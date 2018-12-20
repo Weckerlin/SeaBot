@@ -120,6 +120,7 @@ namespace SeaBotCore.Logger
         {
             var Message = new Message();
             string pretext;
+            bool onlylog = false;
             switch (level)
             {
                 case LogLevel.TRACE:
@@ -133,7 +134,7 @@ namespace SeaBotCore.Logger
                 case LogLevel.DEBUG:
                     if (Core.Debug)
                     {
-                        return;
+                        onlylog = true;
                     }
 
                     Message.color = Color.Cyan;
@@ -156,9 +157,13 @@ namespace SeaBotCore.Logger
                     break;
             }
 
-            Message.message = pretext + text;
+           
             WriteLine(pretext + text);
-            Event.LogMessageChat.Invoke(Message);
+            if (!onlylog)
+            {
+                Message.message = pretext + text;
+                Event.LogMessageChat.Invoke(Message);
+            }
         }
 
         public static class Event

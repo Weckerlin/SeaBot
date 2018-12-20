@@ -42,7 +42,8 @@ namespace SeaBotGUI
             ConfigSer.Load();
             this.MaximizeBox = false;
             textBox2.Text = _config.server_token;
-            checkBox1.Checked = Core.Debug = _config.debug;
+            checkBox1.Checked = _config.debug;
+            Core.Debug = _config.debug;
             chk_autofish.Checked = _config.collectfish;
             chk_prodfact.Checked = _config.prodfactory;
             chk_collectmat.Checked = _config.collectfactory;
