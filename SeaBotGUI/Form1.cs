@@ -1,0 +1,412 @@
+﻿// SeabotGUI
+// Copyright (C) 2018 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SeaBot;
+using SeaBot.Data;
+using SeaBot.Data.Defenitions;
+using SeaBot.Utils;
+using Task = SeaBot.Task;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        public static Thread BotThread;
+        public static Config _config = new Config();
+
+        public Form1()
+        {
+            InitializeComponent();
+            ConfigSer.Load();
+            textBox2.Text = _config.server_token;
+            checkBox1.Checked = _config.debug;
+            chk_autofish.Checked = _config.collectfish;
+            chk_prodfact.Checked = _config.prodfactory;
+            chk_collectmat.Checked = _config.collectfactory;
+            num_ironlimit.Value = _config.ironlimit;
+            num_woodlimit.Value = _config.woodlimit;
+            num_stonelimit.Value = _config.stonelimit;
+            Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+            //Check for cache
+        }
+
+        private void Inventory_CollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs e)
+        {
+            FormateResources(SeaBotCore.GolobalData);
+        }
+
+        private void LogMessageChat_OnLogMessage(Logger.Message e)
+        {
+            if (InvokeRequired)
+            {
+                MethodInvoker inv = delegate
+                {
+                    RichTextBoxExtensions.AppendText(richTextBox1, e.message + "\n", e.color);
+                };
+                richTextBox1.BeginInvoke(inv);
+            }
+            else
+            {
+                RichTextBoxExtensions.AppendText(richTextBox1, e.message + "\n", e.color);
+            }
+        }
+
+        public static class RichTextBoxExtensions
+        {
+            public static void AppendText(RichTextBox box, string text, Color color)
+            {
+                box.SelectionStart = box.TextLength;
+                box.SelectionLength = 0;
+
+                box.SelectionColor = color;
+                box.AppendText(text);
+                box.SelectionColor = box.ForeColor;
+                box.ScrollToCaret();
+            }
+        }
+
+        public void FormateResources(GlobalData data)
+        {
+            //Gold: Fish: Iron:
+            //Gems: Wood: Rock:
+
+            if (textBox1.InvokeRequired)
+            {
+                MethodInvoker inv = delegate
+                {
+                    textBox1.Text =
+                        $"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount} " +
+                        $"Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} " +
+                        $"Iron: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Iron).Amount}" +
+                        Environment.NewLine +
+                        $"Gems: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Gems).Amount} " +
+                        $"Wood: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Wood).Amount} " +
+                        $"Stone: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Stone).Amount}";
+                };
+                textBox1.Invoke(inv);
+            }
+            else
+            {
+                textBox1.Text = $"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount} " +
+                                $"Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} " +
+                                $"Iron: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Iron).Amount}" +
+                                Environment.NewLine +
+                                $"Gems: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Gems).Amount} " +
+                                $"Wood: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Wood).Amount} " +
+                                $"Stone: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Stone).Amount}";
+            }
+
+            var a = new List<ListViewItem>();
+            foreach (var dataa in data.Inventory.Where(n =>
+                n.Id != (int) Enums.EMaterial.Coins && n.Id != (int) Enums.EMaterial.Iron &&
+                n.Id != (int) Enums.EMaterial.Gems && n.Id != (int) Enums.EMaterial.Wood &&
+                n.Id != (int) Enums.EMaterial.Stone && n.Id != (int) Enums.EMaterial.Fish))
+            {
+                string[] row = {((Enums.EMaterial) dataa.Id).ToString(), dataa.Amount.ToString()};
+                a.Add(new ListViewItem(row));
+            }
+
+            if (listView1.InvokeRequired)
+            {
+                MethodInvoker inv = delegate
+                {
+                    listView1.Items.Clear();
+                    foreach (var list in a)
+                    {
+                        listView1.Items.Add(list);
+                    }
+                };
+                listView1.BeginInvoke(inv);
+            }
+            else
+            {
+                listView1.Items.Clear();
+                foreach (var list in a)
+                {
+                    listView1.Items.Add(list);
+                }
+            }
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button3.Enabled = true;
+            button2.Enabled = false;
+            SeaBotCore.ServerToken = textBox2.Text;
+            Networking.Login();
+            FormateResources(SeaBotCore.GolobalData);
+            SeaBotCore.GolobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+            SeaBotCore.GolobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
+            BotThread = new Thread(BotVoid);
+            BotThread.IsBackground = true;
+            BotThread.Start();
+            var a = Defenitions.BuildingDef;
+        }
+
+        private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
+        {
+            FormateResources(SeaBotCore.GolobalData);
+        }
+
+        void BotVoid()
+        {
+            while (true)
+            {
+                Thread.Sleep(60 * 1000);
+                if (chk_autofish.Checked)
+                {
+                    var totalfish = 0;
+                    foreach (var boat in SeaBotCore.GolobalData.Boats)
+                    {
+                        var started = TimeUtils.FromUnixTime(boat.ProdStart);
+                        var b = XmlProcessor.GetBoatLevels().level.First(n => n.id == SeaBotCore.GolobalData.BoatLevel);
+                        var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.turn_time);
+                        if (turns > 5)
+                        {
+                            totalfish += (int) (b.output_amount * turns);
+                            Networking.AddTask(new Task.TakeFish(boat));
+                        }
+                    }
+
+                    if (totalfish > 0)
+                    {
+                        Logger.Info($"Collecting {totalfish} fish");
+                    }
+                }
+
+                if (chk_barrelhack.Checked)
+                {
+                    //testing
+                    //     Networking.AddTask(new Task.ConfirmBarrelTask("21","material","64","1","48"));
+                }
+
+                bool cltd = false;
+                foreach (var data in SeaBotCore.GolobalData.Buildings)
+                {
+                    if (chk_collectmat.Checked)
+                    {
+                        if (data.UpgStart == 0 && data.ProdStart != 0)
+                        {
+                            var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
+                            if (def.Type != "factory")
+                            {
+                                continue;
+                            }
+
+                            var defs = def.Levels.Level.First(n => n.Id == data.Level);
+                            var started = TimeUtils.FromUnixTime(data.ProdStart);
+                            if ((DateTime.UtcNow - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
+                            {
+                                Logger.Info(
+                                    $"Сollecting {defs.ProdOutputs.ProdOutput[0].Amount} {((Enums.EMaterial) defs.ProdOutputs.ProdOutput[0].MaterialId).ToString()}");
+
+                                Networking.AddTask(new Task.FinishBuildingProductionTask(data.InstId.ToString()));
+                                cltd = true;
+                                data.ProdStart = 0;
+                            }
+                        }
+                    }
+                }
+
+                if (!cltd)
+                {
+                    foreach (var data in SeaBotCore.GolobalData.Buildings)
+                    {
+                        if (chk_prodfact.Checked)
+                        {
+                            if (data.UpgStart == 0 && data.ProdStart == 0)
+                            {
+                                var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
+                                if (def.Type != "factory")
+                                {
+                                    continue;
+                                }
+
+                                //lets start?
+                                //DO WE HAVE ENOUGH RESOURCES
+                                var needed = def.Levels.Level.First(n => n.Id == data.Level);
+                                var input = needed.ProdOutputs.ProdOutput[0].Inputs.Input;
+                                var can = false;
+                                foreach (var material in input)
+                                {
+                                    if (SeaBotCore.GolobalData.Inventory.Any(n => n.Id == material.Id))
+                                    {
+                                        var mat = SeaBotCore.GolobalData.Inventory
+                                            .First(n => n.Id == material.Id);
+                                        if (mat.Amount > material.Amount)
+                                        {
+                                            can = true;
+                                            mat.Amount -= (int) material.Amount;
+                                        }
+                                        else
+                                        {
+                                            can = false;
+                                        }
+                                    }
+                                }
+
+                                if (can)
+                                {
+                                    //
+                                    var output = needed.ProdOutputs.ProdOutput[0].MaterialId;
+                                    switch ((Enums.EMaterial) output)
+                                    {
+                                        case Enums.EMaterial.Wood:
+                                            var amount =
+                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                                    n.Id == (int) Enums.EMaterial.Wood).First();
+                                            if (amount.Amount > (int) num_woodlimit.Value)
+                                            {
+                                                if ((int) num_woodlimit.Value == 0)
+                                                {
+                                                    can = true;
+                                                    break;
+                                                }
+
+                                                can = false;
+                                            }
+
+                                            break;
+                                        case Enums.EMaterial.Iron:
+                                            amount =
+                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                                    n.Id == (int) Enums.EMaterial.Iron).First();
+                                            if (amount.Amount > (int) num_ironlimit.Value)
+                                            {
+                                                if ((int) num_ironlimit.Value == 0)
+                                                {
+                                                    can = true;
+                                                    break;
+                                                }
+
+                                                can = false;
+                                            }
+
+                                            break;
+                                        case Enums.EMaterial.Stone:
+                                            amount =
+                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                                    n.Id == (int) Enums.EMaterial.Stone).First();
+                                            if (amount.Amount > (int) num_stonelimit.Value)
+                                            {
+                                                if ((int) num_stonelimit.Value == 0)
+                                                {
+                                                    can = true;
+                                                    break;
+                                                }
+
+                                                can = false;
+                                            }
+
+
+                                            break;
+                                    }
+                                }
+
+                                if (can)
+                                {
+                                    Logger.Info(
+                                        $"Started producing {((Enums.EMaterial) needed.ProdOutputs.ProdOutput[0].MaterialId).ToString()}");
+                                    Networking.AddTask(new Task.StartBuildingProductionTask(data.InstId.ToString(),
+                                        data.ProdId.ToString()));
+                                    data.ProdStart = TimeUtils.GetEpochTime();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.debug = checkBox1.Checked;
+            SeaBotCore.Debug = checkBox1.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_autofish_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.collectfish = chk_autofish.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_prodfact_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.prodfactory = chk_prodfact.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_collectmat_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.collectfactory = chk_collectmat.Checked;
+            ConfigSer.Save();
+        }
+
+
+        private void num_woodlimit_Leave(object sender, EventArgs e)
+        {
+            _config.woodlimit = (int) num_woodlimit.Value;
+            ConfigSer.Save();
+        }
+
+
+        private void num_ironlimit_Leave(object sender, EventArgs e)
+        {
+            _config.ironlimit = (int) num_ironlimit.Value;
+            ConfigSer.Save();
+        }
+
+        private void num_stonelimit_Leave(object sender, EventArgs e)
+        {
+            _config.stonelimit = (int) num_stonelimit.Value;
+            ConfigSer.Save();
+        }
+
+        private void textBox2_Leave_1(object sender, EventArgs e)
+        {
+            _config.server_token = textBox2.Text;
+            ConfigSer.Save();
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button2.Enabled = true;
+            button3.Enabled = false;
+            SeaBotCore.StopBot();
+            BotThread.Abort();
+        }
+    }
+}

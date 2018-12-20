@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBotCore", "SeaBot\SeaBotCore.csproj", "{C9F20A11-7F95-4B34-AC2F-94455AC8427C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{891151FA-5C0E-4EB0-88A5-6F318EE686CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeabotGUI", "SeaBotGUI\SeabotGUI.csproj", "{835C76D7-DBD0-4238-8095-62B6ABEE8C48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9F20A11-7F95-4B34-AC2F-94455AC8427C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F20A11-7F95-4B34-AC2F-94455AC8427C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F20A11-7F95-4B34-AC2F-94455AC8427C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F20A11-7F95-4B34-AC2F-94455AC8427C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835C76D7-DBD0-4238-8095-62B6ABEE8C48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835C76D7-DBD0-4238-8095-62B6ABEE8C48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835C76D7-DBD0-4238-8095-62B6ABEE8C48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835C76D7-DBD0-4238-8095-62B6ABEE8C48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E6191C9-A78A-41A7-8E57-10D08B244428}
+	EndGlobalSection
+EndGlobal
