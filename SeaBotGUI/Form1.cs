@@ -48,6 +48,7 @@ namespace SeaBotGUI
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+            linkLabel1.Links.Add(new LinkLabel.Link(){LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             //Check for cache
         }
 
@@ -153,6 +154,11 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(_config.server_token))
+            {
+                MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
+                return;
+            }
             button3.Enabled = true;
             button2.Enabled = false;
             Core.ServerToken = textBox2.Text;
@@ -403,6 +409,11 @@ namespace SeaBotGUI
             button3.Enabled = false;
             Core.StopBot();
             BotThread.Abort();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
