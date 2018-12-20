@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 
 using Newtonsoft.Json;
 
-namespace SeaBot.Data.Defenitions
+namespace SeaBotCore.Data.Defenitions
 {
     public static class Defenitions
     {

@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml;
-using SeaBot.Utils;
+using SeaBotCore.Utils;
 
-namespace SeaBot.Data
+namespace SeaBotCore.Data
 {
     static class Parser
     {

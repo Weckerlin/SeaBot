@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SeaBot.Data;
-using SeaBot.Utils;
-using SeaBot.XmlData;
+using SeaBotCore.Data;
+using SeaBotCore.Utils;
 
-
-namespace SeaBot
+namespace SeaBotCore
 {
     public class Task
     {
@@ -45,7 +41,7 @@ namespace SeaBot
             {
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = XmlProcessor.GetBoatLevels().level.First(n => n.id == SeaBotCore.GolobalData.BoatLevel);
+                var b = XmlProcessor.GetBoatLevels().level.First(n => n.id == Core.GolobalData.BoatLevel);
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.turn_time);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.turn_count)
@@ -57,7 +53,7 @@ namespace SeaBot
                     CustomObjects.Add("turns", turns);
                 }
 
-                SeaBotCore.GolobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
+                Core.GolobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
                     TimeUtils.GetEpochTime();
             }
         }

@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,19 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
-using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
 
-namespace SeaBot.Data.Defenitions
+namespace SeaBotCore.Data.Defenitions
 {
     public class BuildingDefentions
     {

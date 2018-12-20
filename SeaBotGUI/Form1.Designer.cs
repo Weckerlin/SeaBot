@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace SeaBotGUI
 {
     partial class Form1
     {

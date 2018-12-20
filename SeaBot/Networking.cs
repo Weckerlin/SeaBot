@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -24,20 +24,19 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
-using SeaBot.Data;
-using SeaBot.Utils;
-using static SeaBot.Task;
+using SeaBotCore.Data;
+using SeaBotCore.Utils;
 
-namespace SeaBot
+namespace SeaBotCore
 {
     public static class Networking
     {
         public class DelayedTask
         {
-            public IGameTask Task { get; set; }
+            public Task.IGameTask Task { get; set; }
             public DateTime InvokeTime { get; set; }
 
-            DelayedTask(IGameTask task, DateTime InvokeAt)
+            DelayedTask(Task.IGameTask task, DateTime InvokeAt)
             {
                 Task = task;
                 InvokeTime = InvokeAt;
@@ -60,16 +59,16 @@ namespace SeaBot
             {
                 Thread.Sleep(10);
                 if ((DateTime.Now - _lastRaised).TotalSeconds > 6 && _gametasks.Count != 0 &&
-                    SeaBotCore.GolobalData.Level != 0)
+                    Core.GolobalData.Level != 0)
                 {
-                    Logger.Debug("Syncing...");
+                    Logger.Logger.Debug("Syncing...");
                     Sync();
                 }
 
                 if ((DateTime.Now - _lastRaised).TotalSeconds > 300)
                 {
-                    Logger.Debug("Syncing...");
-                    _gametasks.Add(new HeartBeat());
+                    Logger.Logger.Debug("Syncing...");
+                    _gametasks.Add(new Task.HeartBeat());
                     Sync();
                 }
 
@@ -78,7 +77,7 @@ namespace SeaBot
                     if ((delayedtask.InvokeTime - DateTime.Now).Seconds > 0)
                     {
                         //invoke
-                        Logger.Debug("Added delayedtask");
+                        Logger.Logger.Debug("Added delayedtask");
                         _gametasks.Add(delayedtask.Task);
                     }
                 }
@@ -87,10 +86,10 @@ namespace SeaBot
 
         private static int _taskId = 1;
         private static string _lastsend = "";
-        private static List<IGameTask> _gametasks = new List<IGameTask>();
+        private static List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
         private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
 
-        public static void AddTask(IGameTask task)
+        public static void AddTask(Task.IGameTask task)
         {
             _gametasks.Add(task);
             _lastRaised = DateTime.Now;
@@ -124,7 +123,7 @@ namespace SeaBot
 
         public static void Login()
         {
-            Logger.Info("Loginin'");
+            Logger.Logger.Info("Loginin'");
             //Get big token
             var tempuid = String.Empty;
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
@@ -132,13 +131,13 @@ namespace SeaBot
             using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
             using (var client = new HttpClient(handler) {BaseAddress = baseAddress})
             {
-                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", SeaBotCore.ServerToken));
-                Logger.Info("[1/3] Getting another cookies");
+                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.ServerToken));
+                Logger.Logger.Info("[1/3] Getting another cookies");
                 var result = client.GetAsync("en/seaport/").Result;
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
                 result = client.GetAsync("en/seaport/").Result;
-                Logger.Info("[2/3] Getting protal");
+                Logger.Logger.Info("[2/3] Getting protal");
                 var stringtext = result.Content.ReadAsStringAsync().Result;
                 var regex = new Regex(
                     "portal.pixelfederation.com\\/(_sp\\/\\?direct_login=portal&portal_request=(.*))\" allowfullscreen>");
@@ -146,17 +145,17 @@ namespace SeaBot
                 if (match.Success)
                 {
                     stringtext = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
-                    Logger.Info("[3/3] Getting sessionid");
+                    Logger.Logger.Info("[3/3] Getting sessionid");
                     regex = new Regex(@"session_id': '(.*)', 'test");
 
-                    SeaBotCore.Ssid = regex.Match(stringtext).Groups[1].Value;
+                    Core.Ssid = regex.Match(stringtext).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
                     tempuid = regex.Match(stringtext).Groups[1].Value;
-                    Logger.Info("Done!");
+                    Logger.Logger.Info("Done!");
                 }
                 else
                 {
-                    Logger.Fatal("CANT LOGIN!");
+                    Logger.Logger.Fatal("CANT LOGIN!");
                     return;
                 }
             }
@@ -164,10 +163,10 @@ namespace SeaBot
             var values = new Dictionary<string, string>
             {
                 {"pid", tempuid},
-                {"session_id", SeaBotCore.Ssid}
+                {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
-            SeaBotCore.GolobalData = Parser.ParseXmlToGlobalData(s);
+            Core.GolobalData = Parser.ParseXmlToGlobalData(s);
         }
 
         public static void Sync()
@@ -191,18 +190,18 @@ namespace SeaBot
             var lenght = 0;
             lenght = _lastsend.Length > 224 ? 224 : _lastsend.Length;
             var sig = ToHex(
-                Md5.ComputeHash(Encoding.ASCII.GetBytes(_lastsend.Substring(0, lenght) + SeaBotCore.Ssid + "KNn2R4sK")),
+                Md5.ComputeHash(Encoding.ASCII.GetBytes(_lastsend.Substring(0, lenght) + Core.Ssid + "KNn2R4sK")),
                 false); //_loc2_.substr(0,224) + _sessionData.sessionId + "KNn2R4sK"
             var values = new Dictionary<string, string>
             {
-                {"pid", SeaBotCore.GolobalData.UserId.ToString()},
-                {"session_id", SeaBotCore.Ssid},
+                {"pid", Core.GolobalData.UserId.ToString()},
+                {"session_id", Core.Ssid},
                 {"data", taskstr.ToString()},
                 {"sig", sig}
             };
             _taskId++;
             var response = SendRequest(values, "client.synchronize");
-            Logger.Debug(response);
+            Logger.Logger.Debug(response);
             var doc = new XmlDocument();
             doc.LoadXml(response);
             if (doc.DocumentElement != null)
@@ -213,18 +212,18 @@ namespace SeaBot
                 {
                     if (node.SelectSingleNode("result").InnerText == "OK")
                     {
-                        Logger.Debug(node.SelectSingleNode("action").InnerText + " has been passed");
+                        Logger.Logger.Debug(node.SelectSingleNode("action").InnerText + " has been passed");
                         passed++;
                     }
                     else
                     {
-                        Logger.Debug(node.SelectSingleNode("action").InnerText + " failed!");
+                        Logger.Logger.Debug(node.SelectSingleNode("action").InnerText + " failed!");
                     }
                 }
 
                 if (passed != _gametasks.Count)
                 {
-                    Logger.Warning("Some task has been failed");
+                    Logger.Logger.Warning("Some task has been failed");
                 }
 
 
@@ -235,13 +234,13 @@ namespace SeaBot
                         switch (node.Name)
                         {
                             case "sailors":
-                                SeaBotCore.GolobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.GolobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "sync_interval":
-                                SeaBotCore.GolobalData.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
+                                Core.GolobalData.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
                                 break;
                             case "xp":
-                                SeaBotCore.GolobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.GolobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "material":
                             {
@@ -249,19 +248,19 @@ namespace SeaBot
                                 {
                                     var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
                                     var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
-                                    if (SeaBotCore.GolobalData.Inventory.Count(n => n.Id == defid) != 0)
+                                    if (Core.GolobalData.Inventory.Count(n => n.Id == defid) != 0)
                                     {
-                                        for (var i = 0; i < SeaBotCore.GolobalData.Inventory.Count; i++)
+                                        for (var i = 0; i < Core.GolobalData.Inventory.Count; i++)
                                         {
-                                            if (SeaBotCore.GolobalData.Inventory[i].Id == defid)
+                                            if (Core.GolobalData.Inventory[i].Id == defid)
                                             {
-                                                SeaBotCore.GolobalData.Inventory[i].Amount = amount;
+                                                Core.GolobalData.Inventory[i].Amount = amount;
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        SeaBotCore.GolobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
+                                        Core.GolobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
                                     }
                                 }
 
@@ -272,7 +271,7 @@ namespace SeaBot
             }
             else
             {
-                Logger.Fatal("Sync failed, no response");
+                Logger.Logger.Fatal("Sync failed, no response");
             }
 
             _gametasks.Clear();

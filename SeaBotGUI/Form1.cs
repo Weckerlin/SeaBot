@@ -17,22 +17,18 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SeaBot;
-using SeaBot.Data;
-using SeaBot.Data.Defenitions;
-using SeaBot.Utils;
-using Task = SeaBot.Task;
+using SeaBotCore;
+using SeaBotCore.Data;
+using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Logger;
+using SeaBotCore.Utils;
+using Task = SeaBotCore.Task;
 
-namespace WindowsFormsApp1
+namespace SeaBotGUI
 {
     public partial class Form1 : Form
     {
@@ -58,7 +54,7 @@ namespace WindowsFormsApp1
         private void Inventory_CollectionChanged(object sender,
             NotifyCollectionChangedEventArgs e)
         {
-            FormateResources(SeaBotCore.GolobalData);
+            FormateResources(SeaBotCore.Core.GolobalData);
         }
 
         private void LogMessageChat_OnLogMessage(Logger.Message e)
@@ -159,11 +155,11 @@ namespace WindowsFormsApp1
         {
             button3.Enabled = true;
             button2.Enabled = false;
-            SeaBotCore.ServerToken = textBox2.Text;
+            Core.ServerToken = textBox2.Text;
             Networking.Login();
-            FormateResources(SeaBotCore.GolobalData);
-            SeaBotCore.GolobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
-            SeaBotCore.GolobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
+            FormateResources(Core.GolobalData);
+           Core.GolobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+            Core.GolobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
             BotThread = new Thread(BotVoid);
             BotThread.IsBackground = true;
             BotThread.Start();
@@ -172,7 +168,7 @@ namespace WindowsFormsApp1
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
         {
-            FormateResources(SeaBotCore.GolobalData);
+            FormateResources(Core.GolobalData);
         }
 
         void BotVoid()
@@ -183,10 +179,10 @@ namespace WindowsFormsApp1
                 if (chk_autofish.Checked)
                 {
                     var totalfish = 0;
-                    foreach (var boat in SeaBotCore.GolobalData.Boats)
+                    foreach (var boat in Core.GolobalData.Boats)
                     {
                         var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                        var b = XmlProcessor.GetBoatLevels().level.First(n => n.id == SeaBotCore.GolobalData.BoatLevel);
+                        var b = XmlProcessor.GetBoatLevels().level.First(n => n.id ==Core.GolobalData.BoatLevel);
                         var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.turn_time);
                         if (turns > 5)
                         {
@@ -208,7 +204,7 @@ namespace WindowsFormsApp1
                 }
 
                 bool cltd = false;
-                foreach (var data in SeaBotCore.GolobalData.Buildings)
+                foreach (var data in Core.GolobalData.Buildings)
                 {
                     if (chk_collectmat.Checked)
                     {
@@ -237,7 +233,7 @@ namespace WindowsFormsApp1
 
                 if (!cltd)
                 {
-                    foreach (var data in SeaBotCore.GolobalData.Buildings)
+                    foreach (var data in Core.GolobalData.Buildings)
                     {
                         if (chk_prodfact.Checked)
                         {
@@ -256,9 +252,9 @@ namespace WindowsFormsApp1
                                 var can = false;
                                 foreach (var material in input)
                                 {
-                                    if (SeaBotCore.GolobalData.Inventory.Any(n => n.Id == material.Id))
+                                    if (Core.GolobalData.Inventory.Any(n => n.Id == material.Id))
                                     {
-                                        var mat = SeaBotCore.GolobalData.Inventory
+                                        var mat = Core.GolobalData.Inventory
                                             .First(n => n.Id == material.Id);
                                         if (mat.Amount > material.Amount)
                                         {
@@ -280,7 +276,7 @@ namespace WindowsFormsApp1
                                     {
                                         case Enums.EMaterial.Wood:
                                             var amount =
-                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                                Core.GolobalData.Inventory.Where(n =>
                                                     n.Id == (int) Enums.EMaterial.Wood).First();
                                             if (amount.Amount > (int) num_woodlimit.Value)
                                             {
@@ -296,7 +292,7 @@ namespace WindowsFormsApp1
                                             break;
                                         case Enums.EMaterial.Iron:
                                             amount =
-                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                                Core.GolobalData.Inventory.Where(n =>
                                                     n.Id == (int) Enums.EMaterial.Iron).First();
                                             if (amount.Amount > (int) num_ironlimit.Value)
                                             {
@@ -312,7 +308,7 @@ namespace WindowsFormsApp1
                                             break;
                                         case Enums.EMaterial.Stone:
                                             amount =
-                                                SeaBotCore.GolobalData.Inventory.Where(n =>
+                                               Core.GolobalData.Inventory.Where(n =>
                                                     n.Id == (int) Enums.EMaterial.Stone).First();
                                             if (amount.Amount > (int) num_stonelimit.Value)
                                             {
@@ -349,7 +345,7 @@ namespace WindowsFormsApp1
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             _config.debug = checkBox1.Checked;
-            SeaBotCore.Debug = checkBox1.Checked;
+            Core.Debug = checkBox1.Checked;
             ConfigSer.Save();
         }
 
@@ -405,7 +401,7 @@ namespace WindowsFormsApp1
         {
             button2.Enabled = true;
             button3.Enabled = false;
-            SeaBotCore.StopBot();
+            Core.StopBot();
             BotThread.Abort();
         }
     }

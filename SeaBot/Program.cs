@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,21 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
-using ConsoleTables;
-using SeaBot.Data;
+using SeaBotCore.Data;
 
-namespace SeaBot
+namespace SeaBotCore
 {
-    public static class SeaBotCore
+    public static class Core
     {
         private static readonly HttpClient Client = new HttpClient();
         public static string Ssid = "";

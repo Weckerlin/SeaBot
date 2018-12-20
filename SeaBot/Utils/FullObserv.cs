@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// Core
 // Copyright (C) 2018 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace SeaBot.Utils
+namespace SeaBotCore.Utils
 {
     public class FullyObservableCollection<T> : ObservableCollection<T>
         where T : INotifyPropertyChanged
