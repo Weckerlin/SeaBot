@@ -132,7 +132,7 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [INFO]    ";
                     break;
                 case LogLevel.DEBUG:
-                    if (Core.Debug)
+                    if (!Core.Debug)
                     {
                         onlylog = true;
                     }
