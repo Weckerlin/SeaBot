@@ -41,13 +41,16 @@ namespace SeaBotCore.Data
 
             data.Inventory = new FullyObservableCollection<Item>();
             var inventory = doc.DocumentElement.SelectSingleNode("material");
-            foreach (XmlNode node in inventory.ChildNodes)
+            if (inventory != null)
             {
-                data.Inventory.Add(new Item
+                foreach (XmlNode node in inventory.ChildNodes)
                 {
-                    Id = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText)
-                });
+                    data.Inventory.Add(new Item
+                    {
+                        Id = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -64,16 +67,19 @@ namespace SeaBotCore.Data
 
             data.Achievements = new List<Achievement>();
             var achievementsnode = doc.DocumentElement.SelectSingleNode("achievement");
-            foreach (XmlNode node in achievementsnode.ChildNodes)
+            if (achievementsnode != null)
             {
-                data.Achievements.Add(new Achievement
+                foreach (XmlNode node in achievementsnode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
-                    Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
-                    Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
-                    ConfirmedLevel = Convert.ToInt32(node.SelectSingleNode("confirmed_level")?.InnerText)
-                });
+                    data.Achievements.Add(new Achievement
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
+                        Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
+                        ConfirmedLevel = Convert.ToInt32(node.SelectSingleNode("confirmed_level")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -82,16 +88,19 @@ namespace SeaBotCore.Data
 
             data.Boats = new List<Boat>();
             var boatsnode = doc.DocumentElement.SelectSingleNode("boat");
-            foreach (XmlNode node in boatsnode.ChildNodes)
+            if (boatsnode != null)
             {
-                data.Boats.Add(new Boat
+                foreach (XmlNode node in boatsnode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
-                    Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
-                    Turn = Convert.ToInt32(node.SelectSingleNode("turn")?.InnerText),
-                    ProdStart = Convert.ToInt32(node.SelectSingleNode("prod_start")?.InnerText)
-                });
+                    data.Boats.Add(new Boat
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        Turn = Convert.ToInt32(node.SelectSingleNode("turn")?.InnerText),
+                        ProdStart = Convert.ToInt32(node.SelectSingleNode("prod_start")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -100,19 +109,22 @@ namespace SeaBotCore.Data
 
             data.CaptainsNew = new List<Captain>();
             var captainnode = doc.DocumentElement.SelectSingleNode("captain_new");
-            foreach (XmlNode node in captainnode.ChildNodes)
+            if (captainnode != null)
             {
-                data.CaptainsNew.Add(new Captain
+                foreach (XmlNode node in captainnode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
-                    Charges = Convert.ToInt32(node.SelectSingleNode("charges")?.InnerText),
-                    ShipId = Convert.ToInt32(node.SelectSingleNode("ship_id")?.InnerText),
-                    Type = node.SelectSingleNode("inst_id")?.InnerText,
-                    Created = Convert.ToInt64(node.SelectSingleNode("created")?.InnerText),
-                    SourceType = node.SelectSingleNode("source_type")?.InnerText,
-                    BonusAmount = Convert.ToInt32(node.SelectSingleNode("bonus_amount")?.InnerText)
-                });
+                    data.CaptainsNew.Add(new Captain
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        Charges = Convert.ToInt32(node.SelectSingleNode("charges")?.InnerText),
+                        ShipId = Convert.ToInt32(node.SelectSingleNode("ship_id")?.InnerText),
+                        Type = node.SelectSingleNode("inst_id")?.InnerText,
+                        Created = Convert.ToInt64(node.SelectSingleNode("created")?.InnerText),
+                        SourceType = node.SelectSingleNode("source_type")?.InnerText,
+                        BonusAmount = Convert.ToInt32(node.SelectSingleNode("bonus_amount")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -121,31 +133,34 @@ namespace SeaBotCore.Data
 
             data.Contracts = new List<Contractor>();
             var contractornode = doc.DocumentElement.SelectSingleNode("contractor");
-            foreach (XmlNode node in contractornode.ChildNodes)
+            if (contractornode != null)
             {
-                var a = new Contractor
+                foreach (XmlNode node in contractornode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    QuestId = Convert.ToInt32(node.SelectSingleNode("quest_id")?.InnerText),
-                    Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
-                    Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
-                    CargoOnTheWay = Convert.ToInt32(node.SelectSingleNode("cargo_on_the_way")?.InnerText),
-                    Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText),
-                    PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText)
-                };
-                a.Rewards = new List<Reward>();
-                var rewardnode = node.SelectSingleNode("rewards");
-                foreach (XmlNode rnode in rewardnode)
-                {
-                    a.Rewards.Add(new Reward
+                    var a = new Contractor
                     {
-                        Id = Convert.ToInt32(rnode.SelectSingleNode("id")?.InnerText),
-                        Type = rnode.SelectSingleNode("type")?.InnerText,
-                        Amount = Convert.ToInt32(rnode.SelectSingleNode("amount")?.InnerText)
-                    });
-                }
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        QuestId = Convert.ToInt32(node.SelectSingleNode("quest_id")?.InnerText),
+                        Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
+                        Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
+                        CargoOnTheWay = Convert.ToInt32(node.SelectSingleNode("cargo_on_the_way")?.InnerText),
+                        Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText),
+                        PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText)
+                    };
+                    a.Rewards = new List<Reward>();
+                    var rewardnode = node.SelectSingleNode("rewards");
+                    foreach (XmlNode rnode in rewardnode)
+                    {
+                        a.Rewards.Add(new Reward
+                        {
+                            Id = Convert.ToInt32(rnode.SelectSingleNode("id")?.InnerText),
+                            Type = rnode.SelectSingleNode("type")?.InnerText,
+                            Amount = Convert.ToInt32(rnode.SelectSingleNode("amount")?.InnerText)
+                        });
+                    }
 
-                data.Contracts.Add(a);
+                    data.Contracts.Add(a);
+                }
             }
 
             #endregion
@@ -154,15 +169,18 @@ namespace SeaBotCore.Data
 
             data.LostTreasures = new List<LostTreasure>();
             var lostTreasurenode = doc.DocumentElement.SelectSingleNode("lost_treasure");
-            foreach (XmlNode node in lostTreasurenode.ChildNodes)
+            if (lostTreasurenode != null)
             {
-                data.LostTreasures.Add(new LostTreasure
+                foreach (XmlNode node in lostTreasurenode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    Seed = Convert.ToInt32(node.SelectSingleNode("seed")?.InnerText),
-                    ClaimedChests = Convert.ToInt32(node.SelectSingleNode("claimed_chests")?.InnerText),
-                    UnlockStarted = Convert.ToInt32(node.SelectSingleNode("unlock_started")?.InnerText)
-                });
+                    data.LostTreasures.Add(new LostTreasure
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Seed = Convert.ToInt32(node.SelectSingleNode("seed")?.InnerText),
+                        ClaimedChests = Convert.ToInt32(node.SelectSingleNode("claimed_chests")?.InnerText),
+                        UnlockStarted = Convert.ToInt32(node.SelectSingleNode("unlock_started")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -171,30 +189,33 @@ namespace SeaBotCore.Data
 
             data.Ships = new List<Ship>();
             var shipsnode = doc.DocumentElement.SelectSingleNode("ship");
-            foreach (XmlNode node in shipsnode.ChildNodes)
+            if (shipsnode != null)
             {
-                data.Ships.Add(new Ship
+                foreach (XmlNode node in shipsnode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
-                    Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
-                    Activated = Convert.ToInt32(node.SelectSingleNode("activated")?.InnerText),
-                    Type = node.SelectSingleNode("type")?.InnerText,
-                    TargetId = Convert.ToInt32(node.SelectSingleNode("target_id")?.InnerText),
-                    TargetLevel = Convert.ToInt32(node.SelectSingleNode("target_level")?.InnerText),
-                    Sent = Convert.ToInt32(node.SelectSingleNode("sent")?.InnerText),
-                    Cargo = Convert.ToInt32(node.SelectSingleNode("cargo")?.InnerText),
-                    MaterialId = Convert.ToInt32(node.SelectSingleNode("material_id")?.InnerText),
-                    Loaded = Convert.ToInt32(node.SelectSingleNode("loaded")?.InnerText),
-                    CaptainId = Convert.ToInt32(node.SelectSingleNode("captain_id")?.InnerText),
-                    Crew = Convert.ToInt32(node.SelectSingleNode("crew")?.InnerText),
-                    SourceType = node.SelectSingleNode("source_type")?.InnerText,
-                    NextLevel = Convert.ToInt32(node.SelectSingleNode("next_level")?.InnerText),
-                    SailorsLevel = Convert.ToInt32(node.SelectSingleNode("sailors_level")?.InnerText),
-                    NextSailorsLevel = Convert.ToInt32(node.SelectSingleNode("next_sailors_level")?.InnerText),
-                    NextCapacityLevel = Convert.ToInt32(node.SelectSingleNode("next_capacity_level")?.InnerText),
-                    CapacityLevel = Convert.ToInt32(node.SelectSingleNode("capacity_level")?.InnerText)
-                });
+                    data.Ships.Add(new Ship
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        Activated = Convert.ToInt32(node.SelectSingleNode("activated")?.InnerText),
+                        Type = node.SelectSingleNode("type")?.InnerText,
+                        TargetId = Convert.ToInt32(node.SelectSingleNode("target_id")?.InnerText),
+                        TargetLevel = Convert.ToInt32(node.SelectSingleNode("target_level")?.InnerText),
+                        Sent = Convert.ToInt32(node.SelectSingleNode("sent")?.InnerText),
+                        Cargo = Convert.ToInt32(node.SelectSingleNode("cargo")?.InnerText),
+                        MaterialId = Convert.ToInt32(node.SelectSingleNode("material_id")?.InnerText),
+                        Loaded = Convert.ToInt32(node.SelectSingleNode("loaded")?.InnerText),
+                        CaptainId = Convert.ToInt32(node.SelectSingleNode("captain_id")?.InnerText),
+                        Crew = Convert.ToInt32(node.SelectSingleNode("crew")?.InnerText),
+                        SourceType = node.SelectSingleNode("source_type")?.InnerText,
+                        NextLevel = Convert.ToInt32(node.SelectSingleNode("next_level")?.InnerText),
+                        SailorsLevel = Convert.ToInt32(node.SelectSingleNode("sailors_level")?.InnerText),
+                        NextSailorsLevel = Convert.ToInt32(node.SelectSingleNode("next_sailors_level")?.InnerText),
+                        NextCapacityLevel = Convert.ToInt32(node.SelectSingleNode("next_capacity_level")?.InnerText),
+                        CapacityLevel = Convert.ToInt32(node.SelectSingleNode("capacity_level")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -203,21 +224,24 @@ namespace SeaBotCore.Data
 
             data.Upgradeables = new List<Upgradeable>();
             var upgradenode = doc.DocumentElement.SelectSingleNode("upgradeables");
-            foreach (XmlNode node in upgradenode.ChildNodes)
+            if (upgradenode != null)
             {
-                data.Upgradeables.Add(new Upgradeable
+                foreach (XmlNode node in upgradenode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
-                    Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
-                    Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
-                    CargoOnTheWay = Convert.ToInt32(node.SelectSingleNode("cargo_on_the_way")?.InnerText),
-                    ConfirmedTime = Convert.ToInt32(node.SelectSingleNode("confirmed_time")?.InnerText),
-                    Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText),
-                    Sailors = Convert.ToInt32(node.SelectSingleNode("sailors")?.InnerText),
-                    MaterialKoef = Convert.ToInt32(node.SelectSingleNode("material_koef")?.InnerText),
-                    PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText)
-                });
+                    data.Upgradeables.Add(new Upgradeable
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
+                        Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
+                        CargoOnTheWay = Convert.ToInt32(node.SelectSingleNode("cargo_on_the_way")?.InnerText),
+                        ConfirmedTime = Convert.ToInt32(node.SelectSingleNode("confirmed_time")?.InnerText),
+                        Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText),
+                        Sailors = Convert.ToInt32(node.SelectSingleNode("sailors")?.InnerText),
+                        MaterialKoef = Convert.ToInt32(node.SelectSingleNode("material_koef")?.InnerText),
+                        PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText)
+                    });
+                }
             }
 
             #endregion
@@ -226,21 +250,24 @@ namespace SeaBotCore.Data
 
             data.Buildings = new List<Building>();
             var buildnode = doc.DocumentElement.SelectSingleNode("building");
-            foreach (XmlNode node in buildnode.ChildNodes)
+            if (buildnode != null)
             {
-                data.Buildings.Add(new Building
+                foreach (XmlNode node in buildnode.ChildNodes)
                 {
-                    DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
-                    Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
-                    InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
-                    GridX = Convert.ToInt32(node.SelectSingleNode("grid_x")?.InnerText),
-                    GridY = Convert.ToInt32(node.SelectSingleNode("grid_y")?.InnerText),
-                    ProdStart = Convert.ToInt32(node.SelectSingleNode("prod_start")?.InnerText),
-                    UpgStart = Convert.ToInt32(node.SelectSingleNode("upg_start")?.InnerText),
-                    UpgType = Convert.ToInt32(node.SelectSingleNode("upg_type")?.InnerText),
-                    NewBuildings = Convert.ToInt32(node.SelectSingleNode("new_buildings")?.InnerText),
-                    ProdId = Convert.ToInt32(node.SelectSingleNode("prod_id")?.InnerText)
-                });
+                    data.Buildings.Add(new Building
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        GridX = Convert.ToInt32(node.SelectSingleNode("grid_x")?.InnerText),
+                        GridY = Convert.ToInt32(node.SelectSingleNode("grid_y")?.InnerText),
+                        ProdStart = Convert.ToInt32(node.SelectSingleNode("prod_start")?.InnerText),
+                        UpgStart = Convert.ToInt32(node.SelectSingleNode("upg_start")?.InnerText),
+                        UpgType = Convert.ToInt32(node.SelectSingleNode("upg_type")?.InnerText),
+                        NewBuildings = Convert.ToInt32(node.SelectSingleNode("new_buildings")?.InnerText),
+                        ProdId = Convert.ToInt32(node.SelectSingleNode("prod_id")?.InnerText)
+                    });
+                }
             }
 
             #endregion

@@ -20,6 +20,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SeaBotCore;
@@ -101,26 +102,83 @@ namespace SeaBotGUI
             {
                 MethodInvoker inv = delegate
                 {
-                    textBox1.Text =
-                        $"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount} " +
-                        $"Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} " +
-                        $"Iron: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Iron).Amount}" +
-                        Environment.NewLine +
-                        $"Gems: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Gems).Amount} " +
-                        $"Wood: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Wood).Amount} " +
-                        $"Stone: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Stone).Amount}";
+                    if (data.Inventory != null)
+                    {
+                        StringBuilder txt = new StringBuilder();
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Coins) != null)
+                        {
+                            txt.Append($"Gold: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Coins).Amount}");
+
+                        }
+
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Fish) != null)
+                        {
+                            txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Fish).Amount} ");
+                        }
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Iron) != null)
+                        {
+                            txt.Append($" Iron: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Iron).Amount} ");
+                        }
+
+                        txt.Append(Environment.NewLine);
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Gems) != null)
+                        {
+                            txt.Append($" Gems: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Gems).Amount} ");
+
+                        }
+
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Wood) != null)
+                        {
+                            txt.Append($" Wood: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Wood).Amount}");
+                        }
+                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Stone) != null)
+                        {
+                            txt.Append($" Stone: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Stone).Amount}");
+                        }
+
+                        textBox1.Text = txt.ToString();
+                    }
                 };
                 textBox1.Invoke(inv);
             }
             else
             {
-                textBox1.Text = $"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount} " +
-                                $"Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} " +
-                                $"Iron: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Iron).Amount}" +
-                                Environment.NewLine +
-                                $"Gems: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Gems).Amount} " +
-                                $"Wood: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Wood).Amount} " +
-                                $"Stone: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Stone).Amount}";
+                if (data.Inventory != null)
+                {
+                    StringBuilder txt  = new StringBuilder();
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int) Enums.EMaterial.Coins) != null)
+                    {
+                        txt .Append($"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount}");
+                    
+                    }
+
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int) Enums.EMaterial.Fish) != null)
+                    {
+                        txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} ");
+                    }
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Iron) != null)
+                    {
+                        txt .Append( $" Iron: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Iron).Amount} ");
+                    }
+
+                    txt.Append(Environment.NewLine);
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Gems) != null)
+                    {
+                        txt.Append($" Gems: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Gems).Amount} ");
+
+                    }
+
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Wood) != null)
+                    {
+                        txt .Append( $" Wood: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Wood).Amount}");
+                    }
+                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Stone) != null)
+                    {
+                        txt .Append( $" Stone: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Stone).Amount}");
+                    }
+
+                    textBox1.Text = txt.ToString();
+                }
             }
 
             var a = new List<ListViewItem>();
@@ -185,7 +243,7 @@ namespace SeaBotGUI
         {
             while (true)
             {
-                Thread.Sleep(60 * 1000);
+                
                 if (chk_autofish.Checked)
                 {
                     var totalfish = 0;
@@ -348,6 +406,7 @@ namespace SeaBotGUI
                         }
                     }
                 }
+                Thread.Sleep(60 * 1000);
             }
         }
 
@@ -423,6 +482,14 @@ namespace SeaBotGUI
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(e.Link.LinkData as string);
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            _config.debug = checkBox1.Checked;
+            Core.Debug = checkBox1.Checked;
+            ConfigSer.Save();
+            
         }
     }
 }
