@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Defenitions\BarrelDefenitions.cs" />
     <Compile Include="Data\Defenitions\BuildingDefenitions.cs" />
     <Compile Include="Data\Defenitions\Defenitions.cs" />
     <Compile Include="Data\GlobalData.cs" />
@@ -67,6 +68,7 @@
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="Task.cs" />
+    <Compile Include="Utils\Barrel.cs" />
     <Compile Include="Utils\FullObserv.cs" />
     <Compile Include="Utils\Time.cs" />
     <Compile Include="XmlData\BoatLevelDefenitions.cs" />

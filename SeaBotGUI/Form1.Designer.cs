@@ -68,6 +68,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -91,6 +92,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -216,7 +218,6 @@
             // chk_barrelhack
             // 
             this.chk_barrelhack.AutoSize = true;
-            this.chk_barrelhack.Enabled = false;
             this.chk_barrelhack.Location = new System.Drawing.Point(347, 17);
             this.chk_barrelhack.Name = "chk_barrelhack";
             this.chk_barrelhack.Size = new System.Drawing.Size(78, 17);
@@ -530,6 +531,15 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(463, 424);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Debug";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,6 +615,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chk_prodfact;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }
 

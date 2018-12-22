@@ -22,5 +22,8 @@ namespace SeaBotCore.Data.Defenitions
     {
         public static BuildingDefentions.Root BuildingDef =
             JsonConvert.DeserializeObject<BuildingDefentions.Root>(SeaBotCore.Resource1.BuildingDef);
+
+        public static BarrelDefenitions.Root BarrelDef =
+            JsonConvert.DeserializeObject<BarrelDefenitions.Root>(SeaBotCore.Resource1.BarrelDef);
     }
 }

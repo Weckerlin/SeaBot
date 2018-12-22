@@ -296,11 +296,15 @@ namespace SeaBotCore
 
             public ConfirmBarrelTask(string def_id, string type, string amount, string material_id, string player_lvl)
             {
-                CustomObjects.Add("def_id", def_id);
-                CustomObjects.Add("amount", amount);
-                CustomObjects.Add("type", type);
                 CustomObjects.Add("material_id", material_id);
+                CustomObjects.Add("amount", amount);
                 CustomObjects.Add("player_level", player_lvl);
+                CustomObjects.Add("type", type);
+                CustomObjects.Add("def_id", def_id);
+                
+               
+             
+
             }
         }
 

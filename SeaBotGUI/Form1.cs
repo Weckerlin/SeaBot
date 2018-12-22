@@ -36,7 +36,7 @@ namespace SeaBotGUI
     {
         public static Thread BotThread;
         public static Config _config = new Config();
-
+        public static Thread BarrelThread; 
         public Form1()
         {
             InitializeComponent();
@@ -228,6 +228,8 @@ namespace SeaBotGUI
             FormateResources(Core.GolobalData);
            Core.GolobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GolobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
+            BarrelThread = new Thread(BarrelVoid){IsBackground = true};
+            BarrelThread.Start();
             BotThread = new Thread(BotVoid);
             BotThread.IsBackground = true;
             BotThread.Start();
@@ -239,6 +241,22 @@ namespace SeaBotGUI
             FormateResources(Core.GolobalData);
         }
 
+        void BarrelVoid()
+        {
+            while (true)
+            {
+                Thread.Sleep(10*1000);
+
+                if (chk_barrelhack.Checked)
+                {
+                    var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
+                        .Where(n => n.DefId == 21).First());
+                    Logger.Info(
+                        $"Barrel! Collecting {bar.Amount} {((Enums.EMaterial)bar.Definition.Id).ToString()}");
+                    Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(), bar.Definition.Id.ToString(), Core.GolobalData.Level.ToString()));
+                }
+            }
+        }
         void BotVoid()
         {
             while (true)
@@ -265,11 +283,6 @@ namespace SeaBotGUI
                     }
                 }
 
-                if (chk_barrelhack.Checked)
-                {
-                    //testing
-                    //     Networking.AddTask(new Task.ConfirmBarrelTask("21","material","64","1","48"));
-                }
 
                 bool cltd = false;
                 foreach (var data in Core.GolobalData.Buildings)
@@ -490,6 +503,18 @@ namespace SeaBotGUI
             Core.Debug = checkBox1.Checked;
             ConfigSer.Save();
             
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+          //  var seed = textBox3.Text;
+           // BarrelController.SetSeed(Convert.ToDouble(seed));
+           // BarrelController.GetNextBarrel()
         }
     }
 }

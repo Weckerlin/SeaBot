@@ -58,16 +58,17 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(10);
-                if ((DateTime.Now - _lastRaised).TotalSeconds > 6 && _gametasks.Count != 0 &&
+                Thread.Sleep(6*1000);
+                if ((DateTime.Now - _lastRaised).TotalSeconds > 6&& _gametasks.Count != 0 &&
                     Core.GolobalData.Level != 0)
                 {
-                    Logger.Logger.Debug("Syncing...");
+                    Logger.Logger.Info("Syncing...");
                     Sync();
                 }
 
                 if ((DateTime.Now - _lastRaised).TotalSeconds > 300)
                 {
-                    Logger.Logger.Debug("Syncing...");
+                    Logger.Logger.Info("Sending Heartbeat...");
                     _gametasks.Add(new Task.HeartBeat());
                     Sync();
                 }
@@ -200,6 +201,7 @@ namespace SeaBotCore
                 {"sig", sig}
             };
             _taskId++;
+            Logger.Logger.Debug(taskstr.ToString());
             var response = SendRequest(values, "client.synchronize");
             Logger.Logger.Debug(response);
             var doc = new XmlDocument();
@@ -221,11 +223,15 @@ namespace SeaBotCore
                     }
                 }
 
-                if (passed != _gametasks.Count)
+                if (passed != 0)
                 {
-                    Logger.Logger.Warning("Some task has been failed");
-                }
+                    Logger.Logger.Info("[GOOD] Server accepted our " + passed + " requests");
 
+                }
+                else
+                {
+                    Logger.Logger.Fatal("[BAD] Server accepted our " + passed + " requests!");
+                }
 
                 var pushnode = doc.DocumentElement.SelectSingleNode("push");
                 if (pushnode != null)

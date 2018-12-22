@@ -271,7 +271,7 @@ namespace SeaBotCore.Data
             }
 
             #endregion
-
+            BarrelController._lastBarrelSeed=Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
                 Convert.ToInt32(doc.DocumentElement.SelectSingleNode("config/heartbeat_interval")?.InnerText);
             return data;

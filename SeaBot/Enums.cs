@@ -14,8 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace SeaBotCore
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class Enums
     {
         public enum EFactoryType
@@ -204,6 +208,49 @@ namespace SeaBotCore
             Fuel = 172,
             Cement = 173,
             Concrete = 174
+        }
+
+        public enum EObject
+        {
+            achievement,
+            building,
+            construction_site,
+            boat,
+            boatCargo,
+            ship,
+            shipCargo,
+            hometown,contractor,marketplace,
+            outpost,
+            social_contract,
+            upgradeable,
+            wreck,
+            dealer,
+            global_contractor,
+            crossroad,
+            material,
+            buildArea,
+            levelUp,
+            xp,
+            sailor,
+            product,
+            @event,
+            barrel,
+            museum_ship,
+            museum_level,
+            captain,
+            gift,
+            treasure,
+            vintage_offer,
+            merchant_offer,
+            items_offer,
+            items_offerCargo,
+            lost_treasure,
+            personal_guide,
+            quest_line,
+            captain_new_rarity,
+            equation,
+            videoreward
+
         }
     }
 }

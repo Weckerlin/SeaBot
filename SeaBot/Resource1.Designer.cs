@@ -61,6 +61,31 @@ namespace SeaBotCore {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на {
+        ///    &quot;items&quot;: {
+        ///        &quot;item&quot;: [
+        ///            {
+        ///                &quot;def_id&quot;: 0,
+        ///                &quot;version_id&quot;: 1,
+        ///                &quot;name&quot;: &quot;&quot;,
+        ///                &quot;player_level&quot;: 0,
+        ///                &quot;event_id&quot;: 0,
+        ///                &quot;model_name&quot;: &quot;barrel&quot;,
+        ///                &quot;bounds_min&quot;: &quot;-23,-22,-27&quot;,
+        ///                &quot;bounds_max&quot;: &quot;23,22,27&quot;,
+        ///                &quot;spawn_time&quot;: &quot;10,20&quot;,
+        ///                &quot;lifespan&quot;: 20,
+        ///                &quot;sound&quot;: &quot;barrelClick&quot;,
+        ///                &quot;positions&quot;: &quot;&quot;,
+        ///                &quot;mat [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string BarrelDef {
+            get {
+                return ResourceManager.GetString("BarrelDef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на &lt;levels&gt;
         ///      &lt;level id=&quot;1&quot;&gt;
         ///        &lt;id&gt;1&lt;/id&gt;
