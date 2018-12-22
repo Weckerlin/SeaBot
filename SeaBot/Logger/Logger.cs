@@ -128,7 +128,7 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [TRACE]   ";
                     break;
                 case LogLevel.INFO:
-                    Message.color = Color.Yellow;
+                    Message.color = Color.GreenYellow;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [INFO]    ";
                     break;
                 case LogLevel.DEBUG:
@@ -141,15 +141,15 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [DEBUG]   ";
                     break;
                 case LogLevel.WARNING:
-                    Message.color = Color.Red;
+                    Message.color = Color.Yellow;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [WARNING] ";
                     break;
                 case LogLevel.ERROR:
-                    Message.color = Color.DarkRed;
+                    Message.color = Color.Red;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [ERROR]   ";
                     break;
                 case LogLevel.FATAL:
-                    Message.color = Color.DarkBlue;
+                    Message.color = Color.DarkRed;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [FATAL]   ";
                     break;
                 default:

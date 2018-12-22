@@ -59,7 +59,7 @@ namespace SeaBotCore
             {
                 Thread.Sleep(10);
                 Thread.Sleep(6*1000);
-                if ((DateTime.Now - _lastRaised).TotalSeconds > 6&& _gametasks.Count != 0 &&
+                if (/*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
                     Core.GolobalData.Level != 0)
                 {
                     Logger.Logger.Info("Syncing...");
@@ -212,14 +212,14 @@ namespace SeaBotCore
                 var passed = 0;
                 foreach (XmlNode node in s)
                 {
-                    if (node.SelectSingleNode("result").InnerText == "OK")
+                    if (node.SelectSingleNode("result")?.InnerText == "OK")
                     {
-                        Logger.Logger.Debug(node.SelectSingleNode("action").InnerText + " has been passed");
+                        Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " has been passed");
                         passed++;
                     }
                     else
                     {
-                        Logger.Logger.Debug(node.SelectSingleNode("action").InnerText + " failed!");
+                        Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " failed!");
                     }
                 }
 
@@ -230,7 +230,16 @@ namespace SeaBotCore
                 }
                 else
                 {
-                    Logger.Logger.Fatal("[BAD] Server accepted our " + passed + " requests!");
+                    Logger.Logger.Warning("[BAD] Server accepted our " + passed + " requests!");
+                    Logger.Logger.Info("Checking Fatal error...");
+                    if (doc.SelectSingleNode("result")?.InnerText == "ERROR")
+                    {
+                  
+                        var errcode =(Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("error_code")?.InnerText);
+                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
+                       Events.Events.SyncFailedEvent.SyncFailedChat.Invoke(errcode);
+                    }
+
                 }
 
                 var pushnode = doc.DocumentElement.SelectSingleNode("push");
