@@ -40,6 +40,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk_finishupgrade = new System.Windows.Forms.CheckBox();
             this.chk_prodfact = new System.Windows.Forms.CheckBox();
             this.chk_barrelhack = new System.Windows.Forms.CheckBox();
             this.chk_collectmat = new System.Windows.Forms.CheckBox();
@@ -67,8 +68,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -192,6 +193,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_finishupgrade);
             this.groupBox2.Controls.Add(this.chk_prodfact);
             this.groupBox2.Controls.Add(this.chk_barrelhack);
             this.groupBox2.Controls.Add(this.chk_collectmat);
@@ -203,6 +205,16 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Strategy";
+            // 
+            // chk_finishupgrade
+            // 
+            this.chk_finishupgrade.AutoSize = true;
+            this.chk_finishupgrade.Location = new System.Drawing.Point(92, 42);
+            this.chk_finishupgrade.Name = "chk_finishupgrade";
+            this.chk_finishupgrade.Size = new System.Drawing.Size(122, 17);
+            this.chk_finishupgrade.TabIndex = 5;
+            this.chk_finishupgrade.Text = "Auto-Finish-Upgrade";
+            this.chk_finishupgrade.UseVisualStyleBackColor = true;
             // 
             // chk_prodfact
             // 
@@ -218,11 +230,11 @@
             // chk_barrelhack
             // 
             this.chk_barrelhack.AutoSize = true;
-            this.chk_barrelhack.Location = new System.Drawing.Point(347, 17);
+            this.chk_barrelhack.Location = new System.Drawing.Point(304, 19);
             this.chk_barrelhack.Name = "chk_barrelhack";
-            this.chk_barrelhack.Size = new System.Drawing.Size(78, 17);
+            this.chk_barrelhack.Size = new System.Drawing.Size(127, 17);
             this.chk_barrelhack.TabIndex = 3;
-            this.chk_barrelhack.Text = "Auto-Barrel";
+            this.chk_barrelhack.Text = "Auto-Barrel (unstable)";
             this.chk_barrelhack.UseVisualStyleBackColor = true;
             // 
             // chk_collectmat
@@ -250,8 +262,7 @@
             // chk_aupgrade
             // 
             this.chk_aupgrade.AutoSize = true;
-            this.chk_aupgrade.Enabled = false;
-            this.chk_aupgrade.Location = new System.Drawing.Point(347, 40);
+            this.chk_aupgrade.Location = new System.Drawing.Point(6, 42);
             this.chk_aupgrade.Name = "chk_aupgrade";
             this.chk_aupgrade.Size = new System.Drawing.Size(92, 17);
             this.chk_aupgrade.TabIndex = 0;
@@ -526,11 +537,6 @@
     "e a pull requests!";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // tabPage5
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -539,6 +545,11 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Debug";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 
@@ -608,7 +619,7 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.NumericUpDown num_stonelimit;
         private System.Windows.Forms.NumericUpDown num_ironlimit;
-        private System.Windows.Forms.NumericUpDown num_woodlimit;
+        public System.Windows.Forms.NumericUpDown num_woodlimit;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -616,6 +627,7 @@
         private System.Windows.Forms.CheckBox chk_prodfact;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.CheckBox chk_finishupgrade;
     }
 }
 

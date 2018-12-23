@@ -542,6 +542,24 @@ namespace SeaBotCore
                 CustomObjects.Add("prod_id", prod_id);
             }
         }
+        public class StartBuildingUpgradeTask : IGameTask
+        {
+            public string Action => "start_building_upg";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private uint _time;
+            public StartBuildingUpgradeTask(string inst_id, string prod_id,int lvl,string debug_type,string debug_defId,string debug_tileX,string debug_tileY)
+            {
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("payment_type", "standard");
+                CustomObjects.Add("level",lvl);
+                CustomObjects.Add("debug_type",debug_type);
+                CustomObjects.Add("debug_defId",debug_defId);
+                CustomObjects.Add("debug_tileX",debug_tileX);
+                CustomObjects.Add("debug_tileY",debug_tileY);
+            }
+        }
 
         public class HeartBeat : IGameTask
         {

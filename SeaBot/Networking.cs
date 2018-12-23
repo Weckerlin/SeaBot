@@ -248,6 +248,11 @@ namespace SeaBotCore
                     {
                         switch (node.Name)
                         {
+                            case "level_up":
+                            
+                                Core.GolobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                
+                                break;
                             case "sailors":
                                 Core.GolobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;

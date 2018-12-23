@@ -68,7 +68,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="Utils\Barrel.cs" />
+    <Compile Include="Barrel.cs" />
     <Compile Include="Utils\FullObserv.cs" />
     <Compile Include="Utils\Time.cs" />
   </ItemGroup>

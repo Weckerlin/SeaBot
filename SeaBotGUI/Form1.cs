@@ -30,11 +30,12 @@ using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 using Task = SeaBotCore.Task;
-
+using SeaBotGUI.BotLoop;
 namespace SeaBotGUI
 {
     public partial class Form1 : Form
     {
+        
         public static Thread BotThread;
         public static Config _config = new Config();
         public static Thread BarrelThread; 
@@ -252,15 +253,12 @@ namespace SeaBotGUI
         {
             while (true)
             {
-                Thread.Sleep(10*1000);
+                Thread.Sleep(11*1000);
 
                 if (chk_barrelhack.Checked)
                 {
-                    var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
-                        .Where(n => n.DefId == 21).First());
-                    Logger.Info(
-                        $"Barrel! Collecting {bar.Amount} {((Enums.EMaterial)bar.Definition.Id).ToString()}");
-                    Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(), bar.Definition.Id.ToString(), Core.GolobalData.Level.ToString()));
+                    BotLoop.BotLoop.CollectBarrel();
+
                 }
             }
         }
@@ -268,167 +266,32 @@ namespace SeaBotGUI
         {
             while (true)
             {
-                
+                if (chk_aupgrade.Checked)
+                {
+                    BotLoop.BotLoop.AutoUpgrade();
+                }
                 if (chk_autofish.Checked)
                 {
-                    var totalfish = 0;
-                    foreach (var boat in Core.GolobalData.Boats)
-                    {
-                        var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                        var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level.First(n => n.Id == Core.GolobalData.BoatLevel);
-                        var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
-                        if (turns > 5)
-                        {
-                            totalfish += (int) (b.OutputAmount * turns);
-                            Networking.AddTask(new Task.TakeFish(boat));
-                        }
-                    }
-
-                    if (totalfish > 0)
-                    {
-                        Logger.Info($"Collecting {totalfish} fish");
-                    }
+                    BotLoop.BotLoop.CollectFish();
                 }
 
 
                 if (chk_collectmat.Checked)
                 {
-                    foreach (var data in Core.GolobalData.Buildings)
-                {
-                    
-                        if (data.UpgStart == 0 && data.ProdStart != 0)
-                        {
-                            var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
-                            if (def.Type != "factory")
-                            {
-                                continue;
-                            }
-
-                            var defs = def.Levels.Level.First(n => n.Id == data.Level);
-                            var started = TimeUtils.FromUnixTime(data.ProdStart);
-                            if ((DateTime.UtcNow - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
-                            {
-                                Logger.Info(
-                                    $"Сollecting {defs.ProdOutputs.ProdOutput[0].Amount} {((Enums.EMaterial) defs.ProdOutputs.ProdOutput[0].MaterialId).ToString()}");
-
-                                Networking.AddTask(new Task.FinishBuildingProductionTask(data.InstId.ToString()));
-                               
-                                data.ProdStart = 0;
-                            }
-                        }
-                    }
+                    BotLoop.BotLoop.CollectMaterials();
                 }
 
                 if (chk_prodfact.Checked)
                 {
-                    foreach (var data in Core.GolobalData.Buildings)
-                    {
-                       
-                            if (data.UpgStart == 0 && data.ProdStart == 0)
-                            {
-                                var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
-                                if (def.Type != "factory")
-                                {
-                                    continue;
-                                }
-
-                                //lets start?
-                                //DO WE HAVE ENOUGH RESOURCES
-                                var needed = def.Levels.Level.First(n => n.Id == data.Level);
-                                var input = needed.ProdOutputs.ProdOutput[0].Inputs.Input;
-                                var can = false;
-                                foreach (var material in input)
-                                {
-                                    if (Core.GolobalData.Inventory.Any(n => n.Id == material.Id))
-                                    {
-                                        var mat = Core.GolobalData.Inventory
-                                            .First(n => n.Id == material.Id);
-                                        if (mat.Amount > material.Amount)
-                                        {
-                                            can = true;
-                                            mat.Amount -= (int) material.Amount;
-                                        }
-                                        else
-                                        {
-                                            can = false;
-                                        }
-                                    }
-                                }
-
-                                if (can)
-                                {
-                                    //
-                                    var output = needed.ProdOutputs.ProdOutput[0].MaterialId;
-                                    switch ((Enums.EMaterial) output)
-                                    {
-                                        case Enums.EMaterial.Wood:
-                                            var amount =
-                                                Core.GolobalData.Inventory.Where(n =>
-                                                    n.Id == (int) Enums.EMaterial.Wood).First();
-                                            if (amount.Amount > (int) num_woodlimit.Value)
-                                            {
-                                                if ((int) num_woodlimit.Value == 0)
-                                                {
-                                                    can = true;
-                                                    break;
-                                                }
-
-                                                can = false;
-                                            }
-
-                                            break;
-                                        case Enums.EMaterial.Iron:
-                                            amount =
-                                                Core.GolobalData.Inventory.Where(n =>
-                                                    n.Id == (int) Enums.EMaterial.Iron).First();
-                                            if (amount.Amount > (int) num_ironlimit.Value)
-                                            {
-                                                if ((int) num_ironlimit.Value == 0)
-                                                {
-                                                    can = true;
-                                                    break;
-                                                }
-
-                                                can = false;
-                                            }
-
-                                            break;
-                                        case Enums.EMaterial.Stone:
-                                            amount =
-                                               Core.GolobalData.Inventory.Where(n =>
-                                                    n.Id == (int) Enums.EMaterial.Stone).First();
-                                            if (amount.Amount > (int) num_stonelimit.Value)
-                                            {
-                                                if ((int) num_stonelimit.Value == 0)
-                                                {
-                                                    can = true;
-                                                    break;
-                                                }
-
-                                                can = false;
-                                            }
-
-
-                                            break;
-                                    }
-                                }
-
-                                if (can)
-                                {
-                                    Logger.Info(
-                                        $"Started producing {((Enums.EMaterial) needed.ProdOutputs.ProdOutput[0].MaterialId).ToString()}");
-                                    Networking.AddTask(new Task.StartBuildingProductionTask(data.InstId.ToString(),
-                                        data.ProdId.ToString()));
-                                    data.ProdStart = TimeUtils.GetEpochTime();
-                                }
-                            }
-                        }
+                    BotLoop.BotLoop.ProduceFactories((int)num_ironlimit.Value,(int)num_stonelimit.Value,(int)num_woodlimit.Value);
                     }
 
-                if (chk_aupgrade.Checked)
+                if (chk_finishupgrade.Checked)
                 {
-
+                 BotLoop.BotLoop.FinishUpgrade();
                 }
+
+            
                 
                 Thread.Sleep(60 * 1000);
             }
