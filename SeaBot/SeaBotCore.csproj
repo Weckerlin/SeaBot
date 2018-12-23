@@ -61,6 +61,8 @@
     <Compile Include="Data\Defenitions\BuildingDefenitions.cs" />
     <Compile Include="Data\Defenitions\Defenitions.cs" />
     <Compile Include="Data\GlobalData.cs" />
+    <Compile Include="Data\Materials\Material.cs" />
+    <Compile Include="Data\Materials\MaterialData.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="Logger\Logger.cs" />
@@ -76,8 +78,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XmlData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

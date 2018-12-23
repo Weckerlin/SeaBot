@@ -209,12 +209,13 @@
             // chk_finishupgrade
             // 
             this.chk_finishupgrade.AutoSize = true;
-            this.chk_finishupgrade.Location = new System.Drawing.Point(92, 42);
+            this.chk_finishupgrade.Location = new System.Drawing.Point(304, 17);
             this.chk_finishupgrade.Name = "chk_finishupgrade";
-            this.chk_finishupgrade.Size = new System.Drawing.Size(122, 17);
+            this.chk_finishupgrade.Size = new System.Drawing.Size(97, 17);
             this.chk_finishupgrade.TabIndex = 5;
-            this.chk_finishupgrade.Text = "Auto-Finish-Upgrade";
+            this.chk_finishupgrade.Text = "Finish Upgrade";
             this.chk_finishupgrade.UseVisualStyleBackColor = true;
+            this.chk_finishupgrade.CheckedChanged += new System.EventHandler(this.chk_finishupgrade_CheckedChanged);
             // 
             // chk_prodfact
             // 
@@ -230,12 +231,13 @@
             // chk_barrelhack
             // 
             this.chk_barrelhack.AutoSize = true;
-            this.chk_barrelhack.Location = new System.Drawing.Point(304, 19);
+            this.chk_barrelhack.Location = new System.Drawing.Point(304, 42);
             this.chk_barrelhack.Name = "chk_barrelhack";
             this.chk_barrelhack.Size = new System.Drawing.Size(127, 17);
             this.chk_barrelhack.TabIndex = 3;
             this.chk_barrelhack.Text = "Auto-Barrel (unstable)";
             this.chk_barrelhack.UseVisualStyleBackColor = true;
+            this.chk_barrelhack.CheckedChanged += new System.EventHandler(this.chk_barrelhack_CheckedChanged);
             // 
             // chk_collectmat
             // 
@@ -264,10 +266,11 @@
             this.chk_aupgrade.AutoSize = true;
             this.chk_aupgrade.Location = new System.Drawing.Point(6, 42);
             this.chk_aupgrade.Name = "chk_aupgrade";
-            this.chk_aupgrade.Size = new System.Drawing.Size(92, 17);
+            this.chk_aupgrade.Size = new System.Drawing.Size(67, 17);
             this.chk_aupgrade.TabIndex = 0;
-            this.chk_aupgrade.Text = "Auto-Upgrade";
+            this.chk_aupgrade.Text = "Upgrade";
             this.chk_aupgrade.UseVisualStyleBackColor = true;
+            this.chk_aupgrade.CheckedChanged += new System.EventHandler(this.chk_aupgrade_CheckedChanged);
             // 
             // tabPage2
             // 

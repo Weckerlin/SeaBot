@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Materials;
 
 
 namespace SeaBotCore
@@ -114,6 +115,19 @@ namespace SeaBotCore
             return JsonConvert.DeserializeObject<BuildingDefentions.Root>(File.ReadAllText(_cachefolder + "\\building.json"));
         }
 
+        public static MaterialsData.Root GetMaterials()
+        {
+
+            if (!File.Exists(_cachefolder + $"\\material.json"))
+            {
+                if (!DownloadCache())
+                {
+
+                }
+
+            }
+            return JsonConvert.DeserializeObject<MaterialsData.Root>(File.ReadAllText(_cachefolder + "\\material.json"));
+        }
     }
 
 

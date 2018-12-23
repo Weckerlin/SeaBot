@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using SeaBotCore;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Materials;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 using Task = SeaBotCore.Task;
@@ -50,6 +51,9 @@ namespace SeaBotGUI
             chk_autofish.Checked = _config.collectfish;
             chk_prodfact.Checked = _config.prodfactory;
             chk_collectmat.Checked = _config.collectfactory;
+            chk_barrelhack.Checked = _config.barrelhack;
+            chk_finishupgrade.Checked = _config.finishupgrade;
+            chk_aupgrade.Checked = _config.autoupgrade;
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
@@ -107,35 +111,35 @@ namespace SeaBotGUI
                     if (data.Inventory != null)
                     {
                         StringBuilder txt = new StringBuilder();
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Coins) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("coins").DefId) != null)
                         {
-                            txt.Append($"Gold: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Coins).Amount}");
+                            txt.Append($"Gold: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("coins").DefId).Amount}");
 
                         }
 
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Fish) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("fish").DefId) != null)
                         {
-                            txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Fish).Amount} ");
+                            txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int)MaterialDB.GetItem("fish").DefId).Amount} ");
                         }
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Iron) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("iron").DefId) != null)
                         {
-                            txt.Append($" Iron: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Iron).Amount} ");
+                            txt.Append($" Iron: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("iron").DefId).Amount} ");
                         }
 
                         txt.Append(Environment.NewLine);
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Gems) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("gem").DefId) != null)
                         {
-                            txt.Append($" Gems: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Gems).Amount} ");
+                            txt.Append($" Gems: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("gem").DefId).Amount} ");
 
                         }
 
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Wood) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("wood").DefId) != null)
                         {
-                            txt.Append($" Wood: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Wood).Amount}");
+                            txt.Append($" Wood: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("wood").DefId).Amount}");
                         }
-                        if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Stone) != null)
+                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("stone").DefId) != null)
                         {
-                            txt.Append($" Stone: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Stone).Amount}");
+                            txt.Append($" Stone: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("stone").DefId).Amount}");
                         }
 
                         textBox1.Text = txt.ToString();
@@ -147,36 +151,37 @@ namespace SeaBotGUI
             {
                 if (data.Inventory != null)
                 {
-                    StringBuilder txt  = new StringBuilder();
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int) Enums.EMaterial.Coins) != null)
+            
+                    StringBuilder txt = new StringBuilder();
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("coins").DefId) != null)
                     {
-                        txt .Append($"Gold: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Coins).Amount}");
-                    
+                        txt.Append($"Gold: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("coins").DefId).Amount}");
+
                     }
 
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int) Enums.EMaterial.Fish) != null)
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("fish").DefId) != null)
                     {
-                        txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int) Enums.EMaterial.Fish).Amount} ");
+                        txt.Append($" Fish: {data.Inventory.First(n => n.Id == (int)MaterialDB.GetItem("fish").DefId).Amount} ");
                     }
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Iron) != null)
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("iron").DefId) != null)
                     {
-                        txt .Append( $" Iron: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Iron).Amount} ");
+                        txt.Append($" Iron: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("iron").DefId).Amount} ");
                     }
 
                     txt.Append(Environment.NewLine);
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Gems) != null)
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("gem").DefId) != null)
                     {
-                        txt.Append($" Gems: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Gems).Amount} ");
+                        txt.Append($" Gems: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("gem").DefId).Amount} ");
 
                     }
 
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Wood) != null)
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("wood").DefId) != null)
                     {
-                        txt .Append( $" Wood: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Wood).Amount}");
+                        txt.Append($" Wood: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("wood").DefId).Amount}");
                     }
-                    if (data.Inventory.FirstOrDefault(n => n.Id == (int)Enums.EMaterial.Stone) != null)
+                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("stone").DefId) != null)
                     {
-                        txt .Append( $" Stone: {data.Inventory.First(n => n.Id == (int)Enums.EMaterial.Stone).Amount}");
+                        txt.Append($" Stone: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("stone").DefId).Amount}");
                     }
 
                     textBox1.Text = txt.ToString();
@@ -185,11 +190,11 @@ namespace SeaBotGUI
 
             var a = new List<ListViewItem>();
             foreach (var dataa in data.Inventory.Where(n =>
-                n.Id != (int) Enums.EMaterial.Coins && n.Id != (int) Enums.EMaterial.Iron &&
-                n.Id != (int) Enums.EMaterial.Gems && n.Id != (int) Enums.EMaterial.Wood &&
-                n.Id != (int) Enums.EMaterial.Stone && n.Id != (int) Enums.EMaterial.Fish))
+                n.Id != (int) 1 && n.Id != (int) 2 &&
+                n.Id != (int) 3 && n.Id != (int) 4 &&
+                n.Id != (int) 5 && n.Id != (int) 6))
             {
-                string[] row = {((Enums.EMaterial) dataa.Id).ToString(), dataa.Amount.ToString()};
+                string[] row = {MaterialDB.GetItem(dataa.Id).Name, dataa.Amount.ToString()};
                 a.Add(new ListViewItem(row));
             }
 
@@ -389,6 +394,24 @@ namespace SeaBotGUI
           //  var seed = textBox3.Text;
            // BarrelController.SetSeed(Convert.ToDouble(seed));
            // BarrelController.GetNextBarrel()
+        }
+
+        private void chk_aupgrade_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.autoupgrade = chk_aupgrade.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_finishupgrade_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.finishupgrade = chk_finishupgrade.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_barrelhack_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.barrelhack = chk_barrelhack.Checked;
+            ConfigSer.Save();
         }
     }
 }

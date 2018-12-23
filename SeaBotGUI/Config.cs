@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.IO;
+using System.Threading;
 using System.Web.Script.Serialization;
 
 namespace SeaBotGUI
@@ -29,6 +30,9 @@ namespace SeaBotGUI
         public bool collectfish = false; //done
         public bool prodfactory = false; //done
         public bool collectfactory = false; //done
+        public bool autoupgrade = false;
+        public bool finishupgrade = false;
+        public bool barrelhack = false;
     }
 
     class ConfigSer
