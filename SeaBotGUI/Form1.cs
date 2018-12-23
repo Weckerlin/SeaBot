@@ -291,11 +291,11 @@ namespace SeaBotGUI
                 }
 
 
-                bool cltd = false;
-                foreach (var data in Core.GolobalData.Buildings)
+                if (chk_collectmat.Checked)
                 {
-                    if (chk_collectmat.Checked)
-                    {
+                    foreach (var data in Core.GolobalData.Buildings)
+                {
+                    
                         if (data.UpgStart == 0 && data.ProdStart != 0)
                         {
                             var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
@@ -312,19 +312,18 @@ namespace SeaBotGUI
                                     $"Сollecting {defs.ProdOutputs.ProdOutput[0].Amount} {((Enums.EMaterial) defs.ProdOutputs.ProdOutput[0].MaterialId).ToString()}");
 
                                 Networking.AddTask(new Task.FinishBuildingProductionTask(data.InstId.ToString()));
-                                cltd = true;
+                               
                                 data.ProdStart = 0;
                             }
                         }
                     }
                 }
 
-                if (!cltd)
+                if (chk_prodfact.Checked)
                 {
                     foreach (var data in Core.GolobalData.Buildings)
                     {
-                        if (chk_prodfact.Checked)
-                        {
+                       
                             if (data.UpgStart == 0 && data.ProdStart == 0)
                             {
                                 var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
@@ -425,7 +424,12 @@ namespace SeaBotGUI
                             }
                         }
                     }
+
+                if (chk_aupgrade.Checked)
+                {
+
                 }
+                
                 Thread.Sleep(60 * 1000);
             }
         }
