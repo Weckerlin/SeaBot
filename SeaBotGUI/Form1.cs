@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -221,6 +222,12 @@ namespace SeaBotGUI
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
                 return;
             }
+
+            if (!Directory.Exists("cache"))
+            {
+                Cache.DownloadCache();
+            }
+
             button3.Enabled = true;
             button2.Enabled = false;
             Core.ServerToken = textBox2.Text;
@@ -268,11 +275,11 @@ namespace SeaBotGUI
                     foreach (var boat in Core.GolobalData.Boats)
                     {
                         var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                        var b = XmlProcessor.GetBoatLevels().level.First(n => n.id ==Core.GolobalData.BoatLevel);
-                        var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.turn_time);
+                        var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level.First(n => n.Id == Core.GolobalData.BoatLevel);
+                        var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                         if (turns > 5)
                         {
-                            totalfish += (int) (b.output_amount * turns);
+                            totalfish += (int) (b.OutputAmount * turns);
                             Networking.AddTask(new Task.TakeFish(boat));
                         }
                     }

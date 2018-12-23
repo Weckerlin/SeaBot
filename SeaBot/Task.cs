@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SeaBotCore.Data;
+using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore
@@ -42,12 +43,12 @@ namespace SeaBotCore
                 _time = (uint) TimeUtils.GetEpochTime();
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = XmlProcessor.GetBoatLevels().level.First(n => n.id == Core.GolobalData.BoatLevel);
-                var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.turn_time);
+                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId==1).Levels.Level.First(n => n.Id == Core.GolobalData.BoatLevel);
+                var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
-                if (turns > b.turn_count)
+                if (turns > b.TurnCount)
                 {
-                    CustomObjects.Add("turns", b.turn_count);
+                    CustomObjects.Add("turns", b.TurnCount);
                 }
                 else
                 {
@@ -549,7 +550,7 @@ namespace SeaBotCore
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
 
-            HeartBeat()
+            public HeartBeat()
             {
                 _time = (uint)TimeUtils.GetEpochTime();
             }
