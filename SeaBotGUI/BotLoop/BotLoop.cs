@@ -19,6 +19,7 @@ namespace SeaBotGUI.BotLoop
                         Defenitions.BuildingDef.Items.Item.FirstOrDefault(n =>
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
+                   
                     if (neededmats != null)
                     {
                         var ok = true;
@@ -35,6 +36,23 @@ namespace SeaBotGUI.BotLoop
                                 ok = false;
                                 break;
                             }
+
+                        if (ok)
+                        {
+                            if (neededmats.ReqId != 0)
+                            {
+                                var def = Core.GolobalData.Buildings
+                                    .FirstOrDefault(n => n.DefId == neededmats.ReqId);
+                                if (def != null)
+                                {
+                                    ok = def.Level >= neededmats.ReqLevel;
+                                }
+                                else
+                                {
+                                    ok = false;
+                                }
+                            }
+                        }
 
                         if (ok)
                         {
