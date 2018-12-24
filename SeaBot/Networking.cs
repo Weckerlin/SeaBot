@@ -45,7 +45,7 @@ namespace SeaBotCore
 
         static Networking()
         {
-            Events.Events.SyncFailedEvent.SyncFailedChat.OnSyncFailedEvent += SyncFailedChat_OnSyncFailedEvent;
+            Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailedChat_OnSyncFailedEvent;
             _syncThread.IsBackground = true;
       
             _syncThread.Start();
@@ -71,6 +71,7 @@ namespace SeaBotCore
             {
                 _syncThread = new Thread(SyncVoid);
                 _gametasks.Clear();
+                _taskId = 1;
               _syncThread.Start();
             }
         }
@@ -254,12 +255,18 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Warning("[BAD] Server accepted our " + passed + " requests!");
                     Logger.Logger.Info("Checking Fatal error...");
-                    if (doc.SelectSingleNode("result")?.InnerText == "ERROR")
+                    if (doc.SelectSingleNode("xml/task/result")?.InnerText == "ERROR")
                     {
-                  
-                        var errcode =(Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("error_code")?.InnerText);
+
+                        var errcode =(Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
                         Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
-                       Events.Events.SyncFailedEvent.SyncFailedChat.Invoke(errcode);
+                       Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
+                    }
+                    else if (doc.SelectSingleNode("xml/result")?.InnerText == "ERROR")
+                    {
+                        var errcode = (Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
+                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
+                        Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
 
                 }
