@@ -72,6 +72,7 @@
     <Compile Include="Task.cs" />
     <Compile Include="Barrel.cs" />
     <Compile Include="Utils\FullObserv.cs" />
+    <Compile Include="Utils\ThreadKill.cs" />
     <Compile Include="Utils\Time.cs" />
     <Compile Include="Utils\XMLMinifier.cs" />
   </ItemGroup>

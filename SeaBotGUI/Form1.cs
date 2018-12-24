@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -57,7 +58,8 @@ namespace SeaBotGUI
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
-            
+            label7.Text =
+                $"Version: {FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion}";
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link(){LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             //Check for cache
@@ -237,12 +239,15 @@ namespace SeaBotGUI
             button3.Enabled = true;
             button2.Enabled = false;
             Core.ServerToken = textBox2.Text;
+            
             Networking.Login();
             FormateResources(Core.GlobalData);
            Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
             BarrelThread = new Thread(BarrelVoid){IsBackground = true};
             BarrelThread.Start();
+           
+            Networking.StartThread();
             BotThread = new Thread(BotVoid);
             BotThread.IsBackground = true;
             BotThread.Start();
@@ -360,10 +365,15 @@ namespace SeaBotGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
+           
             button2.Enabled = true;
             button3.Enabled = false;
             Core.StopBot();
-            BotThread.Abort();
+            SeaBotCore.Utils.ThreadKill.KillTheThread(BotThread);
+            SeaBotCore.Utils.ThreadKill.KillTheThread(BarrelThread);
+      
+            Core.GlobalData = null;
+     
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -413,5 +423,22 @@ namespace SeaBotGUI
             _config.barrelhack = chk_barrelhack.Checked;
             ConfigSer.Save();
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/weespin/SeaBot");
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://t.me/nullcore");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/id/wspin/");
+        }
+
+    
     }
 }

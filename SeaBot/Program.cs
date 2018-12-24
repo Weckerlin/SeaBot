@@ -16,6 +16,7 @@
 
 using System.Net.Http;
 using SeaBotCore.Data;
+using SeaBotCore.Utils;
 
 namespace SeaBotCore
 {
@@ -30,7 +31,7 @@ namespace SeaBotCore
 
         public static void StopBot()
         {
-            Networking._syncThread.Abort();
+            ThreadKill.KillTheThread(Networking._syncThread);
         }
     }
 }

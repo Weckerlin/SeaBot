@@ -45,13 +45,35 @@ namespace SeaBotCore
 
         static Networking()
         {
+            Events.Events.SyncFailedEvent.SyncFailedChat.OnSyncFailedEvent += SyncFailedChat_OnSyncFailedEvent;
             _syncThread.IsBackground = true;
+      
             _syncThread.Start();
+        }
+
+        private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
+        {
+            if (e == Enums.EErrorCode.WRONG_SESSION)
+            {
+                Logger.Logger.Info("Trying to relogin");
+                Login();
+            }
         }
 
         private static List<DelayedTask> _delayedtaskList = new List<DelayedTask>();
         public static Thread _syncThread = new Thread(SyncVoid);
         private static DateTime _lastRaised = DateTime.Now;
+
+        public static void StartThread()
+        {
+            
+            if (!_syncThread.IsAlive)
+            {
+                _syncThread = new Thread(SyncVoid);
+                _gametasks.Clear();
+              _syncThread.Start();
+            }
+        }
 
         private static void SyncVoid()
         {

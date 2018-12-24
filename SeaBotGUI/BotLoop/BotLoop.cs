@@ -153,8 +153,9 @@ namespace SeaBotGUI.BotLoop
                             if (MaterialDB.GetItem(inp.Key).Name == "wood")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.First(n => n.Id == inp.Key);
-                                if (amount.Amount > num_woodlimit)
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
+                                
+                                if (amount != null && amount.Amount > num_woodlimit)
                                 {
                                     if (num_woodlimit != 0)
                                     {
@@ -170,8 +171,8 @@ namespace SeaBotGUI.BotLoop
                             if (MaterialDB.GetItem(inp.Key).Name == "iron")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.First(n => n.Id == inp.Key);
-                                if (amount.Amount > num_ironlimit)
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
+                                if (amount != null && amount.Amount > num_ironlimit)
                                 {
                                     if (num_ironlimit != 0)
                                     {
@@ -187,8 +188,8 @@ namespace SeaBotGUI.BotLoop
                             if (MaterialDB.GetItem(inp.Key).Name == "stone")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.First(n => n.Id == inp.Key);
-                                if (amount.Amount > num_stonelimit)
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
+                                if (amount != null && amount.Amount > num_stonelimit)
                                 {
                                     if (num_stonelimit != 0)
                                     {
@@ -263,6 +264,7 @@ namespace SeaBotGUI.BotLoop
 
                     var defs = def.Levels.Level.First(n => n.Id == data.Level);
                     var started = TimeUtils.FromUnixTime(data.ProdStart);
+                    //var prodtime = defs.ProdOutputs.ProdOutput[data.ProdId - 1]; //todo add this!
                     if ((DateTime.UtcNow - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
                     {
                         Logger.Info(
