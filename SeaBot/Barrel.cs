@@ -115,13 +115,13 @@ namespace SeaBotCore.Utils
                 SetSeed(_lastBarrelSeed);
             
                 var material = _definition.Materials.Material[NextIntInRange(0, _definition.Materials.Material.Count - 1)];
-                var min = Ceil(Math.Pow(Core.GolobalData.Level, material.ExponentMin) + material.OffsetMin);
-                var max = Ceil(Math.Pow(Core.GolobalData.Level, material.ExponentMax) + material.OffsetMax);
+                var min = Ceil(Math.Pow(Core.GlobalData.Level, material.ExponentMin) + material.OffsetMin);
+                var max = Ceil(Math.Pow(Core.GlobalData.Level, material.ExponentMax) + material.OffsetMax);
                 var cur = NextIntInRange(min, max);
                 var curcelling = Ceil(cur * material.Koef);
                 _lastBarrelSeed = NextInt();
                 material.DefId = _definition.DefId.ToString();
-                var ret = new BarrelMaterial(material, (int) curcelling, (SeaBotCore.Core.GolobalData.Level));
+                var ret = new BarrelMaterial(material, (int) curcelling, (SeaBotCore.Core.GlobalData.Level));
                 return ret;
             }
         }

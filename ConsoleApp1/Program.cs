@@ -44,7 +44,7 @@ namespace ConsoleApp1
                         }
 
                         Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(),
-                            bar.Definition.Id.ToString(), Core.GolobalData.Level.ToString()));
+                            bar.Definition.Id.ToString(), Core.GlobalData.Level.ToString()));
                         attempts++;
                     }
                     else

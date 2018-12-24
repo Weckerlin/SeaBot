@@ -14,7 +14,7 @@ namespace SeaTests
         public void PseudoRandomBarrel()
         {
             SeaBotCore.Utils.BarrelController._lastBarrelSeed=1147034909;
-            SeaBotCore.Core.GolobalData = new GlobalData(){Level=49};
+            SeaBotCore.Core.GlobalData = new GlobalData(){Level=49};
             var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                 .Where(n => n.DefId == 21).First());
             Assert.AreEqual(1, bar.Definition.Id);

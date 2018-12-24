@@ -43,7 +43,7 @@ namespace SeaBotCore
                 _time = (uint) TimeUtils.GetEpochTime();
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId==1).Levels.Level.First(n => n.Id == Core.GolobalData.BoatLevel);
+                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId==1).Levels.Level.First(n => n.Id == Core.GlobalData.BoatLevel);
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
@@ -55,7 +55,7 @@ namespace SeaBotCore
                     CustomObjects.Add("turns", turns);
                 }
 
-                Core.GolobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
+                Core.GlobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
                     TimeUtils.GetEpochTime();
             }
         }

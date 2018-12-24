@@ -66,7 +66,7 @@ namespace SeaBotGUI
         private void Inventory_CollectionChanged(object sender,
             NotifyCollectionChangedEventArgs e)
         {
-            FormateResources(SeaBotCore.Core.GolobalData);
+            FormateResources(SeaBotCore.Core.GlobalData);
         }
 
         private void LogMessageChat_OnLogMessage(Logger.Message e)
@@ -238,9 +238,9 @@ namespace SeaBotGUI
             button2.Enabled = false;
             Core.ServerToken = textBox2.Text;
             Networking.Login();
-            FormateResources(Core.GolobalData);
-           Core.GolobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
-            Core.GolobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
+            FormateResources(Core.GlobalData);
+           Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+            Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
             BarrelThread = new Thread(BarrelVoid){IsBackground = true};
             BarrelThread.Start();
             BotThread = new Thread(BotVoid);
@@ -251,7 +251,7 @@ namespace SeaBotGUI
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
         {
-            FormateResources(Core.GolobalData);
+            FormateResources(Core.GlobalData);
         }
 
         void BarrelVoid()

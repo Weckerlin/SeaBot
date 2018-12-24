@@ -115,6 +115,7 @@ namespace SeaBotCore.Logger
             {
             }
         }
+      
 
         private static void WriteFormattedLog(LogLevel level, string text)
         {
@@ -123,6 +124,10 @@ namespace SeaBotCore.Logger
             bool onlylog = false;
             switch (level)
             {
+                case LogLevel.NETWORK:
+                    pretext = DateTime.Now.ToString(datetimeFormat) + " [NTWRK]   ";
+                    WriteLine(pretext+text);
+                    break;
                 case LogLevel.TRACE:
                     Message.color = Color.White;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [TRACE]   ";
@@ -195,6 +200,7 @@ namespace SeaBotCore.Logger
         [Flags]
         private enum LogLevel
         {
+            NETWORK,
             TRACE,
             INFO,
             DEBUG,

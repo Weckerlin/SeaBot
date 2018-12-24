@@ -23,7 +23,7 @@ namespace SeaBotCore
     {
         private static readonly HttpClient Client = new HttpClient();
         public static string Ssid = "";
-        public static GlobalData GolobalData = new GlobalData();
+        public static GlobalData GlobalData = new GlobalData();
         public static bool Debug;
 
         public static string ServerToken = "";

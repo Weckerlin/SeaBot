@@ -60,15 +60,15 @@ namespace SeaBotCore
                 Thread.Sleep(10);
                 Thread.Sleep(6*1000);
                 if (/*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
-                    Core.GolobalData.Level != 0)
+                    Core.GlobalData.Level != 0)
                 {
-                    Logger.Logger.Info("Syncing...");
+                    Logger.Logger.Debug("Syncing...");
                     Sync();
                 }
 
                 if ((DateTime.Now - _lastRaised).TotalSeconds > 300)
                 {
-                    Logger.Logger.Info("Sending Heartbeat...");
+                    Logger.Logger.Debug("Sending Heartbeat...");
                     _gametasks.Add(new Task.HeartBeat());
                     Sync();
                 }
@@ -124,7 +124,7 @@ namespace SeaBotCore
 
         public static void Login()
         {
-            Logger.Logger.Info("Loginin'");
+            Logger.Logger.Info("Logining ");
             //Get big token
             var tempuid = String.Empty;
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
@@ -152,7 +152,7 @@ namespace SeaBotCore
                     Core.Ssid = regex.Match(stringtext).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
                     tempuid = regex.Match(stringtext).Groups[1].Value;
-                    Logger.Logger.Info("Done!");
+                    Logger.Logger.Info("Successfully logged in! Session ID = "+Core.Ssid);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace SeaBotCore
                 {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
-            Core.GolobalData = Parser.ParseXmlToGlobalData(s);
+            Core.GlobalData = Parser.ParseXmlToGlobalData(s);
         }
 
         public static void Sync()
@@ -195,13 +195,13 @@ namespace SeaBotCore
                 false); //_loc2_.substr(0,224) + _sessionData.sessionId + "KNn2R4sK"
             var values = new Dictionary<string, string>
             {
-                {"pid", Core.GolobalData.UserId.ToString()},
+                {"pid", Core.GlobalData.UserId.ToString()},
                 {"session_id", Core.Ssid},
                 {"data", taskstr.ToString()},
                 {"sig", sig}
             };
             _taskId++;
-            Logger.Logger.Debug(taskstr.ToString());
+            Logger.Logger.Debug(new XMLMinifier(XMLMinifierSettings.Aggressive).Minify(taskstr.ToString()));
             var response = SendRequest(values, "client.synchronize");
             Logger.Logger.Debug(response);
             var doc = new XmlDocument();
@@ -225,7 +225,7 @@ namespace SeaBotCore
 
                 if (passed != 0)
                 {
-                    Logger.Logger.Info("[GOOD] Server accepted our " + passed + " requests");
+                    Logger.Logger.Debug("[GOOD] Server accepted our " + passed + " requests");
 
                 }
                 else
@@ -250,17 +250,17 @@ namespace SeaBotCore
                         {
                             case "level_up":
                             
-                                Core.GolobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.GlobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 
                                 break;
                             case "sailors":
-                                Core.GolobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.GlobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "sync_interval":
-                                Core.GolobalData.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
+                                Core.GlobalData.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
                                 break;
                             case "xp":
-                                Core.GolobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.GlobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "material":
                             {
@@ -268,19 +268,19 @@ namespace SeaBotCore
                                 {
                                     var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
                                     var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
-                                    if (Core.GolobalData.Inventory.Count(n => n.Id == defid) != 0)
+                                    if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
                                     {
-                                        for (var i = 0; i < Core.GolobalData.Inventory.Count; i++)
+                                        for (var i = 0; i < Core.GlobalData.Inventory.Count; i++)
                                         {
-                                            if (Core.GolobalData.Inventory[i].Id == defid)
+                                            if (Core.GlobalData.Inventory[i].Id == defid)
                                             {
-                                                Core.GolobalData.Inventory[i].Amount = amount;
+                                                Core.GlobalData.Inventory[i].Amount = amount;
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        Core.GolobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
+                                        Core.GlobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
                                     }
                                 }
 
