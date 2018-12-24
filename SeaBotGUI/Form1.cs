@@ -58,11 +58,34 @@ namespace SeaBotGUI
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
+            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
             label7.Text =
                 $"Version: {FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion}";
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link(){LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             //Check for cache
+        }
+
+        private void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
+        {
+            new System.Threading.Tasks.Task(() =>
+            {
+                if ((int) e == 4010 || (int) e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                {
+                    Networking._syncThread.Abort();
+                    SeaBotCore.Utils.ThreadKill.KillTheThread(BotThread);
+                    SeaBotCore.Utils.ThreadKill.KillTheThread(BarrelThread);
+                    Core.GlobalData = null;
+                    Networking.Login();
+                    BarrelThread = new Thread(BarrelVoid) {IsBackground = true};
+                    BarrelThread.Start();
+                    Networking.StartThread();
+                    BotThread = new Thread(BotVoid);
+                    BotThread.IsBackground = true;
+                    BotThread.Start();
+
+                }
+            }).Start();
         }
 
         private void Inventory_CollectionChanged(object sender,
@@ -263,7 +286,7 @@ namespace SeaBotGUI
         {
             while (true)
             {
-                Thread.Sleep(11*1000);
+                Thread.Sleep(20*1000);
 
                 if (chk_barrelhack.Checked)
                 {
@@ -439,6 +462,9 @@ namespace SeaBotGUI
             Process.Start("https://steamcommunity.com/id/wspin/");
         }
 
-    
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
