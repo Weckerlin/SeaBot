@@ -12,7 +12,7 @@ namespace SeaBotCore.Events
         {
             public delegate void SyncFailedHandler(Enums.EErrorCode e);
 
-            public static class SyncFailedChat
+            public static class SyncFailed
             {
                 public static event SyncFailedHandler OnSyncFailedEvent;
 

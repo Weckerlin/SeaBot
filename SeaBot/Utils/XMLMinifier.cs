@@ -15,33 +15,21 @@ namespace SeaBotCore.Utils
         public bool CloseEmptyTags { get; set; }
         public bool RemoveComments { get; set; }
 
-        public static XMLMinifierSettings Aggressive
+        public static XMLMinifierSettings Aggressive => new XMLMinifierSettings
         {
-            get
-            {
-                return new XMLMinifierSettings
-                {
-                    RemoveEmptyLines = true,
-                    RemoveWhitespaceBetweenElements = true,
-                    CloseEmptyTags = true,
-                    RemoveComments = true
-                };
-            }
-        }
+            RemoveEmptyLines = true,
+            RemoveWhitespaceBetweenElements = true,
+            CloseEmptyTags = true,
+            RemoveComments = true
+        };
 
-        public static XMLMinifierSettings NoMinification
+        public static XMLMinifierSettings NoMinification => new XMLMinifierSettings
         {
-            get
-            {
-                return new XMLMinifierSettings
-                {
-                    RemoveEmptyLines = false,
-                    RemoveWhitespaceBetweenElements = false,
-                    CloseEmptyTags = false,
-                    RemoveComments = false
-                };
-            }
-        }
+            RemoveEmptyLines = false,
+            RemoveWhitespaceBetweenElements = false,
+            CloseEmptyTags = false,
+            RemoveComments = false
+        };
     }
     public class XMLMinifier
     {

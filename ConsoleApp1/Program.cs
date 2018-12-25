@@ -23,7 +23,7 @@ namespace ConsoleApp1
             var token = File.ReadAllText("token.txt");
             SeaBotCore.Core.ServerToken = token;
            
-            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailedChat.OnSyncFailedEvent += Kicked_OnWrongSession;
+            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += Kicked_OnWrongSession;
             for (int i = 7; i < 200; i++)
             {
                 kicked = false;
