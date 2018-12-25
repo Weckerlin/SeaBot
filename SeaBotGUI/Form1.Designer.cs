@@ -533,7 +533,7 @@
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(463, 424);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Factories";
+            this.tabPage5.Text = "Buildings";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
