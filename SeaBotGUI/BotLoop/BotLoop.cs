@@ -143,35 +143,31 @@ namespace SeaBotGUI.BotLoop
                                     ok = false;
                                 }
                             }
+                           
                         }
-                     }
-                   
-                    
-                  
-                        foreach (var inp in Dict)
-                        {
-                            if (MaterialDB.GetItem(inp.Key).Name == "wood")
+                       
+                            if (MaterialDB.GetItem(input.MaterialId).Name == "wood")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
-                                
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+
                                 if (amount != null && amount.Amount > num_woodlimit)
                                 {
                                     if (num_woodlimit != 0)
                                     {
                                         ok = false;
                                     }
-                              
+
                                 }
                                 else
                                 {
-                                     ok = false;
+                                    ok = false;
                                 }
                             }
-                            if (MaterialDB.GetItem(inp.Key).Name == "iron")
+                            if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                                 if (amount != null && amount.Amount > num_ironlimit)
                                 {
                                     if (num_ironlimit != 0)
@@ -185,10 +181,10 @@ namespace SeaBotGUI.BotLoop
                                     ok = false;
                                 }
                             }
-                            if (MaterialDB.GetItem(inp.Key).Name == "stone")
+                            if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
                             {
                                 var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
+                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                                 if (amount != null && amount.Amount > num_stonelimit)
                                 {
                                     if (num_stonelimit != 0)
@@ -202,6 +198,11 @@ namespace SeaBotGUI.BotLoop
                                     ok = false;
                                 }
                             }
+                        
+                   
+                    
+                  
+                    
 
                     }
                     if (ok)
