@@ -463,13 +463,13 @@ namespace SeaBotCore
             }
         }
 
-        public class FinishBoatProductionTask : IGameTask
+        public class FinishBoatProducingTask : IGameTask
         {
             public string Action => "finish_boat_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public FinishBoatProductionTask(string inst_id, int turns)
+            public FinishBoatProducingTask(string inst_id, int turns)
             {
                 _time = (uint)TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
@@ -477,13 +477,13 @@ namespace SeaBotCore
             }
         }
 
-        public class FinishBuildingProductionTask : IGameTask
+        public class FinishBuildingProducingTask : IGameTask
         {
             public string Action => "finish_building_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public FinishBuildingProductionTask(string inst_id)
+            public FinishBuildingProducingTask(string inst_id)
             {
                 _time = (uint)TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
@@ -529,13 +529,13 @@ namespace SeaBotCore
             }
         }
 
-        public class StartBuildingProductionTask : IGameTask
+        public class StartBuildingProducingTask : IGameTask
         {
             public string Action => "start_building_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public StartBuildingProductionTask(string inst_id, string prod_id)
+            public StartBuildingProducingTask(string inst_id, string prod_id)
             {
                 _time = (uint)TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);

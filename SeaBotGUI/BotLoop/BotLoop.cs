@@ -213,7 +213,7 @@ namespace SeaBotGUI.BotLoop
 
                         Logger.Info(
                             $"Started producing {MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name}");
-                        Networking.AddTask(new Task.StartBuildingProductionTask(data.InstId.ToString(),
+                        Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId.ToString(),
                             data.ProdId.ToString()));
                         data.ProdStart = TimeUtils.GetEpochTime();
                     }
@@ -270,7 +270,7 @@ namespace SeaBotGUI.BotLoop
                         Logger.Info(
                             $"Сollecting {defs.ProdOutputs.ProdOutput[0].Amount} {MaterialDB.GetItem(defs.ProdOutputs.ProdOutput[0].MaterialId).Name}");
 
-                        Networking.AddTask(new Task.FinishBuildingProductionTask(data.InstId.ToString()));
+                        Networking.AddTask(new Task.FinishBuildingProducingTask(data.InstId.ToString()));
 
                         data.ProdStart = 0;
                     }
