@@ -9,7 +9,7 @@ using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
 namespace SeaBotCore.Data.Defenitions
 {
-    class ShipDefenitions
+    public class ShipDefenitions
     {
         public partial class Items
         {

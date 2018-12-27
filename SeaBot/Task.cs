@@ -594,6 +594,71 @@ namespace SeaBotCore
                 CustomObjects.Add("debug_tileY", debug_tileY);
             }
         }
+        public class SendShipMarketplaceTask : IGameTask
+        {
+            public string Action => "send_ship_marketplace";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private uint _time;
+
+            public SendShipMarketplaceTask(string inst_id, string def_id,string dest_id,string amount)
+            {
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("dest_id", dest_id);
+                CustomObjects.Add("def_id", def_id);
+                CustomObjects.Add("amount", amount);
+
+            }
+        }
+
+        public class UnloadShipTask : IGameTask
+        {
+            public string Action => _action;
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private uint _time;
+            private string _action = "send_ship_marketplace";
+            
+            public UnloadShipTask(string inst_id, string player_level, Enums.EObject eobj, string debug_capacity,
+                string debug_capacity_used, string debug_sailors, string debug_sailors_used, string debug_locationlevel,
+                Captain cpt = null)
+            {
+                
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("player_level", player_level);
+                CustomObjects.Add("debug_capacity", debug_capacity);
+                CustomObjects.Add("debug_capacity_used", debug_capacity_used);
+                CustomObjects.Add("debug_sailors", debug_sailors);
+                CustomObjects.Add("debug_sailors_used", debug_sailors_used);
+                CustomObjects.Add("debug_location_level", debug_locationlevel);
+                if (cpt!=null)
+                {
+                    CustomObjects.Add("debug_captain_id", cpt.InstId);
+                    CustomObjects.Add("debug_captain_def_id", cpt.DefId);
+                }
+
+                switch (eobj)
+                {
+                    case Enums.EObject.upgradeable:
+                        _action = "unload_ship_upgradeable";
+                        break;
+                    case Enums.EObject.marketplace:
+                        _action = "unload_ship_marketplace";
+                        break;
+                    case Enums.EObject.dealer:
+                        _action = "unload_ship_dealer";
+                        break;
+                    case Enums.EObject.wreck:
+                        _action = "unload_ship_wreck";
+                        break;
+                    case Enums.EObject.lost_treasure:
+                        _action = "unload_ship_treasure";
+                        break;
+                }
+            }
+        }
 
         public class HeartBeat : IGameTask
         {

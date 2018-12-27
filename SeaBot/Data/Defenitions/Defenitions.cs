@@ -25,5 +25,9 @@ namespace SeaBotCore.Data.Defenitions
         public static BarrelDefenitions.Root BarrelDef => Cache.GetBarrelDefenitions();
 
         public static BoatDefenitions.Root BoatDef => Cache.GetBoatLevelDefenitions();
+
+        public static ShipDefenitions.Root ShipDef => Cache.GetShipDefenitions();
+        public static MarketplaceDefenitions.Root MarketDef => Cache.GetMarketPlaceDefenitions();
+        
     }
 }

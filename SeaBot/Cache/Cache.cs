@@ -102,7 +102,45 @@ namespace SeaBotCore
 
             return _boatdefenitions;
         }
+        private static ShipDefenitions.Root _shipdefenitions;
 
+        public static ShipDefenitions.Root GetShipDefenitions()
+        {
+            if (_shipdefenitions == null)
+            {
+                if (!File.Exists(_cachefolder + "\\ship.json"))
+                {
+                    if (!DownloadCache())
+                    {
+                    }
+                }
+
+                _shipdefenitions = JsonConvert.DeserializeObject<ShipDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\ship.json"));
+            }
+
+            return _shipdefenitions;
+        }
+
+        private static MarketplaceDefenitions.Root _marketplacedefenitions;
+
+        public static MarketplaceDefenitions.Root GetMarketPlaceDefenitions()
+        {
+            if (_marketplacedefenitions == null)
+            {
+                if (!File.Exists(_cachefolder + "\\marketplace.json"))
+                {
+                    if (!DownloadCache())
+                    {
+                    }
+                }
+
+                _marketplacedefenitions = JsonConvert.DeserializeObject<MarketplaceDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\marketplace.json"));
+            }
+
+            return _marketplacedefenitions;
+        }
         private static BarrelDefenitions.Root _barreldefenitions;
 
         public static BarrelDefenitions.Root GetBarrelDefenitions()
