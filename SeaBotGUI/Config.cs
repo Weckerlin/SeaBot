@@ -34,6 +34,7 @@ namespace SeaBotGUI
         public bool finishupgrade = false;
         public bool barrelhack = false;
         public int barrelinterval = 22;
+        public int hibernateinterval = 5;
     }
 
     class ConfigSer

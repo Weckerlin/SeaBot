@@ -80,6 +80,9 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.num_hibernationinterval = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -101,6 +104,8 @@
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -290,6 +295,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.checkBox1);
@@ -316,6 +322,11 @@
             // num_barrelinterval
             // 
             this.num_barrelinterval.Location = new System.Drawing.Point(12, 36);
+            this.num_barrelinterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.num_barrelinterval.Name = "num_barrelinterval";
             this.num_barrelinterval.Size = new System.Drawing.Size(100, 20);
             this.num_barrelinterval.TabIndex = 1;
@@ -675,6 +686,34 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.num_hibernationinterval);
+            this.groupBox9.Controls.Add(this.label9);
+            this.groupBox9.Location = new System.Drawing.Point(136, 161);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(138, 71);
+            this.groupBox9.TabIndex = 4;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Another Session";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Waiting for (minutes)";
+            // 
+            // num_hibernationinterval
+            // 
+            this.num_hibernationinterval.Location = new System.Drawing.Point(22, 35);
+            this.num_hibernationinterval.Name = "num_hibernationinterval";
+            this.num_hibernationinterval.Size = new System.Drawing.Size(81, 20);
+            this.num_hibernationinterval.TabIndex = 1;
+            this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -715,6 +754,9 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -771,6 +813,9 @@
         private System.Windows.Forms.LinkLabel linkLabel5;
         private System.Windows.Forms.BindingSource buildingBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.NumericUpDown num_hibernationinterval;
+        private System.Windows.Forms.Label label9;
     }
 }
 

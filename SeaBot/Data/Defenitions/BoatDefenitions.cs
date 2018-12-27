@@ -1,9 +1,24 @@
-﻿using System;
+﻿// SeaBotCore
+// Copyright (C) 2018 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using N = Newtonsoft.Json.NullValueHandling;
 
@@ -11,17 +26,17 @@ namespace SeaBotCore.Data.Defenitions
 {
     public class BoatDefenitions
     {
-        public partial class Root
+        public class Root
         {
             [J("items")] public Items Items { get; set; }
         }
 
-        public partial class Items
+        public class Items
         {
             [J("item")] public List<Item> Item { get; set; }
         }
 
-        public partial class Item
+        public class Item
         {
             [J("def_id")] public long DefId { get; set; }
             [J("name")] public string Name { get; set; }
@@ -40,12 +55,12 @@ namespace SeaBotCore.Data.Defenitions
             [J("prices")] public Prices Prices { get; set; }
         }
 
-        public partial class Levels
+        public class Levels
         {
             [J("level")] public List<Level> Level { get; set; }
         }
 
-        public partial class Level
+        public class Level
         {
             [J("id")] public long Id { get; set; }
             [J("mass")] public long Mass { get; set; }
@@ -56,23 +71,23 @@ namespace SeaBotCore.Data.Defenitions
             [J("model_name")] public string ModelName { get; set; }
         }
 
-        public partial class Prices
+        public class Prices
         {
             [J("price")] public List<Price> Price { get; set; }
         }
 
-        public partial class Price
+        public class Price
         {
             [J("id")] public long Id { get; set; }
             [J("materials")] public Materials Materials { get; set; }
         }
 
-        public partial class Materials
+        public class Materials
         {
             [J("material")] public List<Material> Material { get; set; }
         }
 
-        public partial class Material
+        public class Material
         {
             [J("id")] public long Id { get; set; }
             [J("amount")] public long Amount { get; set; }

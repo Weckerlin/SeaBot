@@ -1,4 +1,20 @@
-﻿using System;
+﻿// SeabotGUI
+// Copyright (C) 2018 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -6,15 +22,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SeaBotCore;
+using SeaBotCore.Data;
+using SeaBotCore.Utils;
 using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI.GUIBinds
 {
-    static public class GUIBinds
+    public static class GUIBinds
     {
-        static public class BuildingBinding
+        public static class BuildingBinding
         {
             public static BindingList<Building> Buildings = new BindingList<Building>();
+
             public static BindingList<Building> GetBuildings()
             {
                 var ret = new BindingList<Building>();
@@ -35,7 +54,7 @@ namespace SeaBotGUI.GUIBinds
                     Building.Name = Cache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
                         .First().Name;
                     Building.Level = building.Level;
-                    string producing = "";
+                    var producing = "";
                     if (building.ProdStart != 0)
                     {
                         var willbeproducedat = building.ProdStart + Cache.GetBuildingDefenitions().Items.Item
@@ -45,19 +64,19 @@ namespace SeaBotGUI.GUIBinds
                         //lol xD
 
                         producing =
-                            (DateTime.UtcNow - SeaBotCore.Utils.TimeUtils.FromUnixTime(willbeproducedat))
+                            (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat))
                             .ToString(@"hh\:mm\:ss");
                     }
 
                     Building.Producing = producing;
-                    string upgrade = "";
+                    var upgrade = "";
                     if (building.UpgStart != 0)
                     {
                         var willbeproducedat = building.UpgStart + Cache.GetBuildingDefenitions().Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
 
-                        upgrade = (DateTime.UtcNow - SeaBotCore.Utils.TimeUtils.FromUnixTime(willbeproducedat))
+                        upgrade = (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat))
                             .ToString(@"hh\:mm\:ss");
                     }
 
@@ -66,7 +85,6 @@ namespace SeaBotGUI.GUIBinds
                 }
 
                 return ret;
-
             }
 
             public class Building
@@ -80,4 +98,3 @@ namespace SeaBotGUI.GUIBinds
         }
     }
 }
-

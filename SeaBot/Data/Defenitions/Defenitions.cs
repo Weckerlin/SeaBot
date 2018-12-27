@@ -20,7 +20,6 @@ namespace SeaBotCore.Data.Defenitions
 {
     public static class Defenitions
     {
-
         public static BuildingDefentions.Root BuildingDef => Cache.GetBuildingDefenitions();
 
         public static BarrelDefenitions.Root BarrelDef => Cache.GetBarrelDefenitions();

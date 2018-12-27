@@ -1,4 +1,20 @@
-﻿using System;
+﻿// SeabotGUI
+// Copyright (C) 2018 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SeaBotCore;
@@ -61,9 +77,9 @@ namespace SeaBotGUI.BotLoop
                             {
                                 var m = Core.GlobalData.Inventory
                                     .First(n => n.Id == neededmat.Id);
-                                m.Amount -= (int)neededmat.Amount;
-
+                                m.Amount -= (int) neededmat.Amount;
                             }
+
                             Logger.Info(
                                 $"Started upgrading {defined.Name}");
                             Networking.AddTask(new Task.StartBuildingUpgradeTask(data.InstId.ToString(),
@@ -111,13 +127,11 @@ namespace SeaBotGUI.BotLoop
                         continue;
                     }
 
-                    bool ok = true;
+                    var ok = true;
                     var inputs = needed.ProdOutputs.ProdOutput;
                     var Dict = new Dictionary<long, long>();
                     foreach (var input in inputs)
                     {
-
-
                         foreach (var inp in input.Inputs.Input)
                         {
                             var ourmat = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Id);
@@ -143,7 +157,6 @@ namespace SeaBotGUI.BotLoop
                                     ok = false;
                                 }
                             }
-
                         }
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "wood")
@@ -157,13 +170,13 @@ namespace SeaBotGUI.BotLoop
                                 {
                                     ok = false;
                                 }
-
                             }
                             else
                             {
                                 ok = false;
                             }
                         }
+
                         if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
                         {
                             var amount =
@@ -174,13 +187,13 @@ namespace SeaBotGUI.BotLoop
                                 {
                                     ok = false;
                                 }
-
                             }
                             else
                             {
                                 ok = false;
                             }
                         }
+
                         if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
                         {
                             var amount =
@@ -191,20 +204,19 @@ namespace SeaBotGUI.BotLoop
                                 {
                                     ok = false;
                                 }
-
                             }
                             else
                             {
                                 ok = false;
                             }
                         }
-
                     }
+
                     if (ok)
                     {
                         foreach (var inp in Dict)
                         {
-                            Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int)inp.Value;
+                            Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
                         }
 
                         Logger.Info(
@@ -227,7 +239,7 @@ namespace SeaBotGUI.BotLoop
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 if (turns > 5)
                 {
-                    totalfish += (int)(b.OutputAmount * turns);
+                    totalfish += (int) (b.OutputAmount * turns);
                     Networking.AddTask(new Task.TakeFish(boat));
                 }
             }

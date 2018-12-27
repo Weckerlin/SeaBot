@@ -45,6 +45,8 @@ namespace SeaBotCore.Logger
             }
         }
 
+        public static bool Muted = false;
+
         /// <summary>
         /// Log a DEBUG message
         /// </summary>
@@ -115,18 +117,22 @@ namespace SeaBotCore.Logger
             {
             }
         }
-      
+
 
         private static void WriteFormattedLog(LogLevel level, string text)
         {
+            if (Muted)
+            {
+                return;
+            }
             var Message = new Message();
             string pretext;
-            bool onlylog = false;
+            var onlylog = false;
             switch (level)
             {
                 case LogLevel.NETWORK:
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [NTWRK]   ";
-                    WriteLine(pretext+text);
+                    WriteLine(pretext + text);
                     break;
                 case LogLevel.TRACE:
                     Message.color = Color.White;
@@ -162,7 +168,7 @@ namespace SeaBotCore.Logger
                     break;
             }
 
-           
+
             WriteLine(pretext + text);
             if (!onlylog)
             {

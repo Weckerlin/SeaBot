@@ -26,7 +26,7 @@ namespace SeaBotCore
         public static string Ssid = "";
         public static GlobalData GlobalData = new GlobalData();
         public static bool Debug;
-
+        public static int hibernation = 0;
         public static string ServerToken = "";
 
         public static void StopBot()

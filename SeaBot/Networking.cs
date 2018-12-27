@@ -47,17 +47,28 @@ namespace SeaBotCore
         {
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailedChat_OnSyncFailedEvent;
             _syncThread.IsBackground = true;
-      
+
             _syncThread.Start();
         }
 
         private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
         {
-            if (e == Enums.EErrorCode.WRONG_SESSION)
+            System.Threading.Tasks.Task.Run(() =>
             {
-                Logger.Logger.Info("Trying to relogin");
-                Login();
-            }
+                if (e == Enums.EErrorCode.WRONG_SESSION)
+                {
+                    Logger.Logger.Info(
+                        $"Someone is playing this game right now, waiting for {SeaBotCore.Core.hibernation} minutes");
+                    _syncThread.Abort();
+                    Logger.Logger.Muted = true;
+                    Thread.Sleep(SeaBotCore.Core.hibernation * 1000 * 60);
+                    Logger.Logger.Muted = false; 
+                    Logger.Logger.Info($"Mwaaah, waking up after hibernation");
+                   
+                    StartThread();
+                    Login();
+                }
+            });
         }
 
         private static List<DelayedTask> _delayedtaskList = new List<DelayedTask>();
@@ -66,13 +77,12 @@ namespace SeaBotCore
 
         public static void StartThread()
         {
-            
             if (!_syncThread.IsAlive)
             {
                 _syncThread = new Thread(SyncVoid);
                 _gametasks.Clear();
                 _taskId = 1;
-              _syncThread.Start();
+                _syncThread.Start();
             }
         }
 
@@ -81,9 +91,9 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(10);
-                Thread.Sleep(6*1000);
-                if (/*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
-                    Core.GlobalData.Level != 0)
+                Thread.Sleep(6 * 1000);
+                if ( /*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
+                                                                         Core.GlobalData.Level != 0)
                 {
                     Logger.Logger.Debug("Syncing...");
                     Sync();
@@ -175,7 +185,7 @@ namespace SeaBotCore
                     Core.Ssid = regex.Match(stringtext).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
                     tempuid = regex.Match(stringtext).Groups[1].Value;
-                    Logger.Logger.Info("Successfully logged in! Session ID = "+Core.Ssid);
+                    Logger.Logger.Info("Successfully logged in! Session ID = " + Core.Ssid);
                 }
                 else
                 {
@@ -249,7 +259,6 @@ namespace SeaBotCore
                 if (passed != 0)
                 {
                     Logger.Logger.Debug("[GOOD] Server accepted our " + passed + " requests");
-
                 }
                 else
                 {
@@ -257,18 +266,18 @@ namespace SeaBotCore
                     Logger.Logger.Info("Checking Fatal error...");
                     if (doc.SelectSingleNode("xml/task/result")?.InnerText == "ERROR")
                     {
-
-                        var errcode =(Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
-                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
-                       Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
-                    }
-                    else if (doc.SelectSingleNode("xml/result")?.InnerText == "ERROR")
-                    {
-                        var errcode = (Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
+                        var errcode =
+                            (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
                         Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
                         Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
-
+                    else if (doc.SelectSingleNode("xml/result")?.InnerText == "ERROR")
+                    {
+                        var errcode =
+                            (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
+                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
+                        Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
+                    }
                 }
 
                 var pushnode = doc.DocumentElement.SelectSingleNode("push");
@@ -278,9 +287,9 @@ namespace SeaBotCore
                         switch (node.Name)
                         {
                             case "level_up":
-                            
+
                                 Core.GlobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
-                                
+
                                 break;
                             case "sailors":
                                 Core.GlobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
