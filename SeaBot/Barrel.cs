@@ -23,9 +23,6 @@ using SeaBotCore.Data.Defenitions;
 
 namespace SeaBotCore.Utils
 {
-    class Barrel
-    {
-    }
 
     public class BarrelMaterial
     {

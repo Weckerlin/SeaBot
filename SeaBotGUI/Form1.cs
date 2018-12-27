@@ -22,11 +22,15 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using SeaBotCore;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
@@ -53,11 +57,12 @@ namespace SeaBotGUI
             GridViewUpdater = new Thread(UpdateGrid) {IsBackground = true};
             GridViewUpdater.Start();
             MaximizeBox = false;
-
+            CheckForUpdates();
             textBox2.Text = _config.server_token;
-           num_hibernationinterval.Value= Core.hibernation = _config.hibernateinterval;
+            num_hibernationinterval.Value = Core.hibernation = _config.hibernateinterval;
             checkBox1.Checked = _config.debug;
             Core.Debug = _config.debug;
+            chk_onlyfactory.Checked = _config.upgradeonlyfactory;
             chk_autofish.Checked = _config.collectfish;
             chk_prodfact.Checked = _config.prodfactory;
             chk_collectmat.Checked = _config.collectfactory;
@@ -70,8 +75,7 @@ namespace SeaBotGUI
             num_stonelimit.Value = _config.stonelimit;
             num_barrelinterval.Value = _config.barrelinterval;
             SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
-            label7.Text =
-                $"Version: {FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion}";
+          
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
@@ -334,8 +338,50 @@ namespace SeaBotGUI
             }
         }
 
+        void CheckForUpdates()
+        {
+            HttpClient httpClient = new HttpClient();
 
-        private void button2_Click(object sender, EventArgs e)
+            //specify to use TLS 1.2 as default connection
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+        
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            var l =httpClient.GetAsync("http://api.github.com/repos/weespin/SeaBot/releases/latest").Result.Content.ReadAsStringAsync().Result;
+            var data = JsonConvert.DeserializeObject<GitHub_Data.Root>(l);
+            var version1 = new Version( FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion );
+            var version2 = new Version(data.TagName);
+
+            var result = version1.CompareTo(version2);
+            if (result > 0)
+            {
+                label7.ForeColor = Color.DarkMagenta;
+                label7.Text = $"[DEV] Version: {version1}";
+                
+
+            }
+            
+            else if (result < 0)
+            {
+                label7.ForeColor = Color.DarkRed;
+                label7.Text = $"[Old] Version: {version1}";
+                var msg = MessageBox.Show("A new update has been released, press OK to open download page!", "Update!",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (msg == DialogResult.Yes)
+                {
+                    CompUtils.OpenLink(data.HtmlUrl.ToString());
+                }
+            }
+            else
+            {
+                label7.ForeColor = Color.DarkGreen;
+                label7.Text = $"[Current] Version: {version1}";
+            }
+
+         
+        }
+
+    private void button2_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(_config.server_token))
             {
@@ -390,7 +436,9 @@ namespace SeaBotGUI
             {
                 if (chk_aupgrade.Checked)
                 {
-                    BotLoop.BotLoop.AutoUpgrade();
+                    
+                   BotLoop.BotLoop.AutoUpgrade(_config.upgradeonlyfactory);
+                    
                 }
 
                 if (chk_autofish.Checked)
@@ -563,6 +611,12 @@ namespace SeaBotGUI
         private void numericUpDown2_Leave(object sender, EventArgs e)
         {
           Core.hibernation=  _config.hibernateinterval = (int) num_hibernationinterval.Value;
+            ConfigSer.Save();
+        }
+
+        private void chk_onlyfactory_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.upgradeonlyfactory = chk_onlyfactory.Checked;
             ConfigSer.Save();
         }
     }

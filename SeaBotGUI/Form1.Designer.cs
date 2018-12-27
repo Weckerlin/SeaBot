@@ -47,6 +47,11 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.chk_onlyfactory = new System.Windows.Forms.CheckBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.num_hibernationinterval = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.num_barrelinterval = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -72,7 +77,6 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
@@ -80,9 +84,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.num_hibernationinterval = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -90,6 +92,9 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -104,8 +109,6 @@
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,6 +127,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -192,7 +196,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.richTextBox1);
-            this.groupBox3.Location = new System.Drawing.Point(8, 201);
+            this.groupBox3.Location = new System.Drawing.Point(5, 89);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(447, 152);
             this.groupBox3.TabIndex = 1;
@@ -220,9 +224,9 @@
             this.groupBox2.Controls.Add(this.chk_collectmat);
             this.groupBox2.Controls.Add(this.chk_autofish);
             this.groupBox2.Controls.Add(this.chk_aupgrade);
-            this.groupBox2.Location = new System.Drawing.Point(8, 359);
+            this.groupBox2.Location = new System.Drawing.Point(6, 247);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(447, 65);
+            this.groupBox2.Size = new System.Drawing.Size(446, 65);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Strategy";
@@ -295,6 +299,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox6);
@@ -307,6 +312,55 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.chk_onlyfactory);
+            this.groupBox10.Location = new System.Drawing.Point(280, 161);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(103, 71);
+            this.groupBox10.TabIndex = 5;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Auto Upgrade";
+            // 
+            // chk_onlyfactory
+            // 
+            this.chk_onlyfactory.AutoSize = true;
+            this.chk_onlyfactory.Location = new System.Drawing.Point(6, 35);
+            this.chk_onlyfactory.Name = "chk_onlyfactory";
+            this.chk_onlyfactory.Size = new System.Drawing.Size(93, 17);
+            this.chk_onlyfactory.TabIndex = 0;
+            this.chk_onlyfactory.Text = "Only Factories";
+            this.chk_onlyfactory.UseVisualStyleBackColor = true;
+            this.chk_onlyfactory.CheckedChanged += new System.EventHandler(this.chk_onlyfactory_CheckedChanged);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.num_hibernationinterval);
+            this.groupBox9.Controls.Add(this.label9);
+            this.groupBox9.Location = new System.Drawing.Point(136, 161);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(138, 71);
+            this.groupBox9.TabIndex = 4;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Another Session";
+            // 
+            // num_hibernationinterval
+            // 
+            this.num_hibernationinterval.Location = new System.Drawing.Point(22, 35);
+            this.num_hibernationinterval.Name = "num_hibernationinterval";
+            this.num_hibernationinterval.Size = new System.Drawing.Size(81, 20);
+            this.num_hibernationinterval.TabIndex = 1;
+            this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 19);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Waiting for (minutes)";
             // 
             // groupBox8
             // 
@@ -601,7 +655,6 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.label7);
             this.tabPage4.Controls.Add(this.groupBox7);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -609,15 +662,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "About";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(344, 406);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "label7";
             // 
             // groupBox7
             // 
@@ -686,33 +730,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // groupBox9
+            // label7
             // 
-            this.groupBox9.Controls.Add(this.num_hibernationinterval);
-            this.groupBox9.Controls.Add(this.label9);
-            this.groupBox9.Location = new System.Drawing.Point(136, 161);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(138, 71);
-            this.groupBox9.TabIndex = 4;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Another Session";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 19);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(103, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Waiting for (minutes)";
-            // 
-            // num_hibernationinterval
-            // 
-            this.num_hibernationinterval.Location = new System.Drawing.Point(22, 35);
-            this.num_hibernationinterval.Name = "num_hibernationinterval";
-            this.num_hibernationinterval.Size = new System.Drawing.Size(81, 20);
-            this.num_hibernationinterval.TabIndex = 1;
-            this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(309, 406);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "label7";
             // 
             // Form1
             // 
@@ -727,6 +752,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -735,6 +761,11 @@
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).EndInit();
@@ -750,13 +781,9 @@
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -805,7 +832,6 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown num_barrelinterval;
@@ -816,6 +842,9 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.NumericUpDown num_hibernationinterval;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.CheckBox chk_onlyfactory;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -27,7 +27,7 @@ namespace SeaBotGUI.BotLoop
 {
     public static class BotLoop
     {
-        public static void AutoUpgrade()
+        public static void AutoUpgrade(bool onlyfactory)
         {
             foreach (var data in Core.GlobalData.Buildings)
                 if (data.UpgStart == 0 && data.ProdStart == 0)
@@ -37,9 +37,14 @@ namespace SeaBotGUI.BotLoop
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
 
+                    if (defined != null && (defined.Type != "factory"&&onlyfactory))
+                    {
+                        continue;
+                    }
                     if (neededmats != null)
                     {
                         var ok = true;
+                        
                         foreach (var neededmat in neededmats.Materials.Material)
                             if (Core.GlobalData.Inventory
                                     .FirstOrDefault(n => n.Id == neededmat.Id) != null)
@@ -63,11 +68,17 @@ namespace SeaBotGUI.BotLoop
                                 if (def != null)
                                 {
                                     ok = def.Level >= neededmats.ReqLevel;
+                                   
                                 }
                                 else
                                 {
                                     ok = false;
                                 }
+                            }
+
+                            if (neededmats.PlayerLevel > Core.GlobalData.Level)
+                            {
+                                ok = false;
                             }
                         }
 
