@@ -1,4 +1,20 @@
-﻿using System.IO;
+﻿// SeaBotCore
+// Copyright (C) 2018 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -31,6 +47,7 @@ namespace SeaBotCore.Utils
             RemoveComments = false
         };
     }
+
     public class XMLMinifier
     {
         private XMLMinifierSettings _minifierSettings;
@@ -43,7 +60,8 @@ namespace SeaBotCore.Utils
         public string Minify(string xml)
         {
             var originalXmlDocument = new XmlDocument();
-            originalXmlDocument.PreserveWhitespace = !(_minifierSettings.RemoveWhitespaceBetweenElements || _minifierSettings.RemoveEmptyLines);
+            originalXmlDocument.PreserveWhitespace =
+                !(_minifierSettings.RemoveWhitespaceBetweenElements || _minifierSettings.RemoveEmptyLines);
             originalXmlDocument.Load(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
             //remove comments first so we have less to compress later
@@ -57,7 +75,8 @@ namespace SeaBotCore.Utils
 
             if (_minifierSettings.CloseEmptyTags)
             {
-                foreach (XmlElement el in originalXmlDocument.SelectNodes("descendant::*[not(*) and not(normalize-space())]"))
+                foreach (XmlElement el in originalXmlDocument.SelectNodes(
+                    "descendant::*[not(*) and not(normalize-space())]"))
                 {
                     el.IsEmpty = true;
                 }
@@ -67,13 +86,11 @@ namespace SeaBotCore.Utils
             {
                 return originalXmlDocument.InnerXml;
             }
-            else
-            {
-                var minified = new MemoryStream();
-                originalXmlDocument.Save(minified);
 
-                return Encoding.UTF8.GetString(minified.ToArray());
-            }
+            var minified = new MemoryStream();
+            originalXmlDocument.Save(minified);
+
+            return Encoding.UTF8.GetString(minified.ToArray());
         }
     }
 }

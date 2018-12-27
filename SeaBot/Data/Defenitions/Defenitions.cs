@@ -20,11 +20,14 @@ namespace SeaBotCore.Data.Defenitions
 {
     public static class Defenitions
     {
-
         public static BuildingDefentions.Root BuildingDef => Cache.GetBuildingDefenitions();
 
         public static BarrelDefenitions.Root BarrelDef => Cache.GetBarrelDefenitions();
 
         public static BoatDefenitions.Root BoatDef => Cache.GetBoatLevelDefenitions();
+
+        public static ShipDefenitions.Root ShipDef => Cache.GetShipDefenitions();
+        public static MarketplaceDefenitions.Root MarketDef => Cache.GetMarketPlaceDefenitions();
+        
     }
 }

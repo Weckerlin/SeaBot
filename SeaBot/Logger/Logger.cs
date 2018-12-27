@@ -35,15 +35,21 @@ namespace SeaBotCore.Logger
         static Logger()
         {
             datetimeFormat = "yyyy-MM-dd HH:mm:ss.fff";
-            logFilename = Assembly.GetExecutingAssembly().GetName().Name + FILE_EXT;
+            logFilename = DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + FILE_EXT;
 
             // Log file header line
             var logHeader = logFilename + " is created.";
-            if (!File.Exists(logFilename))
+            if (!Directory.Exists("logs"))
+            {
+                Directory.CreateDirectory("logs");
+            }
+            if (!File.Exists("logs/"+logFilename))
             {
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
             }
         }
+
+        public static bool Muted =false;
 
         /// <summary>
         /// Log a DEBUG message
@@ -103,7 +109,7 @@ namespace SeaBotCore.Logger
         {
             try
             {
-                using (var writer = new StreamWriter(logFilename, append, Encoding.UTF8))
+                using (var writer = new StreamWriter("logs/" + logFilename, append, Encoding.UTF8))
                 {
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -115,18 +121,22 @@ namespace SeaBotCore.Logger
             {
             }
         }
-      
+
 
         private static void WriteFormattedLog(LogLevel level, string text)
         {
+            if (Muted)
+            {
+                return;
+            }
             var Message = new Message();
             string pretext;
-            bool onlylog = false;
+            var onlylog = false;
             switch (level)
             {
                 case LogLevel.NETWORK:
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [NTWRK]   ";
-                    WriteLine(pretext+text);
+                    WriteLine(pretext + text);
                     break;
                 case LogLevel.TRACE:
                     Message.color = Color.White;
@@ -162,7 +172,7 @@ namespace SeaBotCore.Logger
                     break;
             }
 
-           
+
             WriteLine(pretext + text);
             if (!onlylog)
             {

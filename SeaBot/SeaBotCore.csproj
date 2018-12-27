@@ -60,6 +60,8 @@
     <Compile Include="Data\Defenitions\BoatDefenitions.cs" />
     <Compile Include="Data\Defenitions\BuildingDefenitions.cs" />
     <Compile Include="Data\Defenitions\Defenitions.cs" />
+    <Compile Include="Data\Defenitions\MarketplaceDefenitions.cs" />
+    <Compile Include="Data\Defenitions\ShipDefenitions.cs" />
     <Compile Include="Data\GlobalData.cs" />
     <Compile Include="Data\Materials\Material.cs" />
     <Compile Include="Data\Materials\MaterialData.cs" />

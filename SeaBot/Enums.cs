@@ -33,7 +33,6 @@ namespace SeaBotCore
             Machinery = 11
         }
 
-       
 
         public enum EObject
         {
@@ -44,7 +43,9 @@ namespace SeaBotCore
             boatCargo,
             ship,
             shipCargo,
-            hometown,contractor,marketplace,
+            hometown,
+            contractor,
+            marketplace,
             outpost,
             social_contract,
             upgradeable,
@@ -75,8 +76,8 @@ namespace SeaBotCore
             captain_new_rarity,
             equation,
             videoreward
-
         }
+
         public enum EErrorCode
         {
             TASK_CORRUPTED_XML = 101,
@@ -94,7 +95,7 @@ namespace SeaBotCore
             INVALID_SESSION = 1008,
             WRONG_SESSION = 1009,
             EXPIRED_SESSION = 1010,
-            COLLECTION_IN_FUTURE= 2000,
+            COLLECTION_IN_FUTURE = 2000,
             COLLECTION_IN_PAST = 2001,
             TASK_IN_PAST = 2002,
             TASK_IN_FUTURE = 2003

@@ -38,12 +38,14 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public TakeFish(Boat boat)
             {
                 _time = (uint) TimeUtils.GetEpochTime();
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId==1).Levels.Level.First(n => n.Id == Core.GlobalData.BoatLevel);
+                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
+                    .First(n => n.Id == Core.GlobalData.BoatLevel);
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
@@ -66,9 +68,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ActivateEvent(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
         }
@@ -79,9 +82,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ActivateItemsOfferTask(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
         }
@@ -92,9 +96,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ActivateMerchantOfferTask(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
         }
@@ -105,9 +110,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ActivatePackTask(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
         }
@@ -118,9 +124,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ActivateShipTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -131,9 +138,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public AssignCaptainTask(string ship_inst_id, string captain_inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("ship_inst_id", ship_inst_id);
                 CustomObjects.Add("captain_inst_id", captain_inst_id);
             }
@@ -145,9 +153,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyBoatTask(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "boat");
                 CustomObjects.Add("payment_type", "standard");
                 CustomObjects.Add("def_id", def_id);
@@ -160,9 +169,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyBuildareaTask(string def_id, string x, string y, bool gem = false)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "buildarea");
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("x", x);
@@ -177,9 +187,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyBuildingTask(string def_id, string x, string y, bool gem = false)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "building");
 
                 CustomObjects.Add("def_id", def_id);
@@ -195,9 +206,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyCaptainTask(string def_id, string price_def_id, bool gem = false)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "captain");
 
                 CustomObjects.Add("def_id", def_id);
@@ -212,9 +224,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyItemsOfferTask()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
@@ -226,9 +239,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyMoreSailorsTask(int amount)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "sailors");
 
                 CustomObjects.Add("amount", amount);
@@ -241,9 +255,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuySailorsTask(int amount)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "sailors");
 
                 CustomObjects.Add("amount", amount);
@@ -256,9 +271,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyShipTask(string def_id, bool gem = false)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "ship");
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
@@ -271,9 +287,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public BuyShipsOfferShipTask(string def_id, string type, string itemid, bool gem = false)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", type);
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("item_id", itemid);
@@ -287,9 +304,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public CancelShipTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -300,9 +318,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmAchievementTask(string def_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
         }
@@ -313,18 +332,15 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmBarrelTask(string def_id, string type, string amount, string material_id, string player_lvl)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("material_id", material_id);
                 CustomObjects.Add("amount", amount);
                 CustomObjects.Add("player_level", player_lvl);
                 CustomObjects.Add("type", type);
                 CustomObjects.Add("def_id", def_id);
-                
-               
-             
-
             }
         }
 
@@ -334,9 +350,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmContractTask()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
@@ -348,9 +365,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmGlobalContractorMilestoneTask()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
@@ -362,9 +380,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmGlobalContractorObjectiveTask()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
@@ -376,9 +395,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmMuseumTask(int turns)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("turns", turns);
             }
         }
@@ -389,9 +409,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmSocialContractRewardsTask(string inst_ids)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_ids", inst_ids);
             }
         }
@@ -402,9 +423,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmSocialContractTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -415,9 +437,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public ConfirmUpgradeableTask(string def_id, int player_lvl)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("player_level", player_lvl);
             }
@@ -429,9 +452,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public DeactivateShipTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -445,7 +469,7 @@ namespace SeaBotCore
 
             DeleteAllPlayerMaterialsTask()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
             }
         }
 
@@ -455,6 +479,7 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public DockShipTask()
             {
                 _time = (uint) TimeUtils.GetEpochTime();
@@ -463,29 +488,31 @@ namespace SeaBotCore
             }
         }
 
-        public class FinishBoatProductionTask : IGameTask
+        public class FinishBoatProducingTask : IGameTask
         {
             public string Action => "finish_boat_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public FinishBoatProductionTask(string inst_id, int turns)
+
+            public FinishBoatProducingTask(string inst_id, int turns)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("turns", turns);
             }
         }
 
-        public class FinishBuildingProductionTask : IGameTask
+        public class FinishBuildingProducingTask : IGameTask
         {
             public string Action => "finish_building_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public FinishBuildingProductionTask(string inst_id)
+
+            public FinishBuildingProducingTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -496,9 +523,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public FinishBuildingUpgradeTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -509,9 +537,10 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public FinishPersonalGuideTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
@@ -522,42 +551,112 @@ namespace SeaBotCore
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
+
             public GiftConfirmTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
         }
 
-        public class StartBuildingProductionTask : IGameTask
+        public class StartBuildingProducingTask : IGameTask
         {
             public string Action => "start_building_prod";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public StartBuildingProductionTask(string inst_id, string prod_id)
+
+            public StartBuildingProducingTask(string inst_id, string prod_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("prod_id", prod_id);
             }
         }
+
         public class StartBuildingUpgradeTask : IGameTask
         {
             public string Action => "start_building_upg";
             public uint Time => _time;
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private uint _time;
-            public StartBuildingUpgradeTask(string inst_id, string prod_id,int lvl,string debug_type,string debug_defId,string debug_tileX,string debug_tileY)
+
+            public StartBuildingUpgradeTask(string inst_id, string prod_id, int lvl, string debug_type,
+                string debug_defId, string debug_tileX, string debug_tileY)
+            {
+                _time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("payment_type", "standard");
+                CustomObjects.Add("level", lvl);
+                CustomObjects.Add("debug_type", debug_type);
+                CustomObjects.Add("debug_defId", debug_defId);
+                CustomObjects.Add("debug_tileX", debug_tileX);
+                CustomObjects.Add("debug_tileY", debug_tileY);
+            }
+        }
+        public class SendShipMarketplaceTask : IGameTask
+        {
+            public string Action => "send_ship_marketplace";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private uint _time;
+
+            public SendShipMarketplaceTask(string inst_id, string def_id,string dest_id,string amount)
             {
                 _time = (uint)TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
-                CustomObjects.Add("payment_type", "standard");
-                CustomObjects.Add("level",lvl);
-                CustomObjects.Add("debug_type",debug_type);
-                CustomObjects.Add("debug_defId",debug_defId);
-                CustomObjects.Add("debug_tileX",debug_tileX);
-                CustomObjects.Add("debug_tileY",debug_tileY);
+                CustomObjects.Add("dest_id", dest_id);
+                CustomObjects.Add("def_id", def_id);
+                CustomObjects.Add("amount", amount);
+
+            }
+        }
+
+        public class UnloadShipTask : IGameTask
+        {
+            public string Action => _action;
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private uint _time;
+            private string _action = "send_ship_marketplace";
+            
+            public UnloadShipTask(string inst_id, string player_level, Enums.EObject eobj, string debug_capacity,
+                string debug_capacity_used, string debug_sailors, string debug_sailors_used, string debug_locationlevel,
+                Captain cpt = null)
+            {
+                
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("player_level", player_level);
+                CustomObjects.Add("debug_capacity", debug_capacity);
+                CustomObjects.Add("debug_capacity_used", debug_capacity_used);
+                CustomObjects.Add("debug_sailors", debug_sailors);
+                CustomObjects.Add("debug_sailors_used", debug_sailors_used);
+                CustomObjects.Add("debug_location_level", debug_locationlevel);
+                if (cpt!=null)
+                {
+                    CustomObjects.Add("debug_captain_id", cpt.InstId);
+                    CustomObjects.Add("debug_captain_def_id", cpt.DefId);
+                }
+
+                switch (eobj)
+                {
+                    case Enums.EObject.upgradeable:
+                        _action = "unload_ship_upgradeable";
+                        break;
+                    case Enums.EObject.marketplace:
+                        _action = "unload_ship_marketplace";
+                        break;
+                    case Enums.EObject.dealer:
+                        _action = "unload_ship_dealer";
+                        break;
+                    case Enums.EObject.wreck:
+                        _action = "unload_ship_wreck";
+                        break;
+                    case Enums.EObject.lost_treasure:
+                        _action = "unload_ship_treasure";
+                        break;
+                }
             }
         }
 
@@ -570,7 +669,7 @@ namespace SeaBotCore
 
             public HeartBeat()
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
             }
         }
     }
