@@ -365,7 +365,7 @@ namespace SeaBotGUI
             {
                 label7.ForeColor = Color.DarkRed;
                 label7.Text = $"[Old] Version: {version1}";
-                var msg = MessageBox.Show("A new update has been released, press OK to open download page!", "Update!",
+                var msg = MessageBox.Show("A new update was released, press OK to open download page!", "Update!",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes)
                 {
