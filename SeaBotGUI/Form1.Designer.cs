@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -46,6 +47,9 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.num_barrelinterval = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.num_stonelimit = new System.Windows.Forms.NumericUpDown();
             this.num_ironlimit = new System.Windows.Forms.NumericUpDown();
@@ -70,14 +74,12 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
-            this.NameofBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Upgrade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producing = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -85,6 +87,8 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_ironlimit)).BeginInit();
@@ -96,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -285,6 +290,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox8);
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.groupBox1);
@@ -295,6 +301,39 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.num_barrelinterval);
+            this.groupBox8.Controls.Add(this.label8);
+            this.groupBox8.Location = new System.Drawing.Point(8, 160);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(121, 72);
+            this.groupBox8.TabIndex = 3;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Auto-Barrel";
+            // 
+            // num_barrelinterval
+            // 
+            this.num_barrelinterval.Location = new System.Drawing.Point(12, 36);
+            this.num_barrelinterval.Name = "num_barrelinterval";
+            this.num_barrelinterval.Size = new System.Drawing.Size(100, 20);
+            this.num_barrelinterval.TabIndex = 1;
+            this.num_barrelinterval.Value = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.num_barrelinterval.Leave += new System.EventHandler(this.num_barrelinterval_Leave);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Interval (secounds)";
             // 
             // groupBox6
             // 
@@ -378,7 +417,6 @@
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "0 = infinity";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -541,15 +579,13 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameofBuilding,
-            this.Upgrade,
-            this.Producing,
-            this.Level});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(467, 428);
+            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(463, 424);
             this.dataGridView1.TabIndex = 0;
             // 
             // tabPage4
@@ -574,6 +610,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.linkLabel5);
             this.groupBox7.Controls.Add(this.linkLabel4);
             this.groupBox7.Controls.Add(this.linkLabel3);
             this.groupBox7.Controls.Add(this.linkLabel2);
@@ -585,10 +622,21 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Info";
             // 
+            // linkLabel5
+            // 
+            this.linkLabel5.AutoSize = true;
+            this.linkLabel5.Location = new System.Drawing.Point(57, 84);
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.Size = new System.Drawing.Size(93, 13);
+            this.linkLabel5.TabIndex = 4;
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.Text = "Telegram Channel";
+            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+            // 
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(10, 87);
+            this.linkLabel4.Location = new System.Drawing.Point(10, 84);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(37, 13);
             this.linkLabel4.TabIndex = 3;
@@ -627,30 +675,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // NameofBuilding
-            // 
-            this.NameofBuilding.HeaderText = "Name";
-            this.NameofBuilding.Name = "NameofBuilding";
-            this.NameofBuilding.ReadOnly = true;
-            // 
-            // Upgrade
-            // 
-            this.Upgrade.HeaderText = "Upgrade";
-            this.Upgrade.Name = "Upgrade";
-            this.Upgrade.ReadOnly = true;
-            // 
-            // Producing
-            // 
-            this.Producing.HeaderText = "Producing";
-            this.Producing.Name = "Producing";
-            this.Producing.ReadOnly = true;
-            // 
-            // Level
-            // 
-            this.Level.HeaderText = "Level";
-            this.Level.Name = "Level";
-            this.Level.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -672,6 +696,9 @@
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).EndInit();
@@ -687,6 +714,7 @@
             this.tabPage4.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -737,11 +765,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.NumericUpDown num_barrelinterval;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.BindingSource buildingBindingSource;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameofBuilding;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Upgrade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producing;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Level;
     }
 }
 

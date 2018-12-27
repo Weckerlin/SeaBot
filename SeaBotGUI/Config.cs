@@ -33,6 +33,7 @@ namespace SeaBotGUI
         public bool autoupgrade = false;
         public bool finishupgrade = false;
         public bool barrelhack = false;
+        public int barrelinterval = 22;
     }
 
     class ConfigSer

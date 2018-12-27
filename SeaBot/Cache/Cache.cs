@@ -75,58 +75,92 @@ namespace SeaBotCore
             }
         }
 
+        private static BoatDefenitions.Root _boatdefenitions;
+
         public static BoatDefenitions.Root GetBoatLevelDefenitions()
         {
-           
-            if (!File.Exists(_cachefolder + "\\boat.json"))
+            if (_boatdefenitions == null)
             {
-                if (!DownloadCache())
+                if (!File.Exists(_cachefolder + "\\boat.json"))
                 {
-                  
+                    if (!DownloadCache())
+                    {
+
+                    }
+
                 }
-               
+
+                _boatdefenitions= JsonConvert.DeserializeObject<BoatDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\boat.json"));
             }
-            return JsonConvert.DeserializeObject<BoatDefenitions.Root>(File.ReadAllText(_cachefolder + "\\boat.json"));
+
+            return _boatdefenitions;
         }
+
+        private static BarrelDefenitions.Root _barreldefenitions;
+
         public static BarrelDefenitions.Root GetBarrelDefenitions()
         {
-        
-            if (!File.Exists(_cachefolder + $"\\barrel.json"))
+            if (_barreldefenitions == null)
             {
-                if (!DownloadCache())
+                if (!File.Exists(_cachefolder + $"\\barrel.json"))
                 {
-                    
+                    if (!DownloadCache())
+                    {
+
+                    }
+
                 }
 
+               _barreldefenitions= JsonConvert.DeserializeObject<BarrelDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\barrel.json"));
             }
-            return JsonConvert.DeserializeObject<BarrelDefenitions.Root>(File.ReadAllText(_cachefolder + "\\barrel.json"));
+
+            return _barreldefenitions;
         }
+
+        private static BuildingDefentions.Root _buildingdefenitions;
+
         public static BuildingDefentions.Root GetBuildingDefenitions()
         {
-
-            if (!File.Exists(_cachefolder + $"\\building.json"))
+            if (_buildingdefenitions == null)
             {
-                if (!DownloadCache())
+                if (!File.Exists(_cachefolder + $"\\building.json"))
                 {
-                   
+                    if (!DownloadCache())
+                    {
+
+                    }
+
                 }
 
+               _buildingdefenitions= JsonConvert.DeserializeObject<BuildingDefentions.Root>(
+                    File.ReadAllText(_cachefolder + "\\building.json"));
             }
-            return JsonConvert.DeserializeObject<BuildingDefentions.Root>(File.ReadAllText(_cachefolder + "\\building.json"));
+           
+                return _buildingdefenitions;
+            
         }
 
+        private static MaterialsData.Root _materials;
         public static MaterialsData.Root GetMaterials()
         {
-
-            if (!File.Exists(_cachefolder + $"\\material.json"))
+            if (_materials == null)
             {
-                if (!DownloadCache())
+                if (!File.Exists(_cachefolder + $"\\material.json"))
                 {
+                    if (!DownloadCache())
+                    {
+
+                    }
 
                 }
-
+                return JsonConvert.DeserializeObject<MaterialsData.Root>(File.ReadAllText(_cachefolder + "\\material.json"));
             }
-            return JsonConvert.DeserializeObject<MaterialsData.Root>(File.ReadAllText(_cachefolder + "\\material.json"));
+
+            return _materials;
+
+
         }
     }
 

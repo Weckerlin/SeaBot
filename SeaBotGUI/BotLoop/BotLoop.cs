@@ -20,7 +20,7 @@ namespace SeaBotGUI.BotLoop
                         Defenitions.BuildingDef.Items.Item.FirstOrDefault(n =>
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
-                   
+
                     if (neededmats != null)
                     {
                         var ok = true;
@@ -62,7 +62,7 @@ namespace SeaBotGUI.BotLoop
                                 var m = Core.GlobalData.Inventory
                                     .First(n => n.Id == neededmat.Id);
                                 m.Amount -= (int)neededmat.Amount;
-                               
+
                             }
                             Logger.Info(
                                 $"Started upgrading {defined.Name}");
@@ -116,8 +116,8 @@ namespace SeaBotGUI.BotLoop
                     var Dict = new Dictionary<long, long>();
                     foreach (var input in inputs)
                     {
-                        
-                    
+
+
                         foreach (var inp in input.Inputs.Input)
                         {
                             var ourmat = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Id);
@@ -135,80 +135,76 @@ namespace SeaBotGUI.BotLoop
                                     }
                                     else
                                     {
-                                        Dict.Add(inp.Id,inp.Amount);
+                                        Dict.Add(inp.Id, inp.Amount);
                                     }
                                 }
                                 else
                                 {
                                     ok = false;
                                 }
+                            }
+
+                        }
+
+                        if (MaterialDB.GetItem(input.MaterialId).Name == "wood")
+                        {
+                            var amount =
+                                Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+
+                            if (amount != null && amount.Amount > num_woodlimit)
+                            {
+                                if (num_woodlimit != 0)
+                                {
+                                    ok = false;
+                                }
+
+                            }
+                            else
+                            {
+                                ok = false;
                             }
                         }
-                     }
-                   
-                    
-                  
-                        foreach (var inp in Dict)
+                        if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
                         {
-                            if (MaterialDB.GetItem(inp.Key).Name == "wood")
+                            var amount =
+                                Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+                            if (amount != null && amount.Amount > num_ironlimit)
                             {
-                                var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
-                                
-                                if (amount != null && amount.Amount > num_woodlimit)
-                                {
-                                    if (num_woodlimit != 0)
-                                    {
-                                        ok = false;
-                                    }
-                              
-                                }
-                                else
-                                {
-                                     ok = false;
-                                }
-                            }
-                            if (MaterialDB.GetItem(inp.Key).Name == "iron")
-                            {
-                                var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
-                                if (amount != null && amount.Amount > num_ironlimit)
-                                {
-                                    if (num_ironlimit != 0)
-                                    {
-                                        ok = false;
-                                    }
-
-                                }
-                                else
+                                if (num_ironlimit != 0)
                                 {
                                     ok = false;
                                 }
-                            }
-                            if (MaterialDB.GetItem(inp.Key).Name == "stone")
-                            {
-                                var amount =
-                                    Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Key);
-                                if (amount != null && amount.Amount > num_stonelimit)
-                                {
-                                    if (num_stonelimit != 0)
-                                    {
-                                        ok = false;
-                                    }
 
-                                }
-                                else
+                            }
+                            else
+                            {
+                                ok = false;
+                            }
+                        }
+                        if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
+                        {
+                            var amount =
+                                Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+                            if (amount != null && amount.Amount > num_stonelimit)
+                            {
+                                if (num_stonelimit != 0)
                                 {
                                     ok = false;
                                 }
+
                             }
+                            else
+                            {
+                                ok = false;
+                            }
+                        }
 
                     }
                     if (ok)
                     {
                         foreach (var inp in Dict)
                         {
-                            Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
+                            Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int)inp.Value;
                         }
 
                         Logger.Info(
@@ -231,7 +227,7 @@ namespace SeaBotGUI.BotLoop
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 if (turns > 5)
                 {
-                    totalfish += (int) (b.OutputAmount * turns);
+                    totalfish += (int)(b.OutputAmount * turns);
                     Networking.AddTask(new Task.TakeFish(boat));
                 }
             }

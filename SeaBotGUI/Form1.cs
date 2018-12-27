@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -40,12 +41,16 @@ namespace SeaBotGUI
         
         public static Thread BotThread;
         public static Config _config = new Config();
-        public static Thread BarrelThread; 
+        public static Thread BarrelThread;
+        public static Thread GridViewUpdater;
         public Form1()
         {
             InitializeComponent();
             ConfigSer.Load();
+            GridViewUpdater = new Thread(UpdateGrid){IsBackground = true};
+            GridViewUpdater.Start();
             this.MaximizeBox = false;
+          
             textBox2.Text = _config.server_token;
             checkBox1.Checked = _config.debug;
             Core.Debug = _config.debug;
@@ -55,15 +60,69 @@ namespace SeaBotGUI
             chk_barrelhack.Checked = _config.barrelhack;
             chk_finishupgrade.Checked = _config.finishupgrade;
             chk_aupgrade.Checked = _config.autoupgrade;
+            dataGridView1.DataSource = new BindingSource(GUIBinds.GUIBinds.BuildingBinding.Buildings,null);
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
+            num_barrelinterval.Value = _config.barrelinterval;
             SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
             label7.Text =
                 $"Version: {FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion}";
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link(){LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             //Check for cache
+        }
+
+        void UpdateGrid()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (dataGridView1.InvokeRequired)
+                {
+                    var newbuild = SeaBotGUI.GUIBinds.GUIBinds.BuildingBinding.GetBuildings();
+                    MethodInvoker meth = () =>
+                    {
+                        foreach (DataGridViewTextBoxColumn clmn in dataGridView1.Columns)
+                        {
+                        clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        }
+                        foreach (var bld in newbuild)
+                        {
+                            if (SeaBotGUI.GUIBinds.GUIBinds.BuildingBinding.Buildings.Where(n => n.ID == bld.ID).FirstOrDefault() == null)
+                            {
+                                //new 
+                                SeaBotGUI.GUIBinds.GUIBinds.BuildingBinding.Buildings.Add(bld);
+                            }
+                            else
+                            {
+                                var old = SeaBotGUI.GUIBinds.GUIBinds.BuildingBinding.Buildings.First(n => n.ID == bld.ID);
+                                if (old.Level != bld.Level)
+                                {
+                                    old.Level = bld.Level;
+                                }
+
+                                if (old.Producing != bld.Producing)
+                                {
+                                    old.Producing = bld.Producing;
+                                }
+
+                                if (old.Upgrade != bld.Upgrade)
+                                {
+                                    old.Upgrade = bld.Upgrade;
+                                }
+
+                                //edit
+                            }
+                        }
+                        dataGridView1.Refresh();
+                        dataGridView1.Update();
+                    };
+                   
+                    dataGridView1.BeginInvoke(meth);
+                }
+                
+            }
         }
 
         private void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
@@ -286,7 +345,7 @@ namespace SeaBotGUI
         {
             while (true)
             {
-                Thread.Sleep(20*1000);
+                Thread.Sleep((int)(num_barrelinterval.Value)*1000);
 
                 if (chk_barrelhack.Checked)
                 {
@@ -406,7 +465,7 @@ namespace SeaBotGUI
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(e.Link.LinkData as string);
+            Utils.CompUtils.OpenLink(e.Link.LinkData as string);
         }
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
@@ -449,22 +508,30 @@ namespace SeaBotGUI
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/weespin/SeaBot");
+            Utils.CompUtils.OpenLink("https://github.com/weespin/SeaBot");
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://t.me/nullcore");
+            Utils.CompUtils.OpenLink("https://t.me/nullcore");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://steamcommunity.com/id/wspin/");
+            Utils.CompUtils.OpenLink("https://steamcommunity.com/id/wspin/");
         }
 
-        private void label6_Click(object sender, EventArgs e)
-        {
+        
 
+        private void num_barrelinterval_Leave(object sender, EventArgs e)
+        {
+            _config.barrelinterval = (int)num_barrelinterval.Value;
+            ConfigSer.Save();
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Utils.CompUtils.OpenLink("https://t.me/seabotdev");
         }
     }
 }
