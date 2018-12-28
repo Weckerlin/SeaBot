@@ -29,6 +29,15 @@ namespace SeaBotGUI.BotLoop
     {
         public static void AutoUpgrade(bool onlyfactory)
         {
+
+            if (Core.GlobalData == null)
+            {
+                return;
+            }
+            if (Core.GlobalData.Buildings == null)
+            {
+                return;
+            }
             foreach (var data in Core.GlobalData.Buildings)
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {

@@ -29,7 +29,10 @@ namespace SeaBotCore.Utils
         [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
         public static void KillTheThread(Thread th)
         {
-            th.Abort();
+            if (th.IsAlive)
+            {
+                th.Abort();
+            }
         }
     }
 }

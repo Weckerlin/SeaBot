@@ -189,6 +189,7 @@ namespace SeaBotCore
                 }
                 else
                 {
+                    
                     Logger.Logger.Fatal("CANT LOGIN!");
                     return;
                 }

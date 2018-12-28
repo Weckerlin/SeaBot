@@ -210,7 +210,10 @@ namespace SeaBotGUI
         {
             //Gold: Fish: Iron:
             //Gems: Wood: Rock:
-
+            if (data?.Inventory == null)
+            {
+                return;
+            }
             if (textBox1.InvokeRequired)
             {
                 MethodInvoker inv = delegate
@@ -394,11 +397,17 @@ namespace SeaBotGUI
                 Cache.DownloadCache();
             }
 
-            button3.Enabled = true;
-            button2.Enabled = false;
+            
             Core.ServerToken = textBox2.Text;
 
             Networking.Login();
+            if (String.IsNullOrEmpty(Core.Ssid))
+            {
+                MessageBox.Show("Can't get a sessionid, please fill a new server_token!");
+                return;
+            }
+            button3.Enabled = true;
+            button2.Enabled = false;
             FormateResources(Core.GlobalData);
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
