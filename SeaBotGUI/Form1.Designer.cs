@@ -50,8 +50,8 @@
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radio_saveloot = new System.Windows.Forms.RadioButton();
+            this.radio_savesailors = new System.Windows.Forms.RadioButton();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
@@ -262,6 +262,7 @@
             this.chk_autoshipupg.TabIndex = 6;
             this.chk_autoshipupg.Text = "Auto-Ships (very unstable)";
             this.chk_autoshipupg.UseVisualStyleBackColor = true;
+            this.chk_autoshipupg.CheckedChanged += new System.EventHandler(this.chk_autoshipupg_CheckedChanged);
             // 
             // chk_finishupgrade
             // 
@@ -349,8 +350,8 @@
             // 
             // groupBox12
             // 
-            this.groupBox12.Controls.Add(this.radioButton5);
-            this.groupBox12.Controls.Add(this.radioButton4);
+            this.groupBox12.Controls.Add(this.radio_saveloot);
+            this.groupBox12.Controls.Add(this.radio_savesailors);
             this.groupBox12.Location = new System.Drawing.Point(158, 239);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(116, 120);
@@ -358,27 +359,28 @@
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Optimal strategy";
             // 
-            // radioButton5
+            // radio_saveloot
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(9, 43);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(69, 17);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "More loot";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radio_saveloot.AutoSize = true;
+            this.radio_saveloot.Location = new System.Drawing.Point(9, 43);
+            this.radio_saveloot.Name = "radio_saveloot";
+            this.radio_saveloot.Size = new System.Drawing.Size(69, 17);
+            this.radio_saveloot.TabIndex = 1;
+            this.radio_saveloot.TabStop = true;
+            this.radio_saveloot.Text = "More loot";
+            this.radio_saveloot.UseVisualStyleBackColor = true;
+            this.radio_saveloot.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
-            // radioButton4
+            // radio_savesailors
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(9, 20);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(84, 17);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Save Sailors";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radio_savesailors.AutoSize = true;
+            this.radio_savesailors.Location = new System.Drawing.Point(9, 20);
+            this.radio_savesailors.Name = "radio_savesailors";
+            this.radio_savesailors.Size = new System.Drawing.Size(84, 17);
+            this.radio_savesailors.TabIndex = 0;
+            this.radio_savesailors.TabStop = true;
+            this.radio_savesailors.Text = "Save Sailors";
+            this.radio_savesailors.UseVisualStyleBackColor = true;
             // 
             // groupBox11
             // 
@@ -404,6 +406,7 @@
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "Stone";
             this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
             // radioButton6
             // 
@@ -415,6 +418,7 @@
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "Fish";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // radio_iron
             // 
@@ -426,6 +430,7 @@
             this.radio_iron.TabStop = true;
             this.radio_iron.Text = "Iron";
             this.radio_iron.UseVisualStyleBackColor = true;
+            this.radio_iron.CheckedChanged += new System.EventHandler(this.radio_iron_CheckedChanged);
             // 
             // radio_wood
             // 
@@ -437,17 +442,19 @@
             this.radio_wood.TabStop = true;
             this.radio_wood.Text = "Wood";
             this.radio_wood.UseVisualStyleBackColor = true;
+            this.radio_wood.CheckedChanged += new System.EventHandler(this.radio_wood_CheckedChanged);
             // 
             // radio_gold
             // 
             this.radio_gold.AutoSize = true;
             this.radio_gold.Location = new System.Drawing.Point(11, 19);
             this.radio_gold.Name = "radio_gold";
-            this.radio_gold.Size = new System.Drawing.Size(47, 17);
+            this.radio_gold.Size = new System.Drawing.Size(51, 17);
             this.radio_gold.TabIndex = 0;
             this.radio_gold.TabStop = true;
-            this.radio_gold.Text = "Gold";
+            this.radio_gold.Text = "Coins";
             this.radio_gold.UseVisualStyleBackColor = true;
+            this.radio_gold.CheckedChanged += new System.EventHandler(this.radio_gold_CheckedChanged);
             // 
             // groupBox10
             // 
@@ -977,8 +984,8 @@
         private System.Windows.Forms.CheckBox chk_onlyfactory;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radio_saveloot;
+        private System.Windows.Forms.RadioButton radio_savesailors;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;

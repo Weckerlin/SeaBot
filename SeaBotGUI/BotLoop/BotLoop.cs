@@ -104,7 +104,7 @@ namespace SeaBotGUI.BotLoop
             }
         }
 
-        public static void AutoShip()
+        public static void AutoShip(string type, bool lootbased)
         {
             /* PLAN
              * 0. Load SHIPS xDDD
@@ -177,7 +177,7 @@ namespace SeaBotGUI.BotLoop
                 foreach (var ship in Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0))
                 {
 
-                    var bestplace = AutoShipUtils.GetBestUpgPlace("coins", AutoShipUtils.GetSailors(ship), true);
+                    var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship),lootbased);
 
                     var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
                         .Level

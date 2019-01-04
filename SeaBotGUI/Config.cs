@@ -31,11 +31,17 @@ namespace SeaBotGUI
         public bool prodfactory = false; //done
         public bool collectfactory = false; //done
         public bool autoupgrade = false;
+        public bool autoship = false;
+
         public bool finishupgrade = false;
         public bool barrelhack = false;
         public bool upgradeonlyfactory = false;
         public int barrelinterval = 22;
         public int hibernateinterval = 5;
+        // autoship shit
+        public string autoshiptype = "coins";
+        public bool autoshipprofit = !true;
+
     }
 
     class ConfigSer

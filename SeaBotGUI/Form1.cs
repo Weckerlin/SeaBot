@@ -58,6 +58,7 @@ namespace SeaBotGUI
             num_hibernationinterval.Value = Core.hibernation = _config.hibernateinterval;
             checkBox1.Checked = _config.debug;
             Core.Debug = _config.debug;
+            chk_autoshipupg.Checked = _config.autoship;
             chk_onlyfactory.Checked = _config.upgradeonlyfactory;
             chk_autofish.Checked = _config.collectfish;
             chk_prodfact.Checked = _config.prodfactory;
@@ -70,8 +71,17 @@ namespace SeaBotGUI
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
             num_barrelinterval.Value = _config.barrelinterval;
+            if (_config.autoshipprofit)
+            {
+                radio_saveloot.Checked = true;
+               
+            }
+            else
+            {
+                radio_savesailors.Checked = true;
+            }
             SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
-
+            UpdateButtons(_config.autoshiptype);
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
@@ -79,6 +89,8 @@ namespace SeaBotGUI
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
             //Check for cache
         }
+
+       
 
         private void UpdateGrid()
         {
@@ -441,7 +453,7 @@ namespace SeaBotGUI
 
                 if (chk_autoshipupg.Checked)
                 {
-                    BotLoop.BotLoop.AutoShip();
+                    BotLoop.BotLoop.AutoShip(_config.autoshiptype,_config.autoshipprofit);
                  
                 }
 
@@ -621,6 +633,102 @@ namespace SeaBotGUI
         private void chk_onlyfactory_CheckedChanged(object sender, EventArgs e)
         {
             _config.upgradeonlyfactory = chk_onlyfactory.Checked;
+            ConfigSer.Save();
+        }
+
+        private void chk_autoshipupg_CheckedChanged(object sender, EventArgs e)
+        {
+            _config.autoship = chk_autoshipupg.Checked;
+            ConfigSer.Save();
+        }
+
+        private void radio_gold_CheckedChanged(object sender, EventArgs e)
+        {
+            updatecheck();
+        }
+        private void UpdateButtons(string configAutoshiptype)
+        {
+            if (configAutoshiptype == "coins")
+            {
+                radio_gold.Checked = true;
+            }
+
+            if (configAutoshiptype == "fish")
+            {
+                radioButton6.Checked = true;
+            }
+
+            if (configAutoshiptype == "iron")
+            {
+                radio_iron.Checked = true;
+            }
+
+            if (configAutoshiptype == "wood")
+            {
+                radio_wood.Checked = true;
+            }
+            if (configAutoshiptype == "stone")
+            {
+                radioButton7.Checked = true;
+            }
+        }
+        private void updatecheck()
+        {
+            if (radio_gold.Checked)
+            {
+                _config.autoshiptype = "coins";
+            }
+
+            if (radio_iron.Checked)
+            {
+                _config.autoshiptype = "iron";
+            }
+
+            if (radio_wood.Checked)
+            {
+                _config.autoshiptype = "wood";
+            }
+
+            if (radioButton6.Checked)
+            {
+                //fish 
+                _config.autoshiptype = "fish";
+            }
+
+            if (radioButton7.Checked)
+            {
+                //stone
+                _config.autoshiptype = "stone";
+            }
+            ConfigSer.Save();
+        }
+
+        private void radio_iron_CheckedChanged(object sender, EventArgs e)
+        {
+            updatecheck();
+        }
+
+        private void radio_wood_CheckedChanged(object sender, EventArgs e)
+        {
+            updatecheck();
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            //fish
+            updatecheck();
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            //stone
+            updatecheck();
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            //saveloot
+            _config.autoshipprofit= radio_saveloot.Checked;
             ConfigSer.Save();
         }
     }
