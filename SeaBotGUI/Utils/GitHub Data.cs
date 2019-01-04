@@ -1,4 +1,20 @@
-﻿using System;
+﻿// SeabotGUI
+// Copyright (C) 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +22,12 @@ using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
+
 namespace SeaBotGUI.Utils
 {
     class GitHub_Data
     {
-
-        public partial class Root
+        public class Root
         {
             [J("url")] public Uri Url { get; set; }
             [J("assets_url")] public Uri AssetsUrl { get; set; }
@@ -33,7 +49,7 @@ namespace SeaBotGUI.Utils
             [J("body")] public string Body { get; set; }
         }
 
-        public partial class Asset
+        public class Asset
         {
             [J("url")] public Uri Url { get; set; }
             [J("id")] public long Id { get; set; }
@@ -50,7 +66,7 @@ namespace SeaBotGUI.Utils
             [J("browser_download_url")] public Uri BrowserDownloadUrl { get; set; }
         }
 
-        public partial class Author
+        public class Author
         {
             [J("login")] public string Login { get; set; }
             [J("id")] public long Id { get; set; }
@@ -71,6 +87,5 @@ namespace SeaBotGUI.Utils
             [J("type")] public string Type { get; set; }
             [J("site_admin")] public bool SiteAdmin { get; set; }
         }
-
     }
 }

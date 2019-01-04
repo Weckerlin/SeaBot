@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -327,6 +327,7 @@ namespace SeaBotCore.Data
         public int Sailors { get; set; }
         public int MaterialKoef { get; set; }
         public int PlayerLevel { get; set; }
+        public long UpgradeTimeStarted { get; set; }
     }
 
     public class Ship

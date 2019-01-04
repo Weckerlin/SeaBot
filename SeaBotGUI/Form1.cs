@@ -1,5 +1,5 @@
 ﻿// SeabotGUI
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,22 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using SeaBotCore;
 using SeaBotCore.Data;
@@ -37,9 +21,21 @@ using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
-using Task = SeaBotCore.Task;
-using SeaBotGUI.BotLoop;
 using SeaBotGUI.Utils;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI
 {
@@ -75,7 +71,7 @@ namespace SeaBotGUI
             num_stonelimit.Value = _config.stonelimit;
             num_barrelinterval.Value = _config.barrelinterval;
             SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
-          
+
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
@@ -84,7 +80,7 @@ namespace SeaBotGUI
             //Check for cache
         }
 
-        void UpdateGrid()
+        private void UpdateGrid()
         {
             while (true)
             {
@@ -151,9 +147,9 @@ namespace SeaBotGUI
 
         private void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
-            new System.Threading.Tasks.Task(() =>
+            new Task(() =>
             {
-                if ((int) e == 4010 || (int) e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
                 {
                     Networking._syncThread.Abort();
                     ThreadKill.KillTheThread(BotThread);
@@ -163,8 +159,10 @@ namespace SeaBotGUI
                     BarrelThread = new Thread(BarrelVoid) {IsBackground = true};
                     BarrelThread.Start();
                     Networking.StartThread();
-                    BotThread = new Thread(BotVoid);
-                    BotThread.IsBackground = true;
+                    BotThread = new Thread(BotVoid)
+                    {
+                        IsBackground = true
+                    };
                     BotThread.Start();
                 }
             }).Start();
@@ -338,18 +336,22 @@ namespace SeaBotGUI
             }
         }
 
-        void CheckForUpdates()
+        private void CheckForUpdates()
         {
-            HttpClient httpClient = new HttpClient();
+            var httpClient = new HttpClient();
 
             //specify to use TLS 1.2 as default connection
-            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-        
+            ServicePointManager.SecurityProtocol =
+                SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+
             httpClient.DefaultRequestHeaders.Accept.Clear();
-            var l =httpClient.GetAsync("http://api.github.com/repos/weespin/SeaBot/releases/latest").Result.Content.ReadAsStringAsync().Result;
+            var l = httpClient.GetAsync("http://api.github.com/repos/weespin/SeaBot/releases/latest").Result.Content
+                .ReadAsStringAsync().Result;
             var data = JsonConvert.DeserializeObject<GitHub_Data.Root>(l);
-            var version1 = new Version( FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion );
+            var version1 =
+                new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
             var version2 = new Version(data.TagName);
 
             var result = version1.CompareTo(version2);
@@ -357,10 +359,8 @@ namespace SeaBotGUI
             {
                 label7.ForeColor = Color.DarkMagenta;
                 label7.Text = $"[DEV] Version: {version1}";
-                
-
             }
-            
+
             else if (result < 0)
             {
                 label7.ForeColor = Color.DarkRed;
@@ -377,13 +377,11 @@ namespace SeaBotGUI
                 label7.ForeColor = Color.DarkGreen;
                 label7.Text = $"[Current] Version: {version1}";
             }
-
-         
         }
 
-    private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(_config.server_token))
+            if (string.IsNullOrEmpty(_config.server_token))
             {
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
                 return;
@@ -406,8 +404,10 @@ namespace SeaBotGUI
             BarrelThread.Start();
 
             Networking.StartThread();
-            BotThread = new Thread(BotVoid);
-            BotThread.IsBackground = true;
+            BotThread = new Thread(BotVoid)
+            {
+                IsBackground = true
+            };
             BotThread.Start();
             var a = Defenitions.BuildingDef;
         }
@@ -417,11 +417,11 @@ namespace SeaBotGUI
             FormateResources(Core.GlobalData);
         }
 
-        void BarrelVoid()
+        private void BarrelVoid()
         {
             while (true)
             {
-                Thread.Sleep((int) (num_barrelinterval.Value) * 1000);
+                Thread.Sleep((int) num_barrelinterval.Value * 1000);
 
                 if (chk_barrelhack.Checked)
                 {
@@ -430,15 +430,19 @@ namespace SeaBotGUI
             }
         }
 
-        void BotVoid()
+        private void BotVoid()
         {
             while (true)
             {
                 if (chk_aupgrade.Checked)
                 {
-                    
-                   BotLoop.BotLoop.AutoUpgrade(_config.upgradeonlyfactory);
-                    
+                    BotLoop.BotLoop.AutoUpgrade(_config.upgradeonlyfactory);
+                }
+
+                if (chk_autoshipupg.Checked)
+                {
+                    BotLoop.BotLoop.UnloadShips();
+                    BotLoop.BotLoop.SendToUpgradable(true);
                 }
 
                 if (chk_autofish.Checked)
@@ -464,7 +468,7 @@ namespace SeaBotGUI
                 }
 
 
-                Thread.Sleep(60 * 1000);
+                Thread.Sleep(20 * 1000);
             }
         }
 
@@ -610,7 +614,7 @@ namespace SeaBotGUI
 
         private void numericUpDown2_Leave(object sender, EventArgs e)
         {
-          Core.hibernation=  _config.hibernateinterval = (int) num_hibernationinterval.Value;
+            Core.hibernation = _config.hibernateinterval = (int) num_hibernationinterval.Value;
             ConfigSer.Save();
         }
 

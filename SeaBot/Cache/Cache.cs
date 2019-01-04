@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
+using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 
@@ -102,6 +103,7 @@ namespace SeaBotCore
 
             return _boatdefenitions;
         }
+
         private static ShipDefenitions.Root _shipdefenitions;
 
         public static ShipDefenitions.Root GetShipDefenitions()
@@ -141,6 +143,7 @@ namespace SeaBotCore
 
             return _marketplacedefenitions;
         }
+
         private static BarrelDefenitions.Root _barreldefenitions;
 
         public static BarrelDefenitions.Root GetBarrelDefenitions()
@@ -199,6 +202,26 @@ namespace SeaBotCore
             }
 
             return _materials;
+        }
+
+        private static UpgradeableDefenition.Root _upgradeable;
+
+        public static UpgradeableDefenition.Root GetUpgradeablesDefenitions()
+        {
+            if (_upgradeable == null)
+            {
+                if (!File.Exists(_cachefolder + "\\upgradeable.json"))
+                {
+                    if (!DownloadCache())
+                    {
+                    }
+                }
+
+                return JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
+                    File.ReadAllText(_cachefolder + "\\upgradeable.json"));
+            }
+
+            return _upgradeable;
         }
     }
 }

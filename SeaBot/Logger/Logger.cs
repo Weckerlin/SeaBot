@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -43,13 +43,14 @@ namespace SeaBotCore.Logger
             {
                 Directory.CreateDirectory("logs");
             }
-            if (!File.Exists("logs/"+logFilename))
+
+            if (!File.Exists("logs/" + logFilename))
             {
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
             }
         }
 
-        public static bool Muted =false;
+        public static bool Muted = false;
 
         /// <summary>
         /// Log a DEBUG message
@@ -129,6 +130,7 @@ namespace SeaBotCore.Logger
             {
                 return;
             }
+
             var Message = new Message();
             string pretext;
             var onlylog = false;

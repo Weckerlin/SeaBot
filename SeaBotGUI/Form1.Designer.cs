@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -40,6 +41,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk_autoshipupg = new System.Windows.Forms.CheckBox();
             this.chk_finishupgrade = new System.Windows.Forms.CheckBox();
             this.chk_prodfact = new System.Windows.Forms.CheckBox();
             this.chk_barrelhack = new System.Windows.Forms.CheckBox();
@@ -47,6 +49,17 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.chk_onlyfactory = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -84,7 +97,6 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -92,6 +104,8 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
@@ -139,6 +153,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(309, 406);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "label7";
             // 
             // groupBox5
             // 
@@ -218,6 +241,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_autoshipupg);
             this.groupBox2.Controls.Add(this.chk_finishupgrade);
             this.groupBox2.Controls.Add(this.chk_prodfact);
             this.groupBox2.Controls.Add(this.chk_barrelhack);
@@ -226,10 +250,20 @@
             this.groupBox2.Controls.Add(this.chk_aupgrade);
             this.groupBox2.Location = new System.Drawing.Point(6, 247);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(446, 65);
+            this.groupBox2.Size = new System.Drawing.Size(446, 156);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Strategy";
+            // 
+            // chk_autoshipupg
+            // 
+            this.chk_autoshipupg.AutoSize = true;
+            this.chk_autoshipupg.Location = new System.Drawing.Point(92, 42);
+            this.chk_autoshipupg.Name = "chk_autoshipupg";
+            this.chk_autoshipupg.Size = new System.Drawing.Size(149, 17);
+            this.chk_autoshipupg.TabIndex = 6;
+            this.chk_autoshipupg.Text = "Auto-Ships (very unstable)";
+            this.chk_autoshipupg.UseVisualStyleBackColor = true;
             // 
             // chk_finishupgrade
             // 
@@ -299,6 +333,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.groupBox12);
+            this.tabPage2.Controls.Add(this.groupBox11);
             this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.groupBox8);
@@ -312,6 +350,126 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(280, 279);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(280, 252);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.radioButton5);
+            this.groupBox12.Controls.Add(this.radioButton4);
+            this.groupBox12.Location = new System.Drawing.Point(158, 239);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(116, 120);
+            this.groupBox12.TabIndex = 7;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Optimal strategy";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(9, 43);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(69, 17);
+            this.radioButton5.TabIndex = 1;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "More loot";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(9, 20);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(84, 17);
+            this.radioButton4.TabIndex = 0;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Save Sailors";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.radioButton7);
+            this.groupBox11.Controls.Add(this.radioButton6);
+            this.groupBox11.Controls.Add(this.radioButton3);
+            this.groupBox11.Controls.Add(this.radioButton2);
+            this.groupBox11.Controls.Add(this.radioButton1);
+            this.groupBox11.Location = new System.Drawing.Point(9, 239);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(143, 120);
+            this.groupBox11.TabIndex = 6;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Basic Ship (MarketPlace)";
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(64, 20);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(53, 17);
+            this.radioButton7.TabIndex = 4;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "Stone";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(11, 89);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(44, 17);
+            this.radioButton6.TabIndex = 3;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "Fish";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(11, 43);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(43, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Iron";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(11, 66);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(54, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Wood";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(11, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(47, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Gold";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
@@ -730,15 +888,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(309, 406);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "label7";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -761,6 +910,10 @@
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox9.ResumeLayout(false);
@@ -845,6 +998,18 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.CheckBox chk_onlyfactory;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox chk_autoshipupg;
     }
 }
 

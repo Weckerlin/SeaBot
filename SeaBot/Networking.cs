@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -58,13 +58,13 @@ namespace SeaBotCore
                 if (e == Enums.EErrorCode.WRONG_SESSION)
                 {
                     Logger.Logger.Info(
-                        $"Someone is playing this game right now, waiting for {SeaBotCore.Core.hibernation} minutes");
+                        $"Someone is playing this game right now, waiting for {Core.hibernation} minutes");
                     _syncThread.Abort();
                     Logger.Logger.Muted = true;
-                    Thread.Sleep(SeaBotCore.Core.hibernation * 1000 * 60);
-                    Logger.Logger.Muted = false; 
-                    Logger.Logger.Info($"Mwaaah, waking up after hibernation");
-                   
+                    Thread.Sleep(Core.hibernation * 1000 * 60);
+                    Logger.Logger.Muted = false;
+                    Logger.Logger.Info("Mwaaah, waking up after hibernation");
+
                     StartThread();
                     Login();
                 }
@@ -90,7 +90,6 @@ namespace SeaBotCore
         {
             while (true)
             {
-                Thread.Sleep(10);
                 Thread.Sleep(6 * 1000);
                 if ( /*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
                                                                          Core.GlobalData.Level != 0)
@@ -103,6 +102,7 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Debug("Sending Heartbeat...");
                     _gametasks.Add(new Task.HeartBeat());
+
                     Sync();
                 }
 
@@ -138,11 +138,20 @@ namespace SeaBotCore
 
         public static string SendRequest(Dictionary<string, string> data, string action)
         {
-            var content = new FormUrlEncodedContent(data);
+            try
+            {
+                var content = new FormUrlEncodedContent(data);
 
-            var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
+                var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
 
-            return response.Result.Content.ReadAsStringAsync().Result;
+                return response.Result.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.Fatal(ex.ToString());
+            }
+
+            return "";
         }
 
         public static string ToHex(this byte[] bytes, bool upperCase)
@@ -332,6 +341,7 @@ namespace SeaBotCore
                 Logger.Logger.Fatal("Sync failed, no response");
             }
 
+            _lastRaised = DateTime.Now;
             _gametasks.Clear();
         }
     }
