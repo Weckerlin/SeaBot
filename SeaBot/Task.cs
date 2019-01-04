@@ -680,7 +680,20 @@ namespace SeaBotCore
                 CustomObjects.Add("player_level", player_lvl);
             }
         }
+        public class LoadShipUpgradeableTask : IGameTask
+        {
+            public string Action => "load_ship_upgradeable";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private readonly uint _time;
 
+            public LoadShipUpgradeableTask(string inst_id)
+            {
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+             
+            }
+        }
         public class HeartBeat : IGameTask
         {
             public string Action => "heartbeat";

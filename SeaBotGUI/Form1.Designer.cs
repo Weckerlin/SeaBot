@@ -49,17 +49,15 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radio_iron = new System.Windows.Forms.RadioButton();
+            this.radio_wood = new System.Windows.Forms.RadioButton();
+            this.radio_gold = new System.Windows.Forms.RadioButton();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.chk_onlyfactory = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -333,8 +331,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.groupBox12);
             this.tabPage2.Controls.Add(this.groupBox11);
             this.tabPage2.Controls.Add(this.groupBox10);
@@ -350,24 +346,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(280, 279);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(280, 252);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // groupBox12
             // 
@@ -406,9 +384,9 @@
             // 
             this.groupBox11.Controls.Add(this.radioButton7);
             this.groupBox11.Controls.Add(this.radioButton6);
-            this.groupBox11.Controls.Add(this.radioButton3);
-            this.groupBox11.Controls.Add(this.radioButton2);
-            this.groupBox11.Controls.Add(this.radioButton1);
+            this.groupBox11.Controls.Add(this.radio_iron);
+            this.groupBox11.Controls.Add(this.radio_wood);
+            this.groupBox11.Controls.Add(this.radio_gold);
             this.groupBox11.Location = new System.Drawing.Point(9, 239);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(143, 120);
@@ -438,38 +416,38 @@
             this.radioButton6.Text = "Fish";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // radio_iron
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(11, 43);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(43, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Iron";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radio_iron.AutoSize = true;
+            this.radio_iron.Location = new System.Drawing.Point(11, 43);
+            this.radio_iron.Name = "radio_iron";
+            this.radio_iron.Size = new System.Drawing.Size(43, 17);
+            this.radio_iron.TabIndex = 2;
+            this.radio_iron.TabStop = true;
+            this.radio_iron.Text = "Iron";
+            this.radio_iron.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radio_wood
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(11, 66);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(54, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Wood";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radio_wood.AutoSize = true;
+            this.radio_wood.Location = new System.Drawing.Point(11, 66);
+            this.radio_wood.Name = "radio_wood";
+            this.radio_wood.Size = new System.Drawing.Size(54, 17);
+            this.radio_wood.TabIndex = 1;
+            this.radio_wood.TabStop = true;
+            this.radio_wood.Text = "Wood";
+            this.radio_wood.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radio_gold
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(11, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(47, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Gold";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radio_gold.AutoSize = true;
+            this.radio_gold.Location = new System.Drawing.Point(11, 19);
+            this.radio_gold.Name = "radio_gold";
+            this.radio_gold.Size = new System.Drawing.Size(47, 17);
+            this.radio_gold.TabIndex = 0;
+            this.radio_gold.TabStop = true;
+            this.radio_gold.Text = "Gold";
+            this.radio_gold.UseVisualStyleBackColor = true;
             // 
             // groupBox10
             // 
@@ -1004,11 +982,9 @@
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.RadioButton radio_iron;
+        private System.Windows.Forms.RadioButton radio_wood;
+        private System.Windows.Forms.RadioButton radio_gold;
         private System.Windows.Forms.CheckBox chk_autoshipupg;
     }
 }
