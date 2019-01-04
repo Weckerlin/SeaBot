@@ -441,8 +441,8 @@ namespace SeaBotGUI
 
                 if (chk_autoshipupg.Checked)
                 {
-                    BotLoop.BotLoop.UnloadShips();
-                    BotLoop.BotLoop.SendToUpgradable(true);
+                    BotLoop.BotLoop.AutoShip();
+                 
                 }
 
                 if (chk_autofish.Checked)
