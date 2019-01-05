@@ -1,5 +1,5 @@
 ﻿// SeabotGUI
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI
@@ -43,6 +44,7 @@ namespace SeaBotGUI
     {
         public static Thread BotThread;
         public static Config _config = new Config();
+        public static TeleConfigData _teleconfig = new TeleConfigData();
         public static Thread BarrelThread;
         public static Thread GridViewUpdater;
 
@@ -74,12 +76,12 @@ namespace SeaBotGUI
             if (_config.autoshipprofit)
             {
                 radio_saveloot.Checked = true;
-               
             }
             else
             {
                 radio_savesailors.Checked = true;
             }
+
             SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
             UpdateButtons(_config.autoshiptype);
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
@@ -90,7 +92,6 @@ namespace SeaBotGUI
             //Check for cache
         }
 
-       
 
         private void UpdateGrid()
         {
@@ -453,8 +454,7 @@ namespace SeaBotGUI
 
                 if (chk_autoshipupg.Checked)
                 {
-                    BotLoop.BotLoop.AutoShip(_config.autoshiptype,_config.autoshipprofit);
-                 
+                    BotLoop.BotLoop.AutoShip(_config.autoshiptype, _config.autoshipprofit);
                 }
 
                 if (chk_autofish.Checked)
@@ -646,6 +646,7 @@ namespace SeaBotGUI
         {
             updatecheck();
         }
+
         private void UpdateButtons(string configAutoshiptype)
         {
             if (configAutoshiptype == "coins")
@@ -667,11 +668,13 @@ namespace SeaBotGUI
             {
                 radio_wood.Checked = true;
             }
+
             if (configAutoshiptype == "stone")
             {
                 radioButton7.Checked = true;
             }
         }
+
         private void updatecheck()
         {
             if (radio_gold.Checked)
@@ -700,6 +703,7 @@ namespace SeaBotGUI
                 //stone
                 _config.autoshiptype = "stone";
             }
+
             ConfigSer.Save();
         }
 
@@ -728,7 +732,7 @@ namespace SeaBotGUI
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             //saveloot
-            _config.autoshipprofit= radio_saveloot.Checked;
+            _config.autoshipprofit = radio_saveloot.Checked;
             ConfigSer.Save();
         }
     }

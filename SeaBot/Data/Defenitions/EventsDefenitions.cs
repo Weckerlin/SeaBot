@@ -1,4 +1,20 @@
-﻿using System;
+﻿// SeaBotCore
+// Copyright (C) 2018 - 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,21 +25,22 @@ using Newtonsoft.Json.Converters;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
+
 namespace SeaBotCore.Data.Defenitions
 {
     public class EventsDefenitions
     {
-        public partial class Root
+        public class Root
         {
             [J("items")] public Items Items { get; set; }
         }
 
-        public partial class Items
+        public class Items
         {
             [J("item")] public List<Item> Item { get; set; }
         }
 
-        public partial class Item
+        public class Item
         {
             [J("def_id")] public long DefId { get; set; }
             [J("name")] public string Name { get; set; }
@@ -46,14 +63,15 @@ namespace SeaBotCore.Data.Defenitions
             [J("map")] public string Map { get; set; }
         }
 
-        public partial struct Barrel
+        public struct Barrel
         {
             public long? Integer;
             public string String;
 
-            public static implicit operator Barrel(long Integer) => new Barrel { Integer = Integer };
-            public static implicit operator Barrel(string String) => new Barrel { String = String };
+            public static implicit operator Barrel(long Integer) => new Barrel {Integer = Integer};
+            public static implicit operator Barrel(string String) => new Barrel {String = String};
         }
+
         internal static class Converter
         {
             public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
@@ -63,10 +81,11 @@ namespace SeaBotCore.Data.Defenitions
                 Converters =
                 {
                     BarrelConverter.Singleton,
-                    new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
-                },
+                    new IsoDateTimeConverter {DateTimeStyles = DateTimeStyles.AssumeUniversal}
+                }
             };
         }
+
         internal class BarrelConverter : JsonConverter
         {
             public override bool CanConvert(Type t) => t == typeof(Barrel) || t == typeof(Barrel?);
@@ -77,35 +96,35 @@ namespace SeaBotCore.Data.Defenitions
                 {
                     case JsonToken.Integer:
                         var integerValue = serializer.Deserialize<long>(reader);
-                        return new Barrel { Integer = integerValue };
+                        return new Barrel {Integer = integerValue};
                     case JsonToken.String:
                     case JsonToken.Date:
                         var stringValue = serializer.Deserialize<string>(reader);
-                        return new Barrel { String = stringValue };
+                        return new Barrel {String = stringValue};
                 }
+
                 throw new Exception("Cannot unmarshal type Barrel");
             }
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
             {
-                var value = (Barrel)untypedValue;
+                var value = (Barrel) untypedValue;
                 if (value.Integer != null)
                 {
                     serializer.Serialize(writer, value.Integer.Value);
                     return;
                 }
+
                 if (value.String != null)
                 {
                     serializer.Serialize(writer, value.String);
                     return;
                 }
+
                 throw new Exception("Cannot marshal type Barrel");
             }
 
             public static readonly BarrelConverter Singleton = new BarrelConverter();
         }
-
-
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -680,6 +680,7 @@ namespace SeaBotCore
                 CustomObjects.Add("player_level", player_lvl);
             }
         }
+
         public class LoadShipUpgradeableTask : IGameTask
         {
             public string Action => "load_ship_upgradeable";
@@ -689,11 +690,11 @@ namespace SeaBotCore
 
             public LoadShipUpgradeableTask(string inst_id)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
-             
             }
         }
+
         public class HeartBeat : IGameTask
         {
             public string Action => "heartbeat";

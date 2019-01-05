@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -187,7 +187,7 @@ namespace SeaBotCore
                 var match = regex.Match(stringtext);
                 if (match.Success)
                 {
-                    string data = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
+                    var data = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
                     Logger.Logger.Info("[3/3] Getting sessionid");
                     regex = new Regex(@"session_id': '(.*)', 'test");
 
@@ -201,7 +201,6 @@ namespace SeaBotCore
                     {
                         Cache.Update(mtch.Groups[1].Value);
                     }
-
                 }
                 else
                 {

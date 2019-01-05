@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// SeabotGUI
 // Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,34 +16,36 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using J = Newtonsoft.Json.JsonPropertyAttribute;
-using N = Newtonsoft.Json.NullValueHandling;
+using System.Web.Script.Serialization;
+using SeaBotGUI.TelegramBot.WTGLib;
 
-namespace SeaBotCore.Data.Materials
+namespace SeaBotGUI.TelegramBot
 {
-    public class MaterialsData
+    public class TeleConfigData
     {
-        public class Root
+        public List<User> users = new List<User>();
+    }
+
+    class TeleConfigSer
+    {
+        public static void Save()
         {
-            [J("items")] public Items Items { get; set; }
+            var ser = new JavaScriptSerializer();
+            var json = ser.Serialize(Form1._teleconfig);
+            File.WriteAllText("telegramconfig.json", json);
         }
 
-        public class Items
+        public static void Load()
         {
-            [J("item")] public List<Item> Item { get; set; }
-        }
-
-        public class Item
-        {
-            [J("def_id")] public long DefId { get; set; }
-            [J("name")] public string Name { get; set; }
-            [J("name_loc")] public string NameLoc { get; set; }
-            [J("limited")] public long Limited { get; set; }
-            [J("disposable")] public long Disposable { get; set; }
-            [J("texture")] public string Texture { get; set; }
+            if (File.Exists("telegramconfig.json"))
+            {
+                var ser = new JavaScriptSerializer();
+                Form1._teleconfig = ser.Deserialize<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
+            }
         }
     }
 }

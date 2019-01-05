@@ -1,5 +1,5 @@
 ﻿// SeabotGUI
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,11 +36,12 @@ namespace SeaBotGUI
         public bool barrelhack = false;
         public bool upgradeonlyfactory = false;
         public int barrelinterval = 22;
+
         public int hibernateinterval = 5;
+
         // autoship shit
         public string autoshiptype = "coins";
         public bool autoshipprofit = !true;
-
     }
 
     class ConfigSer

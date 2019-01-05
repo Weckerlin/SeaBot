@@ -1,5 +1,5 @@
 // SeabotGUI
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@ using SeaBotCore.Utils;
 
 namespace SeaBotGUI.BotLoop
 {
-   
     public static class BotLoop
     {
         public static class AutoShipUtils
@@ -46,32 +45,37 @@ namespace SeaBotGUI.BotLoop
 
             public static int GetCapacity(Ship ship)
             {
-                if (Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels==null)
+                if (Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels == null)
                 {
-                   return (int) Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels
-                       .Level.First(n => n.Id == ship.CapacityLevel).Capacity.Value;
+                    return (int) Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels
+                        .Level.First(n => n.Id == ship.CapacityLevel).Capacity.Value;
                 }
-                return (int)Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels.Level.First(n => n.Id == ship.Level).Capacity;
+
+                return (int) Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels.Level
+                    .First(n => n.Id == ship.Level).Capacity;
             }
 
             public static int GetSailors(Ship ship)
             {
                 if (Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)
                 {
-                    return  (int)Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels
+                    return (int) Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels
                         .Level.First(n => n.Id == ship.Level).Sailors;
                 }
-                return (int)Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId)
+
+                return (int) Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId)
                     .SailorsLevels.Level
                     .First(n => n.Id == ship.SailorsLevel).Sailors.Value;
             }
-            public static Upgradeable GetBestUpgPlace(string itemname,int sailors, bool profitbased)
+
+            public static Upgradeable GetBestUpgPlace(string itemname, int sailors, bool profitbased)
             {
                 var matid =
                     Defenitions.UpgrDef.Items.Item.Where(n => n.MaterialId == MaterialDB.GetItem(itemname).DefId);
                 var p = matid
                     .Where(shtItem =>
-                        Core.GlobalData.Upgradeables.FirstOrDefault(n => n.DefId == shtItem.DefId && n.Amount != 0&& n.Progress<n.Amount) !=
+                        Core.GlobalData.Upgradeables.FirstOrDefault(n =>
+                            n.DefId == shtItem.DefId && n.Amount != 0 && n.Progress < n.Amount) !=
                         null)
                     .ToDictionary(shtItem => shtItem,
                         shtItem => Core.GlobalData.Upgradeables.First(n => n.DefId == shtItem.DefId));
@@ -83,10 +87,11 @@ namespace SeaBotGUI.BotLoop
                     {
                         continue;
                     }
+
                     if (profitbased)
                     {
                         var itemFirst = up.Key.Levels.Level.First(n => n.Id == up.Value.Level);
-                        var time = (decimal)itemFirst
+                        var time = (decimal) itemFirst
                             .TravelTime;
                         var koef = itemFirst.MaterialKoef;
                         var timepercoin = koef / time;
@@ -99,6 +104,7 @@ namespace SeaBotGUI.BotLoop
                         best.Add(up.Value, timepercoin);
                     }
                 }
+
                 var bestplace = best.OrderBy(n => n.Value).LastOrDefault();
                 return bestplace.Key;
             }
@@ -115,32 +121,31 @@ namespace SeaBotGUI.BotLoop
             for (var index = 0; index < Core.GlobalData.Ships.Count; index++)
             {
                 var ship = Core.GlobalData.Ships[index];
-                if (ship.Type == "upgradeable" && ship.TargetId != 0 && ship.Activated != 0 &&ship.Loaded==0)
+                if (ship.Type == "upgradeable" && ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 0)
                 {
                     var lvl = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
                     if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        lvl.TravelTime+1)
+                        lvl.TravelTime + 1)
                     {
                         Logger.Info(
                             "Loading " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
-                            (int)lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                            (int) lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
 
-                        
                         Networking.AddTask(new Task.LoadShipUpgradeableTask(ship.InstId.ToString()));
                         Core.GlobalData.Ships[index].Loaded = 1;
-
                     }
                 }
             }
+
             var _deship = new List<Ship>();
-           
+
             for (var index = 0; index < Core.GlobalData.Ships.Count; index++)
             {
                 var ship = Core.GlobalData.Ships[index];
-                if (ship.Type == "upgradeable" && ship.TargetId != 0 && ship.Activated != 0&&ship.Loaded==1)
+                if (ship.Type == "upgradeable" && ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1)
                 {
                     var lvl = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
@@ -162,7 +167,7 @@ namespace SeaBotGUI.BotLoop
                             ship.TargetLevel.ToString(),
                             Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Done.ToString(),
                             null, _deship.Count(n => n.DefId == ship.DefId).ToString()));
-                        
+
                         Core.GlobalData.Ships[index].Sent = 0;
                         Core.GlobalData.Ships[index].Type = String.Empty;
                         Core.GlobalData.Ships[index].TargetId = 0;
@@ -173,29 +178,28 @@ namespace SeaBotGUI.BotLoop
 
             _deship.Clear();
             //now send
-          
-                foreach (var ship in Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0))
-                {
 
-                    var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship),lootbased);
+            foreach (var ship in Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0))
+            {
+                var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
 
-                    var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
-                        .Level
-                        .Where(n => n.Id == bestplace.Level).First();
-                    Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Sent =
-                        TimeUtils.GetEpochTime();
-                    Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Type = "upgradeable";
-                    Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).TargetId =
-                        (int) bestplace.DefId;
-                    Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First().TargetLevel = bestplace.Level;
-                    Logger.Info("Sending " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
-                    Networking.AddTask(new Task.SendShipUpgradeableTask(ship.InstId.ToString(),
-                        bestplace.DefId.ToString(), lvls.Amount.ToString(), lvls.MaterialKoef.ToString(),
-                        lvls.Sailors.ToString(), (lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship)).ToString(),
-                        Core.GlobalData.Level.ToString()));
-                }
-            
+                var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
+                    .Level
+                    .Where(n => n.Id == bestplace.Level).First();
+                Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Sent =
+                    TimeUtils.GetEpochTime();
+                Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Type = "upgradeable";
+                Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).TargetId =
+                    bestplace.DefId;
+                Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First().TargetLevel = bestplace.Level;
+                Logger.Info("Sending " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                Networking.AddTask(new Task.SendShipUpgradeableTask(ship.InstId.ToString(),
+                    bestplace.DefId.ToString(), lvls.Amount.ToString(), lvls.MaterialKoef.ToString(),
+                    lvls.Sailors.ToString(), (lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship)).ToString(),
+                    Core.GlobalData.Level.ToString()));
+            }
         }
+
         public static void AutoUpgrade(bool onlyfactory)
         {
             foreach (var data in Core.GlobalData.Buildings)

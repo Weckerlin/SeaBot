@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -41,10 +41,10 @@ namespace SeaBotCore.Utils
 
         public static EventsDefenitions.Item GetCurrentEvent()
         {
-            Dictionary<EventsDefenitions.Item,long> stl = new Dictionary<EventsDefenitions.Item, long>();
-            return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs((long)x.EndTime - GetEpochTime())).First();
-           
+            var stl = new Dictionary<EventsDefenitions.Item, long>();
+            return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
+
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
     }
 }

@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2019 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,24 +39,24 @@ namespace SeaBotCore
         private static string _lastestdef = "1.763.0";
         private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";
         private const string _basedwnladdr = "https://static.seaportgame.com/build/";
+
         public static void Update(string currentversion)
         {
-            bool needupdate = false;
+            var needupdate = false;
             if (File.Exists("cache/cacheversion.txt"))
             {
                 var cachedversion = File.ReadAllText("cache/cacheversion.txt");
-              
+
                 var version1 =
                     new Version(cachedversion);
                 var version2 = new Version(currentversion);
 
                 var result = version1.CompareTo(version2);
-                if (result!=0)
+                if (result != 0)
                 {
                     //update!
                     needupdate = true;
                 }
-
             }
             else
             {
@@ -77,13 +77,14 @@ namespace SeaBotCore
                 File.WriteAllText("cache/cacheversion.txt", currentversion);
             }
         }
+
         public static bool DownloadCache()
         {
             lock (locker)
             {
                 try
                 {
-                    var xml = new WebClient().DownloadString(_baseaddr + _lastestdef+".xml");
+                    var xml = new WebClient().DownloadString(_baseaddr + _lastestdef + ".xml");
                     var doc = new XmlDocument();
                     doc.LoadXml(xml);
                     if (doc.DocumentElement != null)
@@ -261,7 +262,9 @@ namespace SeaBotCore
 
             return _upgradeable;
         }
+
         private static EventsDefenitions.Root _events;
+
         public static EventsDefenitions.Root GetEventDefenitions()
         {
             if (_events == null)
