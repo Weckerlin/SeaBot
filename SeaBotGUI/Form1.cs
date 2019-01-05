@@ -36,6 +36,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SeaBotGUI.TelegramBot;
+using SeaBotGUI.TelegramBot.WTGLib;
 using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI
@@ -47,9 +48,10 @@ namespace SeaBotGUI
         public static TeleConfigData _teleconfig = new TeleConfigData();
         public static Thread BarrelThread;
         public static Thread GridViewUpdater;
-
+        public static WTGLib bot;
         public Form1()
         {
+            bot = new WTGLib("a");
             InitializeComponent();
             ConfigSer.Load();
             GridViewUpdater = new Thread(UpdateGrid) {IsBackground = true};

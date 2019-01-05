@@ -44,7 +44,7 @@ namespace SeaBotGUI.TelegramBot
 
         public class WTGLib
         {
-            WTGLib(string apikey)
+            public WTGLib(string apikey)
             {
                 botClient = new TelegramBotClient(apikey);
                 botClient.OnMessage += Bot_OnMessage;
