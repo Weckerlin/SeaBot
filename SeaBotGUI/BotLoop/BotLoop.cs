@@ -429,8 +429,9 @@ namespace SeaBotGUI.BotLoop
 
         public static void CollectBarrel()
         {
+            var nearestev = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
             var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
-                .Where(n => n.DefId == 21).First());
+                .Where(n => n.DefId == nearestev).First());
             if (bar.Definition.Id != 0)
             {
                 Logger.Info(

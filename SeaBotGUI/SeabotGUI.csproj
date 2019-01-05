@@ -51,6 +51,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telegram.Bot, Version=14.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telegram.Bot.14.10.0\lib\net45\Telegram.Bot.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BotLoop\BotLoop.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="GUIBinds.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelegramBot\TeleBot.cs" />
     <Compile Include="Utils\CompUtils.cs" />
     <Compile Include="Utils\GitHub Data.cs" />
     <EmbeddedResource Include="Form1.resx">

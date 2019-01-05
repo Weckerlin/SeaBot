@@ -29,5 +29,6 @@ namespace SeaBotCore.Data.Defenitions
         public static ShipDefenitions.Root ShipDef => Cache.GetShipDefenitions();
         public static MarketplaceDefenitions.Root MarketDef => Cache.GetMarketPlaceDefenitions();
         public static UpgradeableDefenition.Root UpgrDef => Cache.GetUpgradeablesDefenitions();
+        public static EventsDefenitions.Root EvntDef => Cache.GetEventDefenitions();
     }
 }

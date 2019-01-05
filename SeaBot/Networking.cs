@@ -187,14 +187,21 @@ namespace SeaBotCore
                 var match = regex.Match(stringtext);
                 if (match.Success)
                 {
-                    stringtext = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
+                    string data = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
                     Logger.Logger.Info("[3/3] Getting sessionid");
                     regex = new Regex(@"session_id': '(.*)', 'test");
 
-                    Core.Ssid = regex.Match(stringtext).Groups[1].Value;
+                    Core.Ssid = regex.Match(data).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
-                    tempuid = regex.Match(stringtext).Groups[1].Value;
+                    tempuid = regex.Match(data).Groups[1].Value;
                     Logger.Logger.Info("Successfully logged in! Session ID = " + Core.Ssid);
+                    regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
+                    var mtch = regex.Match(data);
+                    if (mtch.Success)
+                    {
+                        Cache.Update(mtch.Groups[1].Value);
+                    }
+
                 }
                 else
                 {

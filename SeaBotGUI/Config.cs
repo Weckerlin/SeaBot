@@ -32,7 +32,6 @@ namespace SeaBotGUI
         public bool collectfactory = false; //done
         public bool autoupgrade = false;
         public bool autoship = false;
-
         public bool finishupgrade = false;
         public bool barrelhack = false;
         public bool upgradeonlyfactory = false;
