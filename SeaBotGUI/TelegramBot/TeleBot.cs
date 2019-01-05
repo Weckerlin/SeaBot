@@ -16,26 +16,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using SeaBotCore.Logger;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SeaBotGUI.TelegramBot
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using Telegram.Bot;
-    using Telegram.Bot.Args;
-    using Telegram.Bot.Types;
-    using Telegram.Bot.Types.ReplyMarkups;
-
-    namespace WTGLib
-    {
+    
         public class User
         {
             public int userid;
@@ -62,15 +56,17 @@ namespace SeaBotGUI.TelegramBot
                     var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
                     if (reg.Success)
                     {
-                        if (reg.Groups.Count > 1)
-                        {
-                            //new user
-                        }
+                        Form1.bot.botClient.SendTextMessageAsync(e.Message.From.Id,
+                            "Hello! Please enter Startup Code from settings.");
                     }
                     else
                     {
                         Parse(e.Message);
                     }
+                }
+                else
+                {
+                    Parse(e.Message);
                 }
             }
 
@@ -84,8 +80,54 @@ namespace SeaBotGUI.TelegramBot
 
             public async void Parse(Message msg)
             {
+                var ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
+                if (ser == null)
+                {
+                    if (msg.Text != null)
+                    {
+                        var mac = Form1.GetDefMac();
+                       var smac = mac.Substring(0, mac.Length / 2);
+                       if (msg.Text.ToLower() == smac.ToLower())
+                       {
+                           var men = GetMenuItems();
+                          
+                           foreach (var mn in men)
+                           {
+                               try
+                               {
+                                   var instance = Activator.CreateInstance(mn) as IMenu;
+                                   if (instance.ID == 0)
+                                   {
+                                       await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
+                                           ParseReplyKeyboardMarkup(instance));
+                                        
+                                   }
+                               }
+                               catch (Exception)
+                               {
+                                   // ignored
+                               }
+                           }
+
+                         
+                          Form1._teleconfig.users.Add(new User(){MenuID = 0,userid = msg.From.Id});
+                          TeleConfigSer.Save();
+                       }
+                       else
+                       {
+                           Form1.bot.botClient.SendTextMessageAsync(msg.From.Id,
+                               "Wrong Code!\nPlease enter Startup Code from settings.");
+                           return;
+                       }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
                 var menus = GetMenuItems();
-                var ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).First();
+              
                 var menu = ser.MenuID;
                 IMenu first = null;
                 foreach (var mn in menus)
@@ -98,9 +140,9 @@ namespace SeaBotGUI.TelegramBot
                             first = instance;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        // ignored
+                   Debug.WriteLine(ex.ToString());
                     }
                 }
 
@@ -199,7 +241,7 @@ namespace SeaBotGUI.TelegramBot
                 public string name { get; set; }
                 public Action act { get; set; }
                 public int redirect = 0;
-                public bool adminonly = false;
+             
             }
 
             public interface IMenu
@@ -213,5 +255,5 @@ namespace SeaBotGUI.TelegramBot
 
             public TelegramBotClient botClient;
         }
-    }
+    
 }

@@ -31,6 +31,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -49,9 +50,46 @@ namespace SeaBotGUI
         public static Thread BarrelThread;
         public static Thread GridViewUpdater;
         public static WTGLib bot;
+        public static bool TeleBotStarted;
+        public static string GetDefMac()
+        {
+            IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            Console.WriteLine("Interface information for {0}.{1}     ",
+                computerProperties.HostName, computerProperties.DomainName);
+
+            if (nics == null || nics.Length < 1)
+            {
+                Console.WriteLine("  No network interfaces found.");
+                return "DEFCODE";
+            }
+
+            foreach (var adapter in nics)
+            {
+                PhysicalAddress address = adapter.GetPhysicalAddress();
+                byte[] bytes = address.GetAddressBytes();
+                string addr = "";
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    // Display the physical address in hexadecimal.
+                  addr+= bytes[i].ToString("X2");
+                    // Insert a hyphen after each byte, unless we are at the end of the
+                }
+                if (addr == "")
+              {
+
+              }
+              else
+              {
+                  return addr;
+              }
+            }
+
+            return "DEFCODE";
+        }
         public Form1()
         {
-            bot = new WTGLib("a");
+            // bot = new WTGLib("a");
             InitializeComponent();
             ConfigSer.Load();
             GridViewUpdater = new Thread(UpdateGrid) {IsBackground = true};
@@ -74,7 +112,10 @@ namespace SeaBotGUI
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
+            textBox3.Text = _config.telegramtoken;
             num_barrelinterval.Value = _config.barrelinterval;
+            var mac = GetDefMac();
+            lbl_startupcode.Text = mac.Substring(0, mac.Length / 2);
             if (_config.autoshipprofit)
             {
                 radio_saveloot.Checked = true;
@@ -737,5 +778,35 @@ namespace SeaBotGUI
             _config.autoshipprofit = radio_saveloot.Checked;
             ConfigSer.Save();
         }
+
+        private void textBox3_Leave(object sender, EventArgs e)
+        {
+            _config.telegramtoken = textBox3.Text;
+            ConfigSer.Save();
+        }
+
+        private void button4_Click_2(object sender, EventArgs e)
+        {
+            if (_config.telegramtoken == "")
+            {
+                MessageBox.Show("No telegram token");
+                return;
+            }
+            else
+            {
+
+                try
+                {
+                    bot = new WTGLib(_config.telegramtoken);
+                }
+                catch (Exception exception)
+                {
+                   Logger.Fatal(exception.ToString());
+                   
+                }
+                
+            }
+        }
+
     }
 }

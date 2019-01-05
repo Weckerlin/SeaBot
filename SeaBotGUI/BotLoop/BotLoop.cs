@@ -182,8 +182,13 @@ namespace SeaBotGUI.BotLoop
             foreach (var ship in Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0))
             {
                 var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
+                if (bestplace == null)
+                {
+                    continue;
+                }
+            
 
-                var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
+            var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
                     .Level
                     .Where(n => n.Id == bestplace.Level).First();
                 Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Sent =
