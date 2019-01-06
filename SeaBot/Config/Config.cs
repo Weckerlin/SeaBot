@@ -12,24 +12,24 @@ namespace SeaBotCore.Config
     public class Config : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public string server_token = ""; //done
-        public bool debug = false; //done
-        public int woodlimit = 0;
-        public int ironlimit = 0;
-        public int stonelimit = 0;
-        public bool collectfish = false;
-        public bool prodfactory = false; 
-        public bool collectfactory = false; 
-        public bool autoupgrade = false;
-        public bool autoship = false;
-        public bool finishupgrade = false;
-        public bool barrelhack = false;
-        public bool upgradeonlyfactory = false;
-        public int barrelinterval = 22;
-        public int hibernateinterval = 5;
-        public string telegramtoken = "";
-        public string autoshiptype = "coins";
-        public bool autoshipprofit = false;
+        public string server_token { get; set; } = ""; //done
+        public bool debug { get; set; } = false; //done
+        public int woodlimit { get; set; } = 0;
+        public int ironlimit { get; set; } = 0;
+        public int stonelimit { get; set; } = 0;
+        public bool collectfish { get; set; } = false;
+        public bool prodfactory { get; set; } = false; 
+        public bool collectfactory { get; set; } = false; 
+        public bool autoupgrade { get; set; } = false;
+        public bool autoship { get; set; } = false;
+        public bool finishupgrade { get; set; } = false;
+        public bool barrelhack { get; set; } = false;
+        public bool upgradeonlyfactory { get; set; } = false;
+        public int barrelinterval { get; set; } = 22;
+        public int hibernateinterval { get; set; } = 5;
+        public string telegramtoken { get; set; } = "";
+        public string autoshiptype { get; set; } = "coins";
+        public bool autoshipprofit { get; set; } = false;
 
         
     }

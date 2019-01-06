@@ -79,47 +79,54 @@ namespace SeaBotCore
         private static DateTime _lastdefinv = DateTime.Now;
         private static void BotVoid()
         {
-            if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
+            while (true)
             {
-                if (Config.autoupgrade)
+
+                Thread.Sleep(500);
+                if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {
-                   Buildings.AutoUpgrade(Config.upgradeonlyfactory);
+                    if (Config.autoupgrade)
+                    {
+                        Buildings.AutoUpgrade(Config.upgradeonlyfactory);
+                    }
+
+                    if (Config.autoship)
+                    {
+                        Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
+                    }
+
+                    if (Config.collectfish)
+                    {
+                        FishPier.CollectFish();
+                    }
+
+
+                    if (Config.collectfactory)
+                    {
+                        Buildings.CollectMaterials();
+                    }
+
+                    if (Config.prodfactory)
+                    {
+                        Factories.ProduceFactories(Config.ironlimit, Config.stonelimit,
+                            Config.woodlimit);
+                    }
+
+                    if (Config.finishupgrade)
+                    {
+                        Buildings.FinishUpgrade();
+                    }
+
+                    _lastdefinv = DateTime.Now;
+                    ;
                 }
 
-                if (Config.autoship)
+                if (Config.barrelhack && (DateTime.Now - _lastbarrel).TotalSeconds >= Config.barrelinterval)
                 {
-                   Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
+                    Barrels.CollectBarrel();
+                    _lastbarrel = DateTime.Now;
                 }
 
-                if (Config.collectfish)
-                {
-                   FishPier.CollectFish();
-                }
-
-
-                if (Config.collectfactory)
-                {
-                    Buildings.CollectMaterials();
-                }
-
-                if (Config.prodfactory)
-                {
-                    Factories.ProduceFactories(Config.ironlimit, Config.stonelimit,
-                        Config.woodlimit);
-                }
-
-                if (Config.finishupgrade)
-                {
-                    Buildings.FinishUpgrade();
-                }
-
-                _lastdefinv = DateTime.Now;;
-            }
-
-            if (Config.barrelhack && (DateTime.Now - _lastbarrel).TotalSeconds >= Config.barrelinterval)
-            {
-                Barrels.CollectBarrel();
-                _lastbarrel=DateTime.Now;
             }
 
 

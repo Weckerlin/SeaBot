@@ -34,6 +34,17 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lbl_wood = new System.Windows.Forms.Label();
+            this.lbl_stone = new System.Windows.Forms.Label();
+            this.lbl_iron = new System.Windows.Forms.Label();
+            this.lbl_fish = new System.Windows.Forms.Label();
+            this.lbl_gems = new System.Windows.Forms.Label();
+            this.lbl_coins = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -103,20 +114,14 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.lbl_coins = new System.Windows.Forms.Label();
-            this.lbl_gems = new System.Windows.Forms.Label();
-            this.lbl_fish = new System.Windows.Forms.Label();
-            this.lbl_iron = new System.Windows.Forms.Label();
-            this.lbl_stone = new System.Windows.Forms.Label();
-            this.lbl_wood = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -142,11 +147,6 @@
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -208,9 +208,113 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = " Resources";
             // 
+            // lbl_wood
+            // 
+            this.lbl_wood.AutoSize = true;
+            this.lbl_wood.Location = new System.Drawing.Point(256, 53);
+            this.lbl_wood.Name = "lbl_wood";
+            this.lbl_wood.Size = new System.Drawing.Size(0, 13);
+            this.lbl_wood.TabIndex = 11;
+            // 
+            // lbl_stone
+            // 
+            this.lbl_stone.AutoSize = true;
+            this.lbl_stone.Location = new System.Drawing.Point(256, 24);
+            this.lbl_stone.Name = "lbl_stone";
+            this.lbl_stone.Size = new System.Drawing.Size(0, 13);
+            this.lbl_stone.TabIndex = 10;
+            // 
+            // lbl_iron
+            // 
+            this.lbl_iron.AutoSize = true;
+            this.lbl_iron.Location = new System.Drawing.Point(146, 53);
+            this.lbl_iron.Name = "lbl_iron";
+            this.lbl_iron.Size = new System.Drawing.Size(0, 13);
+            this.lbl_iron.TabIndex = 9;
+            // 
+            // lbl_fish
+            // 
+            this.lbl_fish.AutoSize = true;
+            this.lbl_fish.Location = new System.Drawing.Point(147, 24);
+            this.lbl_fish.Name = "lbl_fish";
+            this.lbl_fish.Size = new System.Drawing.Size(0, 13);
+            this.lbl_fish.TabIndex = 8;
+            // 
+            // lbl_gems
+            // 
+            this.lbl_gems.AutoSize = true;
+            this.lbl_gems.Location = new System.Drawing.Point(39, 51);
+            this.lbl_gems.Name = "lbl_gems";
+            this.lbl_gems.Size = new System.Drawing.Size(0, 13);
+            this.lbl_gems.TabIndex = 7;
+            // 
+            // lbl_coins
+            // 
+            this.lbl_coins.AutoSize = true;
+            this.lbl_coins.Location = new System.Drawing.Point(38, 24);
+            this.lbl_coins.Name = "lbl_coins";
+            this.lbl_coins.Size = new System.Drawing.Size(0, 13);
+            this.lbl_coins.TabIndex = 6;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox6.Image = global::SeaBotGUI.Properties.Resources.wood;
+            this.pictureBox6.Location = new System.Drawing.Point(223, 51);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 5;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox5.Image = global::SeaBotGUI.Properties.Resources.stone;
+            this.pictureBox5.Location = new System.Drawing.Point(223, 19);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 4;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox4.Image = global::SeaBotGUI.Properties.Resources.metal;
+            this.pictureBox4.Location = new System.Drawing.Point(114, 48);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 3;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Image = global::SeaBotGUI.Properties.Resources.fish;
+            this.pictureBox3.Location = new System.Drawing.Point(114, 19);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Image = global::SeaBotGUI.Properties.Resources.diamond;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Image = global::SeaBotGUI.Properties.Resources.coin;
             this.pictureBox1.Location = new System.Drawing.Point(6, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(26, 23);
@@ -990,104 +1094,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 48);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(26, 23);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(114, 19);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(26, 23);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Location = new System.Drawing.Point(114, 48);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(26, 23);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox5.Location = new System.Drawing.Point(223, 19);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(26, 23);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 4;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox6.Location = new System.Drawing.Point(223, 51);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(26, 23);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 5;
-            this.pictureBox6.TabStop = false;
-            // 
-            // lbl_coins
-            // 
-            this.lbl_coins.AutoSize = true;
-            this.lbl_coins.Location = new System.Drawing.Point(38, 24);
-            this.lbl_coins.Name = "lbl_coins";
-            this.lbl_coins.Size = new System.Drawing.Size(0, 13);
-            this.lbl_coins.TabIndex = 6;
-            // 
-            // lbl_gems
-            // 
-            this.lbl_gems.AutoSize = true;
-            this.lbl_gems.Location = new System.Drawing.Point(39, 51);
-            this.lbl_gems.Name = "lbl_gems";
-            this.lbl_gems.Size = new System.Drawing.Size(0, 13);
-            this.lbl_gems.TabIndex = 7;
-            // 
-            // lbl_fish
-            // 
-            this.lbl_fish.AutoSize = true;
-            this.lbl_fish.Location = new System.Drawing.Point(147, 24);
-            this.lbl_fish.Name = "lbl_fish";
-            this.lbl_fish.Size = new System.Drawing.Size(0, 13);
-            this.lbl_fish.TabIndex = 8;
-            // 
-            // lbl_iron
-            // 
-            this.lbl_iron.AutoSize = true;
-            this.lbl_iron.Location = new System.Drawing.Point(146, 53);
-            this.lbl_iron.Name = "lbl_iron";
-            this.lbl_iron.Size = new System.Drawing.Size(0, 13);
-            this.lbl_iron.TabIndex = 9;
-            // 
-            // lbl_stone
-            // 
-            this.lbl_stone.AutoSize = true;
-            this.lbl_stone.Location = new System.Drawing.Point(256, 24);
-            this.lbl_stone.Name = "lbl_stone";
-            this.lbl_stone.Size = new System.Drawing.Size(0, 13);
-            this.lbl_stone.TabIndex = 10;
-            // 
-            // lbl_wood
-            // 
-            this.lbl_wood.AutoSize = true;
-            this.lbl_wood.Location = new System.Drawing.Point(256, 53);
-            this.lbl_wood.Name = "lbl_wood";
-            this.lbl_wood.Size = new System.Drawing.Size(0, 13);
-            this.lbl_wood.TabIndex = 11;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1104,6 +1110,11 @@
             this.tabPage1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -1140,11 +1151,6 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }

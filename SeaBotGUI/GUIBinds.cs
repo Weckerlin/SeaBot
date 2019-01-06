@@ -112,7 +112,7 @@ namespace SeaBotGUI.GUIBinds
 
         public static void Start()
         {
-            if (!BuildingThread.IsAlive)
+            if (BuildingThread==null)
             {
                 BuildingThread = new Thread(UpdateGrid);
                 BuildingThread.IsBackground = true;
@@ -125,6 +125,7 @@ namespace SeaBotGUI.GUIBinds
             if (BuildingThread.IsAlive)
             {
                 BuildingThread.Abort();
+                BuildingThread = null;
             }
         }
 
@@ -133,6 +134,10 @@ namespace SeaBotGUI.GUIBinds
             while (true)
             {
                 Thread.Sleep(1000);
+                if (Form1.instance.WindowState == FormWindowState.Minimized)
+                {
+                    continue;
+                }
                 if (Form1.instance.BuildingGrid.InvokeRequired)
                 {
                     var newbuild = BuildingBinding.GetBuildings();

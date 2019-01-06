@@ -44,7 +44,7 @@ namespace SeaBotGUI
 {
     public partial class Form1 : Form
     {
-        public static Thread BotThread;
+      
 
         public static TeleConfigData _teleconfig = new TeleConfigData();
 
@@ -138,6 +138,7 @@ namespace SeaBotGUI
         void OnLogined()
         {
             FormateResources(Core.GlobalData);
+            GUIBinds.BuildingGrid.Start();
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
         }
@@ -547,5 +548,7 @@ namespace SeaBotGUI
                 }
             }
         }
+
+     
     }
 }

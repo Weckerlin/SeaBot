@@ -215,7 +215,9 @@ namespace SeaBotCore
                 {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
+           
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+            Events.Events.LoginedEvent.Logined.Invoke();
         }
 
         public static void Sync()
