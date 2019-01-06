@@ -70,7 +70,7 @@
     <Compile Include="TelegramBot\TelegramMenu.cs" />
     <Compile Include="TelegramBot\TeleUtils.cs" />
     <Compile Include="Utils\CompUtils.cs" />
-    <Compile Include="Utils\GitHub Data.cs" />
+    <Compile Include="Utils\GitHub.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

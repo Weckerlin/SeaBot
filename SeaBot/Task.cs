@@ -697,6 +697,20 @@ namespace SeaBotCore
             }
         }
 
+        public class RemoveMaterialTask : IGameTask
+        {
+            public string Action => "remove_material";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private readonly uint _time;
+
+            public RemoveMaterialTask(string def_id,string amount)
+            {
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("def_id", def_id);
+                CustomObjects.Add("amount",amount);
+            }
+        }
         public class HeartBeat : IGameTask
         {
             public string Action => "heartbeat";

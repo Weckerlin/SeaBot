@@ -99,8 +99,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.num_removenum = new System.Windows.Forms.NumericUpDown();
+            this.btn_removeitem = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -141,7 +141,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_woodlimit)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -928,8 +928,8 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.numericUpDown1);
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.num_removenum);
+            this.tabPage3.Controls.Add(this.btn_removeitem);
             this.tabPage3.Controls.Add(this.listView1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -938,38 +938,37 @@
             this.tabPage3.Text = "Inventory";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // num_removenum
             // 
-            this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Location = new System.Drawing.Point(298, 395);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.num_removenum.Location = new System.Drawing.Point(298, 395);
+            this.num_removenum.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.num_removenum.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(76, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.num_removenum.Name = "num_removenum";
+            this.num_removenum.Size = new System.Drawing.Size(76, 20);
+            this.num_removenum.TabIndex = 2;
+            this.num_removenum.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // button1
+            // btn_removeitem
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(380, 393);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Remove";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_removeitem.Location = new System.Drawing.Point(380, 393);
+            this.btn_removeitem.Name = "btn_removeitem";
+            this.btn_removeitem.Size = new System.Drawing.Size(75, 23);
+            this.btn_removeitem.TabIndex = 1;
+            this.btn_removeitem.Text = "Remove";
+            this.btn_removeitem.UseVisualStyleBackColor = true;
+            this.btn_removeitem.Click += new System.EventHandler(this.btn_removeitem_Click);
             // 
             // listView1
             // 
@@ -1144,7 +1143,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).EndInit();
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage4.ResumeLayout(false);
@@ -1175,8 +1174,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown num_removenum;
+        private System.Windows.Forms.Button btn_removeitem;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ColumnHeader columnHeader1;

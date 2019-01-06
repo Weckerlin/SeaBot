@@ -59,14 +59,19 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Info(
                         $"Someone is playing this game right now, waiting for {Core.hibernation} minutes");
-                    _syncThread.Abort();
-                    Logger.Logger.Muted = true;
-                    Thread.Sleep(Core.hibernation * 1000 * 60);
-                    Logger.Logger.Muted = false;
-                    Logger.Logger.Info("Mwaaah, waking up after hibernation");
-
-                    StartThread();
-                    Login();
+                  
+                   
+                    if (Core.IsBotRunning)
+                    {
+                        _syncThread.Abort();
+                        Logger.Logger.Muted = true;
+                        Thread.Sleep(Core.hibernation * 1000 * 60);
+                        Logger.Logger.Muted = false;
+                        Logger.Logger.Info("Mwaaah, waking up after hibernation");
+                        StartThread();
+                        Login();
+                    }
+                   
                 }
             });
         }

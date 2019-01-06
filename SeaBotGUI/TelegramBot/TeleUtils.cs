@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using SeaBotCore.Logger;
 
 namespace SeaBotGUI.TelegramBot
 {
@@ -16,7 +17,7 @@ namespace SeaBotGUI.TelegramBot
       {
           get
           {
-              if (_macaddr == "")
+              if (_macaddr == null)
               {
                   _macaddr = GetDefMac();
               }
@@ -30,12 +31,9 @@ namespace SeaBotGUI.TelegramBot
         {
             var computerProperties = IPGlobalProperties.GetIPGlobalProperties();
             var nics = NetworkInterface.GetAllNetworkInterfaces();
-            Console.WriteLine("Interface information for {0}.{1}     ",
-                computerProperties.HostName, computerProperties.DomainName);
-
             if (nics == null || nics.Length < 1)
             {
-                Console.WriteLine("  No network interfaces found.");
+               Logger.Info("No network interfaces found.");
                 return "DEFCODE";
             }
 
@@ -51,13 +49,11 @@ namespace SeaBotGUI.TelegramBot
                     // Insert a hyphen after each byte, unless we are at the end of the
                 }
 
-                if (addr.ToString() == "")
-                {
-                }
-                else
+                if (addr.ToString() != "")
                 {
                     return addr.ToString();
                 }
+              
             }
 
             return "DEFCODE";

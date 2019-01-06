@@ -38,9 +38,16 @@ namespace SeaBotCore
         {
             Configurator.Load();
             Config.PropertyChanged += Config_PropertyChanged;
+            Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
         }
 
-        private static void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+         public static bool IsBotRunning
+         {
+             get { return BotThread.IsAlive; }
+         }
+
+
+         private static void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
            Configurator.Save();
         }
@@ -77,6 +84,19 @@ namespace SeaBotCore
         }
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now;
+        private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
+        {
+            new System.Threading.Tasks.Task(() =>
+            {
+                if ((int)e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                {
+                    Logger.Logger.Info("Restarting bot");
+                    Core.StopBot();
+                    Core.StartBot();
+                }
+            }).Start();
+        }
+
         private static void BotVoid()
         {
             while (true)

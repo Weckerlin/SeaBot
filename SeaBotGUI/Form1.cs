@@ -109,7 +109,7 @@ namespace SeaBotGUI
         }
         public Form1()
         {
-            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
+        
             // bot = new WTGLib("a");
             InitializeComponent();
             instance = this;      
@@ -123,18 +123,7 @@ namespace SeaBotGUI
         }
 
 
-        private void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
-        {
-            new Task(() =>
-            {
-                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
-                {
-                   Core.StopBot();
-                   Core.StartBot();
-                }
-            }).Start();
-        }
-
+        
         private void Inventory_CollectionChanged(object sender,
             NotifyCollectionChangedEventArgs e)
         {
@@ -514,6 +503,30 @@ namespace SeaBotGUI
             }
         }
 
-     
+        private void btn_removeitem_Click(object sender, EventArgs e)
+        {
+            var much = num_removenum.Value;
+            if (much <= 0)
+            {
+                return;
+            }
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var picked = listView1.SelectedItems[0].SubItems[0].Text;
+                var wehave = Core.GlobalData.GetAmountItem(picked);
+                    if (wehave != 0 && wehave>=(int)much)
+                    {
+
+                        var item = MaterialDB.GetItem(picked);
+                        Logger.Info($"Removed {much} {item.Name}'s");
+                        Networking.AddTask(new SeaBotCore.Task.RemoveMaterialTask(item.DefId.ToString(),((int)much).ToString()));
+                        SeaBotCore.Core.GlobalData.Inventory.Where(n => n.Id == item.DefId).First().Amount -=
+                            (int) much;
+
+                    }
+                
+            }
+        }
     }
 }
