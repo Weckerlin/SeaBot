@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Xml;
+using SeaBotCore.BotMethods;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.Data
@@ -272,7 +273,7 @@ namespace SeaBotCore.Data
 
             #endregion
 
-            BarrelController._lastBarrelSeed =
+            Barrels.BarrelController._lastBarrelSeed =
                 Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
                 Convert.ToInt32(doc.DocumentElement.SelectSingleNode("config/heartbeat_interval")?.InnerText);

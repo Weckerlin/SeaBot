@@ -37,7 +37,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SeaBotGUI.TelegramBot;
-using SeaBotGUI.TelegramBot.WTGLib;
 using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI
@@ -47,14 +46,14 @@ namespace SeaBotGUI
         public static Thread BotThread;
         public static Config _config = new Config();
         public static TeleConfigData _teleconfig = new TeleConfigData();
-        public static Thread BarrelThread;
-        public static Thread GridViewUpdater;
+
         public static WTGLib bot;
         public static bool TeleBotStarted;
+
         public static string GetDefMac()
         {
-            IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            var computerProperties = IPGlobalProperties.GetIPGlobalProperties();
+            var nics = NetworkInterface.GetAllNetworkInterfaces();
             Console.WriteLine("Interface information for {0}.{1}     ",
                 computerProperties.HostName, computerProperties.DomainName);
 
@@ -66,34 +65,40 @@ namespace SeaBotGUI
 
             foreach (var adapter in nics)
             {
-                PhysicalAddress address = adapter.GetPhysicalAddress();
-                byte[] bytes = address.GetAddressBytes();
-                string addr = "";
-                for (int i = 0; i < bytes.Length; i++)
+                var address = adapter.GetPhysicalAddress();
+                var bytes = address.GetAddressBytes();
+                var addr = "";
+                for (var i = 0; i < bytes.Length; i++)
                 {
                     // Display the physical address in hexadecimal.
-                  addr+= bytes[i].ToString("X2");
+                    addr += bytes[i].ToString("X2");
                     // Insert a hyphen after each byte, unless we are at the end of the
                 }
-                if (addr == "")
-              {
 
-              }
-              else
-              {
-                  return addr;
-              }
+                if (addr == "")
+                {
+                }
+                else
+                {
+                    return addr;
+                }
             }
 
             return "DEFCODE";
         }
+
+        public static Form1 instance;
+        public DataGridView BuildingGrid => dataGridView1;
+
         public Form1()
         {
             // bot = new WTGLib("a");
             InitializeComponent();
+            instance = this;
             ConfigSer.Load();
-            GridViewUpdater = new Thread(UpdateGrid) {IsBackground = true};
-            GridViewUpdater.Start();
+            TeleConfigSer.Load();
+
+
             MaximizeBox = false;
             CheckForUpdates();
             textBox2.Text = _config.server_token;
@@ -108,7 +113,7 @@ namespace SeaBotGUI
             chk_barrelhack.Checked = _config.barrelhack;
             chk_finishupgrade.Checked = _config.finishupgrade;
             chk_aupgrade.Checked = _config.autoupgrade;
-            dataGridView1.DataSource = new BindingSource(GUIBinds.GUIBinds.BuildingBinding.Buildings, null);
+            dataGridView1.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
             num_ironlimit.Value = _config.ironlimit;
             num_woodlimit.Value = _config.woodlimit;
             num_stonelimit.Value = _config.stonelimit;
@@ -135,71 +140,6 @@ namespace SeaBotGUI
             //Check for cache
         }
 
-
-        private void UpdateGrid()
-        {
-            while (true)
-            {
-                Thread.Sleep(1000);
-                if (dataGridView1.InvokeRequired)
-                {
-                    var newbuild = GUIBinds.GUIBinds.BuildingBinding.GetBuildings();
-                    MethodInvoker meth = () =>
-                    {
-                        foreach (DataGridViewTextBoxColumn clmn in dataGridView1.Columns)
-                        {
-                            clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                            clmn.Resizable = DataGridViewTriState.False;
-                        }
-
-                        foreach (var bld in newbuild)
-                        {
-                            if (GUIBinds.GUIBinds.BuildingBinding.Buildings.Where(n => n.ID == bld.ID)
-                                    .FirstOrDefault() == null)
-                            {
-                                var bld2 = bld;
-                                if (bld2.Name == "Small Workshop")
-                                {
-                                    bld2.Name = "Fishing Pier";
-                                }
-
-                                if (bld2.Name == "Big Workshop")
-                                {
-                                    bld2.Name = "Main Dock";
-                                }
-
-                                GUIBinds.GUIBinds.BuildingBinding.Buildings.Add(bld2);
-                            }
-                            else
-                            {
-                                var old = GUIBinds.GUIBinds.BuildingBinding.Buildings.First(n => n.ID == bld.ID);
-                                if (old.Level != bld.Level)
-                                {
-                                    old.Level = bld.Level;
-                                }
-
-                                if (old.Producing != bld.Producing)
-                                {
-                                    old.Producing = bld.Producing;
-                                }
-
-                                if (old.Upgrade != bld.Upgrade)
-                                {
-                                    old.Upgrade = bld.Upgrade;
-                                }
-
-                                //edit
-                            }
-                        }
-
-                        dataGridView1.Refresh();
-                        dataGridView1.Update();
-                    };
-
-                    dataGridView1.BeginInvoke(meth);
-                }
-            }
-        }
 
         private void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
@@ -456,9 +396,6 @@ namespace SeaBotGUI
             FormateResources(Core.GlobalData);
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
-            BarrelThread = new Thread(BarrelVoid) {IsBackground = true};
-            BarrelThread.Start();
-
             Networking.StartThread();
             BotThread = new Thread(BotVoid)
             {
@@ -585,13 +522,7 @@ namespace SeaBotGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button2.Enabled = true;
-            button3.Enabled = false;
             Core.StopBot();
-            ThreadKill.KillTheThread(BotThread);
-            ThreadKill.KillTheThread(BarrelThread);
-
-            Core.GlobalData = null;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -790,23 +721,18 @@ namespace SeaBotGUI
             if (_config.telegramtoken == "")
             {
                 MessageBox.Show("No telegram token");
-                return;
             }
             else
             {
-
                 try
                 {
                     bot = new WTGLib(_config.telegramtoken);
                 }
                 catch (Exception exception)
                 {
-                   Logger.Fatal(exception.ToString());
-                   
+                    Logger.Fatal(exception.ToString());
                 }
-                
             }
         }
-
     }
 }

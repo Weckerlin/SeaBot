@@ -56,7 +56,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BotLoop\BotLoop.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -107,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Anchor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BotLoop\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,231 +29,228 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SeaBotGUI.TelegramBot
 {
-    
-        public class User
+    public class User
+    {
+        public int userid;
+        public int MenuID;
+    }
+
+    public class WTGLib
+    {
+        public WTGLib(string apikey)
         {
-            public int userid;
-            public int MenuID;
+            botClient = new TelegramBotClient(apikey);
+            botClient.OnMessage += Bot_OnMessage;
+            botClient.StartReceiving();
         }
 
-        public class WTGLib
+        private async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
-            public WTGLib(string apikey)
-            {
-                botClient = new TelegramBotClient(apikey);
-                botClient.OnMessage += Bot_OnMessage;
-                botClient.StartReceiving();
-            }
+            var message = e.Message.Text ?? "";
+            Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");
 
-            private async void Bot_OnMessage(object sender, MessageEventArgs e)
+            //THIS IS A NEW USER
+            if (message.StartsWith("/start"))
             {
-                var message = e.Message.Text ?? "";
-                Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");
-
-                //THIS IS A NEW USER
-                if (message.StartsWith("/start"))
+                var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
+                if (reg.Success)
                 {
-                    var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
-                    if (reg.Success)
-                    {
-                        Form1.bot.botClient.SendTextMessageAsync(e.Message.From.Id,
-                            "Hello! Please enter Startup Code from settings.");
-                    }
-                    else
-                    {
-                        Parse(e.Message);
-                    }
+                    Form1.bot.botClient.SendTextMessageAsync(e.Message.From.Id,
+                        "Hello! Please enter Startup Code from settings.");
                 }
                 else
                 {
                     Parse(e.Message);
                 }
             }
-
-            static List<Type> GetMenuItems()
+            else
             {
-                var type = typeof(IMenu);
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(s => s.GetTypes())
-                    .Where(p => type.IsAssignableFrom(p)).ToList();
+                Parse(e.Message);
             }
+        }
 
-            public async void Parse(Message msg)
+        static List<Type> GetMenuItems()
+        {
+            var type = typeof(IMenu);
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p)).ToList();
+        }
+
+        public async void Parse(Message msg)
+        {
+            var ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
+            if (ser == null)
             {
-                var ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
-                if (ser == null)
+                if (msg.Text != null)
                 {
-                    if (msg.Text != null)
+                    var mac = Form1.GetDefMac();
+                    var smac = mac.Substring(0, mac.Length / 2);
+                    if (msg.Text.ToLower() == smac.ToLower())
                     {
-                        var mac = Form1.GetDefMac();
-                       var smac = mac.Substring(0, mac.Length / 2);
-                       if (msg.Text.ToLower() == smac.ToLower())
-                       {
-                           var men = GetMenuItems();
-                          
-                           foreach (var mn in men)
-                           {
-                               try
-                               {
-                                   var instance = Activator.CreateInstance(mn) as IMenu;
-                                   if (instance.ID == 0)
-                                   {
-                                       await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
-                                           ParseReplyKeyboardMarkup(instance));
-                                        
-                                   }
-                               }
-                               catch (Exception)
-                               {
-                                   // ignored
-                               }
-                           }
+                        var men = GetMenuItems();
 
-                         
-                          Form1._teleconfig.users.Add(new User(){MenuID = 0,userid = msg.From.Id});
-                          TeleConfigSer.Save();
-                       }
-                       else
-                       {
-                           Form1.bot.botClient.SendTextMessageAsync(msg.From.Id,
-                               "Wrong Code!\nPlease enter Startup Code from settings.");
-                           return;
-                       }
+                        foreach (var mn in men)
+                        {
+                            try
+                            {
+                                var instance = Activator.CreateInstance(mn) as IMenu;
+                                if (instance.ID == 0)
+                                {
+                                    await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
+                                        ParseReplyKeyboardMarkup(instance));
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
+                        }
+
+
+                        Form1._teleconfig.users.Add(new User {MenuID = 0, userid = msg.From.Id});
+                        TeleConfigSer.Save();
                     }
                     else
                     {
+                        Form1.bot.botClient.SendTextMessageAsync(msg.From.Id,
+                            "Wrong Code!\nPlease enter Startup Code from settings.");
                         return;
                     }
                 }
-                ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
-                var menus = GetMenuItems();
-              
-                var menu = ser.MenuID;
-                IMenu first = null;
-                foreach (var mn in menus)
-                {
-                    try
-                    {
-                        var instance = Activator.CreateInstance(mn) as IMenu;
-                        if (instance.ID == menu)
-                        {
-                            first = instance;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                   Debug.WriteLine(ex.ToString());
-                    }
-                }
-
-                if (first == null)
-                {
-                    await botClient.SendTextMessageAsync(msg.Chat, "Exeption, can't find menu item");
-                }
                 else
                 {
-                    first.Message = msg;
-                    if (msg.Text != null)
+                    return;
+                }
+            }
+
+            ser = Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).FirstOrDefault();
+            var menus = GetMenuItems();
+
+            var menu = ser.MenuID;
+            IMenu first = null;
+            foreach (var mn in menus)
+            {
+                try
+                {
+                    var instance = Activator.CreateInstance(mn) as IMenu;
+                    if (instance.ID == menu)
                     {
-                        Button a = null;
-                        foreach (var rowButton in first.buttons)
+                        first = instance;
+                    }
+                }
+                catch (Exception)
+                {
+                    //ingored
+                }
+            }
+
+            if (first == null)
+            {
+                await botClient.SendTextMessageAsync(msg.Chat, "Exeption, can't find menu item");
+            }
+            else
+            {
+                first.Message = msg;
+                if (msg.Text != null)
+                {
+                    Button a = null;
+                    foreach (var rowButton in first.buttons)
+                    {
+                        foreach (var n in rowButton)
                         {
-                            foreach (var n in rowButton)
+                            if (n.name.ToLower() == msg.Text.ToLower())
                             {
-                                if (n.name.ToLower() == msg.Text.ToLower())
-                                {
-                                    a = n;
-                                    break;
-                                }
+                                a = n;
+                                break;
                             }
-                        }
-
-                        if (a == null)
-                        {
-                            await Task.Run(() => first.Unknown(msg));
-                        }
-                        else
-                        {
-                            if (a.redirect != 0)
-                            {
-                                Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).First().MenuID = a.redirect;
-                                TeleConfigSer.Save();
-                                IMenu newinst = null;
-                                foreach (var mn in menus)
-                                {
-                                    try
-                                    {
-                                        var instance = Activator.CreateInstance(mn) as IMenu;
-                                        if (instance.ID == a.redirect)
-                                        {
-                                            newinst = instance;
-                                        }
-                                    }
-                                    catch (Exception)
-                                    {
-                                        // ignored
-                                    }
-                                }
-
-                                await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
-                                    ParseReplyKeyboardMarkup(newinst));
-                                newinst.Message = msg;
-                                newinst.OnEnter();
-                                return;
-                            }
-
-                            await Task.Run(a.act);
                         }
                     }
-                    else
+
+                    if (a == null)
                     {
                         await Task.Run(() => first.Unknown(msg));
                     }
-                }
-            }
-
-            public ReplyKeyboardMarkup ParseReplyKeyboardMarkup(IMenu arr)
-            {
-                var global = new List<List<KeyboardButton>>();
-
-                foreach (var button in arr.buttons)
-                {
-                    var a = new List<KeyboardButton>();
-                    foreach (var minib in button)
+                    else
                     {
-                        a.Add(new KeyboardButton(minib.name));
+                        if (a.redirect != -1)
+                        {
+                            Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).First().MenuID = a.redirect;
+                            TeleConfigSer.Save();
+                            IMenu newinst = null;
+                            foreach (var mn in menus)
+                            {
+                                try
+                                {
+                                    var instance = Activator.CreateInstance(mn) as IMenu;
+                                    if (instance.ID == a.redirect)
+                                    {
+                                        newinst = instance;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    // ignored
+                                }
+                            }
+
+                            await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
+                                ParseReplyKeyboardMarkup(newinst));
+                            newinst.Message = msg;
+                            newinst.OnEnter();
+                            return;
+                        }
+
+                        await Task.Run(a.act);
                     }
-
-                    global.Add(a);
                 }
-
-                return new ReplyKeyboardMarkup(global);
-            }
-
-            public class Button
-            {
-                public Button(string Name, Action Act)
+                else
                 {
-                    name = Name;
-                    act = Act;
+                    await Task.Run(() => first.Unknown(msg));
+                }
+            }
+        }
+
+        public ReplyKeyboardMarkup ParseReplyKeyboardMarkup(IMenu arr)
+        {
+            var global = new List<List<KeyboardButton>>();
+
+            foreach (var button in arr.buttons)
+            {
+                var a = new List<KeyboardButton>();
+                foreach (var minib in button)
+                {
+                    a.Add(new KeyboardButton(minib.name));
                 }
 
-                public string name { get; set; }
-                public Action act { get; set; }
-                public int redirect = 0;
-             
+                global.Add(a);
             }
 
-            public interface IMenu
-            {
-                Message Message { set; }
-                int ID { get; }
-                Button[][] buttons { get; }
-                void Unknown(Message msg);
-                void OnEnter();
-            }
-
-            public TelegramBotClient botClient;
+            return new ReplyKeyboardMarkup(global);
         }
-    
+
+        public class Button
+        {
+            public Button(string Name, Action Act)
+            {
+                name = Name;
+                act = Act;
+            }
+
+            public string name { get; set; }
+            public Action act { get; set; }
+            public int redirect = 0;
+        }
+
+        public interface IMenu
+        {
+            Message Message { set; }
+            int ID { get; }
+            Button[][] buttons { get; }
+            void Unknown(Message msg);
+            void OnEnter();
+        }
+
+        public TelegramBotClient botClient;
+    }
 }

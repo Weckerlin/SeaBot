@@ -40,6 +40,7 @@ namespace SeaBotGUI
         public int hibernateinterval = 5;
 
         public string telegramtoken = "";
+
         // autoship shit
         public string autoshiptype = "coins";
         public bool autoshipprofit = !true;

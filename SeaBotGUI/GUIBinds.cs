@@ -20,7 +20,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SeaBotCore;
 using SeaBotCore.Data;
 using SeaBotCore.Utils;
@@ -28,8 +30,93 @@ using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI.GUIBinds
 {
-    public static class GUIBinds
+    public static class BuildingGrid
     {
+        public static Thread BuildingThread;
+
+        public static void Start()
+        {
+            if (!BuildingThread.IsAlive)
+            {
+                BuildingThread = new Thread(UpdateGrid);
+                BuildingThread.IsBackground = true;
+                BuildingThread.Start();
+            }
+        }
+
+        public static void Stop()
+        {
+            if (BuildingThread.IsAlive)
+            {
+                BuildingThread.Abort();
+            }
+        }
+
+        public static void UpdateGrid()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (Form1.instance.BuildingGrid.InvokeRequired)
+                {
+                    var newbuild = BuildingBinding.GetBuildings();
+                    MethodInvoker meth = () =>
+                    {
+                        foreach (DataGridViewTextBoxColumn clmn in Form1.instance.BuildingGrid.Columns)
+                        {
+                            clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                            clmn.Resizable = DataGridViewTriState.False;
+                        }
+
+                        foreach (var bld in newbuild)
+                        {
+                            if (BuildingBinding.Buildings.Where(n => n.ID == bld.ID)
+                                    .FirstOrDefault() == null)
+                            {
+                                var bld2 = bld;
+                                if (bld2.Name == "Small Workshop")
+                                {
+                                    bld2.Name = "Fishing Pier";
+                                }
+
+                                if (bld2.Name == "Big Workshop")
+                                {
+                                    bld2.Name = "Main Dock";
+                                }
+
+                                BuildingBinding.Buildings.Add(bld2);
+                            }
+                            else
+                            {
+                                var old = BuildingBinding.Buildings.First(n => n.ID == bld.ID);
+                                if (old.Level != bld.Level)
+                                {
+                                    old.Level = bld.Level;
+                                }
+
+                                if (old.Producing != bld.Producing)
+                                {
+                                    old.Producing = bld.Producing;
+                                }
+
+                                if (old.Upgrade != bld.Upgrade)
+                                {
+                                    old.Upgrade = bld.Upgrade;
+                                }
+
+                                //edit
+                            }
+                        }
+
+                        Form1.instance.BuildingGrid.Refresh();
+                        Form1.instance.BuildingGrid.Update();
+                    };
+
+                    Form1.instance.BuildingGrid.BeginInvoke(meth);
+                }
+            }
+        }
+
         public static class BuildingBinding
         {
             public static BindingList<Building> Buildings = new BindingList<Building>();

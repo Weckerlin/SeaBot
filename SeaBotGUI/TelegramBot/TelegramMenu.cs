@@ -42,10 +42,17 @@ namespace SeaBotGUI.TelegramBot
                 Control,
                 Strategy,
                 Settings,
+                BasicShipUpg,
+                CPLWood,
+                CPLIron,
+                CPLStone,
+                Intervals,
+                ShipOptimal,
                 Data,
-        
+
                 About
             }
+
             public static class MenuItems
             {
                 public class MainMenu : WTGLib.IMenu
@@ -53,49 +60,50 @@ namespace SeaBotGUI.TelegramBot
                     public Message Message { get; set; }
                     int WTGLib.IMenu.ID => (int) EMenu.Main;
 
-                    WTGLib.Button[][] WTGLib.IMenu.buttons => new WTGLib.Button[][]
+                    WTGLib.Button[][] WTGLib.IMenu.buttons => new[]
                     {
-                    new[]
-                    {
-                        new WTGLib.Button("Стратегия", new Action(() =>
+                        new[]
                         {
-
-                        })){ redirect=(int)EMenu.Strategy},
-
-                    },
-                    new[] {new WTGLib.Button("Данные", new Action(() =>
-                    {
-
-                    })){ redirect=(int)EMenu.Data}},
-                    new[] {new WTGLib.Button("О боте", new Action(() => { })) { redirect = (int)EMenu.About } },
-                    new[] {new WTGLib.Button("Настройки", new Action(() => { })) { redirect = (int)EMenu.Settings } }
+                            new WTGLib.Button("Start", () => { }) {redirect = -1},
+                            new WTGLib.Button("Stop", () => { }) {redirect = -1}
+                        },
+                        new[] {new WTGLib.Button("Strategy", () => { }) {redirect = (int) EMenu.Strategy}},
+                        new[] {new WTGLib.Button("Settings", () => { }) {redirect = (int) EMenu.Settings}},
+                        new[] {new WTGLib.Button("About", () => { }) {redirect = (int) EMenu.About}}
                     };
 
-               
-                   
+
                     public void Unknown(Message msg)
                     {
-
                     }
 
                     public void OnEnter()
                     {
-
                     }
-                };
-               
-                public class RandMenu : WTGLib.IMenu
+                }
+
+                public class Settings : WTGLib.IMenu
                 {
                     public Message Message { get; set; }
-                    int WTGLib.IMenu.ID => (int)EMenu.Settings;
+                    int WTGLib.IMenu.ID => (int) EMenu.Settings;
 
-                    public WTGLib.Button[][] buttons => new[]
-                        {new[] { new WTGLib.Button("Меню", new Action(() => { })) {redirect = (int)EMenu.Main}}};
+                    WTGLib.Button[][] WTGLib.IMenu.buttons => new[]
+                    {
+                        new[]
+                        {
+                            new WTGLib.Button("Start", () => { }) {redirect = -1},
+                            new WTGLib.Button("Stop", () => { }) {redirect = -1}
+                        },
+                        new[] {new WTGLib.Button("Strategy", () => { }) {redirect = (int) EMenu.Strategy}},
+                        new[] {new WTGLib.Button("Settings", () => { }) {redirect = (int) EMenu.Settings}},
+                        new[] {new WTGLib.Button("About", () => { }) {redirect = (int) EMenu.About}}
+                    };
+
                     public void Unknown(Message msg)
                     {
                         if (msg.Text != null)
                         {
-                          //bla//bla :D
+                            //bla//bla :D
                         }
                     }
 
@@ -104,13 +112,7 @@ namespace SeaBotGUI.TelegramBot
                         //blablaofc
                     }
                 }
-              
             }
-         
-          
-
-
-
         }
     }
 }
