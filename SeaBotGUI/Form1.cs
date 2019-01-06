@@ -68,20 +68,20 @@ namespace SeaBotGUI
             {
                 var address = adapter.GetPhysicalAddress();
                 var bytes = address.GetAddressBytes();
-                var addr = "";
+                StringBuilder addr = new StringBuilder();
                 for (var i = 0; i < bytes.Length; i++)
                 {
                     // Display the physical address in hexadecimal.
-                    addr += bytes[i].ToString("X2");
+                    addr.Append(bytes[i].ToString("X2"));
                     // Insert a hyphen after each byte, unless we are at the end of the
                 }
 
-                if (addr == "")
+                if (addr.ToString() == "")
                 {
                 }
                 else
                 {
-                    return addr;
+                    return addr.ToString();
                 }
             }
 
