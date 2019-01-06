@@ -174,7 +174,7 @@ namespace SeaBotCore
             using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
             using (var client = new HttpClient(handler) {BaseAddress = baseAddress})
             {
-                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.ServerToken));
+                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.Config.server_token));
                 Logger.Logger.Info("[1/3] Getting another cookies");
                 var result = client.GetAsync("en/seaport/").Result;
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(

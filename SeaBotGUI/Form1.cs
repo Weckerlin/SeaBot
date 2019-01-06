@@ -132,6 +132,14 @@ namespace SeaBotGUI
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
             UpdateButtons(Core.Config.autoshiptype);
+            SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
+        }
+
+        void OnLogined()
+        {
+            FormateResources(Core.GlobalData);
+            Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+            Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
         }
         public Form1()
         {
@@ -186,6 +194,8 @@ namespace SeaBotGUI
      
         public void FormateResources(GlobalData data)
         {
+            if (data.Inventory == null)
+            { return;}
             ResourcesBox.Update();
             var a = new List<ListViewItem>();
             foreach (var dataa in data.Inventory.Where(n =>
@@ -272,9 +282,7 @@ namespace SeaBotGUI
             button3.Enabled = true;
             button2.Enabled = false;
             Core.StartBot();
-            FormateResources(Core.GlobalData);
-            Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
-            Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
+          
 
         }
 
