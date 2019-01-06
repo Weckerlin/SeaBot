@@ -68,6 +68,7 @@
     <Compile Include="TelegramBot\TeleBot.cs" />
     <Compile Include="TelegramBot\TeleConfig.cs" />
     <Compile Include="TelegramBot\TelegramMenu.cs" />
+    <Compile Include="TelegramBot\TeleUtils.cs" />
     <Compile Include="Utils\CompUtils.cs" />
     <Compile Include="Utils\GitHub Data.cs" />
     <EmbeddedResource Include="Form1.resx">

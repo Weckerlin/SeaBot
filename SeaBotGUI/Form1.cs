@@ -51,42 +51,7 @@ namespace SeaBotGUI
         public static WTGLib bot;
         public static bool TeleBotStarted;
 
-        public static string GetDefMac()
-        {
-            var computerProperties = IPGlobalProperties.GetIPGlobalProperties();
-            var nics = NetworkInterface.GetAllNetworkInterfaces();
-            Console.WriteLine("Interface information for {0}.{1}     ",
-                computerProperties.HostName, computerProperties.DomainName);
-
-            if (nics == null || nics.Length < 1)
-            {
-                Console.WriteLine("  No network interfaces found.");
-                return "DEFCODE";
-            }
-
-            foreach (var adapter in nics)
-            {
-                var address = adapter.GetPhysicalAddress();
-                var bytes = address.GetAddressBytes();
-                StringBuilder addr = new StringBuilder();
-                for (var i = 0; i < bytes.Length; i++)
-                {
-                    // Display the physical address in hexadecimal.
-                    addr.Append(bytes[i].ToString("X2"));
-                    // Insert a hyphen after each byte, unless we are at the end of the
-                }
-
-                if (addr.ToString() == "")
-                {
-                }
-                else
-                {
-                    return addr.ToString();
-                }
-            }
-
-            return "DEFCODE";
-        }
+     
 
         public static Form1 instance;
         public DataGridView BuildingGrid => dataGridView1;
@@ -117,8 +82,8 @@ namespace SeaBotGUI
             num_stonelimit.Value = Core.Config.stonelimit;
             textBox3.Text = Core.Config.telegramtoken;
             num_barrelinterval.Value = Core.Config.barrelinterval;
-            var mac = GetDefMac();
-            lbl_startupcode.Text = mac.Substring(0, mac.Length / 2);
+          
+            lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
             if (Core.Config.autoshipprofit)
             {
                 radio_saveloot.Checked = true;

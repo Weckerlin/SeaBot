@@ -84,7 +84,7 @@ namespace SeaBotGUI.TelegramBot
             {
                 if (msg.Text != null)
                 {
-                    var mac = Form1.GetDefMac();
+                    var mac = TeleUtils.MacAdressCode;
                     var smac = mac.Substring(0, mac.Length / 2);
                     if (msg.Text.ToLower() == smac.ToLower())
                     {
