@@ -1,27 +1,17 @@
-﻿// SeabotGUI
-// Copyright (C) 2018 - 2019 Weespin
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
-using System.Threading;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace SeaBotGUI
+namespace SeaBotCore.Config
 {
-    public class Config
+    public class Config : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public string server_token = ""; //done
         public bool debug = false; //done
         public int woodlimit = 0;
@@ -36,22 +26,24 @@ namespace SeaBotGUI
         public bool barrelhack = false;
         public bool upgradeonlyfactory = false;
         public int barrelinterval = 22;
-
         public int hibernateinterval = 5;
-
         public string telegramtoken = "";
-
         // autoship shit
         public string autoshiptype = "coins";
         public bool autoshipprofit = !true;
+
+        public Config()
+        {
+            Configurator.Load();
+        }
     }
 
-    class ConfigSer
+    class Configurator
     {
         public static void Save()
         {
             var ser = new JavaScriptSerializer();
-            var json = ser.Serialize(Form1._config);
+            var json = ser.Serialize(Core.Config);
             File.WriteAllText("config.json", json);
         }
 
@@ -60,8 +52,9 @@ namespace SeaBotGUI
             if (File.Exists("config.json"))
             {
                 var ser = new JavaScriptSerializer();
-                Form1._config = ser.Deserialize<Config>(File.ReadAllText("config.json"));
+                Core.Config = ser.Deserialize<Config>(File.ReadAllText("config.json"));
             }
+
         }
     }
 }

@@ -17,6 +17,7 @@
 using SeaBotCore.Data;
 using SeaBotCore.Utils;
 using System.Net.Http;
+using SeaBotCore.Config;
 
 namespace SeaBotCore
 {
@@ -28,6 +29,17 @@ namespace SeaBotCore
         public static bool Debug;
         public static int hibernation = 0;
         public static string ServerToken = "";
+        public static Config.Config Config = new Config.Config();
+
+         static Core()
+        {
+            Config.PropertyChanged += Config_PropertyChanged;
+        }
+
+        private static void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+           Configurator.Save();
+        }
 
         public static void StopBot()
         {

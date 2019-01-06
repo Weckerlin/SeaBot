@@ -17,9 +17,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml;
 using SeaBotCore.BotMethods;
+using SeaBotCore.Data.Materials;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.Data
@@ -300,6 +302,28 @@ namespace SeaBotCore.Data
         public List<Upgradeable> Upgradeables { get; set; }
         public List<Building> Buildings { get; set; }
         public int HeartbeatInterval { get; set; }
+
+        public int GetAmountItem(string name)
+        {
+            return GetAmountItem((int)MaterialDB.GetItem(name).DefId);
+        }
+
+        public int GetAmountItem(int id)
+        {
+            if (Inventory == null)
+            {
+                return 0;
+            }
+
+            if (Inventory.Any(n => n.Id == id))
+            {
+                return Inventory.First(n => n.Id == id).Amount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 
     public class Building

@@ -36,6 +36,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
 
@@ -44,7 +45,7 @@ namespace SeaBotGUI
     public partial class Form1 : Form
     {
         public static Thread BotThread;
-        public static Config _config = new Config();
+
         public static TeleConfigData _teleconfig = new TeleConfigData();
 
         public static WTGLib bot;
@@ -89,39 +90,35 @@ namespace SeaBotGUI
 
         public static Form1 instance;
         public DataGridView BuildingGrid => dataGridView1;
-
-        public Form1()
+        public Label CoinsLabel => lbl_coins;
+        public Label FishLabel => lbl_fish;
+        public Label StoneLabel => lbl_stone;
+        public Label GemLabel => lbl_gems;
+        public Label IronLabel => lbl_iron;
+        public Label WoodLabel => lbl_wood;
+        public void LoadControls()
         {
-            // bot = new WTGLib("a");
-            InitializeComponent();
-            instance = this;
-            ConfigSer.Load();
-            TeleConfigSer.Load();
-
-
-            MaximizeBox = false;
-            CheckForUpdates();
-            textBox2.Text = _config.server_token;
-            num_hibernationinterval.Value = Core.hibernation = _config.hibernateinterval;
-            checkBox1.Checked = _config.debug;
-            Core.Debug = _config.debug;
-            chk_autoshipupg.Checked = _config.autoship;
-            chk_onlyfactory.Checked = _config.upgradeonlyfactory;
-            chk_autofish.Checked = _config.collectfish;
-            chk_prodfact.Checked = _config.prodfactory;
-            chk_collectmat.Checked = _config.collectfactory;
-            chk_barrelhack.Checked = _config.barrelhack;
-            chk_finishupgrade.Checked = _config.finishupgrade;
-            chk_aupgrade.Checked = _config.autoupgrade;
+            textBox2.Text = Core.Config.server_token;
+            num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
+            checkBox1.Checked = Core.Config.debug;
+            Core.Debug = Core.Config.debug;
+            chk_autoshipupg.Checked = Core.Config.autoship;
+            chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
+            chk_autofish.Checked = Core.Config.collectfish;
+            chk_prodfact.Checked = Core.Config.prodfactory;
+            chk_collectmat.Checked = Core.Config.collectfactory;
+            chk_barrelhack.Checked = Core.Config.barrelhack;
+            chk_finishupgrade.Checked = Core.Config.finishupgrade;
+            chk_aupgrade.Checked = Core.Config.autoupgrade;
             dataGridView1.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
-            num_ironlimit.Value = _config.ironlimit;
-            num_woodlimit.Value = _config.woodlimit;
-            num_stonelimit.Value = _config.stonelimit;
-            textBox3.Text = _config.telegramtoken;
-            num_barrelinterval.Value = _config.barrelinterval;
+            num_ironlimit.Value = Core.Config.ironlimit;
+            num_woodlimit.Value = Core.Config.woodlimit;
+            num_stonelimit.Value = Core.Config.stonelimit;
+            textBox3.Text = Core.Config.telegramtoken;
+            num_barrelinterval.Value = Core.Config.barrelinterval;
             var mac = GetDefMac();
             lbl_startupcode.Text = mac.Substring(0, mac.Length / 2);
-            if (_config.autoshipprofit)
+            if (Core.Config.autoshipprofit)
             {
                 radio_saveloot.Checked = true;
             }
@@ -129,14 +126,24 @@ namespace SeaBotGUI
             {
                 radio_savesailors.Checked = true;
             }
-
-            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
-            UpdateButtons(_config.autoshiptype);
-            Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             linkLabel1.Links.Add(new LinkLabel.Link
-                {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
+                { LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token" });
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
+            UpdateButtons(Core.Config.autoshiptype);
+        }
+        public Form1()
+        {
+            SeaBotCore.Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
+            // bot = new WTGLib("a");
+            InitializeComponent();
+            instance = this;      
+            TeleConfigSer.Load();
+            MaximizeBox = false;
+            CheckForUpdates();
+            LoadControls();
+            Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+
             //Check for cache
         }
 
@@ -186,120 +193,10 @@ namespace SeaBotGUI
             }
         }
 
-        public static class RichTextBoxExtensions
-        {
-            public static void AppendText(RichTextBox box, string text, Color color)
-            {
-                box.SelectionStart = box.TextLength;
-                box.SelectionLength = 0;
-
-                box.SelectionColor = color;
-                box.AppendText(text);
-                box.SelectionColor = box.ForeColor;
-                box.ScrollToCaret();
-            }
-        }
-
+     
         public void FormateResources(GlobalData data)
         {
-            //Gold: Fish: Iron:
-            //Gems: Wood: Rock:
-
-            if (textBox1.InvokeRequired)
-            {
-                MethodInvoker inv = delegate
-                {
-                    if (data.Inventory != null)
-                    {
-                        var txt = new StringBuilder();
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("coins").DefId) != null)
-                        {
-                            txt.Append(
-                                $"Gold: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("coins").DefId).Amount}");
-                        }
-
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("fish").DefId) != null)
-                        {
-                            txt.Append(
-                                $" Fish: {data.Inventory.First(n => n.Id == (int) MaterialDB.GetItem("fish").DefId).Amount} ");
-                        }
-
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("iron").DefId) != null)
-                        {
-                            txt.Append(
-                                $" Iron: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("iron").DefId).Amount} ");
-                        }
-
-                        txt.Append(Environment.NewLine);
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("gem").DefId) != null)
-                        {
-                            txt.Append(
-                                $" Gems: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("gem").DefId).Amount} ");
-                        }
-
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("wood").DefId) != null)
-                        {
-                            txt.Append(
-                                $" Wood: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("wood").DefId).Amount}");
-                        }
-
-                        if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("stone").DefId) != null)
-                        {
-                            txt.Append(
-                                $" Stone: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("stone").DefId).Amount}");
-                        }
-
-                        textBox1.Text = txt.ToString();
-                    }
-                };
-                textBox1.Invoke(inv);
-            }
-            else
-            {
-                if (data.Inventory != null)
-                {
-                    var txt = new StringBuilder();
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("coins").DefId) != null)
-                    {
-                        txt.Append(
-                            $"Gold: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("coins").DefId).Amount}");
-                    }
-
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("fish").DefId) != null)
-                    {
-                        txt.Append(
-                            $" Fish: {data.Inventory.First(n => n.Id == (int) MaterialDB.GetItem("fish").DefId).Amount} ");
-                    }
-
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("iron").DefId) != null)
-                    {
-                        txt.Append(
-                            $" Iron: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("iron").DefId).Amount} ");
-                    }
-
-                    txt.Append(Environment.NewLine);
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("gem").DefId) != null)
-                    {
-                        txt.Append(
-                            $" Gems: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("gem").DefId).Amount} ");
-                    }
-
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("wood").DefId) != null)
-                    {
-                        txt.Append(
-                            $" Wood: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("wood").DefId).Amount}");
-                    }
-
-                    if (data.Inventory.FirstOrDefault(n => n.Id == MaterialDB.GetItem("stone").DefId) != null)
-                    {
-                        txt.Append(
-                            $" Stone: {data.Inventory.First(n => n.Id == MaterialDB.GetItem("stone").DefId).Amount}");
-                    }
-
-                    textBox1.Text = txt.ToString();
-                }
-            }
-
+            ResourcesBox.Update();
             var a = new List<ListViewItem>();
             foreach (var dataa in data.Inventory.Where(n =>
                 n.Id != 1 && n.Id != 2 &&
@@ -377,7 +274,7 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_config.server_token))
+            if (string.IsNullOrEmpty(Core.Config.server_token))
             {
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
                 return;
@@ -410,110 +307,57 @@ namespace SeaBotGUI
             FormateResources(Core.GlobalData);
         }
 
-        private void BarrelVoid()
-        {
-            while (true)
-            {
-                Thread.Sleep((int) num_barrelinterval.Value * 1000);
-
-                if (chk_barrelhack.Checked)
-                {
-                    BotLoop.BotLoop.CollectBarrel();
-                }
-            }
-        }
-
-        private void BotVoid()
-        {
-            while (true)
-            {
-                if (chk_aupgrade.Checked)
-                {
-                    BotLoop.BotLoop.AutoUpgrade(_config.upgradeonlyfactory);
-                }
-
-                if (chk_autoshipupg.Checked)
-                {
-                    BotLoop.BotLoop.AutoShip(_config.autoshiptype, _config.autoshipprofit);
-                }
-
-                if (chk_autofish.Checked)
-                {
-                    BotLoop.BotLoop.CollectFish();
-                }
-
-
-                if (chk_collectmat.Checked)
-                {
-                    BotLoop.BotLoop.CollectMaterials();
-                }
-
-                if (chk_prodfact.Checked)
-                {
-                    BotLoop.BotLoop.ProduceFactories((int) num_ironlimit.Value, (int) num_stonelimit.Value,
-                        (int) num_woodlimit.Value);
-                }
-
-                if (chk_finishupgrade.Checked)
-                {
-                    BotLoop.BotLoop.FinishUpgrade();
-                }
-
-
-                Thread.Sleep(20 * 1000);
-            }
-        }
-
+     
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            _config.debug = checkBox1.Checked;
+            Core.Config.debug = checkBox1.Checked;
             Core.Debug = checkBox1.Checked;
-            ConfigSer.Save();
+          
         }
 
         private void chk_autofish_CheckedChanged(object sender, EventArgs e)
         {
-            _config.collectfish = chk_autofish.Checked;
-            ConfigSer.Save();
+            Core.Config.collectfish = chk_autofish.Checked;
+          
         }
 
         private void chk_prodfact_CheckedChanged(object sender, EventArgs e)
         {
-            _config.prodfactory = chk_prodfact.Checked;
-            ConfigSer.Save();
+            Core.Config.prodfactory = chk_prodfact.Checked;
+          
         }
 
         private void chk_collectmat_CheckedChanged(object sender, EventArgs e)
         {
-            _config.collectfactory = chk_collectmat.Checked;
-            ConfigSer.Save();
+            Core.Config.collectfactory = chk_collectmat.Checked;
+          
         }
 
 
         private void num_woodlimit_Leave(object sender, EventArgs e)
         {
-            _config.woodlimit = (int) num_woodlimit.Value;
-            ConfigSer.Save();
+            Core.Config.woodlimit = (int) num_woodlimit.Value;
+          
         }
 
 
         private void num_ironlimit_Leave(object sender, EventArgs e)
         {
-            _config.ironlimit = (int) num_ironlimit.Value;
-            ConfigSer.Save();
+            Core.Config.ironlimit = (int) num_ironlimit.Value;
+          
         }
 
         private void num_stonelimit_Leave(object sender, EventArgs e)
         {
-            _config.stonelimit = (int) num_stonelimit.Value;
-            ConfigSer.Save();
+            Core.Config.stonelimit = (int) num_stonelimit.Value;
+          
         }
 
         private void textBox2_Leave_1(object sender, EventArgs e)
         {
-            _config.server_token = textBox2.Text;
-            ConfigSer.Save();
+            Core.Config.server_token = textBox2.Text;
+          
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
@@ -537,9 +381,9 @@ namespace SeaBotGUI
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
-            _config.debug = checkBox1.Checked;
+            Core.Config.debug = checkBox1.Checked;
             Core.Debug = checkBox1.Checked;
-            ConfigSer.Save();
+          
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -555,20 +399,20 @@ namespace SeaBotGUI
 
         private void chk_aupgrade_CheckedChanged(object sender, EventArgs e)
         {
-            _config.autoupgrade = chk_aupgrade.Checked;
-            ConfigSer.Save();
+            Core.Config.autoupgrade = chk_aupgrade.Checked;
+          
         }
 
         private void chk_finishupgrade_CheckedChanged(object sender, EventArgs e)
         {
-            _config.finishupgrade = chk_finishupgrade.Checked;
-            ConfigSer.Save();
+            Core.Config.finishupgrade = chk_finishupgrade.Checked;
+          
         }
 
         private void chk_barrelhack_CheckedChanged(object sender, EventArgs e)
         {
-            _config.barrelhack = chk_barrelhack.Checked;
-            ConfigSer.Save();
+            Core.Config.barrelhack = chk_barrelhack.Checked;
+          
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -589,8 +433,8 @@ namespace SeaBotGUI
 
         private void num_barrelinterval_Leave(object sender, EventArgs e)
         {
-            _config.barrelinterval = (int) num_barrelinterval.Value;
-            ConfigSer.Save();
+            Core.Config.barrelinterval = (int) num_barrelinterval.Value;
+          
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -600,20 +444,20 @@ namespace SeaBotGUI
 
         private void numericUpDown2_Leave(object sender, EventArgs e)
         {
-            Core.hibernation = _config.hibernateinterval = (int) num_hibernationinterval.Value;
-            ConfigSer.Save();
+            Core.hibernation = Core.Config.hibernateinterval = (int) num_hibernationinterval.Value;
+          
         }
 
         private void chk_onlyfactory_CheckedChanged(object sender, EventArgs e)
         {
-            _config.upgradeonlyfactory = chk_onlyfactory.Checked;
-            ConfigSer.Save();
+            Core.Config.upgradeonlyfactory = chk_onlyfactory.Checked;
+          
         }
 
         private void chk_autoshipupg_CheckedChanged(object sender, EventArgs e)
         {
-            _config.autoship = chk_autoshipupg.Checked;
-            ConfigSer.Save();
+            Core.Config.autoship = chk_autoshipupg.Checked;
+          
         }
 
         private void radio_gold_CheckedChanged(object sender, EventArgs e)
@@ -653,32 +497,32 @@ namespace SeaBotGUI
         {
             if (radio_gold.Checked)
             {
-                _config.autoshiptype = "coins";
+                Core.Config.autoshiptype = "coins";
             }
 
             if (radio_iron.Checked)
             {
-                _config.autoshiptype = "iron";
+                Core.Config.autoshiptype = "iron";
             }
 
             if (radio_wood.Checked)
             {
-                _config.autoshiptype = "wood";
+                Core.Config.autoshiptype = "wood";
             }
 
             if (radioButton6.Checked)
             {
                 //fish 
-                _config.autoshiptype = "fish";
+                Core.Config.autoshiptype = "fish";
             }
 
             if (radioButton7.Checked)
             {
                 //stone
-                _config.autoshiptype = "stone";
+                Core.Config.autoshiptype = "stone";
             }
 
-            ConfigSer.Save();
+          
         }
 
         private void radio_iron_CheckedChanged(object sender, EventArgs e)
@@ -706,19 +550,19 @@ namespace SeaBotGUI
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             //saveloot
-            _config.autoshipprofit = radio_saveloot.Checked;
-            ConfigSer.Save();
+            Core.Config.autoshipprofit = radio_saveloot.Checked;
+          
         }
 
         private void textBox3_Leave(object sender, EventArgs e)
         {
-            _config.telegramtoken = textBox3.Text;
-            ConfigSer.Save();
+            Core.Config.telegramtoken = textBox3.Text;
+          
         }
 
         private void button4_Click_2(object sender, EventArgs e)
         {
-            if (_config.telegramtoken == "")
+            if (Core.Config.telegramtoken == "")
             {
                 MessageBox.Show("No telegram token");
             }
@@ -726,7 +570,7 @@ namespace SeaBotGUI
             {
                 try
                 {
-                    bot = new WTGLib(_config.telegramtoken);
+                    bot = new WTGLib(Core.Config.telegramtoken);
                 }
                 catch (Exception exception)
                 {

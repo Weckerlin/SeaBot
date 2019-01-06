@@ -34,7 +34,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -49,6 +49,14 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.lbl_startupcode = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.radio_saveloot = new System.Windows.Forms.RadioButton();
             this.radio_savesailors = new System.Windows.Forms.RadioButton();
@@ -95,21 +103,26 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lbl_startupcode = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.lbl_coins = new System.Windows.Forms.Label();
+            this.lbl_gems = new System.Windows.Forms.Label();
+            this.lbl_fish = new System.Windows.Forms.Label();
+            this.lbl_iron = new System.Windows.Forms.Label();
+            this.lbl_stone = new System.Windows.Forms.Label();
+            this.lbl_wood = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -129,7 +142,11 @@
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
-            this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -172,25 +189,34 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.textBox1);
+            this.groupBox5.Controls.Add(this.lbl_wood);
+            this.groupBox5.Controls.Add(this.lbl_stone);
+            this.groupBox5.Controls.Add(this.lbl_iron);
+            this.groupBox5.Controls.Add(this.lbl_fish);
+            this.groupBox5.Controls.Add(this.lbl_gems);
+            this.groupBox5.Controls.Add(this.lbl_coins);
+            this.groupBox5.Controls.Add(this.pictureBox6);
+            this.groupBox5.Controls.Add(this.pictureBox5);
+            this.groupBox5.Controls.Add(this.pictureBox4);
+            this.groupBox5.Controls.Add(this.pictureBox3);
+            this.groupBox5.Controls.Add(this.pictureBox2);
+            this.groupBox5.Controls.Add(this.pictureBox1);
             this.groupBox5.Location = new System.Drawing.Point(107, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(345, 80);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Resources";
+            this.groupBox5.Text = " Resources";
             // 
-            // textBox1
+            // pictureBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 16);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(339, 61);
-            this.textBox1.TabIndex = 0;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // groupBox4
             // 
@@ -357,6 +383,87 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.button5);
+            this.groupBox13.Controls.Add(this.button4);
+            this.groupBox13.Controls.Add(this.lbl_startupcode);
+            this.groupBox13.Controls.Add(this.label11);
+            this.groupBox13.Controls.Add(this.linkLabel6);
+            this.groupBox13.Controls.Add(this.label10);
+            this.groupBox13.Controls.Add(this.textBox3);
+            this.groupBox13.Location = new System.Drawing.Point(158, 239);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(291, 120);
+            this.groupBox13.TabIndex = 9;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "TelegramBot";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(52, 62);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(39, 23);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "Stop";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 62);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(40, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Start";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_2);
+            // 
+            // lbl_startupcode
+            // 
+            this.lbl_startupcode.AutoSize = true;
+            this.lbl_startupcode.Location = new System.Drawing.Point(74, 93);
+            this.lbl_startupcode.Name = "lbl_startupcode";
+            this.lbl_startupcode.Size = new System.Drawing.Size(41, 13);
+            this.lbl_startupcode.TabIndex = 11;
+            this.lbl_startupcode.Text = "label12";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 93);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(72, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Startup Code:";
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.LinkColor = System.Drawing.Color.Silver;
+            this.linkLabel6.Location = new System.Drawing.Point(209, 19);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(73, 13);
+            this.linkLabel6.TabIndex = 5;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "How to get it?";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 19);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Telegram Bot Token";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(6, 36);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(276, 20);
+            this.textBox3.TabIndex = 8;
+            this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
             // 
             // groupBox12
             // 
@@ -883,86 +990,103 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // textBox3
+            // pictureBox2
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 36);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(276, 20);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
             // 
-            // groupBox13
+            // pictureBox3
             // 
-            this.groupBox13.Controls.Add(this.button5);
-            this.groupBox13.Controls.Add(this.button4);
-            this.groupBox13.Controls.Add(this.lbl_startupcode);
-            this.groupBox13.Controls.Add(this.label11);
-            this.groupBox13.Controls.Add(this.linkLabel6);
-            this.groupBox13.Controls.Add(this.label10);
-            this.groupBox13.Controls.Add(this.textBox3);
-            this.groupBox13.Location = new System.Drawing.Point(158, 239);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(291, 120);
-            this.groupBox13.TabIndex = 9;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "TelegramBot";
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Location = new System.Drawing.Point(114, 19);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
             // 
-            // label10
+            // pictureBox4
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 19);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Telegram Bot Token";
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox4.Location = new System.Drawing.Point(114, 48);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 3;
+            this.pictureBox4.TabStop = false;
             // 
-            // linkLabel6
+            // pictureBox5
             // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.LinkColor = System.Drawing.Color.Silver;
-            this.linkLabel6.Location = new System.Drawing.Point(209, 19);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(73, 13);
-            this.linkLabel6.TabIndex = 5;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "How to get it?";
+            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox5.Location = new System.Drawing.Point(223, 19);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 4;
+            this.pictureBox5.TabStop = false;
             // 
-            // label11
+            // pictureBox6
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 93);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 13);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Startup Code:";
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox6.Location = new System.Drawing.Point(223, 51);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(26, 23);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 5;
+            this.pictureBox6.TabStop = false;
             // 
-            // lbl_startupcode
+            // lbl_coins
             // 
-            this.lbl_startupcode.AutoSize = true;
-            this.lbl_startupcode.Location = new System.Drawing.Point(74, 93);
-            this.lbl_startupcode.Name = "lbl_startupcode";
-            this.lbl_startupcode.Size = new System.Drawing.Size(41, 13);
-            this.lbl_startupcode.TabIndex = 11;
-            this.lbl_startupcode.Text = "label12";
+            this.lbl_coins.AutoSize = true;
+            this.lbl_coins.Location = new System.Drawing.Point(38, 24);
+            this.lbl_coins.Name = "lbl_coins";
+            this.lbl_coins.Size = new System.Drawing.Size(0, 13);
+            this.lbl_coins.TabIndex = 6;
             // 
-            // button4
+            // lbl_gems
             // 
-            this.button4.Location = new System.Drawing.Point(6, 62);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(40, 23);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Start";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_2);
+            this.lbl_gems.AutoSize = true;
+            this.lbl_gems.Location = new System.Drawing.Point(39, 51);
+            this.lbl_gems.Name = "lbl_gems";
+            this.lbl_gems.Size = new System.Drawing.Size(0, 13);
+            this.lbl_gems.TabIndex = 7;
             // 
-            // button5
+            // lbl_fish
             // 
-            this.button5.Location = new System.Drawing.Point(52, 62);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(39, 23);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "Stop";
-            this.button5.UseVisualStyleBackColor = true;
+            this.lbl_fish.AutoSize = true;
+            this.lbl_fish.Location = new System.Drawing.Point(147, 24);
+            this.lbl_fish.Name = "lbl_fish";
+            this.lbl_fish.Size = new System.Drawing.Size(0, 13);
+            this.lbl_fish.TabIndex = 8;
+            // 
+            // lbl_iron
+            // 
+            this.lbl_iron.AutoSize = true;
+            this.lbl_iron.Location = new System.Drawing.Point(146, 53);
+            this.lbl_iron.Name = "lbl_iron";
+            this.lbl_iron.Size = new System.Drawing.Size(0, 13);
+            this.lbl_iron.TabIndex = 9;
+            // 
+            // lbl_stone
+            // 
+            this.lbl_stone.AutoSize = true;
+            this.lbl_stone.Location = new System.Drawing.Point(256, 24);
+            this.lbl_stone.Name = "lbl_stone";
+            this.lbl_stone.Size = new System.Drawing.Size(0, 13);
+            this.lbl_stone.TabIndex = 10;
+            // 
+            // lbl_wood
+            // 
+            this.lbl_wood.AutoSize = true;
+            this.lbl_wood.Location = new System.Drawing.Point(256, 53);
+            this.lbl_wood.Name = "lbl_wood";
+            this.lbl_wood.Size = new System.Drawing.Size(0, 13);
+            this.lbl_wood.TabIndex = 11;
             // 
             // Form1
             // 
@@ -980,12 +1104,15 @@
             this.tabPage1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.groupBox11.ResumeLayout(false);
@@ -1013,8 +1140,11 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1043,7 +1173,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -1094,6 +1223,18 @@
         private System.Windows.Forms.LinkLabel linkLabel6;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbl_wood;
+        private System.Windows.Forms.Label lbl_stone;
+        private System.Windows.Forms.Label lbl_iron;
+        private System.Windows.Forms.Label lbl_fish;
+        private System.Windows.Forms.Label lbl_gems;
+        private System.Windows.Forms.Label lbl_coins;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

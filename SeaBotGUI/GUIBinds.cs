@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -30,6 +31,81 @@ using Task = System.Threading.Tasks.Task;
 
 namespace SeaBotGUI.GUIBinds
 {
+    public static class RichTextBoxExtensions
+    {
+        public static void AppendText(RichTextBox box, string text, Color color)
+        {
+            box.SelectionStart = box.TextLength;
+            box.SelectionLength = 0;
+            box.SelectionColor = color;
+            box.AppendText(text);
+            box.SelectionColor = box.ForeColor;
+            box.ScrollToCaret();
+        }
+    }
+
+    public static class ResourcesBox
+    {
+      public static void Update()
+        {
+            var coins = Core.GlobalData.GetAmountItem("coins");
+            if (Form1.instance.CoinsLabel.InvokeRequired)
+            {
+                Form1.instance.CoinsLabel.Invoke(new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.CoinsLabel.Text = coins.ToString();
+            }
+            var fish = Core.GlobalData.GetAmountItem("fish");
+            if (Form1.instance.FishLabel.InvokeRequired)
+            {
+                Form1.instance.FishLabel.Invoke(new Action(() => { Form1.instance.FishLabel.Text = fish.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.FishLabel.Text = fish.ToString();
+            }
+
+            var iron = Core.GlobalData.GetAmountItem("iron");
+            if (Form1.instance.IronLabel.InvokeRequired)
+            {
+                Form1.instance.IronLabel.Invoke(new Action(() => { Form1.instance.IronLabel.Text = iron.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.IronLabel.Text = iron.ToString();
+            }
+            var gem = Core.GlobalData.GetAmountItem("gem");
+            if (Form1.instance.GemLabel.InvokeRequired)
+            {
+                Form1.instance.GemLabel.Invoke(new Action(() => { Form1.instance.GemLabel.Text = gem.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.GemLabel.Text = gem.ToString();
+            }
+            var wood = Core.GlobalData.GetAmountItem("wood");
+            if (Form1.instance.WoodLabel.InvokeRequired)
+            {
+                Form1.instance.WoodLabel.Invoke(new Action(() => { Form1.instance.WoodLabel.Text = wood.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.WoodLabel.Text = wood.ToString();
+            }
+            var stone = Core.GlobalData.GetAmountItem("stone");
+            if (Form1.instance.StoneLabel.InvokeRequired)
+            {
+                Form1.instance.StoneLabel.Invoke(new Action(() => { Form1.instance.StoneLabel.Text = stone.ToString(); }));
+            }
+            else
+            {
+                Form1.instance.StoneLabel.Text = stone.ToString();
+            }
+        }
+
+    }
     public static class BuildingGrid
     {
         public static Thread BuildingThread;
