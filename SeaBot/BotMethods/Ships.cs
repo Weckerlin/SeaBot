@@ -124,7 +124,7 @@ namespace SeaBotCore.BotMethods
         }
     }
 
-    public static class AutoShipUtils
+    static class AutoShipUtils
     {
         public static ShipDefenitions.Item GetShipDefId(Ship ship)
         {

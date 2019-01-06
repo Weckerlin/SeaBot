@@ -18,6 +18,7 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBotCore;
+using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Utils;
@@ -30,9 +31,9 @@ namespace SeaTests
         [TestMethod]
         public void PseudoRandomBarrel()
         {
-            BarrelController._lastBarrelSeed = 1147034909;
+            Barrels.BarrelController._lastBarrelSeed = 1147034909;
             Core.GlobalData = new GlobalData {Level = 49};
-            var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
+            var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                 .Where(n => n.DefId == 21).First());
             Assert.AreEqual(1, bar.Definition.Id);
             Assert.AreEqual(70, bar.Amount);

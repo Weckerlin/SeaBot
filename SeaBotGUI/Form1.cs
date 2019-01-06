@@ -98,6 +98,7 @@ namespace SeaBotGUI
         public Label WoodLabel => lbl_wood;
         public void LoadControls()
         {
+           
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -154,19 +155,8 @@ namespace SeaBotGUI
             {
                 if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
                 {
-                    Networking._syncThread.Abort();
-                    ThreadKill.KillTheThread(BotThread);
-                    ThreadKill.KillTheThread(BarrelThread);
-                    Core.GlobalData = null;
-                    Networking.Login();
-                    BarrelThread = new Thread(BarrelVoid) {IsBackground = true};
-                    BarrelThread.Start();
-                    Networking.StartThread();
-                    BotThread = new Thread(BotVoid)
-                    {
-                        IsBackground = true
-                    };
-                    BotThread.Start();
+                   Core.StopBot();
+                   Core.StartBot();
                 }
             }).Start();
         }
@@ -279,27 +269,13 @@ namespace SeaBotGUI
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
                 return;
             }
-
-            if (!Directory.Exists("cache"))
-            {
-                Cache.DownloadCache();
-            }
-
             button3.Enabled = true;
             button2.Enabled = false;
-            Core.ServerToken = textBox2.Text;
-
-            Networking.Login();
+            Core.StartBot();
             FormateResources(Core.GlobalData);
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
-            Networking.StartThread();
-            BotThread = new Thread(BotVoid)
-            {
-                IsBackground = true
-            };
-            BotThread.Start();
-            var a = Defenitions.BuildingDef;
+
         }
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
@@ -360,10 +336,6 @@ namespace SeaBotGUI
           
         }
 
-        private void richTextBox2_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             Core.StopBot();
@@ -384,17 +356,6 @@ namespace SeaBotGUI
             Core.Config.debug = checkBox1.Checked;
             Core.Debug = checkBox1.Checked;
           
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-            //  var seed = textBox3.Text;
-            // BarrelController.SetSeed(Convert.ToDouble(seed));
-            // BarrelController.GetNextBarrel()
         }
 
         private void chk_aupgrade_CheckedChanged(object sender, EventArgs e)

@@ -17,9 +17,9 @@ namespace SeaBotCore.Config
         public int woodlimit = 0;
         public int ironlimit = 0;
         public int stonelimit = 0;
-        public bool collectfish = false; //done
-        public bool prodfactory = false; //done
-        public bool collectfactory = false; //done
+        public bool collectfish = false;
+        public bool prodfactory = false; 
+        public bool collectfactory = false; 
         public bool autoupgrade = false;
         public bool autoship = false;
         public bool finishupgrade = false;
@@ -28,14 +28,10 @@ namespace SeaBotCore.Config
         public int barrelinterval = 22;
         public int hibernateinterval = 5;
         public string telegramtoken = "";
-        // autoship shit
         public string autoshiptype = "coins";
-        public bool autoshipprofit = !true;
+        public bool autoshipprofit = false;
 
-        public Config()
-        {
-            Configurator.Load();
-        }
+        
     }
 
     class Configurator

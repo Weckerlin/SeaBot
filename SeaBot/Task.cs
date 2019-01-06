@@ -25,6 +25,8 @@ namespace SeaBotCore
 {
     public class Task
     {
+     
+
         public interface IGameTask
         {
             string Action { get; }

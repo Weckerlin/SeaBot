@@ -1,0 +1,128 @@
+﻿// SeaBotCore
+// Copyright (C) 2018 - 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using SeaBotCore.Data;
+using SeaBotCore.Utils;
+using System.Net.Http;
+using System.Threading;
+using SeaBotCore.BotMethods;
+using SeaBotCore.Config;
+
+namespace SeaBotCore
+{
+    public static class Core
+    {
+        private static readonly HttpClient Client = new HttpClient();
+        public static string Ssid = "";
+        public static GlobalData GlobalData = new GlobalData();
+        public static bool Debug;
+        public static int hibernation = 0;
+        public static string ServerToken = "";
+        public static Config.Config Config = new Config.Config();
+        public static Thread BotThread;
+         static Core()
+        {
+            Configurator.Load();
+            Config.PropertyChanged += Config_PropertyChanged;
+        }
+
+        private static void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+           Configurator.Save();
+        }
+
+        public static void StopBot()
+        {
+
+            new System.Threading.Tasks.Task(() =>
+            {
+                ThreadKill.KillTheThread(Networking._syncThread);
+                ThreadKill.KillTheThread(BotThread);
+            }).Start();
+        }
+
+        public static void StartBot()
+        {
+
+            if (Config.server_token == "")
+            {
+                Logger.Logger.Fatal("No server_token");
+                return;
+            }
+
+            new System.Threading.Tasks.Task(() =>
+            {
+            Networking.Login();
+            Networking.StartThread();
+            BotThread = new Thread(BotVoid)
+            {
+                IsBackground = true
+            };
+            BotThread.Start();
+            }).Start();
+        }
+        private static DateTime _lastbarrel = DateTime.Now;
+        private static DateTime _lastdefinv = DateTime.Now;
+        private static void BotVoid()
+        {
+            if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
+            {
+                if (Config.autoupgrade)
+                {
+                   Buildings.AutoUpgrade(Config.upgradeonlyfactory);
+                }
+
+                if (Config.autoship)
+                {
+                   Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
+                }
+
+                if (Config.collectfish)
+                {
+                   FishPier.CollectFish();
+                }
+
+
+                if (Config.collectfactory)
+                {
+                    Buildings.CollectMaterials();
+                }
+
+                if (Config.prodfactory)
+                {
+                    Factories.ProduceFactories(Config.ironlimit, Config.stonelimit,
+                        Config.woodlimit);
+                }
+
+                if (Config.finishupgrade)
+                {
+                    Buildings.FinishUpgrade();
+                }
+
+                _lastdefinv = DateTime.Now;;
+            }
+
+            if (Config.barrelhack && (DateTime.Now - _lastbarrel).TotalSeconds >= Config.barrelinterval)
+            {
+                Barrels.CollectBarrel();
+                _lastbarrel=DateTime.Now;
+            }
+
+
+        }
+    }
+}

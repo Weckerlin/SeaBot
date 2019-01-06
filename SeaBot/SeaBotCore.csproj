@@ -81,7 +81,7 @@
     <Compile Include="Events\Events.cs" />
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Networking.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="Utils\FullObserv.cs" />
