@@ -57,8 +57,9 @@ namespace SeaBotCore
 
             new System.Threading.Tasks.Task(() =>
             {
-                ThreadKill.KillTheThread(Networking._syncThread);
+                ThreadKill.KillTheThread(Networking._syncThread); // todo fix
                 ThreadKill.KillTheThread(BotThread);
+                Logger.Logger.Info("Bot stop");
             }).Start();
         }
 
@@ -83,7 +84,7 @@ namespace SeaBotCore
             }).Start();
         }
         private static DateTime _lastbarrel = DateTime.Now;
-        private static DateTime _lastdefinv = DateTime.Now;
+        private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             new System.Threading.Tasks.Task(() =>
@@ -102,7 +103,7 @@ namespace SeaBotCore
             while (true)
             {
 
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {
                     if (Config.autoupgrade)

@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +25,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
+using Newtonsoft.Json;
 using SeaBotCore.Data;
 using SeaBotCore.Utils;
 
@@ -51,6 +53,8 @@ namespace SeaBotCore
             _syncThread.Start();
         }
 
+        public static string cache1 = "";
+        public static string cache2 = "";
         private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             System.Threading.Tasks.Task.Run(() =>
@@ -63,6 +67,10 @@ namespace SeaBotCore
                    
                     if (Core.IsBotRunning)
                     {
+                        if (Core.Config.debug)
+                        {
+                            File.WriteAllText("beforecrash.json",JsonConvert.SerializeObject(Core.GlobalData));
+                        }
                         _syncThread.Abort();
                         Logger.Logger.Muted = true;
                         Thread.Sleep(Core.hibernation * 1000 * 60);
@@ -70,6 +78,10 @@ namespace SeaBotCore
                         Logger.Logger.Info("Mwaaah, waking up after hibernation");
                         StartThread();
                         Login();
+                        if (Core.Config.debug)
+                        {
+                            File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                        }
                     }
                    
                 }

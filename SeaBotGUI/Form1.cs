@@ -55,6 +55,7 @@ namespace SeaBotGUI
 
         public static Form1 instance;
         public DataGridView BuildingGrid => dataGridView1;
+        public DataGridView ShipGrid => dataGridView2;
         public Label CoinsLabel => lbl_coins;
         public Label FishLabel => lbl_fish;
         public Label StoneLabel => lbl_stone;
@@ -77,6 +78,7 @@ namespace SeaBotGUI
             chk_finishupgrade.Checked = Core.Config.finishupgrade;
             chk_aupgrade.Checked = Core.Config.autoupgrade;
             dataGridView1.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
+            dataGridView2.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
             num_ironlimit.Value = Core.Config.ironlimit;
             num_woodlimit.Value = Core.Config.woodlimit;
             num_stonelimit.Value = Core.Config.stonelimit;
@@ -102,8 +104,9 @@ namespace SeaBotGUI
 
         void OnLogined()
         {
-            FormateResources(Core.GlobalData);
+            FormatResources(Core.GlobalData);
             GUIBinds.BuildingGrid.Start();
+            GUIBinds.ShipGrid.Start();
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
         }
@@ -127,7 +130,7 @@ namespace SeaBotGUI
         private void Inventory_CollectionChanged(object sender,
             NotifyCollectionChangedEventArgs e)
         {
-            FormateResources(Core.GlobalData);
+            FormatResources(Core.GlobalData);
         }
 
         private void LogMessageChat_OnLogMessage(Logger.Message e)
@@ -147,7 +150,7 @@ namespace SeaBotGUI
         }
 
      
-        public void FormateResources(GlobalData data)
+        public void FormatResources(GlobalData data)
         {
             if (data.Inventory == null)
             { return;}
@@ -243,7 +246,7 @@ namespace SeaBotGUI
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
         {
-            FormateResources(Core.GlobalData);
+            FormatResources(Core.GlobalData);
         }
 
      
@@ -301,6 +304,8 @@ namespace SeaBotGUI
 
         private void button3_Click(object sender, EventArgs e)
         {
+            button2.Enabled = true;
+            button3.Enabled = false;
             Core.StopBot();
         }
 
