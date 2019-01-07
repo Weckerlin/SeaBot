@@ -25,6 +25,7 @@ using SeaBotGUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -44,12 +45,9 @@ namespace SeaBotGUI
 {
     public partial class Form1 : Form
     {
-
-
         public static TeleConfigData _teleconfig = new TeleConfigData();
 
         public static bool TeleBotStarted;
-
 
 
         public static Form1 instance;
@@ -61,10 +59,9 @@ namespace SeaBotGUI
         public Label GemLabel => lbl_gems;
         public Label IronLabel => lbl_iron;
         public Label WoodLabel => lbl_wood;
+
         public void LoadControls()
         {
-
-
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -94,67 +91,55 @@ namespace SeaBotGUI
             {
                 radio_savesailors.Checked = true;
             }
+
             linkLabel1.Links.Add(new LinkLabel.Link
-            { LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token" });
+                {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
-            SeaBotCore.Core.Config.PropertyChanged += Config_PropertyChanged;
+            Core.Config.PropertyChanged += Config_PropertyChanged;
         }
 
-        private void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
-            Form1.instance.Invoke(new Action(() =>
+            instance.Invoke(new Action(() =>
             {
                 if (e.PropertyName == "woodlimit")
                 {
-
                     num_woodlimit.Value = Core.Config.woodlimit;
-
                 }
 
                 if (e.PropertyName == "ironlimit")
                 {
-
                     num_ironlimit.Value = Core.Config.ironlimit;
-
                 }
 
 
                 if (e.PropertyName == "stonelimit")
                 {
-
                     num_stonelimit.Value = Core.Config.stonelimit;
-
                 }
 
                 if (e.PropertyName == "collectfish")
                 {
-
                     chk_autofish.Checked = Core.Config.collectfish;
-
                 }
 
                 if (e.PropertyName == "prodfactory")
                 {
-
                     chk_prodfact.Checked = Core.Config.prodfactory;
                 }
 
                 if (e.PropertyName == "collectfactory")
                 {
-
                     chk_collectmat.Checked = Core.Config.collectfactory;
-
                 }
 
                 if (e.PropertyName == "autoupgrade")
                 {
-
                     chk_aupgrade.Checked = Core.Config.autoupgrade;
-
                 }
 
                 if (e.PropertyName == "autoship")
@@ -194,20 +179,15 @@ namespace SeaBotGUI
 
                 if (e.PropertyName == "autoshipprofit")
                 {
-
                     if (Core.Config.autoshipprofit)
                     {
-
                         radio_saveloot.Checked = true;
                     }
                     else
                     {
-
                         radio_savesailors.Checked = true;
                     }
-
                 }
-
             }));
         }
 
@@ -219,9 +199,9 @@ namespace SeaBotGUI
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
         }
+
         public Form1()
         {
-
             // bot = new WTGLib("a");
             InitializeComponent();
             instance = this;
@@ -233,7 +213,6 @@ namespace SeaBotGUI
 
             //Check for cache
         }
-
 
 
         private void Inventory_CollectionChanged(object sender,
@@ -262,7 +241,10 @@ namespace SeaBotGUI
         public void FormatResources(GlobalData data)
         {
             if (data.Inventory == null)
-            { return; }
+            {
+                return;
+            }
+
             ResourcesBox.Update();
             var a = new List<ListViewItem>();
             foreach (var dataa in data.Inventory.Where(n =>
@@ -270,7 +252,7 @@ namespace SeaBotGUI
                 n.Id != 3 && n.Id != 4 &&
                 n.Id != 5 && n.Id != 6))
             {
-                string[] row = { MaterialDB.GetItem(dataa.Id).Name, dataa.Amount.ToString() };
+                string[] row = {MaterialDB.GetItem(dataa.Id).Name, dataa.Amount.ToString()};
                 a.Add(new ListViewItem(row));
             }
 
@@ -346,11 +328,10 @@ namespace SeaBotGUI
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
                 return;
             }
+
             button3.Enabled = true;
             button2.Enabled = false;
             Core.StartBot();
-
-
         }
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
@@ -359,56 +340,47 @@ namespace SeaBotGUI
         }
 
 
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.debug = checkBox1.Checked;
             Core.Debug = checkBox1.Checked;
-
         }
 
         private void chk_autofish_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.collectfish = chk_autofish.Checked;
-
         }
 
         private void chk_prodfact_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.prodfactory = chk_prodfact.Checked;
-
         }
 
         private void chk_collectmat_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.collectfactory = chk_collectmat.Checked;
-
         }
 
 
         private void num_woodlimit_Leave(object sender, EventArgs e)
         {
-            Core.Config.woodlimit = (int)num_woodlimit.Value;
-
+            Core.Config.woodlimit = (int) num_woodlimit.Value;
         }
 
 
         private void num_ironlimit_Leave(object sender, EventArgs e)
         {
-            Core.Config.ironlimit = (int)num_ironlimit.Value;
-
+            Core.Config.ironlimit = (int) num_ironlimit.Value;
         }
 
         private void num_stonelimit_Leave(object sender, EventArgs e)
         {
-            Core.Config.stonelimit = (int)num_stonelimit.Value;
-
+            Core.Config.stonelimit = (int) num_stonelimit.Value;
         }
 
         private void textBox2_Leave_1(object sender, EventArgs e)
         {
             Core.Config.server_token = textBox2.Text;
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -432,25 +404,21 @@ namespace SeaBotGUI
         {
             Core.Config.debug = checkBox1.Checked;
             Core.Debug = checkBox1.Checked;
-
         }
 
         private void chk_aupgrade_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.autoupgrade = chk_aupgrade.Checked;
-
         }
 
         private void chk_finishupgrade_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.finishupgrade = chk_finishupgrade.Checked;
-
         }
 
         private void chk_barrelhack_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.barrelhack = chk_barrelhack.Checked;
-
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -471,8 +439,7 @@ namespace SeaBotGUI
 
         private void num_barrelinterval_Leave(object sender, EventArgs e)
         {
-            Core.Config.barrelinterval = (int)num_barrelinterval.Value;
-
+            Core.Config.barrelinterval = (int) num_barrelinterval.Value;
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -482,20 +449,17 @@ namespace SeaBotGUI
 
         private void numericUpDown2_Leave(object sender, EventArgs e)
         {
-            Core.hibernation = Core.Config.hibernateinterval = (int)num_hibernationinterval.Value;
-
+            Core.hibernation = Core.Config.hibernateinterval = (int) num_hibernationinterval.Value;
         }
 
         private void chk_onlyfactory_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.upgradeonlyfactory = chk_onlyfactory.Checked;
-
         }
 
         private void chk_autoshipupg_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.autoship = chk_autoshipupg.Checked;
-
         }
 
         private void radio_gold_CheckedChanged(object sender, EventArgs e)
@@ -559,8 +523,6 @@ namespace SeaBotGUI
                 //stone
                 Core.Config.autoshiptype = "stone";
             }
-
-
         }
 
         private void radio_iron_CheckedChanged(object sender, EventArgs e)
@@ -589,13 +551,11 @@ namespace SeaBotGUI
         {
             //saveloot
             Core.Config.autoshipprofit = radio_saveloot.Checked;
-
         }
 
         private void textBox3_Leave(object sender, EventArgs e)
         {
             Core.Config.telegramtoken = textBox3.Text;
-
         }
 
         private void button4_Click_2(object sender, EventArgs e)
@@ -629,23 +589,22 @@ namespace SeaBotGUI
             {
                 var picked = listView1.SelectedItems[0].SubItems[0].Text;
                 var wehave = Core.GlobalData.GetAmountItem(picked);
-                if (wehave != 0 && wehave >= (int)much)
+                if (wehave != 0 && wehave >= (int) much)
                 {
-
                     var item = MaterialDB.GetItem(picked);
                     Logger.Info($"Removed {much} {item.Name}'s");
-                    Networking.AddTask(new SeaBotCore.Task.RemoveMaterialTask(item.DefId.ToString(), ((int)much).ToString()));
-                    SeaBotCore.Core.GlobalData.Inventory.Where(n => n.Id == item.DefId).First().Amount -=
-                        (int)much;
-
+                    Networking.AddTask(
+                        new SeaBotCore.Task.RemoveMaterialTask(item.DefId.ToString(), ((int) much).ToString()));
+                    Core.GlobalData.Inventory.Where(n => n.Id == item.DefId).First().Amount -=
+                        (int) much;
                 }
-
             }
         }
 
         private void btn_dumpcore_Click(object sender, EventArgs e)
         {
-            File.WriteAllText(DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + "DUMP.json", JsonConvert.SerializeObject(Core.GlobalData));
+            File.WriteAllText(DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + "DUMP.json",
+                JsonConvert.SerializeObject(Core.GlobalData));
         }
 
         private void button5_Click(object sender, EventArgs e)

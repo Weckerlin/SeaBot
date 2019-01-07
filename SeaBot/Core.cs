@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using SeaBotCore.Data;
 using SeaBotCore.Utils;
 using System.Net.Http;
@@ -34,37 +35,35 @@ namespace SeaBotCore
         public static string ServerToken = "";
         public static Config.Config Config = new Config.Config();
         public static Thread BotThread;
-         static Core()
+
+        static Core()
         {
             Configurator.Load();
             Config.PropertyChanged += Config_PropertyChanged;
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
         }
 
-         public static bool IsBotRunning
-         {
-             get
-             {
-                 if (BotThread != null)
-                 {
-                     return BotThread.IsAlive;
-                 }
-                 else
-                 {
-                     return false;
-                 }
-             }
-         }
-
-
-         private static void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        public static bool IsBotRunning
         {
-           Configurator.Save();
+            get
+            {
+                if (BotThread != null)
+                {
+                    return BotThread.IsAlive;
+                }
+
+                return false;
+            }
+        }
+
+
+        private static void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Configurator.Save();
         }
 
         public static void StopBot()
         {
-
             new System.Threading.Tasks.Task(() =>
             {
                 ThreadKill.KillTheThread(Networking._syncThread); // todo fix
@@ -75,7 +74,6 @@ namespace SeaBotCore
 
         public static void StartBot()
         {
-
             if (Config.server_token == "")
             {
                 Logger.Logger.Fatal("No server_token");
@@ -84,26 +82,28 @@ namespace SeaBotCore
 
             new System.Threading.Tasks.Task(() =>
             {
-            Networking.Login();
-            Networking.StartThread();
-            BotThread = new Thread(BotVoid)
-            {
-                IsBackground = true
-            };
-            BotThread.Start();
+                Networking.Login();
+                Networking.StartThread();
+                BotThread = new Thread(BotVoid)
+                {
+                    IsBackground = true
+                };
+                BotThread.Start();
             }).Start();
         }
+
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
+
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             new System.Threading.Tasks.Task(() =>
             {
-                if ((int)e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
                 {
                     Logger.Logger.Info("Restarting bot");
-                    Core.StopBot();
-                    Core.StartBot();
+                    StopBot();
+                    StartBot();
                 }
             }).Start();
         }
@@ -112,7 +112,6 @@ namespace SeaBotCore
         {
             while (true)
             {
-
                 Thread.Sleep(100);
                 if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {
@@ -158,10 +157,7 @@ namespace SeaBotCore
                     Barrels.CollectBarrel();
                     _lastbarrel = DateTime.Now;
                 }
-
             }
-
-
         }
     }
 }

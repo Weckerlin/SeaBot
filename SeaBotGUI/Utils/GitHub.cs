@@ -25,7 +25,6 @@ using N = Newtonsoft.Json.NullValueHandling;
 
 namespace SeaBotGUI.Utils
 {
-   
     class GitHub_Data
     {
         public class Root

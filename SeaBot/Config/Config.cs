@@ -1,4 +1,20 @@
-﻿using System;
+﻿// SeaBotCore
+// Copyright (C) 2018 - 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -12,23 +28,23 @@ namespace SeaBotCore.Config
     public class Config : INotifyPropertyChanged
     {
         private string _serverToken = "";
-        private bool _debug = false;
-        private int _woodlimit = 0;
-        private int _ironlimit = 0;
-        private int _stonelimit = 0;
-        private bool _collectfish = false;
-        private bool _prodfactory = false;
-        private bool _collectfactory = false;
-        private bool _autoupgrade = false;
-        private bool _autoship = false;
-        private bool _finishupgrade = false;
-        private bool _barrelhack = false;
-        private bool _upgradeonlyfactory = false;
+        private bool _debug;
+        private int _woodlimit;
+        private int _ironlimit;
+        private int _stonelimit;
+        private bool _collectfish;
+        private bool _prodfactory;
+        private bool _collectfactory;
+        private bool _autoupgrade;
+        private bool _autoship;
+        private bool _finishupgrade;
+        private bool _barrelhack;
+        private bool _upgradeonlyfactory;
         private int _barrelinterval = 22;
         private int _hibernateinterval = 5;
         private string _telegramtoken = "";
         private string _autoshiptype = "coins";
-        private bool _autoshipprofit = false;
+        private bool _autoshipprofit;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string server_token
@@ -36,7 +52,7 @@ namespace SeaBotCore.Config
             get => _serverToken;
             set
             {
-                _serverToken = value; 
+                _serverToken = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("server_token"));
             }
         } //done
@@ -126,7 +142,11 @@ namespace SeaBotCore.Config
         public bool autoship
         {
             get => _autoship;
-            set { _autoship = value; OnPropertyChanged(new PropertyChangedEventArgs("autoship")); }
+            set
+            {
+                _autoship = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("autoship"));
+            }
         }
 
         public bool finishupgrade
@@ -153,9 +173,9 @@ namespace SeaBotCore.Config
         {
             get => _upgradeonlyfactory;
             set
-            { 
-            _upgradeonlyfactory = value;
-            OnPropertyChanged(new PropertyChangedEventArgs("upgradeonlyfactory"));
+            {
+                _upgradeonlyfactory = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("upgradeonlyfactory"));
             }
         }
 
@@ -176,7 +196,6 @@ namespace SeaBotCore.Config
             {
                 _hibernateinterval = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("hibernateinterval"));
-
             }
         }
 
@@ -214,7 +233,6 @@ namespace SeaBotCore.Config
         {
             PropertyChanged?.Invoke(this, eventArgs);
         }
-
     }
 
     class Configurator
@@ -233,7 +251,6 @@ namespace SeaBotCore.Config
                 var ser = new JavaScriptSerializer();
                 Core.Config = ser.Deserialize<Config>(File.ReadAllText("config.json"));
             }
-
         }
     }
 }

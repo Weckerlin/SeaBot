@@ -111,7 +111,6 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.StoneLabel.Text = stone.ToString();
             }
         }
-
     }
 
     public static class BuildingGrid
@@ -145,7 +144,6 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-
                     if (Form1.instance.WindowState == FormWindowState.Minimized)
                     {
                         continue;
@@ -322,7 +320,6 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-
                     if (Form1.instance.WindowState == FormWindowState.Minimized)
                     {
                         continue;
@@ -346,7 +343,7 @@ namespace SeaBotGUI.GUIBinds
                                         .FirstOrDefault() == null)
                                 {
                                     var bld2 = bld;
-                                   
+
                                     ShipBinding.Ships.Add(bld2);
                                 }
                                 else
@@ -362,7 +359,6 @@ namespace SeaBotGUI.GUIBinds
                                         old.Route = bld.Route;
                                     }
 
-                                  
 
                                     //edit
                                 }
@@ -395,7 +391,7 @@ namespace SeaBotGUI.GUIBinds
                     return ret;
                 }
 
-                foreach (var ship in Core.GlobalData.Ships.Where(n=>n.Activated!=0))
+                foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
                 {
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
@@ -410,14 +406,12 @@ namespace SeaBotGUI.GUIBinds
                         Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
                         var willatportattime = ship.Sent + lvl.TravelTime;
                         //lol xD 
-                        if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds> 0)
+                        if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
                         {
                             willatportat = "--:--:--";
                         }
                         else
                         {
-
-
                             willatportat =
                                 (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
                                 .ToString(@"hh\:mm\:ss");
@@ -430,7 +424,6 @@ namespace SeaBotGUI.GUIBinds
 
                 return ret;
             }
-
         }
     }
 }

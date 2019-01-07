@@ -25,8 +25,6 @@ namespace SeaBotCore
 {
     public class Task
     {
-     
-
         public interface IGameTask
         {
             string Action { get; }
@@ -704,11 +702,11 @@ namespace SeaBotCore
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
             private readonly uint _time;
 
-            public RemoveMaterialTask(string def_id,string amount)
+            public RemoveMaterialTask(string def_id, string amount)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
-                CustomObjects.Add("amount",amount);
+                CustomObjects.Add("amount", amount);
             }
         }
 
@@ -721,11 +719,12 @@ namespace SeaBotCore
 
             public ConfirmUpgradableTask(string def_id, string player_lvl)
             {
-                _time = (uint)TimeUtils.GetEpochTime();
+                _time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("player_lvl", player_lvl);
             }
         }
+
         public class HeartBeat : IGameTask
         {
             public string Action => "heartbeat";

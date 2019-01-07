@@ -55,6 +55,7 @@ namespace SeaBotCore
 
         public static string cache1 = "";
         public static string cache2 = "";
+
         private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             System.Threading.Tasks.Task.Run(() =>
@@ -63,14 +64,15 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Info(
                         $"Someone is playing this game right now, waiting for {Core.hibernation} minutes");
-                  
-                   
+
+
                     if (Core.IsBotRunning)
                     {
                         if (Core.Config.debug)
                         {
-                            File.WriteAllText("beforecrash.json",JsonConvert.SerializeObject(Core.GlobalData));
+                            File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
                         }
+
                         _syncThread.Abort();
                         Logger.Logger.Muted = true;
                         Thread.Sleep(Core.hibernation * 1000 * 60);
@@ -83,7 +85,6 @@ namespace SeaBotCore
                             File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
                         }
                     }
-                   
                 }
             });
         }
@@ -221,7 +222,6 @@ namespace SeaBotCore
                 }
                 else
                 {
-                    
                     Logger.Logger.Fatal("CANT LOGIN!");
                     return;
                 }
@@ -233,7 +233,7 @@ namespace SeaBotCore
                 {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
-           
+
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
             Events.Events.LoginedEvent.Logined.Invoke();
         }

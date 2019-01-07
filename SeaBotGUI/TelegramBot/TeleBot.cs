@@ -34,6 +34,7 @@ namespace SeaBotGUI.TelegramBot
         public int userid;
         public int MenuID;
     }
+
     public static class TelegramBotController
     {
         public static TelegramBot bot;
@@ -54,11 +55,13 @@ namespace SeaBotGUI.TelegramBot
         {
             bot?.botClient.StopReceiving();
         }
+
         public static void SendMessage(Message msg, string message)
         {
             bot.botClient.SendTextMessageAsync(msg.From.Id, message);
         }
     }
+
     public class TelegramBot
     {
         public TelegramBot(string apikey)
@@ -79,7 +82,7 @@ namespace SeaBotGUI.TelegramBot
                 var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
                 if (reg.Success)
                 {
-                   TelegramBotController.SendMessage(e.Message,
+                    TelegramBotController.SendMessage(e.Message,
                         "Hello! Please enter Startup Code from settings.");
                 }
                 else
@@ -225,8 +228,8 @@ namespace SeaBotGUI.TelegramBot
                             newinst.OnEnter();
                             return;
                         }
-                        await Task.Run(a.act);
 
+                        await Task.Run(a.act);
                     }
                 }
                 else
@@ -243,6 +246,7 @@ namespace SeaBotGUI.TelegramBot
                 Logger.Fatal("No menu!");
                 return null;
             }
+
             var global = new List<List<KeyboardButton>>();
 
             foreach (var button in arr.buttons)

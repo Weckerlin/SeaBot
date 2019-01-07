@@ -305,7 +305,7 @@ namespace SeaBotCore.Data
 
         public int GetAmountItem(string name)
         {
-            return GetAmountItem((int)MaterialDB.GetItem(name).DefId);
+            return GetAmountItem((int) MaterialDB.GetItem(name).DefId);
         }
 
         public int GetAmountItem(int id)
@@ -319,10 +319,8 @@ namespace SeaBotCore.Data
             {
                 return Inventory.First(n => n.Id == id).Amount;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
     }
 

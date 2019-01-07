@@ -75,7 +75,7 @@ namespace SeaBotCore.BotMethods
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             (int) lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
-                       
+
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId.ToString(),
                             Core.GlobalData.Level.ToString(), Enums.EObject.upgradeable,
@@ -107,6 +107,7 @@ namespace SeaBotCore.BotMethods
                 {
                     continue;
                 }
+
                 var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
                     .Level
                     .Where(n => n.Id == bestplace.Level).First();
@@ -117,7 +118,7 @@ namespace SeaBotCore.BotMethods
                     wecan = remain;
                 }
 
-                bestplace.CargoOnTheWay += (int)wecan;
+                bestplace.CargoOnTheWay += (int) wecan;
                 Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Sent =
                     TimeUtils.GetEpochTime();
                 Core.GlobalData.Ships.First(n => n.InstId == ship.InstId).Loaded =

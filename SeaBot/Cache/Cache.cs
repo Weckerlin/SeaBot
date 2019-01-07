@@ -236,7 +236,7 @@ namespace SeaBotCore
                     }
                 }
 
-                _materials= JsonConvert.DeserializeObject<MaterialsData.Root>(
+                _materials = JsonConvert.DeserializeObject<MaterialsData.Root>(
                     File.ReadAllText(_cachefolder + "\\material.json"));
             }
 
@@ -256,7 +256,7 @@ namespace SeaBotCore
                     }
                 }
 
-                _upgradeable= JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
+                _upgradeable = JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
                     File.ReadAllText(_cachefolder + "\\upgradeable.json"));
             }
 
@@ -276,7 +276,7 @@ namespace SeaBotCore
                     }
                 }
 
-                _events= JsonConvert.DeserializeObject<EventsDefenitions.Root>(
+                _events = JsonConvert.DeserializeObject<EventsDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\event.json"));
             }
 
