@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +25,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
+using Newtonsoft.Json;
 using SeaBotCore.Data;
 using SeaBotCore.Utils;
 
@@ -51,6 +53,8 @@ namespace SeaBotCore
             _syncThread.Start();
         }
 
+        public static string cache1 = "";
+        public static string cache2 = "";
         private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             System.Threading.Tasks.Task.Run(() =>
@@ -58,15 +62,28 @@ namespace SeaBotCore
                 if (e == Enums.EErrorCode.WRONG_SESSION)
                 {
                     Logger.Logger.Info(
-                        $"Someone is playing this game right now, waiting for {SeaBotCore.Core.hibernation} minutes");
-                    _syncThread.Abort();
-                    Logger.Logger.Muted = true;
-                    Thread.Sleep(SeaBotCore.Core.hibernation * 1000 * 60);
-                    Logger.Logger.Muted = false; 
-                    Logger.Logger.Info($"Mwaaah, waking up after hibernation");
+                        $"Someone is playing this game right now, waiting for {Core.hibernation} minutes");
+                  
                    
-                    StartThread();
-                    Login();
+                    if (Core.IsBotRunning)
+                    {
+                        if (Core.Config.debug)
+                        {
+                            File.WriteAllText("beforecrash.json",JsonConvert.SerializeObject(Core.GlobalData));
+                        }
+                        _syncThread.Abort();
+                        Logger.Logger.Muted = true;
+                        Thread.Sleep(Core.hibernation * 1000 * 60);
+                        Logger.Logger.Muted = false;
+                        Logger.Logger.Info("Mwaaah, waking up after hibernation");
+                        StartThread();
+                        Login();
+                        if (Core.Config.debug)
+                        {
+                            File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                        }
+                    }
+                   
                 }
             });
         }
@@ -90,7 +107,6 @@ namespace SeaBotCore
         {
             while (true)
             {
-                Thread.Sleep(10);
                 Thread.Sleep(6 * 1000);
                 if ( /*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
                                                                          Core.GlobalData.Level != 0)
@@ -103,6 +119,7 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Debug("Sending Heartbeat...");
                     _gametasks.Add(new Task.HeartBeat());
+
                     Sync();
                 }
 
@@ -138,11 +155,20 @@ namespace SeaBotCore
 
         public static string SendRequest(Dictionary<string, string> data, string action)
         {
-            var content = new FormUrlEncodedContent(data);
+            try
+            {
+                var content = new FormUrlEncodedContent(data);
 
-            var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
+                var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
 
-            return response.Result.Content.ReadAsStringAsync().Result;
+                return response.Result.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.Fatal(ex.ToString());
+            }
+
+            return "";
         }
 
         public static string ToHex(this byte[] bytes, bool upperCase)
@@ -165,7 +191,7 @@ namespace SeaBotCore
             using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
             using (var client = new HttpClient(handler) {BaseAddress = baseAddress})
             {
-                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.ServerToken));
+                cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.Config.server_token));
                 Logger.Logger.Info("[1/3] Getting another cookies");
                 var result = client.GetAsync("en/seaport/").Result;
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
@@ -178,14 +204,20 @@ namespace SeaBotCore
                 var match = regex.Match(stringtext);
                 if (match.Success)
                 {
-                    stringtext = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
+                    var data = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
                     Logger.Logger.Info("[3/3] Getting sessionid");
                     regex = new Regex(@"session_id': '(.*)', 'test");
 
-                    Core.Ssid = regex.Match(stringtext).Groups[1].Value;
+                    Core.Ssid = regex.Match(data).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
-                    tempuid = regex.Match(stringtext).Groups[1].Value;
+                    tempuid = regex.Match(data).Groups[1].Value;
                     Logger.Logger.Info("Successfully logged in! Session ID = " + Core.Ssid);
+                    regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
+                    var mtch = regex.Match(data);
+                    if (mtch.Success)
+                    {
+                        Cache.Update(mtch.Groups[1].Value);
+                    }
                 }
                 else
                 {
@@ -201,7 +233,9 @@ namespace SeaBotCore
                 {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
+           
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+            Events.Events.LoginedEvent.Logined.Invoke();
         }
 
         public static void Sync()
@@ -333,6 +367,7 @@ namespace SeaBotCore
                 Logger.Logger.Fatal("Sync failed, no response");
             }
 
+            _lastRaised = DateTime.Now;
             _gametasks.Clear();
         }
     }

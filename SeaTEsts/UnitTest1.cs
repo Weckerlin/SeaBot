@@ -1,5 +1,5 @@
 ﻿// SeaTests
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@ using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBotCore;
+using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Utils;
@@ -30,9 +31,9 @@ namespace SeaTests
         [TestMethod]
         public void PseudoRandomBarrel()
         {
-            BarrelController._lastBarrelSeed = 1147034909;
+            Barrels.BarrelController._lastBarrelSeed = 1147034909;
             Core.GlobalData = new GlobalData {Level = 49};
-            var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
+            var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                 .Where(n => n.DefId == 21).First());
             Assert.AreEqual(1, bar.Definition.Id);
             Assert.AreEqual(70, bar.Amount);

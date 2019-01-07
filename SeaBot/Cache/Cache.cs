@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
+using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 
@@ -35,8 +36,47 @@ namespace SeaBotCore
     {
         static object locker = new object();
         private const string _cachefolder = "cache";
-        private const string _lastestdef = "definitions/1.763.0.xml";
-        private const string _baseaddr = "http://r4a4v3g4.ssl.hwcdn.net/build/";
+        private static string _lastestdef = "1.763.0";
+        private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";
+        private const string _basedwnladdr = "https://static.seaportgame.com/build/";
+
+        public static void Update(string currentversion)
+        {
+            var needupdate = false;
+            if (File.Exists("cache/cacheversion.txt"))
+            {
+                var cachedversion = File.ReadAllText("cache/cacheversion.txt");
+
+                var version1 =
+                    new Version(cachedversion);
+                var version2 = new Version(currentversion);
+
+                var result = version1.CompareTo(version2);
+                if (result != 0)
+                {
+                    //update!
+                    needupdate = true;
+                }
+            }
+            else
+            {
+                needupdate = true;
+                //its from 0.7 i think
+            }
+
+            if (needupdate)
+            {
+                if (Directory.Exists("cache"))
+                {
+                    Directory.Delete("cache", true);
+                }
+
+                Directory.CreateDirectory("cache");
+                _lastestdef = currentversion;
+                DownloadCache();
+                File.WriteAllText("cache/cacheversion.txt", currentversion);
+            }
+        }
 
         public static bool DownloadCache()
         {
@@ -44,7 +84,7 @@ namespace SeaBotCore
             {
                 try
                 {
-                    var xml = new WebClient().DownloadString(_baseaddr + _lastestdef);
+                    var xml = new WebClient().DownloadString(_baseaddr + _lastestdef + ".xml");
                     var doc = new XmlDocument();
                     doc.LoadXml(xml);
                     if (doc.DocumentElement != null)
@@ -55,7 +95,7 @@ namespace SeaBotCore
                             if (node.InnerText.Contains("definitions_json.zip"))
                             {
                                 var dl = new Regex(@"definitions_json\.zip,(.+)").Match(node.InnerText).Groups[1].Value;
-                                new WebClient().DownloadFile(_baseaddr + dl, "cache.zip");
+                                new WebClient().DownloadFile(_basedwnladdr + dl, "cache.zip");
                                 using (var archive = ZipFile.OpenRead("cache.zip"))
                                 {
                                     if (!Directory.Exists(_cachefolder))
@@ -102,6 +142,7 @@ namespace SeaBotCore
 
             return _boatdefenitions;
         }
+
         private static ShipDefenitions.Root _shipdefenitions;
 
         public static ShipDefenitions.Root GetShipDefenitions()
@@ -141,6 +182,7 @@ namespace SeaBotCore
 
             return _marketplacedefenitions;
         }
+
         private static BarrelDefenitions.Root _barreldefenitions;
 
         public static BarrelDefenitions.Root GetBarrelDefenitions()
@@ -194,11 +236,51 @@ namespace SeaBotCore
                     }
                 }
 
-                return JsonConvert.DeserializeObject<MaterialsData.Root>(
+                _materials= JsonConvert.DeserializeObject<MaterialsData.Root>(
                     File.ReadAllText(_cachefolder + "\\material.json"));
             }
 
             return _materials;
+        }
+
+        private static UpgradeableDefenition.Root _upgradeable;
+
+        public static UpgradeableDefenition.Root GetUpgradeablesDefenitions()
+        {
+            if (_upgradeable == null)
+            {
+                if (!File.Exists(_cachefolder + "\\upgradeable.json"))
+                {
+                    if (!DownloadCache())
+                    {
+                    }
+                }
+
+                _upgradeable= JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
+                    File.ReadAllText(_cachefolder + "\\upgradeable.json"));
+            }
+
+            return _upgradeable;
+        }
+
+        private static EventsDefenitions.Root _events;
+
+        public static EventsDefenitions.Root GetEventDefenitions()
+        {
+            if (_events == null)
+            {
+                if (!File.Exists(_cachefolder + "\\event.json"))
+                {
+                    if (!DownloadCache())
+                    {
+                    }
+                }
+
+                _events= JsonConvert.DeserializeObject<EventsDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\event.json"));
+            }
+
+            return _events;
         }
     }
 }

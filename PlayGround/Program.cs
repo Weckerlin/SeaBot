@@ -1,5 +1,5 @@
 ﻿// BarrelTest
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using SeaBotCore;
+using SeaBotCore.BotMethods;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Events;
@@ -53,7 +54,7 @@ namespace ConsoleApp1
                     Thread.Sleep(i * 1000);
                     if (!kicked)
                     {
-                        var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
+                        var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                             .Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
                         {

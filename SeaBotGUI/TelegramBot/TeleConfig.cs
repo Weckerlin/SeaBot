@@ -1,5 +1,5 @@
 ﻿// SeabotGUI
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,45 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Threading;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
-namespace SeaBotGUI
+
+namespace SeaBotGUI.TelegramBot
 {
-    public class Config
+    public class TeleConfigData
     {
-        public string server_token = ""; //done
-        public bool debug = false; //done
-        public int woodlimit = 0;
-        public int ironlimit = 0;
-        public int stonelimit = 0;
-        public bool collectfish = false; //done
-        public bool prodfactory = false; //done
-        public bool collectfactory = false; //done
-        public bool autoupgrade = false;
-        public bool finishupgrade = false;
-        public bool barrelhack = false;
-        public bool upgradeonlyfactory = false;
-        public int barrelinterval = 22;
-        public int hibernateinterval = 5;
+        public List<User> users = new List<User>();
     }
 
-    class ConfigSer
+    class TeleConfigSer
     {
         public static void Save()
         {
             var ser = new JavaScriptSerializer();
-            var json = ser.Serialize(Form1._config);
-            File.WriteAllText("config.json", json);
+            var json = ser.Serialize(Form1._teleconfig);
+            File.WriteAllText("telegramconfig.json", json);
         }
 
         public static void Load()
         {
-            if (File.Exists("config.json"))
+            if (File.Exists("telegramconfig.json"))
             {
                 var ser = new JavaScriptSerializer();
-                Form1._config = ser.Deserialize<Config>(File.ReadAllText("config.json"));
+                Form1._teleconfig = ser.Deserialize<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
             }
         }
     }

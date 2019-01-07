@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,6 +40,66 @@ namespace SeaBotCore.Events
                 private static void OnSyncFailed(Enums.EErrorCode e)
                 {
                     OnSyncFailedEvent?.Invoke(e);
+                }
+            }
+        }
+
+        public static class LoginedEvent
+        {
+            public delegate void LoginedHandler();
+
+            public static class Logined
+            {
+                public static event LoginedHandler OnLoginedEvent;
+
+                public static void Invoke()
+                {
+                    OnLogined();
+                }
+
+                private static void OnLogined()
+                {
+                    OnLoginedEvent?.Invoke();
+                }
+            }
+        }
+
+        public static class BotStartedEvent
+        {
+            public delegate void BotStartedHandler();
+
+            public static class BotStarted
+            {
+                public static event BotStartedHandler OnBotStartedEvent;
+
+                public static void Invoke()
+                {
+                    OnBotStarted();
+                }
+
+                private static void OnBotStarted()
+                {
+                    OnBotStartedEvent?.Invoke();
+                }
+            }
+        }
+
+        public static class BotStoppedEvent
+        {
+            public delegate void BotStoppedHandler();
+
+            public static class BotStopped
+            {
+                public static event BotStoppedHandler OnBotStoppedEvent;
+
+                public static void Invoke()
+                {
+                    OnBotStopped();
+                }
+
+                private static void OnBotStopped()
+                {
+                    OnBotStoppedEvent?.Invoke();
                 }
             }
         }

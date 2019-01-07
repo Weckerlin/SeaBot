@@ -1,5 +1,5 @@
 ﻿// SeaBotCore
-// Copyright (C) 2018 Weespin
+// Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SeaBot")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Weespin")]
 [assembly: AssemblyProduct("SeaBot")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
@@ -49,5 +49,5 @@ using System.Runtime.InteropServices;
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.7.0")]
-[assembly: AssemblyFileVersion("0.7.0")]
+[assembly: AssemblyVersion("0.8.0")]
+[assembly: AssemblyFileVersion("0.8.0")]
