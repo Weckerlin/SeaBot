@@ -747,7 +747,7 @@
             this.groupBox11.Size = new System.Drawing.Size(143, 120);
             this.groupBox11.TabIndex = 6;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Basic Ship (Upgradable)";
+            this.groupBox11.Text = "Auto-Ship materials";
             // 
             // radioButton7
             // 

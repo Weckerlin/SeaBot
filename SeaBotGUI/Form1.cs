@@ -28,6 +28,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -59,6 +60,7 @@ namespace SeaBotGUI
         public Label GemLabel => lbl_gems;
         public Label IronLabel => lbl_iron;
         public Label WoodLabel => lbl_wood;
+      
 
         public void LoadControls()
         {

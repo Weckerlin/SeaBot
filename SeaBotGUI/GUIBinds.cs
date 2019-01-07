@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -47,68 +48,89 @@ namespace SeaBotGUI.GUIBinds
 
     public static class ResourcesBox
     {
+        public static string ToKMB(this int num)
+        {
+            if (num > 999999999 || num < -999999999)
+            {
+                return num.ToString("0,,,.###B", CultureInfo.InvariantCulture);
+            }
+            else
+            if (num > 999999 || num < -999999)
+            {
+                return num.ToString("0,,.##M", CultureInfo.InvariantCulture);
+            }
+            else
+            if (num > 999 || num < -999)
+            {
+                return num.ToString("0,.#K", CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                return num.ToString(CultureInfo.InvariantCulture);
+            }
+        }
         public static void Update()
         {
             var coins = Core.GlobalData.GetAmountItem("coins");
             if (Form1.instance.CoinsLabel.InvokeRequired)
             {
                 Form1.instance.CoinsLabel.Invoke(
-                    new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToString(); }));
+                    new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToKMB(); }));
             }
             else
             {
-                Form1.instance.CoinsLabel.Text = coins.ToString();
+                Form1.instance.CoinsLabel.Text = coins.ToKMB();
             }
 
             var fish = Core.GlobalData.GetAmountItem("fish");
             if (Form1.instance.FishLabel.InvokeRequired)
             {
-                Form1.instance.FishLabel.Invoke(new Action(() => { Form1.instance.FishLabel.Text = fish.ToString(); }));
+                Form1.instance.FishLabel.Invoke(new Action(() => { Form1.instance.FishLabel.Text = fish.ToKMB(); }));
             }
             else
             {
-                Form1.instance.FishLabel.Text = fish.ToString();
+                Form1.instance.FishLabel.Text = fish.ToKMB();
             }
 
             var iron = Core.GlobalData.GetAmountItem("iron");
             if (Form1.instance.IronLabel.InvokeRequired)
             {
-                Form1.instance.IronLabel.Invoke(new Action(() => { Form1.instance.IronLabel.Text = iron.ToString(); }));
+                Form1.instance.IronLabel.Invoke(new Action(() => { Form1.instance.IronLabel.Text = iron.ToKMB(); }));
             }
             else
             {
-                Form1.instance.IronLabel.Text = iron.ToString();
+                Form1.instance.IronLabel.Text = iron.ToKMB();
             }
 
             var gem = Core.GlobalData.GetAmountItem("gem");
             if (Form1.instance.GemLabel.InvokeRequired)
             {
-                Form1.instance.GemLabel.Invoke(new Action(() => { Form1.instance.GemLabel.Text = gem.ToString(); }));
+                Form1.instance.GemLabel.Invoke(new Action(() => { Form1.instance.GemLabel.Text = gem.ToKMB(); }));
             }
             else
             {
-                Form1.instance.GemLabel.Text = gem.ToString();
+                Form1.instance.GemLabel.Text = gem.ToKMB();
             }
 
             var wood = Core.GlobalData.GetAmountItem("wood");
             if (Form1.instance.WoodLabel.InvokeRequired)
             {
-                Form1.instance.WoodLabel.Invoke(new Action(() => { Form1.instance.WoodLabel.Text = wood.ToString(); }));
+                Form1.instance.WoodLabel.Invoke(new Action(() => { Form1.instance.WoodLabel.Text = wood.ToKMB(); }));
             }
             else
             {
-                Form1.instance.WoodLabel.Text = wood.ToString();
+                Form1.instance.WoodLabel.Text = wood.ToKMB();
             }
 
             var stone = Core.GlobalData.GetAmountItem("stone");
             if (Form1.instance.StoneLabel.InvokeRequired)
             {
                 Form1.instance.StoneLabel.Invoke(
-                    new Action(() => { Form1.instance.StoneLabel.Text = stone.ToString(); }));
+                    new Action(() => { Form1.instance.StoneLabel.Text = stone.ToKMB(); }));
             }
             else
             {
-                Form1.instance.StoneLabel.Text = stone.ToString();
+                Form1.instance.StoneLabel.Text = stone.ToKMB();
             }
         }
     }
