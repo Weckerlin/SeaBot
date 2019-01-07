@@ -37,7 +37,7 @@ namespace SeaBotCore.BotMethods
                 }
 
                 var nextlvl = def.Levels.Level.Where(n => n.Id == upg.Level + 1).First();
-                if (upg.Progress == currentlvl.Amount)
+                if (upg.Progress >= currentlvl.Amount)
                 {
                     //upgrade ofc
                     Core.GlobalData.Upgradeables.Where(n => n.DefId == upg.DefId).First().Level++;

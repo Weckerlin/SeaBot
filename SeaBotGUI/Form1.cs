@@ -430,12 +430,13 @@ namespace SeaBotGUI
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            CompUtils.OpenLink("https://t.me/nullcore");
+            CompUtils.OpenLink("https://steamcommunity.com/id/wspin/");
+           
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            CompUtils.OpenLink("https://steamcommunity.com/id/wspin/");
+            CompUtils.OpenLink("https://t.me/nullcore");
         }
 
 
