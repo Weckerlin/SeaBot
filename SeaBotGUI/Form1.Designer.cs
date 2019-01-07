@@ -187,11 +187,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-<<<<<<< HEAD
             this.label7.Location = new System.Drawing.Point(323, 408);
-=======
-            this.label7.Location = new System.Drawing.Point(309, 406);
->>>>>>> dev
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 13);
             this.label7.TabIndex = 7;
@@ -397,11 +393,7 @@
             this.groupBox2.Controls.Add(this.chk_aupgrade);
             this.groupBox2.Location = new System.Drawing.Point(6, 247);
             this.groupBox2.Name = "groupBox2";
-<<<<<<< HEAD
             this.groupBox2.Size = new System.Drawing.Size(446, 120);
-=======
-            this.groupBox2.Size = new System.Drawing.Size(446, 156);
->>>>>>> dev
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Strategy";
@@ -411,9 +403,9 @@
             this.chk_autoshipupg.AutoSize = true;
             this.chk_autoshipupg.Location = new System.Drawing.Point(92, 42);
             this.chk_autoshipupg.Name = "chk_autoshipupg";
-            this.chk_autoshipupg.Size = new System.Drawing.Size(149, 17);
+            this.chk_autoshipupg.Size = new System.Drawing.Size(126, 17);
             this.chk_autoshipupg.TabIndex = 6;
-            this.chk_autoshipupg.Text = "Auto-Ships (very unstable)";
+            this.chk_autoshipupg.Text = "Auto-Ships (unstable)";
             this.chk_autoshipupg.UseVisualStyleBackColor = true;
             this.chk_autoshipupg.CheckedChanged += new System.EventHandler(this.chk_autoshipupg_CheckedChanged);
             // 
