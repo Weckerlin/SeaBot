@@ -410,7 +410,7 @@ namespace SeaBotGUI.GUIBinds
                         Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
                         var willatportattime = ship.Sent + lvl.TravelTime;
                         //lol xD 
-                        if (DateTime.UtcNow < TimeUtils.FromUnixTime(willatportattime))
+                        if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds> 0)
                         {
                             willatportat = "--:--:--";
                         }

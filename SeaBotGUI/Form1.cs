@@ -48,7 +48,6 @@ namespace SeaBotGUI
 
         public static TeleConfigData _teleconfig = new TeleConfigData();
 
-        public static WTGLib bot;
         public static bool TeleBotStarted;
 
      
@@ -64,7 +63,8 @@ namespace SeaBotGUI
         public Label WoodLabel => lbl_wood;
         public void LoadControls()
         {
-           
+
+            
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -100,6 +100,115 @@ namespace SeaBotGUI
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
+            SeaBotCore.Core.Config.PropertyChanged += Config_PropertyChanged;
+        }
+
+        private void Config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
+            Form1.instance.Invoke(new Action(() =>
+            {
+                if (e.PropertyName == "woodlimit")
+                {
+                  
+                    num_woodlimit.Value = Core.Config.woodlimit; 
+                    
+                }
+
+                if (e.PropertyName == "ironlimit")
+                {
+
+                    num_ironlimit.Value = Core.Config.ironlimit;
+
+                }
+
+
+                if (e.PropertyName == "stonelimit")
+                {
+
+                    num_stonelimit.Value = Core.Config.stonelimit;
+
+                }
+
+                if (e.PropertyName == "collectfish")
+                {
+
+                    chk_autofish.Checked = Core.Config.collectfish;
+
+                }
+
+                if (e.PropertyName == "prodfactory")
+                {
+
+                    chk_prodfact.Checked = Core.Config.prodfactory;
+                }
+
+                if (e.PropertyName == "collectfactory")
+                {
+
+                    chk_collectmat.Checked = Core.Config.collectfactory;
+
+                }
+
+                if (e.PropertyName == "autoupgrade")
+                {
+
+                    chk_aupgrade.Checked = Core.Config.autoupgrade;
+
+                }
+
+                if (e.PropertyName == "autoship")
+                {
+                    chk_autoshipupg.Checked = Core.Config.autoship;
+                }
+
+                if (e.PropertyName == "finishupgrade")
+                {
+                    chk_finishupgrade.Checked = Core.Config.finishupgrade;
+                }
+
+                if (e.PropertyName == "barrelhack")
+                {
+                    chk_barrelhack.Checked = Core.Config.barrelhack;
+                }
+
+                if (e.PropertyName == "upgradeonlyfactory")
+                {
+                    chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
+                }
+
+                if (e.PropertyName == "barrelinterval")
+                {
+                    num_barrelinterval.Value = Core.Config.barrelinterval;
+                }
+
+                if (e.PropertyName == "hibernateinterval")
+                {
+                    num_hibernationinterval.Value = Core.Config.hibernateinterval;
+                }
+
+                if (e.PropertyName == "autoshiptype")
+                {
+                    UpdateButtons(Core.Config.autoshiptype);
+                }
+
+                if (e.PropertyName == "autoshipprofit")
+                {
+
+                    if (Core.Config.autoshipprofit)
+                    {
+
+                        radio_saveloot.Checked = true;
+                    }
+                    else
+                    {
+
+                        radio_savesailors.Checked = true;
+                    }
+
+                }
+
+            }));
         }
 
         void OnLogined()
@@ -499,7 +608,7 @@ namespace SeaBotGUI
             {
                 try
                 {
-                    bot = new WTGLib(Core.Config.telegramtoken);
+                 TelegramBotController.StartBot(Core.Config.telegramtoken);
                 }
                 catch (Exception exception)
                 {
@@ -532,6 +641,21 @@ namespace SeaBotGUI
                     }
                 
             }
+        }
+
+        private void btn_dumpcore_Click(object sender, EventArgs e)
+        {
+            File.WriteAllText(DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss")+"DUMP.json",JsonConvert.SerializeObject(Core.GlobalData));
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            TelegramBotController.StopBot();
+        }
+
+        private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CompUtils.OpenLink("https://github.com/weespin/SeaBot/wiki/Getting-Telegram-Token");
         }
     }
 }

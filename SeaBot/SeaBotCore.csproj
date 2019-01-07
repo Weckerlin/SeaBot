@@ -60,6 +60,7 @@
     <Compile Include="BotMethods\Factories.cs" />
     <Compile Include="BotMethods\FishPier.cs" />
     <Compile Include="BotMethods\Ships.cs" />
+    <Compile Include="BotMethods\Upgradable.cs" />
     <Compile Include="Cache\Cache.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Data\Defenitions\BarrelDefenitions.cs" />

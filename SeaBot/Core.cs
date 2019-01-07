@@ -43,7 +43,17 @@ namespace SeaBotCore
 
          public static bool IsBotRunning
          {
-             get { return BotThread.IsAlive; }
+             get
+             {
+                 if (BotThread != null)
+                 {
+                     return BotThread.IsAlive;
+                 }
+                 else
+                 {
+                     return false;
+                 }
+             }
          }
 
 
@@ -108,6 +118,7 @@ namespace SeaBotCore
                 {
                     if (Config.autoupgrade)
                     {
+                        Upgradable.UpgradeUpgradable();
                         Buildings.AutoUpgrade(Config.upgradeonlyfactory);
                     }
 

@@ -70,6 +70,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_dumpcore = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -589,6 +590,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btn_dumpcore);
             this.tabPage2.Controls.Add(this.groupBox13);
             this.tabPage2.Controls.Add(this.groupBox12);
             this.tabPage2.Controls.Add(this.groupBox11);
@@ -605,6 +607,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn_dumpcore
+            // 
+            this.btn_dumpcore.Location = new System.Drawing.Point(321, 398);
+            this.btn_dumpcore.Name = "btn_dumpcore";
+            this.btn_dumpcore.Size = new System.Drawing.Size(75, 23);
+            this.btn_dumpcore.TabIndex = 10;
+            this.btn_dumpcore.Text = "Dump Data";
+            this.btn_dumpcore.UseVisualStyleBackColor = true;
+            this.btn_dumpcore.Click += new System.EventHandler(this.btn_dumpcore_Click);
             // 
             // groupBox13
             // 
@@ -630,6 +642,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Stop";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -669,6 +682,7 @@
             this.linkLabel6.TabIndex = 5;
             this.linkLabel6.TabStop = true;
             this.linkLabel6.Text = "How to get it?";
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
             // 
             // label10
             // 
@@ -696,7 +710,7 @@
             this.groupBox12.Size = new System.Drawing.Size(98, 72);
             this.groupBox12.TabIndex = 7;
             this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Optimal strategy";
+            this.groupBox12.Text = "Optimal strategy ";
             // 
             // radio_saveloot
             // 
@@ -1272,6 +1286,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button btn_dumpcore;
     }
 }
 

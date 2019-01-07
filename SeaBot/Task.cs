@@ -711,6 +711,21 @@ namespace SeaBotCore
                 CustomObjects.Add("amount",amount);
             }
         }
+
+        public class ConfirmUpgradableTask : IGameTask
+        {
+            public string Action => "confirm_upgradeable";
+            public uint Time => _time;
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+            private readonly uint _time;
+
+            public ConfirmUpgradableTask(string def_id, string player_lvl)
+            {
+                _time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("def_id", def_id);
+                CustomObjects.Add("player_lvl", player_lvl);
+            }
+        }
         public class HeartBeat : IGameTask
         {
             public string Action => "heartbeat";

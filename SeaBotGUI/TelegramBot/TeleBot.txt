@@ -34,34 +34,10 @@ namespace SeaBotGUI.TelegramBot
         public int userid;
         public int MenuID;
     }
-    public static class TelegramBotController
-    {
-        public static TelegramBot bot;
 
-        public static void StartBot(string apikey)
-        {
-            if (apikey == "")
-            {
-                Logger.Fatal("Telegram API key is empty!");
-            }
-            else
-            {
-                bot = new TelegramBot(apikey);
-            }
-        }
-
-        public static void StopBot()
-        {
-            bot?.botClient.StopReceiving();
-        }
-        public static void SendMessage(Message msg, string message)
-        {
-            bot.botClient.SendTextMessageAsync(msg.From.Id, message);
-        }
-    }
-    public class TelegramBot
+    public class WTGLib
     {
-        public TelegramBot(string apikey)
+        public WTGLib(string apikey)
         {
             botClient = new TelegramBotClient(apikey);
             botClient.OnMessage += Bot_OnMessage;
@@ -79,7 +55,7 @@ namespace SeaBotGUI.TelegramBot
                 var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
                 if (reg.Success)
                 {
-                   TelegramBotController.SendMessage(e.Message,
+                    Form1.bot.botClient.SendTextMessageAsync(e.Message.From.Id,
                         "Hello! Please enter Startup Code from settings.");
                 }
                 else
@@ -121,7 +97,7 @@ namespace SeaBotGUI.TelegramBot
                                 var instance = Activator.CreateInstance(mn) as IMenu;
                                 if (instance.ID == 0)
                                 {
-                                    await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
+                                    await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
                                         ParseReplyKeyboardMarkup(instance));
                                 }
                             }
@@ -137,7 +113,7 @@ namespace SeaBotGUI.TelegramBot
                     }
                     else
                     {
-                        TelegramBotController.SendMessage(msg,
+                        Form1.bot.botClient.SendTextMessageAsync(msg.From.Id,
                             "Wrong Code!\nPlease enter Startup Code from settings.");
                         return;
                     }
@@ -199,7 +175,6 @@ namespace SeaBotGUI.TelegramBot
                     {
                         if (a.redirect != -1)
                         {
-                            await Task.Run(a.act);
                             Form1._teleconfig.users.Where(n => n.userid == msg.From.Id).First().MenuID = a.redirect;
                             TeleConfigSer.Save();
                             IMenu newinst = null;
@@ -219,14 +194,14 @@ namespace SeaBotGUI.TelegramBot
                                 }
                             }
 
-                            await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
+                            await botClient.SendTextMessageAsync(msg.From.Id, "Переходим..", replyMarkup:
                                 ParseReplyKeyboardMarkup(newinst));
                             newinst.Message = msg;
                             newinst.OnEnter();
                             return;
                         }
-                        await Task.Run(a.act);
 
+                        await Task.Run(a.act);
                     }
                 }
                 else
@@ -238,11 +213,6 @@ namespace SeaBotGUI.TelegramBot
 
         public ReplyKeyboardMarkup ParseReplyKeyboardMarkup(IMenu arr)
         {
-            if (arr == null)
-            {
-                Logger.Fatal("No menu!");
-                return null;
-            }
             var global = new List<List<KeyboardButton>>();
 
             foreach (var button in arr.buttons)
