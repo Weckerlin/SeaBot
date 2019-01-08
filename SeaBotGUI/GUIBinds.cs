@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using SeaBotCore;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 using Task = System.Threading.Tasks.Task;
 
@@ -423,20 +424,52 @@ namespace SeaBotGUI.GUIBinds
                     var willatportat = "";
                     if (ship.Sent != 0)
                     {
-                        var lvl = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Levels.Level
-                            .First(n => n.Id == ship.TargetLevel);
-                        Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
-                        var willatportattime = ship.Sent + lvl.TravelTime;
-                        //lol xD 
-                        if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
+                        try
                         {
-                            willatportat = "--:--:--";
+
+
+                            var shipdef = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+                            if (shipdef == null)
+                            {
+                                continue;
+                            }
+
+                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels == null)
+                            {
+                                continue;
+                            }
+
+                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
+                                    .Count == 0)
+                            {
+                                continue;
+                            }
+
+                            var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
+                                .FirstOrDefault(n => n.Id == ship.TargetLevel);
+                            if (lvl == null)
+                            {
+                                continue;
+                            }
+
+                            Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
+                            var willatportattime = ship.Sent + lvl.TravelTime;
+                            //lol xD 
+                            if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
+                            {
+                                willatportat = "--:--:--";
+                            }
+                            else
+                            {
+                                willatportat =
+                                    (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
+                                    .ToString(@"hh\:mm\:ss");
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
-                            willatportat =
-                                (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
-                                .ToString(@"hh\:mm\:ss");
+                            Logger.Debug($"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
+                           
                         }
                     }
 

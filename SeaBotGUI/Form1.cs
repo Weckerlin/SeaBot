@@ -38,10 +38,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Exceptionless;
 using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
 
+[assembly: Exceptionless.Configuration.Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
 namespace SeaBotGUI
 {
     public partial class Form1 : Form
@@ -60,10 +62,12 @@ namespace SeaBotGUI
         public Label GemLabel => lbl_gems;
         public Label IronLabel => lbl_iron;
         public Label WoodLabel => lbl_wood;
-      
 
         public void LoadControls()
         {
+            ExceptionlessClient.Default.Register(true);
+           
+             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -83,7 +87,8 @@ namespace SeaBotGUI
             num_stonelimit.Value = Core.Config.stonelimit;
             textBox3.Text = Core.Config.telegramtoken;
             num_barrelinterval.Value = Core.Config.barrelinterval;
-
+            SeaBotCore.Events.Events.BotStoppedEvent.BotStopped.OnBotStoppedEvent += BotStopped_OnBotStoppedEvent;
+            SeaBotCore.Events.Events.BotStartedEvent.BotStarted.OnBotStartedEvent += BotStarted_OnBotStartedEvent;
             lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
             if (Core.Config.autoshipprofit)
             {
@@ -101,6 +106,33 @@ namespace SeaBotGUI
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
             Core.Config.PropertyChanged += Config_PropertyChanged;
+           
+
+        }
+
+        private void BotStarted_OnBotStartedEvent()
+        {
+            Form1.instance.Invoke(new Action(() =>
+            {
+                button3.Enabled = true;
+
+                button2.Enabled = false;
+            }));
+        }
+
+        private void BotStopped_OnBotStoppedEvent()
+        {
+            Form1.instance.Invoke(new Action(() =>
+            {
+                button3.Enabled = false;
+
+                button2.Enabled = true;
+            }));
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+           Logger.Fatal(e.ExceptionObject.ToString());
         }
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -325,6 +357,7 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
+           
             if (string.IsNullOrEmpty(Core.Config.server_token))
             {
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");

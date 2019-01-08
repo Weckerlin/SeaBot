@@ -892,9 +892,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(12, 20);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 13);
+            this.label8.Size = new System.Drawing.Size(91, 13);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Interval (secounds)";
+            this.label8.Text = "Interval (seconds)";
             // 
             // groupBox6
             // 

@@ -109,7 +109,7 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(6 * 1000);
-                if ( /*(DateTime.Now - _lastRaised).TotalSeconds > 6&&*/ _gametasks.Count != 0 &&
+                if ( _gametasks.Count != 0 &&
                                                                          Core.GlobalData.Level != 0)
                 {
                     Logger.Logger.Debug("Syncing...");
@@ -241,7 +241,8 @@ namespace SeaBotCore
         public static void Sync()
         {
             var taskstr = new StringBuilder("<xml>\n");
-            foreach (var task in _gametasks)
+            var firstfifteen = _gametasks.Take(50).ToList();
+            foreach (var task in firstfifteen)
             {
                 taskstr.Append("<task>\n");
                 taskstr.Append("<action>" + task.Action + "</action>\n");
@@ -250,6 +251,7 @@ namespace SeaBotCore
                 taskstr.Append("<time>" + task.Time + "</time>\n");
                 taskstr.Append("</task>\n")
                     ;
+                _gametasks.Remove(task);
             }
 
             taskstr.Append($"<task_id>{_taskId}</task_id>\n");
@@ -368,7 +370,7 @@ namespace SeaBotCore
             }
 
             _lastRaised = DateTime.Now;
-            _gametasks.Clear();
+         
         }
     }
 }

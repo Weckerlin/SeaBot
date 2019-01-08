@@ -68,7 +68,8 @@ namespace SeaBotCore
             {
                 ThreadKill.KillTheThread(Networking._syncThread); // todo fix
                 ThreadKill.KillTheThread(BotThread);
-                Logger.Logger.Info("Bot stop");
+                Logger.Logger.Info("Stopped");
+                Events.Events.BotStoppedEvent.BotStopped.Invoke();
             }).Start();
         }
 
@@ -89,6 +90,7 @@ namespace SeaBotCore
                     IsBackground = true
                 };
                 BotThread.Start();
+                Events.Events.BotStartedEvent.BotStarted.Invoke();
             }).Start();
         }
 
