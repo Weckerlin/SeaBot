@@ -403,9 +403,9 @@
             this.chk_autoshipupg.AutoSize = true;
             this.chk_autoshipupg.Location = new System.Drawing.Point(92, 42);
             this.chk_autoshipupg.Name = "chk_autoshipupg";
-            this.chk_autoshipupg.Size = new System.Drawing.Size(126, 17);
+            this.chk_autoshipupg.Size = new System.Drawing.Size(77, 17);
             this.chk_autoshipupg.TabIndex = 6;
-            this.chk_autoshipupg.Text = "Auto-Ships (unstable)";
+            this.chk_autoshipupg.Text = "Auto-Ships";
             this.chk_autoshipupg.UseVisualStyleBackColor = true;
             this.chk_autoshipupg.CheckedChanged += new System.EventHandler(this.chk_autoshipupg_CheckedChanged);
             // 
