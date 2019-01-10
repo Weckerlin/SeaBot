@@ -649,7 +649,7 @@ namespace SeaBotCore
                 }
             }
 
-            public string Action { get; } = "";
+            public string Action { get; } = string.Empty;
 
             public uint Time { get; }
 

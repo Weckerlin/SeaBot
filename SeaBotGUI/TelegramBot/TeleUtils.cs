@@ -55,7 +55,7 @@ namespace SeaBotGUI.TelegramBot
                     addr.Append(bytes[i].ToString("X2"));
                 // Insert a hyphen after each byte, unless we are at the end of the
 
-                if (addr.ToString() != "") return addr.ToString();
+                if (addr.ToString() != string.Empty) return addr.ToString();
             }
 
             return "DEFCODE";

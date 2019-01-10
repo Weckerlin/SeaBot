@@ -39,7 +39,7 @@ namespace SeaBotGUI.TelegramBot
 
         public static void StartBot(string apikey)
         {
-            if (apikey == "")
+            if (apikey == string.Empty)
                 Logger.Fatal("Telegram API key is empty!");
             else
                 bot = new TelegramBot(apikey);
@@ -69,7 +69,7 @@ namespace SeaBotGUI.TelegramBot
 
         private async void Bot_OnMessage(object sender, MessageEventArgs e)
         {
-            var message = e.Message.Text ?? "";
+            var message = e.Message.Text ?? string.Empty;
             Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");
 
             //THIS IS A NEW USER
@@ -105,7 +105,7 @@ namespace SeaBotGUI.TelegramBot
                 {
                     var mac = TeleUtils.MacAdressCode;
                     var smac = mac.Substring(0, mac.Length / 2);
-                    if (msg.Text.ToLower() == smac.ToLower())
+                    if (string.Compare(msg.Text,smac,true)==0)
                     {
                         var men = GetMenuItems();
 
@@ -167,7 +167,7 @@ namespace SeaBotGUI.TelegramBot
                     Button a = null;
                     foreach (var rowButton in first.buttons)
                     foreach (var n in rowButton)
-                        if (n.name.ToLower() == msg.Text.ToLower())
+                        if (string.Compare(n.name,msg.Text,true)==0)
                         {
                             a = n;
                             break;

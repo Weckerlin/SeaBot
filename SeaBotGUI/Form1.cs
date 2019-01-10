@@ -523,7 +523,7 @@ namespace SeaBotGUI
 
         private void button4_Click_2(object sender, EventArgs e)
         {
-            if (Core.Config.telegramtoken == "")
+            if (Core.Config.telegramtoken == string.Empty)
                 MessageBox.Show("No telegram token");
             else
                 try

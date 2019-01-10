@@ -37,7 +37,7 @@ namespace SeaBotCore.Config
         private int _hibernateinterval = 5;
         private int _ironlimit;
         private bool _prodfactory;
-        private string _serverToken = "";
+        private string _serverToken = string.Empty;
         private bool _sleepenabled;
         private int _sleepevery = 20;
         private bool _sleepeveryhrs;
@@ -45,7 +45,7 @@ namespace SeaBotCore.Config
         private bool _sleepforhrs;
         private bool _smartsleepenabled;
         private int _stonelimit;
-        private string _telegramtoken = "";
+        private string _telegramtoken = string.Empty;
         private bool _upgradeonlyfactory;
         private int _woodlimit;
 

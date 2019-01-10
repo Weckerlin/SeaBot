@@ -155,7 +155,7 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [FATAL]   ";
                     break;
                 default:
-                    pretext = "";
+                    pretext = string.Empty;
                     break;
             }
 
