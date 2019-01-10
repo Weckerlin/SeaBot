@@ -49,8 +49,8 @@ namespace SeaBotCore.Utils
                 {
                     return item;
                 }
-                
             }
+
             return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
 

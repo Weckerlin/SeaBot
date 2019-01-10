@@ -55,21 +55,20 @@ namespace SeaBotGUI.GUIBinds
             {
                 return num.ToString("0,,,.###B", CultureInfo.InvariantCulture);
             }
-            else
+
             if (num > 999999 || num < -999999)
             {
                 return num.ToString("0,,.##M", CultureInfo.InvariantCulture);
             }
-            else
+
             if (num > 999 || num < -999)
             {
                 return num.ToString("0,.#K", CultureInfo.InvariantCulture);
             }
-            else
-            {
-                return num.ToString(CultureInfo.InvariantCulture);
-            }
+
+            return num.ToString(CultureInfo.InvariantCulture);
         }
+
         public static void Update()
         {
             var coins = Core.GlobalData.GetAmountItem("coins");
@@ -426,26 +425,27 @@ namespace SeaBotGUI.GUIBinds
                     {
                         try
                         {
-
-
                             var shipdef = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
                             if (shipdef == null)
                             {
                                 continue;
                             }
 
-                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels == null)
+                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels ==
+                                null)
                             {
                                 continue;
                             }
 
-                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
+                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
+                                    .Level
                                     .Count == 0)
                             {
                                 continue;
                             }
 
-                            var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
+                            var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                                ?.Levels.Level
                                 .FirstOrDefault(n => n.Id == ship.TargetLevel);
                             if (lvl == null)
                             {
@@ -468,8 +468,8 @@ namespace SeaBotGUI.GUIBinds
                         }
                         catch (Exception e)
                         {
-                            Logger.Debug($"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
-                           
+                            Logger.Debug(
+                                $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
                         }
                     }
 

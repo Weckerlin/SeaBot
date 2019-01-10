@@ -17,7 +17,6 @@
 using Newtonsoft.Json;
 using SeaBotCore;
 using SeaBotCore.Data;
-using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
@@ -28,7 +27,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -39,11 +37,14 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
+using Exceptionless.Configuration;
+using SeaBotCore.Config;
 using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
 
-[assembly: Exceptionless.Configuration.Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
+[assembly: Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
+
 namespace SeaBotGUI
 {
     public partial class Form1 : Form
@@ -66,8 +67,8 @@ namespace SeaBotGUI
         public void LoadControls()
         {
             ExceptionlessClient.Default.Register(true);
-           
-             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -99,6 +100,26 @@ namespace SeaBotGUI
                 radio_savesailors.Checked = true;
             }
 
+            chk_smartsleep.Checked = Core.Config.smartsleepenabled;
+            chk_sleepenabled.Checked = Core.Config.sleepenabled;
+            num_sleepevery.Value = Core.Config.sleepevery;
+            num_sleepfor.Value = Core.Config.sleepfor;
+            if (Core.Config.sleepforhrs)
+            {
+                radio_sleepforhrs.Checked = true;
+            }
+            else
+            {
+                radio_sleepformins.Checked = true;
+            }
+            if (Core.Config.sleepeveryhrs)
+            {
+                radio_sleepeveryhrs.Checked = true;
+            }
+            else
+            {
+                radio_sleepeverymin.Checked = true;
+            }
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
@@ -106,13 +127,11 @@ namespace SeaBotGUI
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
             Core.Config.PropertyChanged += Config_PropertyChanged;
-           
-
         }
 
         private void BotStarted_OnBotStartedEvent()
         {
-            Form1.instance.Invoke(new Action(() =>
+            instance.Invoke(new Action(() =>
             {
                 button3.Enabled = true;
 
@@ -122,7 +141,7 @@ namespace SeaBotGUI
 
         private void BotStopped_OnBotStoppedEvent()
         {
-            Form1.instance.Invoke(new Action(() =>
+            instance.Invoke(new Action(() =>
             {
                 button3.Enabled = false;
 
@@ -132,11 +151,16 @@ namespace SeaBotGUI
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-           Logger.Fatal(e.ExceptionObject.ToString());
+            Logger.Fatal(e.ExceptionObject.ToString());
         }
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == "acceptedresponsibility")
+            {
+                return;
+            }
+
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
             instance.Invoke(new Action(() =>
             {
@@ -237,6 +261,7 @@ namespace SeaBotGUI
         public Form1()
         {
             // bot = new WTGLib("a");
+            ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
             InitializeComponent();
             instance = this;
             TeleConfigSer.Load();
@@ -244,6 +269,20 @@ namespace SeaBotGUI
             CheckForUpdates();
             LoadControls();
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+            if (!Core.Config.acceptedresponsibility)
+            {
+                var msg = MessageBox.Show(
+                    "By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.",
+                    "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
+                if (msg == DialogResult.OK)
+                {
+                    Core.Config.acceptedresponsibility = true;
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
 
             //Check for cache
         }
@@ -357,7 +396,6 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
             if (string.IsNullOrEmpty(Core.Config.server_token))
             {
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
@@ -464,7 +502,6 @@ namespace SeaBotGUI
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CompUtils.OpenLink("https://steamcommunity.com/id/wspin/");
-           
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -651,6 +688,73 @@ namespace SeaBotGUI
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CompUtils.OpenLink("https://github.com/weespin/SeaBot/wiki/Getting-Telegram-Token");
+        }
+
+
+        private void chk_smartsleep_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox15.Enabled = !chk_smartsleep.Checked;
+            Core.Config.smartsleepenabled = chk_smartsleep.Checked;
+        }
+
+        private void chk_sleepenabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepenabled = chk_sleepenabled.Checked;
+        }
+
+        private void num_sleepfor_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepfor = (int) num_sleepfor.Value;
+        }
+
+        private void num_sleepevery_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepevery = (int) num_sleepevery.Value;
+        }
+
+        private void radio_sleepforhrs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_sleepforhrs.Checked)
+            {
+                Core.Config.sleepforhrs = true;
+            }
+
+            else
+            {
+                Core.Config.sleepforhrs = false;
+            }
+        }
+
+        private void radio_sleepeveryhrs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_sleepeveryhrs.Checked)
+            {
+                Core.Config.sleepeveryhrs = true;
+            }
+
+            else
+            {
+                Core.Config.sleepeveryhrs = false;
+            }
+        }
+
+        private bool barrelsaid = false;
+        private void num_barrelinterval_ValueChanged(object sender, EventArgs e)
+        {
+            if (num_barrelinterval.Value < 22 && !barrelsaid)
+            {
+                MessageBox.Show("Warning, at least 1 SeaBot user got banned for using interval, which is lower than 22.","Alert",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                barrelsaid = true;
+            }
+
+            if (num_barrelinterval.Value < 10)
+            {
+                num_barrelinterval.ForeColor = Color.Red;
+            }
+            else
+            {
+                num_barrelinterval.ForeColor = Color.Black;
+            }
         }
     }
 }

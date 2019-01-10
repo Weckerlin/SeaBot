@@ -70,6 +70,17 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.chk_sleepenabled = new System.Windows.Forms.CheckBox();
+            this.chk_smartsleep = new System.Windows.Forms.CheckBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.num_sleepevery = new System.Windows.Forms.NumericUpDown();
+            this.radio_sleepeverymin = new System.Windows.Forms.RadioButton();
+            this.radio_sleepeveryhrs = new System.Windows.Forms.RadioButton();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.num_sleepfor = new System.Windows.Forms.NumericUpDown();
+            this.radio_sleepformins = new System.Windows.Forms.RadioButton();
+            this.radio_sleepforhrs = new System.Windows.Forms.RadioButton();
             this.btn_dumpcore = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -136,6 +147,11 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepevery)).BeginInit();
+            this.groupBox15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).BeginInit();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -590,6 +606,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox14);
             this.tabPage2.Controls.Add(this.btn_dumpcore);
             this.tabPage2.Controls.Add(this.groupBox13);
             this.tabPage2.Controls.Add(this.groupBox12);
@@ -608,11 +625,161 @@
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.chk_sleepenabled);
+            this.groupBox14.Controls.Add(this.chk_smartsleep);
+            this.groupBox14.Controls.Add(this.groupBox16);
+            this.groupBox14.Controls.Add(this.groupBox15);
+            this.groupBox14.Location = new System.Drawing.Point(12, 327);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(274, 89);
+            this.groupBox14.TabIndex = 11;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Sleep";
+            // 
+            // chk_sleepenabled
+            // 
+            this.chk_sleepenabled.AutoSize = true;
+            this.chk_sleepenabled.Location = new System.Drawing.Point(12, 66);
+            this.chk_sleepenabled.Name = "chk_sleepenabled";
+            this.chk_sleepenabled.Size = new System.Drawing.Size(65, 17);
+            this.chk_sleepenabled.TabIndex = 9;
+            this.chk_sleepenabled.Text = "Enabled";
+            this.chk_sleepenabled.UseVisualStyleBackColor = true;
+            this.chk_sleepenabled.CheckedChanged += new System.EventHandler(this.chk_sleepenabled_CheckedChanged);
+            // 
+            // chk_smartsleep
+            // 
+            this.chk_smartsleep.AutoSize = true;
+            this.chk_smartsleep.Location = new System.Drawing.Point(89, 66);
+            this.chk_smartsleep.Name = "chk_smartsleep";
+            this.chk_smartsleep.Size = new System.Drawing.Size(83, 17);
+            this.chk_smartsleep.TabIndex = 8;
+            this.chk_smartsleep.Text = "Smart Sleep";
+            this.chk_smartsleep.UseVisualStyleBackColor = true;
+            this.chk_smartsleep.CheckedChanged += new System.EventHandler(this.chk_smartsleep_CheckedChanged);
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.num_sleepevery);
+            this.groupBox16.Controls.Add(this.radio_sleepeverymin);
+            this.groupBox16.Controls.Add(this.radio_sleepeveryhrs);
+            this.groupBox16.Location = new System.Drawing.Point(149, 19);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(110, 41);
+            this.groupBox16.TabIndex = 1;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Every";
+            // 
+            // num_sleepevery
+            // 
+            this.num_sleepevery.Location = new System.Drawing.Point(3, 15);
+            this.num_sleepevery.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.num_sleepevery.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_sleepevery.Name = "num_sleepevery";
+            this.num_sleepevery.Size = new System.Drawing.Size(43, 20);
+            this.num_sleepevery.TabIndex = 16;
+            this.num_sleepevery.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.num_sleepevery.ValueChanged += new System.EventHandler(this.num_sleepevery_ValueChanged);
+            // 
+            // radio_sleepeverymin
+            // 
+            this.radio_sleepeverymin.AutoSize = true;
+            this.radio_sleepeverymin.Checked = true;
+            this.radio_sleepeverymin.Location = new System.Drawing.Point(52, 21);
+            this.radio_sleepeverymin.Name = "radio_sleepeverymin";
+            this.radio_sleepeverymin.Size = new System.Drawing.Size(47, 17);
+            this.radio_sleepeverymin.TabIndex = 15;
+            this.radio_sleepeverymin.TabStop = true;
+            this.radio_sleepeverymin.Text = "Mins";
+            this.radio_sleepeverymin.UseVisualStyleBackColor = true;
+            // 
+            // radio_sleepeveryhrs
+            // 
+            this.radio_sleepeveryhrs.AutoSize = true;
+            this.radio_sleepeveryhrs.Location = new System.Drawing.Point(52, 6);
+            this.radio_sleepeveryhrs.Name = "radio_sleepeveryhrs";
+            this.radio_sleepeveryhrs.Size = new System.Drawing.Size(41, 17);
+            this.radio_sleepeveryhrs.TabIndex = 14;
+            this.radio_sleepeveryhrs.Text = "Hrs";
+            this.radio_sleepeveryhrs.UseVisualStyleBackColor = true;
+            this.radio_sleepeveryhrs.CheckedChanged += new System.EventHandler(this.radio_sleepeveryhrs_CheckedChanged);
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.num_sleepfor);
+            this.groupBox15.Controls.Add(this.radio_sleepformins);
+            this.groupBox15.Controls.Add(this.radio_sleepforhrs);
+            this.groupBox15.Location = new System.Drawing.Point(0, 19);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(143, 41);
+            this.groupBox15.TabIndex = 0;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Bot will sleep for";
+            // 
+            // num_sleepfor
+            // 
+            this.num_sleepfor.Location = new System.Drawing.Point(12, 15);
+            this.num_sleepfor.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.num_sleepfor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_sleepfor.Name = "num_sleepfor";
+            this.num_sleepfor.Size = new System.Drawing.Size(65, 20);
+            this.num_sleepfor.TabIndex = 17;
+            this.num_sleepfor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // radio_sleepformins
+            // 
+            this.radio_sleepformins.AutoSize = true;
+            this.radio_sleepformins.Location = new System.Drawing.Point(89, 21);
+            this.radio_sleepformins.Name = "radio_sleepformins";
+            this.radio_sleepformins.Size = new System.Drawing.Size(47, 17);
+            this.radio_sleepformins.TabIndex = 13;
+            this.radio_sleepformins.Text = "Mins";
+            this.radio_sleepformins.UseVisualStyleBackColor = true;
+            // 
+            // radio_sleepforhrs
+            // 
+            this.radio_sleepforhrs.AutoSize = true;
+            this.radio_sleepforhrs.Checked = true;
+            this.radio_sleepforhrs.Location = new System.Drawing.Point(89, 6);
+            this.radio_sleepforhrs.Name = "radio_sleepforhrs";
+            this.radio_sleepforhrs.Size = new System.Drawing.Size(41, 17);
+            this.radio_sleepforhrs.TabIndex = 12;
+            this.radio_sleepforhrs.TabStop = true;
+            this.radio_sleepforhrs.Text = "Hrs";
+            this.radio_sleepforhrs.UseVisualStyleBackColor = true;
+            this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radio_sleepforhrs_CheckedChanged);
+            // 
             // btn_dumpcore
             // 
-            this.btn_dumpcore.Location = new System.Drawing.Point(321, 398);
+            this.btn_dumpcore.Location = new System.Drawing.Point(366, 191);
             this.btn_dumpcore.Name = "btn_dumpcore";
-            this.btn_dumpcore.Size = new System.Drawing.Size(75, 23);
+            this.btn_dumpcore.Size = new System.Drawing.Size(75, 29);
             this.btn_dumpcore.TabIndex = 10;
             this.btn_dumpcore.Text = "Dump Data";
             this.btn_dumpcore.UseVisualStyleBackColor = true;
@@ -627,9 +794,9 @@
             this.groupBox13.Controls.Add(this.linkLabel6);
             this.groupBox13.Controls.Add(this.label10);
             this.groupBox13.Controls.Add(this.textBox3);
-            this.groupBox13.Location = new System.Drawing.Point(158, 239);
+            this.groupBox13.Location = new System.Drawing.Point(161, 226);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(291, 120);
+            this.groupBox13.Size = new System.Drawing.Size(291, 95);
             this.groupBox13.TabIndex = 9;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "TelegramBot";
@@ -657,7 +824,7 @@
             // lbl_startupcode
             // 
             this.lbl_startupcode.AutoSize = true;
-            this.lbl_startupcode.Location = new System.Drawing.Point(74, 93);
+            this.lbl_startupcode.Location = new System.Drawing.Point(167, 67);
             this.lbl_startupcode.Name = "lbl_startupcode";
             this.lbl_startupcode.Size = new System.Drawing.Size(41, 13);
             this.lbl_startupcode.TabIndex = 11;
@@ -666,7 +833,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 93);
+            this.label11.Location = new System.Drawing.Point(99, 67);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 13);
             this.label11.TabIndex = 1;
@@ -705,9 +872,9 @@
             // 
             this.groupBox12.Controls.Add(this.radio_saveloot);
             this.groupBox12.Controls.Add(this.radio_savesailors);
-            this.groupBox12.Location = new System.Drawing.Point(362, 161);
+            this.groupBox12.Location = new System.Drawing.Point(362, 84);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(98, 72);
+            this.groupBox12.Size = new System.Drawing.Size(98, 70);
             this.groupBox12.TabIndex = 7;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Optimal strategy ";
@@ -742,9 +909,9 @@
             this.groupBox11.Controls.Add(this.radio_iron);
             this.groupBox11.Controls.Add(this.radio_wood);
             this.groupBox11.Controls.Add(this.radio_gold);
-            this.groupBox11.Location = new System.Drawing.Point(9, 239);
+            this.groupBox11.Location = new System.Drawing.Point(12, 226);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(143, 120);
+            this.groupBox11.Size = new System.Drawing.Size(143, 95);
             this.groupBox11.TabIndex = 6;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Auto-Ship materials";
@@ -764,7 +931,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(11, 89);
+            this.radioButton6.Location = new System.Drawing.Point(64, 43);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(44, 17);
             this.radioButton6.TabIndex = 3;
@@ -814,7 +981,7 @@
             this.groupBox10.Controls.Add(this.chk_onlyfactory);
             this.groupBox10.Location = new System.Drawing.Point(257, 161);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(103, 71);
+            this.groupBox10.Size = new System.Drawing.Size(103, 59);
             this.groupBox10.TabIndex = 5;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Auto Upgrade";
@@ -822,7 +989,7 @@
             // chk_onlyfactory
             // 
             this.chk_onlyfactory.AutoSize = true;
-            this.chk_onlyfactory.Location = new System.Drawing.Point(6, 35);
+            this.chk_onlyfactory.Location = new System.Drawing.Point(6, 30);
             this.chk_onlyfactory.Name = "chk_onlyfactory";
             this.chk_onlyfactory.Size = new System.Drawing.Size(93, 17);
             this.chk_onlyfactory.TabIndex = 0;
@@ -836,14 +1003,14 @@
             this.groupBox9.Controls.Add(this.label9);
             this.groupBox9.Location = new System.Drawing.Point(136, 161);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(115, 71);
+            this.groupBox9.Size = new System.Drawing.Size(115, 59);
             this.groupBox9.TabIndex = 4;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Another Session";
             // 
             // num_hibernationinterval
             // 
-            this.num_hibernationinterval.Location = new System.Drawing.Point(19, 35);
+            this.num_hibernationinterval.Location = new System.Drawing.Point(9, 30);
             this.num_hibernationinterval.Name = "num_hibernationinterval";
             this.num_hibernationinterval.Size = new System.Drawing.Size(81, 20);
             this.num_hibernationinterval.TabIndex = 1;
@@ -852,7 +1019,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 19);
+            this.label9.Location = new System.Drawing.Point(6, 14);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(103, 13);
             this.label9.TabIndex = 0;
@@ -864,14 +1031,15 @@
             this.groupBox8.Controls.Add(this.label8);
             this.groupBox8.Location = new System.Drawing.Point(8, 160);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(121, 72);
+            this.groupBox8.Size = new System.Drawing.Size(121, 60);
             this.groupBox8.TabIndex = 3;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Auto-Barrel";
             // 
             // num_barrelinterval
             // 
-            this.num_barrelinterval.Location = new System.Drawing.Point(12, 36);
+            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.num_barrelinterval.Location = new System.Drawing.Point(12, 31);
             this.num_barrelinterval.Minimum = new decimal(new int[] {
             1,
             0,
@@ -885,12 +1053,13 @@
             0,
             0,
             0});
+            this.num_barrelinterval.ValueChanged += new System.EventHandler(this.num_barrelinterval_ValueChanged);
             this.num_barrelinterval.Leave += new System.EventHandler(this.num_barrelinterval_Leave);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 20);
+            this.label8.Location = new System.Drawing.Point(12, 15);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 13);
             this.label8.TabIndex = 0;
@@ -907,7 +1076,7 @@
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Location = new System.Drawing.Point(8, 84);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(447, 70);
+            this.groupBox6.Size = new System.Drawing.Size(352, 70);
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Collect / Produce Limit";
@@ -973,7 +1142,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label6.Location = new System.Drawing.Point(387, 16);
+            this.label6.Location = new System.Drawing.Point(298, 16);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 3;
@@ -1009,7 +1178,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(402, 404);
+            this.checkBox1.Location = new System.Drawing.Point(366, 168);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(58, 17);
             this.checkBox1.TabIndex = 1;
@@ -1169,6 +1338,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepevery)).EndInit();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).EndInit();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
@@ -1287,6 +1464,17 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button btn_dumpcore;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.RadioButton radio_sleepformins;
+        private System.Windows.Forms.RadioButton radio_sleepforhrs;
+        private System.Windows.Forms.NumericUpDown num_sleepevery;
+        private System.Windows.Forms.RadioButton radio_sleepeverymin;
+        private System.Windows.Forms.RadioButton radio_sleepeveryhrs;
+        private System.Windows.Forms.NumericUpDown num_sleepfor;
+        private System.Windows.Forms.CheckBox chk_smartsleep;
+        private System.Windows.Forms.CheckBox chk_sleepenabled;
     }
 }
 

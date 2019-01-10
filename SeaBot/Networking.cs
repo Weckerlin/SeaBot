@@ -53,8 +53,6 @@ namespace SeaBotCore
             _syncThread.Start();
         }
 
-        public static string cache1 = "";
-        public static string cache2 = "";
 
         private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
         {
@@ -109,8 +107,8 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(6 * 1000);
-                if ( _gametasks.Count != 0 &&
-                                                                         Core.GlobalData.Level != 0)
+                if (_gametasks.Count != 0 &&
+                    Core.GlobalData.Level != 0)
                 {
                     Logger.Logger.Debug("Syncing...");
                     Sync();
@@ -122,16 +120,6 @@ namespace SeaBotCore
                     _gametasks.Add(new Task.HeartBeat());
 
                     Sync();
-                }
-
-                foreach (var delayedtask in _delayedtaskList)
-                {
-                    if ((delayedtask.InvokeTime - DateTime.Now).Seconds > 0)
-                    {
-                        //invoke
-                        Logger.Logger.Debug("Added delayedtask");
-                        _gametasks.Add(delayedtask.Task);
-                    }
                 }
             }
         }
@@ -147,10 +135,6 @@ namespace SeaBotCore
             _lastRaised = DateTime.Now;
         }
 
-        public static void AddDelayedTask(DelayedTask task)
-        {
-            _delayedtaskList.Add(task);
-        }
 
         private static readonly HttpClient Client = new HttpClient();
 
@@ -176,8 +160,8 @@ namespace SeaBotCore
         {
             var result = new StringBuilder(bytes.Length * 2);
 
-            for (var i = 0; i < bytes.Length; i++)
-                result.Append(bytes[i].ToString(upperCase ? "X2" : "x2"));
+            foreach (var t in bytes)
+                result.Append(t.ToString(upperCase ? "X2" : "x2"));
 
             return result.ToString();
         }
@@ -194,9 +178,12 @@ namespace SeaBotCore
             {
                 cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.Config.server_token));
                 Logger.Logger.Info("[1/3] Getting another cookies");
-                var result = client.GetAsync("en/seaport/").Result;
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
+             
+
+                var result = client.GetAsync("en/seaport/").Result;
+               
                 result = client.GetAsync("en/seaport/").Result;
                 Logger.Logger.Info("[2/3] Getting protal");
                 var stringtext = result.Content.ReadAsStringAsync().Result;
@@ -219,6 +206,20 @@ namespace SeaBotCore
                     {
                         Cache.Update(mtch.Groups[1].Value);
                     }
+                    regex = new Regex("clientPath = \"(.+)\";");
+                    mtch = regex.Match(data);
+                    if (mtch.Success)
+                    {
+                        Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);
+                    }
+                    Client.DefaultRequestHeaders.Host = "portal.pixelfederation.com";
+                    Client.DefaultRequestHeaders.Add("Origin", "https://r4a4v3g4.ssl.hwcdn.net");
+                    Client.DefaultRequestHeaders.AcceptEncoding.TryParseAdd("gzip, deflate, br");
+                    Client.DefaultRequestHeaders.Accept.TryParseAdd(@"*/*");
+                    Client.DefaultRequestHeaders.AcceptLanguage.TryParseAdd(
+                        "en-GB,en-US;q=0.9,en;q=0.8,ru;q=0.7,uk;q=0.6");
+                    Client.DefaultRequestHeaders.Add("DNT","1");
+                    Client.DefaultRequestHeaders.Add("X-Requested-With", "ShockwaveFlash/32.0.0.114");
                 }
                 else
                 {
@@ -233,10 +234,19 @@ namespace SeaBotCore
                 {"session_id", Core.Ssid}
             };
             var s = SendRequest(values, "client.login");
-
+            SendRequest(values, "client.update");
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+            var rand = new Random();
+
+            var loadtime = rand.Next(5000, 13000);
+            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000:F1} seconds");
+            Thread.Sleep(loadtime);
+            Logger.Logger.Info($"{loadtime / 1000:F1} seconds elapsed");
+            values.Add("loading_time", loadtime.ToString());
+            SendRequest(values, "tracking.finishedLoading");
             Events.Events.LoginedEvent.Logined.Invoke();
         }
+
 
         public static void Sync()
         {
@@ -275,7 +285,15 @@ namespace SeaBotCore
             var response = SendRequest(values, "client.synchronize");
             Logger.Logger.Debug(response);
             var doc = new XmlDocument();
-            doc.LoadXml(response);
+            try
+            {
+                doc.LoadXml(response);
+            }
+            catch (Exception e)
+            {
+                Logger.Logger.Fatal($"Server is responding with non xml file - Response = {response}; Exception info = {e.ToString()}");
+            }
+
             if (doc.DocumentElement != null)
             {
                 var s = doc.DocumentElement.SelectNodes("task");
@@ -370,7 +388,6 @@ namespace SeaBotCore
             }
 
             _lastRaised = DateTime.Now;
-         
         }
     }
 }
