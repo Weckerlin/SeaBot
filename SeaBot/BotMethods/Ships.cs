@@ -102,17 +102,16 @@ namespace SeaBotCore.BotMethods
 
             for (var index = 0; index < Core.GlobalData.Ships.Count; index++)
             {
-
                 var ship = Core.GlobalData.Ships[index];
                 if (ship.TargetId == 0 && ship.Activated != 0 && ship.Sent == 0)
                 {
                     var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
 
-                    if (bestplace == null||SeaBotCore.Core.GlobalData.Sailors< AutoShipUtils.GetSailors(ship))
+                    if (bestplace == null || Core.GlobalData.Sailors < AutoShipUtils.GetSailors(ship))
                     {
                         continue;
                     }
-                   
+
 
                     var lvls = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == bestplace.DefId).First().Levels
                         .Level
@@ -124,7 +123,7 @@ namespace SeaBotCore.BotMethods
                         wecan = remain;
                     }
 
-                    Core.GlobalData.Sailors -= (int)lvls.Sailors;
+                    Core.GlobalData.Sailors -= (int) lvls.Sailors;
 
                     bestplace.CargoOnTheWay += (int) wecan;
                     Core.GlobalData.Ships[index].Sent =

@@ -39,12 +39,14 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
+using Exceptionless.Configuration;
 using SeaBotCore.Config;
 using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
 
-[assembly: Exceptionless.Configuration.Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
+[assembly: Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
+
 namespace SeaBotGUI
 {
     public partial class Form1 : Form
@@ -67,7 +69,7 @@ namespace SeaBotGUI
         public void LoadControls()
         {
             ExceptionlessClient.Default.Register(true);
-            
+
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
@@ -107,13 +109,11 @@ namespace SeaBotGUI
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
             Core.Config.PropertyChanged += Config_PropertyChanged;
-           
-
         }
 
         private void BotStarted_OnBotStartedEvent()
         {
-            Form1.instance.Invoke(new Action(() =>
+            instance.Invoke(new Action(() =>
             {
                 button3.Enabled = true;
 
@@ -123,7 +123,7 @@ namespace SeaBotGUI
 
         private void BotStopped_OnBotStoppedEvent()
         {
-            Form1.instance.Invoke(new Action(() =>
+            instance.Invoke(new Action(() =>
             {
                 button3.Enabled = false;
 
@@ -133,7 +133,7 @@ namespace SeaBotGUI
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-           Logger.Fatal(e.ExceptionObject.ToString());
+            Logger.Fatal(e.ExceptionObject.ToString());
         }
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -142,6 +142,7 @@ namespace SeaBotGUI
             {
                 return;
             }
+
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
             instance.Invoke(new Action(() =>
             {
@@ -251,7 +252,9 @@ namespace SeaBotGUI
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             if (!Core.Config.acceptedresponsibility)
             {
-                var msg =MessageBox.Show("By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.", "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
+                var msg = MessageBox.Show(
+                    "By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.",
+                    "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
                 if (msg == DialogResult.OK)
                 {
                     Core.Config.acceptedresponsibility = true;
@@ -374,7 +377,6 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
             if (string.IsNullOrEmpty(Core.Config.server_token))
             {
                 MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
@@ -481,7 +483,6 @@ namespace SeaBotGUI
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CompUtils.OpenLink("https://steamcommunity.com/id/wspin/");
-           
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -670,7 +671,6 @@ namespace SeaBotGUI
             CompUtils.OpenLink("https://github.com/weespin/SeaBot/wiki/Getting-Telegram-Token");
         }
 
-      
 
         private void chk_smartsleep_CheckedChanged(object sender, EventArgs e)
         {
@@ -685,12 +685,12 @@ namespace SeaBotGUI
 
         private void num_sleepfor_ValueChanged(object sender, EventArgs e)
         {
-            Core.Config.sleepfor = (int)num_sleepfor.Value;
+            Core.Config.sleepfor = (int) num_sleepfor.Value;
         }
 
         private void num_sleepevery_ValueChanged(object sender, EventArgs e)
         {
-            Core.Config.sleepevery = (int)num_sleepevery.Value;
+            Core.Config.sleepevery = (int) num_sleepevery.Value;
         }
 
         private void radio_sleepforhrs_CheckedChanged(object sender, EventArgs e)

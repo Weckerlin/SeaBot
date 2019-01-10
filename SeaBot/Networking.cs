@@ -109,8 +109,8 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(6 * 1000);
-                if ( _gametasks.Count != 0 &&
-                                                                         Core.GlobalData.Level != 0)
+                if (_gametasks.Count != 0 &&
+                    Core.GlobalData.Level != 0)
                 {
                     Logger.Logger.Debug("Syncing...");
                     Sync();
@@ -137,7 +137,6 @@ namespace SeaBotCore
             _lastRaised = DateTime.Now;
         }
 
-     
 
         private static readonly HttpClient Client = new HttpClient();
 
@@ -223,17 +222,17 @@ namespace SeaBotCore
 
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
             var rand = new Random();
-           
+
             var loadtime = rand.Next(5000, 13000);
-            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime/1000:F1} seconds");
+            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000:F1} seconds");
             Thread.Sleep(loadtime);
-            Logger.Logger.Info($"{loadtime/1000:F1} seconds elapsed");
+            Logger.Logger.Info($"{loadtime / 1000:F1} seconds elapsed");
             values.Add("loading_time", loadtime.ToString());
             SendRequest(values, "tracking.finishedLoading");
             Events.Events.LoginedEvent.Logined.Invoke();
         }
 
-       
+
         public static void Sync()
         {
             var taskstr = new StringBuilder("<xml>\n");
@@ -366,7 +365,6 @@ namespace SeaBotCore
             }
 
             _lastRaised = DateTime.Now;
-         
         }
     }
 }

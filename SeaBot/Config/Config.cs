@@ -45,14 +45,15 @@ namespace SeaBotCore.Config
         private string _telegramtoken = "";
         private string _autoshiptype = "coins";
         private bool _autoshipprofit;
-        private bool _acceptedresponsibility = false;
-        private bool _sleepeveryhrs = false;
-        private bool _sleepforhrs = false;
+        private bool _acceptedresponsibility;
+        private bool _sleepeveryhrs;
+        private bool _sleepforhrs;
         private int _sleepfor = 25;
         private int _sleepevery = 20;
         private bool _sleepenabled;
         private bool _smartsleepenabled;
         public event PropertyChangedEventHandler PropertyChanged;
+
         public bool sleepenabled
         {
             get => _sleepenabled;
@@ -62,6 +63,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepenabled"));
             }
         } //done
+
         public bool smartsleepenabled
         {
             get => _smartsleepenabled;
@@ -71,6 +73,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("smartsleepenabled"));
             }
         } //done
+
         public int sleepevery
         {
             get => _sleepevery;
@@ -80,6 +83,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepevery"));
             }
         } //done
+
         public int sleepfor
         {
             get => _sleepfor;
@@ -89,6 +93,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepfor"));
             }
         } //done
+
         public bool sleepforhrs
         {
             get => _sleepforhrs;
@@ -98,6 +103,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepforhrs"));
             }
         } //done
+
         public bool sleepeveryhrs
         {
             get => _sleepeveryhrs;
@@ -107,6 +113,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepeveryhrs"));
             }
         } //done
+
         public bool acceptedresponsibility
         {
             get => _acceptedresponsibility;
@@ -116,6 +123,7 @@ namespace SeaBotCore.Config
                 OnPropertyChanged(new PropertyChangedEventArgs("acceptedresponsibility"));
             }
         } //done
+
         public string server_token
         {
             get => _serverToken;

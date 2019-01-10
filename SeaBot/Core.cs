@@ -97,6 +97,7 @@ namespace SeaBotCore
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
         public static DateTime lastsleep = DateTime.Now;
+
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             new System.Threading.Tasks.Task(() =>
@@ -114,13 +115,12 @@ namespace SeaBotCore
         {
             while (true)
             {
-                
                 Thread.Sleep(100);
-                if (Core.Config.sleepenabled)
+                if (Config.sleepenabled)
                 {
                     Sleeping.Sleep();
-                   
                 }
+
                 if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {
                     if (Config.autoupgrade)
