@@ -28,11 +28,11 @@ namespace SeaBotCore
     public static class Core
     {
         private static readonly HttpClient Client = new HttpClient();
-        public static string Ssid = "";
+        public static string Ssid = string.Empty;
         public static GlobalData GlobalData = new GlobalData();
         public static bool Debug;
         public static int hibernation = 0;
-        public static string ServerToken = "";
+        public static string ServerToken = string.Empty;
         public static Config.Config Config = new Config.Config();
         public static Thread BotThread;
 
@@ -76,7 +76,7 @@ namespace SeaBotCore
 
         public static void StartBot()
         {
-            if (Config.server_token == "")
+            if (Config.server_token == string.Empty)
             {
                 Logger.Logger.Fatal("No server_token");
                 return;

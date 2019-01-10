@@ -23,6 +23,7 @@ using SeaBotCore.BotMethods;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Events;
+using SeaBotCore.Utils;
 
 namespace ConsoleApp1
 {
@@ -48,14 +49,15 @@ namespace ConsoleApp1
                     Thread.Sleep(i * 1000);
                     if (!kicked)
                     {
+                        var barrelid = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
                         var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                             .Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
                             Console.WriteLine(
                                 $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
 
-                        Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(),
-                            bar.Definition.Id.ToString(), Core.GlobalData.Level.ToString()));
+                        Networking.AddTask(new Task.ConfirmBarrelTask(barrelid, bar.get_type(), bar.Amount,
+                            bar.Definition.Id, Core.GlobalData.Level));
                         attempts++;
                     }
                     else

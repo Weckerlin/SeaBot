@@ -38,7 +38,7 @@ namespace SeaBotCore
         private static DateTime _lastRaised = DateTime.Now;
 
         private static int _taskId = 1;
-        private static string _lastsend = "";
+        private static string _lastsend = string.Empty;
         private static readonly List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
         private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
 
@@ -143,7 +143,7 @@ namespace SeaBotCore
                 Logger.Logger.Fatal(ex.ToString());
             }
 
-            return "";
+            return string.Empty;
         }
 
         public static string ToHex(this byte[] bytes, bool upperCase)

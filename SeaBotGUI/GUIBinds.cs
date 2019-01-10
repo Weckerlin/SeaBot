@@ -192,7 +192,7 @@ namespace SeaBotGUI.GUIBinds
                     Building.Name = Cache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
                         .First().Name;
                     Building.Level = building.Level;
-                    var producing = "";
+                    var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
                         var willbeproducedat = building.ProdStart + Cache.GetBuildingDefenitions().Items.Item
@@ -207,7 +207,7 @@ namespace SeaBotGUI.GUIBinds
                     }
 
                     Building.Producing = producing;
-                    var upgrade = "";
+                    var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
                         var willbeproducedat = building.UpgStart + Cache.GetBuildingDefenitions().Items.Item
@@ -338,7 +338,7 @@ namespace SeaBotGUI.GUIBinds
                     Ship.Name = Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
                         .First().Name;
 
-                    var willatportat = "";
+                    var willatportat = string.Empty;
                     if (ship.Sent != 0)
                         try
                         {
