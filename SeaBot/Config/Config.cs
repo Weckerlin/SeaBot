@@ -318,7 +318,16 @@ namespace SeaBotCore.Config
         {
             var ser = new JavaScriptSerializer();
             var json = ser.Serialize(Core.Config);
+            try
+            {
+
+          
             File.WriteAllText("config.json", json);
+            }
+            catch (Exception e)
+            {
+                Logger.Logger.Warning("Can't save a config file. Please move the bot in another directory or run with as administrator!");
+            }
         }
 
         public static void Load()
@@ -326,6 +335,7 @@ namespace SeaBotCore.Config
             if (File.Exists("config.json"))
             {
                 var ser = new JavaScriptSerializer();
+
                 Core.Config = ser.Deserialize<Config>(File.ReadAllText("config.json"));
             }
         }

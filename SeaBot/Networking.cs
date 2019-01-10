@@ -270,7 +270,15 @@ namespace SeaBotCore
             var response = SendRequest(values, "client.synchronize");
             Logger.Logger.Debug(response);
             var doc = new XmlDocument();
-            doc.LoadXml(response);
+            try
+            {
+                doc.LoadXml(response);
+            }
+            catch (Exception e)
+            {
+                Logger.Logger.Fatal($"Server is responding with non xml file - Response = {response}; Exception info = {e.ToString()}");
+            }
+
             if (doc.DocumentElement != null)
             {
                 var s = doc.DocumentElement.SelectNodes("task");
