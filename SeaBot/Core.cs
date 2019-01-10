@@ -16,12 +16,12 @@
 
 using System;
 using System.ComponentModel;
-using SeaBotCore.Data;
-using SeaBotCore.Utils;
 using System.Net.Http;
 using System.Threading;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Config;
+using SeaBotCore.Data;
+using SeaBotCore.Utils;
 
 namespace SeaBotCore
 {
@@ -36,6 +36,10 @@ namespace SeaBotCore
         public static Config.Config Config = new Config.Config();
         public static Thread BotThread;
 
+        private static DateTime _lastbarrel = DateTime.Now;
+        private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
+        public static DateTime lastsleep = DateTime.Now.AddMinutes(-1);
+
         static Core()
         {
             Configurator.Load();
@@ -47,10 +51,7 @@ namespace SeaBotCore
         {
             get
             {
-                if (BotThread != null)
-                {
-                    return BotThread.IsAlive;
-                }
+                if (BotThread != null) return BotThread.IsAlive;
 
                 return false;
             }
@@ -94,10 +95,6 @@ namespace SeaBotCore
             }).Start();
         }
 
-        private static DateTime _lastbarrel = DateTime.Now;
-        private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
-        public static DateTime lastsleep = DateTime.Now.AddMinutes(-1);
-
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             new System.Threading.Tasks.Task(() =>
@@ -105,6 +102,20 @@ namespace SeaBotCore
                 if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
                 {
                     Logger.Logger.Info("Restarting bot");
+                    StopBot();
+                    StartBot();
+                }
+
+                if (e == Enums.EErrorCode.PLAYER_BANNED)
+                {
+                    Logger.Logger.Fatal("User is banned.");
+                    StopBot();
+                }
+
+                if (e == Enums.EErrorCode.MAINTENANCE || e == Enums.EErrorCode.PLAYER_MAINTENANCE)
+                {
+                    Logger.Logger.Info("MAINTENANCE! Retrying after 30 mins");
+                    Thread.Sleep(30 * 60 * 1000);
                     StopBot();
                     StartBot();
                 }
@@ -116,10 +127,7 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(100);
-                if (Config.sleepenabled)
-                {
-                    Sleeping.Sleep();
-                }
+                if (Config.sleepenabled) Sleeping.Sleep();
 
                 if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {
@@ -129,32 +137,18 @@ namespace SeaBotCore
                         Buildings.AutoUpgrade(Config.upgradeonlyfactory);
                     }
 
-                    if (Config.autoship)
-                    {
-                        Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
-                    }
+                    if (Config.autoship) Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
 
-                    if (Config.collectfish)
-                    {
-                        FishPier.CollectFish();
-                    }
+                    if (Config.collectfish) FishPier.CollectFish();
 
 
-                    if (Config.collectfactory)
-                    {
-                        Buildings.CollectMaterials();
-                    }
+                    if (Config.collectfactory) Buildings.CollectMaterials();
 
                     if (Config.prodfactory)
-                    {
                         Factories.ProduceFactories(Config.ironlimit, Config.stonelimit,
                             Config.woodlimit);
-                    }
 
-                    if (Config.finishupgrade)
-                    {
-                        Buildings.FinishUpgrade();
-                    }
+                    if (Config.finishupgrade) Buildings.FinishUpgrade();
 
                     _lastdefinv = DateTime.Now;
                     ;

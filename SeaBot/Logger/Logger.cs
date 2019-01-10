@@ -17,7 +17,6 @@
 using System;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 namespace SeaBotCore.Logger
@@ -28,9 +27,11 @@ namespace SeaBotCore.Logger
         private static readonly string datetimeFormat;
         private static readonly string logFilename;
 
+        public static bool Muted = false;
+
         /// <summary>
-        /// Initiate an instance of SimpleLogger class constructor.
-        /// If log file does not exist, it will be created automatically.
+        ///     Initiate an instance of SimpleLogger class constructor.
+        ///     If log file does not exist, it will be created automatically.
         /// </summary>
         static Logger()
         {
@@ -39,21 +40,14 @@ namespace SeaBotCore.Logger
 
             // Log file header line
             var logHeader = logFilename + " is created.";
-            if (!Directory.Exists("logs"))
-            {
-                Directory.CreateDirectory("logs");
-            }
+            if (!Directory.Exists("logs")) Directory.CreateDirectory("logs");
 
             if (!File.Exists("logs/" + logFilename))
-            {
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
-            }
         }
 
-        public static bool Muted = false;
-
         /// <summary>
-        /// Log a DEBUG message
+        ///     Log a DEBUG message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Debug(string text)
@@ -62,7 +56,7 @@ namespace SeaBotCore.Logger
         }
 
         /// <summary>
-        /// Log an ERROR message
+        ///     Log an ERROR message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Error(string text)
@@ -71,7 +65,7 @@ namespace SeaBotCore.Logger
         }
 
         /// <summary>
-        /// Log a FATAL ERROR message
+        ///     Log a FATAL ERROR message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Fatal(string text)
@@ -80,7 +74,7 @@ namespace SeaBotCore.Logger
         }
 
         /// <summary>
-        /// Log an INFO message
+        ///     Log an INFO message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Info(string text)
@@ -89,7 +83,7 @@ namespace SeaBotCore.Logger
         }
 
         /// <summary>
-        /// Log a TRACE message
+        ///     Log a TRACE message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Trace(string text)
@@ -98,7 +92,7 @@ namespace SeaBotCore.Logger
         }
 
         /// <summary>
-        /// Log a WARNING message
+        ///     Log a WARNING message
         /// </summary>
         /// <param name="text">Message</param>
         public static void Warning(string text)
@@ -112,10 +106,7 @@ namespace SeaBotCore.Logger
             {
                 using (var writer = new StreamWriter("logs/" + logFilename, append, Encoding.UTF8))
                 {
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        writer.WriteLine(text);
-                    }
+                    if (!string.IsNullOrEmpty(text)) writer.WriteLine(text);
                 }
             }
             catch
@@ -126,10 +117,7 @@ namespace SeaBotCore.Logger
 
         private static void WriteFormattedLog(LogLevel level, string text)
         {
-            if (Muted)
-            {
-                return;
-            }
+            if (Muted) return;
 
             var Message = new Message();
             string pretext;
@@ -149,10 +137,7 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [INFO]    ";
                     break;
                 case LogLevel.DEBUG:
-                    if (!Core.Debug)
-                    {
-                        onlylog = true;
-                    }
+                    if (!Core.Debug) onlylog = true;
 
                     Message.color = Color.Cyan;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [DEBUG]   ";
@@ -205,8 +190,8 @@ namespace SeaBotCore.Logger
 
         public class Message
         {
-            public string message;
             public Color color;
+            public string message;
         }
 
         [Flags]

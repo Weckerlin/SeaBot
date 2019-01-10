@@ -22,7 +22,7 @@ namespace SeaBotCore.Utils
 {
     //https://gist.github.com/frankmeola/9500038
     /// <summary>
-    /// Config object for the XML minifier.
+    ///     Config object for the XML minifier.
     /// </summary>
     public class XMLMinifierSettings
     {
@@ -50,7 +50,7 @@ namespace SeaBotCore.Utils
 
     public class XMLMinifier
     {
-        private XMLMinifierSettings _minifierSettings;
+        private readonly XMLMinifierSettings _minifierSettings;
 
         public XMLMinifier(XMLMinifierSettings minifierSettings)
         {
@@ -66,26 +66,15 @@ namespace SeaBotCore.Utils
 
             //remove comments first so we have less to compress later
             if (_minifierSettings.RemoveComments)
-            {
                 foreach (XmlNode comment in originalXmlDocument.SelectNodes("//comment()"))
-                {
                     comment.ParentNode.RemoveChild(comment);
-                }
-            }
 
             if (_minifierSettings.CloseEmptyTags)
-            {
                 foreach (XmlElement el in originalXmlDocument.SelectNodes(
                     "descendant::*[not(*) and not(normalize-space())]"))
-                {
                     el.IsEmpty = true;
-                }
-            }
 
-            if (_minifierSettings.RemoveWhitespaceBetweenElements)
-            {
-                return originalXmlDocument.InnerXml;
-            }
+            if (_minifierSettings.RemoveWhitespaceBetweenElements) return originalXmlDocument.InnerXml;
 
             var minified = new MemoryStream();
             originalXmlDocument.Save(minified);

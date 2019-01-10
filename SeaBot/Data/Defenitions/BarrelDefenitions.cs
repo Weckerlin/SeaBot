@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
@@ -39,16 +35,16 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
-            [J("version_id")] public long VersionId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
+            [J("version_id")] public int VersionId { get; set; }
             [J("name")] public string Name { get; set; }
-            [J("player_level")] public long PlayerLevel { get; set; }
-            [J("event_id")] public long EventId { get; set; }
+            [J("player_level")] public int PlayerLevel { get; set; }
+            [J("event_id")] public int EventId { get; set; }
             [J("model_name")] public string ModelName { get; set; }
             [J("bounds_min")] public string BoundsMin { get; set; }
             [J("bounds_max")] public string BoundsMax { get; set; }
             [J("spawn_time")] public string SpawnTime { get; set; }
-            [J("lifespan")] public long Lifespan { get; set; }
+            [J("lifespan")] public int Lifespan { get; set; }
             [J("sound")] public string Sound { get; set; }
             [J("positions")] public string Positions { get; set; }
             [J("materials")] public Materials Materials { get; set; }
@@ -62,13 +58,13 @@ namespace SeaBotCore.Data.Defenitions
         public class Material
         {
             public string DefId { get; set; }
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("type")] public string Type { get; set; }
             [J("koef")] public double Koef { get; set; }
             [J("exponent_min")] public double ExponentMin { get; set; }
             [J("exponent_max")] public double ExponentMax { get; set; }
-            [J("offset_min")] public long OffsetMin { get; set; }
-            [J("offset_max")] public long OffsetMax { get; set; }
+            [J("offset_min")] public int OffsetMin { get; set; }
+            [J("offset_max")] public int OffsetMax { get; set; }
         }
     }
 }

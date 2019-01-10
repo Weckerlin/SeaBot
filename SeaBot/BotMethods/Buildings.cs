@@ -15,10 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Utils;
@@ -37,10 +34,7 @@ namespace SeaBotCore.BotMethods
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
 
-                    if (defined != null && (defined.Type != "factory" && onlyfactory))
-                    {
-                        continue;
-                    }
+                    if (defined != null && defined.Type != "factory" && onlyfactory) continue;
 
                     if (neededmats != null)
                     {
@@ -67,19 +61,12 @@ namespace SeaBotCore.BotMethods
                                 var def = Core.GlobalData.Buildings
                                     .FirstOrDefault(n => n.DefId == neededmats.ReqId);
                                 if (def != null)
-                                {
                                     ok = def.Level >= neededmats.ReqLevel;
-                                }
                                 else
-                                {
                                     ok = false;
-                                }
                             }
 
-                            if (neededmats.PlayerLevel > Core.GlobalData.Level)
-                            {
-                                ok = false;
-                            }
+                            if (neededmats.PlayerLevel > Core.GlobalData.Level) ok = false;
                         }
 
                         if (ok)
@@ -88,15 +75,15 @@ namespace SeaBotCore.BotMethods
                             {
                                 var m = Core.GlobalData.Inventory
                                     .First(n => n.Id == neededmat.Id);
-                                m.Amount -= (int) neededmat.Amount;
+                                m.Amount -= neededmat.Amount;
                             }
 
                             Logger.Logger.Info(
                                 $"Started upgrading {defined.Name}");
-                            Networking.AddTask(new Task.StartBuildingUpgradeTask(data.InstId.ToString(),
-                                data.ProdId.ToString(), data.Level, data.UpgType.ToString(), data.DefId.ToString(),
-                                data.GridX.ToString(), data.GridY.ToString()));
-                            data.UpgStart = 0;
+                            Networking.AddTask(new Task.StartBuildingUpgradeTask(data.InstId,
+                                data.ProdId, data.Level, data.UpgType.ToString(), data.DefId,
+                                data.GridX, data.GridY));
+                            data.UpgStart = TimeUtils.GetEpochTime();
                         }
                     }
                 }
@@ -115,7 +102,7 @@ namespace SeaBotCore.BotMethods
                         {
                             Logger.Logger.Info(
                                 $"Finishing upgrading {defined.Name}");
-                            Networking.AddTask(new Task.FinishBuildingUpgradeTask(data.InstId.ToString()));
+                            Networking.AddTask(new Task.FinishBuildingUpgradeTask(data.InstId));
                             data.UpgStart = 0;
                             data.Level++;
                         }
@@ -125,7 +112,6 @@ namespace SeaBotCore.BotMethods
         public static void CollectMaterials()
         {
             foreach (var data in Core.GlobalData.Buildings)
-            {
                 if (data.UpgStart == 0 && data.ProdStart != 0)
                 {
                     var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
@@ -139,12 +125,11 @@ namespace SeaBotCore.BotMethods
                         Logger.Logger.Info(
                             $"Сollecting {defs.ProdOutputs.ProdOutput[0].Amount} {MaterialDB.GetItem(defs.ProdOutputs.ProdOutput[0].MaterialId).Name}");
 
-                        Networking.AddTask(new Task.FinishBuildingProducingTask(data.InstId.ToString()));
+                        Networking.AddTask(new Task.FinishBuildingProducingTask(data.InstId));
 
                         data.ProdStart = 0;
                     }
                 }
-            }
         }
     }
 }

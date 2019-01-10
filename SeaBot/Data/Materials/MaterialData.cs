@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using N = Newtonsoft.Json.NullValueHandling;
 
@@ -38,11 +34,11 @@ namespace SeaBotCore.Data.Materials
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
-            [J("limited")] public long Limited { get; set; }
-            [J("disposable")] public long Disposable { get; set; }
+            [J("limited")] public int Limited { get; set; }
+            [J("disposable")] public int Disposable { get; set; }
             [J("texture")] public string Texture { get; set; }
         }
     }

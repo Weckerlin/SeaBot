@@ -14,18 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
 {
-    class Factories
+    internal class Factories
     {
         public static void ProduceFactories(int num_ironlimit, int num_stonelimit, int num_woodlimit)
         {
@@ -38,10 +35,7 @@ namespace SeaBotCore.BotMethods
                     //lets start?
                     //DO WE HAVE ENOUGH RESOURCES
                     var needed = def.Levels.Level.FirstOrDefault(n => n.Id == data.Level);
-                    if (needed == null)
-                    {
-                        continue;
-                    }
+                    if (needed == null) continue;
 
                     var ok = true;
                     var inputs = needed.ProdOutputs.ProdOutput;
@@ -60,13 +54,9 @@ namespace SeaBotCore.BotMethods
                                 if (ourmat.Amount >= inp.Amount)
                                 {
                                     if (Dict.ContainsKey(inp.Id))
-                                    {
                                         Dict[inp.Id] += inp.Amount;
-                                    }
                                     else
-                                    {
                                         Dict.Add(inp.Id, inp.Amount);
-                                    }
                                 }
                                 else
                                 {
@@ -79,66 +69,39 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-
-                            if (amount != null && amount.Amount > num_woodlimit)
-                            {
-                                if (num_woodlimit != 0)
-                                {
+                            if (amount != null && num_woodlimit != 0)
+                                if (amount.Amount > num_woodlimit)
                                     ok = false;
-                                }
-                            }
-                            else
-                            {
-                                ok = false;
-                            }
                         }
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && amount.Amount > num_ironlimit)
-                            {
-                                if (num_ironlimit != 0)
-                                {
+                            if (amount != null && num_ironlimit != 0)
+                                if (amount.Amount > num_ironlimit)
                                     ok = false;
-                                }
-                            }
-                            else
-                            {
-                                ok = false;
-                            }
                         }
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && amount.Amount > num_stonelimit)
-                            {
-                                if (num_stonelimit != 0)
-                                {
+                            if (amount != null && num_stonelimit != 0)
+                                if (amount.Amount > num_stonelimit)
                                     ok = false;
-                                }
-                            }
-                            else
-                            {
-                                ok = false;
-                            }
                         }
                     }
 
                     if (ok)
                     {
                         foreach (var inp in Dict)
-                        {
                             Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
-                        }
 
                         Logger.Logger.Info(
                             $"Started producing {MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name}");
-                        Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId.ToString(),
-                            data.ProdId.ToString()));
+                        Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
+                            data.ProdId));
                         data.ProdStart = TimeUtils.GetEpochTime();
                     }
                 }

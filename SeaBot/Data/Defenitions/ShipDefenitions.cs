@@ -16,9 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
@@ -40,30 +37,30 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
-            [J("version_id")] public long VersionId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
+            [J("version_id")] public int VersionId { get; set; }
             [J("texture")] public string Texture { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
             [J("desc_loc")] public string DescLoc { get; set; }
             [J("ship_type")] public string ShipType { get; set; }
             [J("propulsion")] public string Propulsion { get; set; }
-            [J("slot_usage")] public long SlotUsage { get; set; }
+            [J("slot_usage")] public int SlotUsage { get; set; }
 
             [J("mass")]
             [JsonConverter(typeof(ParseStringConverter))]
-            public long Mass { get; set; }
+            public int Mass { get; set; }
 
-            [J("start_level")] public long StartLevel { get; set; }
-            [J("player_level")] public long PlayerLevel { get; set; }
+            [J("start_level")] public int StartLevel { get; set; }
+            [J("player_level")] public int PlayerLevel { get; set; }
             [J("req_type")] public string ReqType { get; set; }
-            [J("req_id")] public long ReqId { get; set; }
-            [J("req_level")] public long ReqLevel { get; set; }
-            [J("max_count")] public long MaxCount { get; set; }
-            [J("shop_order_id")] public long ShopOrderId { get; set; }
-            [J("event_id")] public long EventId { get; set; }
-            [J("museum_xp")] public long MuseumXp { get; set; }
-            [J("hide")] public long Hide { get; set; }
+            [J("req_id")] public int ReqId { get; set; }
+            [J("req_level")] public int ReqLevel { get; set; }
+            [J("max_count")] public int MaxCount { get; set; }
+            [J("shop_order_id")] public int ShopOrderId { get; set; }
+            [J("event_id")] public int EventId { get; set; }
+            [J("museum_xp")] public int MuseumXp { get; set; }
+            [J("hide")] public int Hide { get; set; }
             [J("bounds_min")] public string BoundsMin { get; set; }
             [J("bounds_max")] public string BoundsMax { get; set; }
 
@@ -93,7 +90,7 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Animation
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("data")] public string Data { get; set; }
         }
 
@@ -104,17 +101,17 @@ namespace SeaBotCore.Data.Defenitions
 
         public class CapacityLevelsLevel
         {
-            [J("id")] public long Id { get; set; }
-            [J("xp")] public long Xp { get; set; }
-            [J("gem_price")] public long GemPrice { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("xp")] public int Xp { get; set; }
+            [J("gem_price")] public int GemPrice { get; set; }
 
             [J("capacity", NullValueHandling = N.Ignore)]
-            public long? Capacity { get; set; }
+            public int? Capacity { get; set; }
 
             [J("materials")] public Materials Materials { get; set; }
 
             [J("sailors", NullValueHandling = N.Ignore)]
-            public long? Sailors { get; set; }
+            public int? Sailors { get; set; }
         }
 
         public class Materials
@@ -124,8 +121,8 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Material
         {
-            [J("id")] public long Id { get; set; }
-            [J("amount")] public long Amount { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("amount")] public int Amount { get; set; }
         }
 
         public class LevelsClass
@@ -135,12 +132,12 @@ namespace SeaBotCore.Data.Defenitions
 
         public class LevelsLevel
         {
-            [J("id")] public long Id { get; set; }
-            [J("xp")] public long Xp { get; set; }
-            [J("gem_price")] public long GemPrice { get; set; }
-            [J("sailors")] public long Sailors { get; set; }
-            [J("capacity")] public long Capacity { get; set; }
-            [J("speed")] public long Speed { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("xp")] public int Xp { get; set; }
+            [J("gem_price")] public int GemPrice { get; set; }
+            [J("sailors")] public int Sailors { get; set; }
+            [J("capacity")] public int Capacity { get; set; }
+            [J("speed")] public int Speed { get; set; }
 
             [J("materials", NullValueHandling = N.Ignore)]
             public Materials Materials { get; set; }
@@ -158,25 +155,27 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Particle
         {
-            [J("particle_id")] public long ParticleId { get; set; }
+            [J("particle_id")] public int ParticleId { get; set; }
             [J("data")] public string Data { get; set; }
         }
 
         internal class ParseStringConverter : JsonConverter
         {
-            public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
+            public static readonly ParseStringConverter Singleton = new ParseStringConverter();
+
+            public override bool CanConvert(Type t)
+            {
+                return t == typeof(int) || t == typeof(int?);
+            }
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
             {
                 if (reader.TokenType == JsonToken.Null) return null;
                 var value = serializer.Deserialize<string>(reader);
-                long l;
-                if (Int64.TryParse(value, out l))
-                {
-                    return l;
-                }
+                int l;
+                if (int.TryParse(value, out l)) return l;
 
-                throw new Exception("Cannot unmarshal type long");
+                throw new Exception("Cannot unmarshal type int");
             }
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -187,11 +186,9 @@ namespace SeaBotCore.Data.Defenitions
                     return;
                 }
 
-                var value = (long) untypedValue;
+                var value = (int) untypedValue;
                 serializer.Serialize(writer, value.ToString());
             }
-
-            public static readonly ParseStringConverter Singleton = new ParseStringConverter();
         }
     }
 }

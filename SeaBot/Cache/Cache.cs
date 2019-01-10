@@ -15,30 +15,40 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using Newtonsoft.Json;
-using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
-
 
 namespace SeaBotCore
 {
     public static class Cache
     {
-        static object locker = new object();
         private const string _cachefolder = "cache";
-        private static string _lastestdef = "1.763.0";
         private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";
         private const string _basedwnladdr = "https://static.seaportgame.com/build/";
+        private static readonly object locker = new object();
+        private static string _lastestdef = "1.763.0";
+
+        private static BoatDefenitions.Root _boatdefenitions;
+
+        private static ShipDefenitions.Root _shipdefenitions;
+
+        private static MarketplaceDefenitions.Root _marketplacedefenitions;
+
+        private static BarrelDefenitions.Root _barreldefenitions;
+
+        private static BuildingDefentions.Root _buildingdefenitions;
+
+        private static MaterialsData.Root _materials;
+
+        private static UpgradeableDefenition.Root _upgradeable;
+
+        private static EventsDefenitions.Root _events;
 
         public static void Update(string currentversion)
         {
@@ -52,11 +62,7 @@ namespace SeaBotCore
                 var version2 = new Version(currentversion);
 
                 var result = version1.CompareTo(version2);
-                if (result != 0)
-                {
-                    //update!
-                    needupdate = true;
-                }
+                if (result != 0) needupdate = true;
             }
             else
             {
@@ -66,10 +72,7 @@ namespace SeaBotCore
 
             if (needupdate)
             {
-                if (Directory.Exists("cache"))
-                {
-                    Directory.Delete("cache", true);
-                }
+                if (Directory.Exists("cache")) Directory.Delete("cache", true);
 
                 Directory.CreateDirectory("cache");
                 _lastestdef = currentversion;
@@ -91,27 +94,20 @@ namespace SeaBotCore
                     {
                         var nodes = doc.SelectSingleNode("xml/files");
                         foreach (XmlNode node in nodes.ChildNodes)
-                        {
                             if (node.InnerText.Contains("definitions_json.zip"))
                             {
                                 var dl = new Regex(@"definitions_json\.zip,(.+)").Match(node.InnerText).Groups[1].Value;
                                 new WebClient().DownloadFile(_basedwnladdr + dl, "cache.zip");
                                 using (var archive = ZipFile.OpenRead("cache.zip"))
                                 {
-                                    if (!Directory.Exists(_cachefolder))
-                                    {
-                                        Directory.CreateDirectory(_cachefolder);
-                                    }
+                                    if (!Directory.Exists(_cachefolder)) Directory.CreateDirectory(_cachefolder);
 
                                     foreach (var entry in archive.Entries)
-                                    {
                                         entry.ExtractToFile(Path.Combine(_cachefolder, entry.FullName), true);
-                                    }
                                 }
 
                                 File.Delete("cache.zip");
                             }
-                        }
                     }
                 }
                 catch (Exception)
@@ -123,18 +119,14 @@ namespace SeaBotCore
             }
         }
 
-        private static BoatDefenitions.Root _boatdefenitions;
-
         public static BoatDefenitions.Root GetBoatLevelDefenitions()
         {
             if (_boatdefenitions == null)
             {
                 if (!File.Exists(_cachefolder + "\\boat.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _boatdefenitions = JsonConvert.DeserializeObject<BoatDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\boat.json"));
@@ -143,18 +135,14 @@ namespace SeaBotCore
             return _boatdefenitions;
         }
 
-        private static ShipDefenitions.Root _shipdefenitions;
-
         public static ShipDefenitions.Root GetShipDefenitions()
         {
             if (_shipdefenitions == null)
             {
                 if (!File.Exists(_cachefolder + "\\ship.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _shipdefenitions = JsonConvert.DeserializeObject<ShipDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\ship.json"));
@@ -163,18 +151,14 @@ namespace SeaBotCore
             return _shipdefenitions;
         }
 
-        private static MarketplaceDefenitions.Root _marketplacedefenitions;
-
         public static MarketplaceDefenitions.Root GetMarketPlaceDefenitions()
         {
             if (_marketplacedefenitions == null)
             {
                 if (!File.Exists(_cachefolder + "\\marketplace.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _marketplacedefenitions = JsonConvert.DeserializeObject<MarketplaceDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\marketplace.json"));
@@ -183,18 +167,14 @@ namespace SeaBotCore
             return _marketplacedefenitions;
         }
 
-        private static BarrelDefenitions.Root _barreldefenitions;
-
         public static BarrelDefenitions.Root GetBarrelDefenitions()
         {
             if (_barreldefenitions == null)
             {
                 if (!File.Exists(_cachefolder + "\\barrel.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _barreldefenitions = JsonConvert.DeserializeObject<BarrelDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\barrel.json"));
@@ -203,18 +183,14 @@ namespace SeaBotCore
             return _barreldefenitions;
         }
 
-        private static BuildingDefentions.Root _buildingdefenitions;
-
         public static BuildingDefentions.Root GetBuildingDefenitions()
         {
             if (_buildingdefenitions == null)
             {
                 if (!File.Exists(_cachefolder + "\\building.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _buildingdefenitions = JsonConvert.DeserializeObject<BuildingDefentions.Root>(
                     File.ReadAllText(_cachefolder + "\\building.json"));
@@ -223,18 +199,14 @@ namespace SeaBotCore
             return _buildingdefenitions;
         }
 
-        private static MaterialsData.Root _materials;
-
         public static MaterialsData.Root GetMaterials()
         {
             if (_materials == null)
             {
                 if (!File.Exists(_cachefolder + "\\material.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _materials = JsonConvert.DeserializeObject<MaterialsData.Root>(
                     File.ReadAllText(_cachefolder + "\\material.json"));
@@ -243,18 +215,14 @@ namespace SeaBotCore
             return _materials;
         }
 
-        private static UpgradeableDefenition.Root _upgradeable;
-
         public static UpgradeableDefenition.Root GetUpgradeablesDefenitions()
         {
             if (_upgradeable == null)
             {
                 if (!File.Exists(_cachefolder + "\\upgradeable.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _upgradeable = JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
                     File.ReadAllText(_cachefolder + "\\upgradeable.json"));
@@ -263,18 +231,14 @@ namespace SeaBotCore
             return _upgradeable;
         }
 
-        private static EventsDefenitions.Root _events;
-
         public static EventsDefenitions.Root GetEventDefenitions()
         {
             if (_events == null)
             {
                 if (!File.Exists(_cachefolder + "\\event.json"))
-                {
                     if (!DownloadCache())
                     {
                     }
-                }
 
                 _events = JsonConvert.DeserializeObject<EventsDefenitions.Root>(
                     File.ReadAllText(_cachefolder + "\\event.json"));

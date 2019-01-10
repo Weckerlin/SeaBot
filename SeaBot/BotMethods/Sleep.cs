@@ -17,10 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Utils;
 
@@ -31,70 +28,53 @@ namespace SeaBotCore.BotMethods
         public static void Sleep()
         {
             if (Core.Config.sleepevery != 0)
-            {
                 if ((DateTime.Now - Core.lastsleep).TotalMinutes >= (Core.Config.sleepeveryhrs
                         ? Core.Config.sleepevery * 60
                         : Core.Config.sleepevery))
                 {
-                    int sleeptimeinmin = 0;
+                    var sleeptimeinmin = 0;
 
                     Core.lastsleep = DateTime.Now;
                     if (Core.Config.smartsleepenabled)
                     {
                         //10 min
-                        int thresholdinmin = 20;
-                        List<int> DelayMinList = new List<int>();
+                        var thresholdinmin = 20;
+                        var DelayMinList = new List<int>();
                         foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
-                        {
                             if (ship.Sent != 0)
-                            {
                                 try
                                 {
                                     var shipdef =
                                         Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-                                    if (shipdef == null)
-                                    {
-                                        continue;
-                                    }
+                                    if (shipdef == null) continue;
 
                                     if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels == null)
-                                    {
                                         continue;
-                                    }
 
                                     if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels.Level
                                             .Count == 0)
-                                    {
                                         continue;
-                                    }
 
                                     var lvl = Defenitions.UpgrDef.Items.Item
                                         .FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
                                         .FirstOrDefault(n => n.Id == ship.TargetLevel);
-                                    if (lvl == null)
-                                    {
-                                        continue;
-                                    }
+                                    if (lvl == null) continue;
 
 
                                     var willatportattime = ship.Sent + lvl.TravelTime;
                                     //lol xD 
                                     if (!((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds >
                                           0))
-                                    {
                                         DelayMinList.Add((int) Math.Ceiling(
-                                            ( TimeUtils.FromUnixTime(willatportattime)-DateTime.UtcNow).TotalMinutes));
-                                    }
+                                            (TimeUtils.FromUnixTime(willatportattime) - DateTime.UtcNow).TotalMinutes));
                                 }
                                 catch (Exception e)
                                 {
                                     Logger.Logger.Debug(
                                         $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
                                 }
-                            }
-                        }
 
                         foreach (var building in Core.GlobalData.Buildings)
                         {
@@ -108,7 +88,7 @@ namespace SeaBotCore.BotMethods
                                 //lol xD
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (TimeUtils.FromUnixTime(willbeproducedat)- DateTime.UtcNow ).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat) - DateTime.UtcNow).TotalMinutes));
                             }
 
 
@@ -121,38 +101,30 @@ namespace SeaBotCore.BotMethods
 
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (TimeUtils.FromUnixTime(willbeproducedat)- DateTime.UtcNow ).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat) - DateTime.UtcNow).TotalMinutes));
                             }
                         }
 
                         //Find center
                         var a = DelayMinList.Where(n => n > thresholdinmin).GroupBy(i => i);
-                          var b =   
+                        var b =
                             a.OrderByDescending(grp => grp.Count());
-                           var   mostlikely=b
+                        var mostlikely = b
                             .Select(grp => grp.Key).FirstOrDefault();
                         var avg = DelayMinList.Average();
                         if (mostlikely > avg)
                         {
                             if (mostlikely > thresholdinmin)
-                            {
                                 sleeptimeinmin = mostlikely;
-                            }
                             else
-                            {
                                 sleeptimeinmin = thresholdinmin;
-                            }
                         }
                         else
                         {
                             if (avg > thresholdinmin)
-                            {
                                 sleeptimeinmin = (int) avg;
-                            }
                             else
-                            {
                                 sleeptimeinmin = thresholdinmin;
-                            }
                         }
                     }
                     else
@@ -171,7 +143,6 @@ namespace SeaBotCore.BotMethods
                     }).Start();
                     //StartSleeping
                 }
-            }
         }
     }
 }

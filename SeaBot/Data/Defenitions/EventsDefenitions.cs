@@ -17,9 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
@@ -42,13 +39,13 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
-            [J("player_level")] public long PlayerLevel { get; set; }
-            [J("start_time")] public long StartTime { get; set; }
-            [J("sleep_time")] public long SleepTime { get; set; }
-            [J("end_time")] public long EndTime { get; set; }
+            [J("player_level")] public int PlayerLevel { get; set; }
+            [J("start_time")] public int StartTime { get; set; }
+            [J("sleep_time")] public int SleepTime { get; set; }
+            [J("end_time")] public int EndTime { get; set; }
             [J("contractors")] public string Contractors { get; set; }
             [J("upgradeables")] public string Upgradeables { get; set; }
             [J("dealers")] public string Dealers { get; set; }
@@ -57,7 +54,7 @@ namespace SeaBotCore.Data.Defenitions
             [J("global_contractors")] public string GlobalContractors { get; set; }
             [J("crossroads")] public string Crossroads { get; set; }
             [J("barrel")] public Barrel Barrel { get; set; }
-            [J("social_contract")] public long SocialContract { get; set; }
+            [J("social_contract")] public int SocialContract { get; set; }
             [J("token_upgrade")] public string TokenUpgrade { get; set; }
             [J("city")] public string City { get; set; }
             [J("map")] public string Map { get; set; }
@@ -65,11 +62,18 @@ namespace SeaBotCore.Data.Defenitions
 
         public struct Barrel
         {
-            public long? Integer;
+            public int? Integer;
             public string String;
 
-            public static implicit operator Barrel(long Integer) => new Barrel {Integer = Integer};
-            public static implicit operator Barrel(string String) => new Barrel {String = String};
+            public static implicit operator Barrel(int Integer)
+            {
+                return new Barrel {Integer = Integer};
+            }
+
+            public static implicit operator Barrel(string String)
+            {
+                return new Barrel {String = String};
+            }
         }
 
         internal static class Converter
@@ -88,14 +92,19 @@ namespace SeaBotCore.Data.Defenitions
 
         internal class BarrelConverter : JsonConverter
         {
-            public override bool CanConvert(Type t) => t == typeof(Barrel) || t == typeof(Barrel?);
+            public static readonly BarrelConverter Singleton = new BarrelConverter();
+
+            public override bool CanConvert(Type t)
+            {
+                return t == typeof(Barrel) || t == typeof(Barrel?);
+            }
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
             {
                 switch (reader.TokenType)
                 {
                     case JsonToken.Integer:
-                        var integerValue = serializer.Deserialize<long>(reader);
+                        var integerValue = serializer.Deserialize<int>(reader);
                         return new Barrel {Integer = integerValue};
                     case JsonToken.String:
                     case JsonToken.Date:
@@ -123,8 +132,6 @@ namespace SeaBotCore.Data.Defenitions
 
                 throw new Exception("Cannot marshal type Barrel");
             }
-
-            public static readonly BarrelConverter Singleton = new BarrelConverter();
         }
     }
 }
