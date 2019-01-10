@@ -14,13 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Newtonsoft.Json;
-using SeaBotCore;
-using SeaBotCore.Data;
-using SeaBotCore.Data.Materials;
-using SeaBotCore.Logger;
-using SeaBotCore.Utils;
-using SeaBotGUI.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -31,17 +24,19 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Reflection;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
 using Exceptionless.Configuration;
-using SeaBotCore.Config;
+using Newtonsoft.Json;
+using SeaBotCore;
+using SeaBotCore.Data;
+using SeaBotCore.Data.Materials;
+using SeaBotCore.Logger;
+using SeaBotCore.Utils;
 using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
-using Task = System.Threading.Tasks.Task;
+using SeaBotGUI.Utils;
 
 [assembly: Exceptionless("lVxMtZtAbEjXCOBSGWJ9DjHXlGg1w3808btZZ9Ug")]
 
@@ -51,18 +46,50 @@ namespace SeaBotGUI
     {
         public static TeleConfigData _teleconfig = new TeleConfigData();
 
-        public static bool TeleBotStarted;
-
-
         public static Form1 instance;
-        public DataGridView BuildingGrid => dataGridView1;
-        public DataGridView ShipGrid => dataGridView2;
-        public Label CoinsLabel => lbl_coins;
-        public Label FishLabel => lbl_fish;
-        public Label StoneLabel => lbl_stone;
-        public Label GemLabel => lbl_gems;
-        public Label IronLabel => lbl_iron;
-        public Label WoodLabel => lbl_wood;
+
+        private bool barrelsaid;
+
+        public Form1()
+        {
+            // bot = new WTGLib("a");
+            ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
+            InitializeComponent();
+            instance = this;
+            TeleConfigSer.Load();
+            MaximizeBox = false;
+            CheckForUpdates();
+            LoadControls();
+            Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+            if (!Core.Config.acceptedresponsibility)
+            {
+                var msg = MessageBox.Show(
+                    "By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.",
+                    "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
+                if (msg == DialogResult.OK)
+                    Core.Config.acceptedresponsibility = true;
+                else
+                    Environment.Exit(0);
+            }
+
+            //Check for cache
+        }
+
+        public DataGridView BuildingGrid { get; private set; }
+
+        public DataGridView ShipGrid { get; private set; }
+
+        public Label CoinsLabel { get; private set; }
+
+        public Label FishLabel { get; private set; }
+
+        public Label StoneLabel { get; private set; }
+
+        public Label GemLabel { get; private set; }
+
+        public Label IronLabel { get; private set; }
+
+        public Label WoodLabel { get; private set; }
 
         public void LoadControls()
         {
@@ -81,8 +108,8 @@ namespace SeaBotGUI
             chk_barrelhack.Checked = Core.Config.barrelhack;
             chk_finishupgrade.Checked = Core.Config.finishupgrade;
             chk_aupgrade.Checked = Core.Config.autoupgrade;
-            dataGridView1.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
-            dataGridView2.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
+            BuildingGrid.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
+            ShipGrid.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
             num_ironlimit.Value = Core.Config.ironlimit;
             num_woodlimit.Value = Core.Config.woodlimit;
             num_stonelimit.Value = Core.Config.stonelimit;
@@ -92,38 +119,26 @@ namespace SeaBotGUI
             SeaBotCore.Events.Events.BotStartedEvent.BotStarted.OnBotStartedEvent += BotStarted_OnBotStartedEvent;
             lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
             if (Core.Config.autoshipprofit)
-            {
                 radio_saveloot.Checked = true;
-            }
             else
-            {
                 radio_savesailors.Checked = true;
-            }
 
             chk_smartsleep.Checked = Core.Config.smartsleepenabled;
             chk_sleepenabled.Checked = Core.Config.sleepenabled;
             num_sleepevery.Value = Core.Config.sleepevery;
             num_sleepfor.Value = Core.Config.sleepfor;
             if (Core.Config.sleepforhrs)
-            {
                 radio_sleepforhrs.Checked = true;
-            }
             else
-            {
                 radio_sleepformins.Checked = true;
-            }
             if (Core.Config.sleepeveryhrs)
-            {
                 radio_sleepeveryhrs.Checked = true;
-            }
             else
-            {
                 radio_sleepeverymin.Checked = true;
-            }
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
-            dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
+            BuildingGrid.DefaultCellStyle.SelectionBackColor = BuildingGrid.DefaultCellStyle.BackColor;
+            BuildingGrid.DefaultCellStyle.SelectionForeColor = BuildingGrid.DefaultCellStyle.ForeColor;
             UpdateButtons(Core.Config.autoshiptype);
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
             Core.Config.PropertyChanged += Config_PropertyChanged;
@@ -156,135 +171,58 @@ namespace SeaBotGUI
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "acceptedresponsibility")
-            {
-                return;
-            }
+            if (e.PropertyName == "acceptedresponsibility") return;
 
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
             instance.Invoke(new Action(() =>
             {
-                if (e.PropertyName == "woodlimit")
-                {
-                    num_woodlimit.Value = Core.Config.woodlimit;
-                }
+                if (e.PropertyName == "woodlimit") num_woodlimit.Value = Core.Config.woodlimit;
 
-                if (e.PropertyName == "ironlimit")
-                {
-                    num_ironlimit.Value = Core.Config.ironlimit;
-                }
+                if (e.PropertyName == "ironlimit") num_ironlimit.Value = Core.Config.ironlimit;
 
 
-                if (e.PropertyName == "stonelimit")
-                {
-                    num_stonelimit.Value = Core.Config.stonelimit;
-                }
+                if (e.PropertyName == "stonelimit") num_stonelimit.Value = Core.Config.stonelimit;
 
-                if (e.PropertyName == "collectfish")
-                {
-                    chk_autofish.Checked = Core.Config.collectfish;
-                }
+                if (e.PropertyName == "collectfish") chk_autofish.Checked = Core.Config.collectfish;
 
-                if (e.PropertyName == "prodfactory")
-                {
-                    chk_prodfact.Checked = Core.Config.prodfactory;
-                }
+                if (e.PropertyName == "prodfactory") chk_prodfact.Checked = Core.Config.prodfactory;
 
-                if (e.PropertyName == "collectfactory")
-                {
-                    chk_collectmat.Checked = Core.Config.collectfactory;
-                }
+                if (e.PropertyName == "collectfactory") chk_collectmat.Checked = Core.Config.collectfactory;
 
-                if (e.PropertyName == "autoupgrade")
-                {
-                    chk_aupgrade.Checked = Core.Config.autoupgrade;
-                }
+                if (e.PropertyName == "autoupgrade") chk_aupgrade.Checked = Core.Config.autoupgrade;
 
-                if (e.PropertyName == "autoship")
-                {
-                    chk_autoshipupg.Checked = Core.Config.autoship;
-                }
+                if (e.PropertyName == "autoship") chk_autoshipupg.Checked = Core.Config.autoship;
 
-                if (e.PropertyName == "finishupgrade")
-                {
-                    chk_finishupgrade.Checked = Core.Config.finishupgrade;
-                }
+                if (e.PropertyName == "finishupgrade") chk_finishupgrade.Checked = Core.Config.finishupgrade;
 
-                if (e.PropertyName == "barrelhack")
-                {
-                    chk_barrelhack.Checked = Core.Config.barrelhack;
-                }
+                if (e.PropertyName == "barrelhack") chk_barrelhack.Checked = Core.Config.barrelhack;
 
-                if (e.PropertyName == "upgradeonlyfactory")
-                {
-                    chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
-                }
+                if (e.PropertyName == "upgradeonlyfactory") chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
 
-                if (e.PropertyName == "barrelinterval")
-                {
-                    num_barrelinterval.Value = Core.Config.barrelinterval;
-                }
+                if (e.PropertyName == "barrelinterval") num_barrelinterval.Value = Core.Config.barrelinterval;
 
                 if (e.PropertyName == "hibernateinterval")
-                {
                     num_hibernationinterval.Value = Core.Config.hibernateinterval;
-                }
 
-                if (e.PropertyName == "autoshiptype")
-                {
-                    UpdateButtons(Core.Config.autoshiptype);
-                }
+                if (e.PropertyName == "autoshiptype") UpdateButtons(Core.Config.autoshiptype);
 
                 if (e.PropertyName == "autoshipprofit")
                 {
                     if (Core.Config.autoshipprofit)
-                    {
                         radio_saveloot.Checked = true;
-                    }
                     else
-                    {
                         radio_savesailors.Checked = true;
-                    }
                 }
             }));
         }
 
-        void OnLogined()
+        private void OnLogined()
         {
             FormatResources(Core.GlobalData);
             GUIBinds.BuildingGrid.Start();
             GUIBinds.ShipGrid.Start();
             Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += Inventory_ItemPropertyChanged;
-        }
-
-        public Form1()
-        {
-            // bot = new WTGLib("a");
-            ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
-            InitializeComponent();
-            instance = this;
-            TeleConfigSer.Load();
-            MaximizeBox = false;
-            CheckForUpdates();
-            LoadControls();
-            Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
-            if (!Core.Config.acceptedresponsibility)
-            {
-                var msg = MessageBox.Show(
-                    "By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.",
-                    "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
-                if (msg == DialogResult.OK)
-                {
-                    Core.Config.acceptedresponsibility = true;
-                }
-                else
-                {
-                    Environment.Exit(0);
-                }
-            }
-
-            //Check for cache
         }
 
 
@@ -313,10 +251,7 @@ namespace SeaBotGUI
 
         public void FormatResources(GlobalData data)
         {
-            if (data.Inventory == null)
-            {
-                return;
-            }
+            if (data.Inventory == null) return;
 
             ResourcesBox.Update();
             var a = new List<ListViewItem>();
@@ -334,20 +269,14 @@ namespace SeaBotGUI
                 MethodInvoker inv = delegate
                 {
                     listView1.Items.Clear();
-                    foreach (var list in a)
-                    {
-                        listView1.Items.Add(list);
-                    }
+                    foreach (var list in a) listView1.Items.Add(list);
                 };
                 listView1.BeginInvoke(inv);
             }
             else
             {
                 listView1.Items.Clear();
-                foreach (var list in a)
-                {
-                    listView1.Items.Add(list);
-                }
+                foreach (var list in a) listView1.Items.Add(list);
             }
         }
 
@@ -382,10 +311,7 @@ namespace SeaBotGUI
                 label7.Text = $"[Old] Version: {version1}";
                 var msg = MessageBox.Show("A new update has been released, press OK to open download page!", "Update!",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes)
-                {
-                    CompUtils.OpenLink(data.HtmlUrl.ToString());
-                }
+                if (msg == DialogResult.Yes) CompUtils.OpenLink(data.HtmlUrl.ToString());
             }
             else
             {
@@ -413,11 +339,7 @@ namespace SeaBotGUI
         }
 
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Core.Config.debug = checkBox1.Checked;
-            Core.Debug = checkBox1.Checked;
-        }
+
 
         private void chk_autofish_CheckedChanged(object sender, EventArgs e)
         {
@@ -542,60 +464,28 @@ namespace SeaBotGUI
 
         private void UpdateButtons(string configAutoshiptype)
         {
-            if (configAutoshiptype == "coins")
-            {
-                radio_gold.Checked = true;
-            }
+            if (configAutoshiptype == "coins") radio_gold.Checked = true;
 
-            if (configAutoshiptype == "fish")
-            {
-                radioButton6.Checked = true;
-            }
+            if (configAutoshiptype == "fish") radioButton6.Checked = true;
 
-            if (configAutoshiptype == "iron")
-            {
-                radio_iron.Checked = true;
-            }
+            if (configAutoshiptype == "iron") radio_iron.Checked = true;
 
-            if (configAutoshiptype == "wood")
-            {
-                radio_wood.Checked = true;
-            }
+            if (configAutoshiptype == "wood") radio_wood.Checked = true;
 
-            if (configAutoshiptype == "stone")
-            {
-                radioButton7.Checked = true;
-            }
+            if (configAutoshiptype == "stone") radioButton7.Checked = true;
         }
 
         private void updatecheck()
         {
-            if (radio_gold.Checked)
-            {
-                Core.Config.autoshiptype = "coins";
-            }
+            if (radio_gold.Checked) Core.Config.autoshiptype = "coins";
 
-            if (radio_iron.Checked)
-            {
-                Core.Config.autoshiptype = "iron";
-            }
+            if (radio_iron.Checked) Core.Config.autoshiptype = "iron";
 
-            if (radio_wood.Checked)
-            {
-                Core.Config.autoshiptype = "wood";
-            }
+            if (radio_wood.Checked) Core.Config.autoshiptype = "wood";
 
-            if (radioButton6.Checked)
-            {
-                //fish 
-                Core.Config.autoshiptype = "fish";
-            }
+            if (radioButton6.Checked) Core.Config.autoshiptype = "fish";
 
-            if (radioButton7.Checked)
-            {
-                //stone
-                Core.Config.autoshiptype = "stone";
-            }
+            if (radioButton7.Checked) Core.Config.autoshiptype = "stone";
         }
 
         private void radio_iron_CheckedChanged(object sender, EventArgs e)
@@ -634,11 +524,8 @@ namespace SeaBotGUI
         private void button4_Click_2(object sender, EventArgs e)
         {
             if (Core.Config.telegramtoken == "")
-            {
                 MessageBox.Show("No telegram token");
-            }
             else
-            {
                 try
                 {
                     TelegramBotController.StartBot(Core.Config.telegramtoken);
@@ -647,29 +534,25 @@ namespace SeaBotGUI
                 {
                     Logger.Fatal(exception.ToString());
                 }
-            }
         }
 
         private void btn_removeitem_Click(object sender, EventArgs e)
         {
-            var much = num_removenum.Value;
-            if (much <= 0)
-            {
-                return;
-            }
+            var much = (int) num_removenum.Value;
+            if (much <= 0) return;
 
             if (listView1.SelectedItems.Count > 0)
             {
                 var picked = listView1.SelectedItems[0].SubItems[0].Text;
                 var wehave = Core.GlobalData.GetAmountItem(picked);
-                if (wehave != 0 && wehave >= (int) much)
+                if (wehave != 0 && wehave >= much)
                 {
                     var item = MaterialDB.GetItem(picked);
                     Logger.Info($"Removed {much} {item.Name}'s");
                     Networking.AddTask(
-                        new SeaBotCore.Task.RemoveMaterialTask(item.DefId.ToString(), ((int) much).ToString()));
-                    Core.GlobalData.Inventory.Where(n => n.Id == item.DefId).First().Amount -=
-                        (int) much;
+                        new Task.RemoveMaterialTask(item.DefId, much));
+                    Core.GlobalData.Inventory.First(n => n.Id == item.DefId).Amount -=
+                        much;
                 }
             }
         }
@@ -702,10 +585,7 @@ namespace SeaBotGUI
             Core.Config.sleepenabled = chk_sleepenabled.Checked;
         }
 
-        private void num_sleepfor_ValueChanged(object sender, EventArgs e)
-        {
-            Core.Config.sleepfor = (int) num_sleepfor.Value;
-        }
+     
 
         private void num_sleepevery_ValueChanged(object sender, EventArgs e)
         {
@@ -715,46 +595,39 @@ namespace SeaBotGUI
         private void radio_sleepforhrs_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_sleepforhrs.Checked)
-            {
                 Core.Config.sleepforhrs = true;
-            }
 
             else
-            {
                 Core.Config.sleepforhrs = false;
-            }
         }
 
         private void radio_sleepeveryhrs_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_sleepeveryhrs.Checked)
-            {
                 Core.Config.sleepeveryhrs = true;
-            }
 
             else
-            {
                 Core.Config.sleepeveryhrs = false;
-            }
         }
 
-        private bool barrelsaid = false;
         private void num_barrelinterval_ValueChanged(object sender, EventArgs e)
         {
-            if (num_barrelinterval.Value < 22 && !barrelsaid)
+            if (num_barrelinterval.Value < 12 && !barrelsaid)
             {
-                MessageBox.Show("Warning, at least 1 SeaBot user got banned for using interval, which is lower than 22.","Alert",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show(
+                    "Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.", "Alert",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 barrelsaid = true;
             }
 
-            if (num_barrelinterval.Value < 10)
-            {
+            if (num_barrelinterval.Value < 12)
                 num_barrelinterval.ForeColor = Color.Red;
-            }
             else
-            {
                 num_barrelinterval.ForeColor = Color.Black;
-            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

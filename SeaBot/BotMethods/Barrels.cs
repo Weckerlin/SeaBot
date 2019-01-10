@@ -15,10 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
@@ -31,44 +28,32 @@ namespace SeaBotCore.BotMethods
         public static void CollectBarrel()
         {
             var nearestev = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
-            var bar = BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
-                .Where(n => n.DefId == nearestev).First());
-            if (bar.Definition.Id != 0)
+            var barrelcontroller = Defenitions.BarrelDef.Items.Item
+                .Where(n => n.DefId == nearestev).First();
+            var nextbarrel = BarrelController.GetNextBarrel(barrelcontroller);
+            if (nextbarrel.Definition.Id != 0)
             {
                 Logger.Logger.Info(
-                    $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
-                if (Core.GlobalData.Inventory.Where(n => n.Id == bar.Definition.Id).FirstOrDefault() != null)
-                {
-                    Core.GlobalData.Inventory.Where(n => n.Id == bar.Definition.Id).First().Amount += bar.Amount;
-                }
+                    $"Barrel! Collecting {nextbarrel.Amount} {MaterialDB.GetItem(nextbarrel.Definition.Id).Name}");
+                if (Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).FirstOrDefault() != null)
+                    Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).First().Amount +=
+                        nextbarrel.Amount;
                 else
-                {
-                    Core.GlobalData.Inventory.Add(new Item {Amount = bar.Amount, Id = (int) bar.Definition.Id});
-                }
+                    Core.GlobalData.Inventory.Add(new Item {Amount = nextbarrel.Amount, Id = nextbarrel.Definition.Id});
             }
             else
             {
                 Logger.Logger.Info(
-                    $"Barrel! Collecting {bar.Amount} sailors!");
+                    $"Barrel! Collecting {nextbarrel.Amount} sailors!");
             }
 
-            Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(),
-                bar.Definition.Id.ToString(), Core.GlobalData.Level.ToString()));
+            Networking.AddTask(new Task.ConfirmBarrelTask(barrelcontroller.DefId, nextbarrel.get_type(),
+                nextbarrel.Amount,
+                nextbarrel.Definition.Id, Core.GlobalData.Level));
         }
 
         public class BarrelMaterial
         {
-            public string get_type()
-            {
-                return _definition.Type;
-            }
-
-            private BarrelDefenitions.Material _definition;
-
-            private int _playerLevel;
-
-            private int _amount;
-
             public BarrelMaterial(BarrelDefenitions.Material param1, int param2, int param3)
             {
                 Definition = param1;
@@ -76,22 +61,15 @@ namespace SeaBotCore.BotMethods
                 Amount = param2;
             }
 
-            public int Amount
-            {
-                get { return _amount; }
-                set { _amount = value; }
-            }
+            public int Amount { get; set; }
 
-            public int PlayerLevel
-            {
-                get { return _playerLevel; }
-                set { _playerLevel = value; }
-            }
+            public int PlayerLevel { get; set; }
 
-            public BarrelDefenitions.Material Definition
+            public BarrelDefenitions.Material Definition { get; set; }
+
+            public string get_type()
             {
-                get { return _definition; }
-                set { _definition = value; }
+                return Definition.Type;
             }
         }
 
@@ -100,7 +78,9 @@ namespace SeaBotCore.BotMethods
         {
             private static double _seed = 1;
 
-            private static double _multiplier = 87981.0;
+            private static readonly double _multiplier = 87981.0;
+
+            public static double _lastBarrelSeed;
 
             public static int NextInt()
             {
@@ -112,7 +92,7 @@ namespace SeaBotCore.BotMethods
                 return Generate() / 2147483647;
             }
 
-            public static Int32 NextIntInRange(double p1, double p2)
+            public static int NextIntInRange(double p1, double p2)
             {
                 p1 = p1 - 0.4999;
                 p2 = p2 + 0.4999;
@@ -135,8 +115,6 @@ namespace SeaBotCore.BotMethods
                 return Math.Ceiling(Math.Round(param1 * 10000) / 10000);
             }
 
-            public static double _lastBarrelSeed;
-
             public static BarrelMaterial GetNextBarrel(BarrelDefenitions.Item _definition)
             {
                 SetSeed(_lastBarrelSeed);
@@ -149,7 +127,7 @@ namespace SeaBotCore.BotMethods
                 var curcelling = Ceil(cur * material.Koef);
                 _lastBarrelSeed = NextInt();
                 material.DefId = _definition.DefId.ToString();
-                var ret = new BarrelMaterial(material, (int) curcelling, (Core.GlobalData.Level));
+                var ret = new BarrelMaterial(material, (int) curcelling, Core.GlobalData.Level);
                 return ret;
             }
         }

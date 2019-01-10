@@ -23,19 +23,19 @@ namespace SeaBotCore.Utils
 {
     public static class TimeUtils
     {
+        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
+
         public static DateTime FromUnixTime(long unixTime)
         {
             return Epoch.AddSeconds(unixTime);
         }
 
-        public static long GetEpochTime()
+        public static int GetEpochTime()
         {
             var utcDate = DateTime.Now.ToUniversalTime();
             var baseTicks = 621355968000000000;
-            long tickResolution = 10000000;
-            var epoch = (utcDate.Ticks - baseTicks) / tickResolution;
-            var epochTicks = (epoch * tickResolution) + baseTicks;
-            var date = new DateTime(epochTicks, DateTimeKind.Local);
+            var tickResolution = 10000000;
+            var epoch = (int) ((utcDate.Ticks - baseTicks) / tickResolution);
             return epoch;
         }
 
@@ -45,15 +45,10 @@ namespace SeaBotCore.Utils
             foreach (var item in Defenitions.EvntDef.Items.Item)
             {
                 var x = GetEpochTime();
-                if (x >= item.StartTime && x <= item.EndTime)
-                {
-                    return item;
-                }
+                if (x >= item.StartTime && x <= item.EndTime) return item;
             }
 
             return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
-
-        private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
     }
 }

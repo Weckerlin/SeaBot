@@ -15,44 +15,39 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace SeaBotCore.Config
 {
     public class Config : INotifyPropertyChanged
     {
-        private string _serverToken = "";
-        private bool _debug;
-        private int _woodlimit;
-        private int _ironlimit;
-        private int _stonelimit;
-        private bool _collectfish;
-        private bool _prodfactory;
-        private bool _collectfactory;
-        private bool _autoupgrade;
-        private bool _autoship;
-        private bool _finishupgrade;
-        private bool _barrelhack;
-        private bool _upgradeonlyfactory;
-        private int _barrelinterval = 22;
-        private int _hibernateinterval = 5;
-        private string _telegramtoken = "";
-        private string _autoshiptype = "coins";
-        private bool _autoshipprofit;
         private bool _acceptedresponsibility;
-        private bool _sleepeveryhrs;
-        private bool _sleepforhrs;
-        private int _sleepfor = 25;
-        private int _sleepevery = 20;
+        private bool _autoship;
+        private bool _autoshipprofit;
+        private string _autoshiptype = "coins";
+        private bool _autoupgrade;
+        private bool _barrelhack;
+        private int _barrelinterval = 22;
+        private bool _collectfactory;
+        private bool _collectfish;
+        private bool _debug;
+        private bool _finishupgrade;
+        private int _hibernateinterval = 5;
+        private int _ironlimit;
+        private bool _prodfactory;
+        private string _serverToken = "";
         private bool _sleepenabled;
+        private int _sleepevery = 20;
+        private bool _sleepeveryhrs;
+        private int _sleepfor = 25;
+        private bool _sleepforhrs;
         private bool _smartsleepenabled;
-        public event PropertyChangedEventHandler PropertyChanged;
+        private int _stonelimit;
+        private string _telegramtoken = "";
+        private bool _upgradeonlyfactory;
+        private int _woodlimit;
 
         public bool sleepenabled
         {
@@ -306,13 +301,15 @@ namespace SeaBotCore.Config
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged(PropertyChangedEventArgs eventArgs)
         {
             PropertyChanged?.Invoke(this, eventArgs);
         }
     }
 
-    class Configurator
+    internal class Configurator
     {
         public static void Save()
         {
@@ -320,13 +317,12 @@ namespace SeaBotCore.Config
             var json = ser.Serialize(Core.Config);
             try
             {
-
-          
-            File.WriteAllText("config.json", json);
+                File.WriteAllText("config.json", json);
             }
             catch (Exception e)
             {
-                Logger.Logger.Warning("Can't save a config file. Please move the bot in another directory or run with as administrator!");
+                Logger.Logger.Warning(
+                    "Can't save a config file. Please move the bot in another directory or run with as administrator!");
             }
         }
 

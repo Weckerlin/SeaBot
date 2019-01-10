@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using N = Newtonsoft.Json.NullValueHandling;
 
@@ -38,19 +34,19 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
             [J("req_type")] public string ReqType { get; set; }
-            [J("req_id")] public long ReqId { get; set; }
-            [J("req_level")] public long ReqLevel { get; set; }
-            [J("shop_order_id")] public long ShopOrderId { get; set; }
-            [J("hide")] public long Hide { get; set; }
+            [J("req_id")] public int ReqId { get; set; }
+            [J("req_level")] public int ReqLevel { get; set; }
+            [J("shop_order_id")] public int ShopOrderId { get; set; }
+            [J("hide")] public int Hide { get; set; }
             [J("texture")] public string Texture { get; set; }
             [J("bounds_min")] public string BoundsMin { get; set; }
             [J("bounds_max")] public string BoundsMax { get; set; }
-            [J("twist_amount")] public long TwistAmount { get; set; }
-            [J("twist_speed")] public long TwistSpeed { get; set; }
+            [J("twist_amount")] public int TwistAmount { get; set; }
+            [J("twist_speed")] public int TwistSpeed { get; set; }
             [J("levels")] public Levels Levels { get; set; }
             [J("prices")] public Prices Prices { get; set; }
         }
@@ -62,12 +58,12 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Level
         {
-            [J("id")] public long Id { get; set; }
-            [J("mass")] public long Mass { get; set; }
-            [J("turn_count")] public long TurnCount { get; set; }
-            [J("turn_time")] public long TurnTime { get; set; }
-            [J("output_id")] public long OutputId { get; set; }
-            [J("output_amount")] public long OutputAmount { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("mass")] public int Mass { get; set; }
+            [J("turn_count")] public int TurnCount { get; set; }
+            [J("turn_time")] public int TurnTime { get; set; }
+            [J("output_id")] public int OutputId { get; set; }
+            [J("output_amount")] public int OutputAmount { get; set; }
             [J("model_name")] public string ModelName { get; set; }
         }
 
@@ -78,7 +74,7 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Price
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("materials")] public Materials Materials { get; set; }
         }
 
@@ -89,8 +85,8 @@ namespace SeaBotCore.Data.Defenitions
 
         public class Material
         {
-            [J("id")] public long Id { get; set; }
-            [J("amount")] public long Amount { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("amount")] public int Amount { get; set; }
         }
     }
 }

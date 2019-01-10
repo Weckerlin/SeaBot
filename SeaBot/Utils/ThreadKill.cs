@@ -14,13 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Permissions;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SeaBotCore.Utils
 {
@@ -29,10 +24,7 @@ namespace SeaBotCore.Utils
         [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
         public static void KillTheThread(Thread th)
         {
-            if (th != null)
-            {
-                th.Abort();
-            }
+            if (th != null) th.Abort();
         }
     }
 }

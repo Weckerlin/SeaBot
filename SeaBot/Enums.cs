@@ -22,6 +22,29 @@ namespace SeaBotCore
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static class Enums
     {
+        public enum EErrorCode
+        {
+            TASK_CORRUPTED_XML = 101,
+            LOGIN = 102,
+            UPDATE = 103,
+            GENOME_INIT = 104,
+            WATCHDOG_TIMEOUT = 106,
+            TASK_IO_ERROR = 107,
+            TASK_SECURITY_ERROR = 108,
+            TASK_WRONG_COLLECTION = 110,
+            MAINTENANCE = 1004,
+            PLAYER_MAINTENANCE = 1005,
+            PLAYER_BANNED = 1006,
+            PLAYER_NOT_FOUND = 1007,
+            INVALID_SESSION = 1008,
+            WRONG_SESSION = 1009,
+            EXPIRED_SESSION = 1010,
+            COLLECTION_IN_FUTURE = 2000,
+            COLLECTION_IN_PAST = 2001,
+            TASK_IN_PAST = 2002,
+            TASK_IN_FUTURE = 2003
+        }
+
         public enum EFactoryType
         {
             SteelFactory = 4,
@@ -76,29 +99,6 @@ namespace SeaBotCore
             captain_new_rarity,
             equation,
             videoreward
-        }
-
-        public enum EErrorCode
-        {
-            TASK_CORRUPTED_XML = 101,
-            LOGIN = 102,
-            UPDATE = 103,
-            GENOME_INIT = 104,
-            WATCHDOG_TIMEOUT = 106,
-            TASK_IO_ERROR = 107,
-            TASK_SECURITY_ERROR = 108,
-            TASK_WRONG_COLLECTION = 110,
-            MAINTENANCE = 1004,
-            PLAYER_MAINTENANCE = 1005,
-            PLAYER_BANNED = 1006,
-            PLAYER_NOT_FOUND = 1007,
-            INVALID_SESSION = 1008,
-            WRONG_SESSION = 1009,
-            EXPIRED_SESSION = 1010,
-            COLLECTION_IN_FUTURE = 2000,
-            COLLECTION_IN_PAST = 2001,
-            TASK_IN_PAST = 2002,
-            TASK_IN_FUTURE = 2003
         }
     }
 }

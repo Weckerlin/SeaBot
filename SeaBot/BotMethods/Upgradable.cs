@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SeaBotCore.Data.Defenitions;
 
 namespace SeaBotCore.BotMethods
@@ -27,26 +23,24 @@ namespace SeaBotCore.BotMethods
     {
         public static void UpgradeUpgradable()
         {
-            foreach (var upg in Core.GlobalData.Upgradeables)
+            for (var index = 0; index < Core.GlobalData.Upgradeables.Count; index++)
             {
-                var def = Defenitions.UpgrDef.Items.Item.Where(n => n.DefId == upg.DefId).First();
-                var currentlvl = def.Levels.Level.Where(n => n.Id == upg.Level).First();
-                if (upg.Level >= def.MaxLevel)
-                {
-                    continue;
-                }
+                var upg = Core.GlobalData.Upgradeables[index];
+                var def = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == upg.DefId);
+                var currentlvl = def.Levels.Level.First(n => n.Id == upg.Level);
+                if (upg.Level >= def.MaxLevel) continue;
 
-                var nextlvl = def.Levels.Level.Where(n => n.Id == upg.Level + 1).First();
+                var nextlvl = def.Levels.Level.First(n => n.Id == upg.Level + 1);
                 if (upg.Progress >= currentlvl.Amount)
                 {
                     //upgrade ofc
-                    Core.GlobalData.Upgradeables.Where(n => n.DefId == upg.DefId).First().Level++;
-                    Core.GlobalData.Upgradeables.Where(n => n.DefId == upg.DefId).First().Progress = 0;
-                    Core.GlobalData.Upgradeables.Where(n => n.DefId == upg.DefId).First().Amount = (int) nextlvl.Amount;
-                    Core.GlobalData.Upgradeables.Where(n => n.DefId == upg.DefId).First().MaterialKoef =
-                        (int) nextlvl.MaterialKoef;
+                    Core.GlobalData.Upgradeables[index].Level++;
+                    Core.GlobalData.Upgradeables[index].Progress = 0;
+                    Core.GlobalData.Upgradeables[index].Amount = nextlvl.Amount;
+                    Core.GlobalData.Upgradeables[index].MaterialKoef =
+                        nextlvl.MaterialKoef;
                     Logger.Logger.Info("Upgraded " + def.Name);
-                    Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId.ToString(), Core.GlobalData.Level));
+                    Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.GlobalData.Level));
                 }
             }
         }

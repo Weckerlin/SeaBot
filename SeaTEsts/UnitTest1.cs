@@ -14,14 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBotCore;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
-using SeaBotCore.Utils;
 
 namespace SeaTests
 {

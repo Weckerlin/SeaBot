@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using SeaBotCore.Data;
-using SeaBotCore.Data.Defenitions;
-using SeaBotCore.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SeaBotCore.Data;
+using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Utils;
 
 namespace SeaBotCore
 {
@@ -34,14 +34,9 @@ namespace SeaBotCore
 
         public class TakeFish : IGameTask
         {
-            public string Action => "finish_boat_prod";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public TakeFish(Boat boat)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
                 var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
@@ -49,148 +44,144 @@ namespace SeaBotCore
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
-                {
                     CustomObjects.Add("turns", b.TurnCount);
-                }
                 else
-                {
                     CustomObjects.Add("turns", turns);
-                }
 
                 Core.GlobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
                     TimeUtils.GetEpochTime();
             }
+
+            public string Action => "finish_boat_prod";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ActivateEvent : IGameTask
         {
-            public string Action => "activate_event";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ActivateEvent(string def_id)
+            public ActivateEvent(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "activate_event";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ActivateItemsOfferTask : IGameTask
         {
-            public string Action => "activate_items_offer";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ActivateItemsOfferTask(string def_id)
+            public ActivateItemsOfferTask(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "activate_items_offer";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ActivateMerchantOfferTask : IGameTask
         {
-            public string Action => "activate_merchant_offer";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ActivateMerchantOfferTask(string def_id)
+            public ActivateMerchantOfferTask(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "activate_merchant_offer";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ActivatePackTask : IGameTask
         {
-            public string Action => "activate_pack";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ActivatePackTask(string def_id)
+            public ActivatePackTask(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "activate_pack";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ActivateShipTask : IGameTask
         {
-            public string Action => "activate_ship";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ActivateShipTask(string inst_id)
+            public ActivateShipTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "activate_ship";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class AssignCaptainTask : IGameTask
         {
-            public string Action => "assign_ship_captain";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public AssignCaptainTask(string ship_inst_id, string captain_inst_id)
+            public AssignCaptainTask(int ship_inst_id, int captain_inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("ship_inst_id", ship_inst_id);
                 CustomObjects.Add("captain_inst_id", captain_inst_id);
             }
+
+            public string Action => "assign_ship_captain";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyBoatTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyBoatTask(string def_id)
+            public BuyBoatTask(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "boat");
                 CustomObjects.Add("payment_type", "standard");
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
-        public class BuyBuildareaTask : IGameTask
+        public class BuyBuildAreaTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyBuildareaTask(string def_id, string x, string y, bool gem = false)
+            public BuyBuildAreaTask(int def_id, int x, int y, bool gem = false)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "buildarea");
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("x", x);
                 CustomObjects.Add("y", y);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyBuildingTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyBuildingTask(string def_id, string x, string y, bool gem = false)
+            public BuyBuildingTask(int def_id, int x, int y, bool gem = false)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "building");
 
                 CustomObjects.Add("def_id", def_id);
@@ -198,393 +189,393 @@ namespace SeaBotCore
                 CustomObjects.Add("y", y);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyCaptainTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyCaptainTask(string def_id, string price_def_id, bool gem = false)
+            public BuyCaptainTask(int def_id, int price_def_id, bool gem = false)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "captain");
 
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("price_def_id", price_def_id);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyItemsOfferTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public BuyItemsOfferTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyMoreSailorsTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public BuyMoreSailorsTask(int amount)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "sailors");
 
                 CustomObjects.Add("amount", amount);
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuySailorsTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public BuySailorsTask(int amount)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "sailors");
 
                 CustomObjects.Add("amount", amount);
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyShipTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyShipTask(string def_id, bool gem = false)
+            public BuyShipTask(int def_id, bool gem = false)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "ship");
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class BuyShipsOfferShipTask : IGameTask
         {
-            public string Action => "purchase";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public BuyShipsOfferShipTask(string def_id, string type, string itemid, bool gem = false)
+            public BuyShipsOfferShipTask(int def_id, string type, int itemid, bool gem = false)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", type);
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("item_id", itemid);
                 CustomObjects.Add("payment_type", gem ? "gem" : "standard");
             }
+
+            public string Action => "purchase";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class CancelShipTask : IGameTask
         {
-            public string Action => "cancel_ship";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public CancelShipTask(string inst_id)
+            public CancelShipTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "cancel_ship";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmAchievementTask : IGameTask
         {
-            public string Action => "confirm_achievement";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmAchievementTask(string def_id)
+            public ConfirmAchievementTask(int def_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "confirm_achievement";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmBarrelTask : IGameTask
         {
-            public string Action => "confirm_barrel";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmBarrelTask(string def_id, string type, string amount, string material_id, string player_lvl)
+            public ConfirmBarrelTask(int def_id, string type, int amount, int material_id, int player_lvl)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("material_id", material_id);
                 CustomObjects.Add("amount", amount);
                 CustomObjects.Add("player_level", player_lvl);
                 CustomObjects.Add("type", type);
                 CustomObjects.Add("def_id", def_id);
             }
+
+            public string Action => "confirm_barrel";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmContractTask : IGameTask
         {
-            public string Action => "confirm_contractor_quest";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public ConfirmContractTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
+
+            public string Action => "confirm_contractor_quest";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmGlobalContractorMilestoneTask : IGameTask
         {
-            public string Action => "confirm_contractor_quest";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public ConfirmGlobalContractorMilestoneTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
+
+            public string Action => "confirm_contractor_quest";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmGlobalContractorObjectiveTask : IGameTask
         {
-            public string Action => "confirm_global_contractor_quest";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public ConfirmGlobalContractorObjectiveTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
+
+            public string Action => "confirm_global_contractor_quest";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmMuseumTask : IGameTask
         {
-            public string Action => "confirm_museum";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public ConfirmMuseumTask(int turns)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("turns", turns);
             }
+
+            public string Action => "confirm_museum";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmSocialContractRewardsTask : IGameTask
         {
-            public string Action => "confirm_social_contract_rewards";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmSocialContractRewardsTask(string inst_ids)
+            public ConfirmSocialContractRewardsTask(int inst_ids)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_ids", inst_ids);
             }
+
+            public string Action => "confirm_social_contract_rewards";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmSocialContractTask : IGameTask
         {
-            public string Action => "confirm_social_contract";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmSocialContractTask(string inst_id)
+            public ConfirmSocialContractTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "confirm_social_contract";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmUpgradeableTask : IGameTask
         {
-            public string Action => "confirm_upgradeable";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmUpgradeableTask(string def_id, int player_lvl)
+            public ConfirmUpgradeableTask(int def_id, int player_lvl)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("player_level", player_lvl);
             }
+
+            public string Action => "confirm_upgradeable";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class DeactivateShipTask : IGameTask
         {
-            public string Action => "deactivate_ship";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public DeactivateShipTask(string inst_id)
+            public DeactivateShipTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "deactivate_ship";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class DeleteAllPlayerMaterialsTask : IGameTask
         {
-            public string Action => "delete_all_player_materials";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             private DeleteAllPlayerMaterialsTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
             }
+
+            public string Action => "delete_all_player_materials";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class DockShipTask : IGameTask
         {
-            public string Action => "confirm_global_contractor_quest";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public DockShipTask()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 //todo reverse this
                 throw new NotImplementedException();
             }
+
+            public string Action => "confirm_global_contractor_quest";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class FinishBoatProducingTask : IGameTask
         {
-            public string Action => "finish_boat_prod";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public FinishBoatProducingTask(string inst_id, int turns)
+            public FinishBoatProducingTask(int inst_id, int turns)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("turns", turns);
             }
+
+            public string Action => "finish_boat_prod";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class FinishBuildingProducingTask : IGameTask
         {
-            public string Action => "finish_building_prod";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public FinishBuildingProducingTask(string inst_id)
+            public FinishBuildingProducingTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "finish_building_prod";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class FinishBuildingUpgradeTask : IGameTask
         {
-            public string Action => "finish_building_upg";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public FinishBuildingUpgradeTask(string inst_id)
+            public FinishBuildingUpgradeTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "finish_building_upg";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class FinishPersonalGuideTask : IGameTask
         {
-            public string Action => "finish_personal_guide_task";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public FinishPersonalGuideTask(string inst_id)
+            public FinishPersonalGuideTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "finish_personal_guide_task";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class GiftConfirmTask : IGameTask
         {
-            public string Action => "confirm_gift";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public GiftConfirmTask(string inst_id)
+            public GiftConfirmTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "confirm_gift";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class StartBuildingProducingTask : IGameTask
         {
-            public string Action => "start_building_prod";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public StartBuildingProducingTask(string inst_id, string prod_id)
+            public StartBuildingProducingTask(int inst_id, int prod_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("prod_id", prod_id);
             }
+
+            public string Action => "start_building_prod";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class StartBuildingUpgradeTask : IGameTask
         {
-            public string Action => "start_building_upg";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public StartBuildingUpgradeTask(string inst_id, string prod_id, int lvl, string debug_type,
-                string debug_defId, string debug_tileX, string debug_tileY)
+            public StartBuildingUpgradeTask(int inst_id, int prod_id, int lvl, string debug_type,
+                int debug_defId, int debug_tileX, int debug_tileY)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("payment_type", "standard");
                 CustomObjects.Add("level", lvl);
@@ -593,38 +584,37 @@ namespace SeaBotCore
                 CustomObjects.Add("debug_tileX", debug_tileX);
                 CustomObjects.Add("debug_tileY", debug_tileY);
             }
+
+            public string Action => "start_building_upg";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class SendShipMarketplaceTask : IGameTask
         {
-            public string Action => "send_ship_marketplace";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public SendShipMarketplaceTask(string inst_id, string def_id, string dest_id, string amount)
+            public SendShipMarketplaceTask(int inst_id, int def_id, int dest_id, int amount)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("dest_id", dest_id);
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("amount", amount);
             }
+
+            public string Action => "send_ship_marketplace";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class UnloadShipTask : IGameTask
         {
-            public string Action => _action;
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-            private readonly string _action = "";
-
-            public UnloadShipTask(string inst_id, string player_level, Enums.EObject eobj, string debug_capacity,
-                string debug_capacity_used, string debug_sailors, string debug_sailors_used, string debug_locationlevel,
-                string debug_progress, Captain cpt = null, string debug_uniqueid = "1")
+            public UnloadShipTask(int inst_id, int player_level, Enums.EObject eobj, int debug_capacity,
+                int debug_capacity_used, int debug_sailors, int debug_sailors_used, int debug_locationlevel,
+                int debug_progress, Captain cpt = null, int debug_uniqueid = 1)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("debug_capacity_used", debug_capacity_used);
                 CustomObjects.Add("debug_sailors_used", debug_sailors_used);
                 CustomObjects.Add("debug_capacity", debug_capacity);
@@ -642,35 +632,36 @@ namespace SeaBotCore
                 switch (eobj)
                 {
                     case Enums.EObject.upgradeable:
-                        _action = "unload_ship_upgradeable";
+                        Action = "unload_ship_upgradeable";
                         break;
                     case Enums.EObject.marketplace:
-                        _action = "unload_ship_marketplace";
+                        Action = "unload_ship_marketplace";
                         break;
                     case Enums.EObject.dealer:
-                        _action = "unload_ship_dealer";
+                        Action = "unload_ship_dealer";
                         break;
                     case Enums.EObject.wreck:
-                        _action = "unload_ship_wreck";
+                        Action = "unload_ship_wreck";
                         break;
                     case Enums.EObject.lost_treasure:
-                        _action = "unload_ship_treasure";
+                        Action = "unload_ship_treasure";
                         break;
                 }
             }
+
+            public string Action { get; } = "";
+
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class SendShipUpgradeableTask : IGameTask
         {
-            public string Action => "send_ship_upgradeable";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public SendShipUpgradeableTask(string inst_id, string dest_id, string dest_amount,
-                string dest_material_koef, string dest_sailors, string amount, string player_lvl)
+            public SendShipUpgradeableTask(int inst_id, int dest_id, int dest_amount,
+                int dest_material_koef, int dest_sailors, int amount, int player_lvl)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
                 CustomObjects.Add("dest_id", dest_id);
                 CustomObjects.Add("dest_amount", dest_amount);
@@ -679,63 +670,68 @@ namespace SeaBotCore
                 CustomObjects.Add("amount", amount);
                 CustomObjects.Add("player_level", player_lvl);
             }
+
+            public string Action => "send_ship_upgradeable";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class LoadShipUpgradeableTask : IGameTask
         {
-            public string Action => "load_ship_upgradeable";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public LoadShipUpgradeableTask(string inst_id)
+            public LoadShipUpgradeableTask(int inst_id)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", inst_id);
             }
+
+            public string Action => "load_ship_upgradeable";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class RemoveMaterialTask : IGameTask
         {
-            public string Action => "remove_material";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public RemoveMaterialTask(string def_id, string amount)
+            public RemoveMaterialTask(int def_id, int amount)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("amount", amount);
             }
+
+            public string Action => "remove_material";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class ConfirmUpgradableTask : IGameTask
         {
-            public string Action => "confirm_upgradeable";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
-            public ConfirmUpgradableTask(string def_id, string player_lvl)
+            public ConfirmUpgradableTask(int def_id, int player_lvl)
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("player_lvl", player_lvl);
             }
+
+            public string Action => "confirm_upgradeable";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
         public class HeartBeat : IGameTask
         {
-            public string Action => "heartbeat";
-            public uint Time => _time;
-            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
-            private readonly uint _time;
-
             public HeartBeat()
             {
-                _time = (uint) TimeUtils.GetEpochTime();
+                Time = (uint) TimeUtils.GetEpochTime();
             }
+
+            public string Action => "heartbeat";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
     }
 }

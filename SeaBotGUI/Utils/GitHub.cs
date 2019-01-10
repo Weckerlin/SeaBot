@@ -16,16 +16,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
 
 namespace SeaBotGUI.Utils
 {
-    class GitHub_Data
+    internal class GitHub_Data
     {
         public class Root
         {

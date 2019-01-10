@@ -26,17 +26,14 @@ using SeaBotCore.Utils;
 
 namespace SeaBotCore.Data
 {
-    static class Parser
+    internal static class Parser
     {
         public static GlobalData ParseXmlToGlobalData(string xml)
         {
             var doc = new XmlDocument();
             doc.LoadXml(xml);
             var data = new GlobalData();
-            if (doc.DocumentElement == null)
-            {
-                return null;
-            }
+            if (doc.DocumentElement == null) return null;
 
             data.UserId = Convert.ToInt32(doc.DocumentElement.SelectSingleNode("pid")?.InnerText);
 
@@ -45,16 +42,12 @@ namespace SeaBotCore.Data
             data.Inventory = new FullyObservableCollection<Item>();
             var inventory = doc.DocumentElement.SelectSingleNode("material");
             if (inventory != null)
-            {
                 foreach (XmlNode node in inventory.ChildNodes)
-                {
                     data.Inventory.Add(new Item
                     {
                         Id = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
                         Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -71,9 +64,7 @@ namespace SeaBotCore.Data
             data.Achievements = new List<Achievement>();
             var achievementsnode = doc.DocumentElement.SelectSingleNode("achievement");
             if (achievementsnode != null)
-            {
                 foreach (XmlNode node in achievementsnode.ChildNodes)
-                {
                     data.Achievements.Add(new Achievement
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -82,8 +73,6 @@ namespace SeaBotCore.Data
                         Done = Convert.ToInt32(node.SelectSingleNode("done")?.InnerText),
                         ConfirmedLevel = Convert.ToInt32(node.SelectSingleNode("confirmed_level")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -92,9 +81,7 @@ namespace SeaBotCore.Data
             data.Boats = new List<Boat>();
             var boatsnode = doc.DocumentElement.SelectSingleNode("boat");
             if (boatsnode != null)
-            {
                 foreach (XmlNode node in boatsnode.ChildNodes)
-                {
                     data.Boats.Add(new Boat
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -103,8 +90,6 @@ namespace SeaBotCore.Data
                         Turn = Convert.ToInt32(node.SelectSingleNode("turn")?.InnerText),
                         ProdStart = Convert.ToInt32(node.SelectSingleNode("prod_start")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -113,9 +98,7 @@ namespace SeaBotCore.Data
             data.CaptainsNew = new List<Captain>();
             var captainnode = doc.DocumentElement.SelectSingleNode("captain_new");
             if (captainnode != null)
-            {
                 foreach (XmlNode node in captainnode.ChildNodes)
-                {
                     data.CaptainsNew.Add(new Captain
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -127,8 +110,6 @@ namespace SeaBotCore.Data
                         SourceType = node.SelectSingleNode("source_type")?.InnerText,
                         BonusAmount = Convert.ToInt32(node.SelectSingleNode("bonus_amount")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -137,7 +118,6 @@ namespace SeaBotCore.Data
             data.Contracts = new List<Contractor>();
             var contractornode = doc.DocumentElement.SelectSingleNode("contractor");
             if (contractornode != null)
-            {
                 foreach (XmlNode node in contractornode.ChildNodes)
                 {
                     var a = new Contractor
@@ -153,18 +133,15 @@ namespace SeaBotCore.Data
                     a.Rewards = new List<Reward>();
                     var rewardnode = node.SelectSingleNode("rewards");
                     foreach (XmlNode rnode in rewardnode)
-                    {
                         a.Rewards.Add(new Reward
                         {
                             Id = Convert.ToInt32(rnode.SelectSingleNode("id")?.InnerText),
                             Type = rnode.SelectSingleNode("type")?.InnerText,
                             Amount = Convert.ToInt32(rnode.SelectSingleNode("amount")?.InnerText)
                         });
-                    }
 
                     data.Contracts.Add(a);
                 }
-            }
 
             #endregion
 
@@ -173,9 +150,7 @@ namespace SeaBotCore.Data
             data.LostTreasures = new List<LostTreasure>();
             var lostTreasurenode = doc.DocumentElement.SelectSingleNode("lost_treasure");
             if (lostTreasurenode != null)
-            {
                 foreach (XmlNode node in lostTreasurenode.ChildNodes)
-                {
                     data.LostTreasures.Add(new LostTreasure
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -183,8 +158,6 @@ namespace SeaBotCore.Data
                         ClaimedChests = Convert.ToInt32(node.SelectSingleNode("claimed_chests")?.InnerText),
                         UnlockStarted = Convert.ToInt32(node.SelectSingleNode("unlock_started")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -193,9 +166,7 @@ namespace SeaBotCore.Data
             data.Ships = new List<Ship>();
             var shipsnode = doc.DocumentElement.SelectSingleNode("ship");
             if (shipsnode != null)
-            {
                 foreach (XmlNode node in shipsnode.ChildNodes)
-                {
                     data.Ships.Add(new Ship
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -218,8 +189,6 @@ namespace SeaBotCore.Data
                         NextCapacityLevel = Convert.ToInt32(node.SelectSingleNode("next_capacity_level")?.InnerText),
                         CapacityLevel = Convert.ToInt32(node.SelectSingleNode("capacity_level")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -228,9 +197,7 @@ namespace SeaBotCore.Data
             data.Upgradeables = new List<Upgradeable>();
             var upgradenode = doc.DocumentElement.SelectSingleNode("upgradeables");
             if (upgradenode != null)
-            {
                 foreach (XmlNode node in upgradenode.ChildNodes)
-                {
                     data.Upgradeables.Add(new Upgradeable
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -244,8 +211,6 @@ namespace SeaBotCore.Data
                         MaterialKoef = Convert.ToInt32(node.SelectSingleNode("material_koef")?.InnerText),
                         PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -254,9 +219,7 @@ namespace SeaBotCore.Data
             data.Buildings = new List<Building>();
             var buildnode = doc.DocumentElement.SelectSingleNode("building");
             if (buildnode != null)
-            {
                 foreach (XmlNode node in buildnode.ChildNodes)
-                {
                     data.Buildings.Add(new Building
                     {
                         DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
@@ -270,8 +233,6 @@ namespace SeaBotCore.Data
                         NewBuildings = Convert.ToInt32(node.SelectSingleNode("new_buildings")?.InnerText),
                         ProdId = Convert.ToInt32(node.SelectSingleNode("prod_id")?.InnerText)
                     });
-                }
-            }
 
             #endregion
 
@@ -305,20 +266,14 @@ namespace SeaBotCore.Data
 
         public int GetAmountItem(string name)
         {
-            return GetAmountItem((int) MaterialDB.GetItem(name).DefId);
+            return GetAmountItem(MaterialDB.GetItem(name).DefId);
         }
 
         public int GetAmountItem(int id)
         {
-            if (Inventory == null)
-            {
-                return 0;
-            }
+            if (Inventory == null) return 0;
 
-            if (Inventory.Any(n => n.Id == id))
-            {
-                return Inventory.First(n => n.Id == id).Amount;
-            }
+            if (Inventory.Any(n => n.Id == id)) return Inventory.First(n => n.Id == id).Amount;
 
             return 0;
         }
@@ -326,16 +281,16 @@ namespace SeaBotCore.Data
 
     public class Building
     {
-        public int InstId;
         public int DefId;
-        public int Level;
         public int GridX;
         public int GridY;
+        public int InstId;
+        public int Level;
+        public int NewBuildings;
+        public int ProdId;
         public long ProdStart;
         public int UpgStart;
         public int UpgType;
-        public int NewBuildings;
-        public int ProdId;
     }
 
     public class Upgradeable
@@ -358,11 +313,11 @@ namespace SeaBotCore.Data
         public int InstId { get; set; }
         public int DefId { get; set; }
         public int Level { get; set; }
-        public long Activated { get; set; }
+        public int Activated { get; set; }
         public string Type { get; set; }
         public int TargetId { get; set; }
         public int TargetLevel { get; set; }
-        public long Sent { get; set; }
+        public int Sent { get; set; }
         public int Cargo { get; set; }
         public int MaterialId { get; set; }
         public int Loaded { get; set; }
@@ -435,8 +390,8 @@ namespace SeaBotCore.Data
 
     public class Item : INotifyPropertyChanged
     {
-        private int _id;
         private int _amount;
+        private int _id;
 
         public int Id
         {

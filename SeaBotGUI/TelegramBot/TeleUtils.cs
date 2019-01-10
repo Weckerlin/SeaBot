@@ -14,12 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading.Tasks;
 using SeaBotCore.Logger;
 
 namespace SeaBotGUI.TelegramBot
@@ -33,10 +29,7 @@ namespace SeaBotGUI.TelegramBot
         {
             get
             {
-                if (_macaddr == null)
-                {
-                    _macaddr = GetDefMac();
-                }
+                if (_macaddr == null) _macaddr = GetDefMac();
 
                 return _macaddr;
             }
@@ -56,18 +49,13 @@ namespace SeaBotGUI.TelegramBot
             {
                 var address = adapter.GetPhysicalAddress();
                 var bytes = address.GetAddressBytes();
-                StringBuilder addr = new StringBuilder();
+                var addr = new StringBuilder();
                 for (var i = 0; i < bytes.Length; i++)
-                {
                     // Display the physical address in hexadecimal.
                     addr.Append(bytes[i].ToString("X2"));
-                    // Insert a hyphen after each byte, unless we are at the end of the
-                }
+                // Insert a hyphen after each byte, unless we are at the end of the
 
-                if (addr.ToString() != "")
-                {
-                    return addr.ToString();
-                }
+                if (addr.ToString() != "") return addr.ToString();
             }
 
             return "DEFCODE";

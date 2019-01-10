@@ -14,26 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Configuration;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using SeaBotCore;
 using SeaBotCore.Data.Materials;
-using Telegram.Bot.Types.InputFiles;
-using Telegram.Bot.Types.ReplyMarkups;
-using File = Telegram.Bot.Types.File;
-using Message = Telegram.Bot.Types.Message;
+using Telegram.Bot.Types;
 
 namespace SeaBotGUI.TelegramBot
 {
-    class TelegramMenu
+    internal class TelegramMenu
     {
         public class NewMenu
         {
@@ -109,22 +98,24 @@ namespace SeaBotGUI.TelegramBot
                         }
                     };
 
+                    public void Unknown(Message msg)
+                    {
+                    }
+
+                    public void OnEnter()
+                    {
+                    }
+
                     private string GetInventory()
                     {
-                        StringBuilder builder = new StringBuilder();
+                        var builder = new StringBuilder();
                         if (Core.GlobalData != null)
                         {
                             if (Core.GlobalData.Inventory != null)
-                            {
                                 foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0))
-                                {
                                     builder.AppendLine($"{MaterialDB.GetItem(item.Id).Name} - {item.Amount}");
-                                }
-                            }
                             else
-                            {
                                 builder.Append("Please start the bot before getting inventory");
-                            }
                         }
                         else
                         {
@@ -132,14 +123,6 @@ namespace SeaBotGUI.TelegramBot
                         }
 
                         return builder.ToString();
-                    }
-
-                    public void Unknown(Message msg)
-                    {
-                    }
-
-                    public void OnEnter()
-                    {
                     }
                 }
 
@@ -430,13 +413,9 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
-                            {
                                 Core.Config.hibernateinterval = ints;
-                            }
                             else
-                            {
                                 TelegramBotController.SendMessage(Message, "Can't parse string!");
-                            }
                         }
                     }
 
@@ -469,13 +448,9 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
-                            {
                                 Core.Config.barrelinterval = ints;
-                            }
                             else
-                            {
                                 TelegramBotController.SendMessage(Message, "Can't parse string!");
-                            }
                         }
                     }
 
@@ -508,13 +483,9 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
-                            {
                                 Core.Config.woodlimit = ints;
-                            }
                             else
-                            {
                                 TelegramBotController.SendMessage(Message, "Can't parse string!");
-                            }
                         }
                     }
 
@@ -546,13 +517,9 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
-                            {
                                 Core.Config.stonelimit = ints;
-                            }
                             else
-                            {
                                 TelegramBotController.SendMessage(Message, "Can't parse string!");
-                            }
                         }
                     }
 
@@ -585,13 +552,9 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
-                            {
                                 Core.Config.stonelimit = ints;
-                            }
                             else
-                            {
                                 TelegramBotController.SendMessage(Message, "Can't parse string!");
-                            }
                         }
                     }
 

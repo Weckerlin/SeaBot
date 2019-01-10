@@ -33,17 +33,22 @@ namespace SeaBotCore
 {
     public static class Networking
     {
-        public class DelayedTask
-        {
-            public Task.IGameTask Task { get; set; }
-            public DateTime InvokeTime { get; set; }
+        private static List<DelayedTask> _delayedtaskList = new List<DelayedTask>();
+        public static Thread _syncThread = new Thread(SyncVoid);
+        private static DateTime _lastRaised = DateTime.Now;
 
-            DelayedTask(Task.IGameTask task, DateTime InvokeAt)
-            {
-                Task = task;
-                InvokeTime = InvokeAt;
-            }
-        }
+        private static int _taskId = 1;
+        private static string _lastsend = "";
+        private static readonly List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
+        private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
+
+        private static readonly HttpClientHandler handler = new HttpClientHandler
+        {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+        };
+
+
+        private static readonly HttpClient Client = new HttpClient(handler);
 
         static Networking()
         {
@@ -67,9 +72,7 @@ namespace SeaBotCore
                     if (Core.IsBotRunning)
                     {
                         if (Core.Config.debug)
-                        {
                             File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                        }
 
                         _syncThread.Abort();
                         Logger.Logger.Muted = true;
@@ -79,17 +82,11 @@ namespace SeaBotCore
                         StartThread();
                         Login();
                         if (Core.Config.debug)
-                        {
                             File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                        }
                     }
                 }
             });
         }
-
-        private static List<DelayedTask> _delayedtaskList = new List<DelayedTask>();
-        public static Thread _syncThread = new Thread(SyncVoid);
-        private static DateTime _lastRaised = DateTime.Now;
 
         public static void StartThread()
         {
@@ -124,23 +121,11 @@ namespace SeaBotCore
             }
         }
 
-        private static int _taskId = 1;
-        private static string _lastsend = "";
-        private static List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
-        private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
-       static HttpClientHandler handler = new HttpClientHandler()
-        {
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-        };
-
         public static void AddTask(Task.IGameTask task)
         {
             _gametasks.Add(task);
             _lastRaised = DateTime.Now;
         }
-
-
-        private static readonly HttpClient Client = new HttpClient(handler);
 
         public static string SendRequest(Dictionary<string, string> data, string action)
         {
@@ -154,6 +139,7 @@ namespace SeaBotCore
             }
             catch (Exception ex)
             {
+                Events.Events.SyncFailedEvent.SyncFailed.Invoke(0);
                 Logger.Logger.Fatal(ex.ToString());
             }
 
@@ -174,7 +160,7 @@ namespace SeaBotCore
         {
             Logger.Logger.Info("Logining ");
             //Get big token
-            var tempuid = String.Empty;
+            var tempuid = string.Empty;
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
@@ -184,10 +170,10 @@ namespace SeaBotCore
                 Logger.Logger.Info("[1/3] Getting another cookies");
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
-             
+
 
                 var result = client.GetAsync("en/seaport/").Result;
-               
+
                 result = client.GetAsync("en/seaport/").Result;
                 Logger.Logger.Info("[2/3] Getting protal");
                 var stringtext = result.Content.ReadAsStringAsync().Result;
@@ -206,23 +192,17 @@ namespace SeaBotCore
                     Logger.Logger.Info("Successfully logged in! Session ID = " + Core.Ssid);
                     regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
                     var mtch = regex.Match(data);
-                    if (mtch.Success)
-                    {
-                        Cache.Update(mtch.Groups[1].Value);
-                    }
+                    if (mtch.Success) Cache.Update(mtch.Groups[1].Value);
                     regex = new Regex("clientPath = \"(.+)\";");
                     mtch = regex.Match(data);
-                    if (mtch.Success)
-                    {
-                        Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);
-                    }
+                    if (mtch.Success) Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);
                     Client.DefaultRequestHeaders.Host = "portal.pixelfederation.com";
                     Client.DefaultRequestHeaders.Add("Origin", "https://r4a4v3g4.ssl.hwcdn.net");
                     Client.DefaultRequestHeaders.AcceptEncoding.TryParseAdd("gzip, deflate, br");
                     Client.DefaultRequestHeaders.Accept.TryParseAdd(@"*/*");
                     Client.DefaultRequestHeaders.AcceptLanguage.TryParseAdd(
                         "en-GB,en-US;q=0.9,en;q=0.8,ru;q=0.7,uk;q=0.6");
-                    Client.DefaultRequestHeaders.Add("DNT","1");
+                    Client.DefaultRequestHeaders.Add("DNT", "1");
                     Client.DefaultRequestHeaders.Add("X-Requested-With", "ShockwaveFlash/32.0.0.114");
                 }
                 else
@@ -295,7 +275,8 @@ namespace SeaBotCore
             }
             catch (Exception e)
             {
-                Logger.Logger.Fatal($"Server is responding with non xml file - Response = {response}; Exception info = {e.ToString()}");
+                Logger.Logger.Fatal(
+                    $"Server is responding with non xml file - Response = {response}; Exception info = {e}");
             }
 
             if (doc.DocumentElement != null)
@@ -303,7 +284,6 @@ namespace SeaBotCore
                 var s = doc.DocumentElement.SelectNodes("task");
                 var passed = 0;
                 foreach (XmlNode node in s)
-                {
                     if (node.SelectSingleNode("result")?.InnerText == "OK")
                     {
                         Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " has been passed");
@@ -313,7 +293,6 @@ namespace SeaBotCore
                     {
                         Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " failed!");
                     }
-                }
 
                 if (passed != 0)
                 {
@@ -342,7 +321,6 @@ namespace SeaBotCore
                 var pushnode = doc.DocumentElement.SelectSingleNode("push");
                 if (pushnode != null)
                     foreach (XmlNode node in pushnode.ChildNodes)
-                    {
                         switch (node.Name)
                         {
                             case "level_up":
@@ -366,25 +344,16 @@ namespace SeaBotCore
                                     var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
                                     var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
                                     if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
-                                    {
                                         for (var i = 0; i < Core.GlobalData.Inventory.Count; i++)
-                                        {
                                             if (Core.GlobalData.Inventory[i].Id == defid)
-                                            {
                                                 Core.GlobalData.Inventory[i].Amount = amount;
-                                            }
-                                        }
-                                    }
                                     else
-                                    {
                                         Core.GlobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
-                                    }
                                 }
 
                                 break;
                             }
                         }
-                    }
             }
             else
             {
@@ -392,6 +361,18 @@ namespace SeaBotCore
             }
 
             _lastRaised = DateTime.Now;
+        }
+
+        public class DelayedTask
+        {
+            private DelayedTask(Task.IGameTask task, DateTime InvokeAt)
+            {
+                Task = task;
+                InvokeTime = InvokeAt;
+            }
+
+            public Task.IGameTask Task { get; set; }
+            public DateTime InvokeTime { get; set; }
         }
     }
 }

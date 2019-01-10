@@ -15,16 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SeaBotGUI.Utils
 {
-    static class CompUtils
+    internal static class CompUtils
     {
         //https://www.mono-project.com/archived/howto_openbrowser/
         //for older mono comp.
@@ -33,7 +29,7 @@ namespace SeaBotGUI.Utils
             try
             {
                 var plat = (int) Environment.OSVersion.Platform;
-                if ((plat != 4) && (plat != 128))
+                if (plat != 4 && plat != 128)
                 {
                     // Use Microsoft's way of opening sites
                     Process.Start(address);
@@ -43,7 +39,7 @@ namespace SeaBotGUI.Utils
                     // We're on Unix, try gnome-open (used by GNOME), then open
                     // (used my MacOS), then Firefox or Konqueror browsers (our last
                     // hope).
-                    var cmdline = String.Format("gnome-open {0} || open {0} || " +
+                    var cmdline = string.Format("gnome-open {0} || open {0} || " +
                                                 "firefox {0} || mozilla-firefox {0} || konqueror {0}", address);
                     var proc = Process.Start(cmdline);
 

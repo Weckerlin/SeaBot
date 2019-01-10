@@ -15,28 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using SeaBotCore;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Events;
-using SeaBotCore.Logger;
-using SeaBotCore.Utils;
-using Task = SeaBotCore.Task;
 
 namespace ConsoleApp1
 {
-    class Program
+    internal class Program
     {
         public static bool kicked;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("BarrelTest");
             var token = File.ReadAllText("token.txt");
@@ -57,10 +51,8 @@ namespace ConsoleApp1
                         var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                             .Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
-                        {
                             Console.WriteLine(
                                 $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
-                        }
 
                         Networking.AddTask(new Task.ConfirmBarrelTask("21", bar.get_type(), bar.Amount.ToString(),
                             bar.Definition.Id.ToString(), Core.GlobalData.Level.ToString()));
