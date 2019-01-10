@@ -70,6 +70,17 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.chk_sleepenabled = new System.Windows.Forms.CheckBox();
+            this.chk_smartsleep = new System.Windows.Forms.CheckBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.num_sleepevery = new System.Windows.Forms.NumericUpDown();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.num_sleepfor = new System.Windows.Forms.NumericUpDown();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radio_sleepforhrs = new System.Windows.Forms.RadioButton();
             this.btn_dumpcore = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -117,17 +128,6 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.chk_smartsleep = new System.Windows.Forms.CheckBox();
-            this.chk_sleepenabled = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -147,6 +147,11 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepevery)).BeginInit();
+            this.groupBox15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).BeginInit();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -163,11 +168,6 @@
             this.tabPage4.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
-            this.groupBox14.SuspendLayout();
-            this.groupBox15.SuspendLayout();
-            this.groupBox16.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -624,6 +624,154 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.chk_sleepenabled);
+            this.groupBox14.Controls.Add(this.chk_smartsleep);
+            this.groupBox14.Controls.Add(this.groupBox16);
+            this.groupBox14.Controls.Add(this.groupBox15);
+            this.groupBox14.Location = new System.Drawing.Point(12, 327);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(274, 89);
+            this.groupBox14.TabIndex = 11;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Sleep";
+            // 
+            // chk_sleepenabled
+            // 
+            this.chk_sleepenabled.AutoSize = true;
+            this.chk_sleepenabled.Location = new System.Drawing.Point(12, 66);
+            this.chk_sleepenabled.Name = "chk_sleepenabled";
+            this.chk_sleepenabled.Size = new System.Drawing.Size(65, 17);
+            this.chk_sleepenabled.TabIndex = 9;
+            this.chk_sleepenabled.Text = "Enabled";
+            this.chk_sleepenabled.UseVisualStyleBackColor = true;
+            this.chk_sleepenabled.CheckedChanged += new System.EventHandler(this.chk_sleepenabled_CheckedChanged);
+            // 
+            // chk_smartsleep
+            // 
+            this.chk_smartsleep.AutoSize = true;
+            this.chk_smartsleep.Location = new System.Drawing.Point(89, 66);
+            this.chk_smartsleep.Name = "chk_smartsleep";
+            this.chk_smartsleep.Size = new System.Drawing.Size(83, 17);
+            this.chk_smartsleep.TabIndex = 8;
+            this.chk_smartsleep.Text = "Smart Sleep";
+            this.chk_smartsleep.UseVisualStyleBackColor = true;
+            this.chk_smartsleep.CheckedChanged += new System.EventHandler(this.chk_smartsleep_CheckedChanged);
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.num_sleepevery);
+            this.groupBox16.Controls.Add(this.radioButton3);
+            this.groupBox16.Controls.Add(this.radioButton4);
+            this.groupBox16.Location = new System.Drawing.Point(149, 19);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(110, 41);
+            this.groupBox16.TabIndex = 1;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Every";
+            // 
+            // num_sleepevery
+            // 
+            this.num_sleepevery.Location = new System.Drawing.Point(3, 15);
+            this.num_sleepevery.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.num_sleepevery.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_sleepevery.Name = "num_sleepevery";
+            this.num_sleepevery.Size = new System.Drawing.Size(43, 20);
+            this.num_sleepevery.TabIndex = 16;
+            this.num_sleepevery.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(52, 21);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(47, 17);
+            this.radioButton3.TabIndex = 15;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Mins";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(52, 6);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(41, 17);
+            this.radioButton4.TabIndex = 14;
+            this.radioButton4.Text = "Hrs";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.num_sleepfor);
+            this.groupBox15.Controls.Add(this.radioButton2);
+            this.groupBox15.Controls.Add(this.radio_sleepforhrs);
+            this.groupBox15.Location = new System.Drawing.Point(0, 19);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(143, 41);
+            this.groupBox15.TabIndex = 0;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Bot will sleep for";
+            // 
+            // num_sleepfor
+            // 
+            this.num_sleepfor.Location = new System.Drawing.Point(12, 15);
+            this.num_sleepfor.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.num_sleepfor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_sleepfor.Name = "num_sleepfor";
+            this.num_sleepfor.Size = new System.Drawing.Size(65, 20);
+            this.num_sleepfor.TabIndex = 17;
+            this.num_sleepfor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(89, 21);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(47, 17);
+            this.radioButton2.TabIndex = 13;
+            this.radioButton2.Text = "Mins";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radio_sleepforhrs
+            // 
+            this.radio_sleepforhrs.AutoSize = true;
+            this.radio_sleepforhrs.Checked = true;
+            this.radio_sleepforhrs.Location = new System.Drawing.Point(89, 6);
+            this.radio_sleepforhrs.Name = "radio_sleepforhrs";
+            this.radio_sleepforhrs.Size = new System.Drawing.Size(41, 17);
+            this.radio_sleepforhrs.TabIndex = 12;
+            this.radio_sleepforhrs.TabStop = true;
+            this.radio_sleepforhrs.Text = "Hrs";
+            this.radio_sleepforhrs.UseVisualStyleBackColor = true;
+            this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // btn_dumpcore
             // 
@@ -1152,133 +1300,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "SeaBot by Weespin";
             // 
-            // groupBox14
-            // 
-            this.groupBox14.Controls.Add(this.chk_sleepenabled);
-            this.groupBox14.Controls.Add(this.chk_smartsleep);
-            this.groupBox14.Controls.Add(this.groupBox16);
-            this.groupBox14.Controls.Add(this.groupBox15);
-            this.groupBox14.Location = new System.Drawing.Point(12, 327);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(274, 89);
-            this.groupBox14.TabIndex = 11;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "Sleep";
-            // 
-            // groupBox15
-            // 
-            this.groupBox15.Controls.Add(this.numericUpDown2);
-            this.groupBox15.Controls.Add(this.radioButton2);
-            this.groupBox15.Controls.Add(this.radioButton1);
-            this.groupBox15.Location = new System.Drawing.Point(0, 19);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(143, 41);
-            this.groupBox15.TabIndex = 0;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "Bot will sleep for";
-            // 
-            // groupBox16
-            // 
-            this.groupBox16.Controls.Add(this.numericUpDown1);
-            this.groupBox16.Controls.Add(this.radioButton3);
-            this.groupBox16.Controls.Add(this.radioButton4);
-            this.groupBox16.Location = new System.Drawing.Point(149, 19);
-            this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(110, 41);
-            this.groupBox16.TabIndex = 1;
-            this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Every";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(89, 6);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(41, 17);
-            this.radioButton1.TabIndex = 12;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Hrs";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(89, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 17);
-            this.radioButton2.TabIndex = 13;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Mins";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(52, 21);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(47, 17);
-            this.radioButton3.TabIndex = 15;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Mins";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(52, 6);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(41, 17);
-            this.radioButton4.TabIndex = 14;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Hrs";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(3, 15);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(43, 20);
-            this.numericUpDown1.TabIndex = 16;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(12, 15);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(65, 20);
-            this.numericUpDown2.TabIndex = 17;
-            // 
-            // chk_smartsleep
-            // 
-            this.chk_smartsleep.AutoSize = true;
-            this.chk_smartsleep.Location = new System.Drawing.Point(89, 66);
-            this.chk_smartsleep.Name = "chk_smartsleep";
-            this.chk_smartsleep.Size = new System.Drawing.Size(83, 17);
-            this.chk_smartsleep.TabIndex = 8;
-            this.chk_smartsleep.Text = "Smart Sleep";
-            this.chk_smartsleep.UseVisualStyleBackColor = true;
-            this.chk_smartsleep.CheckedChanged += new System.EventHandler(this.chk_smartsleep_CheckedChanged);
-            // 
-            // chk_sleepenabled
-            // 
-            this.chk_sleepenabled.AutoSize = true;
-            this.chk_sleepenabled.Location = new System.Drawing.Point(12, 66);
-            this.chk_sleepenabled.Name = "chk_sleepenabled";
-            this.chk_sleepenabled.Size = new System.Drawing.Size(65, 17);
-            this.chk_sleepenabled.TabIndex = 9;
-            this.chk_sleepenabled.Text = "Enabled";
-            this.chk_sleepenabled.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1313,6 +1334,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepevery)).EndInit();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).EndInit();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);
@@ -1338,14 +1367,6 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
-            this.groupBox14.ResumeLayout(false);
-            this.groupBox14.PerformLayout();
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
-            this.groupBox16.ResumeLayout(false);
-            this.groupBox16.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1443,11 +1464,11 @@
         private System.Windows.Forms.GroupBox groupBox16;
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.RadioButton radio_sleepforhrs;
+        private System.Windows.Forms.NumericUpDown num_sleepevery;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown num_sleepfor;
         private System.Windows.Forms.CheckBox chk_smartsleep;
         private System.Windows.Forms.CheckBox chk_sleepenabled;
     }

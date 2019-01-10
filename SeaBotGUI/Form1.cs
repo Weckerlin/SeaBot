@@ -678,6 +678,14 @@ namespace SeaBotGUI
         private void chk_smartsleep_CheckedChanged(object sender, EventArgs e)
         {
             groupBox15.Enabled = !chk_smartsleep.Checked;
+            Core.Config.smartsleepenabled = chk_smartsleep.Checked;
         }
+
+        private void chk_sleepenabled_CheckedChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepenabled = chk_sleepenabled.Checked;
+        }
+
+       
     }
 }
