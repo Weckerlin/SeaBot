@@ -79,17 +79,12 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-
-                            if (amount != null && amount.Amount > num_woodlimit)
+                            if (amount != null&& num_woodlimit!=0)
                             {
-                                if (num_woodlimit != 0)
+                                if ( amount.Amount> num_woodlimit)
                                 {
                                     ok = false;
                                 }
-                            }
-                            else
-                            {
-                                ok = false;
                             }
                         }
 
@@ -97,16 +92,12 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && amount.Amount > num_ironlimit)
+                            if (amount != null && num_ironlimit != 0)
                             {
-                                if (num_ironlimit != 0)
+                                if (amount.Amount > num_ironlimit)
                                 {
                                     ok = false;
                                 }
-                            }
-                            else
-                            {
-                                ok = false;
                             }
                         }
 
@@ -114,16 +105,12 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && amount.Amount > num_stonelimit)
+                            if (amount != null && num_stonelimit != 0)
                             {
-                                if (num_stonelimit != 0)
+                                if (amount.Amount > num_stonelimit)
                                 {
                                     ok = false;
                                 }
-                            }
-                            else
-                            {
-                                ok = false;
                             }
                         }
                     }

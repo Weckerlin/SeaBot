@@ -243,9 +243,9 @@ namespace SeaBotCore
             var rand = new Random();
 
             var loadtime = rand.Next(5000, 13000);
-            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000:F1} seconds");
+            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000D:F1} seconds");
             Thread.Sleep(loadtime);
-            Logger.Logger.Info($"{loadtime / 1000:F1} seconds elapsed");
+            Logger.Logger.Info($"{loadtime / 1000D:F1} seconds elapsed");
             values.Add("loading_time", loadtime.ToString());
             SendRequest(values, "tracking.finishedLoading");
             Events.Events.LoginedEvent.Logined.Invoke();
