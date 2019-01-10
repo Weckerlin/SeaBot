@@ -75,8 +75,8 @@
             this.chk_smartsleep = new System.Windows.Forms.CheckBox();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.num_sleepevery = new System.Windows.Forms.NumericUpDown();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radio_sleepeverymin = new System.Windows.Forms.RadioButton();
+            this.radio_sleepeveryhrs = new System.Windows.Forms.RadioButton();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.num_sleepfor = new System.Windows.Forms.NumericUpDown();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -663,8 +663,8 @@
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.num_sleepevery);
-            this.groupBox16.Controls.Add(this.radioButton3);
-            this.groupBox16.Controls.Add(this.radioButton4);
+            this.groupBox16.Controls.Add(this.radio_sleepeverymin);
+            this.groupBox16.Controls.Add(this.radio_sleepeveryhrs);
             this.groupBox16.Location = new System.Drawing.Point(149, 19);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(110, 41);
@@ -693,28 +693,30 @@
             0,
             0,
             0});
+            this.num_sleepevery.ValueChanged += new System.EventHandler(this.num_sleepevery_ValueChanged);
             // 
-            // radioButton3
+            // radio_sleepeverymin
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Location = new System.Drawing.Point(52, 21);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(47, 17);
-            this.radioButton3.TabIndex = 15;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Mins";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radio_sleepeverymin.AutoSize = true;
+            this.radio_sleepeverymin.Checked = true;
+            this.radio_sleepeverymin.Location = new System.Drawing.Point(52, 21);
+            this.radio_sleepeverymin.Name = "radio_sleepeverymin";
+            this.radio_sleepeverymin.Size = new System.Drawing.Size(47, 17);
+            this.radio_sleepeverymin.TabIndex = 15;
+            this.radio_sleepeverymin.TabStop = true;
+            this.radio_sleepeverymin.Text = "Mins";
+            this.radio_sleepeverymin.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // radio_sleepeveryhrs
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(52, 6);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(41, 17);
-            this.radioButton4.TabIndex = 14;
-            this.radioButton4.Text = "Hrs";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radio_sleepeveryhrs.AutoSize = true;
+            this.radio_sleepeveryhrs.Location = new System.Drawing.Point(52, 6);
+            this.radio_sleepeveryhrs.Name = "radio_sleepeveryhrs";
+            this.radio_sleepeveryhrs.Size = new System.Drawing.Size(41, 17);
+            this.radio_sleepeveryhrs.TabIndex = 14;
+            this.radio_sleepeveryhrs.Text = "Hrs";
+            this.radio_sleepeveryhrs.UseVisualStyleBackColor = true;
+            this.radio_sleepeveryhrs.CheckedChanged += new System.EventHandler(this.radio_sleepeveryhrs_CheckedChanged);
             // 
             // groupBox15
             // 
@@ -771,7 +773,7 @@
             this.radio_sleepforhrs.TabStop = true;
             this.radio_sleepforhrs.Text = "Hrs";
             this.radio_sleepforhrs.UseVisualStyleBackColor = true;
-            this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radio_sleepforhrs_CheckedChanged);
             // 
             // btn_dumpcore
             // 
@@ -1466,8 +1468,8 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radio_sleepforhrs;
         private System.Windows.Forms.NumericUpDown num_sleepevery;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radio_sleepeverymin;
+        private System.Windows.Forms.RadioButton radio_sleepeveryhrs;
         private System.Windows.Forms.NumericUpDown num_sleepfor;
         private System.Windows.Forms.CheckBox chk_smartsleep;
         private System.Windows.Forms.CheckBox chk_sleepenabled;

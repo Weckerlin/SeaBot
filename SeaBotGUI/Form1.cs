@@ -670,10 +670,7 @@ namespace SeaBotGUI
             CompUtils.OpenLink("https://github.com/weespin/SeaBot/wiki/Getting-Telegram-Token");
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+      
 
         private void chk_smartsleep_CheckedChanged(object sender, EventArgs e)
         {
@@ -686,6 +683,40 @@ namespace SeaBotGUI
             Core.Config.sleepenabled = chk_sleepenabled.Checked;
         }
 
-       
+        private void num_sleepfor_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepfor = (int)num_sleepfor.Value;
+        }
+
+        private void num_sleepevery_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepevery = (int)num_sleepevery.Value;
+        }
+
+        private void radio_sleepforhrs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_sleepforhrs.Checked)
+            {
+                Core.Config.sleepforhrs = true;
+            }
+
+            else
+            {
+                Core.Config.sleepforhrs = false;
+            }
+        }
+
+        private void radio_sleepeveryhrs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_sleepeveryhrs.Checked)
+            {
+                Core.Config.sleepeveryhrs = true;
+            }
+
+            else
+            {
+                Core.Config.sleepeveryhrs = false;
+            }
+        }
     }
 }
