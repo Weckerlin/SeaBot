@@ -128,6 +128,10 @@ namespace SeaBotCore
         private static string _lastsend = "";
         private static List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
         private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
+       static HttpClientHandler handler = new HttpClientHandler()
+        {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+        };
 
         public static void AddTask(Task.IGameTask task)
         {
@@ -136,7 +140,7 @@ namespace SeaBotCore
         }
 
 
-        private static readonly HttpClient Client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient(handler);
 
         public static string SendRequest(Dictionary<string, string> data, string action)
         {
