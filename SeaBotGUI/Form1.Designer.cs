@@ -1038,6 +1038,7 @@
             // 
             // num_barrelinterval
             // 
+            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
             this.num_barrelinterval.Location = new System.Drawing.Point(12, 31);
             this.num_barrelinterval.Minimum = new decimal(new int[] {
             1,
@@ -1052,6 +1053,7 @@
             0,
             0,
             0});
+            this.num_barrelinterval.ValueChanged += new System.EventHandler(this.num_barrelinterval_ValueChanged);
             this.num_barrelinterval.Leave += new System.EventHandler(this.num_barrelinterval_Leave);
             // 
             // label8

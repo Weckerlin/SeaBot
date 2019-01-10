@@ -737,5 +737,24 @@ namespace SeaBotGUI
                 Core.Config.sleepeveryhrs = false;
             }
         }
+
+        private bool barrelsaid = false;
+        private void num_barrelinterval_ValueChanged(object sender, EventArgs e)
+        {
+            if (num_barrelinterval.Value < 22 && !barrelsaid)
+            {
+                MessageBox.Show("Warning, at least 1 SeaBot user got banned for using interval, which is lower than 22.","Alert",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                barrelsaid = true;
+            }
+
+            if (num_barrelinterval.Value < 10)
+            {
+                num_barrelinterval.ForeColor = Color.Red;
+            }
+            else
+            {
+                num_barrelinterval.ForeColor = Color.Black;
+            }
+        }
     }
 }
