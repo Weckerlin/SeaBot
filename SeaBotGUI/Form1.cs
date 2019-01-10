@@ -39,6 +39,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
+using SeaBotCore.Config;
 using SeaBotGUI.GUIBinds;
 using SeaBotGUI.TelegramBot;
 using Task = System.Threading.Tasks.Task;
@@ -66,8 +67,8 @@ namespace SeaBotGUI
         public void LoadControls()
         {
             ExceptionlessClient.Default.Register(true);
-           
-             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
@@ -137,6 +138,10 @@ namespace SeaBotGUI
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName == "acceptedresponsibility")
+            {
+                return;
+            }
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
             instance.Invoke(new Action(() =>
             {
@@ -244,6 +249,18 @@ namespace SeaBotGUI
             CheckForUpdates();
             LoadControls();
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
+            if (!Core.Config.acceptedresponsibility)
+            {
+                var msg =MessageBox.Show("By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.", "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
+                if (msg == DialogResult.OK)
+                {
+                    Core.Config.acceptedresponsibility = true;
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
 
             //Check for cache
         }
@@ -651,6 +668,16 @@ namespace SeaBotGUI
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CompUtils.OpenLink("https://github.com/weespin/SeaBot/wiki/Getting-Telegram-Token");
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chk_smartsleep_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox15.Enabled = !chk_smartsleep.Checked;
         }
     }
 }

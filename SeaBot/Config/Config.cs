@@ -45,8 +45,77 @@ namespace SeaBotCore.Config
         private string _telegramtoken = "";
         private string _autoshiptype = "coins";
         private bool _autoshipprofit;
+        private bool _acceptedresponsibility = false;
+        private bool _sleepeveryhrs = false;
+        private bool _sleepforhrs = false;
+        private int _sleepfor = 25;
+        private int _sleepevery = 20;
+        private bool _sleepenabled;
+        private bool _smartsleepenabled;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public bool sleepenabled
+        {
+            get => _sleepenabled;
+            set
+            {
+                _sleepenabled = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("sleepenabled"));
+            }
+        } //done
+        public bool smartsleepenabled
+        {
+            get => _smartsleepenabled;
+            set
+            {
+                _smartsleepenabled = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("smartsleepenabled"));
+            }
+        } //done
+        public int sleepevery
+        {
+            get => _sleepevery;
+            set
+            {
+                _sleepfor = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("sleepevery"));
+            }
+        } //done
+        public int sleepfor
+        {
+            get => _sleepfor;
+            set
+            {
+                _sleepfor = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("sleepfor"));
+            }
+        } //done
+        public bool sleepforhrs
+        {
+            get => _sleepforhrs;
+            set
+            {
+                _sleepforhrs = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("sleepforhrs"));
+            }
+        } //done
+        public bool sleepeveryhrs
+        {
+            get => _sleepeveryhrs;
+            set
+            {
+                _sleepeveryhrs = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("sleepeveryhrs"));
+            }
+        } //done
+        public bool acceptedresponsibility
+        {
+            get => _acceptedresponsibility;
+            set
+            {
+                _acceptedresponsibility = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("acceptedresponsibility"));
+            }
+        } //done
         public string server_token
         {
             get => _serverToken;

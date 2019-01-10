@@ -123,16 +123,6 @@ namespace SeaBotCore
 
                     Sync();
                 }
-
-                foreach (var delayedtask in _delayedtaskList)
-                {
-                    if ((delayedtask.InvokeTime - DateTime.Now).Seconds > 0)
-                    {
-                        //invoke
-                        Logger.Logger.Debug("Added delayedtask");
-                        _gametasks.Add(delayedtask.Task);
-                    }
-                }
             }
         }
 
@@ -147,10 +137,7 @@ namespace SeaBotCore
             _lastRaised = DateTime.Now;
         }
 
-        public static void AddDelayedTask(DelayedTask task)
-        {
-            _delayedtaskList.Add(task);
-        }
+     
 
         private static readonly HttpClient Client = new HttpClient();
 
@@ -235,9 +222,18 @@ namespace SeaBotCore
             var s = SendRequest(values, "client.login");
 
             Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+            var rand = new Random();
+           
+            var loadtime = rand.Next(5000, 13000);
+            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime/1000:F1} seconds");
+            Thread.Sleep(loadtime);
+            Logger.Logger.Info($"{loadtime/1000:F1} seconds elapsed");
+            values.Add("loading_time", loadtime.ToString());
+            SendRequest(values, "tracking.finishedLoading");
             Events.Events.LoginedEvent.Logined.Invoke();
         }
 
+       
         public static void Sync()
         {
             var taskstr = new StringBuilder("<xml>\n");
