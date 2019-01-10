@@ -79,7 +79,7 @@
             this.radio_sleepeveryhrs = new System.Windows.Forms.RadioButton();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.num_sleepfor = new System.Windows.Forms.NumericUpDown();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radio_sleepformins = new System.Windows.Forms.RadioButton();
             this.radio_sleepforhrs = new System.Windows.Forms.RadioButton();
             this.btn_dumpcore = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
@@ -721,7 +721,7 @@
             // groupBox15
             // 
             this.groupBox15.Controls.Add(this.num_sleepfor);
-            this.groupBox15.Controls.Add(this.radioButton2);
+            this.groupBox15.Controls.Add(this.radio_sleepformins);
             this.groupBox15.Controls.Add(this.radio_sleepforhrs);
             this.groupBox15.Location = new System.Drawing.Point(0, 19);
             this.groupBox15.Name = "groupBox15";
@@ -752,15 +752,15 @@
             0,
             0});
             // 
-            // radioButton2
+            // radio_sleepformins
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(89, 21);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(47, 17);
-            this.radioButton2.TabIndex = 13;
-            this.radioButton2.Text = "Mins";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radio_sleepformins.AutoSize = true;
+            this.radio_sleepformins.Location = new System.Drawing.Point(89, 21);
+            this.radio_sleepformins.Name = "radio_sleepformins";
+            this.radio_sleepformins.Size = new System.Drawing.Size(47, 17);
+            this.radio_sleepformins.TabIndex = 13;
+            this.radio_sleepformins.Text = "Mins";
+            this.radio_sleepformins.UseVisualStyleBackColor = true;
             // 
             // radio_sleepforhrs
             // 
@@ -1465,7 +1465,7 @@
         private System.Windows.Forms.GroupBox groupBox14;
         private System.Windows.Forms.GroupBox groupBox16;
         private System.Windows.Forms.GroupBox groupBox15;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radio_sleepformins;
         private System.Windows.Forms.RadioButton radio_sleepforhrs;
         private System.Windows.Forms.NumericUpDown num_sleepevery;
         private System.Windows.Forms.RadioButton radio_sleepeverymin;

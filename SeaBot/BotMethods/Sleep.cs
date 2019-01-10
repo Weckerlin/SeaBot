@@ -85,7 +85,7 @@ namespace SeaBotCore.BotMethods
                                           0))
                                     {
                                         DelayMinList.Add((int) Math.Ceiling(
-                                            (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalMinutes));
+                                            ( TimeUtils.FromUnixTime(willatportattime)-DateTime.UtcNow).TotalMinutes));
                                     }
                                 }
                                 catch (Exception e)
@@ -108,7 +108,7 @@ namespace SeaBotCore.BotMethods
                                 //lol xD
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat)).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat)- DateTime.UtcNow ).TotalMinutes));
                             }
 
 
@@ -121,14 +121,16 @@ namespace SeaBotCore.BotMethods
 
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat)).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat)- DateTime.UtcNow ).TotalMinutes));
                             }
                         }
 
                         //Find center
-                        var mostlikely = DelayMinList.Where(n => n > thresholdinmin).GroupBy(i => i)
-                            .OrderByDescending(grp => grp.Count())
-                            .Select(grp => grp.Key).First();
+                        var a = DelayMinList.Where(n => n > thresholdinmin).GroupBy(i => i);
+                          var b =   
+                            a.OrderByDescending(grp => grp.Count());
+                           var   mostlikely=b
+                            .Select(grp => grp.Key).FirstOrDefault();
                         var avg = DelayMinList.Average();
                         if (mostlikely > avg)
                         {

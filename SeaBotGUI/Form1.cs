@@ -100,6 +100,26 @@ namespace SeaBotGUI
                 radio_savesailors.Checked = true;
             }
 
+            chk_smartsleep.Checked = Core.Config.smartsleepenabled;
+            chk_sleepenabled.Checked = Core.Config.sleepenabled;
+            num_sleepevery.Value = Core.Config.sleepevery;
+            num_sleepfor.Value = Core.Config.sleepfor;
+            if (Core.Config.sleepforhrs)
+            {
+                radio_sleepforhrs.Checked = true;
+            }
+            else
+            {
+                radio_sleepformins.Checked = true;
+            }
+            if (Core.Config.sleepeveryhrs)
+            {
+                radio_sleepeveryhrs.Checked = true;
+            }
+            else
+            {
+                radio_sleepeverymin.Checked = true;
+            }
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
@@ -241,6 +261,7 @@ namespace SeaBotGUI
         public Form1()
         {
             // bot = new WTGLib("a");
+            ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
             InitializeComponent();
             instance = this;
             TeleConfigSer.Load();

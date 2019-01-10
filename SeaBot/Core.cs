@@ -96,7 +96,7 @@ namespace SeaBotCore
 
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
-        public static DateTime lastsleep = DateTime.Now;
+        public static DateTime lastsleep = DateTime.Now.AddMinutes(-1);
 
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {

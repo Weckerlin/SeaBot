@@ -79,7 +79,7 @@ namespace SeaBotCore.Config
             get => _sleepevery;
             set
             {
-                _sleepfor = value;
+                _sleepevery = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepevery"));
             }
         } //done
