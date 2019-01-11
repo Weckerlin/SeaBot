@@ -17,6 +17,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Script.Serialization;
+using Exceptionless.Json;
 
 namespace SeaBotGUI.TelegramBot
 {
@@ -38,8 +39,8 @@ namespace SeaBotGUI.TelegramBot
         {
             if (File.Exists("telegramconfig.json"))
             {
-                var ser = new JavaScriptSerializer();
-                Form1._teleconfig = ser.Deserialize<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
+               
+                Form1._teleconfig = JsonConvert.DeserializeObject<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
             }
         }
     }

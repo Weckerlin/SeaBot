@@ -62,10 +62,10 @@ namespace SeaBotCore.Data.Defenitions
 
         public struct Barrel
         {
-            public int? Integer;
+            public long? Integer;
             public string String;
 
-            public static implicit operator Barrel(int Integer)
+            public static implicit operator Barrel(long Integer)
             {
                 return new Barrel {Integer = Integer};
             }
@@ -92,46 +92,40 @@ namespace SeaBotCore.Data.Defenitions
 
         internal class BarrelConverter : JsonConverter
         {
-            public static readonly BarrelConverter Singleton = new BarrelConverter();
-
-            public override bool CanConvert(Type t)
-            {
-                return t == typeof(Barrel) || t == typeof(Barrel?);
-            }
+            public override bool CanConvert(Type t) => t == typeof(Barrel) || t == typeof(Barrel?);
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
             {
                 switch (reader.TokenType)
                 {
                     case JsonToken.Integer:
-                        var integerValue = serializer.Deserialize<int>(reader);
-                        return new Barrel {Integer = integerValue};
+                        var integerValue = serializer.Deserialize<long>(reader);
+                        return new Barrel { Integer = integerValue };
                     case JsonToken.String:
                     case JsonToken.Date:
                         var stringValue = serializer.Deserialize<string>(reader);
-                        return new Barrel {String = stringValue};
+                        return new Barrel { String = stringValue };
                 }
-
                 throw new Exception("Cannot unmarshal type Barrel");
             }
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
             {
-                var value = (Barrel) untypedValue;
+                var value = (Barrel)untypedValue;
                 if (value.Integer != null)
                 {
                     serializer.Serialize(writer, value.Integer.Value);
                     return;
                 }
-
                 if (value.String != null)
                 {
                     serializer.Serialize(writer, value.String);
                     return;
                 }
-
                 throw new Exception("Cannot marshal type Barrel");
             }
+
+            public static readonly BarrelConverter Singleton = new BarrelConverter();
         }
     }
 }

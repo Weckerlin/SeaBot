@@ -224,7 +224,7 @@ namespace SeaBotCore
 
             var loadtime = rand.Next(5000, 13000);
             Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000D:F1} seconds");
-            Thread.Sleep(loadtime);
+           // Thread.Sleep(loadtime);
             Logger.Logger.Info($"{loadtime / 1000D:F1} seconds elapsed");
             values.Add("loading_time", loadtime.ToString());
             SendRequest(values, "tracking.finishedLoading");

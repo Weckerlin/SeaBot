@@ -56,7 +56,7 @@ namespace ConsoleApp1
                             Console.WriteLine(
                                 $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
 
-                        Networking.AddTask(new Task.ConfirmBarrelTask(barrelid, bar.get_type(), bar.Amount,
+                        Networking.AddTask(new Task.ConfirmBarrelTask((int)barrelid, bar.get_type(), bar.Amount,
                             bar.Definition.Id, Core.GlobalData.Level));
                         attempts++;
                     }
