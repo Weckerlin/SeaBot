@@ -161,6 +161,7 @@ namespace SeaBotCore
             Logger.Logger.Info("Logining ");
             //Get big token
             var tempuid = string.Empty;
+
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
@@ -171,7 +172,10 @@ namespace SeaBotCore
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
 
+                try
+                {
 
+           
                 var result = client.GetAsync("en/seaport/").Result;
 
                 result = client.GetAsync("en/seaport/").Result;
@@ -209,6 +213,12 @@ namespace SeaBotCore
                 {
                     Logger.Logger.Fatal("CANT LOGIN!");
                     return;
+                }
+                }
+                catch (Exception e)
+                {
+                    Logger.Logger.Fatal("CANT LOGIN! "+e.ToString());
+                  
                 }
             }
 
