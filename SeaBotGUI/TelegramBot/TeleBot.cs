@@ -67,7 +67,7 @@ namespace SeaBotGUI.TelegramBot
             botClient.StartReceiving();
         }
 
-        private async void Bot_OnMessage(object sender, MessageEventArgs e)
+        private void Bot_OnMessage(object sender, MessageEventArgs e)
         {
             var message = e.Message.Text ?? string.Empty;
             Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");

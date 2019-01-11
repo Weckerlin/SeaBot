@@ -251,18 +251,23 @@ namespace SeaBotGUI
 
         public void FormatResources(GlobalData data)
         {
+
             if (data.Inventory == null) return;
 
             ResourcesBox.Update();
             var a = new List<ListViewItem>();
-            foreach (var dataa in data.Inventory.Where(n =>
-                n.Id != 1 && n.Id != 2 &&
-                n.Id != 3 && n.Id != 4 &&
-                n.Id != 5 && n.Id != 6))
+            //todo fix
+            for (int i = 0; i < data.Inventory.Count; i++)
             {
-                string[] row = {MaterialDB.GetItem(dataa.Id).Name, dataa.Amount.ToString()};
-                a.Add(new ListViewItem(row));
+               
+                if (data.Inventory[i].Amount != 0)
+                {
+                    string[] row = {MaterialDB.GetItem(data.Inventory[i].Id).Name, data.Inventory[i].Amount.ToString()};
+                    a.Add(new ListViewItem(row));
+                }
             }
+
+     
 
             if (listView1.InvokeRequired)
             {

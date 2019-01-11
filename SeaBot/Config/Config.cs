@@ -319,7 +319,7 @@ namespace SeaBotCore.Config
             {
                 File.WriteAllText("config.json", json);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Logger.Logger.Warning(
                     "Can't save a config file. Please move the bot in another directory or run with as administrator!");

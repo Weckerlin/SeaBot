@@ -36,10 +36,14 @@ namespace SeaBotCore.BotMethods
                 Logger.Logger.Info(
                     $"Barrel! Collecting {nextbarrel.Amount} {MaterialDB.GetItem(nextbarrel.Definition.Id).Name}");
                 if (Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).FirstOrDefault() != null)
+                {
                     Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).First().Amount +=
                         nextbarrel.Amount;
+                }
                 else
+                {
                     Core.GlobalData.Inventory.Add(new Item {Amount = nextbarrel.Amount, Id = nextbarrel.Definition.Id});
+                }
             }
             else
             {

@@ -344,11 +344,13 @@ namespace SeaBotCore
                                     var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
                                     var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
                                     if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
-                                        for (var i = 0; i < Core.GlobalData.Inventory.Count; i++)
-                                            if (Core.GlobalData.Inventory[i].Id == defid)
-                                                Core.GlobalData.Inventory[i].Amount = amount;
+                                    {
+                                        Core.GlobalData.Inventory.Where(n => n.Id == defid).First().Amount = amount;
+                                    }
                                     else
+                                    {
                                         Core.GlobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
+                                    }
                                 }
 
                                 break;

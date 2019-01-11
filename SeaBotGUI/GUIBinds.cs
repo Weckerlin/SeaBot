@@ -369,7 +369,7 @@ namespace SeaBotGUI.GUIBinds
                                     (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
                                     .ToString(@"hh\:mm\:ss");
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             Logger.Debug(
                                 $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");

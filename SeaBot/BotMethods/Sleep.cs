@@ -70,7 +70,7 @@ namespace SeaBotCore.BotMethods
                                         DelayMinList.Add((int) Math.Ceiling(
                                             (TimeUtils.FromUnixTime(willatportattime) - DateTime.UtcNow).TotalMinutes));
                                 }
-                                catch (Exception e)
+                                catch (Exception)
                                 {
                                     Logger.Logger.Debug(
                                         $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
