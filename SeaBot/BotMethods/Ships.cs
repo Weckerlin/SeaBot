@@ -62,12 +62,14 @@ namespace SeaBotCore.BotMethods
             {
                 var ship = Core.GlobalData.Ships[index];
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1)
+                {
+
                     if (ship.Type == "upgradeable")
                     {
                         var lvl = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Levels.Level
                             .First(n => n.Id == ship.TargetLevel);
                         if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                            lvl.TravelTime + 12)
+                            lvl.TravelTime + 2)
                         {
                             Logger.Logger.Info(
                                 "Unloading " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
@@ -87,6 +89,7 @@ namespace SeaBotCore.BotMethods
                             AutoShipUtils.Nullship(Core.GlobalData.Ships[index]);
                         }
                     }
+                }
             }
 
 
@@ -100,7 +103,10 @@ namespace SeaBotCore.BotMethods
                 {
                     var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
 
-                    if (bestplace == null || Core.GlobalData.Sailors < AutoShipUtils.GetSailors(ship)) continue;
+                    if (bestplace == null || Core.GlobalData.Sailors < AutoShipUtils.GetSailors(ship))
+                    {
+                        continue;
+                    }
 
 
                     var lvls = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels

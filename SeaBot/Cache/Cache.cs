@@ -94,24 +94,33 @@ namespace SeaBotCore
                     {
                         var nodes = doc.SelectSingleNode("xml/files");
                         foreach (XmlNode node in nodes.ChildNodes)
+                        {
                             if (node.InnerText.Contains("definitions_json.zip"))
                             {
                                 var dl = new Regex(@"definitions_json\.zip,(.+)").Match(node.InnerText).Groups[1].Value;
                                 new WebClient().DownloadFile(_basedwnladdr + dl, "cache.zip");
                                 using (var archive = ZipFile.OpenRead("cache.zip"))
                                 {
-                                    if (!Directory.Exists(_cachefolder)) Directory.CreateDirectory(_cachefolder);
+                                    if (!Directory.Exists(_cachefolder))
+                                    {
+                                        Directory.CreateDirectory(_cachefolder);
+                                    }
 
                                     foreach (var entry in archive.Entries)
-                                        entry.ExtractToFile(Path.Combine(_cachefolder, entry.FullName), true);
+                                    {
+                                        entry.ExtractToFile(Path.Combine(_cachefolder, entry.Name), true);
+                                    }
                                 }
 
                                 File.Delete("cache.zip");
                             }
+                        }
                     }
                 }
-                catch (Exception)
+                catch
+                    (Exception e)
                 {
+                    Logger.Logger.Fatal(e.ToString());
                     return false;
                 }
 
