@@ -1470,4 +1470,3 @@
         private System.Windows.Forms.CheckBox chk_sleepenabled;
     }
 }
-

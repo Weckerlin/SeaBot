@@ -21,6 +21,7 @@ using System.Threading;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Config;
 using SeaBotCore.Data;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore
@@ -69,7 +70,7 @@ namespace SeaBotCore
             {
                 ThreadKill.KillTheThread(Networking._syncThread); // todo fix
                 ThreadKill.KillTheThread(BotThread);
-                Logger.Logger.Info("Stopped");
+                Logger.Logger.Info(Localization.CORE_STOPPED);
                 Events.Events.BotStoppedEvent.BotStopped.Invoke();
             }).Start();
         }
@@ -78,7 +79,7 @@ namespace SeaBotCore
         {
             if (Config.server_token == string.Empty)
             {
-                Logger.Logger.Fatal("No server_token");
+                Logger.Logger.Fatal(Localization.CORE_NO_SERV_TOKEN);
                 return;
             }
 
@@ -101,20 +102,20 @@ namespace SeaBotCore
             {
                 if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
                 {
-                    Logger.Logger.Info("Restarting bot");
+                    Logger.Logger.Info(Localization.CORE_RESTARTING);
                     StopBot();
                     StartBot();
                 }
 
                 if (e == Enums.EErrorCode.PLAYER_BANNED)
                 {
-                    Logger.Logger.Fatal("User is banned.");
+                    Logger.Logger.Fatal(Localization.CORE_USER_BANNED);
                     StopBot();
                 }
 
                 if (e == Enums.EErrorCode.MAINTENANCE || e == Enums.EErrorCode.PLAYER_MAINTENANCE)
                 {
-                    Logger.Logger.Info("MAINTENANCE! Retrying after 30 mins");
+                    Logger.Logger.Info(Localization.CORE_MAINTENANCE_30MIN);
                     Thread.Sleep(30 * 60 * 1000);
                     StopBot();
                     StartBot();

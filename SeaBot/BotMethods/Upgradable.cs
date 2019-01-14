@@ -16,6 +16,7 @@
 
 using System.Linq;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.BotMethods
 {
@@ -39,7 +40,7 @@ namespace SeaBotCore.BotMethods
                     Core.GlobalData.Upgradeables[index].Amount = nextlvl.Amount;
                     Core.GlobalData.Upgradeables[index].MaterialKoef =
                         nextlvl.MaterialKoef;
-                    Logger.Logger.Info("Upgraded " + def.Name);
+                    Logger.Logger.Info(Localization.UPGRADABLE_UPGRADED + def.Name);
                     Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.GlobalData.Level));
                 }
             }

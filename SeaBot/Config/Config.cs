@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Web.Script.Serialization;
+using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.Config
 {
@@ -322,7 +323,7 @@ namespace SeaBotCore.Config
             catch (Exception)
             {
                 Logger.Logger.Warning(
-                    "Can't save a config file. Please move the bot in another directory or run with as administrator!");
+                    Localization.CONFIG_CANT_SAVE);
             }
         }
 

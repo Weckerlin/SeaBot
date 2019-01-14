@@ -27,6 +27,7 @@ using System.Threading;
 using System.Xml;
 using Newtonsoft.Json;
 using SeaBotCore.Data;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore
@@ -66,7 +67,7 @@ namespace SeaBotCore
                 if (e == Enums.EErrorCode.WRONG_SESSION)
                 {
                     Logger.Logger.Info(
-                        $"Someone is playing this game right now, waiting for {Core.hibernation} minutes");
+                        string.Format(Localization.NETWORKING_SOMEONE_IS_PLAYING, Core.hibernation));
 
 
                     if (Core.IsBotRunning)
@@ -78,7 +79,7 @@ namespace SeaBotCore
                         Logger.Logger.Muted = true;
                         Thread.Sleep(Core.hibernation * 1000 * 60);
                         Logger.Logger.Muted = false;
-                        Logger.Logger.Info("Mwaaah, waking up after hibernation");
+                        Logger.Logger.Info(Localization.NETWORKING_WAKING_UP);
                         StartThread();
                         Login();
                         if (Core.Config.debug)
@@ -107,13 +108,13 @@ namespace SeaBotCore
                 if (_gametasks.Count != 0 &&
                     Core.GlobalData.Level != 0)
                 {
-                    Logger.Logger.Debug("Syncing...");
+                    Logger.Logger.Debug(Localization.NETWORKING_SYNCING);
                     Sync();
                 }
 
                 if ((DateTime.Now - _lastRaised).TotalSeconds > 300)
                 {
-                    Logger.Logger.Debug("Sending Heartbeat...");
+                    Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
                     _gametasks.Add(new Task.HeartBeat());
 
                     Sync();
@@ -168,7 +169,7 @@ namespace SeaBotCore
             using (var client = new HttpClient(handler) {BaseAddress = baseAddress})
             {
                 cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.Config.server_token));
-                Logger.Logger.Info("[1/3] Getting another cookies");
+                Logger.Logger.Info(Localization.NETWORKING_LOGIN_1);
                 client.DefaultRequestHeaders.UserAgent.ParseAdd(
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36");
 
@@ -179,7 +180,7 @@ namespace SeaBotCore
                 var result = client.GetAsync("en/seaport/").Result;
 
                 result = client.GetAsync("en/seaport/").Result;
-                Logger.Logger.Info("[2/3] Getting protal");
+                Logger.Logger.Info(Localization.NETWORKING_LOGIN_2);
                 var stringtext = result.Content.ReadAsStringAsync().Result;
                 var regex = new Regex(
                     "portal.pixelfederation.com\\/(_sp\\/\\?direct_login=portal&portal_request=(.*))\" allowfullscreen>");
@@ -187,13 +188,13 @@ namespace SeaBotCore
                 if (match.Success)
                 {
                     var data = client.GetAsync(match.Groups[1].Value).Result.Content.ReadAsStringAsync().Result;
-                    Logger.Logger.Info("[3/3] Getting sessionid");
+                    Logger.Logger.Info(Localization.NETWORKING_LOGIN_3);
                     regex = new Regex(@"session_id': '(.*)', 'test");
 
                     Core.Ssid = regex.Match(data).Groups[1].Value;
                     regex = new Regex(@"pid': '(.*)', 'platform");
                     tempuid = regex.Match(data).Groups[1].Value;
-                    Logger.Logger.Info("Successfully logged in! Session ID = " + Core.Ssid);
+                    Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
                     regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
                     var mtch = regex.Match(data);
                     if (mtch.Success) Cache.Update(mtch.Groups[1].Value);
@@ -211,13 +212,13 @@ namespace SeaBotCore
                 }
                 else
                 {
-                    Logger.Logger.Fatal("CANT LOGIN!");
+                    Logger.Logger.Fatal(Localization.NETWORKING_LOGIN_CANT_LOGIN);
                     return;
                 }
                 }
                 catch (Exception e)
                 {
-                    Logger.Logger.Fatal("CANT LOGIN! "+e.ToString());
+                    Logger.Logger.Fatal(Localizaion.Localization.NETWORKING_LOGIN_CANT_LOGIN+e.ToString());
                   
                 }
             }
@@ -233,9 +234,9 @@ namespace SeaBotCore
             var rand = new Random();
 
             var loadtime = rand.Next(5000, 13000);
-            Logger.Logger.Info($"Faking real loading. Now, we'll load for {loadtime / 1000D:F1} seconds");
+            Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD, loadtime / 1000D));
             Thread.Sleep(loadtime);
-            Logger.Logger.Info($"{loadtime / 1000D:F1} seconds elapsed");
+            Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD_ELAPSED, loadtime / 1000D));
             values.Add("loading_time", loadtime.ToString());
             SendRequest(values, "tracking.finishedLoading");
             Events.Events.LoginedEvent.Logined.Invoke();
@@ -286,7 +287,7 @@ namespace SeaBotCore
             catch (Exception e)
             {
                 Logger.Logger.Fatal(
-                    $"Server is responding with non xml file - Response = {response}; Exception info = {e}");
+                    string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
             }
 
             if (doc.DocumentElement != null)
@@ -306,24 +307,24 @@ namespace SeaBotCore
 
                 if (passed != 0)
                 {
-                    Logger.Logger.Debug("[GOOD] Server accepted our " + passed + " requests");
+                    Logger.Logger.Debug(string.Format(Localization.NETWORKING_SYNC_ACCEPTED_GOOD, passed));
                 }
                 else
                 {
-                    Logger.Logger.Warning("[BAD] Server accepted our " + passed + " requests!");
-                    Logger.Logger.Info("Checking Fatal error...");
+                    Logger.Logger.Warning(string.Format(Localization.NETWORKING_SYNC_ACCEPTED_BAD, passed));
+                    Logger.Logger.Info(Localization.NETWORKING_SYNC_FATAL_CHECK);
                     if (doc.SelectSingleNode("xml/task/result")?.InnerText == "ERROR")
                     {
                         var errcode =
                             (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
-                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
+                        Logger.Logger.Fatal(string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED, errcode.ToString()));
                         Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
                     else if (doc.SelectSingleNode("xml/result")?.InnerText == "ERROR")
                     {
                         var errcode =
                             (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
-                        Logger.Logger.Fatal($"Server disconnected us with error {errcode.ToString()}");
+                        Logger.Logger.Fatal(string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED, errcode.ToString()));
                         Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
                 }
@@ -369,7 +370,7 @@ namespace SeaBotCore
             }
             else
             {
-                Logger.Logger.Fatal("Sync failed, no response");
+                Logger.Logger.Fatal(Localization.NETWORKING_SYNC_NO_RESPONSE);
             }
 
             _lastRaised = DateTime.Now;

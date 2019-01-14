@@ -20,6 +20,7 @@ using System.Linq;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -45,7 +46,7 @@ namespace SeaBotCore.BotMethods
                         lvl.TravelTime + 1)
                     {
                         Logger.Logger.Info(
-                            "Loading " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                            Localization.SHIPS_LOADING + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -72,7 +73,7 @@ namespace SeaBotCore.BotMethods
                             lvl.TravelTime + 2)
                         {
                             Logger.Logger.Info(
-                                "Unloading " + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                                Localization.SHIPS_UNLOADING + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
                             Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                                 lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -126,7 +127,7 @@ namespace SeaBotCore.BotMethods
                     Core.GlobalData.Ships[index].TargetId =
                         bestplace.DefId;
                     Core.GlobalData.Ships[index].TargetLevel = bestplace.Level;
-                    Logger.Logger.Info("Sending " +
+                    Logger.Logger.Info(Localization.SHIPS_SENDING +
                                        Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
                     Networking.AddTask(new Task.SendShipUpgradeableTask(ship.InstId,
                         bestplace.DefId, lvls.Amount, lvls.MaterialKoef,

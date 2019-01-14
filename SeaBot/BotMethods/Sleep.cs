@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -137,7 +138,7 @@ namespace SeaBotCore.BotMethods
                     new System.Threading.Tasks.Task(() =>
                     {
                         Core.StopBot();
-                        Logger.Logger.Info($"Started sleepin'. Waking up after {sleeptimeinmin} min.");
+                        Logger.Logger.Info(string.Format(Localization.SLEEP_STARTING, sleeptimeinmin));
                         Thread.Sleep(sleeptimeinmin * 1000);
                         Core.StartBot();
                     }).Start();

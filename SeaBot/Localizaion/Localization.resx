@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
+    <value>Barrel! Collecting {0} sailors!</value>
+  </data>
+  <data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
+    <value>Barrel! Collecting {0} {1}</value>
+  </data>
+  <data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
+    <value>Started upgrading {0}</value>
+  </data>
+  <data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
+    <value>Finishing upgrading {0}</value>
+  </data>
+  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
+    <value>Сollecting {0} {1}</value>
+  </data>
+  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
+    <value>Started producing {0}</value>
+  </data>
+  <data name="FISH_COLLECTING" xml:space="preserve">
+    <value>Collecting {0} fish</value>
+  </data>
+  <data name="SHIPS_SENDING" xml:space="preserve">
+    <value>Sending </value>
+  </data>
+  <data name="SHIPS_UNLOADING" xml:space="preserve">
+    <value>Unloading </value>
+  </data>
+  <data name="SHIPS_LOADING" xml:space="preserve">
+    <value>Loading </value>
+  </data>
+  <data name="SLEEP_STARTING" xml:space="preserve">
+    <value>Started sleepin'. Waking up after {0} min.</value>
+  </data>
+  <data name="UPGRADABLE_UPGRADED" xml:space="preserve">
+    <value>Upgraded </value>
+  </data>
+  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
+    <value>Can't save a config file. Please move the bot in another directory or run with as administrator!</value>
+  </data>
+  <data name="LOGGER_CREATED" xml:space="preserve">
+    <value> is created.</value>
+  </data>
+  <data name="CORE_STOPPED" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
+    <value>No server_token</value>
+  </data>
+  <data name="CORE_RESTARTING" xml:space="preserve">
+    <value>Restarting bot</value>
+  </data>
+  <data name="CORE_USER_BANNED" xml:space="preserve">
+    <value>User is banned.</value>
+  </data>
+  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
+    <value>MAINTENANCE! Retrying after 30 mins</value>
+  </data>
+  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
+    <value>Someone is playing this game right now, waiting for {0} minutes</value>
+  </data>
+  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
+    <value>Mwaaah, waking up after hibernation</value>
+  </data>
+  <data name="NETWORKING_SYNCING" xml:space="preserve">
+    <value>Syncing...</value>
+  </data>
+  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
+    <value>Sending Heartbeat...</value>
+  </data>
+  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
+    <value>[1/3] Getting another cookies</value>
+  </data>
+  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
+    <value>[2/3] Getting portal</value>
+  </data>
+  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
+    <value>[3/3] Getting sessionid</value>
+  </data>
+  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
+    <value>Successfully logged in! Session ID = </value>
+  </data>
+  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
+    <value>CANT LOGIN!</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
+    <value>Faking real loading. Now, we'll load for {0:F1} seconds</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
+    <value>{0:F1} seconds elapsed</value>
+  </data>
+  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
+    <value>Server is responding with non xml file - Response = {0}; Exception info = {1}</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
+    <value>[GOOD] Server accepted our {0} requests</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
+    <value>[BAD] Server accepted our {0} requests!</value>
+  </data>
+  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
+    <value>Checking Fatal error...</value>
+  </data>
+  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
+    <value>Server disconnected us with error {0}</value>
+  </data>
+  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
+    <value>Sync failed, no response</value>
+  </data>
+</root>
