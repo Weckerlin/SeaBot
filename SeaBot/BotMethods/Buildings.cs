@@ -124,7 +124,8 @@ namespace SeaBotCore.BotMethods
                     if ((DateTime.UtcNow - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
                     {
                         Logger.Logger.Info(
-                            string.Format(Localization.BUILDINGS_COLLECTING, defs.ProdOutputs.ProdOutput[0].Amount, MaterialDB.GetItem(defs.ProdOutputs.ProdOutput[0].MaterialId).Name));
+                            string.Format(Localization.BUILDINGS_COLLECTING, defs.ProdOutputs.ProdOutput[0].Amount,
+                                MaterialDB.GetItem(defs.ProdOutputs.ProdOutput[0].MaterialId).Name));
 
                         Networking.AddTask(new Task.FinishBuildingProducingTask(data.InstId));
 

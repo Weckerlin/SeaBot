@@ -39,8 +39,8 @@ namespace SeaBotGUI.TelegramBot
         {
             if (File.Exists("telegramconfig.json"))
             {
-               
-                Form1._teleconfig = JsonConvert.DeserializeObject<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
+                Form1._teleconfig =
+                    JsonConvert.DeserializeObject<TeleConfigData>(File.ReadAllText("telegramconfig.json"));
             }
         }
     }

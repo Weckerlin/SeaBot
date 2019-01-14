@@ -22,7 +22,7 @@ namespace SeaBotCore.Localizaion {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Localization {
+    public class Localization {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -174,6 +174,15 @@ namespace SeaBotCore.Localizaion {
         internal static string FISH_COLLECTING {
             get {
                 return ResourceManager.GetString("FISH_COLLECTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12..
+        /// </summary>
+        internal static string FORM_BARREL_WARNING {
+            get {
+                return ResourceManager.GetString("FORM_BARREL_WARNING", resourceCulture);
             }
         }
         

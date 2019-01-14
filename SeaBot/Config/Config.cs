@@ -49,6 +49,17 @@ namespace SeaBotCore.Config
         private string _telegramtoken = string.Empty;
         private bool _upgradeonlyfactory;
         private int _woodlimit;
+        private LocalizationController.ELanguages _language = LocalizationController.GetDefaultLang();
+
+        public LocalizationController.ELanguages language
+        {
+            get => _language;
+            set
+            {
+                _language = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("language"));
+            }
+        } //done
 
         public bool sleepenabled
         {

@@ -100,28 +100,31 @@ namespace SeaBotCore.Data.Defenitions
                 {
                     case JsonToken.Integer:
                         var integerValue = serializer.Deserialize<long>(reader);
-                        return new Barrel { Integer = integerValue };
+                        return new Barrel {Integer = integerValue};
                     case JsonToken.String:
                     case JsonToken.Date:
                         var stringValue = serializer.Deserialize<string>(reader);
-                        return new Barrel { String = stringValue };
+                        return new Barrel {String = stringValue};
                 }
+
                 throw new Exception("Cannot unmarshal type Barrel");
             }
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
             {
-                var value = (Barrel)untypedValue;
+                var value = (Barrel) untypedValue;
                 if (value.Integer != null)
                 {
                     serializer.Serialize(writer, value.Integer.Value);
                     return;
                 }
+
                 if (value.String != null)
                 {
                     serializer.Serialize(writer, value.String);
                     return;
                 }
+
                 throw new Exception("Cannot marshal type Barrel");
             }
 

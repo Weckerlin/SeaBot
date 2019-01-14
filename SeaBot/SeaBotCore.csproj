@@ -83,6 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Localization.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localizaion\LocalizationController.cs" />
     <Compile Include="Logger\Logger.cs" />
     <Compile Include="Networking.cs" />
     <Compile Include="Core.cs" />

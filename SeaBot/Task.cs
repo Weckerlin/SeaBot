@@ -168,7 +168,9 @@ namespace SeaBotCore
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("x", x);
                 CustomObjects.Add("y", y);
-                CustomObjects.Add("payment_type", gem ? "gem" : "standard");
+                CustomObjects.Add("payment_type", gem
+                    ? "gem"
+                    : "standard");
             }
 
             public string Action => "purchase";
@@ -187,7 +189,9 @@ namespace SeaBotCore
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("x", x);
                 CustomObjects.Add("y", y);
-                CustomObjects.Add("payment_type", gem ? "gem" : "standard");
+                CustomObjects.Add("payment_type", gem
+                    ? "gem"
+                    : "standard");
             }
 
             public string Action => "purchase";
@@ -205,7 +209,9 @@ namespace SeaBotCore
 
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("price_def_id", price_def_id);
-                CustomObjects.Add("payment_type", gem ? "gem" : "standard");
+                CustomObjects.Add("payment_type", gem
+                    ? "gem"
+                    : "standard");
             }
 
             public string Action => "purchase";
@@ -268,7 +274,9 @@ namespace SeaBotCore
                 Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("type", "ship");
                 CustomObjects.Add("def_id", def_id);
-                CustomObjects.Add("payment_type", gem ? "gem" : "standard");
+                CustomObjects.Add("payment_type", gem
+                    ? "gem"
+                    : "standard");
             }
 
             public string Action => "purchase";
@@ -285,7 +293,9 @@ namespace SeaBotCore
                 CustomObjects.Add("type", type);
                 CustomObjects.Add("def_id", def_id);
                 CustomObjects.Add("item_id", itemid);
-                CustomObjects.Add("payment_type", gem ? "gem" : "standard");
+                CustomObjects.Add("payment_type", gem
+                    ? "gem"
+                    : "standard");
             }
 
             public string Action => "purchase";

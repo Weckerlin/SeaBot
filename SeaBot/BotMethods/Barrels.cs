@@ -35,7 +35,8 @@ namespace SeaBotCore.BotMethods
             if (nextbarrel.Definition.Id != 0)
             {
                 Logger.Logger.Info(
-                    string.Format(Localization.BARREL_COLLECTING_ITEM, nextbarrel.Amount, MaterialDB.GetItem(nextbarrel.Definition.Id).Name));
+                    string.Format(Localization.BARREL_COLLECTING_ITEM, nextbarrel.Amount,
+                        MaterialDB.GetItem(nextbarrel.Definition.Id).Name));
                 if (Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).FirstOrDefault() != null)
                 {
                     Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).First().Amount +=

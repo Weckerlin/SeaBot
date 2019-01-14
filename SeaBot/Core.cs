@@ -134,7 +134,6 @@ namespace SeaBotCore
                 {
                     if (Config.autoupgrade)
                     {
-                       
                         Buildings.AutoUpgrade(Config.upgradeonlyfactory);
                     }
 
@@ -144,10 +143,16 @@ namespace SeaBotCore
                         Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
                     }
 
-                    if (Config.collectfish) {FishPier.CollectFish();}
+                    if (Config.collectfish)
+                    {
+                        FishPier.CollectFish();
+                    }
 
 
-                    if (Config.collectfactory) {Buildings.CollectMaterials();}
+                    if (Config.collectfactory)
+                    {
+                        Buildings.CollectMaterials();
+                    }
 
                     if (Config.prodfactory)
                     {
@@ -155,7 +160,10 @@ namespace SeaBotCore
                             Config.woodlimit);
                     }
 
-                    if (Config.finishupgrade) {Buildings.FinishUpgrade();}
+                    if (Config.finishupgrade)
+                    {
+                        Buildings.FinishUpgrade();
+                    }
 
                     _lastdefinv = DateTime.Now;
                     ;

@@ -46,7 +46,8 @@ namespace SeaBotCore.BotMethods
                         lvl.TravelTime + 1)
                     {
                         Logger.Logger.Info(
-                            Localization.SHIPS_LOADING + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                            Localization.SHIPS_LOADING +
+                            Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -64,7 +65,6 @@ namespace SeaBotCore.BotMethods
                 var ship = Core.GlobalData.Ships[index];
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1)
                 {
-
                     if (ship.Type == "upgradeable")
                     {
                         var lvl = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Levels.Level
@@ -73,7 +73,8 @@ namespace SeaBotCore.BotMethods
                             lvl.TravelTime + 2)
                         {
                             Logger.Logger.Info(
-                                Localization.SHIPS_UNLOADING + Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                                Localization.SHIPS_UNLOADING + Defenitions.ShipDef.Items.Item
+                                    .First(n => n.DefId == ship.DefId).Name);
                             Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                                 lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 

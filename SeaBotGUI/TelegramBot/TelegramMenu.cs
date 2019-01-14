@@ -170,37 +170,51 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.collectfish ? "✅ Collect Fish" : "❎ Collect Fish",
+                            new TelegramBot.Button(Core.Config.collectfish
+                                        ? "✅ Collect Fish"
+                                        : "❎ Collect Fish",
                                     () => { Core.Config.collectfish = !Core.Config.collectfish; })
                                 {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button(Core.Config.autoupgrade ? "✅ Auto Upgrade" : "❎ Auto Upgrade",
+                            new TelegramBot.Button(Core.Config.autoupgrade
+                                        ? "✅ Auto Upgrade"
+                                        : "❎ Auto Upgrade",
                                     () => { Core.Config.autoupgrade = !Core.Config.autoupgrade; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.prodfactory ? "✅ Produce Factory" : "❎ Produce Factory",
+                            new TelegramBot.Button(Core.Config.prodfactory
+                                        ? "✅ Produce Factory"
+                                        : "❎ Produce Factory",
                                     () => { Core.Config.prodfactory = !Core.Config.prodfactory; })
                                 {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button(Core.Config.autoship ? "✅ Auto Ship" : "❎ Auto Ship",
+                            new TelegramBot.Button(Core.Config.autoship
+                                        ? "✅ Auto Ship"
+                                        : "❎ Auto Ship",
                                     () => { Core.Config.autoship = !Core.Config.autoship; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
                             new TelegramBot.Button(
-                                    Core.Config.barrelhack ? "✅ Auto-Barrel" : "❎ Auto-Barrel",
+                                    Core.Config.barrelhack
+                                        ? "✅ Auto-Barrel"
+                                        : "❎ Auto-Barrel",
                                     () => { Core.Config.barrelhack = !Core.Config.barrelhack; })
                                 {redirect = (int) EMenu.Strategy},
 
-                            new TelegramBot.Button(Core.Config.finishupgrade ? "✅ Finish Upgrade" : "❎ Finish Upgrade",
+                            new TelegramBot.Button(Core.Config.finishupgrade
+                                        ? "✅ Finish Upgrade"
+                                        : "❎ Finish Upgrade",
                                     () => { Core.Config.finishupgrade = !Core.Config.finishupgrade; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
                             new TelegramBot.Button(
-                                    Core.Config.collectfactory ? "✅ Collect Factory" : "❎ Collect Factory",
+                                    Core.Config.collectfactory
+                                        ? "✅ Collect Factory"
+                                        : "❎ Collect Factory",
                                     () => { Core.Config.collectfactory = !Core.Config.collectfactory; })
                                 {redirect = (int) EMenu.Strategy}
                         },
@@ -243,10 +257,14 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(!Core.Config.autoshipprofit ? "✅ Save Sailors" : "❎ Save Sailors",
+                            new TelegramBot.Button(!Core.Config.autoshipprofit
+                                        ? "✅ Save Sailors"
+                                        : "❎ Save Sailors",
                                     () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
                                 {redirect = (int) EMenu.AutoShipOptimal},
-                            new TelegramBot.Button(Core.Config.autoshipprofit ? "✅ More Loot" : "❎ More Loot",
+                            new TelegramBot.Button(Core.Config.autoshipprofit
+                                        ? "✅ More Loot"
+                                        : "❎ More Loot",
                                     () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
                                 {redirect = (int) EMenu.AutoShipOptimal}
                         },
@@ -283,22 +301,32 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "coins" ? "✅ Coins" : "❎ Coins",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "coins"
+                                        ? "✅ Coins"
+                                        : "❎ Coins",
                                     () => { Core.Config.autoshiptype = "coins"; })
                                 {redirect = (int) EMenu.AutoShipMaterial},
-                            new TelegramBot.Button(Core.Config.autoshiptype == "stone" ? "✅ Stone" : "❎ Stone",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "stone"
+                                    ? "✅ Stone"
+                                    : "❎ Stone",
                                 () => { Core.Config.autoshiptype = "stone"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "iron" ? "✅ Iron" : "❎ Iron",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "iron"
+                                    ? "✅ Iron"
+                                    : "❎ Iron",
                                 () => { Core.Config.autoshiptype = "iron"; }) {redirect = (int) EMenu.AutoShipMaterial},
-                            new TelegramBot.Button(Core.Config.autoshiptype == "wood" ? "✅ Wood" : "❎ Wood",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "wood"
+                                    ? "✅ Wood"
+                                    : "❎ Wood",
                                 () => { Core.Config.autoshiptype = "wood"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "fish" ? "✅ Fish" : "❎ Fish",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "fish"
+                                    ? "✅ Fish"
+                                    : "❎ Fish",
                                 () => { Core.Config.autoshiptype = "fish"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
 

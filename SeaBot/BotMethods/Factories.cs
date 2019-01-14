@@ -100,7 +100,8 @@ namespace SeaBotCore.BotMethods
                             Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
 
                         Logger.Logger.Info(
-                            string.Format(Localization.FACTORIES_STARTED_PROD, MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name));
+                            string.Format(Localization.FACTORIES_STARTED_PROD,
+                                MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name));
                         Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
                             data.ProdId));
                         data.ProdStart = TimeUtils.GetEpochTime();
