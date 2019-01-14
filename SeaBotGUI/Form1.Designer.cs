@@ -34,12 +34,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.WoodLabel = new System.Windows.Forms.Label();
-            this.StoneLabel = new System.Windows.Forms.Label();
-            this.IronLabel = new System.Windows.Forms.Label();
-            this.FishLabel = new System.Windows.Forms.Label();
-            this.GemLabel = new System.Windows.Forms.Label();
-            this.CoinsLabel = new System.Windows.Forms.Label();
+            this.lbl_wood = new System.Windows.Forms.Label();
+            this.lbl_stone = new System.Windows.Forms.Label();
+            this.lbl_iron = new System.Windows.Forms.Label();
+            this.lbl_fish = new System.Windows.Forms.Label();
+            this.lbl_gems = new System.Windows.Forms.Label();
+            this.lbl_coins = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -60,9 +60,9 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.BuildingGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.ShipGrid = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.num_removenum = new System.Windows.Forms.NumericUpDown();
             this.btn_removeitem = new System.Windows.Forms.Button();
@@ -141,9 +141,9 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BuildingGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShipGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -199,7 +199,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // label7
             // 
@@ -212,12 +211,12 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.WoodLabel);
-            this.groupBox5.Controls.Add(this.StoneLabel);
-            this.groupBox5.Controls.Add(this.IronLabel);
-            this.groupBox5.Controls.Add(this.FishLabel);
-            this.groupBox5.Controls.Add(this.GemLabel);
-            this.groupBox5.Controls.Add(this.CoinsLabel);
+            this.groupBox5.Controls.Add(this.lbl_wood);
+            this.groupBox5.Controls.Add(this.lbl_stone);
+            this.groupBox5.Controls.Add(this.lbl_iron);
+            this.groupBox5.Controls.Add(this.lbl_fish);
+            this.groupBox5.Controls.Add(this.lbl_gems);
+            this.groupBox5.Controls.Add(this.lbl_coins);
             this.groupBox5.Controls.Add(this.pictureBox6);
             this.groupBox5.Controls.Add(this.pictureBox5);
             this.groupBox5.Controls.Add(this.pictureBox4);
@@ -233,51 +232,51 @@
             // 
             // lbl_wood
             // 
-            this.WoodLabel.AutoSize = true;
-            this.WoodLabel.Location = new System.Drawing.Point(256, 53);
-            this.WoodLabel.Name = "WoodLabel";
-            this.WoodLabel.Size = new System.Drawing.Size(0, 13);
-            this.WoodLabel.TabIndex = 11;
+            this.lbl_wood.AutoSize = true;
+            this.lbl_wood.Location = new System.Drawing.Point(256, 53);
+            this.lbl_wood.Name = "lbl_wood";
+            this.lbl_wood.Size = new System.Drawing.Size(0, 13);
+            this.lbl_wood.TabIndex = 11;
             // 
             // lbl_stone
             // 
-            this.StoneLabel.AutoSize = true;
-            this.StoneLabel.Location = new System.Drawing.Point(256, 24);
-            this.StoneLabel.Name = "StoneLabel";
-            this.StoneLabel.Size = new System.Drawing.Size(0, 13);
-            this.StoneLabel.TabIndex = 10;
+            this.lbl_stone.AutoSize = true;
+            this.lbl_stone.Location = new System.Drawing.Point(256, 24);
+            this.lbl_stone.Name = "lbl_stone";
+            this.lbl_stone.Size = new System.Drawing.Size(0, 13);
+            this.lbl_stone.TabIndex = 10;
             // 
             // lbl_iron
             // 
-            this.IronLabel.AutoSize = true;
-            this.IronLabel.Location = new System.Drawing.Point(146, 53);
-            this.IronLabel.Name = "IronLabel";
-            this.IronLabel.Size = new System.Drawing.Size(0, 13);
-            this.IronLabel.TabIndex = 9;
+            this.lbl_iron.AutoSize = true;
+            this.lbl_iron.Location = new System.Drawing.Point(146, 53);
+            this.lbl_iron.Name = "lbl_iron";
+            this.lbl_iron.Size = new System.Drawing.Size(0, 13);
+            this.lbl_iron.TabIndex = 9;
             // 
             // lbl_fish
             // 
-            this.FishLabel.AutoSize = true;
-            this.FishLabel.Location = new System.Drawing.Point(147, 24);
-            this.FishLabel.Name = "FishLabel";
-            this.FishLabel.Size = new System.Drawing.Size(0, 13);
-            this.FishLabel.TabIndex = 8;
+            this.lbl_fish.AutoSize = true;
+            this.lbl_fish.Location = new System.Drawing.Point(147, 24);
+            this.lbl_fish.Name = "lbl_fish";
+            this.lbl_fish.Size = new System.Drawing.Size(0, 13);
+            this.lbl_fish.TabIndex = 8;
             // 
             // lbl_gems
             // 
-            this.GemLabel.AutoSize = true;
-            this.GemLabel.Location = new System.Drawing.Point(39, 51);
-            this.GemLabel.Name = "GemLabel";
-            this.GemLabel.Size = new System.Drawing.Size(0, 13);
-            this.GemLabel.TabIndex = 7;
+            this.lbl_gems.AutoSize = true;
+            this.lbl_gems.Location = new System.Drawing.Point(39, 51);
+            this.lbl_gems.Name = "lbl_gems";
+            this.lbl_gems.Size = new System.Drawing.Size(0, 13);
+            this.lbl_gems.TabIndex = 7;
             // 
             // lbl_coins
             // 
-            this.CoinsLabel.AutoSize = true;
-            this.CoinsLabel.Location = new System.Drawing.Point(38, 24);
-            this.CoinsLabel.Name = "CoinsLabel";
-            this.CoinsLabel.Size = new System.Drawing.Size(0, 13);
-            this.CoinsLabel.TabIndex = 6;
+            this.lbl_coins.AutoSize = true;
+            this.lbl_coins.Location = new System.Drawing.Point(38, 24);
+            this.lbl_coins.Name = "lbl_coins";
+            this.lbl_coins.Size = new System.Drawing.Size(0, 13);
+            this.lbl_coins.TabIndex = 6;
             // 
             // pictureBox6
             // 
@@ -397,7 +396,7 @@
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.richTextBox1.Size = new System.Drawing.Size(441, 133);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = string.Empty;
+            this.richTextBox1.Text = "";
             // 
             // groupBox2
             // 
@@ -494,7 +493,7 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.BuildingGrid);
+            this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(463, 424);
@@ -504,21 +503,21 @@
             // 
             // dataGridView1
             // 
-            this.BuildingGrid.AllowUserToAddRows = false;
-            this.BuildingGrid.AllowUserToDeleteRows = false;
-            this.BuildingGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BuildingGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BuildingGrid.Location = new System.Drawing.Point(0, 0);
-            this.BuildingGrid.Name = "BuildingGrid";
-            this.BuildingGrid.ReadOnly = true;
-            this.BuildingGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.BuildingGrid.RowHeadersVisible = false;
-            this.BuildingGrid.Size = new System.Drawing.Size(463, 424);
-            this.BuildingGrid.TabIndex = 0;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(463, 424);
+            this.dataGridView1.TabIndex = 0;
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.ShipGrid);
+            this.tabPage6.Controls.Add(this.dataGridView2);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(463, 424);
@@ -528,16 +527,16 @@
             // 
             // dataGridView2
             // 
-            this.ShipGrid.AllowUserToAddRows = false;
-            this.ShipGrid.AllowUserToDeleteRows = false;
-            this.ShipGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ShipGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShipGrid.Location = new System.Drawing.Point(0, 0);
-            this.ShipGrid.Name = "ShipGrid";
-            this.ShipGrid.ReadOnly = true;
-            this.ShipGrid.RowHeadersVisible = false;
-            this.ShipGrid.Size = new System.Drawing.Size(463, 424);
-            this.ShipGrid.TabIndex = 0;
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.Size = new System.Drawing.Size(463, 424);
+            this.dataGridView2.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -1332,9 +1331,9 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BuildingGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ShipGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -1425,6 +1424,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.LinkLabel linkLabel5;
         private System.Windows.Forms.BindingSource buildingBindingSource;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.NumericUpDown num_hibernationinterval;
         private System.Windows.Forms.Label label9;
@@ -1450,12 +1450,19 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbl_wood;
+        private System.Windows.Forms.Label lbl_stone;
+        private System.Windows.Forms.Label lbl_iron;
+        private System.Windows.Forms.Label lbl_fish;
+        private System.Windows.Forms.Label lbl_gems;
+        private System.Windows.Forms.Label lbl_coins;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button btn_dumpcore;
         private System.Windows.Forms.GroupBox groupBox14;
         private System.Windows.Forms.GroupBox groupBox16;
