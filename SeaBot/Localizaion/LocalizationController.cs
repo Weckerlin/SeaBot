@@ -48,14 +48,15 @@ namespace SeaBotCore.Localizaion
             foreach (var lang in Enum.GetNames(typeof(ELanguages)))
             {
                 CultureInfo ci = CultureInfo.InstalledUICulture;
-                if (string.Compare(ci.TwoLetterISOLanguageName, lang, true)==0)
+                if (string.Compare(ci.TwoLetterISOLanguageName, lang, true) == 0)
                 {
-                    return (ELanguages)Enum.Parse(typeof(ELanguages),lang);
+                    return (ELanguages) Enum.Parse(typeof(ELanguages), lang);
                 }
             }
 
             return ELanguages.EN;
         }
+
         public static void SetLanguage(ELanguages elang)
         {
             CultureInfo inf = CultureInfo.DefaultThreadCurrentUICulture;

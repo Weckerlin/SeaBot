@@ -74,7 +74,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIBinds.cs" />
-    <Compile Include="PrivateLocal.Designer.cs">
+    <Compile Include="Localization\PrivateLocal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrivateLocal.resx</DependentUpon>
@@ -96,10 +96,11 @@
     <EmbeddedResource Include="Form1.ru.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrivateLocal.resx">
+    <EmbeddedResource Include="Localization\PrivateLocal.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PrivateLocal.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\PrivateLocal.ru-RU.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

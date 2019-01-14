@@ -36,6 +36,8 @@ using SeaBotCore.Localizaion;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 using SeaBotGUI.GUIBinds;
+using SeaBotGUI.Localization;
+using SeaBotGUI.Properties;
 using SeaBotGUI.TelegramBot;
 using SeaBotGUI.Utils;
 
@@ -55,6 +57,7 @@ namespace SeaBotGUI
         {
             // bot = new WTGLib("a");
             ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
+             LocalizationController.SetLanguage(Core.Config.language);
             InitializeComponent();
             BuildingGrid = dataGridView1;
             ShipGrid = dataGridView2;
@@ -68,6 +71,7 @@ namespace SeaBotGUI
             TeleConfigSer.Load();
             MaximizeBox = false;
             CheckForUpdates();
+            UpdateButtons(Core.Config.autoshiptype);
             LoadControls();
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             if (!Core.Config.acceptedresponsibility)
@@ -131,7 +135,7 @@ namespace SeaBotGUI
                 radio_saveloot.Checked = true;
             else
                 radio_savesailors.Checked = true;
-         
+
             chk_smartsleep.Checked = Core.Config.smartsleepenabled;
             chk_sleepenabled.Checked = Core.Config.sleepenabled;
             num_sleepevery.Value = Core.Config.sleepevery;
@@ -148,13 +152,15 @@ namespace SeaBotGUI
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             BuildingGrid.DefaultCellStyle.SelectionBackColor = BuildingGrid.DefaultCellStyle.BackColor;
             BuildingGrid.DefaultCellStyle.SelectionForeColor = BuildingGrid.DefaultCellStyle.ForeColor;
-            UpdateButtons(Core.Config.autoshiptype);
-            SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
          
+          
+            SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
+
             foreach (var lang in Enum.GetNames(typeof(LocalizationController.ELanguages)))
             {
                 cbox_lang.Items.Add(lang);
             }
+
             cbox_lang.Text = Enum.GetName(typeof(LocalizationController.ELanguages), Core.Config.language);
             Core.Config.PropertyChanged += Config_PropertyChanged;
         }
@@ -645,9 +651,23 @@ namespace SeaBotGUI
             if (cbox_lang.SelectedItem != null)
             {
                 LocalizationController.ELanguages lang;
-                if(Enum.TryParse((string)cbox_lang.SelectedItem,out lang))
+                if (Enum.TryParse((string) cbox_lang.SelectedItem, out lang))
                 {
+                    if (lang == Core.Config.language)
+                    {
+                        return;
+                    }
                     Core.Config.language = lang;
+                    if (lang == LocalizationController.ELanguages.RU)
+                    {
+                        MessageBox.Show("Пожалуйста перезапустите программу чтобы поменять язык.");
+                    }
+
+                    if (lang == LocalizationController.ELanguages.EN)
+                    {
+                        MessageBox.Show("Please restart the program to change the language.");
+                    }
+                 
                 }
                 else
                 {
