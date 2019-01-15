@@ -161,7 +161,7 @@ namespace SeaBotCore.Cache
                 }
             }
          
-                var str = _local.FirstOrDefault(n => n.Key==item);
+                var str = _local.FirstOrDefault(n => string.Compare(n.Key,item,true)==0);
                 if (str.Value==null)
                 {
                     return defname;
