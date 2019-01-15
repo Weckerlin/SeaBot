@@ -30,7 +30,7 @@ namespace SeaBotCore.Cache
 {
     public static class LocalizationCache
     {
-        private static List<string> _local;
+        private static Dictionary<string,string> _local;
 
         private const string _cachefolder = "loccache";
 
@@ -69,6 +69,31 @@ namespace SeaBotCore.Cache
             }
         }
 
+        private static Dictionary<string, string> LoadDictionary(string[] arr)
+        {
+            var ret = new Dictionary<string,string>();
+            foreach (var item in arr)
+            {
+                string key;
+                string value;
+                var str = item.Replace("*#*", "#");
+                int charLocation = str.IndexOf('#');
+
+                if (charLocation > 0)
+                {
+                    key =  str.Substring(0, charLocation);
+                }
+                else
+                {
+                    continue;
+                }
+                value = str.Substring(charLocation+1);
+                ret.Add(key,value);
+            }
+
+            return ret
+                ;
+        }
         public static bool DownloadCache()
         {
             
@@ -121,29 +146,29 @@ namespace SeaBotCore.Cache
                 {
                     if (File.Exists($"{_cachefolder}/{Core.Config.language}.lang"))
                     {
-                        _local = File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang").ToList();
+                        _local = LoadDictionary(File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang"));
                     }
                     else
                     {
                         DownloadCache();
-                        _local = File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang").ToList();
+                        _local = LoadDictionary(File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang"));
                     }
                 }
                 else
                 {
                     DownloadCache();
-                    _local = File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang").ToList();
+                    _local = LoadDictionary(File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang"));
                 }
             }
          
-                var str = _local.FirstOrDefault(n => n.StartsWith(item));
-                if (str == null)
+                var str = _local.FirstOrDefault(n => n.Key==item);
+                if (str.Value==null)
                 {
                     return defname;
                 }
                 else
                 {
-                 return str.Replace(item,"").Remove(0, 3);
+                    return str.Value;
 
                 }
             
