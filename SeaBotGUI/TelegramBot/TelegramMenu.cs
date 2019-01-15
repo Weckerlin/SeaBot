@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using SeaBotCore;
 using SeaBotCore.Data.Materials;
+using SeaBotGUI.Localization;
 using Telegram.Bot.Types;
 
 namespace SeaBotGUI.TelegramBot
@@ -55,41 +56,50 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Start", () =>
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_START, () =>
                             {
                                 if (Core.IsBotRunning)
                                 {
-                                    TelegramBotController.SendMessage(Message, "But the bot is already running");
+                                    TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_BOT_RUNNING);
                                 }
                                 else
                                 {
                                     Core.StartBot();
-                                    TelegramBotController.SendMessage(Message, "Starting...");
+                                    TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_MSG_STARTING);
                                 }
                             }) {redirect = -1},
-                            new TelegramBot.Button("Stop", () =>
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STOP, () =>
                             {
                                 if (Core.IsBotRunning)
                                 {
                                     Core.StopBot();
-                                    TelegramBotController.SendMessage(Message, "Stopped!");
+                                    TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_MSG_STOPPED);
                                 }
                                 else
                                 {
-                                    TelegramBotController.SendMessage(Message, "But the bot is not running");
+                                    TelegramBotController.SendMessage(Message,
+                                        PrivateLocal.TELEGRAM_ERR_BOT_NOT_RUNNING);
                                 }
                             }) {redirect = -1}
                         },
-                        new[] {new TelegramBot.Button("Strategy", () => { }) {redirect = (int) EMenu.Strategy}},
                         new[]
                         {
-                            new TelegramBot.Button("Inventory",
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STRATEGY, () => { })
+                                {redirect = (int) EMenu.Strategy}
+                        },
+                        new[]
+                        {
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_INVENTORY,
                                 () => { TelegramBotController.SendMessage(Message, GetInventory()); }) {redirect = -1}
                         },
-                        new[] {new TelegramBot.Button("Settings", () => { }) {redirect = (int) EMenu.Settings}},
                         new[]
                         {
-                            new TelegramBot.Button("About",
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_SETTINGS, () => { })
+                                {redirect = (int) EMenu.Settings}
+                        },
+                        new[]
+                        {
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_ABOUT,
                                     () =>
                                     {
                                         TelegramBotController.SendMessage(Message, "SeaBot by Weespin\n2018-2019");
@@ -115,11 +125,11 @@ namespace SeaBotGUI.TelegramBot
                                 foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0))
                                     builder.AppendLine($"{MaterialDB.GetItem(item.Id).Name} - {item.Amount}");
                             else
-                                builder.Append("Please start the bot before getting inventory");
+                                builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
                         }
                         else
                         {
-                            builder.Append("Please start the bot before getting inventory");
+                            builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
                         }
 
                         return builder.ToString();
@@ -133,14 +143,22 @@ namespace SeaBotGUI.TelegramBot
 
                     TelegramBot.Button[][] TelegramBot.IMenu.buttons => new[]
                     {
-                        new[] {new TelegramBot.Button("Main", () => { }) {redirect = (int) EMenu.Main}},
-                        new[] {new TelegramBot.Button("Limits", () => { }) {redirect = (int) EMenu.Limits}},
+                        new[]
+                        {
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MAIN, () => { })
+                                {redirect = (int) EMenu.Main}
+                        },
+                        new[]
+                        {
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_LIMITS, () => { })
+                                {redirect = (int) EMenu.Limits}
+                        },
                         new[]
                         {
                             new TelegramBot.Button(
                                     Core.Config.upgradeonlyfactory
-                                        ? "✅ Upgrade Factory only"
-                                        : "❎ Upgrade Factory only",
+                                        ? "✅" + PrivateLocal.TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY
+                                        : "❎" + PrivateLocal.TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY,
                                     () => { Core.Config.upgradeonlyfactory = !Core.Config.upgradeonlyfactory; })
                                 {redirect = (int) EMenu.Settings}
                         }
@@ -170,52 +188,67 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.collectfish ? "✅ Collect Fish" : "❎ Collect Fish",
+                            new TelegramBot.Button(Core.Config.collectfish
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_COLLECT_FISH
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_COLLECT_FISH,
                                     () => { Core.Config.collectfish = !Core.Config.collectfish; })
                                 {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button(Core.Config.autoupgrade ? "✅ Auto Upgrade" : "❎ Auto Upgrade",
+                            new TelegramBot.Button(Core.Config.autoupgrade
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_UPGRADE
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_UPGRADE,
                                     () => { Core.Config.autoupgrade = !Core.Config.autoupgrade; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.prodfactory ? "✅ Produce Factory" : "❎ Produce Factory",
+                            new TelegramBot.Button(Core.Config.prodfactory
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_PRODUCE_FACTORY
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_PRODUCE_FACTORY,
                                     () => { Core.Config.prodfactory = !Core.Config.prodfactory; })
                                 {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button(Core.Config.autoship ? "✅ Auto Ship" : "❎ Auto Ship",
+                            new TelegramBot.Button(Core.Config.autoship
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_SHIP
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_SHIP,
                                     () => { Core.Config.autoship = !Core.Config.autoship; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
                             new TelegramBot.Button(
-                                    Core.Config.barrelhack ? "✅ Auto-Barrel" : "❎ Auto-Barrel",
+                                    Core.Config.barrelhack
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_BARREL
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_AUTO_BARREL,
                                     () => { Core.Config.barrelhack = !Core.Config.barrelhack; })
                                 {redirect = (int) EMenu.Strategy},
 
-                            new TelegramBot.Button(Core.Config.finishupgrade ? "✅ Finish Upgrade" : "❎ Finish Upgrade",
+                            new TelegramBot.Button(Core.Config.finishupgrade
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_FINISH_UPGRADE
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_FINISH_UPGRADE,
                                     () => { Core.Config.finishupgrade = !Core.Config.finishupgrade; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
                             new TelegramBot.Button(
-                                    Core.Config.collectfactory ? "✅ Collect Factory" : "❎ Collect Factory",
+                                    Core.Config.collectfactory
+                                        ? "✅" + PrivateLocal.TELEGRAM_STRATEGY_COLLECT_FACTORY
+                                        : "❎" + PrivateLocal.TELEGRAM_STRATEGY_COLLECT_FACTORY,
                                     () => { Core.Config.collectfactory = !Core.Config.collectfactory; })
                                 {redirect = (int) EMenu.Strategy}
                         },
                         new[]
                         {
-                            new TelegramBot.Button("AutoShip strategy", () => { })
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_AUTOSHIP_OPTIMAL, () => { })
                                 {redirect = (int) EMenu.AutoShipOptimal},
-                            new TelegramBot.Button("AutoShip material", () => { })
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STOP_AUTOSHIP_MATERIAL, () => { })
                                 {redirect = (int) EMenu.AutoShipMaterial}
                         },
 
 
                         new[]
                         {
-                            new TelegramBot.Button("Main", () => { }) {redirect = (int) EMenu.Main}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MAIN, () => { })
+                                {redirect = (int) EMenu.Main}
                         }
                     };
 
@@ -243,10 +276,14 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(!Core.Config.autoshipprofit ? "✅ Save Sailors" : "❎ Save Sailors",
+                            new TelegramBot.Button(!Core.Config.autoshipprofit
+                                        ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS
+                                        : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS,
                                     () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
                                 {redirect = (int) EMenu.AutoShipOptimal},
-                            new TelegramBot.Button(Core.Config.autoshipprofit ? "✅ More Loot" : "❎ More Loot",
+                            new TelegramBot.Button(Core.Config.autoshipprofit
+                                        ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT
+                                        : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT,
                                     () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
                                 {redirect = (int) EMenu.AutoShipOptimal}
                         },
@@ -254,8 +291,10 @@ namespace SeaBotGUI.TelegramBot
 
                         new[]
                         {
-                            new TelegramBot.Button("Strategy", () => { }) {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button("Main", () => { }) {redirect = (int) EMenu.Main}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STRATEGY, () => { })
+                                {redirect = (int) EMenu.Strategy},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MAIN, () => { })
+                                {redirect = (int) EMenu.Main}
                         }
                     };
 
@@ -283,29 +322,41 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "coins" ? "✅ Coins" : "❎ Coins",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "coins"
+                                        ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS
+                                        : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS,
                                     () => { Core.Config.autoshiptype = "coins"; })
                                 {redirect = (int) EMenu.AutoShipMaterial},
-                            new TelegramBot.Button(Core.Config.autoshiptype == "stone" ? "✅ Stone" : "❎ Stone",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "stone"
+                                    ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE
+                                    : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE,
                                 () => { Core.Config.autoshiptype = "stone"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "iron" ? "✅ Iron" : "❎ Iron",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "iron"
+                                    ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON
+                                    : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON,
                                 () => { Core.Config.autoshiptype = "iron"; }) {redirect = (int) EMenu.AutoShipMaterial},
-                            new TelegramBot.Button(Core.Config.autoshiptype == "wood" ? "✅ Wood" : "❎ Wood",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "wood"
+                                    ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD
+                                    : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD,
                                 () => { Core.Config.autoshiptype = "wood"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
                         new[]
                         {
-                            new TelegramBot.Button(Core.Config.autoshiptype == "fish" ? "✅ Fish" : "❎ Fish",
+                            new TelegramBot.Button(Core.Config.autoshiptype == "fish"
+                                    ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH
+                                    : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH,
                                 () => { Core.Config.autoshiptype = "fish"; }) {redirect = (int) EMenu.AutoShipMaterial}
                         },
 
                         new[]
                         {
-                            new TelegramBot.Button("Strategy", () => { }) {redirect = (int) EMenu.Strategy},
-                            new TelegramBot.Button("Main", () => { }) {redirect = (int) EMenu.Main}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STRATEGY, () => { })
+                                {redirect = (int) EMenu.Strategy},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MAIN, () => { })
+                                {redirect = (int) EMenu.Main}
                         }
                     };
 
@@ -333,14 +384,18 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Wood", () => { }) {redirect = (int) EMenu.LimitsWood},
-                            new TelegramBot.Button("Iron", () => { }) {redirect = (int) EMenu.LimitsIron},
-                            new TelegramBot.Button("Stone", () => { }) {redirect = (int) EMenu.LimitsStone}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_WOOD, () => { })
+                                {redirect = (int) EMenu.LimitsWood},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_IRON, () => { })
+                                {redirect = (int) EMenu.LimitsIron},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_STONE, () => { })
+                                {redirect = (int) EMenu.LimitsStone}
                         },
 
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main}
                         }
                     };
 
@@ -367,14 +422,16 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Barrels", () => { }) {redirect = (int) EMenu.IntervalBarrel},
-                            new TelegramBot.Button("Hibernation", () => { })
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_BARRELS, () => { })
+                                {redirect = (int) EMenu.IntervalBarrel},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_HIBERNATION, () => { })
                                 {redirect = (int) EMenu.IntervalHibernation}
                         },
 
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main}
                         }
                     };
 
@@ -401,8 +458,10 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main},
-                            new TelegramBot.Button("Intervals", () => { }) {redirect = (int) EMenu.Intervals}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_INTERVALS, () => { })
+                                {redirect = (int) EMenu.Intervals}
                         }
                     };
 
@@ -415,14 +474,14 @@ namespace SeaBotGUI.TelegramBot
                             if (parsed)
                                 Core.Config.hibernateinterval = ints;
                             else
-                                TelegramBotController.SendMessage(Message, "Can't parse string!");
+                                TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
                         }
                     }
 
                     public void OnEnter()
                     {
                         TelegramBotController.SendMessage(Message,
-                            "Please enter here your hibernation interval.\nYour current hibernation interval: " +
+                            PrivateLocal.TELEGRAM_INTERVAL_HIBERNATION +
                             Core.Config.hibernateinterval);
                     }
                 }
@@ -436,8 +495,10 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main},
-                            new TelegramBot.Button("Intervals", () => { }) {redirect = (int) EMenu.Intervals}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_INTERVALS, () => { })
+                                {redirect = (int) EMenu.Intervals}
                         }
                     };
 
@@ -450,14 +511,14 @@ namespace SeaBotGUI.TelegramBot
                             if (parsed)
                                 Core.Config.barrelinterval = ints;
                             else
-                                TelegramBotController.SendMessage(Message, "Can't parse string!");
+                                TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
                         }
                     }
 
                     public void OnEnter()
                     {
                         TelegramBotController.SendMessage(Message,
-                            "Please enter here your barrel interval.\nYour current barrel interval: " +
+                            PrivateLocal.TELEGRAM_INTERVAL_BARREL +
                             Core.Config.barrelinterval);
                     }
                 }
@@ -471,8 +532,10 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main},
-                            new TelegramBot.Button("Limits", () => { }) {redirect = (int) EMenu.Limits}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_LIMITS, () => { })
+                                {redirect = (int) EMenu.Limits}
                         }
                     };
 
@@ -485,14 +548,14 @@ namespace SeaBotGUI.TelegramBot
                             if (parsed)
                                 Core.Config.woodlimit = ints;
                             else
-                                TelegramBotController.SendMessage(Message, "Can't parse string!");
+                                TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
                         }
                     }
 
                     public void OnEnter()
                     {
                         TelegramBotController.SendMessage(Message,
-                            "Please enter here your Wood limit.\nYour current limit on Wood: " + Core.Config.woodlimit);
+                            PrivateLocal.TELEGRAM_INTERVAL_WOOD + Core.Config.woodlimit);
                     }
                 }
 
@@ -505,8 +568,10 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main},
-                            new TelegramBot.Button("Limits", () => { }) {redirect = (int) EMenu.Limits}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_LIMITS, () => { })
+                                {redirect = (int) EMenu.Limits}
                         }
                     };
 
@@ -519,14 +584,14 @@ namespace SeaBotGUI.TelegramBot
                             if (parsed)
                                 Core.Config.stonelimit = ints;
                             else
-                                TelegramBotController.SendMessage(Message, "Can't parse string!");
+                                TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
                         }
                     }
 
                     public void OnEnter()
                     {
                         TelegramBotController.SendMessage(Message,
-                            "Please enter here your Stone limit.\nYour current limit on Stone: " +
+                            PrivateLocal.TELEGRAM_INTERVAL_STONE +
                             Core.Config.stonelimit);
                     }
                 }
@@ -540,8 +605,10 @@ namespace SeaBotGUI.TelegramBot
                     {
                         new[]
                         {
-                            new TelegramBot.Button("Menu", () => { }) {redirect = (int) EMenu.Main},
-                            new TelegramBot.Button("Limits", () => { }) {redirect = (int) EMenu.Limits}
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_MENU, () => { })
+                                {redirect = (int) EMenu.Main},
+                            new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_LIMITS, () => { })
+                                {redirect = (int) EMenu.Limits}
                         }
                     };
 
@@ -554,14 +621,14 @@ namespace SeaBotGUI.TelegramBot
                             if (parsed)
                                 Core.Config.stonelimit = ints;
                             else
-                                TelegramBotController.SendMessage(Message, "Can't parse string!");
+                                TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
                         }
                     }
 
                     public void OnEnter()
                     {
                         TelegramBotController.SendMessage(Message,
-                            "Please enter here your Iron limit.\nYour current limit on Iron: " + Core.Config.ironlimit);
+                            PrivateLocal.TELEGRAM_INTERVAL_IRON + Core.Config.ironlimit);
                     }
                 }
             }

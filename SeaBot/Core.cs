@@ -21,6 +21,7 @@ using System.Threading;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Config;
 using SeaBotCore.Data;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore
@@ -45,6 +46,7 @@ namespace SeaBotCore
             Configurator.Load();
             Config.PropertyChanged += Config_PropertyChanged;
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
+            LocalizationController.SetLanguage(Core.Config.language);
         }
 
         public static bool IsBotRunning
@@ -69,7 +71,7 @@ namespace SeaBotCore
             {
                 ThreadKill.KillTheThread(Networking._syncThread); // todo fix
                 ThreadKill.KillTheThread(BotThread);
-                Logger.Logger.Info("Stopped");
+                Logger.Logger.Info(Localization.CORE_STOPPED);
                 Events.Events.BotStoppedEvent.BotStopped.Invoke();
             }).Start();
         }
@@ -78,7 +80,7 @@ namespace SeaBotCore
         {
             if (Config.server_token == string.Empty)
             {
-                Logger.Logger.Fatal("No server_token");
+                Logger.Logger.Fatal(Localization.CORE_NO_SERV_TOKEN);
                 return;
             }
 
@@ -99,22 +101,22 @@ namespace SeaBotCore
         {
             new System.Threading.Tasks.Task(() =>
             {
-                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION||e == Enums.EErrorCode.COLLECTION_IN_FUTURE||e == Enums.EErrorCode.COLLECTION_IN_PAST||(int)e== 1011)
                 {
-                    Logger.Logger.Info("Restarting bot");
+                    Logger.Logger.Info(Localization.CORE_RESTARTING);
                     StopBot();
                     StartBot();
                 }
 
                 if (e == Enums.EErrorCode.PLAYER_BANNED)
                 {
-                    Logger.Logger.Fatal("User is banned.");
+                    Logger.Logger.Fatal(Localization.CORE_USER_BANNED);
                     StopBot();
                 }
 
                 if (e == Enums.EErrorCode.MAINTENANCE || e == Enums.EErrorCode.PLAYER_MAINTENANCE)
                 {
-                    Logger.Logger.Info("MAINTENANCE! Retrying after 30 mins");
+                    Logger.Logger.Info(Localization.CORE_MAINTENANCE_30MIN);
                     Thread.Sleep(30 * 60 * 1000);
                     StopBot();
                     StartBot();
@@ -124,6 +126,8 @@ namespace SeaBotCore
 
         private static void BotVoid()
         {
+
+            LocalizationController.SetLanguage(Core.Config.language);
             while (true)
             {
                 Thread.Sleep(100);
@@ -133,7 +137,6 @@ namespace SeaBotCore
                 {
                     if (Config.autoupgrade)
                     {
-                       
                         Buildings.AutoUpgrade(Config.upgradeonlyfactory);
                     }
 
@@ -143,10 +146,16 @@ namespace SeaBotCore
                         Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
                     }
 
-                    if (Config.collectfish) {FishPier.CollectFish();}
+                    if (Config.collectfish)
+                    {
+                        FishPier.CollectFish();
+                    }
 
 
-                    if (Config.collectfactory) {Buildings.CollectMaterials();}
+                    if (Config.collectfactory)
+                    {
+                        Buildings.CollectMaterials();
+                    }
 
                     if (Config.prodfactory)
                     {
@@ -154,7 +163,10 @@ namespace SeaBotCore
                             Config.woodlimit);
                     }
 
-                    if (Config.finishupgrade) {Buildings.FinishUpgrade();}
+                    if (Config.finishupgrade)
+                    {
+                        Buildings.FinishUpgrade();
+                    }
 
                     _lastdefinv = DateTime.Now;
                     ;

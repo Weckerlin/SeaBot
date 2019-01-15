@@ -19,6 +19,7 @@ using System.Linq;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -34,7 +35,8 @@ namespace SeaBotCore.BotMethods
             if (nextbarrel.Definition.Id != 0)
             {
                 Logger.Logger.Info(
-                    $"Barrel! Collecting {nextbarrel.Amount} {MaterialDB.GetItem(nextbarrel.Definition.Id).Name}");
+                    string.Format(Localization.BARREL_COLLECTING_ITEM, nextbarrel.Amount,
+                      MaterialDB.GetLocalizedName(nextbarrel.Definition.Id)));
                 if (Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).FirstOrDefault() != null)
                 {
                     Core.GlobalData.Inventory.Where(n => n.Id == nextbarrel.Definition.Id).First().Amount +=
@@ -48,7 +50,7 @@ namespace SeaBotCore.BotMethods
             else
             {
                 Logger.Logger.Info(
-                    $"Barrel! Collecting {nextbarrel.Amount} sailors!");
+                    string.Format(Localization.BARREL_COLLECTING_SAILORS, nextbarrel.Amount));
             }
 
             Networking.AddTask(new Task.ConfirmBarrelTask(barrelcontroller.DefId, nextbarrel.get_type(),

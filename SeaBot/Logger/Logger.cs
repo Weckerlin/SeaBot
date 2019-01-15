@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.Logger
 {
@@ -39,7 +40,7 @@ namespace SeaBotCore.Logger
             logFilename = DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + FILE_EXT;
 
             // Log file header line
-            var logHeader = logFilename + " is created.";
+            var logHeader = logFilename + Localization.LOGGER_CREATED;
             if (!Directory.Exists("logs")) Directory.CreateDirectory("logs");
 
             if (!File.Exists("logs/" + logFilename))

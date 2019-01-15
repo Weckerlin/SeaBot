@@ -30,11 +30,15 @@ using Exceptionless;
 using Exceptionless.Configuration;
 using Newtonsoft.Json;
 using SeaBotCore;
+using SeaBotCore.Cache;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Materials;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 using SeaBotGUI.GUIBinds;
+using SeaBotGUI.Localization;
+using SeaBotGUI.Properties;
 using SeaBotGUI.TelegramBot;
 using SeaBotGUI.Utils;
 
@@ -54,17 +58,30 @@ namespace SeaBotGUI
         {
             // bot = new WTGLib("a");
             ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
+             LocalizationController.SetLanguage(Core.Config.language);
             InitializeComponent();
+            BuildingGrid = dataGridView1;
+            ShipGrid = dataGridView2;
+            CoinsLabel = lbl_coins;
+            FishLabel = lbl_fish;
+            StoneLabel = lbl_stone;
+            TabControl = tabControl1;
+            GemLabel = lbl_gems;
+            IronLabel = lbl_iron;
+            WoodLabel = lbl_wood;
+            LevelLabel = lbl_lvl;
+            SailorsLabel = lbl_sailors;
             instance = this;
             TeleConfigSer.Load();
             MaximizeBox = false;
             CheckForUpdates();
+            UpdateButtons(Core.Config.autoshiptype);
             LoadControls();
             Logger.Event.LogMessageChat.OnLogMessage += LogMessageChat_OnLogMessage;
             if (!Core.Config.acceptedresponsibility)
             {
                 var msg = MessageBox.Show(
-                    "By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.\r\nIn order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.",
+                    PrivateLocal.SEABOTGUI_WELCOME,
                     "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
                 if (msg == DialogResult.OK)
                     Core.Config.acceptedresponsibility = true;
@@ -83,8 +100,10 @@ namespace SeaBotGUI
 
         public Label FishLabel { get; private set; }
 
+        public TabControl TabControl { get; private set; }
         public Label StoneLabel { get; private set; }
-
+        public Label LevelLabel { get; private set; }
+        public Label SailorsLabel { get; private set; }
         public Label GemLabel { get; private set; }
 
         public Label IronLabel { get; private set; }
@@ -139,8 +158,16 @@ namespace SeaBotGUI
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             BuildingGrid.DefaultCellStyle.SelectionBackColor = BuildingGrid.DefaultCellStyle.BackColor;
             BuildingGrid.DefaultCellStyle.SelectionForeColor = BuildingGrid.DefaultCellStyle.ForeColor;
-            UpdateButtons(Core.Config.autoshiptype);
+         
+          
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
+
+            foreach (var lang in Enum.GetNames(typeof(LocalizationController.ELanguages)))
+            {
+                cbox_lang.Items.Add(lang);
+            }
+
+            cbox_lang.Text = Enum.GetName(typeof(LocalizationController.ELanguages), Core.Config.language);
             Core.Config.PropertyChanged += Config_PropertyChanged;
         }
 
@@ -251,7 +278,6 @@ namespace SeaBotGUI
 
         public void FormatResources(GlobalData data)
         {
-
             if (data.Inventory == null) return;
 
             ResourcesBox.Update();
@@ -259,15 +285,13 @@ namespace SeaBotGUI
             //todo fix
             for (int i = 0; i < data.Inventory.Count; i++)
             {
-               
                 if (data.Inventory[i].Amount != 0)
                 {
-                    string[] row = {MaterialDB.GetItem(data.Inventory[i].Id).Name, data.Inventory[i].Amount.ToString()};
+                    string[] row = {LocalizationCache.GetNameFromLoc(MaterialDB.GetItem(data.Inventory[i].Id).NameLoc, MaterialDB.GetItem(data.Inventory[i].Id).Name), data.Inventory[i].Amount.ToString()};
                     a.Add(new ListViewItem(row));
                 }
             }
 
-     
 
             if (listView1.InvokeRequired)
             {
@@ -313,15 +337,15 @@ namespace SeaBotGUI
             else if (result < 0)
             {
                 label7.ForeColor = Color.DarkRed;
-                label7.Text = $"[Old] Version: {version1}";
-                var msg = MessageBox.Show("A new update has been released, press OK to open download page!", "Update!",
+                label7.Text = string.Format(PrivateLocal.VERSION_OLD, version1);
+                var msg = MessageBox.Show(PrivateLocal.VERSION_UPDATE_MBOX, "Update!",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (msg == DialogResult.Yes) CompUtils.OpenLink(data.HtmlUrl.ToString());
             }
             else
             {
                 label7.ForeColor = Color.DarkGreen;
-                label7.Text = $"[Current] Version: {version1}";
+                label7.Text = string.Format(PrivateLocal.VERSION_CURRENT, version1);
             }
         }
 
@@ -329,7 +353,7 @@ namespace SeaBotGUI
         {
             if (string.IsNullOrEmpty(Core.Config.server_token))
             {
-                MessageBox.Show("Empty server_token\nPlease fill server token in Settings tab", "Error");
+                MessageBox.Show(PrivateLocal.TOKEN_EMPTY, "Error");
                 return;
             }
 
@@ -342,8 +366,6 @@ namespace SeaBotGUI
         {
             FormatResources(Core.GlobalData);
         }
-
-
 
 
         private void chk_autofish_CheckedChanged(object sender, EventArgs e)
@@ -529,7 +551,7 @@ namespace SeaBotGUI
         private void button4_Click_2(object sender, EventArgs e)
         {
             if (Core.Config.telegramtoken == string.Empty)
-                MessageBox.Show("No telegram token");
+                MessageBox.Show(PrivateLocal.TELEGRAM_NO_TOKEN);
             else
                 try
                 {
@@ -553,7 +575,7 @@ namespace SeaBotGUI
                 if (wehave != 0 && wehave >= much)
                 {
                     var item = MaterialDB.GetItem(picked);
-                    Logger.Info($"Removed {much} {item.Name}'s");
+                    Logger.Info(string.Format(PrivateLocal.INVENTORY_REMOVED, much, item.Name));
                     Networking.AddTask(
                         new Task.RemoveMaterialTask(item.DefId, much));
                     Core.GlobalData.Inventory.First(n => n.Id == item.DefId).Amount -=
@@ -590,7 +612,6 @@ namespace SeaBotGUI
             Core.Config.sleepenabled = chk_sleepenabled.Checked;
         }
 
-     
 
         private void num_sleepevery_ValueChanged(object sender, EventArgs e)
         {
@@ -620,7 +641,7 @@ namespace SeaBotGUI
             if (num_barrelinterval.Value < 12 && !barrelsaid)
             {
                 MessageBox.Show(
-                    "Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.", "Alert",
+                    PrivateLocal.BARREL_INTERVAL_WARNING, "Alert",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 barrelsaid = true;
             }
@@ -631,8 +652,54 @@ namespace SeaBotGUI
                 num_barrelinterval.ForeColor = Color.Black;
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void cbox_lang_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbox_lang.SelectedItem != null)
+            {
+                LocalizationController.ELanguages lang;
+                if (Enum.TryParse((string) cbox_lang.SelectedItem, out lang))
+                {
+                    if (lang == Core.Config.language)
+                    {
+                        return;
+                    }
+                    Core.Config.language = lang;
+                    if (lang == LocalizationController.ELanguages.RU)
+                    {
+                        MessageBox.Show("Пожалуйста перезапустите программу чтобы поменять язык.");
+                    }
+
+                    if (lang == LocalizationController.ELanguages.EN)
+                    {
+                        MessageBox.Show("Please restart the program to change the language.");
+                    }
+                 
+                }
+                else
+                {
+                    Core.Config.language = LocalizationController.ELanguages.EN;
+                }
+            }
+        }
+
+        private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Utils.CompUtils.OpenLink("https://www.donationalerts.com/r/weespin");
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CompUtils.OpenLink("https://qiwi.me/seabot");
+        }
+
+        private void linkLabel9_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CompUtils.OpenLink("https://steamcommunity.com/tradeoffer/new/?partner=83321528&token=2CIUp5N6");
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

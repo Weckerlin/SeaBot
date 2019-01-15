@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BARREL_INTERVAL_WARNING" xml:space="preserve">
+    <value>Внимание, уже один человек был забанен за использования интервала который ниже 12-и</value>
+  </data>
+  <data name="INVENTORY_REMOVED" xml:space="preserve">
+    <value>Удалено {0} {1}</value>
+  </data>
+  <data name="TELEGRAM_NO_TOKEN" xml:space="preserve">
+    <value>Нет телеграм токена</value>
+  </data>
+  <data name="TOKEN_EMPTY" xml:space="preserve">
+    <value>Пустой токен игры
+Пожалуйста введите его в настройках</value>
+  </data>
+  <data name="VERSION_CURRENT" xml:space="preserve">
+    <value>[Текущая] Версия: {0}</value>
+  </data>
+  <data name="VERSION_UPDATE_MBOX" xml:space="preserve">
+    <value>Новое обновление уже вышло! Нажмите OK чтобы перейти на страницу загрузки</value>
+  </data>
+  <data name="VERSION_OLD" xml:space="preserve">
+    <value>[Старая] Версия: {0}</value>
+  </data>
+  <data name="SEABOTGUI_WELCOME" xml:space="preserve">
+    <value>Нажимая «ОК», вы соглашаетесь, что ни программа, ни разработчик не несут ответственности за вашу учетную запись.
+Чтобы не получить бан, пожалуйста, не используйте слишком маленькое число в интервалах бочек или просто не используйте их.</value>
+  </data>
+  <data name="TELEGRAM_BTN_START" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="TELEGRAM_BTN_STOP" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="TELEGRAM_BTN_STRATEGY" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="TELEGRAM_BTN_INVENTORY" xml:space="preserve">
+    <value>Инвертарь</value>
+  </data>
+  <data name="TELEGRAM_BTN_SETTINGS" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="TELEGRAM_BTN_ABOUT" xml:space="preserve">
+    <value>О проекте</value>
+  </data>
+  <data name="TELEGRAM_BTN_MAIN" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="TELEGRAM_BTN_LIMITS" xml:space="preserve">
+    <value>Лимиты</value>
+  </data>
+  <data name="TELEGRAM_BTN_AUTOSHIP_OPTIMAL" xml:space="preserve">
+    <value>Стратегия Авто-Корабля</value>
+  </data>
+  <data name="TELEGRAM_BTN_STOP_AUTOSHIP_MATERIAL" xml:space="preserve">
+    <value>Материалы Авто-Корабля</value>
+  </data>
+  <data name="TELEGRAM_BTN_MENU" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="TELEGRAM_BTN_BARRELS" xml:space="preserve">
+    <value>Бочки</value>
+  </data>
+  <data name="TELEGRAM_BTN_HIBERNATION" xml:space="preserve">
+    <value>Спячка</value>
+  </data>
+  <data name="TELEGRAM_BTN_INTERVALS" xml:space="preserve">
+    <value>Интервалы</value>
+  </data>
+  <data name="TELEGRAM_BTN_WOOD" xml:space="preserve">
+    <value>Дерево</value>
+  </data>
+  <data name="TELEGRAM_BTN_IRON" xml:space="preserve">
+    <value>Железо</value>
+  </data>
+  <data name="TELEGRAM_BTN_STONE" xml:space="preserve">
+    <value>Камень</value>
+  </data>
+  <data name="TELEGRAM_EXCEPTION_NULL_INVENTORY" xml:space="preserve">
+    <value>Пожалуйста запустите бота перед запрашиванием инвентаря</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_COLLECT_FISH" xml:space="preserve">
+    <value> Сбор рыбы</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_UPGRADE" xml:space="preserve">
+    <value> Авто-Апгрейд</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_PRODUCE_FACTORY" xml:space="preserve">
+    <value> Производство фабрик</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_SHIP" xml:space="preserve">
+    <value> Авто-Корабль</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_BARREL" xml:space="preserve">
+    <value> Авто-Бочки</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_FINISH_UPGRADE" xml:space="preserve">
+    <value> Завершать апгрейды</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_COLLECT_FACTORY" xml:space="preserve">
+    <value> Сбор фабрик</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS" xml:space="preserve">
+    <value> Спасать моряков</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT" xml:space="preserve">
+    <value> Макс. лут</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS" xml:space="preserve">
+    <value> Монеты</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE" xml:space="preserve">
+    <value> Камень</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON" xml:space="preserve">
+    <value> Железо</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD" xml:space="preserve">
+    <value> Дерево</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH" xml:space="preserve">
+    <value> Рыба</value>
+  </data>
+  <data name="TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY" xml:space="preserve">
+    <value> Апгрейд только фабрик</value>
+  </data>
+  <data name="TELEGRAM_ERR_BOT_RUNNING" xml:space="preserve">
+    <value>Но бот уже работает!</value>
+  </data>
+  <data name="TELEGRAM_ERR_BOT_NOT_RUNNING" xml:space="preserve">
+    <value>Но бот не работает!</value>
+  </data>
+  <data name="TELEGRAM_MSG_STARTING" xml:space="preserve">
+    <value>Запуск..</value>
+  </data>
+  <data name="TELEGRAM_MSG_STOPPED" xml:space="preserve">
+    <value>Остановлено</value>
+  </data>
+  <data name="TELEGRAM_ERR_CANT_PARSE" xml:space="preserve">
+    <value>Не могу запарсить строку</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_HIBERNATION" xml:space="preserve">
+    <value>Пожалуйста введите интервал спячки.
+На данный момент интервал:</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_BARREL" xml:space="preserve">
+    <value>Пожалуйста введите интервал бочек.
+На данный момент интервал:</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_WOOD" xml:space="preserve">
+    <value>Пожалуйста введите лимит дерева.
+На данный момент лимит:</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_STONE" xml:space="preserve">
+    <value>Пожалуйста введите лимит камня.
+На данный момент лимит:</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_IRON" xml:space="preserve">
+    <value>Пожалуйста введите лимит железа.
+На данный момент лимит:</value>
+  </data>
+</root>

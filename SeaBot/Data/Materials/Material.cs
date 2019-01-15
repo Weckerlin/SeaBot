@@ -23,22 +23,28 @@ namespace SeaBotCore.Data.Materials
     {
         public static MaterialsData.Item GetItem(int id)
         {
-            return Cache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
+            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(long id)
         {
-            return Cache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
+            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(string name)
         {
-            return Cache.GetMaterials().Items.Item.FirstOrDefault(n => n.Name == name);
+            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.Name == name);
         }
 
+        public static string GetLocalizedName(int id)
+        {
+            return Cache.LocalizationCache.GetNameFromLoc(Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id)
+                ?.NameLoc.ToLower(), Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id)
+                ?.Name);
+        }
         public static List<MaterialsData.Item> GetAllItems()
         {
-            return Cache.GetMaterials().Items.Item.ToList();
+            return Cache.DefenitionCache.GetMaterials().Items.Item.ToList();
         }
     }
 }

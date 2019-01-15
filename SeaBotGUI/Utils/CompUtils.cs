@@ -50,7 +50,7 @@ namespace SeaBotGUI.Utils
                     // appearently we have been successful.
                 }
             }
-            catch (Exception )
+            catch (Exception)
             {
                 // We don't want any surprises
             }

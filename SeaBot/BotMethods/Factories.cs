@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -99,7 +100,8 @@ namespace SeaBotCore.BotMethods
                             Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
 
                         Logger.Logger.Info(
-                            $"Started producing {MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name}");
+                            string.Format(Localization.FACTORIES_STARTED_PROD,
+                                MaterialDB.GetLocalizedName(needed.ProdOutputs.ProdOutput[0].MaterialId)));
                         Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
                             data.ProdId));
                         data.ProdStart = TimeUtils.GetEpochTime();

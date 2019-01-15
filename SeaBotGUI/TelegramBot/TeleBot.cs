@@ -105,7 +105,7 @@ namespace SeaBotGUI.TelegramBot
                 {
                     var mac = TeleUtils.MacAdressCode;
                     var smac = mac.Substring(0, mac.Length / 2);
-                    if (string.Compare(msg.Text,smac,true)==0)
+                    if (string.Compare(msg.Text, smac, true) == 0)
                     {
                         var men = GetMenuItems();
 
@@ -167,7 +167,7 @@ namespace SeaBotGUI.TelegramBot
                     Button a = null;
                     foreach (var rowButton in first.buttons)
                     foreach (var n in rowButton)
-                        if (string.Compare(n.name,msg.Text,true)==0)
+                        if (string.Compare(n.name, msg.Text, true) == 0)
                         {
                             a = n;
                             break;

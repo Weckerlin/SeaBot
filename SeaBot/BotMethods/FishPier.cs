@@ -17,6 +17,7 @@
 using System;
 using System.Linq;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -39,7 +40,7 @@ namespace SeaBotCore.BotMethods
                 }
             }
 
-            if (totalfish > 0) Logger.Logger.Info($"Collecting {totalfish} fish");
+            if (totalfish > 0) Logger.Logger.Info(string.Format(Localization.FISH_COLLECTING, totalfish));
         }
     }
 }

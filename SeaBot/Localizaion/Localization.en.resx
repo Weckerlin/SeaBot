@@ -112,34 +112,126 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="coin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\coin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
+    <value>Barrel! Collecting {0} sailors!</value>
   </data>
-  <data name="diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
+    <value>Barrel! Collecting {0} {1}</value>
   </data>
-  <data name="fish" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\fish.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
+    <value>Started upgrading {0}</value>
   </data>
-  <data name="level" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\level.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
+    <value>Finishing upgrading {0}</value>
   </data>
-  <data name="metal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\metal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
+    <value>Сollecting {0} {1}</value>
   </data>
-  <data name="sailor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\sailor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
+    <value>Started producing {0}</value>
   </data>
-  <data name="stone" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\stone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FISH_COLLECTING" xml:space="preserve">
+    <value>Collecting {0} fish</value>
   </data>
-  <data name="wood" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\wood.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SHIPS_SENDING" xml:space="preserve">
+    <value>Sending </value>
+  </data>
+  <data name="SHIPS_UNLOADING" xml:space="preserve">
+    <value>Unloading </value>
+  </data>
+  <data name="SHIPS_LOADING" xml:space="preserve">
+    <value>Loading </value>
+  </data>
+  <data name="SLEEP_STARTING" xml:space="preserve">
+    <value>Started sleepin'. Waking up after {0} min.</value>
+  </data>
+  <data name="UPGRADABLE_UPGRADED" xml:space="preserve">
+    <value>Upgraded </value>
+  </data>
+  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
+    <value>Can't save a config file. Please move the bot in another directory or run with as administrator!</value>
+  </data>
+  <data name="LOGGER_CREATED" xml:space="preserve">
+    <value> is created.</value>
+  </data>
+  <data name="CORE_STOPPED" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
+    <value>No server_token</value>
+  </data>
+  <data name="CORE_RESTARTING" xml:space="preserve">
+    <value>Restarting bot</value>
+  </data>
+  <data name="CORE_USER_BANNED" xml:space="preserve">
+    <value>User is banned.</value>
+  </data>
+  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
+    <value>MAINTENANCE! Retrying after 30 mins</value>
+  </data>
+  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
+    <value>Someone is playing this game right now, waiting for {0} minutes</value>
+  </data>
+  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
+    <value>Mwaaah, waking up after hibernation</value>
+  </data>
+  <data name="NETWORKING_SYNCING" xml:space="preserve">
+    <value>Syncing...</value>
+  </data>
+  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
+    <value>Sending Heartbeat...</value>
+  </data>
+  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
+    <value>[1/3] Getting another cookies</value>
+  </data>
+  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
+    <value>[2/3] Getting portal</value>
+  </data>
+  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
+    <value>[3/3] Getting sessionid</value>
+  </data>
+  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
+    <value>Successfully logged in! Session ID = </value>
+  </data>
+  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
+    <value>CANT LOGIN!</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
+    <value>Faking real loading. Now, we'll load for {0:F1} seconds</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
+    <value>{0:F1} seconds elapsed</value>
+  </data>
+  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
+    <value>Server is responding with non xml file - Response = {0}; Exception info = {1}</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
+    <value>[GOOD] Server accepted our {0} requests</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
+    <value>[BAD] Server accepted our {0} requests!</value>
+  </data>
+  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
+    <value>Checking Fatal error...</value>
+  </data>
+  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
+    <value>Server disconnected us with error {0}</value>
+  </data>
+  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
+    <value>Sync failed, no response</value>
+  </data>
+  <data name="FORM_BARREL_WARNING" xml:space="preserve">
+    <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
+  </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
+    <value>Downloading {0} lang.</value>
+  </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
+    <value>Downloading localization cache...</value>
   </data>
 </root>

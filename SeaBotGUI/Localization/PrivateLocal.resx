@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="BARREL_INTERVAL_WARNING" xml:space="preserve">
+    <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
+  </data>
+  <data name="INVENTORY_REMOVED" xml:space="preserve">
+    <value>Removed {0} {1}'s</value>
+  </data>
+  <data name="TELEGRAM_NO_TOKEN" xml:space="preserve">
+    <value>No telegram token</value>
+  </data>
+  <data name="TOKEN_EMPTY" xml:space="preserve">
+    <value>Empty server_token
+Please fill server token in Settings tab</value>
+  </data>
+  <data name="VERSION_CURRENT" xml:space="preserve">
+    <value>[Current] Version: {0}</value>
+  </data>
+  <data name="VERSION_UPDATE_MBOX" xml:space="preserve">
+    <value>A new update has been released, press OK to open download page!</value>
+  </data>
+  <data name="VERSION_OLD" xml:space="preserve">
+    <value>[Old] Version: {0}</value>
+  </data>
+  <data name="SEABOTGUI_WELCOME" xml:space="preserve">
+    <value>By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.
+In order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.</value>
+  </data>
+  <data name="TELEGRAM_BTN_START" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TELEGRAM_BTN_STOP" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="TELEGRAM_BTN_STRATEGY" xml:space="preserve">
+    <value>Strategy</value>
+  </data>
+  <data name="TELEGRAM_BTN_INVENTORY" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="TELEGRAM_BTN_SETTINGS" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TELEGRAM_BTN_ABOUT" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="TELEGRAM_BTN_MAIN" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="TELEGRAM_BTN_LIMITS" xml:space="preserve">
+    <value>Limits</value>
+  </data>
+  <data name="TELEGRAM_BTN_AUTOSHIP_OPTIMAL" xml:space="preserve">
+    <value>AutoShip strategy</value>
+  </data>
+  <data name="TELEGRAM_BTN_STOP_AUTOSHIP_MATERIAL" xml:space="preserve">
+    <value>AutoShip material</value>
+  </data>
+  <data name="TELEGRAM_BTN_MENU" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="TELEGRAM_BTN_BARRELS" xml:space="preserve">
+    <value>Barrels</value>
+  </data>
+  <data name="TELEGRAM_BTN_HIBERNATION" xml:space="preserve">
+    <value>Hibernation</value>
+  </data>
+  <data name="TELEGRAM_BTN_INTERVALS" xml:space="preserve">
+    <value>Intervals</value>
+  </data>
+  <data name="TELEGRAM_BTN_WOOD" xml:space="preserve">
+    <value>Wood</value>
+  </data>
+  <data name="TELEGRAM_BTN_IRON" xml:space="preserve">
+    <value>Iron</value>
+  </data>
+  <data name="TELEGRAM_BTN_STONE" xml:space="preserve">
+    <value>Stone</value>
+  </data>
+  <data name="TELEGRAM_EXCEPTION_NULL_INVENTORY" xml:space="preserve">
+    <value>Please start the bot before getting inventory</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_COLLECT_FISH" xml:space="preserve">
+    <value> Collect Fish</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_UPGRADE" xml:space="preserve">
+    <value> Auto Upgrade</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_PRODUCE_FACTORY" xml:space="preserve">
+    <value> Produce Factory</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_SHIP" xml:space="preserve">
+    <value> Auto Ship</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_AUTO_BARREL" xml:space="preserve">
+    <value> Auto-Barrel</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_FINISH_UPGRADE" xml:space="preserve">
+    <value> Finish Upgrade</value>
+  </data>
+  <data name="TELEGRAM_STRATEGY_COLLECT_FACTORY" xml:space="preserve">
+    <value> Collect Factory</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS" xml:space="preserve">
+    <value> Save Sailors</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT" xml:space="preserve">
+    <value> More Loot</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS" xml:space="preserve">
+    <value> Coins</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE" xml:space="preserve">
+    <value> Stone</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON" xml:space="preserve">
+    <value> Iron</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD" xml:space="preserve">
+    <value> Wood</value>
+  </data>
+  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH" xml:space="preserve">
+    <value> Fish</value>
+  </data>
+  <data name="TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY" xml:space="preserve">
+    <value> Upgrade Factory only</value>
+  </data>
+  <data name="TELEGRAM_ERR_BOT_RUNNING" xml:space="preserve">
+    <value>But the bot is already running</value>
+  </data>
+  <data name="TELEGRAM_ERR_BOT_NOT_RUNNING" xml:space="preserve">
+    <value>But the bot is not running</value>
+  </data>
+  <data name="TELEGRAM_MSG_STARTING" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
+  <data name="TELEGRAM_MSG_STOPPED" xml:space="preserve">
+    <value>Stopped!</value>
+  </data>
+  <data name="TELEGRAM_ERR_CANT_PARSE" xml:space="preserve">
+    <value>Can't parse string!</value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_HIBERNATION" xml:space="preserve">
+    <value>Please enter here your hibernation interval.
+Your current hibernation interval: </value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_BARREL" xml:space="preserve">
+    <value>Please enter here your barrel interval.
+Your current barrel interval: </value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_WOOD" xml:space="preserve">
+    <value>Please enter here your Wood limit.
+Your current limit on Wood: </value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_STONE" xml:space="preserve">
+    <value>Please enter here your Stone limit.
+Your current limit on Stone: </value>
+  </data>
+  <data name="TELEGRAM_INTERVAL_IRON" xml:space="preserve">
+    <value>Please enter here your Iron limit.
+Your current limit on Iron: </value>
+  </data>
+</root>

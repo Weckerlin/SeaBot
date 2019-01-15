@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -81,7 +82,7 @@ namespace SeaBotCore.BotMethods
                             if (building.ProdStart != 0)
                             {
                                 var willbeproducedat =
-                                    building.ProdStart + Cache.GetBuildingDefenitions().Items.Item
+                                    building.ProdStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
                                         .First(n => n.DefId == building.DefId).Levels.Level
                                         .First(n => n.Id == (long) building.Level).ProdOutputs
                                         .ProdOutput[0].Time;
@@ -94,7 +95,7 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + Cache.GetBuildingDefenitions().Items.Item
+                                var willbeproducedat = building.UpgStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
                                                            .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                            .Where(n => n.Id == (long) building.Level + 1).First()
                                                            .UpgradeTime;
@@ -137,7 +138,7 @@ namespace SeaBotCore.BotMethods
                     new System.Threading.Tasks.Task(() =>
                     {
                         Core.StopBot();
-                        Logger.Logger.Info($"Started sleepin'. Waking up after {sleeptimeinmin} min.");
+                        Logger.Logger.Info(string.Format(Localization.SLEEP_STARTING, sleeptimeinmin));
                         Thread.Sleep(sleeptimeinmin * 1000);
                         Core.StartBot();
                     }).Start();

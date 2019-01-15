@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CORE_USER_BANNED" xml:space="preserve">
+    <value>Пользователь забанен</value>
+  </data>
+  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
+    <value>Синхронизация была провалена, нет ответа от сервера.</value>
+  </data>
+  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
+    <value>Игра на тех. обслуживании. Попробуем соединиться через 30 минут!</value>
+  </data>
+  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
+    <value>Сервер отключил нас с ошибкой {0}</value>
+  </data>
+  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
+    <value>Собираем {0} {1}</value>
+  </data>
+  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
+    <value>Проверяем критическую ошибку...</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
+    <value>[ПЛОХО] Сервер подтвердил {0} заданий!</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
+    <value>[ХОРОШО] Сервер подтвердил {0} заданий!</value>
+  </data>
+  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
+    <value>Сервер ответил нам не в xml, Содержимое - {0}; Детали о ошибке - {1}</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
+    <value>{0:F1} секунд прошло</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
+    <value>Делаем фейковую загрузку. Она пройдет через {0:F1} секунд</value>
+  </data>
+  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
+    <value>Ошибка при авторизации</value>
+  </data>
+  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
+    <value>Авторизация прошла успешно! ID сессии = </value>
+  </data>
+  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
+    <value>[3/3] Получаем ID сессии</value>
+  </data>
+  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
+    <value>[2/3] Получаем данные flash игры.</value>
+  </data>
+  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
+    <value>Нет токена</value>
+  </data>
+  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
+    <value>Пингую сервер</value>
+  </data>
+  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
+    <value>На данный момент кто-то играет с этого аккаунта, ждем {0} минут.</value>
+  </data>
+  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
+    <value>[1/3] Получаем другие куки</value>
+  </data>
+  <data name="NETWORKING_SYNCING" xml:space="preserve">
+    <value>Синхронизация</value>
+  </data>
+  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
+    <value>Просыпаюсь после спячки!</value>
+  </data>
+  <data name="CORE_RESTARTING" xml:space="preserve">
+    <value>Бот перезапускается</value>
+  </data>
+  <data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
+    <value>Бочка! Собираем {0} {1}</value>
+  </data>
+  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
+    <value>Бочка! Собираем {0} моряков!</value>
+  </data>
+  <data name="LOGGER_CREATED" xml:space="preserve">
+    <value>был создан.</value>
+  </data>
+  <data name="SHIPS_LOADING" xml:space="preserve">
+    <value>Загружаем </value>
+  </data>
+  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
+    <value>Начато производство {0}</value>
+  </data>
+  <data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
+    <value>Начато улучшение {0}</value>
+  </data>
+  <data name="SLEEP_STARTING" xml:space="preserve">
+    <value>Начинаем спать. Бот будет опять работать через {0} минут.</value>
+  </data>
+  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
+    <value>Не могу сохранить файл конфигурации. Пожалуйста переместите бота в другую директорию либо запустите от имени администратора</value>
+  </data>
+  <data name="CORE_STOPPED" xml:space="preserve">
+    <value>Бот был остановлен</value>
+  </data>
+  <data name="SHIPS_SENDING" xml:space="preserve">
+    <value>Отправляем </value>
+  </data>
+  <data name="SHIPS_UNLOADING" xml:space="preserve">
+    <value>Разгружаем </value>
+  </data>
+  <data name="FISH_COLLECTING" xml:space="preserve">
+    <value>Сбор {0} рыбы</value>
+  </data>
+  <data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
+    <value>Улучшение {0} было закончено</value>
+  </data>
+  <data name="UPGRADABLE_UPGRADED" xml:space="preserve">
+    <value>Улучшено </value>
+  </data>
+  <data name="FORM_BARREL_WARNING" xml:space="preserve">
+    <value>----</value>
+  </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
+    <value>Скачивается языковый пакет: {0}</value>
+  </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
+    <value>Начинаю скачивать языковые пакеты</value>
+  </data>
+</root>
