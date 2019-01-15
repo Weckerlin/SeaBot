@@ -118,99 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 23</value>
-  </data>
-  <data name="pictureBox8.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
   <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="pictureBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 23</value>
-  </data>
-  <data name="pictureBox7.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="lbl_wood.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lbl_wood.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 53</value>
-  </data>
-  <data name="lbl_stone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="lbl_stone.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 24</value>
   </data>
-  <data name="lbl_iron.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="lbl_iron.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 54</value>
-  </data>
-  <data name="lbl_fish.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="lbl_fish.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 25</value>
   </data>
-  <data name="lbl_gems.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lbl_coins.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 48</value>
-  </data>
-  <data name="pictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 19</value>
   </data>
-  <data name="pictureBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 48</value>
-  </data>
-  <data name="pictureBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 19</value>
   </data>
-  <data name="pictureBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="groupBox5.Text" xml:space="preserve">
     <value>Ресурсы</value>
   </data>
-  <data name="button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button3.Text" xml:space="preserve">
     <value>Стоп</value>
-  </data>
-  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button2.Text" xml:space="preserve">
     <value>Старт</value>
@@ -218,8 +158,8 @@
   <data name="groupBox4.Text" xml:space="preserve">
     <value>Управление</value>
   </data>
-  <data name="chk_autoshipupg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Логи</value>
   </data>
   <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 65</value>
@@ -230,9 +170,6 @@
   <data name="chk_autoshipupg.Text" xml:space="preserve">
     <value>Авто-Корабли</value>
   </data>
-  <data name="chk_finishupgrade.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="chk_finishupgrade.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 65</value>
   </data>
@@ -241,9 +178,6 @@
   </data>
   <data name="chk_finishupgrade.Text" xml:space="preserve">
     <value>Завершать апгрейды</value>
-  </data>
-  <data name="chk_prodfact.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="chk_prodfact.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 88</value>
@@ -254,9 +188,6 @@
   <data name="chk_prodfact.Text" xml:space="preserve">
     <value>Производство заводов</value>
   </data>
-  <data name="chk_barrelhack.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="chk_barrelhack.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 42</value>
   </data>
@@ -265,9 +196,6 @@
   </data>
   <data name="chk_barrelhack.Text" xml:space="preserve">
     <value>Авто-Бочки (нестабильный)</value>
-  </data>
-  <data name="chk_collectmat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="chk_collectmat.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 19</value>
@@ -278,17 +206,11 @@
   <data name="chk_collectmat.Text" xml:space="preserve">
     <value>Собирать заводы</value>
   </data>
-  <data name="chk_autofish.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 17</value>
   </data>
   <data name="chk_autofish.Text" xml:space="preserve">
     <value>Собирать рыбу</value>
-  </data>
-  <data name="chk_aupgrade.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="chk_aupgrade.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 42</value>
@@ -299,6 +221,9 @@
   <data name="chk_aupgrade.Text" xml:space="preserve">
     <value>Апгрейд зданий</value>
   </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Главная</value>
   </data>
@@ -307,9 +232,6 @@
   </data>
   <data name="tabPage6.Text" xml:space="preserve">
     <value>Корабли</value>
-  </data>
-  <data name="btn_removeitem.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="btn_removeitem.Text" xml:space="preserve">
     <value>Удалить</value>
@@ -326,32 +248,20 @@
   <data name="groupBox17.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
-  <data name="chk_sleepenabled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
   </data>
   <data name="chk_sleepenabled.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
-  <data name="chk_smartsleep.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="chk_smartsleep.Text" xml:space="preserve">
     <value>Умный сон</value>
-  </data>
-  <data name="radio_sleepeverymin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radio_sleepeverymin.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
   </data>
   <data name="radio_sleepeverymin.Text" xml:space="preserve">
     <value>Мин.</value>
-  </data>
-  <data name="radio_sleepeveryhrs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radio_sleepeveryhrs.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
@@ -362,17 +272,11 @@
   <data name="groupBox16.Text" xml:space="preserve">
     <value>Каждые</value>
   </data>
-  <data name="radio_sleepformins.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radio_sleepformins.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
   </data>
   <data name="radio_sleepformins.Text" xml:space="preserve">
     <value>Мин.</value>
-  </data>
-  <data name="radio_sleepforhrs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radio_sleepforhrs.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
@@ -386,14 +290,8 @@
   <data name="groupBox14.Text" xml:space="preserve">
     <value>Сон</value>
   </data>
-  <data name="btn_dumpcore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="btn_dumpcore.Text" xml:space="preserve">
     <value>Дамп инфы</value>
-  </data>
-  <data name="button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 62</value>
@@ -404,29 +302,17 @@
   <data name="button5.Text" xml:space="preserve">
     <value>Стоп</value>
   </data>
-  <data name="button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 23</value>
   </data>
   <data name="button4.Text" xml:space="preserve">
     <value>Старт</value>
   </data>
-  <data name="lbl_startupcode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Код старта:</value>
-  </data>
-  <data name="linkLabel6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="linkLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 16</value>
@@ -437,9 +323,6 @@
   <data name="linkLabel6.Text" xml:space="preserve">
     <value>Как его получить?</value>
   </data>
-  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
@@ -449,17 +332,11 @@
   <data name="groupBox13.Text" xml:space="preserve">
     <value>Телеграм Бот</value>
   </data>
-  <data name="radio_saveloot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radio_saveloot.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
   </data>
   <data name="radio_saveloot.Text" xml:space="preserve">
     <value>Только лут</value>
-  </data>
-  <data name="radio_savesailors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radio_savesailors.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -470,9 +347,6 @@
   <data name="groupBox12.Text" xml:space="preserve">
     <value>Опт. стратегия</value>
   </data>
-  <data name="radioButton7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radioButton7.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 20</value>
   </data>
@@ -481,9 +355,6 @@
   </data>
   <data name="radioButton7.Text" xml:space="preserve">
     <value>Камень</value>
-  </data>
-  <data name="radioButton6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radioButton6.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 43</value>
@@ -494,26 +365,17 @@
   <data name="radioButton6.Text" xml:space="preserve">
     <value>Рыба</value>
   </data>
-  <data name="radio_iron.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radio_iron.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
   </data>
   <data name="radio_iron.Text" xml:space="preserve">
     <value>Железо</value>
   </data>
-  <data name="radio_wood.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="radio_wood.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
   </data>
   <data name="radio_wood.Text" xml:space="preserve">
     <value>Дерево</value>
-  </data>
-  <data name="radio_gold.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="radio_gold.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 17</value>
@@ -523,9 +385,6 @@
   </data>
   <data name="groupBox11.Text" xml:space="preserve">
     <value>Лут авто-кораблей</value>
-  </data>
-  <data name="chk_onlyfactory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="chk_onlyfactory.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 26</value>
@@ -539,9 +398,6 @@
   <data name="groupBox10.Text" xml:space="preserve">
     <value>Авто Апгрейд</value>
   </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
@@ -550,9 +406,6 @@
   </data>
   <data name="groupBox9.Text" xml:space="preserve">
     <value>Другая сессия</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
@@ -563,9 +416,6 @@
   <data name="groupBox8.Text" xml:space="preserve">
     <value>Авто-Бочки</value>
   </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 7</value>
   </data>
@@ -575,29 +425,14 @@
   <data name="label6.Text" xml:space="preserve">
     <value>0 = бесконечность</value>
   </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="groupBox6.Text" xml:space="preserve">
     <value>Лимит на производство</value>
-  </data>
-  <data name="checkBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 17</value>
   </data>
   <data name="checkBox1.Text" xml:space="preserve">
     <value>Откладка</value>
-  </data>
-  <data name="linkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 16</value>
@@ -607,9 +442,6 @@
   </data>
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>Как его получить?</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -623,44 +455,17 @@
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
   <data name="groupBox19.Text" xml:space="preserve">
     <value>Большое спасибо:</value>
   </data>
-  <data name="linkLabel9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="linkLabel8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="linkLabel7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
   <data name="groupBox18.Text" xml:space="preserve">
     <value>Пожертвования</value>
-  </data>
-  <data name="linkLabel5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="linkLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="linkLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="linkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="tabPage4.Text" xml:space="preserve">
     <value>О проекте</value>
