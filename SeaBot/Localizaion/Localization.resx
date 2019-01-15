@@ -209,4 +209,10 @@
   <data name="FORM_BARREL_WARNING" xml:space="preserve">
     <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
   </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
+    <value>Downloading {0} lang.</value>
+  </data>
+  <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
+    <value>Downloading localization cache...</value>
+  </data>
 </root>

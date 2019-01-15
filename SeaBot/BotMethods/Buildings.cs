@@ -80,7 +80,7 @@ namespace SeaBotCore.BotMethods
                             }
 
                             Logger.Logger.Info(
-                                string.Format(Localization.BUILDINGS_STARTED_UPG, defined.Name));
+                                string.Format(Localization.BUILDINGS_STARTED_UPG, Cache.LocalizationCache.GetNameFromLoc(defined.NameLoc, defined.Name)));
                             Networking.AddTask(new Task.StartBuildingUpgradeTask(data.InstId,
                                 data.ProdId, data.Level, data.UpgType.ToString(), data.DefId,
                                 data.GridX, data.GridY));
@@ -102,7 +102,7 @@ namespace SeaBotCore.BotMethods
                             upgrade.UpgradeTime)
                         {
                             Logger.Logger.Info(
-                                string.Format(Localization.BUILDINGS_FINISHED_UPG, defined.Name));
+                                string.Format(Localization.BUILDINGS_FINISHED_UPG, Cache.LocalizationCache.GetNameFromLoc(defined.NameLoc, defined.Name)));
                             Networking.AddTask(new Task.FinishBuildingUpgradeTask(data.InstId));
                             data.UpgStart = 0;
                             data.Level++;
@@ -125,7 +125,7 @@ namespace SeaBotCore.BotMethods
                     {
                         Logger.Logger.Info(
                             string.Format(Localization.BUILDINGS_COLLECTING, defs.ProdOutputs.ProdOutput[0].Amount,
-                                MaterialDB.GetItem(defs.ProdOutputs.ProdOutput[0].MaterialId).Name));
+                                MaterialDB.GetLocalizedName(defs.ProdOutputs.ProdOutput[0].MaterialId)));
 
                         Networking.AddTask(new Task.FinishBuildingProducingTask(data.InstId));
 

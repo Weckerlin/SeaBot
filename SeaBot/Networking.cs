@@ -102,6 +102,7 @@ namespace SeaBotCore
 
         private static void SyncVoid()
         {
+            LocalizationController.SetLanguage(Core.Config.language);
             while (true)
             {
                 Thread.Sleep(6 * 1000);
@@ -161,6 +162,8 @@ namespace SeaBotCore
 
         public static void Login()
         {
+
+            LocalizationController.SetLanguage(Core.Config.language);
             Logger.Logger.Info("Logining ");
             //Get big token
             var tempuid = string.Empty;
@@ -197,7 +200,10 @@ namespace SeaBotCore
                         Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
                         regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
                         var mtch = regex.Match(data);
-                        if (mtch.Success) Cache.Update(mtch.Groups[1].Value);
+                        if (mtch.Success) Cache.DefenitionCache.Update(mtch.Groups[1].Value);
+                        regex = new Regex(@"loca_filelist_url2': 'https:\/\/static\.seaportgame\.com\/localization\/(.+?)\.xml', '");
+                         mtch = regex.Match(data);
+                        if (mtch.Success) Cache.LocalizationCache.Update(mtch.Groups[1].Value);
                         regex = new Regex("clientPath = \"(.+)\";");
                         mtch = regex.Match(data);
                         if (mtch.Success) Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);

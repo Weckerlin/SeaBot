@@ -40,7 +40,7 @@ namespace SeaBotCore.BotMethods
                     Core.GlobalData.Upgradeables[index].Amount = nextlvl.Amount;
                     Core.GlobalData.Upgradeables[index].MaterialKoef =
                         nextlvl.MaterialKoef;
-                    Logger.Logger.Info(Localization.UPGRADABLE_UPGRADED + def.Name);
+                    Logger.Logger.Info(Localization.UPGRADABLE_UPGRADED + Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
                     Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.GlobalData.Level));
                 }
             }

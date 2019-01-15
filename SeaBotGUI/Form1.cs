@@ -30,6 +30,7 @@ using Exceptionless;
 using Exceptionless.Configuration;
 using Newtonsoft.Json;
 using SeaBotCore;
+using SeaBotCore.Cache;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
@@ -64,6 +65,7 @@ namespace SeaBotGUI
             CoinsLabel = lbl_coins;
             FishLabel = lbl_fish;
             StoneLabel = lbl_stone;
+            TabControl = tabControl1;
             GemLabel = lbl_gems;
             IronLabel = lbl_iron;
             WoodLabel = lbl_wood;
@@ -96,6 +98,7 @@ namespace SeaBotGUI
 
         public Label FishLabel { get; private set; }
 
+        public TabControl TabControl { get; private set; }
         public Label StoneLabel { get; private set; }
 
         public Label GemLabel { get; private set; }
@@ -281,7 +284,7 @@ namespace SeaBotGUI
             {
                 if (data.Inventory[i].Amount != 0)
                 {
-                    string[] row = {MaterialDB.GetItem(data.Inventory[i].Id).Name, data.Inventory[i].Amount.ToString()};
+                    string[] row = {LocalizationCache.GetNameFromLoc(MaterialDB.GetItem(data.Inventory[i].Id).NameLoc, MaterialDB.GetItem(data.Inventory[i].Id).Name), data.Inventory[i].Amount.ToString()};
                     a.Add(new ListViewItem(row));
                 }
             }

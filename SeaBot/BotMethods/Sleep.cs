@@ -82,7 +82,7 @@ namespace SeaBotCore.BotMethods
                             if (building.ProdStart != 0)
                             {
                                 var willbeproducedat =
-                                    building.ProdStart + Cache.GetBuildingDefenitions().Items.Item
+                                    building.ProdStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
                                         .First(n => n.DefId == building.DefId).Levels.Level
                                         .First(n => n.Id == (long) building.Level).ProdOutputs
                                         .ProdOutput[0].Time;
@@ -95,7 +95,7 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + Cache.GetBuildingDefenitions().Items.Item
+                                var willbeproducedat = building.UpgStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
                                                            .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                            .Where(n => n.Id == (long) building.Level + 1).First()
                                                            .UpgradeTime;

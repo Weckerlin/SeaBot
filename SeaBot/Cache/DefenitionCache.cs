@@ -24,9 +24,9 @@ using Newtonsoft.Json;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Data.Materials;
 
-namespace SeaBotCore
+namespace SeaBotCore.Cache
 {
-    public static class Cache
+    public static class DefenitionCache
     {
         private const string _cachefolder = "cache";
         private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";

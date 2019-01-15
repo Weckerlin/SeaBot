@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Diagnostics;
+
 namespace SeaBotCore.Localizaion {
     using System;
     
@@ -22,7 +24,7 @@ namespace SeaBotCore.Localizaion {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Localization {
+    internal class Localization {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -111,6 +113,24 @@ namespace SeaBotCore.Localizaion {
         internal static string CONFIG_CANT_SAVE {
             get {
                 return ResourceManager.GetString("CONFIG_CANT_SAVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Downloading localization cache....
+        /// </summary>
+        internal static string CORE_LOCAL_DOWNLOAD_STARTED {
+            get {
+                return ResourceManager.GetString("CORE_LOCAL_DOWNLOAD_STARTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Downloading {0} lang..
+        /// </summary>
+        internal static string CORE_LOCAL_DOWNLOAD_STEP {
+            get {
+                return ResourceManager.GetString("CORE_LOCAL_DOWNLOAD_STEP", resourceCulture);
             }
         }
         
@@ -209,7 +229,10 @@ namespace SeaBotCore.Localizaion {
         /// </summary>
         internal static string NETWORKING_LOGIN_1 {
             get {
+                
+             
                 return ResourceManager.GetString("NETWORKING_LOGIN_1", resourceCulture);
+                
             }
         }
         

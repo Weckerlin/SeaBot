@@ -18,15 +18,15 @@ namespace SeaBotCore.Data.Defenitions
 {
     public static class Defenitions
     {
-        public static BuildingDefentions.Root BuildingDef => Cache.GetBuildingDefenitions();
+        public static BuildingDefentions.Root BuildingDef => Cache.DefenitionCache.GetBuildingDefenitions();
 
-        public static BarrelDefenitions.Root BarrelDef => Cache.GetBarrelDefenitions();
+        public static BarrelDefenitions.Root BarrelDef => Cache.DefenitionCache.GetBarrelDefenitions();
 
-        public static BoatDefenitions.Root BoatDef => Cache.GetBoatLevelDefenitions();
+        public static BoatDefenitions.Root BoatDef => Cache.DefenitionCache.GetBoatLevelDefenitions();
 
-        public static ShipDefenitions.Root ShipDef => Cache.GetShipDefenitions();
-        public static MarketplaceDefenitions.Root MarketDef => Cache.GetMarketPlaceDefenitions();
-        public static UpgradeableDefenition.Root UpgrDef => Cache.GetUpgradeablesDefenitions();
-        public static EventsDefenitions.Root EvntDef => Cache.GetEventDefenitions();
+        public static ShipDefenitions.Root ShipDef => Cache.DefenitionCache.GetShipDefenitions();
+        public static MarketplaceDefenitions.Root MarketDef => Cache.DefenitionCache.GetMarketPlaceDefenitions();
+        public static UpgradeableDefenition.Root UpgrDef => Cache.DefenitionCache.GetUpgradeablesDefenitions();
+        public static EventsDefenitions.Root EvntDef => Cache.DefenitionCache.GetEventDefenitions();
     }
 }

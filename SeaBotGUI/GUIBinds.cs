@@ -22,6 +22,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using SeaBotCore;
+using SeaBotCore.Cache;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
@@ -127,6 +128,7 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
+                    if ((string)Form1.instance.Invoke(new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage5") continue;
                     if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
 
                     _lastupdatedTime = DateTime.Now;
@@ -145,12 +147,7 @@ namespace SeaBotGUI.GUIBinds
                                 if (BuildingBinding.Buildings.Where(n => n.ID == bld.ID)
                                         .FirstOrDefault() == null)
                                 {
-                                    var bld2 = bld;
-                                    if (bld2.Name == "Small Workshop") bld2.Name = "Fishing Pier";
-
-                                    if (bld2.Name == "Big Workshop") bld2.Name = "Main Dock";
-
-                                    BuildingBinding.Buildings.Add(bld2);
+                                    BuildingBinding.Buildings.Add(bld);
                                 }
                                 else
                                 {
@@ -189,13 +186,14 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
-                    Building.Name = Cache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
-                        .First().Name;
+                    Building.Name = LocalizationCache.GetNameFromLoc(DefenitionCache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
+                        .First().NameLoc, DefenitionCache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
+                        .First().Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + Cache.GetBuildingDefenitions().Items.Item
+                        var willbeproducedat = building.ProdStart + DefenitionCache.GetBuildingDefenitions().Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level).First().ProdOutputs
                                                    .ProdOutput[0].Time;
@@ -210,7 +208,7 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + Cache.GetBuildingDefenitions().Items.Item
+                        var willbeproducedat = building.UpgStart + DefenitionCache.GetBuildingDefenitions().Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
 
@@ -269,8 +267,8 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
+                    if ((string)Form1.instance.Invoke(new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name))!="tabPage6") continue;
                     if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
-
                     _lastupdatedTime = DateTime.Now;
                     if (Form1.instance.ShipGrid.InvokeRequired)
                     {
@@ -335,8 +333,9 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
-                    Ship.Name = Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
-                        .First().Name;
+                    Ship.Name = LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
+                        .First().NameLoc, Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
+                        .First().Name);
 
                     var willatportat = string.Empty;
                     if (ship.Sent != 0)

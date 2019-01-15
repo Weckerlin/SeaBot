@@ -47,7 +47,7 @@ namespace SeaBotCore.BotMethods
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_LOADING +
-                            Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                            Cache.LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc, Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -73,8 +73,7 @@ namespace SeaBotCore.BotMethods
                             lvl.TravelTime + 2)
                         {
                             Logger.Logger.Info(
-                                Localization.SHIPS_UNLOADING + Defenitions.ShipDef.Items.Item
-                                    .First(n => n.DefId == ship.DefId).Name);
+                                Localization.SHIPS_UNLOADING + Cache.LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc, Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                             Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                                 lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -129,7 +128,7 @@ namespace SeaBotCore.BotMethods
                         bestplace.DefId;
                     Core.GlobalData.Ships[index].TargetLevel = bestplace.Level;
                     Logger.Logger.Info(Localization.SHIPS_SENDING +
-                                       Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name);
+                                       Cache.LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc, Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                     Networking.AddTask(new Task.SendShipUpgradeableTask(ship.InstId,
                         bestplace.DefId, lvls.Amount, lvls.MaterialKoef,
                         lvls.Sailors, wecan,

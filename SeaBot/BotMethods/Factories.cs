@@ -101,7 +101,7 @@ namespace SeaBotCore.BotMethods
 
                         Logger.Logger.Info(
                             string.Format(Localization.FACTORIES_STARTED_PROD,
-                                MaterialDB.GetItem(needed.ProdOutputs.ProdOutput[0].MaterialId).Name));
+                                MaterialDB.GetLocalizedName(needed.ProdOutputs.ProdOutput[0].MaterialId)));
                         Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
                             data.ProdId));
                         data.ProdStart = TimeUtils.GetEpochTime();

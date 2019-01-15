@@ -46,6 +46,7 @@ namespace SeaBotCore
             Configurator.Load();
             Config.PropertyChanged += Config_PropertyChanged;
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
+            LocalizationController.SetLanguage(Core.Config.language);
         }
 
         public static bool IsBotRunning
@@ -100,7 +101,7 @@ namespace SeaBotCore
         {
             new System.Threading.Tasks.Task(() =>
             {
-                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION)
+                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION||e == Enums.EErrorCode.COLLECTION_IN_FUTURE||e == Enums.EErrorCode.COLLECTION_IN_PAST||(int)e== 1011)
                 {
                     Logger.Logger.Info(Localization.CORE_RESTARTING);
                     StopBot();
@@ -125,6 +126,8 @@ namespace SeaBotCore
 
         private static void BotVoid()
         {
+
+            LocalizationController.SetLanguage(Core.Config.language);
             while (true)
             {
                 Thread.Sleep(100);

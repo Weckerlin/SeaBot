@@ -69,12 +69,13 @@ namespace SeaBotCore.Localizaion
                     break;
                 case ELanguages.RU:
                 {
-                    inf = new CultureInfo("ru");
+                    inf = new CultureInfo("ru-RU");
                 }
                     break;
             }
 
             Thread.CurrentThread.CurrentUICulture = inf;
+       
         }
     }
 }

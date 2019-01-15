@@ -117,121 +117,121 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CORE_USER_BANNED" xml:space="preserve">
-    <value>Пользователь забанен</value>
-  </data>
-  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
-    <value>Синхронизация была провалена, нет ответа от сервера.</value>
-  </data>
-  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
-    <value>Игра на тех. обслуживании. Попробуем соединиться через 30 минут!</value>
-  </data>
-  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
-    <value>Сервер отключил нас с ошибкой {0}</value>
-  </data>
-  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
-    <value>Собираем {0} {1}</value>
-  </data>
-  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
-    <value>Проверяем критическую ошибку...</value>
-  </data>
-  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
-    <value>[ПЛОХО] Сервер подтвердил {0} заданий!</value>
-  </data>
-  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
-    <value>[ХОРОШО] Сервер подтвердил {0} заданий!</value>
-  </data>
-  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
-    <value>Сервер ответил нам не в xml, Содержимое - {0}; Детали о ошибке - {1}</value>
-  </data>
-  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
-    <value>{0:F1} секунд прошло</value>
-  </data>
-  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
-    <value>Делаем фейковую загрузку. Она пройдет через {0:F1} секунд</value>
-  </data>
-  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
-    <value>Ошибка при авторизации</value>
-  </data>
-  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
-    <value>Авторизация прошла успешно! ID сессии = </value>
-  </data>
-  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
-    <value>[3/3] Получаем ID сессии</value>
-  </data>
-  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
-    <value>[2/3] Получаем данные flash игры.</value>
-  </data>
-  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
-    <value>Нет токена</value>
-  </data>
-  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
-    <value>Пингую сервер</value>
-  </data>
-  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
-    <value>На данный момент кто-то играет с этого аккаунта, ждем {0} минут.</value>
-  </data>
-  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
-    <value>[1/3] Получаем другие куки</value>
-  </data>
-  <data name="NETWORKING_SYNCING" xml:space="preserve">
-    <value>Синхронизация</value>
-  </data>
-  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
-    <value>Просыпаюсь после спячки!</value>
-  </data>
-  <data name="CORE_RESTARTING" xml:space="preserve">
-    <value>Бот перезапускается</value>
+  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
+    <value>Barrel! Collecting {0} sailors!</value>
   </data>
   <data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
-    <value>Бочка! Собираем {0} {1}</value>
-  </data>
-  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
-    <value>Бочка! Собираем {0} моряков!</value>
-  </data>
-  <data name="LOGGER_CREATED" xml:space="preserve">
-    <value>был создан.</value>
-  </data>
-  <data name="SHIPS_LOADING" xml:space="preserve">
-    <value>Загружаем </value>
-  </data>
-  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
-    <value>Начато производство {0}</value>
+    <value>Barrel! Collecting {0} {1}</value>
   </data>
   <data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
-    <value>Начато улучшение {0}</value>
-  </data>
-  <data name="SLEEP_STARTING" xml:space="preserve">
-    <value>Начинаем спать. Бот будет опять работать через {0} минут.</value>
-  </data>
-  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
-    <value>Не могу сохранить файл конфигурации. Пожалуйста переместите бота в другую директорию либо запустите от имени администратора</value>
-  </data>
-  <data name="CORE_STOPPED" xml:space="preserve">
-    <value>Бот был остановлен</value>
-  </data>
-  <data name="SHIPS_SENDING" xml:space="preserve">
-    <value>Отправляем </value>
-  </data>
-  <data name="SHIPS_UNLOADING" xml:space="preserve">
-    <value>Разгружаем </value>
-  </data>
-  <data name="FISH_COLLECTING" xml:space="preserve">
-    <value>Сбор {0} рыбы</value>
+    <value>Started upgrading {0}</value>
   </data>
   <data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
-    <value>Улучшение {0} было закончено</value>
+    <value>Finishing upgrading {0}</value>
+  </data>
+  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
+    <value>Сollecting {0} {1}</value>
+  </data>
+  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
+    <value>Started producing {0}</value>
+  </data>
+  <data name="FISH_COLLECTING" xml:space="preserve">
+    <value>Collecting {0} fish</value>
+  </data>
+  <data name="SHIPS_SENDING" xml:space="preserve">
+    <value>Sending </value>
+  </data>
+  <data name="SHIPS_UNLOADING" xml:space="preserve">
+    <value>Unloading </value>
+  </data>
+  <data name="SHIPS_LOADING" xml:space="preserve">
+    <value>Loading </value>
+  </data>
+  <data name="SLEEP_STARTING" xml:space="preserve">
+    <value>Started sleepin'. Waking up after {0} min.</value>
   </data>
   <data name="UPGRADABLE_UPGRADED" xml:space="preserve">
-    <value>Улучшено </value>
+    <value>Upgraded </value>
+  </data>
+  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
+    <value>Can't save a config file. Please move the bot in another directory or run with as administrator!</value>
+  </data>
+  <data name="LOGGER_CREATED" xml:space="preserve">
+    <value> is created.</value>
+  </data>
+  <data name="CORE_STOPPED" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
+    <value>No server_token</value>
+  </data>
+  <data name="CORE_RESTARTING" xml:space="preserve">
+    <value>Restarting bot</value>
+  </data>
+  <data name="CORE_USER_BANNED" xml:space="preserve">
+    <value>User is banned.</value>
+  </data>
+  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
+    <value>MAINTENANCE! Retrying after 30 mins</value>
+  </data>
+  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
+    <value>Someone is playing this game right now, waiting for {0} minutes</value>
+  </data>
+  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
+    <value>Mwaaah, waking up after hibernation</value>
+  </data>
+  <data name="NETWORKING_SYNCING" xml:space="preserve">
+    <value>Syncing...</value>
+  </data>
+  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
+    <value>Sending Heartbeat...</value>
+  </data>
+  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
+    <value>[1/3] Getting another cookies</value>
+  </data>
+  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
+    <value>[2/3] Getting portal</value>
+  </data>
+  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
+    <value>[3/3] Getting sessionid</value>
+  </data>
+  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
+    <value>Successfully logged in! Session ID = </value>
+  </data>
+  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
+    <value>CANT LOGIN!</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
+    <value>Faking real loading. Now, we'll load for {0:F1} seconds</value>
+  </data>
+  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
+    <value>{0:F1} seconds elapsed</value>
+  </data>
+  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
+    <value>Server is responding with non xml file - Response = {0}; Exception info = {1}</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
+    <value>[GOOD] Server accepted our {0} requests</value>
+  </data>
+  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
+    <value>[BAD] Server accepted our {0} requests!</value>
+  </data>
+  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
+    <value>Checking Fatal error...</value>
+  </data>
+  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
+    <value>Server disconnected us with error {0}</value>
+  </data>
+  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
+    <value>Sync failed, no response</value>
   </data>
   <data name="FORM_BARREL_WARNING" xml:space="preserve">
-    <value>----</value>
+    <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
   </data>
   <data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
-    <value>Скачивается языковый пакет: {0}</value>
+    <value>Downloading {0} lang.</value>
   </data>
   <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
-    <value>Начинаю скачивать языковые пакеты</value>
+    <value>Downloading localization cache...</value>
   </data>
 </root>
