@@ -69,6 +69,8 @@ namespace SeaBotGUI
             GemLabel = lbl_gems;
             IronLabel = lbl_iron;
             WoodLabel = lbl_wood;
+            LevelLabel = lbl_lvl;
+            SailorsLabel = lbl_sailors;
             instance = this;
             TeleConfigSer.Load();
             MaximizeBox = false;
@@ -100,7 +102,8 @@ namespace SeaBotGUI
 
         public TabControl TabControl { get; private set; }
         public Label StoneLabel { get; private set; }
-
+        public Label LevelLabel { get; private set; }
+        public Label SailorsLabel { get; private set; }
         public Label GemLabel { get; private set; }
 
         public Label IronLabel { get; private set; }
@@ -677,6 +680,26 @@ namespace SeaBotGUI
                     Core.Config.language = LocalizationController.ELanguages.EN;
                 }
             }
+        }
+
+        private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Utils.CompUtils.OpenLink("https://www.donationalerts.com/r/weespin");
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CompUtils.OpenLink("https://qiwi.me/seabot");
+        }
+
+        private void linkLabel9_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CompUtils.OpenLink("https://steamcommunity.com/tradeoffer/new/?partner=83321528&token=2CIUp5N6");
+        }
+
+        private void groupBox5_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

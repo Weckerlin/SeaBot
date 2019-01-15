@@ -136,7 +136,9 @@
     <Content Include="Icons\coin.png" />
     <Content Include="Icons\diamond.png" />
     <Content Include="Icons\fish.png" />
+    <None Include="Icons\level.png" />
     <Content Include="Icons\metal.png" />
+    <None Include="Icons\sailor.png" />
     <Content Include="Icons\stone.png" />
     <Content Include="Icons\wood.png" />
   </ItemGroup>

@@ -57,6 +57,19 @@ namespace SeaBotGUI.GUIBinds
 
         public static void Update()
         {
+            var sailors = Core.GlobalData.Sailors;
+            if (Form1.instance.SailorsLabel.InvokeRequired)
+                Form1.instance.SailorsLabel.Invoke(
+                    new Action(() => { Form1.instance.SailorsLabel.Text = sailors.ToKMB(); }));
+            else
+                Form1.instance.CoinsLabel.Text = sailors.ToKMB();
+            var level = Core.GlobalData.Level;
+            if (Form1.instance.LevelLabel.InvokeRequired)
+                Form1.instance.LevelLabel.Invoke(
+                    new Action(() => { Form1.instance.LevelLabel.Text = level.ToString(); }));
+            else
+                Form1.instance.LevelLabel.Text = level.ToString();
+
             var coins = Core.GlobalData.GetAmountItem("coins");
             if (Form1.instance.CoinsLabel.InvokeRequired)
                 Form1.instance.CoinsLabel.Invoke(
