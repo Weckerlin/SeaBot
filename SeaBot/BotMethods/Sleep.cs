@@ -112,20 +112,19 @@ namespace SeaBotCore.BotMethods
                             a.OrderByDescending(grp => grp.Count());
                         var mostlikely = b
                             .Select(grp => grp.Key).FirstOrDefault();
-                        var avg = DelayMinList.Average();
-                        if (mostlikely > avg)
+                        var avg = (int)DelayMinList.Average();
+                      
+                        if (mostlikely > avg*1.5)
                         {
-                            if (mostlikely > thresholdinmin)
-                                sleeptimeinmin = mostlikely;
-                            else
-                                sleeptimeinmin = thresholdinmin;
+                            sleeptimeinmin = avg > thresholdinmin
+                                ? avg
+                                : thresholdinmin;
                         }
                         else
                         {
-                            if (avg > thresholdinmin)
-                                sleeptimeinmin = (int) avg;
-                            else
-                                sleeptimeinmin = thresholdinmin;
+                            sleeptimeinmin = mostlikely > thresholdinmin
+                                ? mostlikely
+                                : thresholdinmin;
                         }
                     }
                     else
@@ -139,7 +138,7 @@ namespace SeaBotCore.BotMethods
                     {
                         Core.StopBot();
                         Logger.Logger.Info(string.Format(Localization.SLEEP_STARTING, sleeptimeinmin));
-                        Thread.Sleep(sleeptimeinmin * 1000);
+                        Thread.Sleep(sleeptimeinmin *60* 1000);
                         Core.StartBot();
                     }).Start();
                     //StartSleeping
