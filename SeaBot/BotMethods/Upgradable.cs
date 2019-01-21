@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
+using SeaBotCore.Cache;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Localizaion;
 
@@ -40,7 +41,8 @@ namespace SeaBotCore.BotMethods
                     Core.GlobalData.Upgradeables[index].Amount = nextlvl.Amount;
                     Core.GlobalData.Upgradeables[index].MaterialKoef =
                         nextlvl.MaterialKoef;
-                    Logger.Logger.Info(Localization.UPGRADABLE_UPGRADED + Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
+                    Logger.Logger.Info(Localization.UPGRADABLE_UPGRADED +
+                                       LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
                     Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.GlobalData.Level));
                 }
             }

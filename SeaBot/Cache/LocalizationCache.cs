@@ -30,20 +30,22 @@ namespace SeaBotCore.Cache
 {
     public static class LocalizationCache
     {
-        private static Dictionary<string,string> _local;
+        private static Dictionary<string, string> _local;
 
         private const string _cachefolder = "loccache";
 
         private const string _baseaddr = "https://static.seaportgame.com/localization/";
         private static readonly object locker = new object();
+
         private static string _lastestdef = "1.427.0";
+
         //https://static.seaportgame.com/localization/1.427.0.xml
         public static void Update(string currentversion)
         {
             var needupdate = false;
-            if (File.Exists(_cachefolder+"/cacheversion.txt"))
+            if (File.Exists(_cachefolder + "/cacheversion.txt"))
             {
-                var cachedversion = File.ReadAllText(_cachefolder+"/cacheversion.txt");
+                var cachedversion = File.ReadAllText(_cachefolder + "/cacheversion.txt");
 
                 var version1 =
                     new Version(cachedversion);
@@ -65,13 +67,13 @@ namespace SeaBotCore.Cache
                 Directory.CreateDirectory(_cachefolder);
                 _lastestdef = currentversion;
                 DownloadCache();
-                File.WriteAllText(_cachefolder+"/cacheversion.txt", currentversion);
+                File.WriteAllText(_cachefolder + "/cacheversion.txt", currentversion);
             }
         }
 
         private static Dictionary<string, string> LoadDictionary(string[] arr)
         {
-            var ret = new Dictionary<string,string>();
+            var ret = new Dictionary<string, string>();
             foreach (var item in arr)
             {
                 string key;
@@ -81,22 +83,23 @@ namespace SeaBotCore.Cache
 
                 if (charLocation > 0)
                 {
-                    key =  str.Substring(0, charLocation);
+                    key = str.Substring(0, charLocation);
                 }
                 else
                 {
                     continue;
                 }
-                value = str.Substring(charLocation+1);
-                ret.Add(key,value);
+
+                value = str.Substring(charLocation + 1);
+                ret.Add(key, value);
             }
 
             return ret
                 ;
         }
+
         public static bool DownloadCache()
         {
-            
             lock (locker)
             {
                 try
@@ -111,17 +114,19 @@ namespace SeaBotCore.Cache
                         var nodes = doc.SelectSingleNode("xml/files");
                         foreach (XmlNode node in nodes.ChildNodes)
                         {
-                            if (node.InnerText.Contains("localization.csv")&&neededlangs.Where(n=>node.InnerText.Contains(n)).Any())
+                            if (node.InnerText.Contains("localization.csv") &&
+                                neededlangs.Where(n => node.InnerText.Contains(n)).Any())
                             {
                                 var dl = new Regex(@"\/(.+)\/localization\.csv,(.+)").Match(node.InnerText);
                                 if (!Directory.Exists(_cachefolder))
                                 {
                                     Directory.CreateDirectory(_cachefolder);
                                 }
+
                                 new WebClient().DownloadFile(_baseaddr + dl.Groups[2].Value,
                                     $"{_cachefolder}/{dl.Groups[1].Value}.lang");
-                                Logger.Logger.Info(string.Format(Localization.CORE_LOCAL_DOWNLOAD_STEP, dl.Groups[1].Value));
-
+                                Logger.Logger.Info(string.Format(Localization.CORE_LOCAL_DOWNLOAD_STEP,
+                                    dl.Groups[1].Value));
                             }
                         }
                     }
@@ -136,10 +141,9 @@ namespace SeaBotCore.Cache
                 return true;
             }
         }
-        public static string GetNameFromLoc(string item,string defname )
-        {
-            
 
+        public static string GetNameFromLoc(string item, string defname)
+        {
             if (_local == null)
             {
                 if (Directory.Exists(_cachefolder))
@@ -160,23 +164,14 @@ namespace SeaBotCore.Cache
                     _local = LoadDictionary(File.ReadAllLines($"{_cachefolder}/{Core.Config.language}.lang"));
                 }
             }
-         
-                var str = _local.FirstOrDefault(n => string.Compare(n.Key,item,true)==0);
-                if (str.Value==null)
-                {
-                    return defname;
-                }
-                else
-                {
-                    return str.Value;
 
-                }
-            
-           
+            var str = _local.FirstOrDefault(n => string.Compare(n.Key, item, true) == 0);
+            if (str.Value == null)
+            {
+                return defname;
+            }
+
+            return str.Value;
         }
-      
-       
-
-
     }
 }

@@ -75,7 +75,6 @@ namespace SeaBotCore.Localizaion
             }
 
             Thread.CurrentThread.CurrentUICulture = inf;
-       
         }
     }
 }

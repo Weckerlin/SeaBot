@@ -58,7 +58,7 @@ namespace SeaBotGUI
         {
             // bot = new WTGLib("a");
             ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
-             LocalizationController.SetLanguage(Core.Config.language);
+            LocalizationController.SetLanguage(Core.Config.language);
             InitializeComponent();
             BuildingGrid = dataGridView1;
             ShipGrid = dataGridView2;
@@ -158,8 +158,8 @@ namespace SeaBotGUI
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             BuildingGrid.DefaultCellStyle.SelectionBackColor = BuildingGrid.DefaultCellStyle.BackColor;
             BuildingGrid.DefaultCellStyle.SelectionForeColor = BuildingGrid.DefaultCellStyle.ForeColor;
-         
-          
+
+
             SeaBotCore.Events.Events.LoginedEvent.Logined.OnLoginedEvent += OnLogined;
 
             foreach (var lang in Enum.GetNames(typeof(LocalizationController.ELanguages)))
@@ -287,7 +287,12 @@ namespace SeaBotGUI
             {
                 if (data.Inventory[i].Amount != 0)
                 {
-                    string[] row = {LocalizationCache.GetNameFromLoc(MaterialDB.GetItem(data.Inventory[i].Id).NameLoc, MaterialDB.GetItem(data.Inventory[i].Id).Name), data.Inventory[i].Amount.ToString()};
+                    string[] row =
+                    {
+                        LocalizationCache.GetNameFromLoc(MaterialDB.GetItem(data.Inventory[i].Id).NameLoc,
+                            MaterialDB.GetItem(data.Inventory[i].Id).Name),
+                        data.Inventory[i].Amount.ToString()
+                    };
                     a.Add(new ListViewItem(row));
                 }
             }
@@ -663,6 +668,7 @@ namespace SeaBotGUI
                     {
                         return;
                     }
+
                     Core.Config.language = lang;
                     if (lang == LocalizationController.ELanguages.RU)
                     {
@@ -673,7 +679,6 @@ namespace SeaBotGUI
                     {
                         MessageBox.Show("Please restart the program to change the language.");
                     }
-                 
                 }
                 else
                 {
@@ -684,7 +689,7 @@ namespace SeaBotGUI
 
         private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Utils.CompUtils.OpenLink("https://www.donationalerts.com/r/weespin");
+            CompUtils.OpenLink("https://www.donationalerts.com/r/weespin");
         }
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -699,7 +704,6 @@ namespace SeaBotGUI
 
         private void groupBox5_Enter(object sender, EventArgs e)
         {
-
         }
     }
 }

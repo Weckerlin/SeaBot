@@ -141,7 +141,8 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-                   
+                    if ((string) Form1.instance.Invoke(
+                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage5") continue;
                     if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
 
                     _lastupdatedTime = DateTime.Now;
@@ -199,8 +200,10 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
-                    Building.Name = LocalizationCache.GetNameFromLoc(DefenitionCache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
-                        .First().NameLoc, DefenitionCache.GetBuildingDefenitions().Items.Item.Where(n => n.DefId == building.DefId)
+                    Building.Name = LocalizationCache.GetNameFromLoc(DefenitionCache.GetBuildingDefenitions().Items.Item
+                        .Where(n => n.DefId == building.DefId)
+                        .First().NameLoc, DefenitionCache.GetBuildingDefenitions().Items.Item
+                        .Where(n => n.DefId == building.DefId)
                         .First().Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
@@ -280,7 +283,8 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-                  
+                    if ((string) Form1.instance.Invoke(
+                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage6") continue;
                     if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
                     _lastupdatedTime = DateTime.Now;
                     if (Form1.instance.ShipGrid.InvokeRequired)
@@ -346,7 +350,8 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
-                    Ship.Name = LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
+                    Ship.Name = LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item
+                        .Where(n => n.DefId == ship.DefId)
                         .First().NameLoc, Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
                         .First().Name);
 

@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using SeaBotCore.Cache;
 using SeaBotCore.Data.Defenitions;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
@@ -82,7 +83,7 @@ namespace SeaBotCore.BotMethods
                             if (building.ProdStart != 0)
                             {
                                 var willbeproducedat =
-                                    building.ProdStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
+                                    building.ProdStart + DefenitionCache.GetBuildingDefenitions().Items.Item
                                         .First(n => n.DefId == building.DefId).Levels.Level
                                         .First(n => n.Id == (long) building.Level).ProdOutputs
                                         .ProdOutput[0].Time;
@@ -95,10 +96,11 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + Cache.DefenitionCache.GetBuildingDefenitions().Items.Item
-                                                           .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                                           .Where(n => n.Id == (long) building.Level + 1).First()
-                                                           .UpgradeTime;
+                                var willbeproducedat =
+                                    building.UpgStart + DefenitionCache.GetBuildingDefenitions().Items.Item
+                                        .Where(n => n.DefId == building.DefId).First().Levels.Level
+                                        .Where(n => n.Id == (long) building.Level + 1).First()
+                                        .UpgradeTime;
 
 
                                 DelayMinList.Add((int) Math.Ceiling(
@@ -112,9 +114,9 @@ namespace SeaBotCore.BotMethods
                             a.OrderByDescending(grp => grp.Count());
                         var mostlikely = b
                             .Select(grp => grp.Key).FirstOrDefault();
-                        var avg = (int)DelayMinList.Average();
-                      
-                        if (mostlikely > avg*1.5)
+                        var avg = (int) DelayMinList.Average();
+
+                        if (mostlikely > avg * 1.5)
                         {
                             sleeptimeinmin = avg > thresholdinmin
                                 ? avg
@@ -138,7 +140,7 @@ namespace SeaBotCore.BotMethods
                     {
                         Core.StopBot();
                         Logger.Logger.Info(string.Format(Localization.SLEEP_STARTING, sleeptimeinmin));
-                        Thread.Sleep(sleeptimeinmin *60* 1000);
+                        Thread.Sleep(sleeptimeinmin * 60 * 1000);
                         Core.StartBot();
                     }).Start();
                     //StartSleeping

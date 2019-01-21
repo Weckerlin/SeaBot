@@ -14,19 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using SeaBotCore.Cache;
+
 namespace SeaBotCore.Data.Defenitions
 {
     public static class Defenitions
     {
-        public static BuildingDefentions.Root BuildingDef => Cache.DefenitionCache.GetBuildingDefenitions();
+        public static BuildingDefentions.Root BuildingDef => DefenitionCache.GetBuildingDefenitions();
 
-        public static BarrelDefenitions.Root BarrelDef => Cache.DefenitionCache.GetBarrelDefenitions();
+        public static BarrelDefenitions.Root BarrelDef => DefenitionCache.GetBarrelDefenitions();
 
-        public static BoatDefenitions.Root BoatDef => Cache.DefenitionCache.GetBoatLevelDefenitions();
-
-        public static ShipDefenitions.Root ShipDef => Cache.DefenitionCache.GetShipDefenitions();
-        public static MarketplaceDefenitions.Root MarketDef => Cache.DefenitionCache.GetMarketPlaceDefenitions();
-        public static UpgradeableDefenition.Root UpgrDef => Cache.DefenitionCache.GetUpgradeablesDefenitions();
-        public static EventsDefenitions.Root EvntDef => Cache.DefenitionCache.GetEventDefenitions();
+        public static BoatDefenitions.Root BoatDef => DefenitionCache.GetBoatLevelDefenitions();
+        public static DealerDefenitions.Root DealerDef => DefenitionCache.GetDealerDefenitions();
+        public static ShipDefenitions.Root ShipDef => DefenitionCache.GetShipDefenitions();
+        public static MarketplaceDefenitions.Root MarketDef => DefenitionCache.GetMarketPlaceDefenitions();
+        public static UpgradeableDefenition.Root UpgrDef => DefenitionCache.GetUpgradeablesDefenitions();
+        public static EventsDefenitions.Root EvntDef => DefenitionCache.GetEventDefenitions();
     }
 }

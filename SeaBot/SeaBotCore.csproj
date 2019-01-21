@@ -69,6 +69,7 @@
     <Compile Include="Data\Defenitions\BarrelDefenitions.cs" />
     <Compile Include="Data\Defenitions\BoatDefenitions.cs" />
     <Compile Include="Data\Defenitions\BuildingDefenitions.cs" />
+    <Compile Include="Data\Defenitions\DealerDefenitions.cs" />
     <Compile Include="Data\Defenitions\Defenitions.cs" />
     <Compile Include="Data\Defenitions\EventsDefenitions.cs" />
     <Compile Include="Data\Defenitions\MarketplaceDefenitions.cs" />

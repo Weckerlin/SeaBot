@@ -44,6 +44,8 @@ namespace SeaBotCore.Cache
 
         private static BuildingDefentions.Root _buildingdefenitions;
 
+        private static DealerDefenitions.Root _dealerdefenitions;
+
         private static MaterialsData.Root _materials;
 
         private static UpgradeableDefenition.Root _upgradeable;
@@ -254,6 +256,22 @@ namespace SeaBotCore.Cache
             }
 
             return _events;
+        }
+
+        public static DealerDefenitions.Root GetDealerDefenitions()
+        {
+            if (_dealerdefenitions == null)
+            {
+                if (!File.Exists(_cachefolder + "\\dealer.json"))
+                    if (!DownloadCache())
+                    {
+                    }
+
+                _dealerdefenitions = JsonConvert.DeserializeObject<DealerDefenitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\dealer.json"));
+            }
+
+            return _dealerdefenitions;
         }
     }
 }

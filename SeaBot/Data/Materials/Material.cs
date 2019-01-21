@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SeaBotCore.Cache;
 
 namespace SeaBotCore.Data.Materials
 {
@@ -23,28 +24,30 @@ namespace SeaBotCore.Data.Materials
     {
         public static MaterialsData.Item GetItem(int id)
         {
-            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
+            return DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(long id)
         {
-            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
+            return DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(string name)
         {
-            return Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.Name == name);
+            return DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.Name == name);
         }
 
         public static string GetLocalizedName(int id)
         {
-            return Cache.LocalizationCache.GetNameFromLoc(Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id)
-                ?.NameLoc.ToLower(), Cache.DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id)
+            return LocalizationCache.GetNameFromLoc(DefenitionCache.GetMaterials().Items.Item
+                .FirstOrDefault(n => n.DefId == id)
+                ?.NameLoc.ToLower(), DefenitionCache.GetMaterials().Items.Item.FirstOrDefault(n => n.DefId == id)
                 ?.Name);
         }
+
         public static List<MaterialsData.Item> GetAllItems()
         {
-            return Cache.DefenitionCache.GetMaterials().Items.Item.ToList();
+            return DefenitionCache.GetMaterials().Items.Item.ToList();
         }
     }
 }

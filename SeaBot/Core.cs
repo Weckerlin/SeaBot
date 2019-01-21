@@ -36,7 +36,7 @@ namespace SeaBotCore
         public static string ServerToken = string.Empty;
         public static Config.Config Config = new Config.Config();
         public static Thread BotThread;
-        
+
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
         public static DateTime lastsleep = DateTime.Now.AddMinutes(-1);
@@ -46,7 +46,7 @@ namespace SeaBotCore
             Configurator.Load();
             Config.PropertyChanged += Config_PropertyChanged;
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
-            LocalizationController.SetLanguage(Core.Config.language);
+            LocalizationController.SetLanguage(Config.language);
             Events.Events.LoginedEvent.Logined.OnLoginedEvent += Logined_OnLoginedEvent;
         }
 
@@ -96,18 +96,16 @@ namespace SeaBotCore
                 return;
             }
 
-            new System.Threading.Tasks.Task(() =>
-            {
-                Networking.Login();
-              
-            }).Start();
+            new System.Threading.Tasks.Task(() => { Networking.Login(); }).Start();
         }
 
         private static void SyncFailed_OnSyncFailedEvent(Enums.EErrorCode e)
         {
             new System.Threading.Tasks.Task(() =>
             {
-                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION||e == Enums.EErrorCode.COLLECTION_IN_FUTURE||e == Enums.EErrorCode.COLLECTION_IN_PAST||(int)e== 1011)
+                if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION ||
+                    e == Enums.EErrorCode.COLLECTION_IN_FUTURE || e == Enums.EErrorCode.COLLECTION_IN_PAST ||
+                    (int) e == 1011)
                 {
                     Logger.Logger.Info(Localization.CORE_RESTARTING);
                     StopBot();
@@ -132,8 +130,7 @@ namespace SeaBotCore
 
         private static void BotVoid()
         {
-
-            LocalizationController.SetLanguage(Core.Config.language);
+            LocalizationController.SetLanguage(Config.language);
             while (true)
             {
                 Thread.Sleep(100);

@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using Newtonsoft.Json;
+using SeaBotCore.Cache;
 using SeaBotCore.Data;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
@@ -162,7 +163,6 @@ namespace SeaBotCore
 
         public static void Login()
         {
-
             LocalizationController.SetLanguage(Core.Config.language);
             Logger.Logger.Info("Logining ");
             //Get big token
@@ -200,10 +200,11 @@ namespace SeaBotCore
                         Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
                         regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
                         var mtch = regex.Match(data);
-                        if (mtch.Success) Cache.DefenitionCache.Update(mtch.Groups[1].Value);
-                        regex = new Regex(@"loca_filelist_url2': 'https:\/\/static\.seaportgame\.com\/localization\/(.+?)\.xml', '");
-                         mtch = regex.Match(data);
-                        if (mtch.Success) Cache.LocalizationCache.Update(mtch.Groups[1].Value);
+                        if (mtch.Success) DefenitionCache.Update(mtch.Groups[1].Value);
+                        regex = new Regex(
+                            @"loca_filelist_url2': 'https:\/\/static\.seaportgame\.com\/localization\/(.+?)\.xml', '");
+                        mtch = regex.Match(data);
+                        if (mtch.Success) LocalizationCache.Update(mtch.Groups[1].Value);
                         regex = new Regex("clientPath = \"(.+)\";");
                         mtch = regex.Match(data);
                         if (mtch.Success) Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);

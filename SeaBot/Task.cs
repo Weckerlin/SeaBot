@@ -622,25 +622,20 @@ namespace SeaBotCore
 
         public class UnloadShipTask : IGameTask
         {
-            public UnloadShipTask(Ship ship, Enums.EObject eobj, 
-             UpgradeableDefenition.Level lvl,
-             Captain cpt = null, int uniqueid = 1)
+            public UnloadShipTask(int inst_id, int player_level, Enums.EObject eobj, int debug_capacity,
+                int debug_capacity_used, int debug_sailors, int debug_sailors_used, int debug_locationlevel,
+                Captain cpt = null, int debug_uniqueid = 1)
             {
-                
-             
                 Time = (uint) TimeUtils.GetEpochTime();
-                CustomObjects.Add("debug_capacity_used", lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship));
-                CustomObjects.Add("debug_sailors_used", lvl.Sailors);
-                CustomObjects.Add("debug_capacity", AutoShipUtils.GetCapacity(ship));
-                CustomObjects.Add("debug_uniqueid", uniqueid);
-                CustomObjects.Add("debug_sailors", AutoShipUtils.GetSailors(ship));
-                CustomObjects.Add("debug_location_level", ship.TargetLevel);
-                CustomObjects.Add("inst_id", ship.InstId);
-                if (eobj == Enums.EObject.upgradeable)
-                {
-                        CustomObjects.Add("debug_progress", Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Done);
-                }
-                CustomObjects.Add("player_level", Core.GlobalData.Level);
+                CustomObjects.Add("debug_capacity_used", debug_capacity_used);
+                CustomObjects.Add("debug_sailors_used", debug_sailors_used);
+                CustomObjects.Add("debug_capacity", debug_capacity);
+                CustomObjects.Add("debug_uniqueid", debug_uniqueid);
+                CustomObjects.Add("debug_sailors", debug_sailors);
+                CustomObjects.Add("debug_location_level", debug_locationlevel);
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("player_level", player_level);
+
                 if (cpt != null)
                 {
                     CustomObjects.Add("debug_captain_id", cpt.InstId);
