@@ -36,7 +36,7 @@ namespace SeaBotCore
         public static string ServerToken = string.Empty;
         public static Config.Config Config = new Config.Config();
         public static Thread BotThread;
-
+        
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
         public static DateTime lastsleep = DateTime.Now.AddMinutes(-1);
@@ -47,6 +47,18 @@ namespace SeaBotCore
             Config.PropertyChanged += Config_PropertyChanged;
             Events.Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += SyncFailed_OnSyncFailedEvent;
             LocalizationController.SetLanguage(Core.Config.language);
+            Events.Events.LoginedEvent.Logined.OnLoginedEvent += Logined_OnLoginedEvent;
+        }
+
+        private static void Logined_OnLoginedEvent()
+        {
+            Networking.StartThread();
+            BotThread = new Thread(BotVoid)
+            {
+                IsBackground = true
+            };
+            BotThread.Start();
+            Events.Events.BotStartedEvent.BotStarted.Invoke();
         }
 
         public static bool IsBotRunning
@@ -87,13 +99,7 @@ namespace SeaBotCore
             new System.Threading.Tasks.Task(() =>
             {
                 Networking.Login();
-                Networking.StartThread();
-                BotThread = new Thread(BotVoid)
-                {
-                    IsBackground = true
-                };
-                BotThread.Start();
-                Events.Events.BotStartedEvent.BotStarted.Invoke();
+              
             }).Start();
         }
 
