@@ -21,7 +21,7 @@ using J = Newtonsoft.Json.JsonPropertyAttribute;
 using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
 
-namespace SeaBotCore.Data.Defenitions
+namespace SeaBotCore.Data.Definitions
 {
     public class ShipDefenitions
     {

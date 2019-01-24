@@ -23,7 +23,7 @@ using System.Threading;
 using System.Windows.Forms;
 using SeaBotCore;
 using SeaBotCore.Cache;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 

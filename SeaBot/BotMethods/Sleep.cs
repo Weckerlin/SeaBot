@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using SeaBotCore.Cache;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 

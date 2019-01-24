@@ -17,7 +17,7 @@
 using System.Collections.Generic;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
-namespace SeaBotCore.Data.Defenitions
+namespace SeaBotCore.Data.Definitions
 {
     public class UpgradeableDefenition
 

@@ -21,7 +21,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
 using Newtonsoft.Json;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 
 namespace SeaBotCore.Cache
@@ -51,6 +51,8 @@ namespace SeaBotCore.Cache
         private static UpgradeableDefenition.Root _upgradeable;
 
         private static EventsDefenitions.Root _events;
+
+        private static WreckDefinitions.Root _wreck;
 
         public static void Update(string currentversion)
         {
@@ -272,6 +274,22 @@ namespace SeaBotCore.Cache
             }
 
             return _dealerdefenitions;
+        }
+
+        public static WreckDefinitions.Root GetWreckDefenitions()
+        {
+            if (_wreck == null)
+            {
+                if (!File.Exists(_cachefolder + "\\wreck.json"))
+                    if (!DownloadCache())
+                    {
+                    }
+
+                _wreck = JsonConvert.DeserializeObject<WreckDefinitions.Root>(
+                    File.ReadAllText(_cachefolder + "\\wreck.json"));
+            }
+
+            return _wreck;
         }
     }
 }

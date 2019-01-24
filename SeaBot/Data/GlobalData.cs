@@ -236,6 +236,38 @@ namespace SeaBotCore.Data
 
             #endregion
 
+            #region Wreck
+
+            data.Wrecks = new List<Wreck>();
+            var wrecknode = doc.DocumentElement.SelectSingleNode("wreck");
+            if (wrecknode != null)
+            {
+                foreach (XmlNode node in wrecknode.ChildNodes)
+                {
+                    Wreck wr = new Wreck
+                    {
+                        DefId = Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Sailors = Convert.ToInt32(node.SelectSingleNode("sailors")?.InnerText),
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        Spot = Convert.ToInt32(node.SelectSingleNode("spot")?.InnerText),
+                        Status = Convert.ToInt32(node.SelectSingleNode("status")?.InnerText)
+                    };
+                    var rewardnode = node.SelectSingleNode("rewards");
+                    wr.Rewards = new List<Reward>();
+                    foreach (XmlNode rnode in rewardnode)
+                        wr.Rewards.Add(new Reward
+                        {
+                            Id = Convert.ToInt32(rnode.SelectSingleNode("id")?.InnerText),
+                            Type = rnode.SelectSingleNode("type")?.InnerText,
+                            Amount = Convert.ToInt32(rnode.SelectSingleNode("amount")?.InnerText)
+                        });
+
+                    data.Wrecks.Add(wr);
+                }
+            }
+
+            #endregion
+
             Barrels.BarrelController._lastBarrelSeed =
                 Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
@@ -263,6 +295,7 @@ namespace SeaBotCore.Data
         public List<Upgradeable> Upgradeables { get; set; }
         public List<Building> Buildings { get; set; }
         public int HeartbeatInterval { get; set; }
+        public List<Wreck> Wrecks { get; set; }
 
         public int GetAmountItem(string name)
         {
@@ -337,6 +370,16 @@ namespace SeaBotCore.Data
         public long Seed { get; set; }
         public int ClaimedChests { get; set; }
         public int UnlockStarted { get; set; }
+    }
+
+    public class Wreck
+    {
+        public int InstId { get; set; }
+        public int DefId { get; set; }
+        public int Sailors { get; set; }
+        public int Spot { get; set; }
+        public int Status { get; set; }
+        public List<Reward> Rewards { get; set; }
     }
 
     public class Contractor

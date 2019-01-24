@@ -17,7 +17,7 @@
 using System;
 using System.Linq;
 using SeaBotCore.Cache;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;

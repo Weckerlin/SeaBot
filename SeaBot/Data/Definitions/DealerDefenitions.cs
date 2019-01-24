@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using N = Newtonsoft.Json.NullValueHandling;
 
-namespace SeaBotCore.Data.Defenitions
+namespace SeaBotCore.Data.Definitions
 {
     public static class DealerDefenitions
     {

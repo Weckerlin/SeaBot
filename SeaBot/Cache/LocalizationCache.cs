@@ -22,7 +22,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
 

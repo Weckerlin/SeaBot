@@ -16,7 +16,7 @@
 
 using SeaBotCore.Cache;
 
-namespace SeaBotCore.Data.Defenitions
+namespace SeaBotCore.Data.Definitions
 {
     public static class Defenitions
     {
@@ -26,6 +26,7 @@ namespace SeaBotCore.Data.Defenitions
 
         public static BoatDefenitions.Root BoatDef => DefenitionCache.GetBoatLevelDefenitions();
         public static DealerDefenitions.Root DealerDef => DefenitionCache.GetDealerDefenitions();
+        public static WreckDefinitions.Root WreckDef => DefenitionCache.GetWreckDefenitions();
         public static ShipDefenitions.Root ShipDef => DefenitionCache.GetShipDefenitions();
         public static MarketplaceDefenitions.Root MarketDef => DefenitionCache.GetMarketPlaceDefenitions();
         public static UpgradeableDefenition.Root UpgrDef => DefenitionCache.GetUpgradeablesDefenitions();

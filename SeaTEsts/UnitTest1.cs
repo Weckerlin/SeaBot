@@ -19,7 +19,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SeaBotCore;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 
 namespace SeaTests
 {

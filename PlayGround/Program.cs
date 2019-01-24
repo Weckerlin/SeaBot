@@ -20,7 +20,7 @@ using System.Linq;
 using System.Threading;
 using SeaBotCore;
 using SeaBotCore.BotMethods;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Events;
 using SeaBotCore.Utils;

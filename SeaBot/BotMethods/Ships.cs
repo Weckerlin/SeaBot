@@ -20,7 +20,7 @@ using System.Diagnostics;
 using System.Linq;
 using SeaBotCore.Cache;
 using SeaBotCore.Data;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
@@ -89,7 +89,7 @@ namespace SeaBotCore.BotMethods
                     }
                 }
 
-                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1 && ship.Type == "marketplace")
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "marketplace")
                 {
                     var market = Defenitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
                     var lvl = Defenitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).Materials
@@ -100,8 +100,8 @@ namespace SeaBotCore.BotMethods
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                Defenitions.MarketDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                Defenitions.MarketDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                                Defenitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                                Defenitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                             Core.GlobalData.Level, Enums.EObject.marketplace,
@@ -114,8 +114,24 @@ namespace SeaBotCore.BotMethods
                     }
                 }
 
-                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1 && ship.Type == "dealer")
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "wreck")
                 {
+                    var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
+                    var predefined = Defenitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).First();
+
+                    if (wrk != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                            Core.GlobalData.Level, Enums.EObject.wreck,
+                            AutoShipUtils.GetCapacity(ship),
+                            0,
+                            AutoShipUtils.GetSailors(ship), wrk.Sailors,
+                            ship.TargetLevel,
+                            null, _deship.Count(n => n.DefId == ship.DefId)));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
                 }
             }
 

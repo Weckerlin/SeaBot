@@ -20,7 +20,7 @@ using System.Diagnostics;
 using System.Linq;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore

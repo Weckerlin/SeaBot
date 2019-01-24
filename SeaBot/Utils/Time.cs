@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SeaBotCore.Data.Defenitions;
+using SeaBotCore.Data.Definitions;
 
 namespace SeaBotCore.Utils
 {
