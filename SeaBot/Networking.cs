@@ -284,16 +284,24 @@ namespace SeaBotCore
             };
             var s = SendRequest(values, "client.login");
             SendRequest(values, "client.update");
-            Core.GlobalData = Parser.ParseXmlToGlobalData(s);
-            var rand = new Random();
+            if (s.StartsWith("<xml>"))
+            {
+                Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+                var rand = new Random();
 
-            var loadtime = rand.Next(5000, 13000);
-            Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD, loadtime / 1000D));
-            Thread.Sleep(loadtime);
-            Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD_ELAPSED, loadtime / 1000D));
-            values.Add("loading_time", loadtime.ToString());
-            SendRequest(values, "tracking.finishedLoading");
-            Events.Events.LoginedEvent.Logined.Invoke();
+                var loadtime = rand.Next(5000, 13000);
+                Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD, loadtime / 1000D));
+                Thread.Sleep(loadtime);
+                Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD_ELAPSED, loadtime / 1000D));
+                values.Add("loading_time", loadtime.ToString());
+                SendRequest(values, "tracking.finishedLoading");
+                Events.Events.LoginedEvent.Logined.Invoke();
+            }
+            else
+            {
+                Logger.Logger.Fatal("Server responded " +s);
+                Core.StopBot();
+            }
         }
 
 

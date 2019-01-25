@@ -28,14 +28,23 @@ namespace SeaBotCore.BotMethods
             for (var index = 0; index < Core.GlobalData.Upgradeables.Count; index++)
             {
                 var upg = Core.GlobalData.Upgradeables[index];
-                var def = Definitions.UpgrDef.Items.Item.First(n => n.DefId == upg.DefId);
-                var currentlvl = def.Levels.Level.First(n => n.Id == upg.Level);
+                var def = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
+                var currentlvl = def?.Levels.Level.FirstOrDefault(n => n.Id == upg.Level);
+                if (def == null||currentlvl == null)
+                {
+                    continue;
+                }
+               
                 if (upg.Level >= def.MaxLevel)
                 {
                     continue;
                 }
 
-                var nextlvl = def.Levels.Level.First(n => n.Id == upg.Level + 1);
+                var nextlvl = def.Levels.Level.FirstOrDefault(n => n.Id == upg.Level + 1);
+                if (nextlvl == null)
+                {
+                    continue;
+                }
                 if (upg.Progress >= currentlvl.Amount)
                 {
                     //upgrade ofc

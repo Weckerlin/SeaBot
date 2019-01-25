@@ -30,9 +30,12 @@ namespace SeaBotCore.BotMethods
             foreach (var boat in Core.GlobalData.Boats)
             {
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Definitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
-                    .First(n => n.Id == Core.GlobalData.BoatLevel);
-
+                var b = Definitions.BoatDef.Items.Item.FirstOrDefault(n => n.DefId == 1)?.Levels.Level
+                    .FirstOrDefault(n => n.Id == Core.GlobalData.BoatLevel);
+                if (b == null)
+                {
+                    continue;
+                }
                 var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
                 if (turns > b.TurnCount / 2)
                 {

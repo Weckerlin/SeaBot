@@ -57,7 +57,6 @@ namespace SeaBotGUI
         public Form1()
         {
             // bot = new WTGLib("a");
-            ExceptionlessClient.Default.Configuration.IncludePrivateInformation = false;
             LocalizationController.SetLanguage(Core.Config.language);
             InitializeComponent();
             BuildingGrid = dataGridView1;

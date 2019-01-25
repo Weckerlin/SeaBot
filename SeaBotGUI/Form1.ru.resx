@@ -117,142 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lbl_wood.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 53</value>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 22</value>
   </data>
-  <data name="lbl_stone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 24</value>
+  <data name="groupBox19.Text" xml:space="preserve">
+    <value>Большое спасибо:</value>
   </data>
-  <data name="lbl_iron.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 54</value>
+  <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
   </data>
-  <data name="lbl_fish.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 25</value>
+  <data name="groupBox18.Text" xml:space="preserve">
+    <value>Пожертвования</value>
   </data>
-  <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 48</value>
-  </data>
-  <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 19</value>
-  </data>
-  <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 48</value>
-  </data>
-  <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 19</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Ресурсы</value>
-  </data>
-  <data name="button3.Text" xml:space="preserve">
-    <value>Стоп</value>
-  </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Старт</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Управление</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Логи</value>
-  </data>
-  <data name="chk_automuseum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 19</value>
-  </data>
-  <data name="chk_automuseum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
-  </data>
-  <data name="chk_automuseum.Text" xml:space="preserve">
-    <value>Собирать музеи</value>
-  </data>
-  <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 65</value>
-  </data>
-  <data name="chk_autoshipupg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
-  </data>
-  <data name="chk_autoshipupg.Text" xml:space="preserve">
-    <value>Авто-Корабли</value>
-  </data>
-  <data name="chk_finishupgrade.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 65</value>
-  </data>
-  <data name="chk_finishupgrade.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 17</value>
-  </data>
-  <data name="chk_finishupgrade.Text" xml:space="preserve">
-    <value>Завершать апгрейды</value>
-  </data>
-  <data name="chk_prodfact.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 88</value>
-  </data>
-  <data name="chk_prodfact.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 17</value>
-  </data>
-  <data name="chk_prodfact.Text" xml:space="preserve">
-    <value>Производство заводов</value>
-  </data>
-  <data name="chk_barrelhack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 42</value>
-  </data>
-  <data name="chk_barrelhack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 17</value>
-  </data>
-  <data name="chk_barrelhack.Text" xml:space="preserve">
-    <value>Авто-Бочки</value>
-  </data>
-  <data name="chk_collectmat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 19</value>
-  </data>
-  <data name="chk_collectmat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 17</value>
-  </data>
-  <data name="chk_collectmat.Text" xml:space="preserve">
-    <value>Собирать заводы</value>
-  </data>
-  <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
-  <data name="chk_autofish.Text" xml:space="preserve">
-    <value>Собирать рыбу</value>
-  </data>
-  <data name="chk_aupgrade.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 42</value>
-  </data>
-  <data name="chk_aupgrade.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
-  </data>
-  <data name="chk_aupgrade.Text" xml:space="preserve">
-    <value>Апгрейд зданий</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Стратегия</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Главная</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Здания</value>
-  </data>
-  <data name="tabPage6.Text" xml:space="preserve">
-    <value>Корабли</value>
-  </data>
-  <data name="btn_removeitem.Text" xml:space="preserve">
-    <value>Удалить</value>
-  </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
-    <value>Предмет</value>
-  </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
-    <value>Кол-во</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Инвертарь</value>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>О проекте</value>
   </data>
   <data name="groupBox17.Text" xml:space="preserve">
     <value>Язык</value>
@@ -464,20 +343,144 @@
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 22</value>
+  <data name="btn_removeitem.Text" xml:space="preserve">
+    <value>Удалить</value>
   </data>
-  <data name="groupBox19.Text" xml:space="preserve">
-    <value>Большое спасибо:</value>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>Предмет</value>
   </data>
-  <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>Кол-во</value>
   </data>
-  <data name="groupBox18.Text" xml:space="preserve">
-    <value>Пожертвования</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Инвертарь</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>О проекте</value>
+  <data name="tabPage6.Text" xml:space="preserve">
+    <value>Корабли</value>
+  </data>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Здания</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_wood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 53</value>
+  </data>
+  <data name="lbl_stone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 24</value>
+  </data>
+  <data name="lbl_iron.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 54</value>
+  </data>
+  <data name="lbl_fish.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 25</value>
+  </data>
+  <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 48</value>
+  </data>
+  <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 19</value>
+  </data>
+  <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 48</value>
+  </data>
+  <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 19</value>
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Ресурсы</value>
+  </data>
+  <data name="button3.Text" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Логи</value>
+  </data>
+  <data name="chk_automuseum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chk_automuseum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 19</value>
+  </data>
+  <data name="chk_automuseum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="chk_automuseum.Text" xml:space="preserve">
+    <value>Собирать музеи</value>
+  </data>
+  <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 65</value>
+  </data>
+  <data name="chk_autoshipupg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 17</value>
+  </data>
+  <data name="chk_autoshipupg.Text" xml:space="preserve">
+    <value>Авто-Корабли</value>
+  </data>
+  <data name="chk_finishupgrade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 65</value>
+  </data>
+  <data name="chk_finishupgrade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="chk_finishupgrade.Text" xml:space="preserve">
+    <value>Завершать апгрейды</value>
+  </data>
+  <data name="chk_prodfact.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 88</value>
+  </data>
+  <data name="chk_prodfact.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 17</value>
+  </data>
+  <data name="chk_prodfact.Text" xml:space="preserve">
+    <value>Производство заводов</value>
+  </data>
+  <data name="chk_barrelhack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 42</value>
+  </data>
+  <data name="chk_barrelhack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 17</value>
+  </data>
+  <data name="chk_barrelhack.Text" xml:space="preserve">
+    <value>Авто-Бочки</value>
+  </data>
+  <data name="chk_collectmat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 19</value>
+  </data>
+  <data name="chk_collectmat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 17</value>
+  </data>
+  <data name="chk_collectmat.Text" xml:space="preserve">
+    <value>Собирать заводы</value>
+  </data>
+  <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
+  </data>
+  <data name="chk_autofish.Text" xml:space="preserve">
+    <value>Собирать рыбу</value>
+  </data>
+  <data name="chk_aupgrade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 42</value>
+  </data>
+  <data name="chk_aupgrade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="chk_aupgrade.Text" xml:space="preserve">
+    <value>Апгрейд зданий</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Главная</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
