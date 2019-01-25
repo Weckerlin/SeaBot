@@ -119,7 +119,7 @@ namespace SeaBotCore.BotMethods
                     var upgrade = defined.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
                     if (upgrade != null)
                     {
-                        if ((DateTime.UtcNow - TimeUtils.FromUnixTime(data.UpgStart)).TotalSeconds >
+                        if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(data.UpgStart)).TotalSeconds >
                             upgrade.UpgradeTime)
                         {
                             Logger.Logger.Info(
@@ -149,7 +149,7 @@ namespace SeaBotCore.BotMethods
                     var defs = def.Levels.Level.First(n => n.Id == data.Level);
                     var started = TimeUtils.FromUnixTime(data.ProdStart);
                     //var prodtime = defs.ProdOutputs.ProdOutput[data.ProdId - 1]; //todo add this!
-                    if ((DateTime.UtcNow - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
+                    if ((TimeUtils.FixedUTCTime - started).TotalSeconds > defs.ProdOutputs.ProdOutput[0].Time)
                     {
                         Logger.Logger.Info(
                             string.Format(Localization.BUILDINGS_COLLECTING, defs.ProdOutputs.ProdOutput[0].Amount,

@@ -282,7 +282,7 @@ namespace SeaBotGUI.GUIBinds
                         //lol xD
 
                         producing =
-                            (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat))
+                            (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
                             .ToString(@"hh\:mm\:ss");
                     }
 
@@ -294,7 +294,7 @@ namespace SeaBotGUI.GUIBinds
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
 
-                        upgrade = (DateTime.UtcNow - TimeUtils.FromUnixTime(willbeproducedat))
+                        upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
                             .ToString(@"hh\:mm\:ss");
                     }
 
@@ -478,14 +478,14 @@ namespace SeaBotGUI.GUIBinds
                             Ship.Route = Definitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
                             var willatportattime = ship.Sent + lvl.TravelTime;
                             //lol xD 
-                            if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
+                            if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
                             {
                                 willatportat = "--:--:--";
                             }
                             else
                             {
                                 willatportat =
-                                    (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
+                                    (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime))
                                     .ToString(@"hh\:mm\:ss");
                             }
                         }

@@ -43,7 +43,7 @@ namespace SeaBotCore
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
                 var b = Definitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
                     .First(n => n.Id == Core.GlobalData.BoatLevel);
-                var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
+                var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
                 {

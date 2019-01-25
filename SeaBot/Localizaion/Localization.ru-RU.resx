@@ -234,4 +234,7 @@
   <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
     <value>Начинаю скачивать языковые пакеты</value>
   </data>
+  <data name="TIMEUTIL.TIMEMISMATCH" xml:space="preserve">
+    <value>Похоже что твое время очень сильно расходится с серверным, ничего страшного. Используем смещение на {0:F2} минут</value>
+  </data>
 </root>

@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Diagnostics;
-
 namespace SeaBotCore.Localizaion {
     using System;
     
@@ -229,10 +227,7 @@ namespace SeaBotCore.Localizaion {
         /// </summary>
         internal static string NETWORKING_LOGIN_1 {
             get {
-                
-             
                 return ResourceManager.GetString("NETWORKING_LOGIN_1", resourceCulture);
-                
             }
         }
         
@@ -404,6 +399,15 @@ namespace SeaBotCore.Localizaion {
         internal static string SLEEP_STARTING {
             get {
                 return ResourceManager.GetString("SLEEP_STARTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Looks like your local time and server time is mismatched! Using a {0:F2}min. offset.
+        /// </summary>
+        internal static string TIMEUTIL_TIMEMISMATCH {
+            get {
+                return ResourceManager.GetString("TIMEUTIL.TIMEMISMATCH", resourceCulture);
             }
         }
         

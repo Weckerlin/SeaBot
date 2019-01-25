@@ -33,7 +33,7 @@ namespace SeaBotCore.BotMethods
                 var b = Definitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
                     .First(n => n.Id == Core.GlobalData.BoatLevel);
 
-                var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
+                var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
                 if (turns > b.TurnCount / 2)
                 {
                     totalfish += (int) (b.OutputAmount * turns);

@@ -38,7 +38,7 @@ namespace SeaBotCore.BotMethods
             var started = TimeUtils.FromUnixTime(museum.ProdStart);
             var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == museum.Level);
 
-            var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
+            var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
             {
                 Networking.AddTask(new Task.ConfirmMuseumTask((int) b.TurnCount));

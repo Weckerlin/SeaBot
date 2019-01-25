@@ -39,7 +39,7 @@ namespace SeaBotCore.BotMethods
                     var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
-                    if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         lvl.TravelTime + 1)
                     {
                         Logger.Logger.Info(
@@ -66,7 +66,7 @@ namespace SeaBotCore.BotMethods
                     var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
-                    if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         lvl.TravelTime + 2)
                     {
                         Logger.Logger.Info(
@@ -95,7 +95,7 @@ namespace SeaBotCore.BotMethods
                     var lvl = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).Materials
                         .Material.Where(n => n.Id == ship.MaterialId).First();
 
-                    if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         market.TravelTime + 2)
                     {
                         Logger.Logger.Info(
@@ -119,7 +119,7 @@ namespace SeaBotCore.BotMethods
                     var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
                     var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).First();
 
-                    if (wrk != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if (wrk != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -140,7 +140,7 @@ namespace SeaBotCore.BotMethods
                     var predefined = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
 
 
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -154,7 +154,7 @@ namespace SeaBotCore.BotMethods
                     var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
 
 
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -166,7 +166,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "outpost")
                 {
                     var predefined = Definitions.OutpostDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -178,7 +178,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "social_contract")
                 {
                     var predefined = Definitions.SContractDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -190,7 +190,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "dealer")
                 {
                     var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime- TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);
@@ -208,7 +208,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "treasure")
                 {
                     var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
                     {
                         _deship.Add(ship);

@@ -141,6 +141,36 @@ namespace SeaBotCore
                 var content = new FormUrlEncodedContent(data);
 
                 var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
+                //<xml><time>1548446333</time></xml>
+                try
+                {
+
+
+                    var doc = new XmlDocument();
+                    try
+                    {
+                        doc.LoadXml(response.Result.Content.ReadAsStringAsync().Result);
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Logger.Fatal(
+                            string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
+                    }
+
+                    if (doc.DocumentElement != null)
+                    {
+                        var s = Convert.ToInt64(doc.DocumentElement.SelectSingleNode("time")?.InnerText);
+                        TimeUtils.CheckForTimeMismatch(s);
+
+                    }
+
+                }
+            
+            catch (Exception e)
+            {
+               Logger.Logger.Warning(e.ToString());
+                
+            }
 
                 return response.Result.Content.ReadAsStringAsync().Result;
             }

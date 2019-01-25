@@ -15,24 +15,49 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using SeaBotCore.Data.Definitions;
+using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.Utils
 {
     public static class TimeUtils
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
-
+        private static TimeSpan _timeOffset = new TimeSpan(0); 
+      
         public static DateTime FromUnixTime(long unixTime)
         {
             return Epoch.AddSeconds(unixTime);
         }
 
+        public static void CheckForTimeMismatch(long time)
+        {
+            var timedelay = ((DateTime.UtcNow+_timeOffset) - FromUnixTime(time)).TotalMinutes;
+
+            if (timedelay >= 3 || timedelay <= -3)
+            {
+                Logger.Logger.Warning(string.Format(Localization.TIMEUTIL_TIMEMISMATCH, timedelay));
+                if (timedelay > 0)
+                {
+                    _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
+                }
+                else
+                {
+                    _timeOffset =  TimeSpan.FromMinutes(timedelay);
+                }
+
+                Logger.Logger.Debug("Time offset(min) = " + _timeOffset.Minutes);
+                //Time is really delayed!
+            }
+        }
+
+        public static DateTime FixedUTCTime => DateTime.UtcNow + _timeOffset;
         public static int GetEpochTime()
         {
-            var utcDate = DateTime.Now.ToUniversalTime();
+            var utcDate = FixedUTCTime;
             var baseTicks = 621355968000000000;
             var tickResolution = 10000000;
             var epoch = (int) ((utcDate.Ticks - baseTicks) / tickResolution);

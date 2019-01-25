@@ -80,11 +80,11 @@ namespace SeaBotCore.BotMethods
 
                                     var willatportattime = ship.Sent + lvl.TravelTime;
                                     //lol xD 
-                                    if (!((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds >
+                                    if (!((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds >
                                           0))
                                     {
                                         DelayMinList.Add((int) Math.Ceiling(
-                                            (TimeUtils.FromUnixTime(willatportattime) - DateTime.UtcNow).TotalMinutes));
+                                            (TimeUtils.FromUnixTime(willatportattime) - TimeUtils.FixedUTCTime).TotalMinutes));
                                     }
                                 }
                                 catch (Exception)
@@ -107,7 +107,7 @@ namespace SeaBotCore.BotMethods
                                 //lol xD
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (TimeUtils.FromUnixTime(willbeproducedat) - DateTime.UtcNow).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat) - TimeUtils.FixedUTCTime).TotalMinutes));
                             }
 
 
@@ -121,7 +121,7 @@ namespace SeaBotCore.BotMethods
 
 
                                 DelayMinList.Add((int) Math.Ceiling(
-                                    (TimeUtils.FromUnixTime(willbeproducedat) - DateTime.UtcNow).TotalMinutes));
+                                    (TimeUtils.FromUnixTime(willbeproducedat) - TimeUtils.FixedUTCTime).TotalMinutes));
                             }
                         }
 

@@ -215,4 +215,7 @@
   <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
     <value>Downloading localization cache...</value>
   </data>
+  <data name="TIMEUTIL.TIMEMISMATCH" xml:space="preserve">
+    <value>Looks like your local time and server time is mismatched! Using a {0:F2}min. offset</value>
+  </data>
 </root>
