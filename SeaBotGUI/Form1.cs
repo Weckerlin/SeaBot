@@ -131,6 +131,7 @@ namespace SeaBotGUI
             chk_barrelhack.Checked = Core.Config.barrelhack;
             chk_finishupgrade.Checked = Core.Config.finishupgrade;
             chk_aupgrade.Checked = Core.Config.autoupgrade;
+            chk_automuseum.Checked = Core.Config.collectmuseum;
             BuildingGrid.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
             ShipGrid.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
             num_ironlimit.Value = Core.Config.ironlimit;
@@ -829,8 +830,9 @@ namespace SeaBotGUI
             CompUtils.OpenLink("https://steamcommunity.com/tradeoffer/new/?partner=83321528&token=2CIUp5N6");
         }
 
-        private void groupBox5_Enter(object sender, EventArgs e)
+        private void chk_automuseum_CheckedChanged(object sender, EventArgs e)
         {
+            Core.Config.collectmuseum = chk_automuseum.Checked;
         }
     }
 }

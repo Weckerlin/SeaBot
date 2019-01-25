@@ -60,6 +60,7 @@
     <Compile Include="BotMethods\Buildings.cs" />
     <Compile Include="BotMethods\Factories.cs" />
     <Compile Include="BotMethods\FishPier.cs" />
+    <Compile Include="BotMethods\Museum.cs" />
     <Compile Include="BotMethods\Ships.cs" />
     <Compile Include="BotMethods\Sleep.cs" />
     <Compile Include="BotMethods\Upgradable.cs" />
@@ -71,11 +72,15 @@
     <Compile Include="Data\Definitions\BuildingDefenitions.cs" />
     <Compile Include="Data\Definitions\ContractorDefinitions.cs" />
     <Compile Include="Data\Definitions\DealerDefenitions.cs" />
-    <Compile Include="Data\Definitions\Definitions.cs" />
+    <Compile Include="Data\Definitions.cs" />
     <Compile Include="Data\Definitions\EventsDefenitions.cs" />
     <Compile Include="Data\Definitions\GlobalContractorDefinitions.cs" />
     <Compile Include="Data\Definitions\MarketplaceDefenitions.cs" />
+    <Compile Include="Data\Definitions\MuseumLevelDefenitions.cs" />
+    <Compile Include="Data\Definitions\OutpostDefinitions.cs" />
     <Compile Include="Data\Definitions\ShipDefenitions.cs" />
+    <Compile Include="Data\Definitions\SocialContractDefenitions.cs" />
+    <Compile Include="Data\Definitions\TreasureDefenitions.cs" />
     <Compile Include="Data\Definitions\UpgradeableDefenition.cs" />
     <Compile Include="Data\Definitions\WreckDefenitions.cs" />
     <Compile Include="Data\GlobalData.cs" />

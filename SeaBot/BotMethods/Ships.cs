@@ -133,6 +133,95 @@ namespace SeaBotCore.BotMethods
                         AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                     }
                 }
+
+                //Contractor
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "contractor")
+                {
+                    var predefined = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+
+
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
+
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "global_contractor")
+                {
+                    var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+
+
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
+
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "outpost")
+                {
+                    var predefined = Definitions.OutpostDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipOutpostTask(ship.InstId));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
+
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "social_contract")
+                {
+                    var predefined = Definitions.SContractDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
+
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "dealer")
+                {
+                    var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                            Core.GlobalData.Level, Enums.EObject.dealer,
+                            AutoShipUtils.GetCapacity(ship),
+                            0,
+                            AutoShipUtils.GetSailors(ship), (int) predefined.Sailors,
+                            ship.TargetLevel,
+                            null, _deship.Count(n => n.DefId == ship.DefId)));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
+
+                if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "treasure")
+                {
+                    var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                    if ((DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
+                        predefined.TravelTime + 2)
+                    {
+                        _deship.Add(ship);
+                        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                            Core.GlobalData.Level, Enums.EObject.treasure,
+                            AutoShipUtils.GetCapacity(ship),
+                            0,
+                            AutoShipUtils.GetSailors(ship), 0,
+                            ship.TargetLevel,
+                            null, _deship.Count(n => n.DefId == ship.DefId)));
+                        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    }
+                }
             }
 
 

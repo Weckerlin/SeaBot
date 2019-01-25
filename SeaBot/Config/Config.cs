@@ -49,6 +49,7 @@ namespace SeaBotCore.Config
         private string _telegramtoken = string.Empty;
         private bool _upgradeonlyfactory;
         private int _woodlimit;
+        private bool _collectmuseum;
         private LocalizationController.ELanguages _language = LocalizationController.GetDefaultLang();
 
         public LocalizationController.ELanguages language
@@ -68,6 +69,16 @@ namespace SeaBotCore.Config
             {
                 _sleepenabled = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepenabled"));
+            }
+        } //done
+
+        public bool collectmuseum
+        {
+            get => _collectmuseum;
+            set
+            {
+                _collectmuseum = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("collectmuseum"));
             }
         } //done
 

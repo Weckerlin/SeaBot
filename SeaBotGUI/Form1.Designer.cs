@@ -56,6 +56,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chk_automuseum = new System.Windows.Forms.CheckBox();
             this.chk_autoshipupg = new System.Windows.Forms.CheckBox();
             this.chk_finishupgrade = new System.Windows.Forms.CheckBox();
             this.chk_prodfact = new System.Windows.Forms.CheckBox();
@@ -127,6 +128,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
@@ -236,7 +238,6 @@
             this.groupBox5.Controls.Add(this.pictureBox1);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // pictureBox8
             // 
@@ -382,6 +383,7 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.chk_automuseum);
             this.groupBox2.Controls.Add(this.chk_autoshipupg);
             this.groupBox2.Controls.Add(this.chk_finishupgrade);
             this.groupBox2.Controls.Add(this.chk_prodfact);
@@ -391,6 +393,13 @@
             this.groupBox2.Controls.Add(this.chk_aupgrade);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // chk_automuseum
+            // 
+            resources.ApplyResources(this.chk_automuseum, "chk_automuseum");
+            this.chk_automuseum.Name = "chk_automuseum";
+            this.chk_automuseum.UseVisualStyleBackColor = true;
+            this.chk_automuseum.CheckedChanged += new System.EventHandler(this.chk_automuseum_CheckedChanged);
             // 
             // chk_autoshipupg
             // 
@@ -996,11 +1005,17 @@
             // tabPage4
             // 
             resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.groupBox19);
             this.tabPage4.Controls.Add(this.groupBox18);
             this.tabPage4.Controls.Add(this.groupBox7);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
             // 
             // groupBox19
             // 
@@ -1276,5 +1291,7 @@
         private System.Windows.Forms.Label lbl_lvl;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chk_automuseum;
     }
 }

@@ -161,6 +161,15 @@
   <data name="groupBox3.Text" xml:space="preserve">
     <value>Логи</value>
   </data>
+  <data name="chk_automuseum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 19</value>
+  </data>
+  <data name="chk_automuseum.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 17</value>
+  </data>
+  <data name="chk_automuseum.Text" xml:space="preserve">
+    <value>Собирать музеи</value>
+  </data>
   <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 65</value>
   </data>
@@ -192,10 +201,10 @@
     <value>142, 42</value>
   </data>
   <data name="chk_barrelhack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 17</value>
+    <value>83, 17</value>
   </data>
   <data name="chk_barrelhack.Text" xml:space="preserve">
-    <value>Авто-Бочки (нестабильный)</value>
+    <value>Авто-Бочки</value>
   </data>
   <data name="chk_collectmat.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 19</value>

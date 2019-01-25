@@ -14,12 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
+using R = Newtonsoft.Json.Required;
+using N = Newtonsoft.Json.NullValueHandling;
 
 namespace SeaBotCore.Data.Definitions
 {
-    public static class DealerDefenitions
+    public class OutpostDefinitions
     {
         public class Root : IDefinition
         {
@@ -37,39 +43,50 @@ namespace SeaBotCore.Data.Definitions
             [J("version_id")] public long VersionId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
+            [J("title_loc")] public string TitleLoc { get; set; }
+            [J("flavour_loc")] public string FlavourLoc { get; set; }
+            [J("type")] public string Type { get; set; }
             [J("speedupable")] public long Speedupable { get; set; }
             [J("sailors")] public long Sailors { get; set; }
             [J("slots")] public long Slots { get; set; }
+            [J("req_level")] public long ReqLevel { get; set; }
             [J("travel_time")] public long TravelTime { get; set; }
+            [J("unlock_time")] public long UnlockTime { get; set; }
+            [J("unlocked_fog")] public string UnlockedFog { get; set; }
+            [J("xp")] public long Xp { get; set; }
+            [J("xp_pct")] public long XpPct { get; set; }
+            [J("crew")] public long Crew { get; set; }
+            [J("difficulty")] public long Difficulty { get; set; }
+            [J("round")] public long Round { get; set; }
             [J("event_id")] public long EventId { get; set; }
-            [J("outpost_id")] public long OutpostId { get; set; }
-            [J("contractor_id")] public long ContractorId { get; set; }
             [J("map_x")] public long MapX { get; set; }
             [J("map_y")] public long MapY { get; set; }
             [J("atlas")] public string Atlas { get; set; }
             [J("texture")] public string Texture { get; set; }
             [J("iso_width")] public long IsoWidth { get; set; }
             [J("iso_height")] public long IsoHeight { get; set; }
-            [J("dealer_texture")] public string DealerTexture { get; set; }
             [J("points")] public string Points { get; set; }
             [J("controls")] public string Controls { get; set; }
-            [J("trades")] public Trades Trades { get; set; }
+
+            [J("required_locations", NullValueHandling = N.Ignore)]
+            public RequiredLocations RequiredLocations { get; set; }
+
+            [J("required_one", NullValueHandling = N.Ignore)]
+            public RequiredLocations RequiredOne { get; set; }
+
+            [J("unlocked_locations", NullValueHandling = N.Ignore)]
+            public RequiredLocations UnlockedLocations { get; set; }
         }
 
-        public class Trades
+        public class RequiredLocations
         {
-            [J("trade")] public List<Trade> Trade { get; set; }
+            [J("location")] public List<Location> Location { get; set; }
         }
 
-        public class Trade
+        public class Location
         {
-            [J("id")] public long Id { get; set; }
-            [J("input_type")] public string InputType { get; set; }
-            [J("input_id")] public long InputId { get; set; }
-            [J("input_amount")] public long InputAmount { get; set; }
-            [J("output_type")] public string OutputType { get; set; }
-            [J("output_id")] public long OutputId { get; set; }
-            [J("output_amount")] public long OutputAmount { get; set; }
+            [J("type")] public string Type { get; set; }
+            [J("ids")] public string Ids { get; set; }
         }
     }
 }

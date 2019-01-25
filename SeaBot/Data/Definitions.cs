@@ -36,7 +36,11 @@ namespace SeaBotCore.Data.Definitions
         Events,
         Material,
         Contractor,
-        GlobalContractor
+        GlobalContractor,
+        Outpost,
+        SocialContract,
+        Treasure,
+        MuseumLevels
     }
 
     public static class Definitions
@@ -70,9 +74,23 @@ namespace SeaBotCore.Data.Definitions
 
         public static MaterialsData.Root MatDef =>
             (MaterialsData.Root) DefenitionCache.GetDefinition(EDefinitionType.Material);
+
         public static GlobalContractorDefinitions.Root GConDef =>
             (GlobalContractorDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.GlobalContractor);
+
         public static ContractorDefinitions.Root ConDef =>
             (ContractorDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Contractor);
+
+        public static OutpostDefinitions.Root OutpostDef =>
+            (OutpostDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Outpost);
+
+        public static SocialContractDefenitions.Root SContractDef =>
+            (SocialContractDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.SocialContract);
+
+        public static TreasureDefenitions.Root TreasureDef =>
+            (TreasureDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Treasure);
+
+        public static MuseumLevelDefenitions.Root MuseumLvlDef =>
+            (MuseumLevelDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.MuseumLevels);
     }
 }

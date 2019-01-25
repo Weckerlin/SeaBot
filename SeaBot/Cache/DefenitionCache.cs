@@ -168,6 +168,19 @@ namespace SeaBotCore.Cache
                 case EDefinitionType.Contractor:
                     filename = "contractor";
                     break;
+                case EDefinitionType.SocialContract:
+                    filename = "social_contract";
+                    break;
+                case EDefinitionType.Outpost:
+                    filename = "outpost";
+                    break;
+                case EDefinitionType.Treasure:
+                    filename = "treasure";
+                    break;
+                case EDefinitionType.MuseumLevels:
+                    filename = "museum_level";
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -225,6 +238,18 @@ namespace SeaBotCore.Cache
                     break;
                 case EDefinitionType.GlobalContractor:
                     ret = JsonConvert.DeserializeObject<GlobalContractorDefinitions.Root>(content);
+                    break;
+                case EDefinitionType.SocialContract:
+                    ret = JsonConvert.DeserializeObject<SocialContractDefenitions.Root>(content);
+                    break;
+                case EDefinitionType.Outpost:
+                    ret = JsonConvert.DeserializeObject<OutpostDefinitions.Root>(content);
+                    break;
+                case EDefinitionType.Treasure:
+                    ret = JsonConvert.DeserializeObject<OutpostDefinitions.Root>(content);
+                    break;
+                case EDefinitionType.MuseumLevels:
+                    ret = JsonConvert.DeserializeObject<MuseumLevelDefenitions.Root>(content);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

@@ -739,6 +739,62 @@ namespace SeaBotCore
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
+        public class UnloadShipContactorTask : IGameTask
+        {
+            public UnloadShipContactorTask(int inst_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+            }
+
+            public string Action => "unload_ship_contractor";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class UnloadShipGlobalContractorTask : IGameTask
+        {
+            public UnloadShipGlobalContractorTask(int inst_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+            }
+
+            public string Action => "unload_ship_global_contractor";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class UnloadShipOutpostTask : IGameTask
+        {
+            public UnloadShipOutpostTask(int inst_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+            }
+
+            public string Action => "unload_ship_outpost";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class UnloadShipSocialContractTask : IGameTask
+        {
+            public UnloadShipSocialContractTask(int inst_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+            }
+
+            public string Action => "unload_ship_social_contract";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
         public class HeartBeat : IGameTask
         {
             public HeartBeat()
