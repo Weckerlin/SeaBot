@@ -71,8 +71,9 @@
     <Compile Include="Data\Definitions\BuildingDefenitions.cs" />
     <Compile Include="Data\Definitions\ContractorDefinitions.cs" />
     <Compile Include="Data\Definitions\DealerDefenitions.cs" />
-    <Compile Include="Data\Definitions\Defenitions.cs" />
+    <Compile Include="Data\Definitions\Definitions.cs" />
     <Compile Include="Data\Definitions\EventsDefenitions.cs" />
+    <Compile Include="Data\Definitions\GlobalContractorDefinitions.cs" />
     <Compile Include="Data\Definitions\MarketplaceDefenitions.cs" />
     <Compile Include="Data\Definitions\ShipDefenitions.cs" />
     <Compile Include="Data\Definitions\UpgradeableDefenition.cs" />

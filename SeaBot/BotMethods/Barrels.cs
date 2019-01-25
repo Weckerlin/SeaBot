@@ -29,7 +29,7 @@ namespace SeaBotCore.BotMethods
         public static void CollectBarrel()
         {
             var nearestev = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
-            var barrelcontroller = Defenitions.BarrelDef.Items.Item
+            var barrelcontroller = Definitions.BarrelDef.Items.Item
                 .Where(n => n.DefId == nearestev).First();
             var nextbarrel = BarrelController.GetNextBarrel(barrelcontroller);
             if (nextbarrel.Definition.Id != 0)

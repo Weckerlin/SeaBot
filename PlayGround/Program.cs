@@ -51,7 +51,7 @@ namespace ConsoleApp1
                     if (!kicked)
                     {
                         var barrelid = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
-                        var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
+                        var bar = Barrels.BarrelController.GetNextBarrel(Definitions.BarrelDef.Items.Item
                             .Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
                         {

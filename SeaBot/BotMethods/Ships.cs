@@ -36,7 +36,7 @@ namespace SeaBotCore.BotMethods
                 var ship = Core.GlobalData.Ships[index];
                 if (ship.Type == "upgradeable" && ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 0)
                 {
-                    var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                    var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
                     if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
@@ -45,8 +45,8 @@ namespace SeaBotCore.BotMethods
                         Logger.Logger.Info(
                             Localization.SHIPS_LOADING +
                             LocalizationCache.GetNameFromLoc(
-                                Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                                Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                                Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -63,7 +63,7 @@ namespace SeaBotCore.BotMethods
                 var ship = Core.GlobalData.Ships[index];
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 1 && ship.Type == "upgradeable")
                 {
-                    var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                    var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
                     if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
@@ -71,8 +71,8 @@ namespace SeaBotCore.BotMethods
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                                Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                                Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                         Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                             lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
 
@@ -91,8 +91,8 @@ namespace SeaBotCore.BotMethods
 
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "marketplace")
                 {
-                    var market = Defenitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-                    var lvl = Defenitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).Materials
+                    var market = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+                    var lvl = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).Materials
                         .Material.Where(n => n.Id == ship.MaterialId).First();
 
                     if (lvl != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
@@ -100,8 +100,8 @@ namespace SeaBotCore.BotMethods
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                Defenitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                                Defenitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
+                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                             Core.GlobalData.Level, Enums.EObject.marketplace,
@@ -117,7 +117,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "wreck")
                 {
                     var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
-                    var predefined = Defenitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).First();
+                    var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).First();
 
                     if (wrk != null && (DateTime.UtcNow - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
                         predefined.TravelTime + 2)
@@ -150,7 +150,7 @@ namespace SeaBotCore.BotMethods
                 }
 
 
-                var lvls = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels
+                var lvls = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels
                     .Level.FirstOrDefault(n => n.Id == bestplace.Level);
                 if (lvls != null)
                 {
@@ -175,8 +175,8 @@ namespace SeaBotCore.BotMethods
                     shp.TargetLevel = bestplace.Level;
                     Logger.Logger.Info(Localization.SHIPS_SENDING +
                                        LocalizationCache.GetNameFromLoc(
-                                           Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                           Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                                           Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                                           Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                     Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
                 }
             }
@@ -187,7 +187,7 @@ namespace SeaBotCore.BotMethods
     {
         public static ShipDefenitions.Item GetShipDefId(Ship ship)
         {
-            return Defenitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId);
+            return Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId);
         }
 
         public static void NullShip(Ship ship)
@@ -209,9 +209,9 @@ namespace SeaBotCore.BotMethods
 
         public static int GetCapacity(Ship ship)
         {
-            if (Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels == null)
+            if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels == null)
             {
-                var capacity = Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels
+                var capacity = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels
                     .Level.First(n => n.Id == ship.CapacityLevel).Capacity;
                 if (capacity != null)
                 {
@@ -220,7 +220,7 @@ namespace SeaBotCore.BotMethods
             }
 
             ShipDefenitions.Item first = null;
-            foreach (var n in Defenitions.ShipDef.Items.Item)
+            foreach (var n in Definitions.ShipDef.Items.Item)
             {
                 if (n.DefId == ship.DefId)
                 {
@@ -240,10 +240,10 @@ namespace SeaBotCore.BotMethods
 
         public static int GetSailors(Ship ship)
         {
-            if (Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)
+            if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)
             {
                 ShipDefenitions.Item first = null;
-                foreach (var n in Defenitions.ShipDef.Items.Item)
+                foreach (var n in Definitions.ShipDef.Items.Item)
                 {
                     if (n.DefId == ship.DefId)
                     {
@@ -259,7 +259,7 @@ namespace SeaBotCore.BotMethods
                 }
             }
 
-            var sailors = Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId)
+            var sailors = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId)
                 .SailorsLevels.Level
                 .First(n => n.Id == ship.SailorsLevel).Sailors;
             if (sailors != null)
@@ -273,7 +273,7 @@ namespace SeaBotCore.BotMethods
         public static Upgradeable GetBestUpgPlace(string itemname, int sailors, bool profitbased)
         {
             var matid =
-                Defenitions.UpgrDef.Items.Item.Where(n => n.MaterialId == MaterialDB.GetItem(itemname).DefId);
+                Definitions.UpgrDef.Items.Item.Where(n => n.MaterialId == MaterialDB.GetItem(itemname).DefId);
             var p = matid
                 .Where(shtItem =>
                     Core.GlobalData.Upgradeables.FirstOrDefault(n =>

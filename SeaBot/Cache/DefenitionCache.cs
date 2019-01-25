@@ -162,6 +162,12 @@ namespace SeaBotCore.Cache
                 case EDefinitionType.Material:
                     filename = "material";
                     break;
+                case EDefinitionType.GlobalContractor:
+                    filename = "global_contractor";
+                    break;
+                case EDefinitionType.Contractor:
+                    filename = "contractor";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -176,10 +182,8 @@ namespace SeaBotCore.Cache
             switch (type)
             {
                 case EDefinitionType.Barrels:
-
                     ret = JsonConvert.DeserializeObject<ContractorDefinitions.Root>(
                         content);
-
                     break;
                 case EDefinitionType.Boat:
                     ret = JsonConvert.DeserializeObject<BoatDefenitions.Root>(
@@ -215,6 +219,12 @@ namespace SeaBotCore.Cache
                     break;
                 case EDefinitionType.Material:
                     ret = JsonConvert.DeserializeObject<MaterialsData.Root>(content);
+                    break;
+                case EDefinitionType.Contractor:
+                    ret = JsonConvert.DeserializeObject<ContractorDefinitions.Root>(content);
+                    break;
+                case EDefinitionType.GlobalContractor:
+                    ret = JsonConvert.DeserializeObject<GlobalContractorDefinitions.Root>(content);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

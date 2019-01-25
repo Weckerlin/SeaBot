@@ -41,7 +41,7 @@ namespace SeaBotCore
                 Time = (uint) TimeUtils.GetEpochTime();
                 //calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Defenitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
+                var b = Definitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
                     .First(n => n.Id == Core.GlobalData.BoatLevel);
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
@@ -677,7 +677,7 @@ namespace SeaBotCore
         {
             public SendShipUpgradeableTask(Ship ship, Upgradeable destination, int amount)
             {
-                var destination_levels = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == destination.DefId).Levels
+                var destination_levels = Definitions.UpgrDef.Items.Item.First(n => n.DefId == destination.DefId).Levels
                     .Level.FirstOrDefault(n => n.Id == destination.Level);
                 Time = (uint) TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", ship.InstId);

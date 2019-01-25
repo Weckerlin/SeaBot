@@ -237,7 +237,7 @@ namespace SeaBotGUI.TelegramBot
             }
         }
 
-        public ReplyKeyboardMarkup ParseReplyKeyboardMarkup(IMenu arr)
+        private ReplyKeyboardMarkup ParseReplyKeyboardMarkup(IMenu arr)
         {
             if (arr == null)
             {

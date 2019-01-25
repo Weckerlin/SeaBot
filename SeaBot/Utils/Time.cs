@@ -42,7 +42,7 @@ namespace SeaBotCore.Utils
         public static EventsDefenitions.Item GetCurrentEvent()
         {
             var stl = new Dictionary<EventsDefenitions.Item, long>();
-            foreach (var item in Defenitions.EvntDef.Items.Item)
+            foreach (var item in Definitions.EvntDef.Items.Item)
             {
                 var x = GetEpochTime();
                 if (x >= item.StartTime && x <= item.EndTime)
@@ -51,7 +51,7 @@ namespace SeaBotCore.Utils
                 }
             }
 
-            return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
+            return Definitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
     }
 }

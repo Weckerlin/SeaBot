@@ -28,7 +28,7 @@ namespace SeaBotCore.BotMethods
             for (var index = 0; index < Core.GlobalData.Upgradeables.Count; index++)
             {
                 var upg = Core.GlobalData.Upgradeables[index];
-                var def = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == upg.DefId);
+                var def = Definitions.UpgrDef.Items.Item.First(n => n.DefId == upg.DefId);
                 var currentlvl = def.Levels.Level.First(n => n.Id == upg.Level);
                 if (upg.Level >= def.MaxLevel)
                 {

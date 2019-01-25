@@ -33,7 +33,7 @@ namespace SeaBotCore.BotMethods
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {
                     var defined =
-                        Defenitions.BuildingDef.Items.Item.FirstOrDefault(n =>
+                        Definitions.BuildingDef.Items.Item.FirstOrDefault(n =>
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
 
@@ -115,7 +115,7 @@ namespace SeaBotCore.BotMethods
             {
                 if (data.UpgStart != 0 && data.ProdStart == 0)
                 {
-                    var defined = Defenitions.BuildingDef.Items.Item.FirstOrDefault(n => n.DefId == data.DefId);
+                    var defined = Definitions.BuildingDef.Items.Item.FirstOrDefault(n => n.DefId == data.DefId);
                     var upgrade = defined.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
                     if (upgrade != null)
                     {
@@ -140,7 +140,7 @@ namespace SeaBotCore.BotMethods
             {
                 if (data.UpgStart == 0 && data.ProdStart != 0)
                 {
-                    var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
+                    var def = Definitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
                     if (def.Type != "factory")
                     {
                         continue;

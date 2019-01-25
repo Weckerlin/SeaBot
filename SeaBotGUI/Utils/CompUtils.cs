@@ -45,9 +45,6 @@ namespace SeaBotGUI.Utils
 
                     // Sleep some time to wait for the shell to return in case of error
                     Thread.Sleep(250);
-
-                    // If the exit code is zero or the process is still running then
-                    // appearently we have been successful.
                 }
             }
             catch (Exception)

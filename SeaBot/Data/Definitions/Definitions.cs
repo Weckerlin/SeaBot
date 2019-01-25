@@ -34,10 +34,12 @@ namespace SeaBotCore.Data.Definitions
         Marketplace,
         Upgradable,
         Events,
-        Material
+        Material,
+        Contractor,
+        GlobalContractor
     }
 
-    public static class Defenitions
+    public static class Definitions
     {
         public static BuildingDefentions.Root BuildingDef =>
             (BuildingDefentions.Root) DefenitionCache.GetDefinition(EDefinitionType.Buildings);
@@ -68,5 +70,9 @@ namespace SeaBotCore.Data.Definitions
 
         public static MaterialsData.Root MatDef =>
             (MaterialsData.Root) DefenitionCache.GetDefinition(EDefinitionType.Material);
+        public static GlobalContractorDefinitions.Root GConDef =>
+            (GlobalContractorDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.GlobalContractor);
+        public static ContractorDefinitions.Root ConDef =>
+            (ContractorDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Contractor);
     }
 }

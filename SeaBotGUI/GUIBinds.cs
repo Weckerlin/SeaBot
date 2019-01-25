@@ -266,16 +266,16 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
-                    Building.Name = LocalizationCache.GetNameFromLoc(Defenitions.BuildingDef.Items.Item
+                    Building.Name = LocalizationCache.GetNameFromLoc(Definitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
-                        .First().NameLoc, Defenitions.BuildingDef.Items.Item
+                        .First().NameLoc, Definitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
                         .First().Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + Defenitions.BuildingDef.Items.Item
+                        var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level).First().ProdOutputs
                                                    .ProdOutput[0].Time;
@@ -290,7 +290,7 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + Defenitions.BuildingDef.Items.Item
+                        var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
 
@@ -438,9 +438,9 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
-                    Ship.Name = LocalizationCache.GetNameFromLoc(Defenitions.ShipDef.Items.Item
+                    Ship.Name = LocalizationCache.GetNameFromLoc(Definitions.ShipDef.Items.Item
                         .Where(n => n.DefId == ship.DefId)
-                        .First().NameLoc, Defenitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
+                        .First().NameLoc, Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
                         .First().Name);
 
                     var willatportat = string.Empty;
@@ -448,26 +448,26 @@ namespace SeaBotGUI.GUIBinds
                     {
                         try
                         {
-                            var shipdef = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+                            var shipdef = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
                             if (shipdef == null)
                             {
                                 continue;
                             }
 
-                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels ==
+                            if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels ==
                                 null)
                             {
                                 continue;
                             }
 
-                            if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
+                            if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
                                     .Level
                                     .Count == 0)
                             {
                                 continue;
                             }
 
-                            var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                            var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                 ?.Levels.Level
                                 .FirstOrDefault(n => n.Id == ship.TargetLevel);
                             if (lvl == null)
@@ -475,7 +475,7 @@ namespace SeaBotGUI.GUIBinds
                                 continue;
                             }
 
-                            Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
+                            Ship.Route = Definitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
                             var willatportattime = ship.Sent + lvl.TravelTime;
                             //lol xD 
                             if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)

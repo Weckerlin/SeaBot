@@ -25,30 +25,30 @@ namespace SeaBotCore.Data.Materials
     {
         public static MaterialsData.Item GetItem(int id)
         {
-            return Defenitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
+            return Definitions.Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(long id)
         {
-            return Defenitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
+            return Definitions.Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
         }
 
         public static MaterialsData.Item GetItem(string name)
         {
-            return Defenitions.MatDef.Items.Item.FirstOrDefault(n => n.Name == name);
+            return Definitions.Definitions.MatDef.Items.Item.FirstOrDefault(n => n.Name == name);
         }
 
         public static string GetLocalizedName(int id)
         {
-            return LocalizationCache.GetNameFromLoc(Defenitions.MatDef.Items.Item
+            return LocalizationCache.GetNameFromLoc(Definitions.Definitions.MatDef.Items.Item
                 .FirstOrDefault(n => n.DefId == id)
-                ?.NameLoc.ToLower(), Defenitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id)
+                ?.NameLoc.ToLower(), Definitions.Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id)
                 ?.Name);
         }
 
         public static List<MaterialsData.Item> GetAllItems()
         {
-            return Defenitions.MatDef.Items.Item.ToList();
+            return Definitions.Definitions.MatDef.Items.Item.ToList();
         }
     }
 }
