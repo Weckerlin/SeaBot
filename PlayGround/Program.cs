@@ -38,6 +38,7 @@ namespace ConsoleApp1
             Core.ServerToken = token;
 
             Events.SyncFailedEvent.SyncFailed.OnSyncFailedEvent += Kicked_OnWrongSession;
+
             for (var i = 7; i < 200; i++)
             {
                 kicked = false;
@@ -53,8 +54,10 @@ namespace ConsoleApp1
                         var bar = Barrels.BarrelController.GetNextBarrel(Defenitions.BarrelDef.Items.Item
                             .Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
+                        {
                             Console.WriteLine(
                                 $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
+                        }
 
                         Networking.AddTask(new Task.ConfirmBarrelTask((int) barrelid, bar.get_type(), bar.Amount,
                             bar.Definition.Id, Core.GlobalData.Level));

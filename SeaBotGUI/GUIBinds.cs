@@ -46,11 +46,20 @@ namespace SeaBotGUI.GUIBinds
     {
         public static string ToKMB(this int num)
         {
-            if (num > 999999999 || num < -999999999) return num.ToString("0,,,.###B", CultureInfo.InvariantCulture);
+            if (num > 999999999 || num < -999999999)
+            {
+                return num.ToString("0,,,.###B", CultureInfo.InvariantCulture);
+            }
 
-            if (num > 999999 || num < -999999) return num.ToString("0,,.##M", CultureInfo.InvariantCulture);
+            if (num > 999999 || num < -999999)
+            {
+                return num.ToString("0,,.##M", CultureInfo.InvariantCulture);
+            }
 
-            if (num > 999 || num < -999) return num.ToString("0,.#K", CultureInfo.InvariantCulture);
+            if (num > 999 || num < -999)
+            {
+                return num.ToString("0,.#K", CultureInfo.InvariantCulture);
+            }
 
             return num.ToString(CultureInfo.InvariantCulture);
         }
@@ -59,54 +68,87 @@ namespace SeaBotGUI.GUIBinds
         {
             var sailors = Core.GlobalData.Sailors;
             if (Form1.instance.SailorsLabel.InvokeRequired)
+            {
                 Form1.instance.SailorsLabel.Invoke(
                     new Action(() => { Form1.instance.SailorsLabel.Text = sailors.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.CoinsLabel.Text = sailors.ToKMB();
+            }
+
             var level = Core.GlobalData.Level;
             if (Form1.instance.LevelLabel.InvokeRequired)
+            {
                 Form1.instance.LevelLabel.Invoke(
                     new Action(() => { Form1.instance.LevelLabel.Text = level.ToString(); }));
+            }
             else
+            {
                 Form1.instance.LevelLabel.Text = level.ToString();
+            }
 
             var coins = Core.GlobalData.GetAmountItem("coins");
             if (Form1.instance.CoinsLabel.InvokeRequired)
+            {
                 Form1.instance.CoinsLabel.Invoke(
                     new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.CoinsLabel.Text = coins.ToKMB();
+            }
 
             var fish = Core.GlobalData.GetAmountItem("fish");
             if (Form1.instance.FishLabel.InvokeRequired)
+            {
                 Form1.instance.FishLabel.Invoke(new Action(() => { Form1.instance.FishLabel.Text = fish.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.FishLabel.Text = fish.ToKMB();
+            }
 
             var iron = Core.GlobalData.GetAmountItem("iron");
             if (Form1.instance.IronLabel.InvokeRequired)
+            {
                 Form1.instance.IronLabel.Invoke(new Action(() => { Form1.instance.IronLabel.Text = iron.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.IronLabel.Text = iron.ToKMB();
+            }
 
             var gem = Core.GlobalData.GetAmountItem("gem");
             if (Form1.instance.GemLabel.InvokeRequired)
+            {
                 Form1.instance.GemLabel.Invoke(new Action(() => { Form1.instance.GemLabel.Text = gem.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.GemLabel.Text = gem.ToKMB();
+            }
 
             var wood = Core.GlobalData.GetAmountItem("wood");
             if (Form1.instance.WoodLabel.InvokeRequired)
+            {
                 Form1.instance.WoodLabel.Invoke(new Action(() => { Form1.instance.WoodLabel.Text = wood.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.WoodLabel.Text = wood.ToKMB();
+            }
 
             var stone = Core.GlobalData.GetAmountItem("stone");
             if (Form1.instance.StoneLabel.InvokeRequired)
+            {
                 Form1.instance.StoneLabel.Invoke(
                     new Action(() => { Form1.instance.StoneLabel.Text = stone.ToKMB(); }));
+            }
             else
+            {
                 Form1.instance.StoneLabel.Text = stone.ToKMB();
+            }
         }
     }
 
@@ -142,8 +184,15 @@ namespace SeaBotGUI.GUIBinds
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
                     if ((string) Form1.instance.Invoke(
-                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage5") continue;
-                    if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
+                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage5")
+                    {
+                        continue;
+                    }
+
+                    if (Form1.instance.WindowState == FormWindowState.Minimized)
+                    {
+                        continue;
+                    }
 
                     _lastupdatedTime = DateTime.Now;
                     if (Form1.instance.BuildingGrid.InvokeRequired)
@@ -158,6 +207,7 @@ namespace SeaBotGUI.GUIBinds
                             }
 
                             foreach (var bld in newbuild)
+                            {
                                 if (BuildingBinding.Buildings.Where(n => n.ID == bld.ID)
                                         .FirstOrDefault() == null)
                                 {
@@ -166,14 +216,24 @@ namespace SeaBotGUI.GUIBinds
                                 else
                                 {
                                     var old = BuildingBinding.Buildings.First(n => n.ID == bld.ID);
-                                    if (old.Level != bld.Level) old.Level = bld.Level;
+                                    if (old.Level != bld.Level)
+                                    {
+                                        old.Level = bld.Level;
+                                    }
 
-                                    if (old.Producing != bld.Producing) old.Producing = bld.Producing;
+                                    if (old.Producing != bld.Producing)
+                                    {
+                                        old.Producing = bld.Producing;
+                                    }
 
-                                    if (old.Upgrade != bld.Upgrade) old.Upgrade = bld.Upgrade;
+                                    if (old.Upgrade != bld.Upgrade)
+                                    {
+                                        old.Upgrade = bld.Upgrade;
+                                    }
 
                                     //edit
                                 }
+                            }
 
                             Form1.instance.BuildingGrid.Refresh();
                             Form1.instance.BuildingGrid.Update();
@@ -192,9 +252,15 @@ namespace SeaBotGUI.GUIBinds
             public static BindingList<Building> GetBuildings()
             {
                 var ret = new BindingList<Building>();
-                if (Core.GlobalData == null) return ret;
+                if (Core.GlobalData == null)
+                {
+                    return ret;
+                }
 
-                if (Core.GlobalData.Buildings == null) return ret;
+                if (Core.GlobalData.Buildings == null)
+                {
+                    return ret;
+                }
 
                 foreach (var building in Core.GlobalData.Buildings)
                 {
@@ -284,8 +350,16 @@ namespace SeaBotGUI.GUIBinds
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
                     if ((string) Form1.instance.Invoke(
-                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage6") continue;
-                    if (Form1.instance.WindowState == FormWindowState.Minimized) continue;
+                            new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage6")
+                    {
+                        continue;
+                    }
+
+                    if (Form1.instance.WindowState == FormWindowState.Minimized)
+                    {
+                        continue;
+                    }
+
                     _lastupdatedTime = DateTime.Now;
                     if (Form1.instance.ShipGrid.InvokeRequired)
                     {
@@ -299,6 +373,7 @@ namespace SeaBotGUI.GUIBinds
                             }
 
                             foreach (var bld in newbuild)
+                            {
                                 if (ShipBinding.Ships.Where(n => n.ID == bld.ID)
                                         .FirstOrDefault() == null)
                                 {
@@ -309,13 +384,20 @@ namespace SeaBotGUI.GUIBinds
                                 else
                                 {
                                     var old = ShipBinding.Ships.First(n => n.ID == bld.ID);
-                                    if (old.InPortAt != bld.InPortAt) old.InPortAt = bld.InPortAt;
+                                    if (old.InPortAt != bld.InPortAt)
+                                    {
+                                        old.InPortAt = bld.InPortAt;
+                                    }
 
-                                    if (old.Route != bld.Route) old.Route = bld.Route;
+                                    if (old.Route != bld.Route)
+                                    {
+                                        old.Route = bld.Route;
+                                    }
 
 
                                     //edit
                                 }
+                            }
 
                             Form1.instance.ShipGrid.Refresh();
                             Form1.instance.ShipGrid.Update();
@@ -342,9 +424,15 @@ namespace SeaBotGUI.GUIBinds
             public static BindingList<Ship> GetShips()
             {
                 var ret = new BindingList<Ship>();
-                if (Core.GlobalData == null) return ret;
+                if (Core.GlobalData == null)
+                {
+                    return ret;
+                }
 
-                if (Core.GlobalData.Buildings == null) return ret;
+                if (Core.GlobalData.Buildings == null)
+                {
+                    return ret;
+                }
 
                 foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
                 {
@@ -357,40 +445,56 @@ namespace SeaBotGUI.GUIBinds
 
                     var willatportat = string.Empty;
                     if (ship.Sent != 0)
+                    {
                         try
                         {
                             var shipdef = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-                            if (shipdef == null) continue;
+                            if (shipdef == null)
+                            {
+                                continue;
+                            }
 
                             if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels ==
                                 null)
+                            {
                                 continue;
+                            }
 
                             if (Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
                                     .Level
                                     .Count == 0)
+                            {
                                 continue;
+                            }
 
                             var lvl = Defenitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                 ?.Levels.Level
                                 .FirstOrDefault(n => n.Id == ship.TargetLevel);
-                            if (lvl == null) continue;
+                            if (lvl == null)
+                            {
+                                continue;
+                            }
 
                             Ship.Route = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
                             var willatportattime = ship.Sent + lvl.TravelTime;
                             //lol xD 
                             if ((DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
+                            {
                                 willatportat = "--:--:--";
+                            }
                             else
+                            {
                                 willatportat =
                                     (DateTime.UtcNow - TimeUtils.FromUnixTime(willatportattime))
                                     .ToString(@"hh\:mm\:ss");
+                            }
                         }
                         catch (Exception)
                         {
                             Logger.Debug(
                                 $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
                         }
+                    }
 
                     Ship.InPortAt = willatportat;
                     ret.Add(Ship);

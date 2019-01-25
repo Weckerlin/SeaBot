@@ -156,7 +156,10 @@ namespace SeaBotCore.BotMethods
                 {
                     var wecan = lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship);
                     var remain = bestplace.Amount - bestplace.Progress;
-                    if (remain < wecan) wecan = remain;
+                    if (remain < wecan)
+                    {
+                        wecan = remain;
+                    }
 
                     Core.GlobalData.Sailors -= lvls.Sailors;
 
@@ -211,7 +214,9 @@ namespace SeaBotCore.BotMethods
                 var capacity = Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels
                     .Level.First(n => n.Id == ship.CapacityLevel).Capacity;
                 if (capacity != null)
+                {
                     return capacity.Value;
+                }
             }
 
             ShipDefenitions.Item first = null;
@@ -225,8 +230,11 @@ namespace SeaBotCore.BotMethods
             }
 
             if (first != null)
+            {
                 return first.Levels.Level
                     .First(n => n.Id == ship.Level).Capacity;
+            }
+
             return 0;
         }
 
@@ -245,15 +253,20 @@ namespace SeaBotCore.BotMethods
                 }
 
                 if (first != null)
+                {
                     return first.Levels
                         .Level.First(n => n.Id == ship.Level).Sailors;
+                }
             }
 
             var sailors = Defenitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId)
                 .SailorsLevels.Level
                 .First(n => n.Id == ship.SailorsLevel).Sailors;
             if (sailors != null)
+            {
                 return sailors.Value;
+            }
+
             return int.MaxValue;
         }
 
@@ -272,7 +285,10 @@ namespace SeaBotCore.BotMethods
                 new Dictionary<Upgradeable, decimal>();
             foreach (var up in p)
             {
-                if (up.Key.Levels.Level.First(n => n.Id == up.Value.Level).Sailors > sailors) continue;
+                if (up.Key.Levels.Level.First(n => n.Id == up.Value.Level).Sailors > sailors)
+                {
+                    continue;
+                }
 
                 if (profitbased)
                 {

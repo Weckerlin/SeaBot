@@ -29,6 +29,7 @@ namespace SeaBotCore.BotMethods
         public static void AutoUpgrade(bool onlyfactory)
         {
             foreach (var data in Core.GlobalData.Buildings)
+            {
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {
                     var defined =
@@ -36,25 +37,33 @@ namespace SeaBotCore.BotMethods
                             n.DefId == data.DefId);
                     var neededmats = defined?.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
 
-                    if (defined != null && defined.Type != "factory" && onlyfactory) continue;
+                    if (defined != null && defined.Type != "factory" && onlyfactory)
+                    {
+                        continue;
+                    }
 
                     if (neededmats != null)
                     {
                         var ok = true;
 
                         foreach (var neededmat in neededmats.Materials.Material)
+                        {
                             if (Core.GlobalData.Inventory
                                     .FirstOrDefault(n => n.Id == neededmat.Id) != null)
                             {
                                 var m = Core.GlobalData.Inventory
                                     .First(n => n.Id == neededmat.Id);
-                                if (neededmat.Amount > m.Amount) ok = false;
+                                if (neededmat.Amount > m.Amount)
+                                {
+                                    ok = false;
+                                }
                             }
                             else
                             {
                                 ok = false;
                                 break;
                             }
+                        }
 
                         if (ok)
                         {
@@ -63,12 +72,19 @@ namespace SeaBotCore.BotMethods
                                 var def = Core.GlobalData.Buildings
                                     .FirstOrDefault(n => n.DefId == neededmats.ReqId);
                                 if (def != null)
+                                {
                                     ok = def.Level >= neededmats.ReqLevel;
+                                }
                                 else
+                                {
                                     ok = false;
+                                }
                             }
 
-                            if (neededmats.PlayerLevel > Core.GlobalData.Level) ok = false;
+                            if (neededmats.PlayerLevel > Core.GlobalData.Level)
+                            {
+                                ok = false;
+                            }
                         }
 
                         if (ok)
@@ -90,16 +106,19 @@ namespace SeaBotCore.BotMethods
                         }
                     }
                 }
+            }
         }
 
         public static void FinishUpgrade()
         {
             foreach (var data in Core.GlobalData.Buildings)
+            {
                 if (data.UpgStart != 0 && data.ProdStart == 0)
                 {
                     var defined = Defenitions.BuildingDef.Items.Item.FirstOrDefault(n => n.DefId == data.DefId);
                     var upgrade = defined.Levels.Level.FirstOrDefault(n => n.Id == data.Level + 1);
                     if (upgrade != null)
+                    {
                         if ((DateTime.UtcNow - TimeUtils.FromUnixTime(data.UpgStart)).TotalSeconds >
                             upgrade.UpgradeTime)
                         {
@@ -110,16 +129,22 @@ namespace SeaBotCore.BotMethods
                             data.UpgStart = 0;
                             data.Level++;
                         }
+                    }
                 }
+            }
         }
 
         public static void CollectMaterials()
         {
             foreach (var data in Core.GlobalData.Buildings)
+            {
                 if (data.UpgStart == 0 && data.ProdStart != 0)
                 {
                     var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
-                    if (def.Type != "factory") continue;
+                    if (def.Type != "factory")
+                    {
+                        continue;
+                    }
 
                     var defs = def.Levels.Level.First(n => n.Id == data.Level);
                     var started = TimeUtils.FromUnixTime(data.ProdStart);
@@ -135,6 +160,7 @@ namespace SeaBotCore.BotMethods
                         data.ProdStart = 0;
                     }
                 }
+            }
         }
     }
 }

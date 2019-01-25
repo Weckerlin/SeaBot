@@ -92,7 +92,10 @@ namespace SeaBotCore.Data.Definitions
 
         internal class BarrelConverter : JsonConverter
         {
-            public override bool CanConvert(Type t) => t == typeof(Barrel) || t == typeof(Barrel?);
+            public override bool CanConvert(Type t)
+            {
+                return t == typeof(Barrel) || t == typeof(Barrel?);
+            }
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
             {

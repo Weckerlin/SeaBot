@@ -27,7 +27,7 @@ using SeaBotCore.Data.Materials;
 
 namespace SeaBotCore.Cache
 {
-    public static class DefenitionCache
+    internal static class DefenitionCache
     {
         private const string _cachefolder = "cache";
         private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";
@@ -48,7 +48,10 @@ namespace SeaBotCore.Cache
                 var version2 = new Version(currentversion);
 
                 var result = version1.CompareTo(version2);
-                if (result != 0) needupdate = true;
+                if (result != 0)
+                {
+                    needupdate = true;
+                }
             }
             else
             {
@@ -58,7 +61,10 @@ namespace SeaBotCore.Cache
 
             if (needupdate)
             {
-                if (Directory.Exists("cache")) Directory.Delete("cache", true);
+                if (Directory.Exists("cache"))
+                {
+                    Directory.Delete("cache", true);
+                }
 
                 Directory.CreateDirectory("cache");
                 _lastestdef = currentversion;

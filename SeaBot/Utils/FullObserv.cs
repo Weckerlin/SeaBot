@@ -48,13 +48,21 @@ namespace SeaBotCore.Utils
         {
             if (e.Action == NotifyCollectionChangedAction.Remove ||
                 e.Action == NotifyCollectionChangedAction.Replace)
+            {
                 foreach (T item in e.OldItems)
+                {
                     item.PropertyChanged -= ChildPropertyChanged;
+                }
+            }
 
             if (e.Action == NotifyCollectionChangedAction.Add ||
                 e.Action == NotifyCollectionChangedAction.Replace)
+            {
                 foreach (T item in e.NewItems)
+                {
                     item.PropertyChanged += ChildPropertyChanged;
+                }
+            }
 
             base.OnCollectionChanged(e);
         }
@@ -72,7 +80,9 @@ namespace SeaBotCore.Utils
         protected override void ClearItems()
         {
             foreach (var item in Items)
+            {
                 item.PropertyChanged -= ChildPropertyChanged;
+            }
 
             base.ClearItems();
         }
@@ -80,7 +90,9 @@ namespace SeaBotCore.Utils
         private void ObserveAll()
         {
             foreach (var item in Items)
+            {
                 item.PropertyChanged += ChildPropertyChanged;
+            }
         }
 
         private void ChildPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -89,7 +101,9 @@ namespace SeaBotCore.Utils
             var i = Items.IndexOf(typedSender);
 
             if (i < 0)
+            {
                 throw new ArgumentException("Received property notification from item not in collection");
+            }
 
             OnItemPropertyChanged(i, e);
         }

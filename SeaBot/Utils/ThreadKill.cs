@@ -19,12 +19,15 @@ using System.Threading;
 
 namespace SeaBotCore.Utils
 {
-    public static class ThreadKill
+    internal static class ThreadKill
     {
         [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
         public static void KillTheThread(Thread th)
         {
-            if (th != null) th.Abort();
+            if (th != null)
+            {
+                th.Abort();
+            }
         }
     }
 }

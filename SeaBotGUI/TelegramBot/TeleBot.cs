@@ -40,9 +40,13 @@ namespace SeaBotGUI.TelegramBot
         public static void StartBot(string apikey)
         {
             if (apikey == string.Empty)
+            {
                 Logger.Fatal("Telegram API key is empty!");
+            }
             else
+            {
                 bot = new TelegramBot(apikey);
+            }
         }
 
         public static void StopBot()
@@ -77,10 +81,14 @@ namespace SeaBotGUI.TelegramBot
             {
                 var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
                 if (reg.Success)
+                {
                     TelegramBotController.SendMessage(e.Message,
                         "Hello! Please enter Startup Code from settings.");
+                }
                 else
+                {
                     Parse(e.Message);
+                }
             }
             else
             {
@@ -110,17 +118,21 @@ namespace SeaBotGUI.TelegramBot
                         var men = GetMenuItems();
 
                         foreach (var mn in men)
+                        {
                             try
                             {
                                 var instance = Activator.CreateInstance(mn) as IMenu;
                                 if (instance.ID == 0)
+                                {
                                     await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
                                         ParseReplyKeyboardMarkup(instance));
+                                }
                             }
                             catch (Exception)
                             {
                                 // ignored
                             }
+                        }
 
 
                         Form1._teleconfig.users.Add(new User {MenuID = 0, userid = msg.From.Id});
@@ -145,15 +157,20 @@ namespace SeaBotGUI.TelegramBot
             var menu = ser.MenuID;
             IMenu first = null;
             foreach (var mn in menus)
+            {
                 try
                 {
                     var instance = Activator.CreateInstance(mn) as IMenu;
-                    if (instance.ID == menu) first = instance;
+                    if (instance.ID == menu)
+                    {
+                        first = instance;
+                    }
                 }
                 catch (Exception)
                 {
                     //ingored
                 }
+            }
 
             if (first == null)
             {
@@ -167,11 +184,13 @@ namespace SeaBotGUI.TelegramBot
                     Button a = null;
                     foreach (var rowButton in first.buttons)
                     foreach (var n in rowButton)
+                    {
                         if (string.Compare(n.name, msg.Text, true) == 0)
                         {
                             a = n;
                             break;
                         }
+                    }
 
                     if (a == null)
                     {
@@ -186,15 +205,20 @@ namespace SeaBotGUI.TelegramBot
                             TeleConfigSer.Save();
                             IMenu newinst = null;
                             foreach (var mn in menus)
+                            {
                                 try
                                 {
                                     var instance = Activator.CreateInstance(mn) as IMenu;
-                                    if (instance.ID == a.redirect) newinst = instance;
+                                    if (instance.ID == a.redirect)
+                                    {
+                                        newinst = instance;
+                                    }
                                 }
                                 catch (Exception)
                                 {
                                     // ignored
                                 }
+                            }
 
                             await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
                                 ParseReplyKeyboardMarkup(newinst));
@@ -226,7 +250,10 @@ namespace SeaBotGUI.TelegramBot
             foreach (var button in arr.buttons)
             {
                 var a = new List<KeyboardButton>();
-                foreach (var minib in button) a.Add(new KeyboardButton(minib.name));
+                foreach (var minib in button)
+                {
+                    a.Add(new KeyboardButton(minib.name));
+                }
 
                 global.Add(a);
             }

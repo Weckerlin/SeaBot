@@ -41,10 +41,15 @@ namespace SeaBotCore.Logger
 
             // Log file header line
             var logHeader = logFilename + Localization.LOGGER_CREATED;
-            if (!Directory.Exists("logs")) Directory.CreateDirectory("logs");
+            if (!Directory.Exists("logs"))
+            {
+                Directory.CreateDirectory("logs");
+            }
 
             if (!File.Exists("logs/" + logFilename))
+            {
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
+            }
         }
 
         /// <summary>
@@ -107,7 +112,10 @@ namespace SeaBotCore.Logger
             {
                 using (var writer = new StreamWriter("logs/" + logFilename, append, Encoding.UTF8))
                 {
-                    if (!string.IsNullOrEmpty(text)) writer.WriteLine(text);
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        writer.WriteLine(text);
+                    }
                 }
             }
             catch
@@ -118,7 +126,10 @@ namespace SeaBotCore.Logger
 
         private static void WriteFormattedLog(LogLevel level, string text)
         {
-            if (Muted) return;
+            if (Muted)
+            {
+                return;
+            }
 
             var Message = new Message();
             string pretext;
@@ -138,7 +149,10 @@ namespace SeaBotCore.Logger
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [INFO]    ";
                     break;
                 case LogLevel.DEBUG:
-                    if (!Core.Debug) onlylog = true;
+                    if (!Core.Debug)
+                    {
+                        onlylog = true;
+                    }
 
                     Message.color = Color.Cyan;
                     pretext = DateTime.Now.ToString(datetimeFormat) + " [DEBUG]   ";

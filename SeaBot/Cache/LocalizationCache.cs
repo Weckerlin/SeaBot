@@ -52,7 +52,10 @@ namespace SeaBotCore.Cache
                 var version2 = new Version(currentversion);
 
                 var result = version1.CompareTo(version2);
-                if (result != 0) needupdate = true;
+                if (result != 0)
+                {
+                    needupdate = true;
+                }
             }
             else
             {
@@ -62,7 +65,10 @@ namespace SeaBotCore.Cache
 
             if (needupdate)
             {
-                if (Directory.Exists(_cachefolder)) Directory.Delete(_cachefolder, true);
+                if (Directory.Exists(_cachefolder))
+                {
+                    Directory.Delete(_cachefolder, true);
+                }
 
                 Directory.CreateDirectory(_cachefolder);
                 _lastestdef = currentversion;

@@ -28,15 +28,22 @@ namespace SeaBotCore.BotMethods
         public static void ProduceFactories(int num_ironlimit, int num_stonelimit, int num_woodlimit)
         {
             foreach (var data in Core.GlobalData.Buildings)
+            {
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {
                     var def = Defenitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
-                    if (def.Type != "factory") continue;
+                    if (def.Type != "factory")
+                    {
+                        continue;
+                    }
 
                     //lets start?
                     //DO WE HAVE ENOUGH RESOURCES
                     var needed = def.Levels.Level.FirstOrDefault(n => n.Id == data.Level);
-                    if (needed == null) continue;
+                    if (needed == null)
+                    {
+                        continue;
+                    }
 
                     var ok = true;
                     var inputs = needed.ProdOutputs.ProdOutput;
@@ -55,9 +62,13 @@ namespace SeaBotCore.BotMethods
                                 if (ourmat.Amount >= inp.Amount)
                                 {
                                     if (Dict.ContainsKey(inp.Id))
+                                    {
                                         Dict[inp.Id] += inp.Amount;
+                                    }
                                     else
+                                    {
                                         Dict.Add(inp.Id, inp.Amount);
+                                    }
                                 }
                                 else
                                 {
@@ -71,8 +82,12 @@ namespace SeaBotCore.BotMethods
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && num_woodlimit != 0)
+                            {
                                 if (amount.Amount > num_woodlimit)
+                                {
                                     ok = false;
+                                }
+                            }
                         }
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
@@ -80,8 +95,12 @@ namespace SeaBotCore.BotMethods
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && num_ironlimit != 0)
+                            {
                                 if (amount.Amount > num_ironlimit)
+                                {
                                     ok = false;
+                                }
+                            }
                         }
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
@@ -89,15 +108,21 @@ namespace SeaBotCore.BotMethods
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && num_stonelimit != 0)
+                            {
                                 if (amount.Amount > num_stonelimit)
+                                {
                                     ok = false;
+                                }
+                            }
                         }
                     }
 
                     if (ok)
                     {
                         foreach (var inp in Dict)
+                        {
                             Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int) inp.Value;
+                        }
 
                         Logger.Logger.Info(
                             string.Format(Localization.FACTORIES_STARTED_PROD,
@@ -107,6 +132,7 @@ namespace SeaBotCore.BotMethods
                         data.ProdStart = TimeUtils.GetEpochTime();
                     }
                 }
+            }
         }
     }
 }

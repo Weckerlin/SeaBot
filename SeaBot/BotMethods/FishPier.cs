@@ -41,7 +41,10 @@ namespace SeaBotCore.BotMethods
                 }
             }
 
-            if (totalfish > 0) Logger.Logger.Info(string.Format(Localization.FISH_COLLECTING, totalfish));
+            if (totalfish > 0)
+            {
+                Logger.Logger.Info(string.Format(Localization.FISH_COLLECTING, totalfish));
+            }
         }
     }
 }

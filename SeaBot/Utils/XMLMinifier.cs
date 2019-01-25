@@ -24,7 +24,7 @@ namespace SeaBotCore.Utils
     /// <summary>
     ///     Config object for the XML minifier.
     /// </summary>
-    public class XMLMinifierSettings
+    internal class XMLMinifierSettings
     {
         public bool RemoveEmptyLines { get; set; }
         public bool RemoveWhitespaceBetweenElements { get; set; }
@@ -48,7 +48,7 @@ namespace SeaBotCore.Utils
         };
     }
 
-    public class XMLMinifier
+    internal class XMLMinifier
     {
         private readonly XMLMinifierSettings _minifierSettings;
 
@@ -66,15 +66,26 @@ namespace SeaBotCore.Utils
 
             //remove comments first so we have less to compress later
             if (_minifierSettings.RemoveComments)
+            {
                 foreach (XmlNode comment in originalXmlDocument.SelectNodes("//comment()"))
+                {
                     comment.ParentNode.RemoveChild(comment);
+                }
+            }
 
             if (_minifierSettings.CloseEmptyTags)
+            {
                 foreach (XmlElement el in originalXmlDocument.SelectNodes(
                     "descendant::*[not(*) and not(normalize-space())]"))
+                {
                     el.IsEmpty = true;
+                }
+            }
 
-            if (_minifierSettings.RemoveWhitespaceBetweenElements) return originalXmlDocument.InnerXml;
+            if (_minifierSettings.RemoveWhitespaceBetweenElements)
+            {
+                return originalXmlDocument.InnerXml;
+            }
 
             var minified = new MemoryStream();
             originalXmlDocument.Save(minified);

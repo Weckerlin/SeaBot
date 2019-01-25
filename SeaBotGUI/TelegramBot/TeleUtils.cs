@@ -29,7 +29,10 @@ namespace SeaBotGUI.TelegramBot
         {
             get
             {
-                if (_macaddr == null) _macaddr = GetDefMac();
+                if (_macaddr == null)
+                {
+                    _macaddr = GetDefMac();
+                }
 
                 return _macaddr;
             }
@@ -52,10 +55,15 @@ namespace SeaBotGUI.TelegramBot
                 var addr = new StringBuilder();
                 for (var i = 0; i < bytes.Length; i++)
                     // Display the physical address in hexadecimal.
+                {
                     addr.Append(bytes[i].ToString("X2"));
+                }
                 // Insert a hyphen after each byte, unless we are at the end of the
 
-                if (addr.ToString() != string.Empty) return addr.ToString();
+                if (addr.ToString() != string.Empty)
+                {
+                    return addr.ToString();
+                }
             }
 
             return "DEFCODE";

@@ -45,7 +45,10 @@ namespace SeaBotCore.Utils
             foreach (var item in Defenitions.EvntDef.Items.Item)
             {
                 var x = GetEpochTime();
-                if (x >= item.StartTime && x <= item.EndTime) return item;
+                if (x >= item.StartTime && x <= item.EndTime)
+                {
+                    return item;
+                }
             }
 
             return Defenitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();

@@ -84,9 +84,13 @@ namespace SeaBotGUI
                     PrivateLocal.SEABOTGUI_WELCOME,
                     "Root to the SeaBot!", MessageBoxButtons.OKCancel);
                 if (msg == DialogResult.OK)
+                {
                     Core.Config.acceptedresponsibility = true;
+                }
                 else
+                {
                     Environment.Exit(0);
+                }
             }
 
             //Check for cache
@@ -138,22 +142,36 @@ namespace SeaBotGUI
             SeaBotCore.Events.Events.BotStartedEvent.BotStarted.OnBotStartedEvent += BotStarted_OnBotStartedEvent;
             lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
             if (Core.Config.autoshipprofit)
+            {
                 radio_saveloot.Checked = true;
+            }
             else
+            {
                 radio_savesailors.Checked = true;
+            }
 
             chk_smartsleep.Checked = Core.Config.smartsleepenabled;
             chk_sleepenabled.Checked = Core.Config.sleepenabled;
             num_sleepevery.Value = Core.Config.sleepevery;
             num_sleepfor.Value = Core.Config.sleepfor;
             if (Core.Config.sleepforhrs)
+            {
                 radio_sleepforhrs.Checked = true;
+            }
             else
+            {
                 radio_sleepformins.Checked = true;
+            }
+
             if (Core.Config.sleepeveryhrs)
+            {
                 radio_sleepeveryhrs.Checked = true;
+            }
             else
+            {
                 radio_sleepeverymin.Checked = true;
+            }
+
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
             BuildingGrid.DefaultCellStyle.SelectionBackColor = BuildingGrid.DefaultCellStyle.BackColor;
@@ -198,47 +216,95 @@ namespace SeaBotGUI
 
         private void Config_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "acceptedresponsibility") return;
+            if (e.PropertyName == "acceptedresponsibility")
+            {
+                return;
+            }
 
             //Dont scream at me because this shit happened, its 4AM, i don't wont to bind
             instance.Invoke(new Action(() =>
             {
-                if (e.PropertyName == "woodlimit") num_woodlimit.Value = Core.Config.woodlimit;
+                if (e.PropertyName == "woodlimit")
+                {
+                    num_woodlimit.Value = Core.Config.woodlimit;
+                }
 
-                if (e.PropertyName == "ironlimit") num_ironlimit.Value = Core.Config.ironlimit;
+                if (e.PropertyName == "ironlimit")
+                {
+                    num_ironlimit.Value = Core.Config.ironlimit;
+                }
 
 
-                if (e.PropertyName == "stonelimit") num_stonelimit.Value = Core.Config.stonelimit;
+                if (e.PropertyName == "stonelimit")
+                {
+                    num_stonelimit.Value = Core.Config.stonelimit;
+                }
 
-                if (e.PropertyName == "collectfish") chk_autofish.Checked = Core.Config.collectfish;
+                if (e.PropertyName == "collectfish")
+                {
+                    chk_autofish.Checked = Core.Config.collectfish;
+                }
 
-                if (e.PropertyName == "prodfactory") chk_prodfact.Checked = Core.Config.prodfactory;
+                if (e.PropertyName == "prodfactory")
+                {
+                    chk_prodfact.Checked = Core.Config.prodfactory;
+                }
 
-                if (e.PropertyName == "collectfactory") chk_collectmat.Checked = Core.Config.collectfactory;
+                if (e.PropertyName == "collectfactory")
+                {
+                    chk_collectmat.Checked = Core.Config.collectfactory;
+                }
 
-                if (e.PropertyName == "autoupgrade") chk_aupgrade.Checked = Core.Config.autoupgrade;
+                if (e.PropertyName == "autoupgrade")
+                {
+                    chk_aupgrade.Checked = Core.Config.autoupgrade;
+                }
 
-                if (e.PropertyName == "autoship") chk_autoshipupg.Checked = Core.Config.autoship;
+                if (e.PropertyName == "autoship")
+                {
+                    chk_autoshipupg.Checked = Core.Config.autoship;
+                }
 
-                if (e.PropertyName == "finishupgrade") chk_finishupgrade.Checked = Core.Config.finishupgrade;
+                if (e.PropertyName == "finishupgrade")
+                {
+                    chk_finishupgrade.Checked = Core.Config.finishupgrade;
+                }
 
-                if (e.PropertyName == "barrelhack") chk_barrelhack.Checked = Core.Config.barrelhack;
+                if (e.PropertyName == "barrelhack")
+                {
+                    chk_barrelhack.Checked = Core.Config.barrelhack;
+                }
 
-                if (e.PropertyName == "upgradeonlyfactory") chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
+                if (e.PropertyName == "upgradeonlyfactory")
+                {
+                    chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
+                }
 
-                if (e.PropertyName == "barrelinterval") num_barrelinterval.Value = Core.Config.barrelinterval;
+                if (e.PropertyName == "barrelinterval")
+                {
+                    num_barrelinterval.Value = Core.Config.barrelinterval;
+                }
 
                 if (e.PropertyName == "hibernateinterval")
+                {
                     num_hibernationinterval.Value = Core.Config.hibernateinterval;
+                }
 
-                if (e.PropertyName == "autoshiptype") UpdateButtons(Core.Config.autoshiptype);
+                if (e.PropertyName == "autoshiptype")
+                {
+                    UpdateButtons(Core.Config.autoshiptype);
+                }
 
                 if (e.PropertyName == "autoshipprofit")
                 {
                     if (Core.Config.autoshipprofit)
+                    {
                         radio_saveloot.Checked = true;
+                    }
                     else
+                    {
                         radio_savesailors.Checked = true;
+                    }
                 }
             }));
         }
@@ -278,7 +344,10 @@ namespace SeaBotGUI
 
         public void FormatResources(GlobalData data)
         {
-            if (data.Inventory == null) return;
+            if (data.Inventory == null)
+            {
+                return;
+            }
 
             ResourcesBox.Update();
             var a = new List<ListViewItem>();
@@ -303,14 +372,20 @@ namespace SeaBotGUI
                 MethodInvoker inv = delegate
                 {
                     listView1.Items.Clear();
-                    foreach (var list in a) listView1.Items.Add(list);
+                    foreach (var list in a)
+                    {
+                        listView1.Items.Add(list);
+                    }
                 };
                 listView1.BeginInvoke(inv);
             }
             else
             {
                 listView1.Items.Clear();
-                foreach (var list in a) listView1.Items.Add(list);
+                foreach (var list in a)
+                {
+                    listView1.Items.Add(list);
+                }
             }
         }
 
@@ -345,7 +420,10 @@ namespace SeaBotGUI
                 label7.Text = string.Format(PrivateLocal.VERSION_OLD, version1);
                 var msg = MessageBox.Show(PrivateLocal.VERSION_UPDATE_MBOX, "Update!",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes) CompUtils.OpenLink(data.HtmlUrl.ToString());
+                if (msg == DialogResult.Yes)
+                {
+                    CompUtils.OpenLink(data.HtmlUrl.ToString());
+                }
             }
             else
             {
@@ -496,28 +574,58 @@ namespace SeaBotGUI
 
         private void UpdateButtons(string configAutoshiptype)
         {
-            if (configAutoshiptype == "coins") radio_gold.Checked = true;
+            if (configAutoshiptype == "coins")
+            {
+                radio_gold.Checked = true;
+            }
 
-            if (configAutoshiptype == "fish") radioButton6.Checked = true;
+            if (configAutoshiptype == "fish")
+            {
+                radioButton6.Checked = true;
+            }
 
-            if (configAutoshiptype == "iron") radio_iron.Checked = true;
+            if (configAutoshiptype == "iron")
+            {
+                radio_iron.Checked = true;
+            }
 
-            if (configAutoshiptype == "wood") radio_wood.Checked = true;
+            if (configAutoshiptype == "wood")
+            {
+                radio_wood.Checked = true;
+            }
 
-            if (configAutoshiptype == "stone") radioButton7.Checked = true;
+            if (configAutoshiptype == "stone")
+            {
+                radioButton7.Checked = true;
+            }
         }
 
         private void updatecheck()
         {
-            if (radio_gold.Checked) Core.Config.autoshiptype = "coins";
+            if (radio_gold.Checked)
+            {
+                Core.Config.autoshiptype = "coins";
+            }
 
-            if (radio_iron.Checked) Core.Config.autoshiptype = "iron";
+            if (radio_iron.Checked)
+            {
+                Core.Config.autoshiptype = "iron";
+            }
 
-            if (radio_wood.Checked) Core.Config.autoshiptype = "wood";
+            if (radio_wood.Checked)
+            {
+                Core.Config.autoshiptype = "wood";
+            }
 
-            if (radioButton6.Checked) Core.Config.autoshiptype = "fish";
+            if (radioButton6.Checked)
+            {
+                Core.Config.autoshiptype = "fish";
+            }
 
-            if (radioButton7.Checked) Core.Config.autoshiptype = "stone";
+            if (radioButton7.Checked)
+            {
+                Core.Config.autoshiptype = "stone";
+            }
         }
 
         private void radio_iron_CheckedChanged(object sender, EventArgs e)
@@ -556,8 +664,11 @@ namespace SeaBotGUI
         private void button4_Click_2(object sender, EventArgs e)
         {
             if (Core.Config.telegramtoken == string.Empty)
+            {
                 MessageBox.Show(PrivateLocal.TELEGRAM_NO_TOKEN);
+            }
             else
+            {
                 try
                 {
                     TelegramBotController.StartBot(Core.Config.telegramtoken);
@@ -566,12 +677,16 @@ namespace SeaBotGUI
                 {
                     Logger.Fatal(exception.ToString());
                 }
+            }
         }
 
         private void btn_removeitem_Click(object sender, EventArgs e)
         {
             var much = (int) num_removenum.Value;
-            if (much <= 0) return;
+            if (much <= 0)
+            {
+                return;
+            }
 
             if (listView1.SelectedItems.Count > 0)
             {
@@ -626,19 +741,27 @@ namespace SeaBotGUI
         private void radio_sleepforhrs_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_sleepforhrs.Checked)
+            {
                 Core.Config.sleepforhrs = true;
+            }
 
             else
+            {
                 Core.Config.sleepforhrs = false;
+            }
         }
 
         private void radio_sleepeveryhrs_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_sleepeveryhrs.Checked)
+            {
                 Core.Config.sleepeveryhrs = true;
+            }
 
             else
+            {
                 Core.Config.sleepeveryhrs = false;
+            }
         }
 
         private void num_barrelinterval_ValueChanged(object sender, EventArgs e)
@@ -652,9 +775,13 @@ namespace SeaBotGUI
             }
 
             if (num_barrelinterval.Value < 12)
+            {
                 num_barrelinterval.ForeColor = Color.Red;
+            }
             else
+            {
                 num_barrelinterval.ForeColor = Color.Black;
+            }
         }
 
         private void cbox_lang_SelectedIndexChanged(object sender, EventArgs e)

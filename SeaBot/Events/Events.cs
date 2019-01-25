@@ -26,12 +26,12 @@ namespace SeaBotCore.Events
             {
                 public static event SyncFailedHandler OnSyncFailedEvent;
 
-                public static void Invoke(Enums.EErrorCode e)
+                internal static void Invoke(Enums.EErrorCode e)
                 {
                     OnSyncFailed(e);
                 }
 
-                private static void OnSyncFailed(Enums.EErrorCode e)
+                internal static void OnSyncFailed(Enums.EErrorCode e)
                 {
                     OnSyncFailedEvent?.Invoke(e);
                 }
@@ -46,12 +46,12 @@ namespace SeaBotCore.Events
             {
                 public static event LoginedHandler OnLoginedEvent;
 
-                public static void Invoke()
+                internal static void Invoke()
                 {
                     OnLogined();
                 }
 
-                private static void OnLogined()
+                internal static void OnLogined()
                 {
                     OnLoginedEvent?.Invoke();
                 }
@@ -66,12 +66,12 @@ namespace SeaBotCore.Events
             {
                 public static event BotStartedHandler OnBotStartedEvent;
 
-                public static void Invoke()
+                internal static void Invoke()
                 {
                     OnBotStarted();
                 }
 
-                private static void OnBotStarted()
+                internal static void OnBotStarted()
                 {
                     OnBotStartedEvent?.Invoke();
                 }
@@ -86,12 +86,12 @@ namespace SeaBotCore.Events
             {
                 public static event BotStoppedHandler OnBotStoppedEvent;
 
-                public static void Invoke()
+                internal static void Invoke()
                 {
                     OnBotStopped();
                 }
 
-                private static void OnBotStopped()
+                internal static void OnBotStopped()
                 {
                     OnBotStoppedEvent?.Invoke();
                 }

@@ -34,7 +34,7 @@ namespace SeaBotCore.Localizaion
 
         public static ELanguages CurrentLang
         {
-            get { return Core.Config.language; }
+            get => Core.Config.language;
 
             set
             {

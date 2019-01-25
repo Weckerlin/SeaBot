@@ -30,7 +30,10 @@ namespace SeaBotCore.BotMethods
                 var upg = Core.GlobalData.Upgradeables[index];
                 var def = Defenitions.UpgrDef.Items.Item.First(n => n.DefId == upg.DefId);
                 var currentlvl = def.Levels.Level.First(n => n.Id == upg.Level);
-                if (upg.Level >= def.MaxLevel) continue;
+                if (upg.Level >= def.MaxLevel)
+                {
+                    continue;
+                }
 
                 var nextlvl = def.Levels.Level.First(n => n.Id == upg.Level + 1);
                 if (upg.Progress >= currentlvl.Amount)

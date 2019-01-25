@@ -122,10 +122,16 @@ namespace SeaBotGUI.TelegramBot
                         if (Core.GlobalData != null)
                         {
                             if (Core.GlobalData.Inventory != null)
+                            {
                                 foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0))
+                                {
                                     builder.AppendLine($"{MaterialDB.GetItem(item.Id).Name} - {item.Amount}");
+                                }
+                            }
                             else
+                            {
                                 builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
+                            }
                         }
                         else
                         {
@@ -472,9 +478,13 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
+                            {
                                 Core.Config.hibernateinterval = ints;
+                            }
                             else
+                            {
                                 TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
+                            }
                         }
                     }
 
@@ -509,9 +519,13 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
+                            {
                                 Core.Config.barrelinterval = ints;
+                            }
                             else
+                            {
                                 TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
+                            }
                         }
                     }
 
@@ -546,9 +560,13 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
+                            {
                                 Core.Config.woodlimit = ints;
+                            }
                             else
+                            {
                                 TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
+                            }
                         }
                     }
 
@@ -582,9 +600,13 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
+                            {
                                 Core.Config.stonelimit = ints;
+                            }
                             else
+                            {
                                 TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
+                            }
                         }
                     }
 
@@ -619,9 +641,13 @@ namespace SeaBotGUI.TelegramBot
                             var ints = 0;
                             var parsed = int.TryParse(msg.Text, out ints);
                             if (parsed)
+                            {
                                 Core.Config.stonelimit = ints;
+                            }
                             else
+                            {
                                 TelegramBotController.SendMessage(Message, PrivateLocal.TELEGRAM_ERR_CANT_PARSE);
+                            }
                         }
                     }
 

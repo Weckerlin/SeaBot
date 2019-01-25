@@ -65,7 +65,10 @@ namespace SeaBotCore
         {
             get
             {
-                if (BotThread != null) return BotThread.IsAlive;
+                if (BotThread != null)
+                {
+                    return BotThread.IsAlive;
+                }
 
                 return false;
             }
@@ -134,7 +137,10 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(100);
-                if (Config.sleepenabled) Sleeping.Sleep();
+                if (Config.sleepenabled)
+                {
+                    Sleeping.Sleep();
+                }
 
                 if ((DateTime.Now - _lastdefinv).TotalSeconds >= 10)
                 {

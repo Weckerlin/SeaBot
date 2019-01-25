@@ -19,11 +19,11 @@ using SeaBotCore.Data.Materials;
 
 namespace SeaBotCore.Data.Definitions
 {
-    public interface IDefinition
+    internal interface IDefinition
     {
     }
 
-    public enum EDefinitionType
+    internal enum EDefinitionType
     {
         Buildings,
         Barrels,

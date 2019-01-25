@@ -46,9 +46,13 @@ namespace SeaBotCore
                 var turns = Math.Round((DateTime.UtcNow - started).TotalSeconds / b.TurnTime);
                 CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
+                {
                     CustomObjects.Add("turns", b.TurnCount);
+                }
                 else
+                {
                     CustomObjects.Add("turns", turns);
+                }
 
                 Core.GlobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart =
                     TimeUtils.GetEpochTime();

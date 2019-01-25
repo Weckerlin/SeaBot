@@ -74,7 +74,9 @@ namespace SeaBotCore
                     if (Core.IsBotRunning)
                     {
                         if (Core.Config.debug)
+                        {
                             File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                        }
 
                         _syncThread.Abort();
                         Logger.Logger.Muted = true;
@@ -84,7 +86,9 @@ namespace SeaBotCore
                         StartThread();
                         Login();
                         if (Core.Config.debug)
+                        {
                             File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                        }
                     }
                 }
             });
@@ -154,9 +158,11 @@ namespace SeaBotCore
             var result = new StringBuilder(bytes.Length * 2);
 
             foreach (var t in bytes)
+            {
                 result.Append(t.ToString(upperCase
                     ? "X2"
                     : "x2"));
+            }
 
             return result.ToString();
         }
@@ -200,14 +206,26 @@ namespace SeaBotCore
                         Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
                         regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
                         var mtch = regex.Match(data);
-                        if (mtch.Success) DefenitionCache.Update(mtch.Groups[1].Value);
+                        if (mtch.Success)
+                        {
+                            DefenitionCache.Update(mtch.Groups[1].Value);
+                        }
+
                         regex = new Regex(
                             @"loca_filelist_url2': 'https:\/\/static\.seaportgame\.com\/localization\/(.+?)\.xml', '");
                         mtch = regex.Match(data);
-                        if (mtch.Success) LocalizationCache.Update(mtch.Groups[1].Value);
+                        if (mtch.Success)
+                        {
+                            LocalizationCache.Update(mtch.Groups[1].Value);
+                        }
+
                         regex = new Regex("clientPath = \"(.+)\";");
                         mtch = regex.Match(data);
-                        if (mtch.Success) Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);
+                        if (mtch.Success)
+                        {
+                            Client.DefaultRequestHeaders.Referrer = new Uri(mtch.Groups[1].Value);
+                        }
+
                         Client.DefaultRequestHeaders.Host = "portal.pixelfederation.com";
                         Client.DefaultRequestHeaders.Add("Origin", "https://r4a4v3g4.ssl.hwcdn.net");
                         Client.DefaultRequestHeaders.AcceptEncoding.TryParseAdd("gzip, deflate, br");
@@ -258,7 +276,10 @@ namespace SeaBotCore
                 taskstr.Append("<task>\n");
                 taskstr.Append("<action>" + task.Action + "</action>\n");
                 foreach (var customobj in task.CustomObjects)
+                {
                     taskstr.Append($"<{customobj.Key}>{customobj.Value}</{customobj.Key}>\n");
+                }
+
                 taskstr.Append("<time>" + task.Time + "</time>\n");
                 taskstr.Append("</task>\n")
                     ;
@@ -303,6 +324,7 @@ namespace SeaBotCore
                 var s = doc.DocumentElement.SelectNodes("task");
                 var passed = 0;
                 foreach (XmlNode node in s)
+                {
                     if (node.SelectSingleNode("result")?.InnerText == "OK")
                     {
                         Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " has been passed");
@@ -312,6 +334,7 @@ namespace SeaBotCore
                     {
                         Logger.Logger.Debug(node.SelectSingleNode("action")?.InnerText + " failed!");
                     }
+                }
 
                 if (passed != 0)
                 {
@@ -341,7 +364,9 @@ namespace SeaBotCore
 
                 var pushnode = doc.DocumentElement.SelectSingleNode("push");
                 if (pushnode != null)
+                {
                     foreach (XmlNode node in pushnode.ChildNodes)
+                    {
                         switch (node.Name)
                         {
                             case "level_up":
@@ -377,6 +402,8 @@ namespace SeaBotCore
                                 break;
                             }
                         }
+                    }
+                }
             }
             else
             {
