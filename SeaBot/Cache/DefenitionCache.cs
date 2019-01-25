@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -33,26 +34,7 @@ namespace SeaBotCore.Cache
         private const string _basedwnladdr = "https://static.seaportgame.com/build/";
         private static readonly object locker = new object();
         private static string _lastestdef = "1.763.0";
-
-        private static BoatDefenitions.Root _boatdefenitions;
-
-        private static ShipDefenitions.Root _shipdefenitions;
-
-        private static MarketplaceDefenitions.Root _marketplacedefenitions;
-
-        private static BarrelDefenitions.Root _barreldefenitions;
-
-        private static BuildingDefentions.Root _buildingdefenitions;
-
-        private static DealerDefenitions.Root _dealerdefenitions;
-
-        private static MaterialsData.Root _materials;
-
-        private static UpgradeableDefenition.Root _upgradeable;
-
-        private static EventsDefenitions.Root _events;
-
-        private static WreckDefinitions.Root _wreck;
+        private static Dictionary<EDefinitionType, IDefinition> _cache = new Dictionary<EDefinitionType, IDefinition>();
 
         public static void Update(string currentversion)
         {
@@ -132,164 +114,108 @@ namespace SeaBotCore.Cache
             }
         }
 
-        public static BoatDefenitions.Root GetBoatLevelDefenitions()
-        {
-            if (_boatdefenitions == null)
-            {
-                if (!File.Exists(_cachefolder + "\\boat.json"))
-                    if (!DownloadCache())
-                    {
-                    }
 
-                _boatdefenitions = JsonConvert.DeserializeObject<BoatDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\boat.json"));
+        public static IDefinition GetDefinition(EDefinitionType type)
+        {
+            if (_cache.ContainsKey(type))
+            {
+                return _cache[type];
             }
 
-            return _boatdefenitions;
-        }
-
-        public static ShipDefenitions.Root GetShipDefenitions()
-        {
-            if (_shipdefenitions == null)
+            IDefinition ret = null;
+            var filename = "";
+            switch (type)
             {
-                if (!File.Exists(_cachefolder + "\\ship.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _shipdefenitions = JsonConvert.DeserializeObject<ShipDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\ship.json"));
+                case EDefinitionType.Barrels:
+                    filename = "barrel";
+                    break;
+                case EDefinitionType.Events:
+                    filename = "event";
+                    break;
+                case EDefinitionType.Buildings:
+                    filename = "building";
+                    break;
+                case EDefinitionType.Boat:
+                    filename = "boat";
+                    break;
+                case EDefinitionType.Dealer:
+                    filename = "dealer";
+                    break;
+                case EDefinitionType.Marketplace:
+                    filename = "marketplace";
+                    break;
+                case EDefinitionType.Ship:
+                    filename = "ship";
+                    break;
+                case EDefinitionType.Upgradable:
+                    filename = "upgradeable";
+                    break;
+                case EDefinitionType.Wreck:
+                    filename = "wreck";
+                    break;
+                case EDefinitionType.Material:
+                    filename = "material";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            return _shipdefenitions;
-        }
 
-        public static MarketplaceDefenitions.Root GetMarketPlaceDefenitions()
-        {
-            if (_marketplacedefenitions == null)
+            if (!File.Exists(_cachefolder + "\\" + filename + ".json"))
             {
-                if (!File.Exists(_cachefolder + "\\marketplace.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _marketplacedefenitions = JsonConvert.DeserializeObject<MarketplaceDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\marketplace.json"));
+                DownloadCache();
             }
 
-            return _marketplacedefenitions;
-        }
-
-        public static BarrelDefenitions.Root GetBarrelDefenitions()
-        {
-            if (_barreldefenitions == null)
+            var content = File.ReadAllText(_cachefolder + "\\" + filename + ".json");
+            switch (type)
             {
-                if (!File.Exists(_cachefolder + "\\barrel.json"))
-                    if (!DownloadCache())
-                    {
-                    }
+                case EDefinitionType.Barrels:
 
-                _barreldefenitions = JsonConvert.DeserializeObject<BarrelDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\barrel.json"));
+                    ret = JsonConvert.DeserializeObject<ContractorDefinitions.Root>(
+                        content);
+
+                    break;
+                case EDefinitionType.Boat:
+                    ret = JsonConvert.DeserializeObject<BoatDefenitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Buildings:
+                    ret = JsonConvert.DeserializeObject<BuildingDefentions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Dealer:
+                    ret = JsonConvert.DeserializeObject<DealerDefenitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Wreck:
+                    ret = JsonConvert.DeserializeObject<WreckDefinitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Ship:
+                    ret = JsonConvert.DeserializeObject<ShipDefenitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Marketplace:
+                    ret = JsonConvert.DeserializeObject<MarketplaceDefenitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Upgradable:
+                    ret = JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Events:
+                    ret = JsonConvert.DeserializeObject<EventsDefenitions.Root>(
+                        content);
+                    break;
+                case EDefinitionType.Material:
+                    ret = JsonConvert.DeserializeObject<MaterialsData.Root>(content);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            return _barreldefenitions;
-        }
-
-        public static BuildingDefentions.Root GetBuildingDefenitions()
-        {
-            if (_buildingdefenitions == null)
-            {
-                if (!File.Exists(_cachefolder + "\\building.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _buildingdefenitions = JsonConvert.DeserializeObject<BuildingDefentions.Root>(
-                    File.ReadAllText(_cachefolder + "\\building.json"));
-            }
-
-            return _buildingdefenitions;
-        }
-
-        public static MaterialsData.Root GetMaterials()
-        {
-            if (_materials == null)
-            {
-                if (!File.Exists(_cachefolder + "\\material.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _materials = JsonConvert.DeserializeObject<MaterialsData.Root>(
-                    File.ReadAllText(_cachefolder + "\\material.json"));
-            }
-
-            return _materials;
-        }
-
-        public static UpgradeableDefenition.Root GetUpgradeablesDefenitions()
-        {
-            if (_upgradeable == null)
-            {
-                if (!File.Exists(_cachefolder + "\\upgradeable.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _upgradeable = JsonConvert.DeserializeObject<UpgradeableDefenition.Root>(
-                    File.ReadAllText(_cachefolder + "\\upgradeable.json"));
-            }
-
-            return _upgradeable;
-        }
-
-        public static EventsDefenitions.Root GetEventDefenitions()
-        {
-            if (_events == null)
-            {
-                if (!File.Exists(_cachefolder + "\\event.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _events = JsonConvert.DeserializeObject<EventsDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\event.json"));
-            }
-
-            return _events;
-        }
-
-        public static DealerDefenitions.Root GetDealerDefenitions()
-        {
-            if (_dealerdefenitions == null)
-            {
-                if (!File.Exists(_cachefolder + "\\dealer.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _dealerdefenitions = JsonConvert.DeserializeObject<DealerDefenitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\dealer.json"));
-            }
-
-            return _dealerdefenitions;
-        }
-
-        public static WreckDefinitions.Root GetWreckDefenitions()
-        {
-            if (_wreck == null)
-            {
-                if (!File.Exists(_cachefolder + "\\wreck.json"))
-                    if (!DownloadCache())
-                    {
-                    }
-
-                _wreck = JsonConvert.DeserializeObject<WreckDefinitions.Root>(
-                    File.ReadAllText(_cachefolder + "\\wreck.json"));
-            }
-
-            return _wreck;
+            _cache.Add(type, ret);
+            return ret;
         }
     }
 }

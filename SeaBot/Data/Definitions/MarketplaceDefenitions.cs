@@ -23,7 +23,7 @@ namespace SeaBotCore.Data.Definitions
 {
     public class MarketplaceDefenitions
     {
-        public class Root
+        public class Root : IDefinition
         {
             [J("items")] public Items Items { get; set; }
         }

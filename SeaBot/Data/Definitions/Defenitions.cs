@@ -15,21 +15,58 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using SeaBotCore.Cache;
+using SeaBotCore.Data.Materials;
 
 namespace SeaBotCore.Data.Definitions
 {
+    public interface IDefinition
+    {
+    }
+
+    public enum EDefinitionType
+    {
+        Buildings,
+        Barrels,
+        Boat,
+        Dealer,
+        Wreck,
+        Ship,
+        Marketplace,
+        Upgradable,
+        Events,
+        Material
+    }
+
     public static class Defenitions
     {
-        public static BuildingDefentions.Root BuildingDef => DefenitionCache.GetBuildingDefenitions();
+        public static BuildingDefentions.Root BuildingDef =>
+            (BuildingDefentions.Root) DefenitionCache.GetDefinition(EDefinitionType.Buildings);
 
-        public static BarrelDefenitions.Root BarrelDef => DefenitionCache.GetBarrelDefenitions();
+        public static BarrelDefenitions.Root BarrelDef =>
+            (BarrelDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Barrels);
 
-        public static BoatDefenitions.Root BoatDef => DefenitionCache.GetBoatLevelDefenitions();
-        public static DealerDefenitions.Root DealerDef => DefenitionCache.GetDealerDefenitions();
-        public static WreckDefinitions.Root WreckDef => DefenitionCache.GetWreckDefenitions();
-        public static ShipDefenitions.Root ShipDef => DefenitionCache.GetShipDefenitions();
-        public static MarketplaceDefenitions.Root MarketDef => DefenitionCache.GetMarketPlaceDefenitions();
-        public static UpgradeableDefenition.Root UpgrDef => DefenitionCache.GetUpgradeablesDefenitions();
-        public static EventsDefenitions.Root EvntDef => DefenitionCache.GetEventDefenitions();
+        public static BoatDefenitions.Root BoatDef =>
+            (BoatDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Boat);
+
+        public static DealerDefenitions.Root DealerDef =>
+            (DealerDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Dealer);
+
+        public static WreckDefinitions.Root WreckDef =>
+            (WreckDefinitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Wreck);
+
+        public static ShipDefenitions.Root ShipDef =>
+            (ShipDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Ship);
+
+        public static MarketplaceDefenitions.Root MarketDef =>
+            (MarketplaceDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Marketplace);
+
+        public static UpgradeableDefenition.Root UpgrDef =>
+            (UpgradeableDefenition.Root) DefenitionCache.GetDefinition(EDefinitionType.Upgradable);
+
+        public static EventsDefenitions.Root EvntDef =>
+            (EventsDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.Events);
+
+        public static MaterialsData.Root MatDef =>
+            (MaterialsData.Root) DefenitionCache.GetDefinition(EDefinitionType.Material);
     }
 }

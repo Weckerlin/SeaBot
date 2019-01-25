@@ -69,6 +69,7 @@
     <Compile Include="Data\Definitions\BarrelDefinitions.cs" />
     <Compile Include="Data\Definitions\BoatDefenitions.cs" />
     <Compile Include="Data\Definitions\BuildingDefenitions.cs" />
+    <Compile Include="Data\Definitions\ContractorDefinitions.cs" />
     <Compile Include="Data\Definitions\DealerDefenitions.cs" />
     <Compile Include="Data\Definitions\Defenitions.cs" />
     <Compile Include="Data\Definitions\EventsDefenitions.cs" />

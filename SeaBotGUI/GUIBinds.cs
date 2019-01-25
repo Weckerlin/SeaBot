@@ -200,16 +200,16 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
-                    Building.Name = LocalizationCache.GetNameFromLoc(DefenitionCache.GetBuildingDefenitions().Items.Item
+                    Building.Name = LocalizationCache.GetNameFromLoc(Defenitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
-                        .First().NameLoc, DefenitionCache.GetBuildingDefenitions().Items.Item
+                        .First().NameLoc, Defenitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
                         .First().Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + DefenitionCache.GetBuildingDefenitions().Items.Item
+                        var willbeproducedat = building.ProdStart + Defenitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level).First().ProdOutputs
                                                    .ProdOutput[0].Time;
@@ -224,7 +224,7 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + DefenitionCache.GetBuildingDefenitions().Items.Item
+                        var willbeproducedat = building.UpgStart + Defenitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
                                                    .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
 

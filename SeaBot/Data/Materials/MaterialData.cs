@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using SeaBotCore.Data.Definitions;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 using N = Newtonsoft.Json.NullValueHandling;
 
@@ -22,7 +23,7 @@ namespace SeaBotCore.Data.Materials
 {
     public class MaterialsData
     {
-        public class Root
+        public class Root : IDefinition
         {
             [J("items")] public Items Items { get; set; }
         }

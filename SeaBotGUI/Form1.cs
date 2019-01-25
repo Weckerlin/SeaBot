@@ -82,7 +82,7 @@ namespace SeaBotGUI
             {
                 var msg = MessageBox.Show(
                     PrivateLocal.SEABOTGUI_WELCOME,
-                    "Welcome to the SeaBot!", MessageBoxButtons.OKCancel);
+                    "Root to the SeaBot!", MessageBoxButtons.OKCancel);
                 if (msg == DialogResult.OK)
                     Core.Config.acceptedresponsibility = true;
                 else

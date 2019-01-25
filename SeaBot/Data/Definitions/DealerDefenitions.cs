@@ -27,7 +27,7 @@ namespace SeaBotCore.Data.Definitions
 {
     public static class DealerDefenitions
     {
-        public class Root
+        public class Root : IDefinition
         {
             [J("items")] public Items Items { get; set; }
         }

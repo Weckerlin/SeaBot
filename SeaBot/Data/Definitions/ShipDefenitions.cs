@@ -30,7 +30,7 @@ namespace SeaBotCore.Data.Definitions
             [J("item")] public List<Item> Item { get; set; }
         }
 
-        public class Root
+        public class Root : IDefinition
         {
             [J("items")] public Items Items { get; set; }
         }
