@@ -286,7 +286,7 @@ namespace SeaBotGUI.GUIBinds
                             .ToString(@"hh\:mm\:ss");
                     }
 
-                    Building.Producing = producing;
+           
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
@@ -298,6 +298,32 @@ namespace SeaBotGUI.GUIBinds
                             .ToString(@"hh\:mm\:ss");
                     }
 
+                    if (building.DefId == 12)
+                    {
+                        if (building.UpgStart == 0)
+                        {
+                            var slot = Core.GlobalData.Slots.FirstOrDefault(n => n.Type == "museum_ship");
+                            if (slot == null)
+                            {
+                                continue;
+                            }
+
+                            if (slot.SlotUsed == 0)
+                            {
+                                continue;
+                            }
+            
+                            var started = TimeUtils.FromUnixTime(slot.LastUsed);
+                       
+                            var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == building.Level);
+
+                             producing =(TimeUtils.FixedUTCTime - (started.AddSeconds(b.TurnCount*b.TurnTime))).ToString(@"hh\:mm\:ss");
+                           
+
+                         
+                        }
+                    }
+                    Building.Producing = producing;
                     Building.Upgrade = upgrade;
                     ret.Add(Building);
                 }

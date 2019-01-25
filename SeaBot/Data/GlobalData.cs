@@ -309,6 +309,29 @@ namespace SeaBotCore.Data
 
             #endregion
 
+            #region Slots
+
+            data.Slots = new List<Slot>();
+            var slotnode = doc.DocumentElement.SelectSingleNode("slot");
+            if (slotnode != null)
+            {
+                foreach (XmlNode node in slotnode.ChildNodes)
+                {
+                    Slot wr = new Slot
+                    {
+                        Type = node.SelectSingleNode("type")?.InnerText,
+                        Level = Convert.ToInt32(node.SelectSingleNode("level")?.InnerText),
+                        SlotUsed = Convert.ToInt32(node.SelectSingleNode("slot_used")?.InnerText),
+                        SlotMax = Convert.ToInt32(node.SelectSingleNode("slot_max")?.InnerText),
+                        Ai = Convert.ToInt32(node.SelectSingleNode("ai")?.InnerText),
+                        LastUsed = Convert.ToInt32(node.SelectSingleNode("last_used")?.InnerText)
+                    };
+
+                    data.Slots.Add(wr);
+                }
+            }
+
+            #endregion
             Barrels.BarrelController._lastBarrelSeed =
                 Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
@@ -337,7 +360,7 @@ namespace SeaBotCore.Data
         public List<Building> Buildings { get; set; }
         public int HeartbeatInterval { get; set; }
         public List<Wreck> Wrecks { get; set; }
-
+        public List<Slot> Slots { get; set; }
         public int GetAmountItem(string name)
         {
             return GetAmountItem(MaterialDB.GetItem(name).DefId);
@@ -429,6 +452,15 @@ namespace SeaBotCore.Data
         public List<Reward> Rewards { get; set; }
     }
 
+    public class Slot
+    {
+       public string Type { get; set; }
+       public int Level{ get; set; }
+       public int SlotUsed{ get; set; }
+       public int SlotMax{ get; set; }
+       public int Ai{ get; set; }
+       public int LastUsed{ get; set; }
+    }
     public class Contractor
     {
         public int DefId { get; set; }

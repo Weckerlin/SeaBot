@@ -195,7 +195,7 @@ namespace SeaBotCore.Cache
             switch (type)
             {
                 case EDefinitionType.Barrels:
-                    ret = JsonConvert.DeserializeObject<ContractorDefinitions.Root>(
+                    ret = JsonConvert.DeserializeObject<BarrelDefenitions.Root>(
                         content);
                     break;
                 case EDefinitionType.Boat:
@@ -246,7 +246,7 @@ namespace SeaBotCore.Cache
                     ret = JsonConvert.DeserializeObject<OutpostDefinitions.Root>(content);
                     break;
                 case EDefinitionType.Treasure:
-                    ret = JsonConvert.DeserializeObject<OutpostDefinitions.Root>(content);
+                    ret = JsonConvert.DeserializeObject<TreasureDefenitions.Root>(content);
                     break;
                 case EDefinitionType.MuseumLevels:
                     ret = JsonConvert.DeserializeObject<MuseumLevelDefenitions.Root>(content);

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SeaBotCore.Data;
 using SeaBotCore.Data.Definitions;
 using SeaBotCore.Utils;
 
@@ -35,8 +36,19 @@ namespace SeaBotCore.BotMethods
                 return;
             }
 
-            var started = TimeUtils.FromUnixTime(museum.ProdStart);
-            var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == museum.Level);
+            var slot = Core.GlobalData.Slots.FirstOrDefault(n => n.Type == "museum_ship");
+            if (slot == null)
+            {
+                return;
+            }
+
+            if (slot.SlotUsed == 0)
+            {
+                return;
+            }
+            
+            var started = TimeUtils.FromUnixTime(slot.LastUsed);
+            var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == slot.Level);
 
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
