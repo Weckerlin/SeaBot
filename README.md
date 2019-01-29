@@ -14,7 +14,7 @@
 ### Features
 
 - Automatic ship managment
-- Full-featured: Museums, Barrels, Production, Upgrading, Fishing Piers,  Auto-Loot, Multi-languages and more!
+- Full-featured: Museums, Barrels, Production, Upgrading, Fishing Piers, Auto-Loot, Multi-languages and more!
 - Rich bot configuration
 - Compatible with Windows, Linux and Mac (untested).
 - Sleeping while another session is running.
@@ -23,7 +23,7 @@
 
 ### Возможности
 - Автоматический менеджмент кораблей
-- Полностью функционирует: Музеи, Бочки, Производство, Апгрейды, Сбор рыбы, Авто-Лут, Многоязычность и многое другое!
+- Полностью функционирует: Музеи, Бочки, Производство, Апгрейды, Сбор рыбы, Авто-Лут, Мультиязычность и многое другое!
 - Богатая конфигурация бота
 - Совместим с Windows, Linux, Mac (в теории через mono)
 - Сон во время игры с реального девайса
