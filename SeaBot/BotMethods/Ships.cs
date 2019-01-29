@@ -39,8 +39,7 @@ namespace SeaBotCore.BotMethods
                     var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
-                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        lvl.TravelTime + 1)
+                    if (lvl != null && AutoShipUtils.isVoyageCompleted(ship))
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_LOADING +
@@ -66,8 +65,8 @@ namespace SeaBotCore.BotMethods
                     var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.Levels.Level
                         .First(n => n.Id == ship.TargetLevel);
-                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        lvl.TravelTime + 2)
+                    if (lvl != null && AutoShipUtils.isVoyageCompleted(ship))
+                        
                     {
                         Logger.Logger.Info(
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
@@ -93,12 +92,11 @@ namespace SeaBotCore.BotMethods
                 {
                     var market = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
                     var lvl = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).Materials
-                        .Material.Where(n => n.Id == ship.MaterialId).First();
+                        .Material.Where(n => n.Id == ship.MaterialId).FirstOrDefault();
 
-                    if (lvl != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        market.TravelTime + 2)
-                    {
-                        Logger.Logger.Info(
+                    if (lvl != null && AutoShipUtils.isVoyageCompleted(ship))
+                        {
+                            Logger.Logger.Info(
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
                                 Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
                                 Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
@@ -117,12 +115,11 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "wreck")
                 {
                     var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
-                    var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).First();
+                    var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).FirstOrDefault();
 
-                    if (wrk != null && (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
-                    {
-                        _deship.Add(ship);
+                    if (wrk != null &&AutoShipUtils.isVoyageCompleted(ship))
+                        {
+                            _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                             Core.GlobalData.Level, Enums.EObject.wreck,
                             AutoShipUtils.GetCapacity(ship),
@@ -137,12 +134,8 @@ namespace SeaBotCore.BotMethods
                 //Contractor
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "contractor")
                 {
-                    var predefined = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-
-
-                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
-                    {
+                    if(AutoShipUtils.isVoyageCompleted(ship))
+                    { 
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
                         AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
@@ -152,10 +145,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "global_contractor")
                 {
                     var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-
-
-                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
+                    if (AutoShipUtils.isVoyageCompleted(ship))
                     {
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
@@ -165,9 +155,7 @@ namespace SeaBotCore.BotMethods
 
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "outpost")
                 {
-                    var predefined = Definitions.OutpostDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
+                    if (AutoShipUtils.isVoyageCompleted(ship))
                     {
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipOutpostTask(ship.InstId));
@@ -177,9 +165,7 @@ namespace SeaBotCore.BotMethods
 
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "social_contract")
                 {
-                    var predefined = Definitions.SContractDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
+                    if (AutoShipUtils.isVoyageCompleted(ship))
                     {
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
@@ -190,9 +176,9 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "dealer")
                 {
                     var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((TimeUtils.FixedUTCTime- TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
+                    if (AutoShipUtils.isVoyageCompleted(ship))
                     {
+                        
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                             Core.GlobalData.Level, Enums.EObject.dealer,
@@ -208,8 +194,7 @@ namespace SeaBotCore.BotMethods
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Type == "treasure")
                 {
                     var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
-                    if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds >
-                        predefined.TravelTime + 2)
+                    if (AutoShipUtils.isVoyageCompleted(ship))
                     {
                         _deship.Add(ship);
                         Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
@@ -274,6 +259,51 @@ namespace SeaBotCore.BotMethods
 
     internal static class AutoShipUtils
     {
+        public static bool isVoyageCompleted(Ship ship)
+        {
+            int? traveltime = null;
+            switch (ship.Type)
+            {
+                case "upgradeable":
+                    traveltime = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                         ?.Levels.Level
+                         .First(n => n.Id == ship.TargetLevel).TravelTime;
+                    break;
+                case "marketplace":
+                    traveltime = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).TravelTime;
+                    break;
+                case "wreck":
+
+                    var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
+                    traveltime = (int)Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).FirstOrDefault().TravelTime;
+                    break;
+                case "contractor":
+
+                    traveltime = (int)Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
+                    break;
+                case "global_contractor":
+
+                    traveltime = (int)Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
+                    break;
+                case "outpost":
+
+                    traveltime = (int)Definitions.OutpostDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
+                    break;
+                case "social_contract":
+
+                    traveltime = (int)Definitions.SContractDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
+                    break;
+                case "dealer":
+
+                    traveltime = (int)Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
+                    break;
+            }
+            if(traveltime==null)
+            {
+                return false;
+            }
+           return (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds > traveltime;
+        }
         public static ShipDefenitions.Item GetShipDefId(Ship ship)
         {
             return Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId);

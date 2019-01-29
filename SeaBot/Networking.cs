@@ -35,7 +35,7 @@ namespace SeaBotCore
 {
     public static class Networking
     {
-        private static List<DelayedTask> _delayedtaskList = new List<DelayedTask>();
+      
         public static Thread _syncThread = new Thread(SyncVoid);
         private static DateTime _lastRaised = DateTime.Now;
 
@@ -118,7 +118,7 @@ namespace SeaBotCore
                     Sync();
                 }
 
-                if ((DateTime.Now - _lastRaised).TotalSeconds > 300)
+                if ((DateTime.Now - _lastRaised).TotalSeconds > Core.GlobalData.HeartbeatInterval)
                 {
                     Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
                     _gametasks.Add(new Task.HeartBeat());
@@ -415,9 +415,7 @@ namespace SeaBotCore
                         switch (node.Name)
                         {
                             case "level_up":
-
                                 Core.GlobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
-
                                 break;
                             case "sailors":
                                 Core.GlobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
@@ -458,16 +456,6 @@ namespace SeaBotCore
             _lastRaised = DateTime.Now;
         }
 
-        public class DelayedTask
-        {
-            private DelayedTask(Task.IGameTask task, DateTime InvokeAt)
-            {
-                Task = task;
-                InvokeTime = InvokeAt;
-            }
-
-            public Task.IGameTask Task { get; set; }
-            public DateTime InvokeTime { get; set; }
-        }
+       
     }
 }

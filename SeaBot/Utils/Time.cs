@@ -49,7 +49,7 @@ namespace SeaBotCore.Utils
                     _timeOffset =  TimeSpan.FromMinutes(timedelay);
                 }
 
-                Logger.Logger.Debug("Time offset(min) = " + _timeOffset.Minutes);
+                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.Minutes);
                 //Time is really delayed!
             }
         }
@@ -78,5 +78,6 @@ namespace SeaBotCore.Utils
 
             return Definitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
+         
     }
 }
