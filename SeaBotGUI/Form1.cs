@@ -121,7 +121,7 @@ namespace SeaBotGUI
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
-            Core.Debug = Core.Config.debug;
+           
             chk_autoshipupg.Checked = Core.Config.autoship;
             chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
             chk_autofish.Checked = Core.Config.collectfish;
@@ -508,7 +508,6 @@ namespace SeaBotGUI
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
             Core.Config.debug = checkBox1.Checked;
-            Core.Debug = checkBox1.Checked;
         }
 
         private void chk_aupgrade_CheckedChanged(object sender, EventArgs e)
@@ -832,6 +831,12 @@ namespace SeaBotGUI
         private void chk_automuseum_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.collectmuseum = chk_automuseum.Checked;
+        }
+
+        private void Btn_stats_Click(object sender, EventArgs e)
+        {
+            Stats stats = new Stats();
+            stats.Show();
         }
     }
 }

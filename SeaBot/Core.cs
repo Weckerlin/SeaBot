@@ -31,7 +31,7 @@ namespace SeaBotCore
         private static readonly HttpClient Client = new HttpClient();
         public static string Ssid = string.Empty;
         public static GlobalData GlobalData = new GlobalData();
-        public static bool Debug;
+        public static bool Debug => Config.debug;
         public static int hibernation = 0;
         public static string ServerToken = string.Empty;
         public static Config.Config Config = new Config.Config();
@@ -98,7 +98,7 @@ namespace SeaBotCore
                 Logger.Logger.Fatal(Localization.CORE_NO_SERV_TOKEN);
                 return;
             }
-
+      
             new System.Threading.Tasks.Task(() => { Networking.Login(); }).Start();
         }
 

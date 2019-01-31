@@ -303,6 +303,7 @@ namespace SeaBotCore
                 values.Add("loading_time", loadtime.ToString());
                 SendRequest(values, "tracking.finishedLoading");
                 Events.Events.LoginedEvent.Logined.Invoke();
+                Statistics.StatisticsWriter.Start();
             }
             else
             {

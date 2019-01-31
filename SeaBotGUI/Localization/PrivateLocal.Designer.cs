@@ -89,6 +89,96 @@ namespace SeaBotGUI.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Amount.
+        /// </summary>
+        internal static string STAT_AMOUNT {
+            get {
+                return ResourceManager.GetString("STAT_AMOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Coins.
+        /// </summary>
+        internal static string STAT_COINS {
+            get {
+                return ResourceManager.GetString("STAT_COINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Fish.
+        /// </summary>
+        internal static string STAT_FISH {
+            get {
+                return ResourceManager.GetString("STAT_FISH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Gems.
+        /// </summary>
+        internal static string STAT_GEMS {
+            get {
+                return ResourceManager.GetString("STAT_GEMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Iron.
+        /// </summary>
+        internal static string STAT_IRON {
+            get {
+                return ResourceManager.GetString("STAT_IRON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Level.
+        /// </summary>
+        internal static string STAT_LEVEL {
+            get {
+                return ResourceManager.GetString("STAT_LEVEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sailors.
+        /// </summary>
+        internal static string STAT_SAILORS {
+            get {
+                return ResourceManager.GetString("STAT_SAILORS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Stone.
+        /// </summary>
+        internal static string STAT_STONE {
+            get {
+                return ResourceManager.GetString("STAT_STONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Time.
+        /// </summary>
+        internal static string STAT_TIME {
+            get {
+                return ResourceManager.GetString("STAT_TIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wood.
+        /// </summary>
+        internal static string STAT_WOOD {
+            get {
+                return ResourceManager.GetString("STAT_WOOD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на About.
         /// </summary>
         internal static string TELEGRAM_BTN_ABOUT {

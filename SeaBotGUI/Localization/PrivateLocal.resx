@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,164 +97,194 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="BARREL_INTERVAL_WARNING" xml:space="preserve">
+	<data name="BARREL_INTERVAL_WARNING" xml:space="preserve">
     <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
   </data>
-  <data name="INVENTORY_REMOVED" xml:space="preserve">
+	<data name="INVENTORY_REMOVED" xml:space="preserve">
     <value>Removed {0} {1}'s</value>
   </data>
-  <data name="TELEGRAM_NO_TOKEN" xml:space="preserve">
+	<data name="TELEGRAM_NO_TOKEN" xml:space="preserve">
     <value>No telegram token</value>
   </data>
-  <data name="TOKEN_EMPTY" xml:space="preserve">
+	<data name="TOKEN_EMPTY" xml:space="preserve">
     <value>Empty server_token
 Please fill server token in Settings tab</value>
   </data>
-  <data name="VERSION_CURRENT" xml:space="preserve">
+	<data name="VERSION_CURRENT" xml:space="preserve">
     <value>[Current] Version: {0}</value>
   </data>
-  <data name="VERSION_UPDATE_MBOX" xml:space="preserve">
+	<data name="VERSION_UPDATE_MBOX" xml:space="preserve">
     <value>A new update has been released, press OK to open download page!</value>
   </data>
-  <data name="VERSION_OLD" xml:space="preserve">
+	<data name="VERSION_OLD" xml:space="preserve">
     <value>[Old] Version: {0}</value>
   </data>
-  <data name="SEABOTGUI_WELCOME" xml:space="preserve">
+	<data name="SEABOTGUI_WELCOME" xml:space="preserve">
     <value>By clicking 'OK' you agree that neither the program nor the developer is responsible for your account.
 In order not to get a ban, please do not use too small a number in the intervals of the barrel or just do not use them.</value>
   </data>
-  <data name="TELEGRAM_BTN_START" xml:space="preserve">
+	<data name="TELEGRAM_BTN_START" xml:space="preserve">
     <value>Start</value>
   </data>
-  <data name="TELEGRAM_BTN_STOP" xml:space="preserve">
+	<data name="TELEGRAM_BTN_STOP" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="TELEGRAM_BTN_STRATEGY" xml:space="preserve">
+	<data name="TELEGRAM_BTN_STRATEGY" xml:space="preserve">
     <value>Strategy</value>
   </data>
-  <data name="TELEGRAM_BTN_INVENTORY" xml:space="preserve">
+	<data name="TELEGRAM_BTN_INVENTORY" xml:space="preserve">
     <value>Inventory</value>
   </data>
-  <data name="TELEGRAM_BTN_SETTINGS" xml:space="preserve">
+	<data name="TELEGRAM_BTN_SETTINGS" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="TELEGRAM_BTN_ABOUT" xml:space="preserve">
+	<data name="TELEGRAM_BTN_ABOUT" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="TELEGRAM_BTN_MAIN" xml:space="preserve">
+	<data name="TELEGRAM_BTN_MAIN" xml:space="preserve">
     <value>Main</value>
   </data>
-  <data name="TELEGRAM_BTN_LIMITS" xml:space="preserve">
+	<data name="TELEGRAM_BTN_LIMITS" xml:space="preserve">
     <value>Limits</value>
   </data>
-  <data name="TELEGRAM_BTN_AUTOSHIP_OPTIMAL" xml:space="preserve">
+	<data name="TELEGRAM_BTN_AUTOSHIP_OPTIMAL" xml:space="preserve">
     <value>AutoShip strategy</value>
   </data>
-  <data name="TELEGRAM_BTN_STOP_AUTOSHIP_MATERIAL" xml:space="preserve">
+	<data name="TELEGRAM_BTN_STOP_AUTOSHIP_MATERIAL" xml:space="preserve">
     <value>AutoShip material</value>
   </data>
-  <data name="TELEGRAM_BTN_MENU" xml:space="preserve">
+	<data name="TELEGRAM_BTN_MENU" xml:space="preserve">
     <value>Menu</value>
   </data>
-  <data name="TELEGRAM_BTN_BARRELS" xml:space="preserve">
+	<data name="TELEGRAM_BTN_BARRELS" xml:space="preserve">
     <value>Barrels</value>
   </data>
-  <data name="TELEGRAM_BTN_HIBERNATION" xml:space="preserve">
+	<data name="TELEGRAM_BTN_HIBERNATION" xml:space="preserve">
     <value>Hibernation</value>
   </data>
-  <data name="TELEGRAM_BTN_INTERVALS" xml:space="preserve">
+	<data name="TELEGRAM_BTN_INTERVALS" xml:space="preserve">
     <value>Intervals</value>
   </data>
-  <data name="TELEGRAM_BTN_WOOD" xml:space="preserve">
+	<data name="TELEGRAM_BTN_WOOD" xml:space="preserve">
     <value>Wood</value>
   </data>
-  <data name="TELEGRAM_BTN_IRON" xml:space="preserve">
+	<data name="TELEGRAM_BTN_IRON" xml:space="preserve">
     <value>Iron</value>
   </data>
-  <data name="TELEGRAM_BTN_STONE" xml:space="preserve">
+	<data name="TELEGRAM_BTN_STONE" xml:space="preserve">
     <value>Stone</value>
   </data>
-  <data name="TELEGRAM_EXCEPTION_NULL_INVENTORY" xml:space="preserve">
+	<data name="TELEGRAM_EXCEPTION_NULL_INVENTORY" xml:space="preserve">
     <value>Please start the bot before getting inventory</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_COLLECT_FISH" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_COLLECT_FISH" xml:space="preserve">
     <value> Collect Fish</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_AUTO_UPGRADE" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_AUTO_UPGRADE" xml:space="preserve">
     <value> Auto Upgrade</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_PRODUCE_FACTORY" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_PRODUCE_FACTORY" xml:space="preserve">
     <value> Produce Factory</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_AUTO_SHIP" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_AUTO_SHIP" xml:space="preserve">
     <value> Auto Ship</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_AUTO_BARREL" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_AUTO_BARREL" xml:space="preserve">
     <value> Auto-Barrel</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_FINISH_UPGRADE" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_FINISH_UPGRADE" xml:space="preserve">
     <value> Finish Upgrade</value>
   </data>
-  <data name="TELEGRAM_STRATEGY_COLLECT_FACTORY" xml:space="preserve">
+	<data name="TELEGRAM_STRATEGY_COLLECT_FACTORY" xml:space="preserve">
     <value> Collect Factory</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS" xml:space="preserve">
     <value> Save Sailors</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT" xml:space="preserve">
     <value> More Loot</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_COINS" xml:space="preserve">
     <value> Coins</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_STONE" xml:space="preserve">
     <value> Stone</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_IRON" xml:space="preserve">
     <value> Iron</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_WOOD" xml:space="preserve">
     <value> Wood</value>
   </data>
-  <data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH" xml:space="preserve">
+	<data name="TELEGRAM_SHIP_STRATEGY_MATERIAL_FISH" xml:space="preserve">
     <value> Fish</value>
   </data>
-  <data name="TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY" xml:space="preserve">
+	<data name="TELEGRAM_SETTINGS_UPGRADE_FACTORY_ONLY" xml:space="preserve">
     <value> Upgrade Factory only</value>
   </data>
-  <data name="TELEGRAM_ERR_BOT_RUNNING" xml:space="preserve">
+	<data name="TELEGRAM_ERR_BOT_RUNNING" xml:space="preserve">
     <value>But the bot is already running</value>
   </data>
-  <data name="TELEGRAM_ERR_BOT_NOT_RUNNING" xml:space="preserve">
+	<data name="TELEGRAM_ERR_BOT_NOT_RUNNING" xml:space="preserve">
     <value>But the bot is not running</value>
   </data>
-  <data name="TELEGRAM_MSG_STARTING" xml:space="preserve">
+	<data name="TELEGRAM_MSG_STARTING" xml:space="preserve">
     <value>Starting...</value>
   </data>
-  <data name="TELEGRAM_MSG_STOPPED" xml:space="preserve">
+	<data name="TELEGRAM_MSG_STOPPED" xml:space="preserve">
     <value>Stopped!</value>
   </data>
-  <data name="TELEGRAM_ERR_CANT_PARSE" xml:space="preserve">
+	<data name="TELEGRAM_ERR_CANT_PARSE" xml:space="preserve">
     <value>Can't parse string!</value>
   </data>
-  <data name="TELEGRAM_INTERVAL_HIBERNATION" xml:space="preserve">
+	<data name="TELEGRAM_INTERVAL_HIBERNATION" xml:space="preserve">
     <value>Please enter here your hibernation interval.
 Your current hibernation interval: </value>
   </data>
-  <data name="TELEGRAM_INTERVAL_BARREL" xml:space="preserve">
+	<data name="TELEGRAM_INTERVAL_BARREL" xml:space="preserve">
     <value>Please enter here your barrel interval.
 Your current barrel interval: </value>
   </data>
-  <data name="TELEGRAM_INTERVAL_WOOD" xml:space="preserve">
+	<data name="TELEGRAM_INTERVAL_WOOD" xml:space="preserve">
     <value>Please enter here your Wood limit.
 Your current limit on Wood: </value>
   </data>
-  <data name="TELEGRAM_INTERVAL_STONE" xml:space="preserve">
+	<data name="TELEGRAM_INTERVAL_STONE" xml:space="preserve">
     <value>Please enter here your Stone limit.
 Your current limit on Stone: </value>
   </data>
-  <data name="TELEGRAM_INTERVAL_IRON" xml:space="preserve">
+	<data name="TELEGRAM_INTERVAL_IRON" xml:space="preserve">
     <value>Please enter here your Iron limit.
 Your current limit on Iron: </value>
+  </data>
+	<data name="STAT_COINS" xml:space="preserve">
+    <value>Coins</value>
+  </data>
+	<data name="STAT_FISH" xml:space="preserve">
+    <value>Fish</value>
+  </data>
+	<data name="STAT_STONE" xml:space="preserve">
+    <value>Stone</value>
+  </data>
+	<data name="STAT_IRON" xml:space="preserve">
+    <value>Iron</value>
+  </data>
+	<data name="STAT_WOOD" xml:space="preserve">
+    <value>Wood</value>
+  </data>
+	<data name="STAT_LEVEL" xml:space="preserve">
+    <value>Level</value>
+  </data>
+	<data name="STAT_GEMS" xml:space="preserve">
+    <value>Gems</value>
+  </data>
+	<data name="STAT_SAILORS" xml:space="preserve">
+    <value>Sailors</value>
+  </data>
+	<data name="STAT_TIME" xml:space="preserve">
+    <value>Time</value>
+  </data>
+	<data name="STAT_AMOUNT" xml:space="preserve">
+    <value>Amount</value>
   </data>
 </root>
