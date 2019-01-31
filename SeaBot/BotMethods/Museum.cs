@@ -21,6 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Definitions;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Utils;
 
 namespace SeaBotCore.BotMethods
@@ -52,7 +53,8 @@ namespace SeaBotCore.BotMethods
 
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
-            {
+            { 
+                Logger.Logger.Info(Localization.MUSEUM_COLLECT);
                 Networking.AddTask(new Task.ConfirmMuseumTask((int) b.TurnCount));
             }
         }

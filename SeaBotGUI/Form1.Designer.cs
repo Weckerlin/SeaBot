@@ -45,8 +45,55 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.num_limitconcrete = new System.Windows.Forms.NumericUpDown();
+            this.num_limitfuel = new System.Windows.Forms.NumericUpDown();
+            this.num_limitmech = new System.Windows.Forms.NumericUpDown();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.num_stonelimit = new System.Windows.Forms.NumericUpDown();
+            this.num_ironlimit = new System.Windows.Forms.NumericUpDown();
+            this.num_woodlimit = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.chk_onlyfactory = new System.Windows.Forms.CheckBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.num_barrelinterval = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.radio_saveloot = new System.Windows.Forms.RadioButton();
+            this.radio_savesailors = new System.Windows.Forms.RadioButton();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radio_iron = new System.Windows.Forms.RadioButton();
+            this.radio_wood = new System.Windows.Forms.RadioButton();
+            this.radio_gold = new System.Windows.Forms.RadioButton();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.btn_dumpcore = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.cbox_lang = new System.Windows.Forms.ComboBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.num_hibernationinterval = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.chk_sleepenabled = new System.Windows.Forms.CheckBox();
             this.chk_smartsleep = new System.Windows.Forms.CheckBox();
@@ -58,7 +105,6 @@
             this.num_sleepfor = new System.Windows.Forms.NumericUpDown();
             this.radio_sleepformins = new System.Windows.Forms.RadioButton();
             this.radio_sleepforhrs = new System.Windows.Forms.RadioButton();
-            this.btn_dumpcore = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -67,36 +113,6 @@
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.radio_saveloot = new System.Windows.Forms.RadioButton();
-            this.radio_savesailors = new System.Windows.Forms.RadioButton();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radio_iron = new System.Windows.Forms.RadioButton();
-            this.radio_wood = new System.Windows.Forms.RadioButton();
-            this.radio_gold = new System.Windows.Forms.RadioButton();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.chk_onlyfactory = new System.Windows.Forms.CheckBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.num_hibernationinterval = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.num_barrelinterval = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.num_stonelimit = new System.Windows.Forms.NumericUpDown();
-            this.num_ironlimit = new System.Windows.Forms.NumericUpDown();
-            this.num_woodlimit = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.num_removenum = new System.Windows.Forms.NumericUpDown();
             this.btn_removeitem = new System.Windows.Forms.Button();
@@ -148,25 +164,33 @@
             this.groupBox18.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitconcrete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitfuel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitmech)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_ironlimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_woodlimit)).BeginInit();
+            this.groupBox10.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).BeginInit();
+            this.groupBox12.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.groupBox21.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox17.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
             this.groupBox14.SuspendLayout();
             this.groupBox16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_sleepevery)).BeginInit();
             this.groupBox15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).BeginInit();
             this.groupBox13.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).BeginInit();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_ironlimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_woodlimit)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).BeginInit();
             this.tabPage6.SuspendLayout();
@@ -288,20 +312,409 @@
             // tabPage2
             // 
             resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Controls.Add(this.groupBox17);
-            this.tabPage2.Controls.Add(this.groupBox14);
-            this.tabPage2.Controls.Add(this.btn_dumpcore);
-            this.tabPage2.Controls.Add(this.groupBox13);
-            this.tabPage2.Controls.Add(this.groupBox12);
-            this.tabPage2.Controls.Add(this.groupBox11);
-            this.tabPage2.Controls.Add(this.groupBox10);
-            this.tabPage2.Controls.Add(this.groupBox9);
-            this.tabPage2.Controls.Add(this.groupBox8);
-            this.tabPage2.Controls.Add(this.groupBox6);
-            this.tabPage2.Controls.Add(this.checkBox1);
-            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            resources.ApplyResources(this.tabControl2, "tabControl2");
+            this.tabControl2.Controls.Add(this.tabPage8);
+            this.tabControl2.Controls.Add(this.tabPage7);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            // 
+            // tabPage8
+            // 
+            resources.ApplyResources(this.tabPage8, "tabPage8");
+            this.tabPage8.Controls.Add(this.groupBox20);
+            this.tabPage8.Controls.Add(this.groupBox6);
+            this.tabPage8.Controls.Add(this.groupBox10);
+            this.tabPage8.Controls.Add(this.groupBox8);
+            this.tabPage8.Controls.Add(this.groupBox12);
+            this.tabPage8.Controls.Add(this.groupBox11);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // groupBox20
+            // 
+            resources.ApplyResources(this.groupBox20, "groupBox20");
+            this.groupBox20.Controls.Add(this.label16);
+            this.groupBox20.Controls.Add(this.label15);
+            this.groupBox20.Controls.Add(this.label14);
+            this.groupBox20.Controls.Add(this.label13);
+            this.groupBox20.Controls.Add(this.num_limitconcrete);
+            this.groupBox20.Controls.Add(this.num_limitfuel);
+            this.groupBox20.Controls.Add(this.num_limitmech);
+            this.groupBox20.Controls.Add(this.checkBox2);
+            this.groupBox20.Controls.Add(this.radioButton3);
+            this.groupBox20.Controls.Add(this.radioButton2);
+            this.groupBox20.Controls.Add(this.radioButton1);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.TabStop = false;
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label16.Name = "label16";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label14
+            // 
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // num_limitconcrete
+            // 
+            resources.ApplyResources(this.num_limitconcrete, "num_limitconcrete");
+            this.num_limitconcrete.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_limitconcrete.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_limitconcrete.Name = "num_limitconcrete";
+            this.num_limitconcrete.Leave += new System.EventHandler(this.Num_limitconcrete_Leave);
+            // 
+            // num_limitfuel
+            // 
+            resources.ApplyResources(this.num_limitfuel, "num_limitfuel");
+            this.num_limitfuel.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_limitfuel.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_limitfuel.Name = "num_limitfuel";
+            this.num_limitfuel.Leave += new System.EventHandler(this.Num_limitfuel_Leave);
+            // 
+            // num_limitmech
+            // 
+            resources.ApplyResources(this.num_limitmech, "num_limitmech");
+            this.num_limitmech.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_limitmech.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_limitmech.Name = "num_limitmech";
+            this.num_limitmech.Leave += new System.EventHandler(this.Num_limitmech_Leave);
+            // 
+            // checkBox2
+            // 
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            resources.ApplyResources(this.radioButton3, "radioButton3");
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.TabStop = true;
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButton3_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            resources.ApplyResources(this.radioButton2, "radioButton2");
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.TabStop = true;
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            resources.ApplyResources(this.radioButton1, "radioButton1");
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.RadioButton1_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Controls.Add(this.num_stonelimit);
+            this.groupBox6.Controls.Add(this.num_ironlimit);
+            this.groupBox6.Controls.Add(this.num_woodlimit);
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // num_stonelimit
+            // 
+            resources.ApplyResources(this.num_stonelimit, "num_stonelimit");
+            this.num_stonelimit.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_stonelimit.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_stonelimit.Name = "num_stonelimit";
+            this.num_stonelimit.Leave += new System.EventHandler(this.num_stonelimit_Leave);
+            // 
+            // num_ironlimit
+            // 
+            resources.ApplyResources(this.num_ironlimit, "num_ironlimit");
+            this.num_ironlimit.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_ironlimit.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_ironlimit.Name = "num_ironlimit";
+            this.num_ironlimit.Leave += new System.EventHandler(this.num_ironlimit_Leave);
+            // 
+            // num_woodlimit
+            // 
+            resources.ApplyResources(this.num_woodlimit, "num_woodlimit");
+            this.num_woodlimit.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.num_woodlimit.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.num_woodlimit.Name = "num_woodlimit";
+            this.num_woodlimit.Leave += new System.EventHandler(this.num_woodlimit_Leave);
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.label6.Name = "label6";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // groupBox10
+            // 
+            resources.ApplyResources(this.groupBox10, "groupBox10");
+            this.groupBox10.Controls.Add(this.chk_onlyfactory);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.TabStop = false;
+            // 
+            // chk_onlyfactory
+            // 
+            resources.ApplyResources(this.chk_onlyfactory, "chk_onlyfactory");
+            this.chk_onlyfactory.Name = "chk_onlyfactory";
+            this.chk_onlyfactory.UseVisualStyleBackColor = true;
+            this.chk_onlyfactory.CheckedChanged += new System.EventHandler(this.chk_onlyfactory_CheckedChanged);
+            // 
+            // groupBox8
+            // 
+            resources.ApplyResources(this.groupBox8, "groupBox8");
+            this.groupBox8.Controls.Add(this.num_barrelinterval);
+            this.groupBox8.Controls.Add(this.label8);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.TabStop = false;
+            // 
+            // num_barrelinterval
+            // 
+            resources.ApplyResources(this.num_barrelinterval, "num_barrelinterval");
+            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.num_barrelinterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_barrelinterval.Name = "num_barrelinterval";
+            this.num_barrelinterval.Value = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.num_barrelinterval.ValueChanged += new System.EventHandler(this.num_barrelinterval_ValueChanged);
+            this.num_barrelinterval.Leave += new System.EventHandler(this.num_barrelinterval_Leave);
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // groupBox12
+            // 
+            resources.ApplyResources(this.groupBox12, "groupBox12");
+            this.groupBox12.Controls.Add(this.radio_saveloot);
+            this.groupBox12.Controls.Add(this.radio_savesailors);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.TabStop = false;
+            // 
+            // radio_saveloot
+            // 
+            resources.ApplyResources(this.radio_saveloot, "radio_saveloot");
+            this.radio_saveloot.Name = "radio_saveloot";
+            this.radio_saveloot.TabStop = true;
+            this.radio_saveloot.UseVisualStyleBackColor = true;
+            this.radio_saveloot.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // radio_savesailors
+            // 
+            resources.ApplyResources(this.radio_savesailors, "radio_savesailors");
+            this.radio_savesailors.Name = "radio_savesailors";
+            this.radio_savesailors.TabStop = true;
+            this.radio_savesailors.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            resources.ApplyResources(this.groupBox11, "groupBox11");
+            this.groupBox11.Controls.Add(this.radioButton7);
+            this.groupBox11.Controls.Add(this.radioButton6);
+            this.groupBox11.Controls.Add(this.radio_iron);
+            this.groupBox11.Controls.Add(this.radio_wood);
+            this.groupBox11.Controls.Add(this.radio_gold);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.TabStop = false;
+            // 
+            // radioButton7
+            // 
+            resources.ApplyResources(this.radioButton7, "radioButton7");
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.TabStop = true;
+            this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            resources.ApplyResources(this.radioButton6, "radioButton6");
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.TabStop = true;
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // radio_iron
+            // 
+            resources.ApplyResources(this.radio_iron, "radio_iron");
+            this.radio_iron.Name = "radio_iron";
+            this.radio_iron.TabStop = true;
+            this.radio_iron.UseVisualStyleBackColor = true;
+            this.radio_iron.CheckedChanged += new System.EventHandler(this.radio_iron_CheckedChanged);
+            // 
+            // radio_wood
+            // 
+            resources.ApplyResources(this.radio_wood, "radio_wood");
+            this.radio_wood.Name = "radio_wood";
+            this.radio_wood.TabStop = true;
+            this.radio_wood.UseVisualStyleBackColor = true;
+            this.radio_wood.CheckedChanged += new System.EventHandler(this.radio_wood_CheckedChanged);
+            // 
+            // radio_gold
+            // 
+            resources.ApplyResources(this.radio_gold, "radio_gold");
+            this.radio_gold.Name = "radio_gold";
+            this.radio_gold.TabStop = true;
+            this.radio_gold.UseVisualStyleBackColor = true;
+            this.radio_gold.CheckedChanged += new System.EventHandler(this.radio_gold_CheckedChanged);
+            // 
+            // tabPage7
+            // 
+            resources.ApplyResources(this.tabPage7, "tabPage7");
+            this.tabPage7.Controls.Add(this.groupBox21);
+            this.tabPage7.Controls.Add(this.groupBox1);
+            this.tabPage7.Controls.Add(this.groupBox17);
+            this.tabPage7.Controls.Add(this.groupBox9);
+            this.tabPage7.Controls.Add(this.groupBox14);
+            this.tabPage7.Controls.Add(this.groupBox13);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox21
+            // 
+            resources.ApplyResources(this.groupBox21, "groupBox21");
+            this.groupBox21.Controls.Add(this.btn_dumpcore);
+            this.groupBox21.Controls.Add(this.checkBox1);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.TabStop = false;
+            // 
+            // btn_dumpcore
+            // 
+            resources.ApplyResources(this.btn_dumpcore, "btn_dumpcore");
+            this.btn_dumpcore.Name = "btn_dumpcore";
+            this.btn_dumpcore.UseVisualStyleBackColor = true;
+            this.btn_dumpcore.Click += new System.EventHandler(this.btn_dumpcore_Click);
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            // 
+            // groupBox1
+            // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.linkLabel1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // linkLabel1
+            // 
+            resources.ApplyResources(this.linkLabel1, "linkLabel1");
+            this.linkLabel1.LinkColor = System.Drawing.Color.Silver;
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // textBox2
+            // 
+            resources.ApplyResources(this.textBox2, "textBox2");
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave_1);
             // 
             // groupBox17
             // 
@@ -316,6 +729,25 @@
             this.cbox_lang.FormattingEnabled = true;
             this.cbox_lang.Name = "cbox_lang";
             this.cbox_lang.SelectedIndexChanged += new System.EventHandler(this.cbox_lang_SelectedIndexChanged);
+            // 
+            // groupBox9
+            // 
+            resources.ApplyResources(this.groupBox9, "groupBox9");
+            this.groupBox9.Controls.Add(this.num_hibernationinterval);
+            this.groupBox9.Controls.Add(this.label9);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.TabStop = false;
+            // 
+            // num_hibernationinterval
+            // 
+            resources.ApplyResources(this.num_hibernationinterval, "num_hibernationinterval");
+            this.num_hibernationinterval.Name = "num_hibernationinterval";
+            this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
             // 
             // groupBox14
             // 
@@ -430,13 +862,6 @@
             this.radio_sleepforhrs.UseVisualStyleBackColor = true;
             this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radio_sleepforhrs_CheckedChanged);
             // 
-            // btn_dumpcore
-            // 
-            resources.ApplyResources(this.btn_dumpcore, "btn_dumpcore");
-            this.btn_dumpcore.Name = "btn_dumpcore";
-            this.btn_dumpcore.UseVisualStyleBackColor = true;
-            this.btn_dumpcore.Click += new System.EventHandler(this.btn_dumpcore_Click);
-            // 
             // groupBox13
             // 
             resources.ApplyResources(this.groupBox13, "groupBox13");
@@ -492,261 +917,6 @@
             resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.Name = "textBox3";
             this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
-            // 
-            // groupBox12
-            // 
-            resources.ApplyResources(this.groupBox12, "groupBox12");
-            this.groupBox12.Controls.Add(this.radio_saveloot);
-            this.groupBox12.Controls.Add(this.radio_savesailors);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.TabStop = false;
-            // 
-            // radio_saveloot
-            // 
-            resources.ApplyResources(this.radio_saveloot, "radio_saveloot");
-            this.radio_saveloot.Name = "radio_saveloot";
-            this.radio_saveloot.TabStop = true;
-            this.radio_saveloot.UseVisualStyleBackColor = true;
-            this.radio_saveloot.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
-            // 
-            // radio_savesailors
-            // 
-            resources.ApplyResources(this.radio_savesailors, "radio_savesailors");
-            this.radio_savesailors.Name = "radio_savesailors";
-            this.radio_savesailors.TabStop = true;
-            this.radio_savesailors.UseVisualStyleBackColor = true;
-            // 
-            // groupBox11
-            // 
-            resources.ApplyResources(this.groupBox11, "groupBox11");
-            this.groupBox11.Controls.Add(this.radioButton7);
-            this.groupBox11.Controls.Add(this.radioButton6);
-            this.groupBox11.Controls.Add(this.radio_iron);
-            this.groupBox11.Controls.Add(this.radio_wood);
-            this.groupBox11.Controls.Add(this.radio_gold);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.TabStop = false;
-            // 
-            // radioButton7
-            // 
-            resources.ApplyResources(this.radioButton7, "radioButton7");
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.TabStop = true;
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
-            // 
-            // radioButton6
-            // 
-            resources.ApplyResources(this.radioButton6, "radioButton6");
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.TabStop = true;
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
-            // 
-            // radio_iron
-            // 
-            resources.ApplyResources(this.radio_iron, "radio_iron");
-            this.radio_iron.Name = "radio_iron";
-            this.radio_iron.TabStop = true;
-            this.radio_iron.UseVisualStyleBackColor = true;
-            this.radio_iron.CheckedChanged += new System.EventHandler(this.radio_iron_CheckedChanged);
-            // 
-            // radio_wood
-            // 
-            resources.ApplyResources(this.radio_wood, "radio_wood");
-            this.radio_wood.Name = "radio_wood";
-            this.radio_wood.TabStop = true;
-            this.radio_wood.UseVisualStyleBackColor = true;
-            this.radio_wood.CheckedChanged += new System.EventHandler(this.radio_wood_CheckedChanged);
-            // 
-            // radio_gold
-            // 
-            resources.ApplyResources(this.radio_gold, "radio_gold");
-            this.radio_gold.Name = "radio_gold";
-            this.radio_gold.TabStop = true;
-            this.radio_gold.UseVisualStyleBackColor = true;
-            this.radio_gold.CheckedChanged += new System.EventHandler(this.radio_gold_CheckedChanged);
-            // 
-            // groupBox10
-            // 
-            resources.ApplyResources(this.groupBox10, "groupBox10");
-            this.groupBox10.Controls.Add(this.chk_onlyfactory);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.TabStop = false;
-            // 
-            // chk_onlyfactory
-            // 
-            resources.ApplyResources(this.chk_onlyfactory, "chk_onlyfactory");
-            this.chk_onlyfactory.Name = "chk_onlyfactory";
-            this.chk_onlyfactory.UseVisualStyleBackColor = true;
-            this.chk_onlyfactory.CheckedChanged += new System.EventHandler(this.chk_onlyfactory_CheckedChanged);
-            // 
-            // groupBox9
-            // 
-            resources.ApplyResources(this.groupBox9, "groupBox9");
-            this.groupBox9.Controls.Add(this.num_hibernationinterval);
-            this.groupBox9.Controls.Add(this.label9);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.TabStop = false;
-            // 
-            // num_hibernationinterval
-            // 
-            resources.ApplyResources(this.num_hibernationinterval, "num_hibernationinterval");
-            this.num_hibernationinterval.Name = "num_hibernationinterval";
-            this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // groupBox8
-            // 
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Controls.Add(this.num_barrelinterval);
-            this.groupBox8.Controls.Add(this.label8);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
-            // 
-            // num_barrelinterval
-            // 
-            resources.ApplyResources(this.num_barrelinterval, "num_barrelinterval");
-            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.num_barrelinterval.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.num_barrelinterval.Name = "num_barrelinterval";
-            this.num_barrelinterval.Value = new decimal(new int[] {
-            22,
-            0,
-            0,
-            0});
-            this.num_barrelinterval.ValueChanged += new System.EventHandler(this.num_barrelinterval_ValueChanged);
-            this.num_barrelinterval.Leave += new System.EventHandler(this.num_barrelinterval_Leave);
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // groupBox6
-            // 
-            resources.ApplyResources(this.groupBox6, "groupBox6");
-            this.groupBox6.Controls.Add(this.num_stonelimit);
-            this.groupBox6.Controls.Add(this.num_ironlimit);
-            this.groupBox6.Controls.Add(this.num_woodlimit);
-            this.groupBox6.Controls.Add(this.label6);
-            this.groupBox6.Controls.Add(this.label5);
-            this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Controls.Add(this.label3);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.TabStop = false;
-            // 
-            // num_stonelimit
-            // 
-            resources.ApplyResources(this.num_stonelimit, "num_stonelimit");
-            this.num_stonelimit.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.num_stonelimit.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.num_stonelimit.Name = "num_stonelimit";
-            this.num_stonelimit.Leave += new System.EventHandler(this.num_stonelimit_Leave);
-            // 
-            // num_ironlimit
-            // 
-            resources.ApplyResources(this.num_ironlimit, "num_ironlimit");
-            this.num_ironlimit.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.num_ironlimit.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.num_ironlimit.Name = "num_ironlimit";
-            this.num_ironlimit.Leave += new System.EventHandler(this.num_ironlimit_Leave);
-            // 
-            // num_woodlimit
-            // 
-            resources.ApplyResources(this.num_woodlimit, "num_woodlimit");
-            this.num_woodlimit.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.num_woodlimit.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.num_woodlimit.Name = "num_woodlimit";
-            this.num_woodlimit.Leave += new System.EventHandler(this.num_woodlimit_Leave);
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label6.Name = "label6";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // checkBox1
-            // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
-            // 
-            // groupBox1
-            // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.linkLabel1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
-            // linkLabel1
-            // 
-            resources.ApplyResources(this.linkLabel1, "linkLabel1");
-            this.linkLabel1.LinkColor = System.Drawing.Color.Silver;
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // textBox2
-            // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave_1);
             // 
             // tabPage3
             // 
@@ -1124,8 +1294,36 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitconcrete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitfuel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_limitmech)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_ironlimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_woodlimit)).EndInit();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).EndInit();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox17.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).EndInit();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.groupBox16.ResumeLayout(false);
@@ -1136,25 +1334,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_sleepfor)).EndInit();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_hibernationinterval)).EndInit();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_barrelinterval)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_stonelimit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_ironlimit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_woodlimit)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.num_removenum)).EndInit();
             this.tabPage6.ResumeLayout(false);
@@ -1237,14 +1416,6 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown num_barrelinterval;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.NumericUpDown num_stonelimit;
-        private System.Windows.Forms.NumericUpDown num_ironlimit;
-        public System.Windows.Forms.NumericUpDown num_woodlimit;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
@@ -1295,5 +1466,29 @@
         private System.Windows.Forms.CheckBox chk_aupgrade;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button btn_stats;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.NumericUpDown num_stonelimit;
+        private System.Windows.Forms.NumericUpDown num_ironlimit;
+        public System.Windows.Forms.NumericUpDown num_woodlimit;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        public System.Windows.Forms.NumericUpDown num_limitconcrete;
+        public System.Windows.Forms.NumericUpDown num_limitfuel;
+        public System.Windows.Forms.NumericUpDown num_limitmech;
     }
 }

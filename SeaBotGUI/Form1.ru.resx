@@ -133,92 +133,116 @@
   <data name="tabPage4.Text" xml:space="preserve">
     <value>О проекте</value>
   </data>
-  <data name="groupBox17.Text" xml:space="preserve">
-    <value>Язык</value>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>323, 16</value>
   </data>
-  <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
   </data>
-  <data name="chk_sleepenabled.Text" xml:space="preserve">
-    <value>Включено</value>
+  <data name="label16.Text" xml:space="preserve">
+    <value>0 = бесконечность</value>
   </data>
-  <data name="chk_smartsleep.Text" xml:space="preserve">
-    <value>Умный сон</value>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
-  <data name="radio_sleepeverymin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Бетон</value>
   </data>
-  <data name="radio_sleepeverymin.Text" xml:space="preserve">
-    <value>Мин.</value>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 34</value>
   </data>
-  <data name="radio_sleepeveryhrs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 17</value>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
-  <data name="radio_sleepeveryhrs.Text" xml:space="preserve">
-    <value>Час.</value>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Топливо</value>
   </data>
-  <data name="groupBox16.Text" xml:space="preserve">
-    <value>Каждые</value>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 33</value>
   </data>
-  <data name="radio_sleepformins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 17</value>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
   </data>
-  <data name="radio_sleepformins.Text" xml:space="preserve">
-    <value>Мин.</value>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Запчасть</value>
   </data>
-  <data name="radio_sleepforhrs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 17</value>
+  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 17</value>
   </data>
-  <data name="radio_sleepforhrs.Text" xml:space="preserve">
-    <value>Час.</value>
+  <data name="checkBox2.Text" xml:space="preserve">
+    <value>Все до лимитов</value>
   </data>
-  <data name="groupBox15.Text" xml:space="preserve">
-    <value>Бот будет спать</value>
+  <data name="radioButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 17</value>
   </data>
-  <data name="groupBox14.Text" xml:space="preserve">
-    <value>Сон</value>
+  <data name="radioButton3.Text" xml:space="preserve">
+    <value>Бетон</value>
   </data>
-  <data name="btn_dumpcore.Text" xml:space="preserve">
-    <value>Дамп инфы</value>
+  <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
   </data>
-  <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 62</value>
+  <data name="radioButton2.Text" xml:space="preserve">
+    <value>Топливо</value>
   </data>
-  <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 23</value>
+  <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
   </data>
-  <data name="button5.Text" xml:space="preserve">
-    <value>Стоп</value>
+  <data name="radioButton1.Text" xml:space="preserve">
+    <value>Запчасть</value>
   </data>
-  <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 23</value>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 7</value>
   </data>
-  <data name="button4.Text" xml:space="preserve">
-    <value>Старт</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
   </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>0 = бесконечность</value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Код старта:</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
   </data>
-  <data name="linkLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 16</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Камень</value>
   </data>
-  <data name="linkLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
   </data>
-  <data name="linkLabel6.Text" xml:space="preserve">
-    <value>Как его получить?</value>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Железо</value>
   </data>
-  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 20</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Токен</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
   </data>
-  <data name="groupBox13.Text" xml:space="preserve">
-    <value>Телеграм Бот</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Дерево</value>
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Лимит на производство</value>
+  </data>
+  <data name="chk_onlyfactory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 26</value>
+  </data>
+  <data name="chk_onlyfactory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="chk_onlyfactory.Text" xml:space="preserve">
+    <value>Только заводы</value>
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Авто Апгрейд</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Интервал (сек.)</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Авто-Бочки</value>
   </data>
   <data name="radio_saveloot.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
@@ -274,47 +298,11 @@
   <data name="groupBox11.Text" xml:space="preserve">
     <value>Лут авто-кораблей</value>
   </data>
-  <data name="chk_onlyfactory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 26</value>
+  <data name="tabPage8.Text" xml:space="preserve">
+    <value>Стратегия</value>
   </data>
-  <data name="chk_onlyfactory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
-  </data>
-  <data name="chk_onlyfactory.Text" xml:space="preserve">
-    <value>Только заводы</value>
-  </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>Авто Апгрейд</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Спать (мин.)</value>
-  </data>
-  <data name="groupBox9.Text" xml:space="preserve">
-    <value>Другая сессия</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Интервал (сек.)</value>
-  </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>Авто-Бочки</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 7</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>0 = бесконечность</value>
-  </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>Лимит на производство</value>
+  <data name="btn_dumpcore.Text" xml:space="preserve">
+    <value>Дамп инфы</value>
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 17</value>
@@ -339,6 +327,102 @@
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Логин</value>
+  </data>
+  <data name="groupBox17.Text" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Спать (мин.)</value>
+  </data>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Другая сессия</value>
+  </data>
+  <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="chk_sleepenabled.Text" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="chk_smartsleep.Text" xml:space="preserve">
+    <value>Умный сон</value>
+  </data>
+  <data name="radio_sleepeverymin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="radio_sleepeverymin.Text" xml:space="preserve">
+    <value>Мин.</value>
+  </data>
+  <data name="radio_sleepeveryhrs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="radio_sleepeveryhrs.Text" xml:space="preserve">
+    <value>Час.</value>
+  </data>
+  <data name="groupBox16.Text" xml:space="preserve">
+    <value>Каждые</value>
+  </data>
+  <data name="radio_sleepformins.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="radio_sleepformins.Text" xml:space="preserve">
+    <value>Мин.</value>
+  </data>
+  <data name="radio_sleepforhrs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="radio_sleepforhrs.Text" xml:space="preserve">
+    <value>Час.</value>
+  </data>
+  <data name="groupBox15.Text" xml:space="preserve">
+    <value>Бот будет спать</value>
+  </data>
+  <data name="groupBox14.Text" xml:space="preserve">
+    <value>Сон</value>
+  </data>
+  <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>54, 62</value>
+  </data>
+  <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 23</value>
+  </data>
+  <data name="button5.Text" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 23</value>
+  </data>
+  <data name="button4.Text" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Код старта:</value>
+  </data>
+  <data name="linkLabel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 16</value>
+  </data>
+  <data name="linkLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="linkLabel6.Text" xml:space="preserve">
+    <value>Как его получить?</value>
+  </data>
+  <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="label10.Text" xml:space="preserve">
+    <value>Токен</value>
+  </data>
+  <data name="groupBox13.Text" xml:space="preserve">
+    <value>Телеграм Бот</value>
+  </data>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Бот</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Настройки</value>

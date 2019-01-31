@@ -160,6 +160,10 @@ namespace SeaBotCore
                         FishPier.CollectFish();
                     }
 
+                    if (Config.collectmuseum)
+                    {
+                        Museum.CollectMuseum();
+                    }
 
                     if (Config.collectfactory)
                     {
@@ -168,8 +172,7 @@ namespace SeaBotCore
 
                     if (Config.prodfactory)
                     {
-                        Factories.ProduceFactories(Config.ironlimit, Config.stonelimit,
-                            Config.woodlimit);
+                        Factories.ProduceFactories();
                     }
 
                     if (Config.finishupgrade)

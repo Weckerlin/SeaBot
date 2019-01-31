@@ -214,6 +214,15 @@ namespace SeaBotCore.Localizaion {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Collecting Museum.
+        /// </summary>
+        internal static string MUSEUM_COLLECT {
+            get {
+                return ResourceManager.GetString("MUSEUM_COLLECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Sending Heartbeat....
         /// </summary>
         internal static string NETWORKING_HEARTBEAT {

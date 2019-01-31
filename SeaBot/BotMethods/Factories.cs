@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SeaBotCore.Config;
 using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
@@ -25,7 +26,7 @@ namespace SeaBotCore.BotMethods
 {
     internal class Factories
     {
-        public static void ProduceFactories(int num_ironlimit, int num_stonelimit, int num_woodlimit)
+        public static void ProduceFactories()
         {
             foreach (var data in Core.GlobalData.Buildings)
             {
@@ -36,14 +37,204 @@ namespace SeaBotCore.BotMethods
                     {
                         continue;
                     }
-
-                    //lets start?
-                    //DO WE HAVE ENOUGH RESOURCES
                     var needed = def.Levels.Level.FirstOrDefault(n => n.Id == data.Level);
                     if (needed == null)
                     {
                         continue;
                     }
+                    if (data.DefId == 11)
+                    {
+                        //This is a machinery
+                        if (Core.Config.autothresholdworkshop)
+                        {
+                            //Mechanical part
+                          
+                            if (Core.GlobalData.GetAmountItem(33) <Core.Config.thresholdmechanical)
+                            {
+                                var prodid = 1;
+                                bool enough = true;
+                                var mat = needed.ProdOutputs.ProdOutput.Where(n => n.Id == 1).FirstOrDefault();
+                                if (mat == null)
+                                {
+                                    continue;
+                                }
+                                foreach (var prod in mat.Inputs.Input)
+                                {
+                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    {
+                                        enough = false;
+                                    }
+                                   
+                                }
+
+                                if (enough)
+                                {
+                                    foreach (var inp in mat.Inputs.Input)
+                                    {
+                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= (int)inp.Amount;
+                                    }
+                                    Logger.Logger.Info(
+                                        string.Format(Localization.FACTORIES_STARTED_PROD,
+                                            MaterialDB.GetLocalizedName(mat.MaterialId)));
+                                    Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
+                                        prodid));
+                                    data.ProdStart = TimeUtils.GetEpochTime();
+
+                                    continue;
+                                }
+
+                                //This will work
+                            }
+                                //Fuel
+                            if (Core.GlobalData.GetAmountItem(180) < Core.Config.thresholdfuel)
+                            {
+                                var prodid = 2;
+                                bool enough = true;
+                                var mat = needed.ProdOutputs.ProdOutput.Where(n => n.Id == prodid).FirstOrDefault();
+                                if (mat == null)
+                                {
+                                    continue;
+                                }
+                                foreach (var prod in mat.Inputs.Input)
+                                {
+                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    {
+                                        enough = false;
+                                    }
+
+                                }
+
+                                if (enough)
+                                {
+                                    foreach (var inp in mat.Inputs.Input)
+                                    {
+                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= (int)inp.Amount;
+                                    }
+                                    Logger.Logger.Info(
+                                        string.Format(Localization.FACTORIES_STARTED_PROD,
+                                            MaterialDB.GetLocalizedName(mat.MaterialId)));
+                                    Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
+                                        prodid));
+                                    data.ProdStart = TimeUtils.GetEpochTime();
+                                    continue;
+                                }
+                            }
+                            //todo CHECK FOR LEVEL!!!
+                            //Concrete
+                            if (data.Level >= 5)
+                            {
+                                if (Core.GlobalData.GetAmountItem(182) < Core.Config.thresholdconcrete)
+                                {
+                                    var prodid = 3;
+                                
+                                    bool enough = true;
+                                    var mat = needed.ProdOutputs.ProdOutput.Where(n => n.Id == prodid).FirstOrDefault();
+                                    if (mat == null)
+                                    {
+                                        continue;
+                                    }
+                                    foreach (var prod in mat.Inputs.Input)
+                                    {
+                                        if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                        {
+                                            enough = false;
+                                        }
+
+                                    }
+
+                                    if (enough)
+                                    {
+                                        foreach (var inp in mat.Inputs.Input)
+                                        {
+                                            Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= (int)inp.Amount;
+                                        }
+                                        Logger.Logger.Info(
+                                            string.Format(Localization.FACTORIES_STARTED_PROD,
+                                                MaterialDB.GetLocalizedName(mat.MaterialId)));
+                                        Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
+                                            prodid));
+                                        data.ProdStart = TimeUtils.GetEpochTime();
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            var prodid = 0;
+                            var matid = 0;
+                            int thresholdconc=0;
+                            switch (Core.Config.workshoptype)
+                            {   
+                                case WorkshopType.Concrete:
+                                {
+                                    matid = 182;
+                                    prodid = 3;
+                                    thresholdconc = Core.Config.thresholdconcrete;
+                                    }
+                                 break;
+                                case WorkshopType.Fuel:
+                                {
+                                    matid = 180;
+                                    prodid = 2;
+                                    thresholdconc = Core.Config.thresholdfuel;
+                                    }
+                                    break;
+                                case WorkshopType.MechanicalPart:
+                                {
+                                    matid = 33;
+                                    prodid = 1;
+                                    thresholdconc = Core.Config.thresholdmechanical;
+                                    break;
+                                }
+                            }
+
+                            if (prodid == 3 && data.Level < 5)
+                            {
+                                continue;
+                            }
+                            if (Core.GlobalData.GetAmountItem(matid) < thresholdconc||thresholdconc==0)
+                            {
+                               
+                                bool enough = true;
+                                var mat = needed.ProdOutputs.ProdOutput.Where(n => n.Id == prodid).FirstOrDefault();
+                                if (mat == null)
+                                {
+                                    continue;
+                                }
+                                foreach (var prod in mat.Inputs.Input)
+                                {
+                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    {
+                                        enough = false;
+                                    }
+
+                                }
+
+                                if (enough)
+                                {
+                                    foreach (var inp in mat.Inputs.Input)
+                                    {
+                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= (int)inp.Amount;
+                                    }
+                                    Logger.Logger.Info(
+                                        string.Format(Localization.FACTORIES_STARTED_PROD,
+                                            MaterialDB.GetLocalizedName(mat.MaterialId)));
+                                    Networking.AddTask(new Task.StartBuildingProducingTask(data.InstId,
+                                        prodid));
+                                    data.ProdStart = TimeUtils.GetEpochTime();
+                                    continue;
+                                }
+                            }
+                        }
+
+                        //Don't need another shit
+                        continue;
+                    }
+
+                    //lets start?
+                    //DO WE HAVE ENOUGH RESOURCES
+                    
 
                     var ok = true;
                     var inputs = needed.ProdOutputs.ProdOutput;
@@ -81,9 +272,9 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && num_woodlimit != 0)
+                            if (amount != null && Core.Config.woodlimit != 0)
                             {
-                                if (amount.Amount > num_woodlimit)
+                                if (amount.Amount > Core.Config.woodlimit)
                                 {
                                     ok = false;
                                 }
@@ -94,9 +285,9 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && num_ironlimit != 0)
+                            if (amount != null && Core.Config.ironlimit != 0)
                             {
-                                if (amount.Amount > num_ironlimit)
+                                if (amount.Amount > Core.Config.ironlimit)
                                 {
                                     ok = false;
                                 }
@@ -107,9 +298,9 @@ namespace SeaBotCore.BotMethods
                         {
                             var amount =
                                 Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
-                            if (amount != null && num_stonelimit != 0)
+                            if (amount != null && Core.Config.stonelimit != 0)
                             {
-                                if (amount.Amount > num_stonelimit)
+                                if (amount.Amount > Core.Config.stonelimit)
                                 {
                                     ok = false;
                                 }

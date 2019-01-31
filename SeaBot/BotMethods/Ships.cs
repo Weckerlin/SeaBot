@@ -76,8 +76,13 @@ namespace SeaBotCore.BotMethods
                                 Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
                                     Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
                                     Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
-                            Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
-                                lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                            var upg = Core.GlobalData.Upgradeables.FirstOrDefault(n => n.DefId == ship.TargetId);
+                            if (upg != null)
+                            {
+                              upg.Progress +=
+                                    lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                            }
+                        
                             _deship.Add(ship);
                             Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                                 Core.GlobalData.Level, Enums.EObject.upgradeable,
@@ -146,7 +151,7 @@ namespace SeaBotCore.BotMethods
 
                     if (ship.Type == "global_contractor")
                     {
-                        var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                        var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
                         if (AutoShipUtils.isVoyageCompleted(ship))
                         {
                             _deship.Add(ship);
@@ -177,7 +182,7 @@ namespace SeaBotCore.BotMethods
 
                     if (ship.Type == "dealer")
                     {
-                        var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                        var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
                         if (AutoShipUtils.isVoyageCompleted(ship))
                         {
 
@@ -195,7 +200,7 @@ namespace SeaBotCore.BotMethods
 
                     if (ship.Type == "treasure")
                     {
-                        var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).First();
+                        var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
                         if (AutoShipUtils.isVoyageCompleted(ship))
                         {
                             _deship.Add(ship);

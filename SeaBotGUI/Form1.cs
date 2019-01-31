@@ -31,6 +31,7 @@ using Exceptionless.Configuration;
 using Newtonsoft.Json;
 using SeaBotCore;
 using SeaBotCore.Cache;
+using SeaBotCore.Config;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Materials;
 using SeaBotCore.Localizaion;
@@ -116,12 +117,12 @@ namespace SeaBotGUI
         public void LoadControls()
         {
             ExceptionlessClient.Default.Register(true);
-
+            ExceptionlessClient.Default.SubmitLog("Logined");
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             textBox2.Text = Core.Config.server_token;
             num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             checkBox1.Checked = Core.Config.debug;
-           
+       
             chk_autoshipupg.Checked = Core.Config.autoship;
             chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
             chk_autofish.Checked = Core.Config.collectfish;
@@ -136,6 +137,9 @@ namespace SeaBotGUI
             num_ironlimit.Value = Core.Config.ironlimit;
             num_woodlimit.Value = Core.Config.woodlimit;
             num_stonelimit.Value = Core.Config.stonelimit;
+            num_limitfuel.Value = Core.Config.thresholdfuel;
+            num_limitconcrete.Value = Core.Config.thresholdconcrete;
+            num_limitmech.Value = Core.Config.thresholdmechanical;
             textBox3.Text = Core.Config.telegramtoken;
             num_barrelinterval.Value = Core.Config.barrelinterval;
             SeaBotCore.Events.Events.BotStoppedEvent.BotStopped.OnBotStoppedEvent += BotStopped_OnBotStoppedEvent;
@@ -170,6 +174,24 @@ namespace SeaBotGUI
             else
             {
                 radio_sleepeverymin.Checked = true;
+            }
+
+            if (Core.Config.autothresholdworkshop)
+            {
+                checkBox2.Checked = true;
+            }
+
+            if (Core.Config.workshoptype == WorkshopType.Fuel)
+            {
+                radioButton2.Checked = true;
+            }
+            if (Core.Config.workshoptype == WorkshopType.Concrete)
+            {
+                radioButton3.Checked = true;
+            }
+            if (Core.Config.workshoptype == WorkshopType.MechanicalPart)
+            {
+                radioButton1.Checked = true;
             }
 
             linkLabel1.Links.Add(new LinkLabel.Link
@@ -211,6 +233,8 @@ namespace SeaBotGUI
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            var exc = (Exception) e.ExceptionObject;
+            exc.ToExceptionless().Submit();
             Logger.Fatal(e.ExceptionObject.ToString());
         }
 
@@ -842,6 +866,74 @@ namespace SeaBotGUI
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Core.Config.autothresholdworkshop = checkBox2.Checked;
+            if (checkBox2.Checked)
+            {
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                radioButton3.Enabled = false;
+            }
+            else
+            {
+                radioButton1.Enabled = true;
+                radioButton2.Enabled = true;
+                radioButton3.Enabled = true;
+            }
+        }
+
+        private void RadioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            WorkShopRadio();
+        }
+
+        private void RadioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            WorkShopRadio();
+        }
+
+        private void RadioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            WorkShopRadio();
+        }
+
+        public void WorkShopRadio()
+        {
+            if (radioButton1.Checked)
+            {
+                Core.Config.workshoptype = WorkshopType.MechanicalPart;
+            }
+
+            if (radioButton2.Checked)
+            {
+                Core.Config.workshoptype = WorkshopType.Fuel;
+            }
+            if (radioButton3.Checked)
+            {
+                Core.Config.workshoptype = WorkshopType.Concrete;
+            }
+        }
+
+     
+
+        private void Num_limitmech_Leave(object sender, EventArgs e)
+        {
+            Core.Config.thresholdmechanical =(int) num_limitmech.Value;
+        }
+
+       
+
+        private void Num_limitfuel_Leave(object sender, EventArgs e)
+        {
+            Core.Config.thresholdfuel = (int)num_limitfuel.Value;
+        }
+
+        private void Num_limitconcrete_Leave(object sender, EventArgs e)
+        {
+            Core.Config.thresholdconcrete = (int)num_limitconcrete.Value;
         }
     }
 }

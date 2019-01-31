@@ -22,6 +22,13 @@ using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.Config
 {
+    public enum WorkshopType
+    {
+        MechanicalPart,
+        Fuel,
+        Concrete
+    }
+    
     public class Config : INotifyPropertyChanged
     {
         private bool _acceptedresponsibility;
@@ -51,7 +58,47 @@ namespace SeaBotCore.Config
         private int _woodlimit;
         private bool _collectmuseum;
         private LocalizationController.ELanguages _language = LocalizationController.GetDefaultLang();
-
+        private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
+        private bool _autothresholdworkshop;
+        private int _thresholdmechanical;
+        private int _thresholdfuel;
+        private int _thresholdconcrete;
+        public int thresholdconcrete
+        {
+            get => _thresholdconcrete;
+            set
+            {
+                _thresholdconcrete = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("thresholdconcrete"));
+            }
+        }
+        public int thresholdfuel
+        {
+            get => _thresholdfuel;
+            set
+            {
+                _thresholdfuel = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("thresholdfuel"));
+            }
+        }
+        public bool autothresholdworkshop
+        {
+            get => _autothresholdworkshop;
+            set
+            {
+                _autothresholdworkshop = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("autothresholdworkshop"));
+            }
+        }
+        public int thresholdmechanical
+        {
+            get => _thresholdmechanical;
+            set
+            {
+                _thresholdmechanical = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("thresholdmechanical"));
+            }
+        }
         public LocalizationController.ELanguages language
         {
             get => _language;
@@ -60,7 +107,16 @@ namespace SeaBotCore.Config
                 _language = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("language"));
             }
-        } //done
+        }
+        public WorkshopType workshoptype
+        {
+            get => _workshoptype;
+            set
+            {
+                _workshoptype = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("workshoptype"));
+            }
+        }
 
         public bool sleepenabled
         {
@@ -70,7 +126,7 @@ namespace SeaBotCore.Config
                 _sleepenabled = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepenabled"));
             }
-        } //done
+        } 
 
         public bool collectmuseum
         {
@@ -80,7 +136,7 @@ namespace SeaBotCore.Config
                 _collectmuseum = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("collectmuseum"));
             }
-        } //done
+        } 
 
         public bool smartsleepenabled
         {
@@ -90,7 +146,7 @@ namespace SeaBotCore.Config
                 _smartsleepenabled = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("smartsleepenabled"));
             }
-        } //done
+        } 
 
         public int sleepevery
         {
@@ -100,7 +156,7 @@ namespace SeaBotCore.Config
                 _sleepevery = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepevery"));
             }
-        } //done
+        } 
 
         public int sleepfor
         {
@@ -110,7 +166,7 @@ namespace SeaBotCore.Config
                 _sleepfor = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepfor"));
             }
-        } //done
+        } 
 
         public bool sleepforhrs
         {
@@ -120,7 +176,7 @@ namespace SeaBotCore.Config
                 _sleepforhrs = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepforhrs"));
             }
-        } //done
+        } 
 
         public bool sleepeveryhrs
         {
@@ -130,7 +186,7 @@ namespace SeaBotCore.Config
                 _sleepeveryhrs = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("sleepeveryhrs"));
             }
-        } //done
+        } 
 
         public bool acceptedresponsibility
         {
@@ -140,7 +196,7 @@ namespace SeaBotCore.Config
                 _acceptedresponsibility = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("acceptedresponsibility"));
             }
-        } //done
+        } 
 
         public string server_token
         {
@@ -150,7 +206,7 @@ namespace SeaBotCore.Config
                 _serverToken = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("server_token"));
             }
-        } //done
+        } 
 
         public bool debug
         {
@@ -160,7 +216,7 @@ namespace SeaBotCore.Config
                 _debug = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("debug"));
             }
-        } //done
+        } 
 
         public int woodlimit
         {

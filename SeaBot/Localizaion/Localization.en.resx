@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
     <value>Barrel! Collecting {0} sailors!</value>
@@ -236,5 +236,8 @@
   </data>
   <data name="TIMEUTIL.TIMEMISMATCH" xml:space="preserve">
     <value>Looks like your local time and server time is mismatched! Using a {0:F2}min. offset</value>
+  </data>
+  <data name="MUSEUM_COLLECT" xml:space="preserve">
+    <value>Collecting Museum</value>
   </data>
 </root>

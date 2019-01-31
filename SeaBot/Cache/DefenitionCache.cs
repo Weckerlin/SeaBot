@@ -255,7 +255,14 @@ namespace SeaBotCore.Cache
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
+            try
+            {
             _cache.Add(type, ret);
+            }
+            catch (Exception e)
+            {
+               
+            }
             return ret;
         }
     }
