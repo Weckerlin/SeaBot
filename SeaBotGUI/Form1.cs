@@ -838,5 +838,10 @@ namespace SeaBotGUI
             Stats stats = new Stats();
             stats.Show();
         }
+
+        private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

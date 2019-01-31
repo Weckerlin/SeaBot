@@ -361,6 +361,9 @@
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Здания</value>
   </data>
+  <data name="btn_stats.Text" xml:space="preserve">
+    <value>Статистика</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

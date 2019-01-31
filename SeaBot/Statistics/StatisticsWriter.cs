@@ -46,15 +46,22 @@ namespace SeaBotCore.Statistics
                 ThreadKill.KillTheThread(_thread); // todo fix
             }).Start();
         }
+
         private static void ThreadLoop()
         {
-
-            if (Core.GlobalData != null)
+            while (true)
             {
-                LogStatistics();
+                Thread.Sleep(2000);
+                if (Core.GlobalData != null)
+                {
+                    LogStatistics();
+                    Thread.Sleep(MinuteInterval * 60 * 1000);
+                }
+
+               
             }
-            Thread.Sleep(MinuteInterval * 60 * 1000);
         }
+
         private static void LogStatistics()
         {
             try
