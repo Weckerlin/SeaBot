@@ -56,7 +56,7 @@ namespace SeaBotCore.BotMethods
             {
                 museum.ProdStart = TimeUtils.GetEpochTime();
                 Logger.Logger.Info(Localization.MUSEUM_COLLECT);
-                Networking.AddTask(new Task.ConfirmMuseumTask((int) b.TurnCount));
+                Networking.AddTask(new Task.ConfirmMuseumTask((int)b.TurnCount));
             }
         }
     }

@@ -46,10 +46,10 @@ namespace SeaBotCore.Utils
                 }
                 else
                 {
-                    _timeOffset =  TimeSpan.FromMinutes(timedelay);
+                    _timeOffset =  TimeSpan.FromMinutes(timedelay).Negate();
                 }
 
-                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.Minutes);
+                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalMinutes);
                 //Time is really delayed!
             }
         }
