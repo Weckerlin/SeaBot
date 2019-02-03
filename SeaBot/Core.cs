@@ -108,7 +108,7 @@ namespace SeaBotCore
             {
                 if ((int) e == 4010 || e == 0 || e == Enums.EErrorCode.INVALID_SESSION ||
                     e == Enums.EErrorCode.COLLECTION_IN_FUTURE || e == Enums.EErrorCode.COLLECTION_IN_PAST ||
-                    (int) e == 1011)
+                    (int) e == 1011||(int)e==2006)
                 {
                     Logger.Logger.Info(Localization.CORE_RESTARTING);
                     StopBot();
