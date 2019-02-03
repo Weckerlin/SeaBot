@@ -53,7 +53,8 @@ namespace SeaBotCore.BotMethods
 
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
-            { 
+            {
+                museum.ProdStart = TimeUtils.GetEpochTime();
                 Logger.Logger.Info(Localization.MUSEUM_COLLECT);
                 Networking.AddTask(new Task.ConfirmMuseumTask((int) b.TurnCount));
             }

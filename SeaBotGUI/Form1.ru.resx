@@ -283,6 +283,9 @@
   <data name="radio_iron.Text" xml:space="preserve">
     <value>Железо</value>
   </data>
+  <data name="radio_wood.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 43</value>
+  </data>
   <data name="radio_wood.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
   </data>

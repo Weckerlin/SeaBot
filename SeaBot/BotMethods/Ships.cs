@@ -69,7 +69,7 @@ namespace SeaBotCore.BotMethods
                     {
                         var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                             ?.Levels.Level
-                            .First(n => n.Id == ship.TargetLevel);
+                            .FirstOrDefault(n => n.Id == ship.TargetLevel);
                         if (lvl != null && AutoShipUtils.isVoyageCompleted(ship))
                         {
                             Logger.Logger.Info(
@@ -274,36 +274,62 @@ namespace SeaBotCore.BotMethods
                 case "upgradeable":
                     traveltime = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                          ?.Levels.Level
-                         .First(n => n.Id == ship.TargetLevel).TravelTime;
+                         .FirstOrDefault(n => n.Id == ship.TargetLevel)?.TravelTime;
                     break;
                 case "marketplace":
-                    traveltime = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId).TravelTime;
+                    traveltime = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
                     break;
-                case "wreck":
+                //case "wreck":
 
-                    var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
-                    traveltime = (int)Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).FirstOrDefault().TravelTime;
-                    break;
-                case "contractor":
+                //    var wrk = Core.GlobalData.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
+                //    traveltime = (int)Definitions.WreckDef.Items.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.TravelTime;
+                //    break;
+                //case "contractor":
 
-                    traveltime = (int)Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
-                    break;
-                case "global_contractor":
+                //    var l = Definitions.ConDef.Items.Item
+                //        .FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
+                //    if (l !=
+                //        null)
+                //        traveltime = (int) l;
+                //    break;
+                //case "global_contractor":
 
-                    traveltime = (int)Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
-                    break;
-                case "outpost":
+                //    var time = Definitions.GConDef.Items.Item
+                //        .FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
+                //    if (time !=
+                //        null)
+                //        traveltime = (int) time;
+                //    break;
+                //case "outpost":
 
-                    traveltime = (int)Definitions.OutpostDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
-                    break;
-                case "social_contract":
+                //    OutpostDefinitions.Item first = null;
+                //    foreach (var n in Definitions.OutpostDef.Items.Item)
+                //    {
+                //        if (n.DefId == ship.TargetId)
+                //        {
+                //            first = n;
+                //            break;
+                //        }
+                //    }
 
-                    traveltime = (int)Definitions.SContractDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
-                    break;
-                case "dealer":
+                //    traveltime = (int)first.TravelTime;
+                //    break;
+                //case "social_contract":
 
-                    traveltime = (int)Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault().TravelTime;
-                    break;
+                //    var travelTime = Definitions.SContractDef.Items.Item
+                //        .FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
+                //    if (travelTime !=
+                //        null)
+                //        traveltime = (int) travelTime;
+                //    break;
+                //case "dealer":
+
+                //    var o = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId)
+                //        .FirstOrDefault()?.TravelTime;
+                //    if (o !=
+                //        null)
+                //        traveltime = (int) o;
+                //    break;
             }
             if(traveltime==null)
             {
