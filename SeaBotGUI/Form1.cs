@@ -935,5 +935,10 @@ namespace SeaBotGUI
         {
             Core.Config.thresholdconcrete = (int)num_limitconcrete.Value;
         }
+
+        private void Label17_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
