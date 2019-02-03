@@ -35,13 +35,13 @@ namespace SeaBotCore.Utils
 
         public static void CheckForTimeMismatch(long time)
         {
-            var timedelay = ((DateTime.UtcNow+_timeOffset) - FromUnixTime(time)).TotalMinutes;
+            var timedelay = ((DateTime.UtcNow+_timeOffset) - FromUnixTime(time)).TotalSeconds;
 
-            if (timedelay >= 3 || timedelay <= -3)
+            if (timedelay >= 3 || timedelay <= 0)
             {
                 Logger.Logger.Warning(string.Format(Localization.TIMEUTIL_TIMEMISMATCH, timedelay));
                 _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
-                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalMinutes);
+                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalSeconds);
                 //Time is really delayed!
             }
         }

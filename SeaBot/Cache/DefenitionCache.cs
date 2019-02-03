@@ -180,7 +180,9 @@ namespace SeaBotCore.Cache
                 case EDefinitionType.MuseumLevels:
                     filename = "museum_level";
                     break;
-
+                case EDefinitionType.LevelUp:
+                    filename = "levelup";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -251,6 +253,9 @@ namespace SeaBotCore.Cache
                 case EDefinitionType.MuseumLevels:
                     ret = JsonConvert.DeserializeObject<MuseumLevelDefenitions.Root>(content);
                     break;
+                case EDefinitionType.LevelUp:
+                    ret = JsonConvert.DeserializeObject<LevelUPDefenition.Root>(content);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -261,8 +266,9 @@ namespace SeaBotCore.Cache
             }
             catch (Exception e)
             {
-               
+                // ignored
             }
+
             return ret;
         }
     }

@@ -40,7 +40,8 @@ namespace SeaBotCore.Data.Definitions
         Outpost,
         SocialContract,
         Treasure,
-        MuseumLevels
+        MuseumLevels,
+        LevelUp
     }
 
     public static class Definitions
@@ -92,5 +93,7 @@ namespace SeaBotCore.Data.Definitions
 
         public static MuseumLevelDefenitions.Root MuseumLvlDef =>
             (MuseumLevelDefenitions.Root) DefenitionCache.GetDefinition(EDefinitionType.MuseumLevels);
+        public static LevelUPDefenition.Root LevelUpDef =>
+            (LevelUPDefenition.Root)DefenitionCache.GetDefinition(EDefinitionType.LevelUp);
     }
 }

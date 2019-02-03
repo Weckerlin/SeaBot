@@ -75,6 +75,7 @@
     <Compile Include="Data\Definitions.cs" />
     <Compile Include="Data\Definitions\EventsDefenitions.cs" />
     <Compile Include="Data\Definitions\GlobalContractorDefinitions.cs" />
+    <Compile Include="Data\Definitions\LevelUPDefenition.cs" />
     <Compile Include="Data\Definitions\MarketplaceDefenitions.cs" />
     <Compile Include="Data\Definitions\MuseumLevelDefenitions.cs" />
     <Compile Include="Data\Definitions\OutpostDefinitions.cs" />
