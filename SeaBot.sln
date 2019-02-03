@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlayGround", "PlayGround", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBotHeadless", "SeaBotHeadLess\SeaBotHeadless.csproj", "{B2D7D764-6E9B-4834-9CA8-05F530D1C6DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaBotWPF", "SeaBotWPF\SeaBotWPF.csproj", "{919F2393-E0BF-4589-9F14-BCBC7A43BE68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B2D7D764-6E9B-4834-9CA8-05F530D1C6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2D7D764-6E9B-4834-9CA8-05F530D1C6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2D7D764-6E9B-4834-9CA8-05F530D1C6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{919F2393-E0BF-4589-9F14-BCBC7A43BE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{919F2393-E0BF-4589-9F14-BCBC7A43BE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{919F2393-E0BF-4589-9F14-BCBC7A43BE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{919F2393-E0BF-4589-9F14-BCBC7A43BE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

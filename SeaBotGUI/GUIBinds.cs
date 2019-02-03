@@ -323,6 +323,9 @@ namespace SeaBotGUI.GUIBinds
                          
                         }
                     }
+
+                    Building.UpgradeIgnore = false;
+
                     Building.Producing = producing;
                     Building.Upgrade = upgrade;
                     ret.Add(Building);
@@ -338,6 +341,8 @@ namespace SeaBotGUI.GUIBinds
                 public int Level { get; set; }
                 public string Producing { get; set; }
                 public string Upgrade { get; set; }
+                public static bool ProdIgnore { get; set; }
+                public static bool UpgradeIgnore { get; set; }
             }
         }
     }

@@ -57,8 +57,6 @@ namespace SeaBotCore.Statistics
                     LogStatistics();
                     Thread.Sleep(MinuteInterval * 60 * 1000);
                 }
-
-               
             }
         }
 
@@ -66,7 +64,6 @@ namespace SeaBotCore.Statistics
         {
             try
             {
-               
                     if (!Directory.Exists(statfolder))
                     {
                         Directory.CreateDirectory(statfolder);
@@ -74,7 +71,6 @@ namespace SeaBotCore.Statistics
 
                     File.WriteAllText(statfolder + "/" + DateTime.Now.ToString("yyyyMMddTHHmmss"), JsonConvert.SerializeObject(Core.GlobalData));
                     Logger.Logger.Debug("Saved a new stat");
-                
             }
             catch (Exception)
             {
