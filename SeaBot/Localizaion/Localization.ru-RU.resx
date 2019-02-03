@@ -238,7 +238,6 @@
     <value>Похоже что твое время очень сильно расходится с серверным, ничего страшного. Используем смещение на {0:F2} минут</value>
   </data>
   <data name="MUSEUM_COLLECT" xml:space="preserve">
-    <value>Собираю музей
-</value>
+    <value>Собираю музей</value>
   </data>
 </root>

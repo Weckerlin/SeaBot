@@ -40,15 +40,7 @@ namespace SeaBotCore.Utils
             if (timedelay >= 3 || timedelay <= -3)
             {
                 Logger.Logger.Warning(string.Format(Localization.TIMEUTIL_TIMEMISMATCH, timedelay));
-                if (timedelay > 0)
-                {
-                    _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
-                }
-                else
-                {
-                    _timeOffset =  TimeSpan.FromMinutes(timedelay).Negate();
-                }
-
+                _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
                 Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalMinutes);
                 //Time is really delayed!
             }
