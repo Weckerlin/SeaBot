@@ -139,15 +139,24 @@ namespace SeaBotCore.BotMethods
                     //}
 
                     ////Contractor
-                    //if (ship.Type == "contractor")
-                    //{
-                    //    if (AutoShipUtils.isVoyageCompleted(ship))
-                    //    {
-                    //        _deship.Add(ship);
-                    //        Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
-                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                    //    }
-                    //}
+                    if (ship.Type == "contractor")
+                    {
+                        if (AutoShipUtils.isVoyageCompleted(ship))
+                        {
+                            var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
+                                .FirstOrDefault();
+                            var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
+                            if (quest == null) continue;
+                            var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                            _deship.Add(ship);
+                            var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
+                                .FirstOrDefault();
+                           
+                            
+                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                        }
+                    }
 
                     //if (ship.Type == "global_contractor")
                     //{

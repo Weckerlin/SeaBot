@@ -485,62 +485,155 @@ namespace SeaBotCore
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
-        public class DockShipTask : IGameTask
+        public class DockShipTaskOutPost : IGameTask
         {
-            public DockShipTask(Ship ship, int loc_defid , Enums.EObject map,bool usecapt ,int ship_capacity, int ship_capacity_used,int sailors,int sailors_used,int debug_loc_lvl)
+            public DockShipTaskOutPost(Ship ship, bool usecapt, int ship_capacity, int ship_capacity_used, int sailors,
+                int sailors_used, int debug_loc_lvl, int progress, int goalprogress,int uniqueid)
             {
                 Time = (uint) TimeUtils.GetEpochTime();
-                CustomObjects.Add("inst_id",ship.InstId);
+                CustomObjects.Add("inst_id", ship.InstId);
                 CustomObjects.Add("player_level", Core.GlobalData.Level);
-                CustomObjects.Add("debug_capacity",ship_capacity );
+                CustomObjects.Add("debug_capacity", ship_capacity);
                 CustomObjects.Add("debug_capacity_used", ship_capacity_used);
                 CustomObjects.Add("debug_sailors", sailors);
-                CustomObjects.Add("debug_sailors_used", Core.GlobalData.Level);
-                CustomObjects.Add("debug_location_level", Core.GlobalData.Level);
+                CustomObjects.Add("debug_sailors_used", sailors_used);
+                CustomObjects.Add("debug_location_level", debug_loc_lvl);
                 if (usecapt)
                 {
                     if (ship.CaptainId != 0)
                     {
-                        CustomObjects.Add("debug_captain_id",ship.CaptainId);
-                        CustomObjects.Add("debug_captain_def_id", Core.GlobalData.CaptainsNew.Where(n=>n.InstId==ship.CaptainId).FirstOrDefault()?.InstId);
+                        CustomObjects.Add("debug_captain_id", ship.CaptainId);
+                        CustomObjects.Add("debug_captain_def_id",
+                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                                ?.InstId);
                     }
                 }
-                CustomObjects.Add("debug_uniqueId",1);
-                switch (map)
-                {
-                    case Enums.EObject.contractor:
-                        _action = "dock_ship_contractor";
-                        var contractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId);
-                       
-                        CustomObjects.Add("debug_contractId", ship.CaptainId);
-                        CustomObjects.Add("debug_progress", ship.CaptainId);
-                        CustomObjects.Add("debug_goalProgress", ship.CaptainId);
-                        CustomObjects.Add("debug_objectiveTypeId", ship.CaptainId);
-                        break;
-                    case Enums.EObject.outpost:
-                        _action = "dock_ship_outpost";
-                        CustomObjects.Add("debug_progress", ship.CaptainId);
-                        CustomObjects.Add("debug_goalProgress", ship.CaptainId);
-                        break;
-                    case Enums.EObject.social_contract:
-                        _action = "dock_ship_social_contract";
-                        break;
-                    case Enums.EObject.global_contractor:
-                        _action = "dock_ship_global_contractor";
-                        break;
-                  
-                }
 
-                //todo reverse this
-                throw new NotImplementedException();
+                CustomObjects.Add("debug_uniqueId",uniqueid);
+
+
+                CustomObjects.Add("debug_progress", progress);
+                CustomObjects.Add("debug_goalProgress", goalprogress);
             }
 
-            private string _action;
+
             public string Action
             {
-                get => _action;
-
+                get => "dock_ship_outpost";
             }
+
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class DockShipTaskGlobalContractor : IGameTask
+        {
+            public DockShipTaskGlobalContractor(Ship ship, bool usecapt, int ship_capacity, int ship_capacity_used,
+                int sailors, int sailors_used, int debug_loc_lvl,int uniqueid)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", ship.InstId);
+                CustomObjects.Add("player_level", Core.GlobalData.Level);
+                CustomObjects.Add("debug_capacity", ship_capacity);
+                CustomObjects.Add("debug_capacity_used", ship_capacity_used);
+                CustomObjects.Add("debug_sailors", sailors);
+                CustomObjects.Add("debug_sailors_used", sailors_used);
+                CustomObjects.Add("debug_location_level", debug_loc_lvl);
+                if (usecapt)
+                {
+                    if (ship.CaptainId != 0)
+                    {
+                        CustomObjects.Add("debug_captain_id", ship.CaptainId);
+                        CustomObjects.Add("debug_captain_def_id",
+                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                                ?.InstId);
+                    }
+                }
+
+                CustomObjects.Add("debug_uniqueId", uniqueid);
+            }
+
+
+            public string Action => "dock_ship_global_contractor";
+
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class DockShipSocialContractor : IGameTask
+        {
+            public DockShipSocialContractor(Ship ship, bool usecapt, int ship_capacity, int ship_capacity_used,
+                int sailors, int sailors_used, int debug_loc_lvl,int uniqueid)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", ship.InstId);
+                CustomObjects.Add("player_level", Core.GlobalData.Level);
+                CustomObjects.Add("debug_capacity", ship_capacity);
+                CustomObjects.Add("debug_capacity_used", ship_capacity_used);
+                CustomObjects.Add("debug_sailors", sailors);
+                CustomObjects.Add("debug_sailors_used", sailors_used);
+                CustomObjects.Add("debug_location_level", debug_loc_lvl);
+                if (usecapt)
+                {
+                    if (ship.CaptainId != 0)
+                    {
+                        CustomObjects.Add("debug_captain_id", ship.CaptainId);
+                        CustomObjects.Add("debug_captain_def_id",
+                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                                ?.InstId);
+                    }
+                }
+
+                CustomObjects.Add("debug_uniqueId", uniqueid);
+            }
+
+            public string Action => "dock_ship_social_contract";
+
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
+
+        public class DockShipTaskContractor : IGameTask
+        {
+            public DockShipTaskContractor(Ship ship,  bool usecapt, int ship_capacity,
+                int ship_capacity_used, int sailors, int sailors_used, int debug_loc_lvl, int contractid, int progress,
+                int goalprogress, string objectivetypeid,int uniqueid)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", ship.InstId);
+                CustomObjects.Add("player_level", Core.GlobalData.Level);
+                CustomObjects.Add("debug_capacity", ship_capacity);
+                CustomObjects.Add("debug_capacity_used", ship_capacity_used);
+                CustomObjects.Add("debug_sailors", sailors);
+                CustomObjects.Add("debug_sailors_used", sailors_used);
+                CustomObjects.Add("debug_location_level", debug_loc_lvl);
+                if (usecapt)
+                {
+                    if (ship.CaptainId != 0)
+                    {
+                        CustomObjects.Add("debug_captain_id", ship.CaptainId);
+                        CustomObjects.Add("debug_captain_def_id",
+                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                                ?.InstId);
+                    }
+                }
+
+                CustomObjects.Add("debug_uniqueId", uniqueid);
+
+                var contractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId);
+
+                CustomObjects.Add("debug_contractId", contractid);
+                CustomObjects.Add("debug_progress", progress);
+                CustomObjects.Add("debug_goalProgress", goalprogress);
+                CustomObjects.Add("debug_objectiveTypeId", objectivetypeid);
+            }
+
+
+            public string Action => "dock_ship_contractor";
+
 
             public uint Time { get; }
 
@@ -800,7 +893,7 @@ namespace SeaBotCore
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
 
-     
+
         public class UnloadShipGlobalContractorTask : IGameTask
         {
             public UnloadShipGlobalContractorTask(int inst_id)
