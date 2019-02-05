@@ -119,101 +119,101 @@ namespace SeaBotCore.BotMethods
                         }
                     }
 
-                    if (ship.Type == "wreck")
-                    {
-                        var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
-                        var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).FirstOrDefault();
+                    //if (ship.Type == "wreck")
+                    //{
+                    //    var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
+                    //    var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId).FirstOrDefault();
 
-                        if (wrk != null && AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
-                                Core.GlobalData.Level, Enums.EObject.wreck,
-                                AutoShipUtils.GetCapacity(ship),
-                                0,
-                                AutoShipUtils.GetSailors(ship), wrk.Sailors,
-                                ship.TargetLevel,
-                                null, _deship.Count(n => n.DefId == ship.DefId)));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //    if (wrk != null && AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                    //            Core.GlobalData.Level, Enums.EObject.wreck,
+                    //            AutoShipUtils.GetCapacity(ship),
+                    //            0,
+                    //            AutoShipUtils.GetSailors(ship), wrk.Sailors,
+                    //            ship.TargetLevel,
+                    //            null, _deship.Count(n => n.DefId == ship.DefId)));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    //Contractor
-                    if (ship.Type == "contractor")
-                    {
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    ////Contractor
+                    //if (ship.Type == "contractor")
+                    //{
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    if (ship.Type == "global_contractor")
-                    {
-                        var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //if (ship.Type == "global_contractor")
+                    //{
+                    //    var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    if (ship.Type == "outpost")
-                    {
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipOutpostTask(ship.InstId));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //if (ship.Type == "outpost")
+                    //{
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipOutpostTask(ship.InstId));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    if (ship.Type == "social_contract")
-                    {
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //if (ship.Type == "social_contract")
+                    //{
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    if (ship.Type == "dealer")
-                    {
-                        var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
+                    //if (ship.Type == "dealer")
+                    //{
+                    //    var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
 
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
-                                Core.GlobalData.Level, Enums.EObject.dealer,
-                                AutoShipUtils.GetCapacity(ship),
-                                0,
-                                AutoShipUtils.GetSailors(ship), (int)predefined.Sailors,
-                                ship.TargetLevel,
-                                null, _deship.Count(n => n.DefId == ship.DefId)));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                    //            Core.GlobalData.Level, Enums.EObject.dealer,
+                    //            AutoShipUtils.GetCapacity(ship),
+                    //            0,
+                    //            AutoShipUtils.GetSailors(ship), (int)predefined.Sailors,
+                    //            ship.TargetLevel,
+                    //            null, _deship.Count(n => n.DefId == ship.DefId)));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
-                    if (ship.Type == "treasure")
-                    {
-                        var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            _deship.Add(ship);
-                            Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
-                                Core.GlobalData.Level, Enums.EObject.treasure,
-                                AutoShipUtils.GetCapacity(ship),
-                                0,
-                                AutoShipUtils.GetSailors(ship), 0,
-                                ship.TargetLevel,
-                                null, _deship.Count(n => n.DefId == ship.DefId)));
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //if (ship.Type == "treasure")
+                    //{
+                    //    var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        _deship.Add(ship);
+                    //        Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
+                    //            Core.GlobalData.Level, Enums.EObject.treasure,
+                    //            AutoShipUtils.GetCapacity(ship),
+                    //            0,
+                    //            AutoShipUtils.GetSailors(ship), 0,
+                    //            ship.TargetLevel,
+                    //            null, _deship.Count(n => n.DefId == ship.DefId)));
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
                 }
             }
 

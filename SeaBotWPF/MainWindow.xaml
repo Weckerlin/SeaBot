@@ -4,72 +4,167 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeaBotWPF"
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:chart="clr-namespace:SeaBotWPF.Chart"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" Background="#FF001532">
     <Window.Resources>
-        <Style x:Key="Gradient">
-            <Setter Property="Control.Background" Value="{StaticResource WindowBackgroundBrush}" />
-        </Style>
+        <Storyboard x:Key="overlay">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="0.0" To="1.0" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:03" BeginTime="00:00:02" From="1.0" To="0.0" />
+        </Storyboard>
     </Window.Resources>
-    <Grid Background="#FF001529" >
+    <Grid Background="#FF001529">
         <Grid.RowDefinitions>
-            <RowDefinition Height="77 px"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="77 px" />
+            <RowDefinition Height="153*" />
+            <RowDefinition Height="145*" />
+            <RowDefinition Height="290*" />
+            <RowDefinition Height="24*" />
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90 px"></ColumnDefinition>
-            <ColumnDefinition Width="149*"></ColumnDefinition>
-
+            <ColumnDefinition Width="90 px" />
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" HorizontalContentAlignment="Center" FontFamily="pack://application:,,,/Fonts/#Open Sans Light" FontStyle="Normal" FontSize="61"  Grid.Column="1"  Content="MAIN" Foreground="White"></Label>
+
+
+        <Grid Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="18*" />
+                <ColumnDefinition Width="72" />
+                <ColumnDefinition Width="72" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" HorizontalContentAlignment="Center" Margin="0,-8,0,0"
+                   FontFamily="pack://application:,,,/Fonts/#Open Sans Light" FontStyle="Normal" FontSize="61"
+                   Grid.Column="0" Content="MAIN" Foreground="White" />
+            <Label Grid.Row="0" HorizontalContentAlignment="Left"
+                   FontFamily="pack://application:,,,/Fonts/#Open Sans Light" FontStyle="Normal" FontSize="45"
+                   Grid.Column="2" Content="ХАЙ ЗЯБЛС" Foreground="White" />
+            <Label Grid.Row="0" HorizontalContentAlignment="Left"
+                   FontFamily="pack://application:,,,/Fonts/#Open Sans Light" FontStyle="Normal" FontSize="45"
+                   Grid.Column="1" Content="SEABOT - " Foreground="White" />
+            <StackPanel Grid.Column="1" Panel.ZIndex="4" Orientation="Horizontal">
+                <Separator Panel.ZIndex="4" Margin="-20,0,0,0" Width="2"
+                           Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
+            </StackPanel>
+            <StackPanel Grid.Column="3" Panel.ZIndex="4" Orientation="Horizontal">
+                <Separator Panel.ZIndex="4" Margin="0,0,0,0" Width="2"
+                           Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
+            </StackPanel>
+            <Button Grid.Column="4" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Margin="12,0">
+                <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                      Stretch="Uniform"
+                      Data="M 5 5 L 5 6 L 5 26 L 5 27 L 6 27 L 26 27 L 27 27 L 27 26 L 27 6 L 27 5 L 26 5 L 6 5 L 5 5 z M 7 7 L 25 7 L 25 25 L 7 25 L 7 7 z M 11.6875 10.3125 L 10.28125 11.71875 L 14.5625 16 L 10.21875 20.34375 L 11.625 21.75 L 15.96875 17.40625 L 20.28125 21.71875 L 21.6875 20.3125 L 17.375 16 L 21.625 11.75 L 20.21875 10.34375 L 15.96875 14.59375 L 11.6875 10.3125 z" />
+            </Button>
+            <Button Grid.Column="3" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Margin="12,0">
+                <Path Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}"
+                      Stretch="Uniform"
+                      Data="M 3.5 2 C 2.6774686 2 2 2.6774686 2 3.5 L 2 12.5 C 2 13.322531 2.6774686 14 3.5 14 L 12.5 14 C 13.322531 14 14 13.322531 14 12.5 L 14 3.5 C 14 2.6774686 13.322531 2 12.5 2 L 3.5 2 z M 3.5 3 L 12.5 3 C 12.781469 3 13 3.2185314 13 3.5 L 13 12.5 C 13 12.781469 12.781469 13 12.5 13 L 3.5 13 C 3.2185314 13 3 12.781469 3 12.5 L 3 3.5 C 3 3.2185314 3.2185314 3 3.5 3 z M 5 10 L 5 11 L 11 11 L 11 10 L 5 10 z" />
+            </Button>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="3">
+            <chart:PointShapeLine />
+
+        </Grid>
+
         <Border Panel.ZIndex="-1" Grid.Row="0" Grid.Column="0" Background="#FF002442" />
-        <StackPanel   Panel.ZIndex="4" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Vertical">
-            <Separator   Panel.ZIndex="4" Margin="0,0,0,0" Height ="2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
+        <StackPanel Grid.Column="0" Panel.ZIndex="4" Grid.ColumnSpan="4" Grid.Row="1" Orientation="Vertical">
+            <Separator Panel.ZIndex="4" Margin="0,0,0,0" Height="2"
+                       Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
         </StackPanel>
-        <StackPanel  Panel.ZIndex="-4" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" >
-            <StackPanel.Effect>
-                <BlurEffect Radius="5" />
-            </StackPanel.Effect>
-
-
-            <Separator  Panel.ZIndex="4" Margin="-1,0,0,0" Width="2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
+        <StackPanel Grid.Row="0" Panel.ZIndex="-4" Grid.Column="1" Grid.RowSpan="5" Orientation="Horizontal"
+                    Margin="0,0,5,0">
+            <Separator Panel.ZIndex="4" Margin="-1,0,0,0" Width="2"
+                       Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#FF163359" />
         </StackPanel>
-        <Grid  ClipToBounds="True" Grid.Column="0" Margin="0,2,0,0"  Background="#FF002442"  Grid.Row="1">
+        <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Border Height="50" BorderThickness="1" Grid.Column="6" Grid.Row="1" 
+                    CornerRadius="0,10,0,10" BorderBrush="Black" Background="#1E4D5F">
+        
+            <Button BorderBrush="{x:Null}" Click="ButtonBase_OnClick" Background="{x:Null}">
+
+                <Label Margin="0,-12,0,0" Foreground="AliceBlue" FontSize="41" FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Content="Start">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="19"></DropShadowEffect>
+                        </Label.Effect>
+                    </Label>
+            </Button>
+          
+            </Border>
+            <Label Name="lbl_last_log" Grid.Row="0" Margin="-36,0,0,0" FontStyle="Oblique" FontSize="36" FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Grid.ColumnSpan="5" Foreground ="AliceBlue" Content="Last log: Collecting 10 apples">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Triggers>
+                            <Trigger Property="Visibility" Value="Visible">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource overlay}">
+                                       
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Grid>
+        <Grid ClipToBounds="True" Grid.Column="0" Grid.RowSpan="4" Margin="0,2,0,0" Background="#FF002442" Grid.Row="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="87 px"></RowDefinition>
-                <RowDefinition Height="87 px"></RowDefinition>
-                <RowDefinition Height="87px"></RowDefinition>
-                <RowDefinition Height="87px"></RowDefinition>
-                <RowDefinition Height="87px"></RowDefinition>
-                <RowDefinition Height="87px"></RowDefinition>
+                <RowDefinition Height="87 px" />
+                <RowDefinition Height="87 px" />
+                <RowDefinition Height="87px" />
+                <RowDefinition Height="87px" />
+                <RowDefinition Height="87px" />
+                <RowDefinition Height="87px" />
 
 
             </Grid.RowDefinitions>
-            <Button  BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/home.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/home.png" />
             </Button>
-            <Button BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="1" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/factory.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="1" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/factory.png" />
             </Button>
-            <Button BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/ship.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="2" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/ship.png" />
             </Button>
-            <Button BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"  Grid.Row="3" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/box.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="3" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/box.png" />
             </Button>
-            <Button BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="4" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/gear.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="4" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/gear.png" />
             </Button>
-            <Button BorderThickness="0"  
-    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="5" Background="{x:Null}" >
-                <Image Stretch="None" Source="icons/about.png"></Image>
+            <Button BorderThickness="0"
+                    Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="5" Background="{x:Null}">
+                <Image Stretch="None" Source="icons/about.png" />
             </Button>
         </Grid>
     </Grid>

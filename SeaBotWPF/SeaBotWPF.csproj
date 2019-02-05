@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Chart\PointShapeLine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +72,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Chart\PointShapeLine.xaml.cs">
+      <DependentUpon>PointShapeLine.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -97,6 +110,7 @@
     <Resource Include="Fonts\OpenSans-Regular.ttf" />
     <Resource Include="Fonts\OpenSans-SemiBold.ttf" />
     <Resource Include="Fonts\OpenSans-SemiBoldItalic.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,6 +126,16 @@
     <Resource Include="icons\gear.png" />
     <Resource Include="icons\home.png" />
     <Resource Include="icons\ship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons\coin.png" />
+    <Resource Include="icons\diamond.png" />
+    <Resource Include="icons\fish.png" />
+    <Resource Include="icons\level.png" />
+    <Resource Include="icons\metal.png" />
+    <Resource Include="icons\sailor.png" />
+    <Resource Include="icons\stone.png" />
+    <Resource Include="icons\wood.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

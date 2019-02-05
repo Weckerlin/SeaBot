@@ -35,7 +35,7 @@ namespace SeaBotCore
         public static int hibernation = 0;
         public static string ServerToken = string.Empty;
         public static Config.Config Config = new Config.Config();
-        public static Thread BotThread;
+        public static Thread BotThread = new Thread(BotVoid){IsBackground = true};
 
         private static DateTime _lastbarrel = DateTime.Now;
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
@@ -53,10 +53,6 @@ namespace SeaBotCore
         private static void Logined_OnLoginedEvent()
         {
             Networking.StartThread();
-            BotThread = new Thread(BotVoid)
-            {
-                IsBackground = true
-            };
             BotThread.Start();
             Events.Events.BotStartedEvent.BotStarted.Invoke();
         }
