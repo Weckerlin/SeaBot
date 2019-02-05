@@ -33,6 +33,7 @@
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
@@ -48,6 +49,15 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.radio_marketplace = new System.Windows.Forms.RadioButton();
+            this.radio_autoshipauto = new System.Windows.Forms.RadioButton();
+            this.radio_outpost = new System.Windows.Forms.RadioButton();
+            this.radio_contractor = new System.Windows.Forms.RadioButton();
+            this.radio_upgradable = new System.Windows.Forms.RadioButton();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -77,8 +87,8 @@
             this.radio_saveloot = new System.Windows.Forms.RadioButton();
             this.radio_savesailors = new System.Windows.Forms.RadioButton();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radio_stone = new System.Windows.Forms.RadioButton();
+            this.radio_fish = new System.Windows.Forms.RadioButton();
             this.radio_iron = new System.Windows.Forms.RadioButton();
             this.radio_wood = new System.Windows.Forms.RadioButton();
             this.radio_gold = new System.Windows.Forms.RadioButton();
@@ -159,12 +169,9 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.groupBox22 = new System.Windows.Forms.GroupBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.groupBox23 = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.radio_oil = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -173,6 +180,8 @@
             this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage8.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.groupBox22.SuspendLayout();
             this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_limitconcrete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_limitfuel)).BeginInit();
@@ -218,8 +227,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.groupBox22.SuspendLayout();
-            this.groupBox23.SuspendLayout();
+            this.groupBox24.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage4
@@ -233,16 +241,23 @@
             // 
             // groupBox19
             // 
+            this.groupBox19.Controls.Add(this.label18);
             this.groupBox19.Controls.Add(this.label17);
             this.groupBox19.Controls.Add(this.label12);
             resources.ApplyResources(this.groupBox19, "groupBox19");
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.TabStop = false;
             // 
+            // label18
+            // 
+            resources.ApplyResources(this.label18, "label18");
+            this.label18.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label18.Name = "label18";
+            // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
-            this.label17.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label17.ForeColor = System.Drawing.Color.OrangeRed;
             this.label17.Name = "label17";
             this.label17.Click += new System.EventHandler(this.Label17_Click);
             // 
@@ -343,6 +358,7 @@
             // 
             // tabPage8
             // 
+            this.tabPage8.Controls.Add(this.groupBox24);
             this.tabPage8.Controls.Add(this.groupBox23);
             this.tabPage8.Controls.Add(this.groupBox22);
             this.tabPage8.Controls.Add(this.groupBox20);
@@ -354,6 +370,72 @@
             resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.checkBox4);
+            this.groupBox23.Controls.Add(this.checkBox3);
+            resources.ApplyResources(this.groupBox23, "groupBox23");
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.TabStop = false;
+            // 
+            // checkBox4
+            // 
+            resources.ApplyResources(this.checkBox4, "checkBox4");
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.radio_marketplace);
+            this.groupBox22.Controls.Add(this.radio_autoshipauto);
+            this.groupBox22.Controls.Add(this.radio_outpost);
+            this.groupBox22.Controls.Add(this.radio_contractor);
+            this.groupBox22.Controls.Add(this.radio_upgradable);
+            resources.ApplyResources(this.groupBox22, "groupBox22");
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.TabStop = false;
+            // 
+            // radio_marketplace
+            // 
+            resources.ApplyResources(this.radio_marketplace, "radio_marketplace");
+            this.radio_marketplace.Name = "radio_marketplace";
+            this.radio_marketplace.TabStop = true;
+            this.radio_marketplace.UseVisualStyleBackColor = true;
+            // 
+            // radio_autoshipauto
+            // 
+            resources.ApplyResources(this.radio_autoshipauto, "radio_autoshipauto");
+            this.radio_autoshipauto.Name = "radio_autoshipauto";
+            this.radio_autoshipauto.TabStop = true;
+            this.radio_autoshipauto.UseVisualStyleBackColor = true;
+            // 
+            // radio_outpost
+            // 
+            resources.ApplyResources(this.radio_outpost, "radio_outpost");
+            this.radio_outpost.Name = "radio_outpost";
+            this.radio_outpost.TabStop = true;
+            this.radio_outpost.UseVisualStyleBackColor = true;
+            // 
+            // radio_contractor
+            // 
+            resources.ApplyResources(this.radio_contractor, "radio_contractor");
+            this.radio_contractor.Name = "radio_contractor";
+            this.radio_contractor.TabStop = true;
+            this.radio_contractor.UseVisualStyleBackColor = true;
+            // 
+            // radio_upgradable
+            // 
+            resources.ApplyResources(this.radio_upgradable, "radio_upgradable");
+            this.radio_upgradable.Name = "radio_upgradable";
+            this.radio_upgradable.TabStop = true;
+            this.radio_upgradable.UseVisualStyleBackColor = true;
             // 
             // groupBox20
             // 
@@ -624,8 +706,9 @@
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.radioButton7);
-            this.groupBox11.Controls.Add(this.radioButton6);
+            this.groupBox11.Controls.Add(this.radio_oil);
+            this.groupBox11.Controls.Add(this.radio_stone);
+            this.groupBox11.Controls.Add(this.radio_fish);
             this.groupBox11.Controls.Add(this.radio_iron);
             this.groupBox11.Controls.Add(this.radio_wood);
             this.groupBox11.Controls.Add(this.radio_gold);
@@ -633,21 +716,21 @@
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.TabStop = false;
             // 
-            // radioButton7
+            // radio_stone
             // 
-            resources.ApplyResources(this.radioButton7, "radioButton7");
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.TabStop = true;
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            resources.ApplyResources(this.radio_stone, "radio_stone");
+            this.radio_stone.Name = "radio_stone";
+            this.radio_stone.TabStop = true;
+            this.radio_stone.UseVisualStyleBackColor = true;
+            this.radio_stone.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
-            // radioButton6
+            // radio_fish
             // 
-            resources.ApplyResources(this.radioButton6, "radioButton6");
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.TabStop = true;
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            resources.ApplyResources(this.radio_fish, "radio_fish");
+            this.radio_fish.Name = "radio_fish";
+            this.radio_fish.TabStop = true;
+            this.radio_fish.UseVisualStyleBackColor = true;
+            this.radio_fish.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // radio_iron
             // 
@@ -1296,47 +1379,26 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
-            // groupBox22
+            // groupBox24
             // 
-            this.groupBox22.Controls.Add(this.radioButton5);
-            this.groupBox22.Controls.Add(this.radioButton4);
-            resources.ApplyResources(this.groupBox22, "groupBox22");
-            this.groupBox22.Name = "groupBox22";
-            this.groupBox22.TabStop = false;
+            this.groupBox24.Controls.Add(this.button1);
+            resources.ApplyResources(this.groupBox24, "groupBox24");
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.TabStop = false;
             // 
-            // radioButton4
+            // button1
             // 
-            resources.ApplyResources(this.radioButton4, "radioButton4");
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.TabStop = true;
-            this.radioButton4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // radio_oil
             // 
-            resources.ApplyResources(this.radioButton5, "radioButton5");
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.TabStop = true;
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // groupBox23
-            // 
-            this.groupBox23.Controls.Add(this.checkBox4);
-            this.groupBox23.Controls.Add(this.checkBox3);
-            resources.ApplyResources(this.groupBox23, "groupBox23");
-            this.groupBox23.Name = "groupBox23";
-            this.groupBox23.TabStop = false;
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.radio_oil, "radio_oil");
+            this.radio_oil.Name = "radio_oil";
+            this.radio_oil.TabStop = true;
+            this.radio_oil.UseVisualStyleBackColor = true;
+            this.radio_oil.CheckedChanged += new System.EventHandler(this.Radio_oil_CheckedChanged);
             // 
             // Form1
             // 
@@ -1357,6 +1419,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            this.groupBox22.ResumeLayout(false);
+            this.groupBox22.PerformLayout();
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_limitconcrete)).EndInit();
@@ -1418,10 +1484,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.groupBox22.ResumeLayout(false);
-            this.groupBox22.PerformLayout();
-            this.groupBox23.ResumeLayout(false);
-            this.groupBox23.PerformLayout();
+            this.groupBox24.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1468,8 +1531,8 @@
         private System.Windows.Forms.RadioButton radio_saveloot;
         private System.Windows.Forms.RadioButton radio_savesailors;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radio_stone;
+        private System.Windows.Forms.RadioButton radio_fish;
         private System.Windows.Forms.RadioButton radio_iron;
         private System.Windows.Forms.RadioButton radio_wood;
         private System.Windows.Forms.RadioButton radio_gold;
@@ -1557,10 +1620,17 @@
         public System.Windows.Forms.NumericUpDown num_limitmech;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.GroupBox groupBox22;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radio_contractor;
+        private System.Windows.Forms.RadioButton radio_upgradable;
         private System.Windows.Forms.GroupBox groupBox23;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.RadioButton radio_marketplace;
+        private System.Windows.Forms.RadioButton radio_autoshipauto;
+        private System.Windows.Forms.RadioButton radio_outpost;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton radio_oil;
     }
 }

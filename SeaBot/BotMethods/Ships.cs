@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using SeaBotCore.Cache;
 using SeaBotCore.Data;
@@ -157,7 +156,7 @@ namespace SeaBotCore.BotMethods
                             Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
                                 Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
                                 Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
-                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),usedshit,AutoShipUtils.GetSailors(ship), currentcontractor.Sailors,ship.TargetLevel,currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
                            
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         }
@@ -247,9 +246,16 @@ namespace SeaBotCore.BotMethods
                         continue;
                     }
 
-
-                    var lvls = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels
+                    var place = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId);
+                    var shipfull = Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                    var lvls = place.Levels
                         .Level.FirstOrDefault(n => n.Id == bestplace.Level);
+
+                    if (shipfull.SlotUsage < place.Slots)
+                    {
+                        continue;
+                    }
+                    
                     if (lvls != null)
                     {
                         var wecan = lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship);
@@ -301,10 +307,8 @@ namespace SeaBotCore.BotMethods
                     {
                         sending = AutoShipUtils.GetSailors(ship);
                     }
-                    else
-                    {
-                        sending = can;
-                    }
+
+                    sending = can;
 
                     opst.Crew += sending;
                     Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, opst.DefId, sending));
@@ -427,7 +431,7 @@ namespace SeaBotCore.BotMethods
                         }
                     }
 
-                    traveltime = (int)first.TravelTime;
+                    traveltime = first.TravelTime;
                     break;
                 case "social_contract":
 
@@ -539,13 +543,22 @@ namespace SeaBotCore.BotMethods
 
         public static Upgradeable GetBestUpgPlace(string itemname, int sailors, bool profitbased)
         {
-            var matid =
-                Definitions.UpgrDef.Items.Item.Where(n => n.MaterialId == MaterialDB.GetItem(itemname).DefId);
-            var p = matid
-                .Where(shtItem =>
-                    Core.GlobalData.Upgradeables.FirstOrDefault(n =>
-                        n.DefId == shtItem.DefId && n.Amount != 0 && n.Progress < n.Amount) !=
-                    null)
+            var mat = MaterialDB.GetItem(itemname).DefId;
+            List<UpgradeableDefenition.Item> needed = new List<UpgradeableDefenition.Item>();
+            foreach (var item in Definitions.UpgrDef.Items.Item)
+            {
+                if (item.MaterialId == mat)
+                {
+                    needed.Add(item);
+                }
+            }
+
+            var sito = needed.Where(shtItem =>
+                Core.GlobalData.Upgradeables.FirstOrDefault(n =>
+                    n.DefId == shtItem.DefId && n.Amount != 0 && n.Progress < n.Amount ||
+                    n.DefId == shtItem.DefId && shtItem.MaxLevel==1) !=
+                null);
+            var p = sito
                 .ToDictionary(shtItem => shtItem,
                     shtItem => Core.GlobalData.Upgradeables.First(n => n.DefId == shtItem.DefId));
             var best =

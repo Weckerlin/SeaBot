@@ -28,6 +28,14 @@ namespace SeaBotCore.Config
         Fuel,
         Concrete
     }
+    public enum ShipDestType
+    {
+        Upgradable,
+        Outpost,
+        Marketplace,
+        Contractor,
+        Auto
+    }
     
     public class Config : INotifyPropertyChanged
     {
@@ -63,6 +71,16 @@ namespace SeaBotCore.Config
         private int _thresholdmechanical;
         private int _thresholdfuel;
         private int _thresholdconcrete;
+        private ShipDestType _shipdesttype = ShipDestType.Upgradable;
+        public ShipDestType shipdesttype
+        {
+            get => _shipdesttype;
+            set
+            {
+                _shipdesttype = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("shipdesttype"));
+            }
+        }
         public int thresholdconcrete
         {
             get => _thresholdconcrete;

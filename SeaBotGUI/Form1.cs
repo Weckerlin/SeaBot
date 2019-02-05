@@ -193,6 +193,26 @@ namespace SeaBotGUI
             {
                 radioButton1.Checked = true;
             }
+            if(Core.Config.shipdesttype == ShipDestType.Auto)
+            {
+                radio_autoshipauto.Checked = true;
+            }
+            if (Core.Config.shipdesttype == ShipDestType.Contractor)
+            {
+                radio_contractor.Checked = true;
+            }
+            if (Core.Config.shipdesttype == ShipDestType.Marketplace)
+            {
+                radio_marketplace.Checked = true;
+            }
+            if (Core.Config.shipdesttype == ShipDestType.Outpost)
+            {
+                radio_outpost.Checked = true;
+            }
+            if (Core.Config.shipdesttype == ShipDestType.Upgradable)
+            {
+                radio_upgradable.Checked = true;
+            }
 
             linkLabel1.Links.Add(new LinkLabel.Link
                 {LinkData = "https://github.com/weespin/SeaBot/wiki/Getting-server_token"});
@@ -604,7 +624,7 @@ namespace SeaBotGUI
 
             if (configAutoshiptype == "fish")
             {
-                radioButton6.Checked = true;
+                radio_fish.Checked = true;
             }
 
             if (configAutoshiptype == "iron")
@@ -619,7 +639,11 @@ namespace SeaBotGUI
 
             if (configAutoshiptype == "stone")
             {
-                radioButton7.Checked = true;
+                radio_stone.Checked = true;
+            }
+            if(configAutoshiptype == "Tier 2 - Oil")
+            {
+                radio_oil.Checked = true;
             }
         }
 
@@ -640,14 +664,18 @@ namespace SeaBotGUI
                 Core.Config.autoshiptype = "wood";
             }
 
-            if (radioButton6.Checked)
+            if (radio_fish.Checked)
             {
                 Core.Config.autoshiptype = "fish";
             }
 
-            if (radioButton7.Checked)
+            if (radio_stone.Checked)
             {
                 Core.Config.autoshiptype = "stone";
+            }
+            if(radio_oil.Checked)
+            {
+                Core.Config.autoshiptype = "Tier 2 - Oil";
             }
         }
 
@@ -916,7 +944,33 @@ namespace SeaBotGUI
                 Core.Config.workshoptype = WorkshopType.Concrete;
             }
         }
+        public void ShipDestReset()
+        {
+            if (radio_upgradable.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Upgradable;
+            }
+            if (radio_autoshipauto.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Auto;
+            }
+            if (radio_contractor.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Contractor;
+            }
+            if (radio_outpost.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Outpost;
+            }
+            if (radio_marketplace.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Marketplace;
+            }
 
+
+
+
+        }
      
 
         private void Num_limitmech_Leave(object sender, EventArgs e)
@@ -939,6 +993,11 @@ namespace SeaBotGUI
         private void Label17_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Radio_oil_CheckedChanged(object sender, EventArgs e)
+        {
+            updatecheck();
         }
     }
 }
