@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -40,7 +41,8 @@ namespace SeaBotCore.Logger
             logFilename = DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + FILE_EXT;
 
             // Log file header line
-            var logHeader = logFilename + Localization.LOGGER_CREATED;
+
+            var logHeader = logFilename + " " +Localization.LOGGER_CREATED+ " v"+ FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;
             if (!Directory.Exists("logs"))
             {
                 Directory.CreateDirectory("logs");

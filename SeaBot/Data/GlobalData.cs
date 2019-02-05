@@ -332,6 +332,32 @@ namespace SeaBotCore.Data
             }
 
             #endregion
+
+            #region Outpost
+
+            data.Outposts = new List<Outpost>();
+            var outpost = doc.DocumentElement.SelectSingleNode("outpost");
+            if (slotnode != null)
+            {
+                foreach (XmlNode node in outpost.ChildNodes)
+                {
+                    Outpost wr = new Outpost
+                    {
+                        DefId =  Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                        Crew = Convert.ToInt32(node.SelectSingleNode("crew")?.InnerText),
+                        Done = Convert.ToByte(node.SelectSingleNode("done")?.InnerText)==1,
+                        CargoOnTheWay = Convert.ToInt32(node.SelectSingleNode("cargo_on_the_way")?.InnerText),
+                        PlayerLevel = Convert.ToInt32(node.SelectSingleNode("player_level")?.InnerText),
+                        RequiredCrew = Convert.ToInt32(node.SelectSingleNode("required_crew")?.InnerText)
+
+                    };
+
+                    data.Outposts.Add(wr);
+                }
+            }
+
+            #endregion
+
             Barrels.BarrelController._lastBarrelSeed =
                 Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
@@ -361,6 +387,7 @@ namespace SeaBotCore.Data
         public int HeartbeatInterval { get; set; }
         public List<Wreck> Wrecks { get; set; }
         public List<Slot> Slots { get; set; }
+        public List<Outpost> Outposts { get; set; }
         public int GetAmountItem(string name)
         {
             return GetAmountItem(MaterialDB.GetItem(name).DefId);
@@ -395,7 +422,15 @@ namespace SeaBotCore.Data
         public int UpgStart;
         public int UpgType;
     }
-
+    public class Outpost
+    {
+       public int DefId {get;set;}
+       public int Crew {get;set;}
+       public bool Done {get;set;}
+       public int CargoOnTheWay {get;set;}
+       public int PlayerLevel {get;set;}
+       public int RequiredCrew {get;set;}
+    }
     public class Upgradeable
     {
         public int DefId { get; set; }

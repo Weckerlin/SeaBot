@@ -151,9 +151,11 @@ namespace SeaBotCore.BotMethods
                             _deship.Add(ship);
                             var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
                                 .FirstOrDefault();
-                           
+                            //TODO: increasing of progress or amount!
                             
-                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                           
+                         Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                           
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         }
                     }
@@ -269,6 +271,13 @@ namespace SeaBotCore.BotMethods
                                            Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                     Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
                 }
+            }
+
+            //Outpost send!
+            if(false)
+            {
+                    //1. Find with done == 0
+                    var outposts = Core.GlobalData.
             }
         }
     }

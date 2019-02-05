@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using SeaBotCore.BotMethods;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Definitions;
@@ -358,11 +359,24 @@ namespace SeaBotCore
 
         public class ConfirmContractTask : IGameTask
         {
-            public ConfirmContractTask()
+            public ConfirmContractTask(int def_id,int quest_id,ContractorDefinitions.Rewards rewards)
             {
+                CustomObjects.Add("def_id", def_id);
+                CustomObjects.Add("quest_id", quest_id);
                 Time = (uint) TimeUtils.GetEpochTime();
-                //todo reverse this
-                throw new NotImplementedException();
+                if(rewards.Reward.Count>0)
+                {
+                   StringBuilder rew = new StringBuilder();
+                foreach(var reward in rewards.Reward)
+                    { 
+                        rew.Append("\n<reward>");
+                        rew.Append("\n<type>" + reward.Type+ "</type>");
+                        rew.Append("\n<id>" + reward.Id + "</id>");
+                        rew.Append("\n<amount>" + reward.Amount + "</amount>");
+                        rew.Append("\n</reward>");
+                    }
+                    CustomObjects.Add("rewards", rew.ToString());
+                }
             }
 
             public string Action => "confirm_contractor_quest";
@@ -654,6 +668,7 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+      
 
         public class FinishBuildingProducingTask : IGameTask
         {

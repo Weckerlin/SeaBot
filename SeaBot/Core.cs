@@ -53,7 +53,13 @@ namespace SeaBotCore
         private static void Logined_OnLoginedEvent()
         {
             Networking.StartThread();
-            BotThread.Start();
+            if (!IsBotRunning)
+            {
+                BotThread = new Thread(BotVoid) { IsBackground = true };
+                BotThread.Start();
+            }
+          
+            
             Events.Events.BotStartedEvent.BotStarted.Invoke();
         }
 
@@ -148,6 +154,7 @@ namespace SeaBotCore
                     if (Config.autoship)
                     {
                         Upgradable.UpgradeUpgradable();
+                        BotMethods.Contractor.UpgradeContractor();
                         Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
                     }
 
