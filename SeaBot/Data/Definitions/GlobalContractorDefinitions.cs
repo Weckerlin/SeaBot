@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -40,8 +40,8 @@ namespace SeaBotCore.Data.Definitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
-            [J("version_id")] public long VersionId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
+            [J("version_id")] public int VersionId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
             [J("title_loc")] public string TitleLoc { get; set; }
@@ -49,19 +49,19 @@ namespace SeaBotCore.Data.Definitions
             [J("wallpost_title")] public string WallpostTitle { get; set; }
             [J("wallpost_desc")] public string WallpostDesc { get; set; }
             [J("wallpost_img")] public string WallpostImg { get; set; }
-            [J("objective_amount")] public long ObjectiveAmount { get; set; }
-            [J("objective_reward_count")] public long ObjectiveRewardCount { get; set; }
-            [J("speedupable")] public long Speedupable { get; set; }
-            [J("slots")] public long Slots { get; set; }
-            [J("travel_time")] public long TravelTime { get; set; }
-            [J("event_id")] public long EventId { get; set; }
-            [J("milestone_count")] public long MilestoneCount { get; set; }
-            [J("map_x")] public long MapX { get; set; }
-            [J("map_y")] public long MapY { get; set; }
+            [J("objective_amount")] public int ObjectiveAmount { get; set; }
+            [J("objective_reward_count")] public int ObjectiveRewardCount { get; set; }
+            [J("speedupable")] public int Speedupable { get; set; }
+            [J("slots")] public int Slots { get; set; }
+            [J("travel_time")] public int TravelTime { get; set; }
+            [J("event_id")] public int EventId { get; set; }
+            [J("milestone_count")] public int MilestoneCount { get; set; }
+            [J("map_x")] public int MapX { get; set; }
+            [J("map_y")] public int MapY { get; set; }
             [J("atlas")] public string Atlas { get; set; }
             [J("texture")] public string Texture { get; set; }
-            [J("iso_width")] public long IsoWidth { get; set; }
-            [J("iso_height")] public long IsoHeight { get; set; }
+            [J("iso_width")] public int IsoWidth { get; set; }
+            [J("iso_height")] public int IsoHeight { get; set; }
             [J("points")] public string Points { get; set; }
             [J("controls")] public string Controls { get; set; }
             [J("milestones")] public Milestones Milestones { get; set; }
@@ -82,13 +82,13 @@ namespace SeaBotCore.Data.Definitions
 
         public class Milestone
         {
-            [J("id")] public long Id { get; set; }
-            [J("amount")] public long Amount { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("amount")] public int Amount { get; set; }
             [J("chest")] public string Chest { get; set; }
             [J("koef_min")] public double KoefMin { get; set; }
             [J("koef_max")] public double KoefMax { get; set; }
-            [J("rewards_count")] public long RewardsCount { get; set; }
-            [J("progress_koef")] public long ProgressKoef { get; set; }
+            [J("rewards_count")] public int RewardsCount { get; set; }
+            [J("progress_koef")] public int ProgressKoef { get; set; }
             [J("rewards")] public Rewards Rewards { get; set; }
         }
 
@@ -99,15 +99,15 @@ namespace SeaBotCore.Data.Definitions
 
         public class Reward
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("object_type")] public string ObjectType { get; set; }
-            [J("object_def_id")] public long ObjectDefId { get; set; }
-            [J("amount")] public long Amount { get; set; }
+            [J("object_def_id")] public int ObjectDefId { get; set; }
+            [J("amount")] public int Amount { get; set; }
             [J("bonus")] public double Bonus { get; set; }
-            [J("chance")] public long Chance { get; set; }
-            [J("round")] public long Round { get; set; }
-            [J("min_xp_pct")] public long MinXpPct { get; set; }
-            [J("max_xp_pct")] public long MaxXpPct { get; set; }
+            [J("chance")] public int Chance { get; set; }
+            [J("round")] public int Round { get; set; }
+            [J("min_xp_pct")] public int MinXpPct { get; set; }
+            [J("max_xp_pct")] public int MaxXpPct { get; set; }
         }
 
         public class Objectives
@@ -117,14 +117,14 @@ namespace SeaBotCore.Data.Definitions
 
         public class Objective
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("object_type")] public string ObjectType { get; set; }
-            [J("object_def_id")] public long ObjectDefId { get; set; }
+            [J("object_def_id")] public int ObjectDefId { get; set; }
             [J("material_koef")] public double MaterialKoef { get; set; }
             [J("koef_min")] public double KoefMin { get; set; }
             [J("koef_max")] public double KoefMax { get; set; }
             [J("material_offset")] public double MaterialOffset { get; set; }
-            [J("round")] public long Round { get; set; }
+            [J("round")] public int Round { get; set; }
         }
 
         public class RequiredLocations
@@ -135,7 +135,7 @@ namespace SeaBotCore.Data.Definitions
         public class RequiredLocationsLocation
         {
             [J("type")] public string Type { get; set; }
-            [J("unique_id")] public long UniqueId { get; set; }
+            [J("unique_id")] public int UniqueId { get; set; }
         }
 
         public class UnlockedLocations
@@ -149,14 +149,14 @@ namespace SeaBotCore.Data.Definitions
 
             [J("ids")]
             [JsonConverter(typeof(ParseStringConverter))]
-            public long Ids { get; set; }
+            public int Ids { get; set; }
         }
 
         internal class ParseStringConverter : JsonConverter
         {
             public override bool CanConvert(Type t)
             {
-                return t == typeof(long) || t == typeof(long?);
+                return t == typeof(int) || t == typeof(int?);
             }
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -173,7 +173,7 @@ namespace SeaBotCore.Data.Definitions
                     return l;
                 }
 
-                throw new Exception("Cannot unmarshal type long");
+                throw new Exception("Cannot unmarshal type int");
             }
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -184,7 +184,7 @@ namespace SeaBotCore.Data.Definitions
                     return;
                 }
 
-                var value = (long) untypedValue;
+                var value = (int) untypedValue;
                 serializer.Serialize(writer, value.ToString());
             }
 

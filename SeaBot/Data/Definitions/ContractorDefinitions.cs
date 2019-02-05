@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -41,29 +41,29 @@ namespace SeaBotCore.Data.Definitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
-            [J("version_id")] public long VersionId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
+            [J("version_id")] public int VersionId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("picture")] public string Picture { get; set; }
             [J("type")] public string Type { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
             [J("contractor_loc")] public string ContractorLoc { get; set; }
             [J("final_reward_loc")] public string FinalRewardLoc { get; set; }
-            [J("req_level")] public long ReqLevel { get; set; }
-            [J("rec_level")] public long RecLevel { get; set; }
-            [J("speedupable")] public long Speedupable { get; set; }
-            [J("sailors")] public long Sailors { get; set; }
-            [J("slots")] public long Slots { get; set; }
-            [J("travel_time")] public long TravelTime { get; set; }
-            [J("unlock_time")] public long UnlockTime { get; set; }
-            [J("event_id")] public long EventId { get; set; }
-            [J("quest_count")] public long QuestCount { get; set; }
-            [J("map_x")] public long MapX { get; set; }
-            [J("map_y")] public long MapY { get; set; }
+            [J("req_level")] public int ReqLevel { get; set; }
+            [J("rec_level")] public int RecLevel { get; set; }
+            [J("speedupable")] public int Speedupable { get; set; }
+            [J("sailors")] public int Sailors { get; set; }
+            [J("slots")] public int Slots { get; set; }
+            [J("travel_time")] public int TravelTime { get; set; }
+            [J("unlock_time")] public int UnlockTime { get; set; }
+            [J("event_id")] public int EventId { get; set; }
+            [J("quest_count")] public int QuestCount { get; set; }
+            [J("map_x")] public int MapX { get; set; }
+            [J("map_y")] public int MapY { get; set; }
             [J("atlas")] public string Atlas { get; set; }
             [J("texture")] public string Texture { get; set; }
-            [J("iso_width")] public long IsoWidth { get; set; }
-            [J("iso_height")] public long IsoHeight { get; set; }
+            [J("iso_width")] public int IsoWidth { get; set; }
+            [J("iso_height")] public int IsoHeight { get; set; }
             [J("thumb_size")] public string ThumbSize { get; set; }
             [J("thumb_offset")] public string ThumbOffset { get; set; }
             [J("head_offset")] public string HeadOffset { get; set; }
@@ -86,11 +86,11 @@ namespace SeaBotCore.Data.Definitions
 
         public class FinalReward
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("type")] public string Type { get; set; }
-            [J("amount")] public long Amount { get; set; }
-            [J("min_level")] public long MinLevel { get; set; }
-            [J("max_level")] public long MaxLevel { get; set; }
+            [J("amount")] public int Amount { get; set; }
+            [J("min_level")] public int MinLevel { get; set; }
+            [J("max_level")] public int MaxLevel { get; set; }
         }
 
         public class Quests
@@ -102,14 +102,14 @@ namespace SeaBotCore.Data.Definitions
         {
             [J("title_loc")] public string TitleLoc { get; set; }
             [J("text_loc")] public string TextLoc { get; set; }
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("objective_type_id")] public string ObjectiveTypeId { get; set; }
-            [J("objective_def_id")] public long ObjectiveDefId { get; set; }
-            [J("material_koef")] public long MaterialKoef { get; set; }
-            [J("bonus")] public long Bonus { get; set; }
-            [J("difficulty")] public long Difficulty { get; set; }
-            [J("amount")] public long Amount { get; set; }
-            [J("round")] public long Round { get; set; }
+            [J("objective_def_id")] public int ObjectiveDefId { get; set; }
+            [J("material_koef")] public int MaterialKoef { get; set; }
+            [J("bonus")] public int Bonus { get; set; }
+            [J("difficulty")] public int Difficulty { get; set; }
+            [J("amount")] public int Amount { get; set; }
+            [J("round")] public int Round { get; set; }
 
             [J("rewards", NullValueHandling = N.Ignore)]
             public Rewards Rewards { get; set; }
@@ -122,12 +122,12 @@ namespace SeaBotCore.Data.Definitions
 
         public class Reward
         {
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("type")] public string Type { get; set; }
-            [J("amount")] public long Amount { get; set; }
-            [J("bonus")] public long Bonus { get; set; }
-            [J("xp_pct")] public long XpPct { get; set; }
-            [J("round")] public long Round { get; set; }
+            [J("amount")] public int Amount { get; set; }
+            [J("bonus")] public int Bonus { get; set; }
+            [J("xp_pct")] public int XpPct { get; set; }
+            [J("round")] public int Round { get; set; }
         }
 
         public class RequiredLocations
@@ -138,7 +138,7 @@ namespace SeaBotCore.Data.Definitions
         public class RequiredLocationsLocation
         {
             [J("type")] public string Type { get; set; }
-            [J("unique_id")] public long UniqueId { get; set; }
+            [J("unique_id")] public int UniqueId { get; set; }
         }
 
         public class UnlockedLocations

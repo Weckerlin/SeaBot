@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -39,22 +39,22 @@ namespace SeaBotCore.Data.Definitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
+            [J("def_id")] public int DefId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("name_loc")] public string NameLoc { get; set; }
-            [J("speedupable")] public long Speedupable { get; set; }
-            [J("slots")] public long Slots { get; set; }
-            [J("enabled")] public long Enabled { get; set; }
+            [J("speedupable")] public int Speedupable { get; set; }
+            [J("slots")] public int Slots { get; set; }
+            [J("enabled")] public int Enabled { get; set; }
             [J("type")] public string Type { get; set; }
-            [J("travel_time")] public long TravelTime { get; set; }
-            [J("outpost_id")] public long OutpostId { get; set; }
-            [J("event_id")] public long EventId { get; set; }
-            [J("map_x")] public long MapX { get; set; }
-            [J("map_y")] public long MapY { get; set; }
+            [J("travel_time")] public int TravelTime { get; set; }
+            [J("outpost_id")] public int OutpostId { get; set; }
+            [J("event_id")] public int EventId { get; set; }
+            [J("map_x")] public int MapX { get; set; }
+            [J("map_y")] public int MapY { get; set; }
             [J("atlas")] public string Atlas { get; set; }
             [J("texture")] public string Texture { get; set; }
-            [J("iso_width")] public long IsoWidth { get; set; }
-            [J("iso_height")] public long IsoHeight { get; set; }
+            [J("iso_width")] public int IsoWidth { get; set; }
+            [J("iso_height")] public int IsoHeight { get; set; }
             [J("points")] public string Points { get; set; }
             [J("controls")] public string Controls { get; set; }
             [J("materials")] public Materials Materials { get; set; }

@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -39,11 +39,11 @@ namespace SeaBotCore.Data.Definitions
 
         public class Item
         {
-            [J("def_id")] public long DefId { get; set; }
-            [J("id")] public long Id { get; set; }
-            [J("turn_count")] public long TurnCount { get; set; }
-            [J("turn_time")] public long TurnTime { get; set; }
-            [J("output_amount")] public long OutputAmount { get; set; }
+            [J("def_id")] public int DefId { get; set; }
+            [J("id")] public int Id { get; set; }
+            [J("turn_count")] public int TurnCount { get; set; }
+            [J("turn_time")] public int TurnTime { get; set; }
+            [J("output_amount")] public int OutputAmount { get; set; }
         }
     }
 }

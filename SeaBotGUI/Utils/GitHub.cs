@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace SeaBotGUI.Utils
             [J("assets_url")] public Uri AssetsUrl { get; set; }
             [J("upload_url")] public string UploadUrl { get; set; }
             [J("html_url")] public Uri HtmlUrl { get; set; }
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("node_id")] public string NodeId { get; set; }
             [J("tag_name")] public string TagName { get; set; }
             [J("target_commitish")] public string TargetCommitish { get; set; }
@@ -49,15 +49,15 @@ namespace SeaBotGUI.Utils
         public class Asset
         {
             [J("url")] public Uri Url { get; set; }
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("node_id")] public string NodeId { get; set; }
             [J("name")] public string Name { get; set; }
             [J("label")] public object Label { get; set; }
             [J("uploader")] public Author Uploader { get; set; }
             [J("content_type")] public string ContentType { get; set; }
             [J("state")] public string State { get; set; }
-            [J("size")] public long Size { get; set; }
-            [J("download_count")] public long DownloadCount { get; set; }
+            [J("size")] public int Size { get; set; }
+            [J("download_count")] public int DownloadCount { get; set; }
             [J("created_at")] public DateTimeOffset CreatedAt { get; set; }
             [J("updated_at")] public DateTimeOffset UpdatedAt { get; set; }
             [J("browser_download_url")] public Uri BrowserDownloadUrl { get; set; }
@@ -66,7 +66,7 @@ namespace SeaBotGUI.Utils
         public class Author
         {
             [J("login")] public string Login { get; set; }
-            [J("id")] public long Id { get; set; }
+            [J("id")] public int Id { get; set; }
             [J("node_id")] public string NodeId { get; set; }
             [J("avatar_url")] public Uri AvatarUrl { get; set; }
             [J("gravatar_id")] public string GravatarId { get; set; }

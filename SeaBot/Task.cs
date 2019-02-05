@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -338,7 +338,22 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+        public class OutpostSendShipTask : IGameTask
+        {
+            public OutpostSendShipTask(int inst_id,int outpost_id,int crew)
+            {
+                Time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("outpost_id", outpost_id);
+                CustomObjects.Add("crew", crew);
+                CustomObjects.Add("player_level", Core.GlobalData.Level);
+            }
 
+            public string Action => "send_ship_outpost";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
         public class ConfirmBarrelTask : IGameTask
         {
             public ConfirmBarrelTask(int def_id, string type, int amount, int material_id, int player_lvl)

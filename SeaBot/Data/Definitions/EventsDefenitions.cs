@@ -67,12 +67,12 @@ namespace SeaBotCore.Data.Definitions
 
             public static implicit operator Barrel(long Integer)
             {
-                return new Barrel {Integer = Integer};
+                return new Barrel { Integer = Integer };
             }
 
             public static implicit operator Barrel(string String)
             {
-                return new Barrel {String = String};
+                return new Barrel { String = String };
             }
         }
 
@@ -103,11 +103,11 @@ namespace SeaBotCore.Data.Definitions
                 {
                     case JsonToken.Integer:
                         var integerValue = serializer.Deserialize<long>(reader);
-                        return new Barrel {Integer = integerValue};
+                        return new Barrel { Integer = integerValue };
                     case JsonToken.String:
                     case JsonToken.Date:
                         var stringValue = serializer.Deserialize<string>(reader);
-                        return new Barrel {String = stringValue};
+                        return new Barrel { String = stringValue };
                 }
 
                 throw new Exception("Cannot unmarshal type Barrel");
@@ -115,7 +115,7 @@ namespace SeaBotCore.Data.Definitions
 
             public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
             {
-                var value = (Barrel) untypedValue;
+                var value = (Barrel)untypedValue;
                 if (value.Integer != null)
                 {
                     serializer.Serialize(writer, value.Integer.Value);

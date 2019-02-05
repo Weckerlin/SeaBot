@@ -24,19 +24,19 @@ namespace SeaBotCore.Data.Definitions
         public partial class Item
         {
             [JsonProperty("def_id")]
-            public long DefId { get; set; }
+            public int DefId { get; set; }
 
             [JsonProperty("name")]
             public string Name { get; set; }
 
             [JsonProperty("xp")]
-            public long Xp { get; set; }
+            public int Xp { get; set; }
 
             [JsonProperty("median_capacity")]
-            public long MedianCapacity { get; set; }
+            public int MedianCapacity { get; set; }
 
             [JsonProperty("median_crew")]
-            public long MedianCrew { get; set; }
+            public int MedianCrew { get; set; }
 
             [JsonProperty("rewards", NullValueHandling = NullValueHandling.Ignore)]
             public Rewards Rewards { get; set; }
@@ -51,13 +51,13 @@ namespace SeaBotCore.Data.Definitions
         public partial class Reward
         {
             [JsonProperty("id")]
-            public long Id { get; set; }
+            public int Id { get; set; }
 
             [JsonProperty("type")]
             public string Type { get; set; }
 
             [JsonProperty("amount")]
-            public long Amount { get; set; }
+            public int Amount { get; set; }
         }
 
     }

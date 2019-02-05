@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -102,7 +102,7 @@ namespace SeaBotCore.BotMethods
                                 var willbeproducedat =
                                     building.ProdStart + Definitions.BuildingDef.Items.Item
                                         .First(n => n.DefId == building.DefId).Levels.Level
-                                        .First(n => n.Id == (long) building.Level).ProdOutputs
+                                        .First(n => n.Id == (int) building.Level).ProdOutputs
                                         .ProdOutput[0].Time;
                                 //lol xD
 
@@ -116,7 +116,7 @@ namespace SeaBotCore.BotMethods
                                 var willbeproducedat =
                                     building.UpgStart + Definitions.BuildingDef.Items.Item
                                         .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                        .Where(n => n.Id == (long) building.Level + 1).First()
+                                        .Where(n => n.Id == (int) building.Level + 1).First()
                                         .UpgradeTime;
 
 

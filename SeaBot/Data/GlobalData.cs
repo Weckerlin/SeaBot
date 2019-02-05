@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -123,7 +123,7 @@ namespace SeaBotCore.Data
                         Charges = Convert.ToInt32(node.SelectSingleNode("charges")?.InnerText),
                         ShipId = Convert.ToInt32(node.SelectSingleNode("ship_id")?.InnerText),
                         Type = node.SelectSingleNode("inst_id")?.InnerText,
-                        Created = Convert.ToInt64(node.SelectSingleNode("created")?.InnerText),
+                        Created = Convert.ToInt32(node.SelectSingleNode("created")?.InnerText),
                         SourceType = node.SelectSingleNode("source_type")?.InnerText,
                         BonusAmount = Convert.ToInt32(node.SelectSingleNode("bonus_amount")?.InnerText)
                     });
@@ -418,7 +418,7 @@ namespace SeaBotCore.Data
         public int Level;
         public int NewBuildings;
         public int ProdId;
-        public long ProdStart;
+        public int ProdStart;
         public int UpgStart;
         public int UpgType;
     }
@@ -438,12 +438,12 @@ namespace SeaBotCore.Data
         public int Progress { get; set; }
         public int Done { get; set; }
         public int CargoOnTheWay { get; set; }
-        public long ConfirmedTime { get; set; }
+        public int ConfirmedTime { get; set; }
         public int Amount { get; set; }
         public int Sailors { get; set; }
         public int MaterialKoef { get; set; }
         public int PlayerLevel { get; set; }
-        public long UpgradeTimeStarted { get; set; }
+        public int UpgradeTimeStarted { get; set; }
     }
 
     public class Ship
@@ -472,7 +472,7 @@ namespace SeaBotCore.Data
     public class LostTreasure
     {
         public int DefId { get; set; }
-        public long Seed { get; set; }
+        public int Seed { get; set; }
         public int ClaimedChests { get; set; }
         public int UnlockStarted { get; set; }
     }
@@ -522,7 +522,7 @@ namespace SeaBotCore.Data
         public int Charges { get; set; }
         public int ShipId { get; set; }
         public string Type { get; set; }
-        public long Created { get; set; }
+        public int Created { get; set; }
         public string SourceType { get; set; }
         public int BonusAmount { get; set; }
     }
@@ -533,7 +533,7 @@ namespace SeaBotCore.Data
         public int DefId { get; set; }
         public int Level { get; set; }
         public int Turn { get; set; }
-        public long ProdStart { get; set; }
+        public int ProdStart { get; set; }
     }
 
     public class Achievement

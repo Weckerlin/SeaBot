@@ -101,7 +101,7 @@ namespace SeaBotWPF.Chart
 
             int start = 0;
 
-            //handle ARGB strings (8 characters long)
+            //handle ARGB strings (8 characters int)
             if (hex.Length == 8)
             {
                 a = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);

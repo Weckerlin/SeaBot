@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -152,9 +152,12 @@ namespace SeaBotCore.BotMethods
                             var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
                                 .FirstOrDefault();
                             //TODO: increasing of progress or amount!
-                            
-                           
-                         Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+
+                            Logger.Logger.Info(
+                            Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
+                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
+                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),(int)usedshit,AutoShipUtils.GetSailors(ship), (int)currentcontractor.Sailors,ship.TargetLevel,(int)currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
                            
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         }
@@ -171,15 +174,16 @@ namespace SeaBotCore.BotMethods
                     //    }
                     //}
 
-                    //if (ship.Type == "outpost")
-                    //{
-                    //    if (AutoShipUtils.isVoyageCompleted(ship))
-                    //    {
-                    //        _deship.Add(ship);
-                    //        Networking.AddTask(new Task.UnloadShipOutpostTask(ship.InstId));
-                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                    //    }
-                    //}
+                    if (ship.Type == "outpost")
+                    {
+                        if (AutoShipUtils.isVoyageCompleted(ship))
+                        {
+                            _deship.Add(ship);
+                            var loc = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).First();
+                            Networking.AddTask(new Task.DockShipTaskOutPost(ship,false,AutoShipUtils.GetCapacity(ship),ship.Cargo,AutoShipUtils.GetSailors(ship),ship.Crew,ship.TargetLevel,loc.CargoOnTheWay+loc.Crew,loc.RequiredCrew, _deship.Count(n => n.DefId == ship.DefId)));
+                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                        }
+                    }
 
                     //if (ship.Type == "social_contract")
                     //{
@@ -230,62 +234,87 @@ namespace SeaBotCore.BotMethods
 
             _deship.Clear();
             //now send
-            var bestships = Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
-                .OrderByDescending(AutoShipUtils.GetCapacity).ToList();
-            foreach (var ship in bestships)
+            if (true)
             {
-                var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
-
-                if (bestplace == null || Core.GlobalData.Sailors < AutoShipUtils.GetSailors(ship))
+                var bestships = Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                    .OrderByDescending(AutoShipUtils.GetCapacity).ToList();
+                foreach (var ship in bestships)
                 {
-                    continue;
-                }
+                    var bestplace = AutoShipUtils.GetBestUpgPlace(type, AutoShipUtils.GetSailors(ship), lootbased);
 
-
-                var lvls = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels
-                    .Level.FirstOrDefault(n => n.Id == bestplace.Level);
-                if (lvls != null)
-                {
-                    var wecan = lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship);
-                    var remain = bestplace.Amount - bestplace.Progress;
-                    if (remain < wecan)
+                    if (bestplace == null || Core.GlobalData.Sailors < AutoShipUtils.GetSailors(ship))
                     {
-                        wecan = remain;
+                        continue;
                     }
 
-                    Core.GlobalData.Sailors -= lvls.Sailors;
 
-                    bestplace.CargoOnTheWay += wecan;
-                    var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
-                    shp.Sent =
-                        TimeUtils.GetEpochTime();
-                    shp.Loaded =
-                        0;
-                    shp.Type = "upgradeable";
-                    shp.TargetId =
-                        bestplace.DefId;
-                    shp.TargetLevel = bestplace.Level;
-                    Logger.Logger.Info(Localization.SHIPS_SENDING +
-                                       LocalizationCache.GetNameFromLoc(
-                                           Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                           Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
-                    Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
+                    var lvls = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId).Levels
+                        .Level.FirstOrDefault(n => n.Id == bestplace.Level);
+                    if (lvls != null)
+                    {
+                        var wecan = lvls.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                        var remain = bestplace.Amount - bestplace.Progress;
+                        if (remain < wecan)
+                        {
+                            wecan = remain;
+                        }
+
+                        Core.GlobalData.Sailors -= lvls.Sailors;
+
+                        bestplace.CargoOnTheWay += wecan;
+                        var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
+                        shp.Sent =
+                            TimeUtils.GetEpochTime();
+                        shp.Loaded =
+                            0;
+                        shp.Type = "upgradeable";
+                        shp.TargetId =
+                            bestplace.DefId;
+                        shp.TargetLevel = bestplace.Level;
+                        Logger.Logger.Info(Localization.SHIPS_SENDING +
+                                           LocalizationCache.GetNameFromLoc(
+                                               Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                                               Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                        Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
+                    }
                 }
             }
+            else
+            {
+                //Outpost send!
 
-            //Outpost send!
-           
                 //1. Find with done == 0
-                var locoutposts = Core.GlobalData.Outposts.Where(n => !n.Done).ToList();
-                foreach (var opst in locoutposts)
+                var bestships = Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                   .OrderByDescending(AutoShipUtils.GetSailors).ToList();
+                var opst = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew).First();
+                foreach (var ship in bestships)
                 {
-                   //Send with checks!
+
+                    if (opst.Done || opst.Crew >= opst.RequiredCrew)
+                    {
+                        continue;
+                    }
+
+                    var can = opst.RequiredCrew - opst.Crew;
+                    var sending = 0;
+                    if (can > AutoShipUtils.GetSailors(ship))
+                    {
+                        sending = AutoShipUtils.GetSailors(ship);
+                    }
+                    else
+                    {
+                        sending = can;
+                    }
+
+                    opst.Crew += sending;
+                    Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, opst.DefId, sending));
+
                 }
                 //2. Find and unlock new outposts
                 var locked = AutoShipUtils.GetUnlockableOutposts();
+                //KAAAAAAAAAAAAZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO?
 
-           
-            
+            }
         }
     }
 

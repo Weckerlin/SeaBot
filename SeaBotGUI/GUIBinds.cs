@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// aint with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.ComponentModel;
@@ -277,7 +277,7 @@ namespace SeaBotGUI.GUIBinds
                     {
                         var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                                   .Where(n => n.Id == (long) building.Level).First().ProdOutputs
+                                                   .Where(n => n.Id == (int) building.Level).First().ProdOutputs
                                                    .ProdOutput[0].Time;
                         //lol xD
 
@@ -292,7 +292,7 @@ namespace SeaBotGUI.GUIBinds
                     {
                         var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                                   .Where(n => n.Id == (long) building.Level + 1).First().UpgradeTime;
+                                                   .Where(n => n.Id == (int) building.Level + 1).First().UpgradeTime;
 
                         upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
                             .ToString(@"hh\:mm\:ss");
