@@ -274,16 +274,84 @@ namespace SeaBotCore.BotMethods
             }
 
             //Outpost send!
-            if(false)
-            {
-                    //1. Find with done == 0
-                    var outposts = Core.GlobalData.
-            }
+           
+                //1. Find with done == 0
+                var locoutposts = Core.GlobalData.Outposts.Where(n => !n.Done).ToList();
+                foreach (var opst in locoutposts)
+                {
+                   //Send with checks!
+                }
+                //2. Find and unlock new outposts
+                var locked = AutoShipUtils.GetUnlockableOutposts();
+
+           
+            
         }
     }
 
     internal static class AutoShipUtils
     {
+        public static List<OutpostDefinitions.Item> GetUnlockableOutposts()
+        {
+            var lockedspots = new List<OutpostDefinitions.Item>();
+            foreach (var lpost in Definitions.OutpostDef.Items.Item)
+            { 
+                if(Core.GlobalData.Outposts.Any(n=>n.DefId==lpost.DefId))
+                {
+                    continue;
+                }
+                //check for level
+                if (lpost.ReqLevel <= Core.GlobalData.Level)
+                {
+                    //check for unlocktime
+                    if (lpost.UnlockTime <= TimeUtils.GetEpochTime())
+                    {
+                        //check if unlocked spot
+                        if(lpost.RequiredLocations==null)
+                        {
+                            continue;
+                        }
+                        if(lpost.EventId!=TimeUtils.GetCurrentEvent().DefId)
+                        {
+                            if(lpost.EventId!=0)
+                            {
+                                continue;
+                            }
+                        }
+                        foreach (var postreq in lpost.RequiredLocations.Location)
+                        {
+                            if (postreq.Type == "outpost")
+                            {
+                                bool enogh = true;
+                                var reqlids = postreq.Ids.Split(',');
+                                foreach (var req in reqlids)
+                                {
+                                    var num = 0;
+                                    if (Int32.TryParse(req, out num))
+                                    {
+                                        if (!Core.GlobalData.Outposts.Where(n=>n.Done).Any(n => n.DefId == num))
+                                        {
+                                            enogh = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        enogh = false;
+                                        break;
+                                    }
+                                }
+                                if (enogh)
+                                {
+                                    lockedspots.Add(lpost);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return lockedspots;
+        }
         public static bool isVoyageCompleted(Ship ship)
         {
             int? traveltime = null;
