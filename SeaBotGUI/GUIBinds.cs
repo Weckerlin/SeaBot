@@ -268,22 +268,26 @@ namespace SeaBotGUI.GUIBinds
                     Building.ID = building.InstId;
                     Building.Name = LocalizationCache.GetNameFromLoc(Definitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
-                        .First().NameLoc, Definitions.BuildingDef.Items.Item
+                        .FirstOrDefault()?.NameLoc, Definitions.BuildingDef.Items.Item
                         .Where(n => n.DefId == building.DefId)
-                        .First().Name);
+                        .FirstOrDefault()?.Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
                         var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
-                                                   .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                                   .Where(n => n.Id == (int) building.Level).First().ProdOutputs
+                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
+                                                   .Where(n => n.Id == (int) building.Level).FirstOrDefault()?.ProdOutputs
                                                    .ProdOutput[0].Time;
+                        if (willbeproducedat.HasValue)
+                        {
+                            producing =
+                                (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat.Value))
+                                .ToString(@"hh\:mm\:ss");
+                        }
                         //lol xD
 
-                        producing =
-                            (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
-                            .ToString(@"hh\:mm\:ss");
+                       
                     }
 
            
@@ -291,11 +295,14 @@ namespace SeaBotGUI.GUIBinds
                     if (building.UpgStart != 0)
                     {
                         var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
-                                                   .Where(n => n.DefId == building.DefId).First().Levels.Level
-                                                   .Where(n => n.Id == (int) building.Level + 1).First().UpgradeTime;
-
-                        upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
-                            .ToString(@"hh\:mm\:ss");
+                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
+                                                   .Where(n => n.Id == (int) building.Level + 1).FirstOrDefault()
+                                                   ?.UpgradeTime;
+                        if (willbeproducedat.HasValue)
+                        {
+                            upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
+                                .ToString(@"hh\:mm\:ss");
+                        }
                     }
 
                     if (building.DefId == 12)
@@ -467,12 +474,13 @@ namespace SeaBotGUI.GUIBinds
 
                 foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
                 {
+                   var name = LocalizationCache.GetNameFromLoc(Definitions.ShipDef.Items.Item
+                        .Where(n => n.DefId == ship.DefId)?
+                        .FirstOrDefault()?.NameLoc, Definitions.ShipDef.Items.Item
+                        .FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
-                    Ship.Name = LocalizationCache.GetNameFromLoc(Definitions.ShipDef.Items.Item
-                        .Where(n => n.DefId == ship.DefId)
-                        .First().NameLoc, Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)
-                        .First().Name);
+                    Ship.Name = name;
 
                     var willatportat = string.Empty;
                     if (ship.Sent != 0)

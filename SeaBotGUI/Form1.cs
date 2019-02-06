@@ -402,8 +402,7 @@ namespace SeaBotGUI
                 {
                     string[] row =
                     {
-                        LocalizationCache.GetNameFromLoc(MaterialDB.GetItem(data.Inventory[i].Id).NameLoc,
-                            MaterialDB.GetItem(data.Inventory[i].Id).Name),
+                      MaterialDB.GetLocalizedName(data.Inventory[i].Id),
                         data.Inventory[i].Amount.ToString()
                     };
                     a.Add(new ListViewItem(row));
