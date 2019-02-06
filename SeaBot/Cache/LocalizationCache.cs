@@ -152,7 +152,7 @@ namespace SeaBotCore.Cache
 
         public static string GetNameFromLoc(string item, string defname)
         {
-            if (_local == null)
+            if (_local == null||_local.Count==0)
             {
                 if (Directory.Exists(_cachefolder))
                 {

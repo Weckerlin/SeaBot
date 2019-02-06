@@ -22,8 +22,10 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using SeaBotCore;
+using SeaBotCore.BotMethods;
 using SeaBotCore.Cache;
 using SeaBotCore.Data.Definitions;
+using SeaBotCore.Localizaion;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
 
@@ -488,35 +490,10 @@ namespace SeaBotGUI.GUIBinds
                        
                         try
                         {
-                            var shipdef = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-                            if (shipdef == null)
-                            {
-                                continue;
-                            }
 
-                            if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels ==
-                                null)
-                            {
-                                continue;
-                            }
 
-                            if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
-                                    .Level
-                                    .Count == 0)
-                            {
-                                continue;
-                            }
-
-                            var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
-                                ?.Levels.Level
-                                .FirstOrDefault(n => n.Id == ship.TargetLevel);
-                            if (lvl == null)
-                            {
-                                continue;
-                            }
-
-                            Ship.Route = Definitions.UpgrDef.Items.Item.First(n => n.DefId == ship.TargetId).Name;
-                            var willatportattime = ship.Sent + lvl.TravelTime;
+                            Ship.Route = LocalizationCache.GetNameFromLoc(ship.GetTravelName(), "");
+                            var willatportattime = ship.Sent + ship.GetTravelTime();
                             //lol xD 
                             if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
                             {
@@ -531,8 +508,7 @@ namespace SeaBotGUI.GUIBinds
                         }
                         catch (Exception)
                         {
-                            Logger.Debug(
-                                $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
+                           
                         }
                     }
 
