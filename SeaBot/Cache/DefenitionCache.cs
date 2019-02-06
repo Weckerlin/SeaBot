@@ -264,7 +264,7 @@ namespace SeaBotCore.Cache
             {
             _cache.Add(type, ret);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // ignored
             }

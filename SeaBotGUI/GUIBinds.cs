@@ -485,6 +485,7 @@ namespace SeaBotGUI.GUIBinds
                     var willatportat = string.Empty;
                     if (ship.Sent != 0)
                     {
+                       
                         try
                         {
                             var shipdef = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
