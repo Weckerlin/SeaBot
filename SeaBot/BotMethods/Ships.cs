@@ -556,7 +556,7 @@ namespace SeaBotCore.BotMethods
             var sito = needed.Where(shtItem =>
                 Core.GlobalData.Upgradeables.FirstOrDefault(n =>
                     n.DefId == shtItem.DefId && n.Amount != 0 && n.Progress < n.Amount ||
-                    n.DefId == shtItem.DefId && shtItem.MaxLevel==1) !=
+                    n.DefId == shtItem.DefId && shtItem.MaxLevel==1 && shtItem.EventId==0) !=
                 null);
             var p = sito
                 .ToDictionary(shtItem => shtItem,

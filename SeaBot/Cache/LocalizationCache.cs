@@ -35,6 +35,7 @@ namespace SeaBotCore.Cache
         private const string _cachefolder = "loccache";
 
         private const string _baseaddr = "https://static.seaportgame.com/localization/";
+        private const string _baseaddr2 = "https://static.seaportgame.com/build/";
         private static readonly object locker = new object();
 
         private static string _lastestdef = "1.427.0";
@@ -75,6 +76,7 @@ namespace SeaBotCore.Cache
                 DownloadCache();
                 File.WriteAllText(_cachefolder + "/cacheversion.txt", currentversion);
             }
+            _lastestdef = currentversion;
         }
 
         private static Dictionary<string, string> LoadDictionary(string[] arr)
@@ -129,7 +131,7 @@ namespace SeaBotCore.Cache
                                     Directory.CreateDirectory(_cachefolder);
                                 }
 
-                                new WebClient().DownloadFile(_baseaddr + dl.Groups[2].Value,
+                                new WebClient().DownloadFile(_baseaddr2 + dl.Groups[2].Value,
                                     $"{_cachefolder}/{dl.Groups[1].Value}.lang");
                                 Logger.Logger.Info(string.Format(Localization.CORE_LOCAL_DOWNLOAD_STEP,
                                     dl.Groups[1].Value));

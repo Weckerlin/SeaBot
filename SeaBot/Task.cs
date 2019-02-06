@@ -847,36 +847,16 @@ namespace SeaBotCore
         {
             public SendShipUpgradeableTask(Ship ship, Upgradeable destination, int amount)
             {
-                var capacity = AutoShipUtils.GetCapacity(ship);
                 var destination_levels = Definitions.UpgrDef.Items.Item.First(n => n.DefId == destination.DefId).Levels
                     .Level.FirstOrDefault(n => n.Id == destination.Level);
-                Time = (uint) TimeUtils.GetEpochTime();
-                
+                Time = (uint)TimeUtils.GetEpochTime();
                 CustomObjects.Add("inst_id", ship.InstId);
                 CustomObjects.Add("dest_id", destination.DefId);
                 CustomObjects.Add("dest_amount", destination_levels.Amount);
-                if (destination_levels.MaterialKoef != 0)
-                {
-                    CustomObjects.Add("dest_material_koef", destination_levels.MaterialKoef);
-                }
-                else
-                {
-                    CustomObjects.Add("dest_material_koef", 1);
-                }
-
+                CustomObjects.Add("dest_material_koef",
+                    destination_levels.MaterialKoef != 0 ? destination_levels.MaterialKoef : 1);
                 CustomObjects.Add("dest_sailors", destination_levels.Sailors);
-                if (amount == 0)
-                {
-                    CustomObjects.Add("amount", AutoShipUtils.GetCapacity(ship));
-                }
-                else
-                {
-
-
-
-                    CustomObjects.Add("amount", amount);
-                }
-
+                CustomObjects.Add("amount", amount == 0 ? AutoShipUtils.GetCapacity(ship) : amount);
                 CustomObjects.Add("player_level", Core.GlobalData.Level);
             }
 
