@@ -13,13 +13,15 @@ namespace SeaBotCore.BotMethods
     {
         public static void UpgradeContractor()
         {
+            return;
+            ///BETA!!!
             for (var index = 0; index < Core.GlobalData.Contracts.Count; index++)
             {
                 var upg = Core.GlobalData.Contracts[index];
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
-                var nexlv = def.Quests.Quest.Where(n => n.Id == upg.QuestId + 1).FirstOrDefault();
-                var currquest = def.Quests.Quest.Where(n => n.Id == upg.QuestId).FirstOrDefault();
-                if(nexlv==null)
+                var nexlv = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId + 1);
+                var currquest = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId);
+                if(nexlv==null||currquest==null)
                 {
                     continue;
                 }

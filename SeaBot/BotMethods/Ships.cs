@@ -138,29 +138,29 @@ namespace SeaBotCore.BotMethods
                     //}
 
                     ////Contractor
-                    if (ship.Type == "contractor")
-                    {
-                        if (AutoShipUtils.isVoyageCompleted(ship))
-                        {
-                            var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
-                                .FirstOrDefault();
-                            var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
-                            if (quest == null) continue;
-                            var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
-                            _deship.Add(ship);
-                            var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
-                                .FirstOrDefault();
-                            //TODO: increasing of progress or amount!
+                    //if (ship.Type == "contractor")
+                    //{
+                    //    if (AutoShipUtils.isVoyageCompleted(ship))
+                    //    {
+                    //        var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
+                    //            .FirstOrDefault();
+                    //        var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
+                    //        if (quest == null) continue;
+                    //        var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                    //        _deship.Add(ship);
+                    //        var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
+                    //            .FirstOrDefault();
+                    //        //TODO: increasing of progress or amount!
 
-                            Logger.Logger.Info(
-                            Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
-                            Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),usedshit,AutoShipUtils.GetSailors(ship), currentcontractor.Sailors,ship.TargetLevel,currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                    //        Logger.Logger.Info(
+                    //        Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
+                    //            Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                    //            Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
+                    //        Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),usedshit,AutoShipUtils.GetSailors(ship), currentcontractor.Sailors,ship.TargetLevel,currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
                            
-                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                        }
-                    }
+                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                    //    }
+                    //}
 
                     //if (ship.Type == "global_contractor")
                     //{

@@ -27,7 +27,7 @@ namespace SeaBotCore.Utils
     {
         private static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
         private static TimeSpan _timeOffset = new TimeSpan(0); 
-      
+      public static object locker = new object();
         public static DateTime FromUnixTime(long unixTime)
         {
             return Epoch.AddSeconds(unixTime);
@@ -35,14 +35,17 @@ namespace SeaBotCore.Utils
 
         public static void CheckForTimeMismatch(long time)
         {
-            var timedelay = ((DateTime.UtcNow+_timeOffset) - FromUnixTime(time)).TotalMinutes;
-
-            if (timedelay >= 3 || timedelay <= 0)
+            if (Core.Debug)
             {
-                Logger.Logger.Warning(string.Format(Localization.TIMEUTIL_TIMEMISMATCH, timedelay));
-                _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
-                Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalMinutes);
-                //Time is really delayed!
+                var timedelay = ((DateTime.UtcNow + _timeOffset) - FromUnixTime(time)).TotalMinutes;
+                //  Logger.Logger.Info(FromUnixTime(time).ToString());
+                if (timedelay >= 3 || timedelay <= -3)
+                {
+                    Logger.Logger.Warning(string.Format(Localization.TIMEUTIL_TIMEMISMATCH, timedelay));
+                    _timeOffset = TimeSpan.FromMinutes(timedelay).Negate();
+                    Logger.Logger.Debug("Time offset (min) = " + _timeOffset.TotalMinutes);
+                    //Time is really delayed!
+                }
             }
         }
 
@@ -58,7 +61,7 @@ namespace SeaBotCore.Utils
 
         public static EventsDefenitions.Item GetCurrentEvent()
         {
-            var stl = new Dictionary<EventsDefenitions.Item, int>();
+            var stl = new Dictionary<EventsDefenitions.Item, long>();
             foreach (var item in Definitions.EvntDef.Items.Item)
             {
                 var x = GetEpochTime();
