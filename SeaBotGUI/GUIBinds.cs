@@ -296,11 +296,11 @@ namespace SeaBotGUI.GUIBinds
                     {
                         var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
-                                                   .Where(n => n.Id == (int) building.Level + 1).FirstOrDefault()
+                                                   .Where(n => n.Id == building.Level + 1).FirstOrDefault()
                                                    ?.UpgradeTime;
                         if (willbeproducedat.HasValue)
                         {
-                            upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
+                            upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime((long)willbeproducedat))
                                 .ToString(@"hh\:mm\:ss");
                         }
                     }

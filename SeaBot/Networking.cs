@@ -118,7 +118,7 @@ namespace SeaBotCore
                     Sync();
                 }
 
-                if ((DateTime.Now - _lastRaised).TotalSeconds > Core.GlobalData.HeartbeatInterval)
+                if ((DateTime.Now - _lastRaised).TotalSeconds > (Core.GlobalData.HeartbeatInterval==0?300:Core.GlobalData.HeartbeatInterval))
                 {
                     Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
                     _gametasks.Add(new Task.HeartBeat());
