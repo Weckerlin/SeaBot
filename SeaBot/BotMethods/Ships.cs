@@ -155,6 +155,7 @@ namespace SeaBotCore.BotMethods
                     {
                         if (ship.IsVoyageCompleted())
                         {
+                            //TODO: THIS SHIT IS STATIC!!!
                             var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
                                 .FirstOrDefault();
                             var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
@@ -189,6 +190,11 @@ namespace SeaBotCore.BotMethods
                             _deship.Add(ship);
                             var loc = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).First();
                             ship.LogUnload();
+                            var outp = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+                            if(outp.CargoOnTheWay<=ship.Sailors())
+                            {
+                                outp.CargoOnTheWay -= ship.Sailors();
+                            }
                             Networking.AddTask(new Task.DockShipTaskOutPost(ship,false,AutoShipUtils.GetCapacity(ship),ship.Cargo,AutoShipUtils.GetSailors(ship),ship.Crew,ship.TargetLevel,loc.CargoOnTheWay+loc.Crew,loc.RequiredCrew, _deship.Count(n => n.DefId == ship.DefId)));
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         
@@ -537,50 +543,103 @@ namespace SeaBotCore.BotMethods
         }
         public static bool SendToContractor(Ship ship)
         {
-            var opst = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew).FirstOrDefault();
-            if (opst != null)
+            List<Data.Contractor> statiopst = new List<Data.Contractor>();
+            List<Data.Contractor> genopst = new List<Data.Contractor>();
+            foreach (var contractor in Core.GlobalData.Contracts)
             {
-                var can = opst.RequiredCrew - opst.Crew;
-                var sending = 0;
-                if (can > AutoShipUtils.GetSailors(ship))
+                if (contractor.Done == 0)
                 {
-                    sending = AutoShipUtils.GetSailors(ship);
+                    var def = Definitions.ConDef.Items.Item.Where(c => contractor.DefId == c.DefId).FirstOrDefault();
+                    var quest =def.Quests.Quest.Where(q => contractor.QuestId == q.Id).First();
+                    if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
+                    {
+                        if (def.Type == "static")
+                        {
+                            statiopst.Add(contractor);
+                        }
+                        else
+                        {
+
+
+                            genopst.Add(contractor);
+                        }
+                    }
+
+                }
+            }
+
+            foreach (var opst in statiopst)
+            {
+                var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
+                var quest =def.Quests.Quest.Where(q => opst.QuestId == q.Id).First();
+                var already = opst.Progress;
+                var exists = quest.Amount - opst.Progress;
+                var wecan = 0;
+                if (exists*quest.MaterialKoef > ship.Capacity())
+                {
+                    wecan = ship.Capacity();
                 }
                 else
                 {
-                    sending = can;
+                    wecan = exists;
                 }
 
-                
-                opst.Crew += sending;
-                Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, opst.DefId, sending));
+                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().CargoOnTheWay +=
+                    wecan * quest.MaterialKoef;
+                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().Progress +=
+                    wecan * quest.MaterialKoef;
+                Logger.Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
+                Networking.AddTask(new Task.SendShipContractorTask(ship.InstId, opst.DefId,quest.ObjectiveDefId,quest.Id, wecan*quest.MaterialKoef));
+                var lship = Core.GlobalData.Ships.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                lship.Sent =
+                    TimeUtils.GetEpochTime();
+                lship.Loaded =
+                    0;
+                lship.Type = "contractor";
+                lship.TargetId =
+                   opst.DefId;
+                lship.TargetLevel = quest.Id;
                 return true;
             }
-            else
+            foreach (var opst in genopst)
             {
-                var locked = AutoShipUtils.GetUnlockableOutposts();
-                if (locked.Count == 0)
+                var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
+                var quest =def.Quests.Quest.Where(q => opst.QuestId == q.Id).First();
+                var already = opst.Progress;
+                var exists = (int)quest.InputAmount() - opst.Progress;
+                var wecan = 0;
+                if (exists*quest.MaterialKoef > ship.Capacity())
                 {
-                    return false;
+                    wecan = ship.Capacity();
+                }
+                else
+                {
+                    wecan = exists;
                 }
 
-                var next = locked.OrderBy(n=>n.Sailors).FirstOrDefault();
-                if (next == null)
-                {
-                    return false;
-                }
-               
-                var sending = 0;
-                sending = next.Crew > AutoShipUtils.GetSailors(ship) ? AutoShipUtils.GetSailors(ship) : next.Crew;
-
-                
-                Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, next.DefId, sending));
-                Core.GlobalData.Outposts.Add(new Outpost(){CargoOnTheWay = sending,Crew = sending,DefId = sending,Done = false,PlayerLevel = Core.GlobalData.Level,RequiredCrew = next.Crew});
+                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().CargoOnTheWay +=
+                    wecan * quest.MaterialKoef;
+                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().Progress +=
+                    wecan * quest.MaterialKoef;
+                var lship = Core.GlobalData.Ships.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                lship.Loaded =
+                    0;
+                lship.Type = "contractor";
+                lship.TargetId =
+                    opst.DefId;
+                lship.TargetLevel = quest.Id;
+                Logger.Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
+                Networking.AddTask(new Task.SendShipContractorTask(ship.InstId, opst.DefId,quest.ObjectiveDefId,quest.Id, (int)wecan*quest.MaterialKoef));
                 return true;
             }
+                
+               
+            
+
+            return false;
             //KAAAAAAAAAAAAZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO?
         }
-        public static bool SendToOutPost(Ship ship)
+        public static bool SendToOutpost(Ship ship)
         {
             var opst = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew).FirstOrDefault();
             if (opst != null)
@@ -619,6 +678,7 @@ namespace SeaBotCore.BotMethods
                 sending = next.Crew > AutoShipUtils.GetSailors(ship) ? AutoShipUtils.GetSailors(ship) : next.Crew;
 
                 
+                Logger.Logger.Info("TEMPLATE: SENDING A SHIP TO OUTPOST");
                 Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, next.DefId, sending));
                Core.GlobalData.Outposts.Add(new Outpost(){CargoOnTheWay = sending,Crew = sending,DefId = sending,Done = false,PlayerLevel = Core.GlobalData.Level,RequiredCrew = next.Crew});
                return true;
@@ -692,7 +752,7 @@ namespace SeaBotCore.BotMethods
             canproceed = wehaveininv < ship.Capacity() ? wehaveininv : ship.Capacity();
             
             Core.GlobalData.Inventory.Where(n=>n.Id==maktplc.InputId).FirstOrDefault().Amount-=canproceed;
-            Logger.Logger.Info("Sending...");
+            Logger.Logger.Info("TEMPLATE: SENDING A SHIP TO MARKETPLACE");
             Networking.AddTask(new Task.SendShipMarketplaceTask(ship.InstId,maktplc.Id,1,canproceed));
             var locship = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
             locship.Type = "marketplace";

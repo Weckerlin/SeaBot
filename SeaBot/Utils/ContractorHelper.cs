@@ -33,7 +33,6 @@ namespace SeaBotCore.Utils
             {
                 ret = Math.Floor(Definitions.LevelUpDef.Items.Item.Where(n => n.DefId == Core.GlobalData.Level).First()
                           .Xp / 1000D * reward.XpPct);
-                throw new NotImplementedException();
             }
             else
             {

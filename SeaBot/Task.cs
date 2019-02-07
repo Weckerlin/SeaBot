@@ -354,6 +354,24 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+        public class SendShipContractorTask : IGameTask
+        {
+            public SendShipContractorTask(int inst_id,int contractor_id,int material_id,int quest_id,int amount)
+            {
+                Time = (uint)TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+                CustomObjects.Add("contractor_id", contractor_id);
+                CustomObjects.Add("material_id", material_id);
+                CustomObjects.Add("amount", amount);
+                CustomObjects.Add("quest_id",quest_id);
+                CustomObjects.Add("player_level", Core.GlobalData.Level);
+            }
+
+            public string Action => "send_ship_contractor";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
         public class ConfirmBarrelTask : IGameTask
         {
             public ConfirmBarrelTask(int def_id, string type, int amount, int material_id, int player_lvl)
@@ -371,7 +389,19 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+        public class ConfirmOutpostTask : IGameTask
+        {
+            public ConfirmOutpostTask(int def_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("def_id", def_id);
+            }
 
+            public string Action => "confirm_outpost";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
         public class ConfirmContractTask : IGameTask
         {
             public ConfirmContractTask(int def_id,int quest_id,ContractorDefinitions.Rewards rewards)
