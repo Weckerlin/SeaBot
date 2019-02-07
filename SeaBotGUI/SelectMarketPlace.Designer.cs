@@ -33,17 +33,19 @@
             // 
             // checkedListBox1
             // 
+            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
+            this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(320, 409);
+            this.checkedListBox1.Size = new System.Drawing.Size(255, 249);
             this.checkedListBox1.TabIndex = 0;
+          
             // 
             // SelectMarketPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 450);
+            this.ClientSize = new System.Drawing.Size(255, 249);
             this.Controls.Add(this.checkedListBox1);
             this.Name = "SelectMarketPlace";
             this.Text = "SelectMarketplace";

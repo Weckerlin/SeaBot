@@ -117,45 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 22</value>
+  </data>
   <data name="groupBox19.Text" xml:space="preserve">
     <value>Большое спасибо:</value>
+  </data>
+  <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
   </data>
   <data name="groupBox18.Text" xml:space="preserve">
     <value>Пожертвования</value>
   </data>
   <data name="tabPage4.Text" xml:space="preserve">
     <value>О проекте</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 22</value>
-  </data>
-  <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>Лимит на производство</value>
-  </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>Авто Апгрейд</value>
-  </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>Авто-Бочки</value>
-  </data>
-  <data name="groupBox12.Text" xml:space="preserve">
-    <value>Опт. стратегия</value>
-  </data>
-  <data name="groupBox11.Text" xml:space="preserve">
-    <value>Лут авто-кораблей</value>
-  </data>
-  <data name="tabPage8.Text" xml:space="preserve">
-    <value>Стратегия</value>
-  </data>
-  <data name="tabPage7.Text" xml:space="preserve">
-    <value>Бот</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Настройки</value>
   </data>
   <data name="radio_outpost.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 67</value>
@@ -247,6 +223,9 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Дерево</value>
   </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Лимит на производство</value>
+  </data>
   <data name="chk_onlyfactory.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 26</value>
   </data>
@@ -256,11 +235,17 @@
   <data name="chk_onlyfactory.Text" xml:space="preserve">
     <value>Только заводы</value>
   </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Авто Апгрейд</value>
+  </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Интервал (сек.)</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Авто-Бочки</value>
   </data>
   <data name="radio_saveloot.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
@@ -273,6 +258,9 @@
   </data>
   <data name="radio_savesailors.Text" xml:space="preserve">
     <value>Моряки</value>
+  </data>
+  <data name="groupBox12.Text" xml:space="preserve">
+    <value>Опт. стратегия</value>
   </data>
   <data name="radio_oil.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 19</value>
@@ -304,6 +292,12 @@
   <data name="radio_gold.Text" xml:space="preserve">
     <value>Монеты</value>
   </data>
+  <data name="groupBox11.Text" xml:space="preserve">
+    <value>Лут авто-кораблей</value>
+  </data>
+  <data name="tabPage8.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
   <data name="btn_dumpcore.Text" xml:space="preserve">
     <value>Дамп инфы</value>
   </data>
@@ -312,9 +306,6 @@
   </data>
   <data name="checkBox1.Text" xml:space="preserve">
     <value>Откладка</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Логин</value>
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 16</value>
@@ -331,11 +322,11 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Токен игры</value>
   </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Логин</value>
+  </data>
   <data name="groupBox17.Text" xml:space="preserve">
     <value>Язык</value>
-  </data>
-  <data name="groupBox9.Text" xml:space="preserve">
-    <value>Другая сессия</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -343,8 +334,8 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Спать (мин.)</value>
   </data>
-  <data name="groupBox14.Text" xml:space="preserve">
-    <value>Сон</value>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Другая сессия</value>
   </data>
   <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
@@ -354,9 +345,6 @@
   </data>
   <data name="chk_smartsleep.Text" xml:space="preserve">
     <value>Умный сон</value>
-  </data>
-  <data name="groupBox16.Text" xml:space="preserve">
-    <value>Каждые</value>
   </data>
   <data name="radio_sleepeverymin.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
@@ -370,8 +358,8 @@
   <data name="radio_sleepeveryhrs.Text" xml:space="preserve">
     <value>Час.</value>
   </data>
-  <data name="groupBox15.Text" xml:space="preserve">
-    <value>Бот будет спать</value>
+  <data name="groupBox16.Text" xml:space="preserve">
+    <value>Каждые</value>
   </data>
   <data name="radio_sleepformins.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
@@ -385,8 +373,11 @@
   <data name="radio_sleepforhrs.Text" xml:space="preserve">
     <value>Час.</value>
   </data>
-  <data name="groupBox13.Text" xml:space="preserve">
-    <value>Телеграм Бот</value>
+  <data name="groupBox15.Text" xml:space="preserve">
+    <value>Бот будет спать</value>
+  </data>
+  <data name="groupBox14.Text" xml:space="preserve">
+    <value>Сон</value>
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 62</value>
@@ -424,8 +415,14 @@
   <data name="label10.Text" xml:space="preserve">
     <value>Токен</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Инвертарь</value>
+  <data name="groupBox13.Text" xml:space="preserve">
+    <value>Телеграм Бот</value>
+  </data>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Бот</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Настройки</value>
   </data>
   <data name="btn_removeitem.Text" xml:space="preserve">
     <value>Удалить</value>
@@ -436,20 +433,17 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Кол-во</value>
   </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Инвертарь</value>
+  </data>
   <data name="tabPage6.Text" xml:space="preserve">
     <value>Корабли</value>
   </data>
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Здания</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Главная</value>
-  </data>
   <data name="btn_stats.Text" xml:space="preserve">
     <value>Статистика</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Ресурсы</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -479,8 +473,8 @@
   <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 19</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Управление</value>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Ресурсы</value>
   </data>
   <data name="button3.Text" xml:space="preserve">
     <value>Стоп</value>
@@ -488,11 +482,11 @@
   <data name="button2.Text" xml:space="preserve">
     <value>Старт</value>
   </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Управление</value>
+  </data>
   <data name="groupBox3.Text" xml:space="preserve">
     <value>Логи</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Стратегия</value>
   </data>
   <data name="chk_automuseum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -565,6 +559,12 @@
   </data>
   <data name="chk_aupgrade.Text" xml:space="preserve">
     <value>Апгрейд зданий</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Главная</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

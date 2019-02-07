@@ -71,10 +71,7 @@ namespace SeaBotCore.BotMethods
                             .FirstOrDefault(n => n.Id == ship.TargetLevel);
                         if (lvl != null)
                         {
-                            Logger.Logger.Info(
-                                Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                            ship.LogUnload();
                             var upg = Core.GlobalData.Upgradeables.FirstOrDefault(n => n.DefId == ship.TargetId);
                             if (upg != null)
                             {
@@ -102,10 +99,7 @@ namespace SeaBotCore.BotMethods
 
                         if (lvl != null)
                         {
-                            Logger.Logger.Info(
-                            Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
+                            ship.LogUnload();
                             _deship.Add(ship);
                             Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
                                 Core.GlobalData.Level, Enums.EObject.marketplace,
@@ -138,29 +132,26 @@ namespace SeaBotCore.BotMethods
                     //}
 
                     ////Contractor
-                    //if (ship.Type == "contractor")
-                    //{
-                    //    if (AutoShipUtils.isVoyageCompleted(ship))
-                    //    {
-                    //        var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
-                    //            .FirstOrDefault();
-                    //        var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
-                    //        if (quest == null) continue;
-                    //        var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
-                    //        _deship.Add(ship);
-                    //        var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
-                    //            .FirstOrDefault();
-                    //        //TODO: increasing of progress or amount!
+                    if (ship.Type == "contractor")
+                    {
+                        if (ship.IsVoyageCompleted())
+                        {
+                            var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
+                                .FirstOrDefault();
+                            var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
+                            if (quest == null) continue;
+                            var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                            _deship.Add(ship);
+                            var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
+                                .FirstOrDefault();
+                            //TODO: increasing of progress or amount!
 
-                    //        Logger.Logger.Info(
-                    //        Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                    //            Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                    //            Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
-                    //        Networking.AddTask(new Task.DockShipTaskContractor(ship,false,AutoShipUtils.GetCapacity(ship),usedshit,AutoShipUtils.GetSailors(ship), currentcontractor.Sailors,ship.TargetLevel,currentcontractor.DefId,lcontract.Progress,(int)quest.InputAmount(),quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
-                           
-                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                    //    }
-                    //}
+                            ship.LogUnload();
+                            Networking.AddTask(new Task.DockShipTaskContractor(ship, false, AutoShipUtils.GetCapacity(ship), usedshit, AutoShipUtils.GetSailors(ship), currentcontractor.Sailors, ship.TargetLevel, currentcontractor.DefId, lcontract.Progress, (int)quest.InputAmount(), quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+
+                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                        }
+                    }
 
                     //if (ship.Type == "global_contractor")
                     //{
@@ -178,20 +169,28 @@ namespace SeaBotCore.BotMethods
                         
                             _deship.Add(ship);
                             var loc = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).First();
+                            ship.LogUnload();
                             Networking.AddTask(new Task.DockShipTaskOutPost(ship,false,AutoShipUtils.GetCapacity(ship),ship.Cargo,AutoShipUtils.GetSailors(ship),ship.Crew,ship.TargetLevel,loc.CargoOnTheWay+loc.Crew,loc.RequiredCrew, _deship.Count(n => n.DefId == ship.DefId)));
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         
                     }
 
-                    //if (ship.Type == "social_contract")
-                    //{
-                    //    if (AutoShipUtils.isVoyageCompleted(ship))
-                    //    {
-                    //        _deship.Add(ship);
-                    //        Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
-                    //        AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
-                    //    }
-                    //}
+                    if (ship.Type == "social_contract")
+                    {
+                        if (ship.IsVoyageCompleted())
+                        {
+                            _deship.Add(ship);
+                            var co = Core.GlobalData.SocialContracts.Where(n => n.InstId == ship.TargetId)
+                                .FirstOrDefault();
+                            if (co == null)
+                            {
+                                continue;
+                            }
+                          ship.LogUnload();
+                            Networking.AddTask(new Task.DockShipSocialContractor(ship,false,ship.Capacity(),(int)co.MaterialKoef/co.Amount,ship.Sailors(),co.Sailors,ship.TargetLevel,_deship.Count(n => n.DefId == ship.DefId)));
+                            AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+                        }
+                    }
 
                     //if (ship.Type == "dealer")
                     //{
@@ -323,6 +322,14 @@ namespace SeaBotCore.BotMethods
 
     public static class AutoShipUtils
     {
+        public static void LogUnload(this Ship ship)
+        {
+            Logger.Logger.Info(Localization.SHIPS_SENDING +
+                               LocalizationCache.GetNameFromLoc(
+                                   Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                                   Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+        }
+        
         public static List<OutpostDefinitions.Item> GetUnlockableOutposts()
         {
             var lockedspots = new List<OutpostDefinitions.Item>();
@@ -438,9 +445,9 @@ namespace SeaBotCore.BotMethods
                     traveltime = first.TravelTime;
                     break;
                 case "social_contract":
-
+                    var soccontract = Core.GlobalData.SocialContracts.Where(n=>n.InstId==ship.TargetId).FirstOrDefault();
                     var travelTime = Definitions.SContractDef.Items.Item
-                        .FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
+                        .FirstOrDefault(n => n.DefId == soccontract?.DefId)?.TravelTime;
                     if (travelTime !=
                         null)
                         traveltime = (int)travelTime;
@@ -541,6 +548,10 @@ namespace SeaBotCore.BotMethods
             return GetShipDefId(ship).Levels.Level.FirstOrDefault(n => n.Id == level);
         }
 
+        public static int Capacity(this Ship ship)
+        {
+            return GetCapacity(ship);
+        }
         public static int GetCapacity(Ship ship)
         {
             if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels == null)
@@ -572,6 +583,10 @@ namespace SeaBotCore.BotMethods
             return 0;
         }
 
+        public static int Sailors(this Ship ship)
+        {
+            return GetSailors(ship);
+        }
         public static int GetSailors(Ship ship)
         {
             if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)

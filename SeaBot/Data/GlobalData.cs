@@ -358,6 +358,37 @@ namespace SeaBotCore.Data
 
             #endregion
 
+            #region SocialContractors
+
+            data.SocialContracts = new List<SocialContract>();
+            var socialcontractNode = doc.DocumentElement.SelectSingleNode("social_contract");
+            if (socialcontractNode != null)
+            {
+                foreach (XmlNode node in socialcontractNode.ChildNodes)
+                {
+                    SocialContract wr = new SocialContract
+                    {
+                        DefId =  Convert.ToInt32(node.SelectSingleNode("def_id")?.InnerText),
+                   
+                        Done = Convert.ToByte(node.SelectSingleNode("done")?.InnerText)==1,
+                        InstId = Convert.ToInt32(node.SelectSingleNode("inst_id")?.InnerText),
+                        Progress = Convert.ToInt32(node.SelectSingleNode("progress")?.InnerText),
+                        MaterialId = Convert.ToInt32(node.SelectSingleNode("material_id")?.InnerText),
+                        MaterialKoef = Convert.ToInt32(node.SelectSingleNode("material_koef")?.InnerText),
+                        Amount = Convert.ToInt32(node.SelectSingleNode("amount")?.InnerText),
+                        Sailors = Convert.ToInt32(node.SelectSingleNode("sailors")?.InnerText),
+                        RewardType =node.SelectSingleNode("material_id")?.InnerText,
+                        RewardId =    Convert.ToInt32(node.SelectSingleNode("reward_id")?.InnerText),
+                        RewardAmount = Convert.ToInt32(node.SelectSingleNode("reward_amount")?.InnerText)
+
+                    };
+
+                    data.SocialContracts.Add(wr);
+                }
+            }
+
+            #endregion
+
             Barrels.BarrelController._lastBarrelSeed =
                 Convert.ToDouble(doc.DocumentElement.SelectSingleNode("last_barrel_amount")?.InnerText);
             data.HeartbeatInterval =
@@ -387,6 +418,7 @@ namespace SeaBotCore.Data
         public int HeartbeatInterval { get; set; }
         public List<Wreck> Wrecks { get; set; }
         public List<Slot> Slots { get; set; }
+        public List<SocialContract> SocialContracts { get; set; }
         public List<Outpost> Outposts { get; set; }
         public int GetAmountItem(string name)
         {
@@ -515,6 +547,21 @@ namespace SeaBotCore.Data
         public int Amount { get; set; }
     }
 
+    public class SocialContract
+    {
+        public int FriendId{get;set;}
+        public int InstId{get;set;}
+        public int DefId{get;set;}
+        public int Progress{get;set;}
+        public bool Done{get;set;}
+        public int Amount{get;set;}
+        public int MaterialId{get;set;}
+        public int MaterialKoef{get;set;}
+        public int Sailors{get;set;}
+        public string RewardType{get;set;}
+        public int RewardId{get;set;}
+        public int RewardAmount{get;set;}
+    }
     public class Captain
     {
         public int InstId { get; set; }

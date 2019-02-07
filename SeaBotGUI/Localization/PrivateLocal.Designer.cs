@@ -89,6 +89,15 @@ namespace SeaBotGUI.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Social Contract.
+        /// </summary>
+        internal static string SHIPS_SOCIAL_CONTRACT {
+            get {
+                return ResourceManager.GetString("SHIPS.SOCIAL_CONTRACT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Amount.
         /// </summary>
         internal static string STAT_AMOUNT {

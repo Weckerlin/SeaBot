@@ -15,9 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Web.Script.Serialization;
+using SeaBotCore.Data;
 using SeaBotCore.Localizaion;
 
 namespace SeaBotCore.Config
@@ -72,6 +74,17 @@ namespace SeaBotCore.Config
         private int _thresholdfuel;
         private int _thresholdconcrete;
         private ShipDestType _shipdesttype = ShipDestType.Upgradable;
+        private List<int> _marketitems = new List<int>();
+
+        public List<int> marketitems
+        {
+            get => _marketitems;
+            set
+            {
+                _marketitems = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("marketitems"));
+            }
+        }
         public ShipDestType shipdesttype
         {
             get => _shipdesttype;

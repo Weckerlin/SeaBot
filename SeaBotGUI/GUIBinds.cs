@@ -28,6 +28,7 @@ using SeaBotCore.Data.Definitions;
 using SeaBotCore.Localizaion;
 using SeaBotCore.Logger;
 using SeaBotCore.Utils;
+using SeaBotGUI.Localization;
 
 namespace SeaBotGUI.GUIBinds
 {
@@ -491,8 +492,12 @@ namespace SeaBotGUI.GUIBinds
                         try
                         {
 
-
                             Ship.Route = LocalizationCache.GetNameFromLoc(ship.GetTravelName(), "");
+                            if (ship.Type == "social_contract")
+                            {
+                                Ship.Route = PrivateLocal.SHIPS_SOCIAL_CONTRACT;
+                            }
+                        
                             var willatportattime = ship.Sent + ship.GetTravelTime();
                             //lol xD 
                             if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
