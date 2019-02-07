@@ -998,5 +998,11 @@ namespace SeaBotGUI
         {
             updatecheck();
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            SelectMarketPlace s = new SelectMarketPlace();
+            s.Show();
+        }
     }
 }
