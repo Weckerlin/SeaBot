@@ -12,6 +12,7 @@ using SeaBotCore.Config;
 using SeaBotCore.Data;
 using SeaBotCore.Data.Definitions;
 using SeaBotCore.Data.Materials;
+using SeaBotCore.Utils;
 
 namespace SeaBotGUI
 {
@@ -24,8 +25,7 @@ namespace SeaBotGUI
           
             if (SeaBotCore.Core.GlobalData != null&&SeaBotCore.Core.GlobalData.Inventory!=null)
             {
-                foreach (var item in SeaBotCore.Core.GlobalData.Inventory.Where(n =>
-                    n.Amount > 0 && Definitions.MarketDef.Items.Item[1].Materials.Material.Any(b => b.InputId == n.Id)))
+                foreach (var item in AutoTools.GetUsableMarketplacePoints())
                 {
                     
                     if (Core.Config.marketitems.Contains(item.Id))

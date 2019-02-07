@@ -55,6 +55,7 @@ namespace SeaBotCore.Cache
                 var result = version1.CompareTo(version2);
                 if (result != 0)
                 {
+                    _lastestdef = currentversion;
                     needupdate = true;
                 }
             }

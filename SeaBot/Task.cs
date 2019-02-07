@@ -879,6 +879,19 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+        public class LoadShipWreck : IGameTask
+        {
+            public LoadShipWreck(int inst_id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("inst_id", inst_id);
+            }
+
+            public string Action => "load_ship_wreck";
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
 
         public class RemoveMaterialTask : IGameTask
         {

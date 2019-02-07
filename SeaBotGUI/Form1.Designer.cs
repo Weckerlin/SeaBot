@@ -172,6 +172,7 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.radio_wreck = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -407,6 +408,7 @@
             // 
             // groupBox22
             // 
+            this.groupBox22.Controls.Add(this.radio_wreck);
             this.groupBox22.Controls.Add(this.radio_marketplace);
             this.groupBox22.Controls.Add(this.radio_autoshipauto);
             this.groupBox22.Controls.Add(this.radio_outpost);
@@ -1401,6 +1403,13 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
+            // radio_wreck
+            // 
+            resources.ApplyResources(this.radio_wreck, "radio_wreck");
+            this.radio_wreck.Name = "radio_wreck";
+            this.radio_wreck.TabStop = true;
+            this.radio_wreck.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -1633,5 +1642,6 @@
         private System.Windows.Forms.GroupBox groupBox24;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton radio_oil;
+        private System.Windows.Forms.RadioButton radio_wreck;
     }
 }
