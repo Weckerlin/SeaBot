@@ -680,11 +680,8 @@ namespace SeaBotCore
                     }
                 }
 
-                CustomObjects.Add("debug_uniqueId", uniqueid);
-
-                var contractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId);
-
-                CustomObjects.Add("debug_contractId", contractid);
+                CustomObjects.Add("debug_uniqueId", contractid); //TODO: MESS EM AGAIN!!!
+                CustomObjects.Add("debug_contractId", uniqueid);
                 CustomObjects.Add("debug_progress", progress);
                 CustomObjects.Add("debug_goalProgress", goalprogress);
                 CustomObjects.Add("debug_objectiveTypeId", objectivetypeid);
@@ -698,7 +695,23 @@ namespace SeaBotCore
 
             public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
         }
+           public class SimpleDockShipContrator : IGameTask
+        {
+            public SimpleDockShipContrator( int id)
+            {
+                Time = (uint) TimeUtils.GetEpochTime();
+                CustomObjects.Add("id", id);
+               
+            }
 
+
+            public string Action => "dock_ship_contractor";
+
+
+            public uint Time { get; }
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+        }
         public class FinishBoatProducingTask : IGameTask
         {
             public FinishBoatProducingTask(int inst_id, int turns)

@@ -55,6 +55,7 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.radio_wreck = new System.Windows.Forms.RadioButton();
             this.radio_marketplace = new System.Windows.Forms.RadioButton();
             this.radio_autoshipauto = new System.Windows.Forms.RadioButton();
             this.radio_outpost = new System.Windows.Forms.RadioButton();
@@ -172,7 +173,6 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.radio_wreck = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -417,6 +417,13 @@
             resources.ApplyResources(this.groupBox22, "groupBox22");
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.TabStop = false;
+            // 
+            // radio_wreck
+            // 
+            resources.ApplyResources(this.radio_wreck, "radio_wreck");
+            this.radio_wreck.Name = "radio_wreck";
+            this.radio_wreck.TabStop = true;
+            this.radio_wreck.UseVisualStyleBackColor = true;
             // 
             // radio_marketplace
             // 
@@ -972,6 +979,7 @@
             0,
             0,
             0});
+       
             // 
             // radio_sleepformins
             // 
@@ -1402,13 +1410,6 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            // 
-            // radio_wreck
-            // 
-            resources.ApplyResources(this.radio_wreck, "radio_wreck");
-            this.radio_wreck.Name = "radio_wreck";
-            this.radio_wreck.TabStop = true;
-            this.radio_wreck.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

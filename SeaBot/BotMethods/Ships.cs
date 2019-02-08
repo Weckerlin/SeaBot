@@ -155,19 +155,27 @@ namespace SeaBotCore.BotMethods
                     {
                         if (ship.IsVoyageCompleted())
                         {
-                            //TODO: THIS SHIT IS STATIC!!!
+                            //TODO: MESSED UP UNIQUEID AND CONTRACTID
                             var currentcontractor = Definitions.ConDef.Items.Item.Where(n => n.DefId == ship.TargetId)
                                 .FirstOrDefault();
-                            var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel).FirstOrDefault();
-                            if (quest == null) continue;
-                            var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
-                            _deship.Add(ship);
-                            var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
-                                .FirstOrDefault();
-                            //TODO: increasing of progress or amount!
+                           
+                                var quest = currentcontractor?.Quests.Quest.Where(n => n.Id == ship.TargetLevel)
+                                    .FirstOrDefault();
+                                if (quest == null) continue;
+                                var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                                _deship.Add(ship);
+                                var lcontract = Core.GlobalData.Contracts.Where(n => n.DefId == ship.TargetId)
+                                    .FirstOrDefault();
+                                //TODO: increasing of progress or amount!
 
-                            ship.LogUnload();
-                            Networking.AddTask(new Task.DockShipTaskContractor(ship, false, AutoShipUtils.GetCapacity(ship), usedshit, AutoShipUtils.GetSailors(ship), currentcontractor.Sailors, ship.TargetLevel, currentcontractor.DefId, lcontract.Progress, (int)quest.InputAmount(), quest.ObjectiveTypeId, _deship.Count(n => n.DefId == ship.DefId)));
+                                ship.LogUnload();
+                                Networking.AddTask(new Task.DockShipTaskContractor(ship, false,
+                                    AutoShipUtils.GetCapacity(ship), usedshit, AutoShipUtils.GetSailors(ship),
+                                    currentcontractor.Sailors, ship.TargetLevel, currentcontractor.DefId,
+                                    lcontract.Progress, (int) quest.InputAmount(), quest.ObjectiveTypeId,
+                                   _deship.Count(n => n.DefId == ship.DefId)));
+                            
+                          
 
                             AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
                         }
@@ -262,8 +270,8 @@ namespace SeaBotCore.BotMethods
             {
                 foreach (var VARIABLE in bestships)
                 {
-                    AutoShipUtils.SendToContractor(VARIABLE);
-            //        AutoShipUtils.SendToMarketplace(VARIABLE);
+                  // AutoShipUtils.SendToUpgradable(VARIABLE,Core.Config.autoshiptype);
+              //    AutoShipUtils.SendToMarketplace(VARIABLE);
                 }
                
             }
@@ -693,7 +701,7 @@ namespace SeaBotCore.BotMethods
 
             var marketplacepoints = AutoTools.GetEnabledMarketPlacePoints();
             
-            var neededitems = AutoTools.NeededItemsForUpgrade().OrderByDescending(pair => pair.Value).Select(n=>n.Key).ToList();
+            var neededitems = AutoTools.NeededItemsForUpgradePercentage().OrderBy(pair => pair.Value).Select(n=>n.Key).ToList();
            
             MarketplaceDefenitions.Material maktplc = new MarketplaceDefenitions.Material();
 
@@ -758,9 +766,10 @@ namespace SeaBotCore.BotMethods
             locship.Type = "marketplace";
             locship.TargetId = 1;
             locship.TargetLevel = 0;
+            locship.MaterialId = 0;
             locship.Sent = TimeUtils.GetEpochTime();
-            locship.Loaded =
-                0;
+            locship.MaterialId = maktplc.Id;
+            locship.Loaded = 0; 
             return true;
 
         }

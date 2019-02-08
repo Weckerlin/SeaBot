@@ -31,6 +31,52 @@ namespace SeaBotCore.Utils
            }
            return list;
        }
+
+       public static Dictionary<int, int> GetLocalProducionPerHour()
+       {
+           var ret = new Dictionary<int, int>();
+           var fishprod = 0;
+           foreach (var boat in Core.GlobalData.Boats)
+           {
+               var b = Definitions.BoatDef.Items.Item.FirstOrDefault(n => n.DefId == 1)?.Levels.Level
+                   .FirstOrDefault(n => n.Id == Core.GlobalData.BoatLevel);
+               if (b == null)
+               {
+                   return ret;
+               }
+              fishprod+=b.OutputAmount * ( 60 / b.TurnTime);
+                
+           }
+           //Fish = 3;
+           ret.Add(3,fishprod);
+           foreach (var building in Core.GlobalData.Buildings)
+           {
+               var bdef = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault();
+               if (bdef?.Type == "factory")
+               {
+                   var level = bdef.Levels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
+                   foreach (var outputsOutput in level.ProdOutputs.ProdOutput)
+                   {
+                       if (outputsOutput.Time == 0)
+                       {
+                           continue;
+                       }
+                       var perhour = 60M / outputsOutput.Time;
+                       var outperhour = perhour * outputsOutput.Amount;
+                       if (ret.ContainsKey(outputsOutput.MaterialId))
+                       {
+                           ret[outputsOutput.MaterialId] += (int)outperhour;
+                       }
+                       else
+                       {
+                           ret.Add(outputsOutput.MaterialId,(int)outperhour);
+                       }
+                   }
+               }
+           }
+           
+           return ret;
+       }
        public static Dictionary<int, int> NeededItemsForUpgrade()
        {
            var ret = new Dictionary<int, int>();
@@ -71,6 +117,63 @@ namespace SeaBotCore.Utils
            foreach (var  item in b)
            {
                ret.Add(item.Id,item.Amount*-1);
+           }
+
+           return ret;
+       }
+       public static Dictionary<int, decimal> NeededItemsForUpgradePercentage()
+       {
+           var ret = new Dictionary<int, decimal>();
+           //1. Needed for upgrades!
+           var locinv = new List<Item>();
+           var makingph = GetLocalProducionPerHour();
+         
+
+           foreach (var building in Core.GlobalData.Buildings)
+           {
+               try
+               {
+                 
+                   //Next level
+                   var nextlvlbuilding = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId)
+                       .FirstOrDefault()?.Levels.Level.Where(n=>n.Id==building.Level).FirstOrDefault();
+                   if (nextlvlbuilding?.Materials.Material != null)
+                   {
+                       foreach (var mats in nextlvlbuilding?.Materials.Material)
+                       {
+                           if (locinv.Any(n=>n.Id==mats.Id))
+                           {
+                               locinv.Where(n => n.Id == mats.Id).First().Amount += mats.Amount;
+                           }
+                           else
+                           {
+                              
+                               locinv.Add(new Item() {Id = mats.Id,Amount = mats.Amount});
+                           }
+                       }
+                   }
+               }
+               catch (Exception)
+               {
+                   // ignored
+               }
+           }
+
+          
+           foreach (var item in locinv)
+           {
+               if (makingph.ContainsKey(item.Id))
+               {
+
+                   decimal koef = ( (decimal) item.Amount/(decimal) makingph[item.Id]);
+                   if (koef == 0)
+                   {
+                       continue;
+                   }
+
+                   ret.Add(item.Id, 100M / koef);
+               }
+             
            }
 
            return ret;

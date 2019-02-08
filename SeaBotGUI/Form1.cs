@@ -757,7 +757,7 @@ namespace SeaBotGUI
         private void btn_dumpcore_Click(object sender, EventArgs e)
         {
             File.WriteAllText(DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + "DUMP.json",
-                JsonConvert.SerializeObject(Core.GlobalData));
+                JsonConvert.SerializeObject(Core.GlobalData, Formatting.Indented));
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1004,5 +1004,7 @@ namespace SeaBotGUI
             SelectMarketPlace s = new SelectMarketPlace();
             s.Show();
         }
+
+        
     }
 }
