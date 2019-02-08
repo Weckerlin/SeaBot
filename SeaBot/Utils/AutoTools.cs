@@ -156,43 +156,55 @@ namespace SeaBotCore.Utils
 
             foreach (var building in Core.GlobalData.Buildings)
             {
-                try
-                {
+             
                     // Next level
                     var nextlvlbuilding = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId)
                         .FirstOrDefault()?.Levels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     if (nextlvlbuilding?.Materials.Material != null)
                     {
-                        foreach (var mats in nextlvlbuilding?.Materials.Material)
+                        foreach (var mats in nextlvlbuilding?.Materials.Material.Where(n => n.Amount != 0))
                         {
                             if (locinv.Any(n => n.Id == mats.Id))
                             {
+                                if (mats.Id == 180)
+                                {
+                                    Console.Read();
+                                }
+                            
                                 locinv.Where(n => n.Id == mats.Id).First().Amount += mats.Amount;
                             }
                             else
                             {
-                                locinv.Add(new Item { Id = mats.Id, Amount = mats.Amount });
+                                var mat = new Item { Id = mats.Id, Amount = mats.Amount };
+                                locinv.Add(mat);
                             }
                         }
                     }
-                }
-                catch (Exception)
-                {
-                    // ignored
-                }
+                
+              
             }
 
             foreach (var item in locinv)
             {
                 if (makingph.ContainsKey(item.Id))
                 {
-                    var koef = item.Amount / (decimal)makingph[item.Id];
-                    if (koef == 0)
+                    
+                    if (makingph[item.Id] != 0)
                     {
-                        continue;
-                    }
 
-                    ret.Add(item.Id, 100M / koef);
+                        decimal koef = (decimal)item.Amount / makingph[item.Id];
+                        if (koef == 0)
+                        {
+                            continue;
+                        }
+
+                        ret.Add(item.Id, 100M / koef);
+                    }
+                    else
+                    {
+                        ret.Add(item.Id, 100M);
+                    }
+                   
                 }
             }
 
