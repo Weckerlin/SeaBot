@@ -1,27 +1,31 @@
-﻿// SeaBotCore
-// Copyright (C) 2018 - 2019 Weespin
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
+﻿// // SeaBotCore
+// // Copyright (C) 2018 - 2019 Weespin
+// // 
+// // This program is free software: you can redistribute it and/or modify
+// // it under the terms of the GNU General Public License as published by
+// // the Free Software Foundation, either version 3 of the License, or
+// // (at your option) any later version.
+// // 
+// // This program is distributed in the hope that it will be useful,
+// // but WITHOUT ANY WARRANTY; without even the implied warranty of
+// // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// // GNU General Public License for more details.
+// // 
+// // You should have received a copy of the GNU General Public License
+// // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace SeaBotCore.Utils
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+
+    #endregion
+
     public class FullyObservableCollection<T> : ObservableCollection<T>
         where T : INotifyPropertyChanged
     {
@@ -29,14 +33,16 @@ namespace SeaBotCore.Utils
         {
         }
 
-        public FullyObservableCollection(List<T> list) : base(list)
+        public FullyObservableCollection(List<T> list)
+            : base(list)
         {
-            ObserveAll();
+            this.ObserveAll();
         }
 
-        public FullyObservableCollection(IEnumerable<T> enumerable) : base(enumerable)
+        public FullyObservableCollection(IEnumerable<T> enumerable)
+            : base(enumerable)
         {
-            ObserveAll();
+            this.ObserveAll();
         }
 
         /// <summary>
@@ -44,23 +50,31 @@ namespace SeaBotCore.Utils
         /// </summary>
         public event EventHandler<ItemPropertyChangedEventArgs> ItemPropertyChanged;
 
+        protected override void ClearItems()
+        {
+            foreach (var item in this.Items)
+            {
+                item.PropertyChanged -= this.ChildPropertyChanged;
+            }
+
+            base.ClearItems();
+        }
+
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove ||
-                e.Action == NotifyCollectionChangedAction.Replace)
+            if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Replace)
             {
                 foreach (T item in e.OldItems)
                 {
-                    item.PropertyChanged -= ChildPropertyChanged;
+                    item.PropertyChanged -= this.ChildPropertyChanged;
                 }
             }
 
-            if (e.Action == NotifyCollectionChangedAction.Add ||
-                e.Action == NotifyCollectionChangedAction.Replace)
+            if (e.Action == NotifyCollectionChangedAction.Add || e.Action == NotifyCollectionChangedAction.Replace)
             {
                 foreach (T item in e.NewItems)
                 {
-                    item.PropertyChanged += ChildPropertyChanged;
+                    item.PropertyChanged += this.ChildPropertyChanged;
                 }
             }
 
@@ -69,43 +83,33 @@ namespace SeaBotCore.Utils
 
         protected void OnItemPropertyChanged(ItemPropertyChangedEventArgs e)
         {
-            ItemPropertyChanged?.Invoke(this, e);
+            this.ItemPropertyChanged?.Invoke(this, e);
         }
 
         protected void OnItemPropertyChanged(int index, PropertyChangedEventArgs e)
         {
-            OnItemPropertyChanged(new ItemPropertyChangedEventArgs(index, e));
-        }
-
-        protected override void ClearItems()
-        {
-            foreach (var item in Items)
-            {
-                item.PropertyChanged -= ChildPropertyChanged;
-            }
-
-            base.ClearItems();
-        }
-
-        private void ObserveAll()
-        {
-            foreach (var item in Items)
-            {
-                item.PropertyChanged += ChildPropertyChanged;
-            }
+            this.OnItemPropertyChanged(new ItemPropertyChangedEventArgs(index, e));
         }
 
         private void ChildPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var typedSender = (T) sender;
-            var i = Items.IndexOf(typedSender);
+            var typedSender = (T)sender;
+            var i = this.Items.IndexOf(typedSender);
 
             if (i < 0)
             {
                 throw new ArgumentException("Received property notification from item not in collection");
             }
 
-            OnItemPropertyChanged(i, e);
+            this.OnItemPropertyChanged(i, e);
+        }
+
+        private void ObserveAll()
+        {
+            foreach (var item in this.Items)
+            {
+                item.PropertyChanged += this.ChildPropertyChanged;
+            }
         }
     }
 
@@ -119,9 +123,10 @@ namespace SeaBotCore.Utils
         /// </summary>
         /// <param name="index">The index in the collection of changed item.</param>
         /// <param name="name">The name of the property that changed.</param>
-        public ItemPropertyChangedEventArgs(int index, string name) : base(name)
+        public ItemPropertyChangedEventArgs(int index, string name)
+            : base(name)
         {
-            CollectionIndex = index;
+            this.CollectionIndex = index;
         }
 
         /// <summary>
@@ -129,7 +134,8 @@ namespace SeaBotCore.Utils
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="args">The <see cref="PropertyChangedEventArgs" /> instance containing the event data.</param>
-        public ItemPropertyChangedEventArgs(int index, PropertyChangedEventArgs args) : this(index, args.PropertyName)
+        public ItemPropertyChangedEventArgs(int index, PropertyChangedEventArgs args)
+            : this(index, args.PropertyName)
         {
         }
 

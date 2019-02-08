@@ -6,6 +6,6 @@
 
         <FontFamily x:Key="OpenSans-Bold">pack://application:,,,/Fonts/#OpenSans-Bold</FontFamily>
         <FontFamily x:Key="OpenSans-Light">pack://application:,,,/Fonts/#OpenSans-Light</FontFamily>
-       
+
     </Application.Resources>
 </Application>

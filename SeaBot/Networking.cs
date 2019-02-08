@@ -1,56 +1,67 @@
-﻿// SeaBotCore
-// Copyright (C) 2018 - 2019 Weespin
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Xml;
-using Newtonsoft.Json;
-using SeaBotCore.Cache;
-using SeaBotCore.Data;
-using SeaBotCore.Localizaion;
-using SeaBotCore.Utils;
+﻿// // SeaBotCore
+// // Copyright (C) 2018 - 2019 Weespin
+// // 
+// // This program is free software: you can redistribute it and/or modify
+// // it under the terms of the GNU General Public License as published by
+// // the Free Software Foundation, either version 3 of the License, or
+// // (at your option) any later version.
+// // 
+// // This program is distributed in the hope that it will be useful,
+// // but WITHOUT ANY WARRANTY; without even the implied warranty of
+// // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// // GNU General Public License for more details.
+// // 
+// // You should have received a copy of the GNU General Public License
+// // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace SeaBotCore
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Xml;
+
+    using Newtonsoft.Json;
+
+    using SeaBotCore.Cache;
+    using SeaBotCore.Data;
+    using SeaBotCore.Localizaion;
+    using SeaBotCore.Statistics;
+    using SeaBotCore.Utils;
+
+    #endregion
+
     public static class Networking
     {
-      
         public static Thread _syncThread = new Thread(SyncVoid);
-        private static DateTime _lastRaised = DateTime.Now;
 
-        private static int _taskId = 1;
-        private static string _lastsend = string.Empty;
         private static readonly List<Task.IGameTask> _gametasks = new List<Task.IGameTask>();
-        private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
 
         private static readonly HttpClientHandler handler = new HttpClientHandler
-        {
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-        };
-
+                                                                {
+                                                                    AutomaticDecompression =
+                                                                        DecompressionMethods.GZip
+                                                                        | DecompressionMethods.Deflate
+                                                                };
 
         private static readonly HttpClient Client = new HttpClient(handler);
+
+        private static readonly MD5 Md5 = new MD5CryptoServiceProvider();
+
+        private static DateTime _lastRaised = DateTime.Now;
+
+        private static string _lastsend = string.Empty;
+
+        private static int _taskId = 1;
 
         static Networking()
         {
@@ -60,154 +71,24 @@ namespace SeaBotCore
             _syncThread.Start();
         }
 
-
-        private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
-        {
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                if (e == Enums.EErrorCode.WRONG_SESSION)
-                {
-                    Logger.Logger.Info(
-                        string.Format(Localization.NETWORKING_SOMEONE_IS_PLAYING, Core.hibernation));
-
-
-                    if (Core.IsBotRunning)
-                    {
-                        if (Core.Config.debug)
-                        {
-                            File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                        }
-
-                        _syncThread.Abort();
-                        Logger.Logger.Muted = true;
-                        Thread.Sleep(Core.hibernation * 1000 * 60);
-                        Logger.Logger.Muted = false;
-                        Logger.Logger.Info(Localization.NETWORKING_WAKING_UP);
-                        StartThread();
-                        Login();
-                        if (Core.Config.debug)
-                        {
-                            File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                        }
-                    }
-                }
-            });
-        }
-
-        public static void StartThread()
-        {
-            if (!_syncThread.IsAlive)
-            {
-                _syncThread = new Thread(SyncVoid);
-                _gametasks.Clear();
-                _taskId = 1;
-                _syncThread.Start();
-            }
-        }
-
-        private static void SyncVoid()
-        {
-            LocalizationController.SetLanguage(Core.Config.language);
-            while (true)
-            {
-                Thread.Sleep(6 * 1000);
-                if (_gametasks.Count != 0 &&
-                    Core.GlobalData.Level != 0)
-                {
-                    Logger.Logger.Debug(Localization.NETWORKING_SYNCING);
-                    Sync();
-                }
-
-                if ((DateTime.Now - _lastRaised).TotalSeconds > (Core.GlobalData.HeartbeatInterval==0?300:Core.GlobalData.HeartbeatInterval))
-                {
-                    Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
-                    _gametasks.Add(new Task.HeartBeat());
-
-                    Sync();
-                }
-            }
-        }
-
         public static void AddTask(Task.IGameTask task)
         {
             _gametasks.Add(task);
             _lastRaised = DateTime.Now;
         }
 
-        public static string SendRequest(Dictionary<string, string> data, string action)
-        {
-            try
-            {
-                var content = new FormUrlEncodedContent(data);
-
-                var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
-                //<xml><time>1548446333</time></xml>
-                try
-                {
-
-
-                    var doc = new XmlDocument();
-                    try
-                    {
-                        doc.LoadXml(response.Result.Content.ReadAsStringAsync().Result);
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.Logger.Fatal(
-                            string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
-                    }
-
-                    if (doc.DocumentElement != null)
-                    {
-                        var s = Convert.ToInt64(doc.DocumentElement.SelectSingleNode("time")?.InnerText);
-                        TimeUtils.CheckForTimeMismatch(s);
-
-                    }
-
-                }
-            
-            catch (Exception e)
-            {
-               Logger.Logger.Warning(e.ToString());
-                
-            }
-
-                return response.Result.Content.ReadAsStringAsync().Result;
-            }
-            catch (Exception ex)
-            {
-                Events.Events.SyncFailedEvent.SyncFailed.Invoke(0);
-                Logger.Logger.Fatal(ex.ToString());
-            }
-
-            return string.Empty;
-        }
-
-        public static string ToHex(this byte[] bytes, bool upperCase)
-        {
-            var result = new StringBuilder(bytes.Length * 2);
-
-            foreach (var t in bytes)
-            {
-                result.Append(t.ToString(upperCase
-                    ? "X2"
-                    : "x2"));
-            }
-
-            return result.ToString();
-        }
-
         public static void Login()
         {
             LocalizationController.SetLanguage(Core.Config.language);
             Logger.Logger.Info("Logining ");
-            //Get big token
+
+            // Get big token
             var tempuid = string.Empty;
 
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
             var cookieContainer = new CookieContainer();
-            using (var handler = new HttpClientHandler {CookieContainer = cookieContainer})
-            using (var client = new HttpClient(handler) {BaseAddress = baseAddress})
+            using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
+            using (var client = new HttpClient(handler) { BaseAddress = baseAddress })
             {
                 cookieContainer.Add(baseAddress, new Cookie("_pf_login_server_token", Core.Config.server_token));
                 Logger.Logger.Info(Localization.NETWORKING_LOGIN_1);
@@ -277,11 +158,7 @@ namespace SeaBotCore
                 }
             }
 
-            var values = new Dictionary<string, string>
-            {
-                {"pid", tempuid},
-                {"session_id", Core.Ssid}
-            };
+            var values = new Dictionary<string, string> { { "pid", tempuid }, { "session_id", Core.Ssid } };
             var s = SendRequest(values, "client.login");
             SendRequest(values, "client.update");
             if (s.StartsWith("<xml>"))
@@ -292,26 +169,77 @@ namespace SeaBotCore
                 var loadtime = rand.Next(5000, 13000);
                 if (!Core.Debug)
                 {
-
                     Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD, loadtime / 1000D));
                     Thread.Sleep(loadtime);
-                    Logger.Logger.Info(string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD_ELAPSED,
-                        loadtime / 1000D));
+                    Logger.Logger.Info(
+                        string.Format(Localization.NETWORKING_LOGIN_FAKE_LOAD_ELAPSED, loadtime / 1000D));
                 }
-            
 
                 values.Add("loading_time", loadtime.ToString());
                 SendRequest(values, "tracking.finishedLoading");
                 Events.Events.LoginedEvent.Logined.Invoke();
-                Statistics.StatisticsWriter.Start();
+                StatisticsWriter.Start();
             }
             else
             {
-                Logger.Logger.Fatal("Server responded " +s);
+                Logger.Logger.Fatal("Server responded " + s);
                 Core.StopBot();
             }
         }
 
+        public static string SendRequest(Dictionary<string, string> data, string action)
+        {
+            try
+            {
+                var content = new FormUrlEncodedContent(data);
+
+                var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
+
+                // <xml><time>1548446333</time></xml>
+                try
+                {
+                    var doc = new XmlDocument();
+                    try
+                    {
+                        doc.LoadXml(response.Result.Content.ReadAsStringAsync().Result);
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Logger.Fatal(string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
+                    }
+
+                    if (doc.DocumentElement != null)
+                    {
+                        var s = Convert.ToInt64(doc.DocumentElement.SelectSingleNode("time")?.InnerText);
+                        TimeUtils.CheckForTimeMismatch(s);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.Logger.Warning(e.ToString());
+                }
+
+                return response.Result.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception ex)
+            {
+                Events.Events.SyncFailedEvent.SyncFailed.Invoke(0);
+                Logger.Logger.Fatal(ex.ToString());
+            }
+
+            return string.Empty;
+        }
+
+        public static void StartThread()
+        {
+            if (!_syncThread.IsAlive)
+            {
+                _syncThread = new Thread(SyncVoid);
+                _gametasks.Clear();
+                _taskId = 1;
+                _syncThread.Start();
+            }
+        }
 
         public static void Sync()
         {
@@ -327,8 +255,7 @@ namespace SeaBotCore
                 }
 
                 taskstr.Append("<time>" + task.Time + "</time>\n");
-                taskstr.Append("</task>\n")
-                    ;
+                taskstr.Append("</task>\n");
                 _gametasks.Remove(task);
             }
 
@@ -337,19 +264,17 @@ namespace SeaBotCore
             taskstr.Append("</xml>");
             _lastsend = taskstr.ToString();
             var lenght = 0;
-            lenght = _lastsend.Length > 224
-                ? 224
-                : _lastsend.Length;
+            lenght = _lastsend.Length > 224 ? 224 : _lastsend.Length;
             var sig = ToHex(
                 Md5.ComputeHash(Encoding.ASCII.GetBytes(_lastsend.Substring(0, lenght) + Core.Ssid + "KNn2R4sK")),
-                false); //_loc2_.substr(0,224) + _sessionData.sessionId + "KNn2R4sK"
+                false); // _loc2_.substr(0,224) + _sessionData.sessionId + "KNn2R4sK"
             var values = new Dictionary<string, string>
-            {
-                {"pid", Core.GlobalData.UserId.ToString()},
-                {"session_id", Core.Ssid},
-                {"data", taskstr.ToString()},
-                {"sig", sig}
-            };
+                             {
+                                 { "pid", Core.GlobalData.UserId.ToString() },
+                                 { "session_id", Core.Ssid },
+                                 { "data", taskstr.ToString() },
+                                 { "sig", sig }
+                             };
             _taskId++;
             Logger.Logger.Debug(new XMLMinifier(XMLMinifierSettings.Aggressive).Minify(taskstr.ToString()));
             var response = SendRequest(values, "client.synchronize");
@@ -361,8 +286,7 @@ namespace SeaBotCore
             }
             catch (Exception e)
             {
-                Logger.Logger.Fatal(
-                    string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
+                Logger.Logger.Fatal(string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
             }
 
             if (doc.DocumentElement != null)
@@ -393,17 +317,17 @@ namespace SeaBotCore
                     if (doc.SelectSingleNode("xml/task/result")?.InnerText == "ERROR")
                     {
                         var errcode =
-                            (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
-                        Logger.Logger.Fatal(string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED,
-                            errcode.ToString()));
+                            (Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/task/error_code")?.InnerText);
+                        Logger.Logger.Fatal(
+                            string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED, errcode.ToString()));
                         Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
                     else if (doc.SelectSingleNode("xml/result")?.InnerText == "ERROR")
                     {
                         var errcode =
-                            (Enums.EErrorCode) Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
-                        Logger.Logger.Fatal(string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED,
-                            errcode.ToString()));
+                            (Enums.EErrorCode)Convert.ToInt32(doc.SelectSingleNode("xml/error_code")?.InnerText);
+                        Logger.Logger.Fatal(
+                            string.Format(Localization.NETWORKING_SYNC_SERVER_DISCONNECTED, errcode.ToString()));
                         Events.Events.SyncFailedEvent.SyncFailed.Invoke(errcode);
                     }
                 }
@@ -428,23 +352,23 @@ namespace SeaBotCore
                                 Core.GlobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "material":
-                            {
-                                foreach (XmlNode materials in node.ChildNodes)
                                 {
-                                    var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
-                                    var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
-                                    if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
+                                    foreach (XmlNode materials in node.ChildNodes)
                                     {
-                                        Core.GlobalData.Inventory.Where(n => n.Id == defid).First().Amount = amount;
+                                        var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
+                                        var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
+                                        if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
+                                        {
+                                            Core.GlobalData.Inventory.Where(n => n.Id == defid).First().Amount = amount;
+                                        }
+                                        else
+                                        {
+                                            Core.GlobalData.Inventory.Add(new Item { Id = defid, Amount = amount });
+                                        }
                                     }
-                                    else
-                                    {
-                                        Core.GlobalData.Inventory.Add(new Item {Id = defid, Amount = amount});
-                                    }
-                                }
 
-                                break;
-                            }
+                                    break;
+                                }
                         }
                     }
                 }
@@ -457,6 +381,72 @@ namespace SeaBotCore
             _lastRaised = DateTime.Now;
         }
 
-       
+        public static string ToHex(this byte[] bytes, bool upperCase)
+        {
+            var result = new StringBuilder(bytes.Length * 2);
+
+            foreach (var t in bytes)
+            {
+                result.Append(t.ToString(upperCase ? "X2" : "x2"));
+            }
+
+            return result.ToString();
+        }
+
+        private static void SyncFailedChat_OnSyncFailedEvent(Enums.EErrorCode e)
+        {
+            System.Threading.Tasks.Task.Run(
+                () =>
+                    {
+                        if (e == Enums.EErrorCode.WRONG_SESSION)
+                        {
+                            Logger.Logger.Info(
+                                string.Format(Localization.NETWORKING_SOMEONE_IS_PLAYING, Core.hibernation));
+
+                            if (Core.IsBotRunning)
+                            {
+                                if (Core.Config.debug)
+                                {
+                                    File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                                }
+
+                                _syncThread.Abort();
+                                Logger.Logger.Muted = true;
+                                Thread.Sleep(Core.hibernation * 1000 * 60);
+                                Logger.Logger.Muted = false;
+                                Logger.Logger.Info(Localization.NETWORKING_WAKING_UP);
+                                StartThread();
+                                Login();
+                                if (Core.Config.debug)
+                                {
+                                    File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
+                                }
+                            }
+                        }
+                    });
+        }
+
+        private static void SyncVoid()
+        {
+            LocalizationController.SetLanguage(Core.Config.language);
+            while (true)
+            {
+                Thread.Sleep(6 * 1000);
+                if (_gametasks.Count != 0 && Core.GlobalData.Level != 0)
+                {
+                    Logger.Logger.Debug(Localization.NETWORKING_SYNCING);
+                    Sync();
+                }
+
+                if ((DateTime.Now - _lastRaised).TotalSeconds
+                    > (Core.GlobalData.HeartbeatInterval == 0 ? 300 : Core.GlobalData.HeartbeatInterval))
+                {
+                    Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
+                    _gametasks.Add(new Task.HeartBeat());
+
+                    Sync();
+                }
+            }
+        }
     }
 }

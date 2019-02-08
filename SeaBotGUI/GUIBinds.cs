@@ -1,37 +1,41 @@
-﻿// SeabotGUI
-// Copyright (C) 2018 - 2019 Weespin
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using SeaBotCore;
-using SeaBotCore.BotMethods;
-using SeaBotCore.Cache;
-using SeaBotCore.Data.Definitions;
-using SeaBotCore.Localizaion;
-using SeaBotCore.Logger;
-using SeaBotCore.Utils;
-using SeaBotGUI.Localization;
+﻿// // SeabotGUI
+// // Copyright (C) 2018 - 2019 Weespin
+// // 
+// // This program is free software: you can redistribute it and/or modify
+// // it under the terms of the GNU General Public License as published by
+// // the Free Software Foundation, either version 3 of the License, or
+// // (at your option) any later version.
+// // 
+// // This program is distributed in the hope that it will be useful,
+// // but WITHOUT ANY WARRANTY; without even the implied warranty of
+// // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// // GNU General Public License for more details.
+// // 
+// // You should have received a copy of the GNU General Public License
+// // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace SeaBotGUI.GUIBinds
 {
+    #region
+
+    using System;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading;
+    using System.Windows.Forms;
+
+    using SeaBotCore;
+    using SeaBotCore.BotMethods;
+    using SeaBotCore.Cache;
+    using SeaBotCore.Data.Definitions;
+    using SeaBotCore.Utils;
+
+    using SeaBotGUI.Localization;
+
+    #endregion
+
     public static class RichTextBoxExtensions
     {
         public static void AppendText(RichTextBox box, string text, Color color)
@@ -94,8 +98,7 @@ namespace SeaBotGUI.GUIBinds
             var coins = Core.GlobalData.GetAmountItem("coins");
             if (Form1.instance.CoinsLabel.InvokeRequired)
             {
-                Form1.instance.CoinsLabel.Invoke(
-                    new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToKMB(); }));
+                Form1.instance.CoinsLabel.Invoke(new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToKMB(); }));
             }
             else
             {
@@ -145,8 +148,7 @@ namespace SeaBotGUI.GUIBinds
             var stone = Core.GlobalData.GetAmountItem("stone");
             if (Form1.instance.StoneLabel.InvokeRequired)
             {
-                Form1.instance.StoneLabel.Invoke(
-                    new Action(() => { Form1.instance.StoneLabel.Text = stone.ToKMB(); }));
+                Form1.instance.StoneLabel.Invoke(new Action(() => { Form1.instance.StoneLabel.Text = stone.ToKMB(); }));
             }
             else
             {
@@ -186,7 +188,7 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-                    if ((string) Form1.instance.Invoke(
+                    if ((string)Form1.instance.Invoke(
                             new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage5")
                     {
                         continue;
@@ -202,45 +204,44 @@ namespace SeaBotGUI.GUIBinds
                     {
                         var newbuild = BuildingBinding.GetBuildings();
                         MethodInvoker meth = () =>
-                        {
-                            foreach (DataGridViewTextBoxColumn clmn in Form1.instance.BuildingGrid.Columns)
                             {
-                                clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                clmn.Resizable = DataGridViewTriState.False;
-                            }
-
-                            foreach (var bld in newbuild)
-                            {
-                                if (BuildingBinding.Buildings.Where(n => n.ID == bld.ID)
-                                        .FirstOrDefault() == null)
+                                foreach (DataGridViewTextBoxColumn clmn in Form1.instance.BuildingGrid.Columns)
                                 {
-                                    BuildingBinding.Buildings.Add(bld);
+                                    clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                                    clmn.Resizable = DataGridViewTriState.False;
                                 }
-                                else
+
+                                foreach (var bld in newbuild)
                                 {
-                                    var old = BuildingBinding.Buildings.First(n => n.ID == bld.ID);
-                                    if (old.Level != bld.Level)
+                                    if (BuildingBinding.Buildings.Where(n => n.ID == bld.ID).FirstOrDefault() == null)
                                     {
-                                        old.Level = bld.Level;
+                                        BuildingBinding.Buildings.Add(bld);
                                     }
-
-                                    if (old.Producing != bld.Producing)
+                                    else
                                     {
-                                        old.Producing = bld.Producing;
-                                    }
+                                        var old = BuildingBinding.Buildings.First(n => n.ID == bld.ID);
+                                        if (old.Level != bld.Level)
+                                        {
+                                            old.Level = bld.Level;
+                                        }
 
-                                    if (old.Upgrade != bld.Upgrade)
-                                    {
-                                        old.Upgrade = bld.Upgrade;
-                                    }
+                                        if (old.Producing != bld.Producing)
+                                        {
+                                            old.Producing = bld.Producing;
+                                        }
 
-                                    //edit
+                                        if (old.Upgrade != bld.Upgrade)
+                                        {
+                                            old.Upgrade = bld.Upgrade;
+                                        }
+
+                                        // edit
+                                    }
                                 }
-                            }
 
-                            Form1.instance.BuildingGrid.Refresh();
-                            Form1.instance.BuildingGrid.Update();
-                        };
+                                Form1.instance.BuildingGrid.Refresh();
+                                Form1.instance.BuildingGrid.Update();
+                            };
 
                         Form1.instance.BuildingGrid.BeginInvoke(meth);
                     }
@@ -269,31 +270,28 @@ namespace SeaBotGUI.GUIBinds
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
-                    Building.Name = LocalizationCache.GetNameFromLoc(Definitions.BuildingDef.Items.Item
-                        .Where(n => n.DefId == building.DefId)
-                        .FirstOrDefault()?.NameLoc, Definitions.BuildingDef.Items.Item
-                        .Where(n => n.DefId == building.DefId)
-                        .FirstOrDefault()?.Name);
+                    Building.Name = LocalizationCache.GetNameFromLoc(
+                        Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                            ?.NameLoc,
+                        Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                            ?.Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
                         var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
                                                    .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
-                                                   .Where(n => n.Id == (int) building.Level).FirstOrDefault()?.ProdOutputs
+                                                   .Where(n => n.Id == building.Level).FirstOrDefault()?.ProdOutputs
                                                    .ProdOutput[0].Time;
                         if (willbeproducedat.HasValue)
                         {
-                            producing =
-                                (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat.Value))
+                            producing = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat.Value))
                                 .ToString(@"hh\:mm\:ss");
                         }
-                        //lol xD
 
-                       
+                        // lol xD
                     }
 
-           
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
@@ -322,15 +320,13 @@ namespace SeaBotGUI.GUIBinds
                             {
                                 continue;
                             }
-            
+
                             var started = TimeUtils.FromUnixTime(slot.LastUsed);
-                       
+
                             var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == building.Level);
 
-                             producing =(TimeUtils.FixedUTCTime - (started.AddSeconds(b.TurnCount*b.TurnTime))).ToString(@"hh\:mm\:ss");
-                           
-
-                         
+                            producing = (TimeUtils.FixedUTCTime - started.AddSeconds(b.TurnCount * b.TurnTime))
+                                .ToString(@"hh\:mm\:ss");
                         }
                     }
 
@@ -346,13 +342,19 @@ namespace SeaBotGUI.GUIBinds
 
             public class Building
             {
-                public int ID { get; set; }
-                public string Name { get; set; }
-                public int Level { get; set; }
-                public string Producing { get; set; }
-                public string Upgrade { get; set; }
                 public static bool ProdIgnore { get; set; }
+
                 public static bool UpgradeIgnore { get; set; }
+
+                public int ID { get; set; }
+
+                public int Level { get; set; }
+
+                public string Name { get; set; }
+
+                public string Producing { get; set; }
+
+                public string Upgrade { get; set; }
             }
         }
     }
@@ -390,7 +392,7 @@ namespace SeaBotGUI.GUIBinds
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-                    if ((string) Form1.instance.Invoke(
+                    if ((string)Form1.instance.Invoke(
                             new Func<string>(() => Form1.instance.TabControl.SelectedTab.Name)) != "tabPage6")
                     {
                         continue;
@@ -406,56 +408,46 @@ namespace SeaBotGUI.GUIBinds
                     {
                         var newbuild = ShipBinding.GetShips();
                         MethodInvoker meth = () =>
-                        {
-                            foreach (DataGridViewTextBoxColumn clmn in Form1.instance.ShipGrid.Columns)
                             {
-                                clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                clmn.Resizable = DataGridViewTriState.False;
-                            }
-
-                            foreach (var bld in newbuild)
-                            {
-                                if (ShipBinding.Ships.Where(n => n.ID == bld.ID)
-                                        .FirstOrDefault() == null)
+                                foreach (DataGridViewTextBoxColumn clmn in Form1.instance.ShipGrid.Columns)
                                 {
-                                    var bld2 = bld;
-
-                                    ShipBinding.Ships.Add(bld2);
+                                    clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                                    clmn.Resizable = DataGridViewTriState.False;
                                 }
-                                else
+
+                                foreach (var bld in newbuild)
                                 {
-                                    var old = ShipBinding.Ships.First(n => n.ID == bld.ID);
-                                    if (old.InPortAt != bld.InPortAt)
+                                    if (ShipBinding.Ships.Where(n => n.ID == bld.ID).FirstOrDefault() == null)
                                     {
-                                        old.InPortAt = bld.InPortAt;
-                                    }
+                                        var bld2 = bld;
 
-                                    if (old.Route != bld.Route)
+                                        ShipBinding.Ships.Add(bld2);
+                                    }
+                                    else
                                     {
-                                        old.Route = bld.Route;
+                                        var old = ShipBinding.Ships.First(n => n.ID == bld.ID);
+                                        if (old.InPortAt != bld.InPortAt)
+                                        {
+                                            old.InPortAt = bld.InPortAt;
+                                        }
+
+                                        if (old.Route != bld.Route)
+                                        {
+                                            old.Route = bld.Route;
+                                        }
+
+                                        // edit
                                     }
-
-
-                                    //edit
                                 }
-                            }
 
-                            Form1.instance.ShipGrid.Refresh();
-                            Form1.instance.ShipGrid.Update();
-                        };
+                                Form1.instance.ShipGrid.Refresh();
+                                Form1.instance.ShipGrid.Update();
+                            };
 
                         Form1.instance.ShipGrid.BeginInvoke(meth);
                     }
                 }
             }
-        }
-
-        public class Ship
-        {
-            public int ID { get; set; }
-            public string Name { get; set; }
-            public string Route { get; set; }
-            public string InPortAt { get; set; }
         }
 
         public static class ShipBinding
@@ -477,10 +469,9 @@ namespace SeaBotGUI.GUIBinds
 
                 foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
                 {
-                   var name = LocalizationCache.GetNameFromLoc(Definitions.ShipDef.Items.Item
-                        .Where(n => n.DefId == ship.DefId)?
-                        .FirstOrDefault()?.NameLoc, Definitions.ShipDef.Items.Item
-                        .FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                    var name = LocalizationCache.GetNameFromLoc(
+                        Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
+                        Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
                     Ship.Name = name;
@@ -488,18 +479,17 @@ namespace SeaBotGUI.GUIBinds
                     var willatportat = string.Empty;
                     if (ship.Sent != 0)
                     {
-                       
                         try
                         {
-
-                            Ship.Route = LocalizationCache.GetNameFromLoc(ship.GetTravelName(), "");
+                            Ship.Route = LocalizationCache.GetNameFromLoc(ship.GetTravelName(), string.Empty);
                             if (ship.Type == "social_contract")
                             {
                                 Ship.Route = PrivateLocal.SHIPS_SOCIAL_CONTRACT;
                             }
-                        
+
                             var willatportattime = ship.Sent + ship.GetTravelTime();
-                            //lol xD 
+
+                            // lol xD 
                             if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
                             {
                                 willatportat = "--:--:--";
@@ -507,13 +497,12 @@ namespace SeaBotGUI.GUIBinds
                             else
                             {
                                 willatportat =
-                                    (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime))
-                                    .ToString(@"hh\:mm\:ss");
+                                    (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).ToString(
+                                        @"hh\:mm\:ss");
                             }
                         }
                         catch (Exception)
                         {
-                           
                         }
                     }
 
@@ -523,6 +512,17 @@ namespace SeaBotGUI.GUIBinds
 
                 return ret;
             }
+        }
+
+        public class Ship
+        {
+            public int ID { get; set; }
+
+            public string InPortAt { get; set; }
+
+            public string Name { get; set; }
+
+            public string Route { get; set; }
         }
     }
 }

@@ -1,41 +1,53 @@
-﻿// SeabotGUI
-// Copyright (C) 2018 - 2019 Weespin
-// 
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using SeaBotCore.Logger;
-using Telegram.Bot;
-using Telegram.Bot.Args;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
+﻿// // SeabotGUI
+// // Copyright (C) 2018 - 2019 Weespin
+// // 
+// // This program is free software: you can redistribute it and/or modify
+// // it under the terms of the GNU General Public License as published by
+// // the Free Software Foundation, either version 3 of the License, or
+// // (at your option) any later version.
+// // 
+// // This program is distributed in the hope that it will be useful,
+// // but WITHOUT ANY WARRANTY; without even the implied warranty of
+// // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// // GNU General Public License for more details.
+// // 
+// // You should have received a copy of the GNU General Public License
+// // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace SeaBotGUI.TelegramBot
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+
+    using SeaBotCore.Logger;
+
+    using Telegram.Bot;
+    using Telegram.Bot.Args;
+    using Telegram.Bot.Types;
+    using Telegram.Bot.Types.ReplyMarkups;
+
+    #endregion
+
     public class User
     {
         public int MenuID;
+
         public int userid;
     }
 
     public static class TelegramBotController
     {
         public static TelegramBot bot;
+
+        public static void SendMessage(Message msg, string message)
+        {
+            bot.botClient.SendTextMessageAsync(msg.From.Id, message);
+        }
 
         public static void StartBot(string apikey)
         {
@@ -53,11 +65,6 @@ namespace SeaBotGUI.TelegramBot
         {
             bot?.botClient.StopReceiving();
         }
-
-        public static void SendMessage(Message msg, string message)
-        {
-            bot.botClient.SendTextMessageAsync(msg.From.Id, message);
-        }
     }
 
     public class TelegramBot
@@ -66,42 +73,22 @@ namespace SeaBotGUI.TelegramBot
 
         public TelegramBot(string apikey)
         {
-            botClient = new TelegramBotClient(apikey);
-            botClient.OnMessage += Bot_OnMessage;
-            botClient.StartReceiving();
+            this.botClient = new TelegramBotClient(apikey);
+            this.botClient.OnMessage += this.Bot_OnMessage;
+            this.botClient.StartReceiving();
         }
 
-        private void Bot_OnMessage(object sender, MessageEventArgs e)
+        public interface IMenu
         {
-            var message = e.Message.Text ?? string.Empty;
-            Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");
+            Button[][] buttons { get; }
 
-            //THIS IS A NEW USER
-            if (message.StartsWith("/start"))
-            {
-                var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
-                if (reg.Success)
-                {
-                    TelegramBotController.SendMessage(e.Message,
-                        "Hello! Please enter Startup Code from settings.");
-                }
-                else
-                {
-                    Parse(e.Message);
-                }
-            }
-            else
-            {
-                Parse(e.Message);
-            }
-        }
+            int ID { get; }
 
-        private static List<Type> GetMenuItems()
-        {
-            var type = typeof(IMenu);
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p)).ToList();
+            Message Message { set; }
+
+            void OnEnter();
+
+            void Unknown(Message msg);
         }
 
         public async void Parse(Message msg)
@@ -124,8 +111,10 @@ namespace SeaBotGUI.TelegramBot
                                 var instance = Activator.CreateInstance(mn) as IMenu;
                                 if (instance.ID == 0)
                                 {
-                                    await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
-                                        ParseReplyKeyboardMarkup(instance));
+                                    await this.botClient.SendTextMessageAsync(
+                                        msg.From.Id,
+                                        "Redirecting..",
+                                        replyMarkup: this.ParseReplyKeyboardMarkup(instance));
                                 }
                             }
                             catch (Exception)
@@ -134,14 +123,12 @@ namespace SeaBotGUI.TelegramBot
                             }
                         }
 
-
-                        Form1._teleconfig.users.Add(new User {MenuID = 0, userid = msg.From.Id});
+                        Form1._teleconfig.users.Add(new User { MenuID = 0, userid = msg.From.Id });
                         TeleConfigSer.Save();
                     }
                     else
                     {
-                        TelegramBotController.SendMessage(msg,
-                            "Wrong Code!\nPlease enter Startup Code from settings.");
+                        TelegramBotController.SendMessage(msg, "Wrong Code!\nPlease enter Startup Code from settings.");
                         return;
                     }
                 }
@@ -168,13 +155,13 @@ namespace SeaBotGUI.TelegramBot
                 }
                 catch (Exception)
                 {
-                    //ingored
+                    // ingored
                 }
             }
 
             if (first == null)
             {
-                await botClient.SendTextMessageAsync(msg.Chat, "Exeption, can't find menu item");
+                await this.botClient.SendTextMessageAsync(msg.Chat, "Exeption, can't find menu item");
             }
             else
             {
@@ -220,8 +207,10 @@ namespace SeaBotGUI.TelegramBot
                                 }
                             }
 
-                            await botClient.SendTextMessageAsync(msg.From.Id, "Redirecting..", replyMarkup:
-                                ParseReplyKeyboardMarkup(newinst));
+                            await this.botClient.SendTextMessageAsync(
+                                msg.From.Id,
+                                "Redirecting..",
+                                replyMarkup: this.ParseReplyKeyboardMarkup(newinst));
                             newinst.Message = msg;
                             newinst.OnEnter();
                             return;
@@ -234,6 +223,37 @@ namespace SeaBotGUI.TelegramBot
                 {
                     await Task.Run(() => first.Unknown(msg));
                 }
+            }
+        }
+
+        private static List<Type> GetMenuItems()
+        {
+            var type = typeof(IMenu);
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p)).ToList();
+        }
+
+        private void Bot_OnMessage(object sender, MessageEventArgs e)
+        {
+            var message = e.Message.Text ?? string.Empty;
+            Logger.Debug($"Received a text message in chat {e.Message.Chat.Id}. Text: {message}");
+
+            // THIS IS A NEW USER
+            if (message.StartsWith("/start"))
+            {
+                var reg = new Regex(@"(\/start\s)(\d+)").Match(message);
+                if (reg.Success)
+                {
+                    TelegramBotController.SendMessage(e.Message, "Hello! Please enter Startup Code from settings.");
+                }
+                else
+                {
+                    this.Parse(e.Message);
+                }
+            }
+            else
+            {
+                this.Parse(e.Message);
             }
         }
 
@@ -267,21 +287,13 @@ namespace SeaBotGUI.TelegramBot
 
             public Button(string Name, Action Act)
             {
-                name = Name;
-                act = Act;
+                this.name = Name;
+                this.act = Act;
             }
 
-            public string name { get; set; }
             public Action act { get; set; }
-        }
 
-        public interface IMenu
-        {
-            Message Message { set; }
-            int ID { get; }
-            Button[][] buttons { get; }
-            void Unknown(Message msg);
-            void OnEnter();
+            public string name { get; set; }
         }
     }
 }

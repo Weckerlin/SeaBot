@@ -173,6 +173,7 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -979,7 +980,6 @@
             0,
             0,
             0});
-       
             // 
             // radio_sleepformins
             // 
@@ -1144,6 +1144,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.linkLabel10);
             this.tabPage1.Controls.Add(this.btn_stats);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.groupBox5);
@@ -1411,6 +1412,13 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
+            // linkLabel10
+            // 
+            resources.ApplyResources(this.linkLabel10, "linkLabel10");
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.TabStop = true;
+            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel10_LinkClicked);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -1644,5 +1652,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton radio_oil;
         private System.Windows.Forms.RadioButton radio_wreck;
+        private System.Windows.Forms.LinkLabel linkLabel10;
     }
 }
