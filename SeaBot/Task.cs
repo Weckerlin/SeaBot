@@ -939,6 +939,21 @@ namespace SeaBotCore
 
             public uint Time { get; }
         }
+        public class SendShipwreckTask : IGameTask
+        {
+            public SendShipwreckTask(int inst_id,int dest_id)
+            {
+                this.Time = (uint)TimeUtils.GetEpochTime();
+                this.CustomObjects.Add("inst_id", inst_id);
+                this.CustomObjects.Add("dest_id", dest_id);
+            }
+
+            public string Action => "send_ship_wreck";
+
+            public Dictionary<string, object> CustomObjects { get; } = new Dictionary<string, object>();
+
+            public uint Time { get; }
+        }
 
         public class StartBuildingProducingTask : IGameTask
         {

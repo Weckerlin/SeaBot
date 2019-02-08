@@ -165,12 +165,7 @@ namespace SeaBotCore.Utils
                         foreach (var mats in nextlvlbuilding?.Materials.Material.Where(n => n.Amount != 0))
                         {
                             if (locinv.Any(n => n.Id == mats.Id))
-                            {
-                                if (mats.Id == 180)
-                                {
-                                    Console.Read();
-                                }
-                            
+                            { 
                                 locinv.Where(n => n.Id == mats.Id).First().Amount += mats.Amount;
                             }
                             else
@@ -180,8 +175,6 @@ namespace SeaBotCore.Utils
                             }
                         }
                     }
-                
-              
             }
 
             foreach (var item in locinv)
@@ -191,7 +184,6 @@ namespace SeaBotCore.Utils
                     
                     if (makingph[item.Id] != 0)
                     {
-
                         decimal koef = (decimal)item.Amount / makingph[item.Id];
                         if (koef == 0)
                         {

@@ -1,18 +1,18 @@
-﻿// // SeaBotCore
-// // Copyright (C) 2018 - 2019 Weespin
-// // 
-// // This program is free software: you can redistribute it and/or modify
-// // it under the terms of the GNU General Public License as published by
-// // the Free Software Foundation, either version 3 of the License, or
-// // (at your option) any later version.
-// // 
-// // This program is distributed in the hope that it will be useful,
-// // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// // GNU General Public License for more details.
-// // 
-// // You should have received a copy of the GNU General Public License
-// // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿// SeaBotCore
+// Copyright (C) 2018 - 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace SeaBotCore.BotMethods
 {
@@ -140,9 +140,7 @@ namespace SeaBotCore.BotMethods
                     if (ship.Type == "wreck")
                     {
                         var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
-                        var predefined = Definitions.WreckDef.Items.Item.Where(n => n.DefId == wrk.DefId)
-                            .FirstOrDefault();
-
+                    
                         if (wrk != null && ship.IsVoyageCompleted())
                         {
                             _deship.Add(ship);
@@ -314,7 +312,7 @@ namespace SeaBotCore.BotMethods
                 foreach (var VARIABLE in bestships)
                 {
                     // AutoShipUtils.SendToUpgradable(VARIABLE,Core.Config.autoshiptype);
-                    AutoShipUtils.SendToMarketplace(VARIABLE);
+                    AutoShipUtils.SendToWreck(VARIABLE);
                 }
             }
         }
@@ -956,6 +954,37 @@ namespace SeaBotCore.BotMethods
                         Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
                 Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
                 return true;
+            }
+
+            return false;
+        }
+        
+        public static bool SendToWreck(Ship ship)
+        {
+            var wreck = Core.GlobalData.Wrecks.Where(n => n.Status == 0).FirstOrDefault();
+
+            if (wreck != null)
+            {
+                if (wreck.Sailors < ship.Sailors())
+                {
+                    var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
+                    shp.Sent = TimeUtils.GetEpochTime();
+                    shp.Loaded = 0;
+                    shp.Type = "wreck";
+                    shp.TargetId = wreck.InstId;
+                    shp.TargetLevel = 0;
+                    wreck.Status = 1;
+                    Logger.Info(
+                        Localization.SHIPS_SENDING + LocalizationCache.GetNameFromLoc(
+                            Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                            Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                    Networking.AddTask(new Task.SendShipwreckTask(ship.InstId, wreck.InstId));
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             return false;

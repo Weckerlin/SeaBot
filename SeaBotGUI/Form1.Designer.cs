@@ -139,6 +139,7 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.btn_stats = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -173,7 +174,6 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -1155,6 +1155,13 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // linkLabel10
+            // 
+            resources.ApplyResources(this.linkLabel10, "linkLabel10");
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.TabStop = true;
+            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel10_LinkClicked);
+            // 
             // btn_stats
             // 
             resources.ApplyResources(this.btn_stats, "btn_stats");
@@ -1411,13 +1418,6 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            // 
-            // linkLabel10
-            // 
-            resources.ApplyResources(this.linkLabel10, "linkLabel10");
-            this.linkLabel10.Name = "linkLabel10";
-            this.linkLabel10.TabStop = true;
-            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel10_LinkClicked);
             // 
             // Form1
             // 
