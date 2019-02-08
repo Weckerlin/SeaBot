@@ -35,7 +35,7 @@ namespace SeaBotCore.Utils
        public static Dictionary<int, int> GetLocalProducionPerHour()
        {
            var ret = new Dictionary<int, int>();
-           var fishprod = 0;
+           decimal fishprod = 0;
            foreach (var boat in Core.GlobalData.Boats)
            {
                var b = Definitions.BoatDef.Items.Item.FirstOrDefault(n => n.DefId == 1)?.Levels.Level
@@ -44,11 +44,13 @@ namespace SeaBotCore.Utils
                {
                    return ret;
                }
-              fishprod+=b.OutputAmount * ( 60 / b.TurnTime);
+
+               var turnsperhour = (60/b.TurnTime)*60;
+              fishprod+=b.OutputAmount * turnsperhour;
                 
            }
            //Fish = 3;
-           ret.Add(3,fishprod);
+           ret.Add(3,(int)fishprod);
            foreach (var building in Core.GlobalData.Buildings)
            {
                var bdef = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault();

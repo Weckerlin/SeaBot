@@ -271,7 +271,7 @@ namespace SeaBotCore.BotMethods
                 foreach (var VARIABLE in bestships)
                 {
                   // AutoShipUtils.SendToUpgradable(VARIABLE,Core.Config.autoshiptype);
-              //    AutoShipUtils.SendToMarketplace(VARIABLE);
+                 AutoShipUtils.SendToMarketplace(VARIABLE);
                 }
                
             }
