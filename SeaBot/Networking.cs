@@ -23,6 +23,7 @@ namespace SeaBotCore
     using System.Linq;
     using System.Net;
     using System.Net.Http;
+    using System.Runtime.CompilerServices;
     using System.Security.Cryptography;
     using System.Text;
     using System.Text.RegularExpressions;
@@ -86,6 +87,10 @@ namespace SeaBotCore
 
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
             var cookieContainer = new CookieContainer();
+            var loc_cookies = Cookies.ReadCookiesFromDisk();
+            var pxcookie = loc_cookies.GetCookies(new Uri("https://portal.pixelfederation.com"));
+
+           
             using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = baseAddress })
             {
@@ -114,7 +119,7 @@ namespace SeaBotCore
                         regex = new Regex(@"pid': '(.*)', 'platform");
                         tempuid = regex.Match(data).Groups[1].Value;
                         Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
-                        regex = new Regex(@"static\.seaportgame\.com\/build\/definitions\/(.*)\.xml',");
+                        regex = new Regex(@"'filelist_url1': 'https:\/\/r4a4v3g4\.ssl\.hwcdn\.net\/build\/(.+)\.xml', 'filelist_url2");
                         var mtch = regex.Match(data);
                         if (mtch.Success)
                         {
@@ -176,6 +181,7 @@ namespace SeaBotCore
 
                 values.Add("loading_time", loadtime.ToString());
                 SendRequest(values, "tracking.finishedLoading");
+                Cookies.WriteCookiesToDisk(cookieContainer);
                 Events.Events.LoginedEvent.Logined.Invoke();
                 StatisticsWriter.Start();
             }

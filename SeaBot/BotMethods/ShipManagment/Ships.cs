@@ -40,7 +40,7 @@ namespace SeaBotCore.BotMethods
         {
             LoadShips.LoadAllShips();
             UnloadShips.UnloadAllShips();
-            SendShips.SendShipsDestination(Core.Config.shipdesttype);
+          SendShips.SendShipsDestination(Core.Config.shipdesttype);
         }
     }
 

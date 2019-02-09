@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 
 namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 {
+    using Newtonsoft.Json;
+
     using SeaBotCore.Cache;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
@@ -92,32 +94,39 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static int GetCapacity(Ship ship)
         {
-            if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Levels == null)
-            {
-                var capacity = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels.Level
-                    .FirstOrDefault(n => n.Id == ship.CapacityLevel)?.Capacity;
-                if (capacity != null)
+           
+                if (Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Levels == null)
                 {
-                    return capacity.Value;
+                    var capacity = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels.Level
+                        .FirstOrDefault(n => n.Id == ship.CapacityLevel)?.Capacity;
+                    if (capacity != null)
+                    {
+                        return capacity.Value;
+                    }
                 }
-            }
 
-            ShipDefenitions.Item first = null;
-            foreach (var n in Definitions.ShipDef.Items.Item)
-            {
-                if (n.DefId == ship.DefId)
+                ShipDefenitions.Item first = null;
+                foreach (var n in Definitions.ShipDef.Items.Item)
                 {
-                    first = n;
-                    break;
+                    if (n.DefId == ship.DefId)
+                    {
+                        first = n;
+                        break;
+                    }
                 }
-            }
 
-            if (first != null)
-            {
-                return first.Levels.Level.First(n => n.Id == ship.Level).Capacity;
-            }
+                if (first != null)
+                {
+                    var pr = first.Levels.Level.FirstOrDefault(n => n.Id == ship.Level);
+                    if (pr != null)
+                    {
+                        return pr.Capacity;
+                    }
+                }
 
-            return 0;
+                return 0;
+            
+         
         }
 
         public static ShipDefenitions.LevelsLevel GetLevels(Ship ship, int level)
@@ -371,8 +380,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         {
             Logger.Info(
                 Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                    Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                    Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
         }
 
         public static void NullShip(Ship ship)

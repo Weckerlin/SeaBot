@@ -108,6 +108,7 @@
     <Compile Include="Task.cs" />
     <Compile Include="Utils\AutoTools.cs" />
     <Compile Include="Utils\ContractorHelper.cs" />
+    <Compile Include="Utils\Cookies.cs" />
     <Compile Include="Utils\FullObserv.cs" />
     <Compile Include="Utils\ThreadKill.cs" />
     <Compile Include="Utils\Time.cs" />

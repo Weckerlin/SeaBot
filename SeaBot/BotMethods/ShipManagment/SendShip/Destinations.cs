@@ -48,7 +48,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 if (contractor.Done == 0)
                 {
                     var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
-                    var quest = def.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
+                    var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
                     if (quest == null || def == null)
                     {
                         continue;
@@ -77,7 +77,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             foreach (var opst in statiopst.OrderBy(n => n.QuestId))
             {
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
-                var quest = def.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
+                var quest = def?.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
                 if (quest == null || def == null)
                 {
                     continue;
@@ -123,7 +123,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             foreach (var opst in genopst.OrderBy(n => n.QuestId))
             {
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
-                var quest = def.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
+                var quest = def?.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
                 if (quest == null)
                 {
                     continue;
@@ -309,11 +309,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 return false;
             }
 
-            var place = Definitions.UpgrDef.Items.Item.First(n => n.DefId == bestplace.DefId);
+            var place = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == bestplace.DefId);
             var shipfull = Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId).FirstOrDefault();
-            var lvls = place.Levels.Level.FirstOrDefault(n => n.Id == bestplace.Level);
+            var lvls = place?.Levels.Level.FirstOrDefault(n => n.Id == bestplace.Level);
 
-            if (shipfull.SlotUsage < place.Slots)
+            if (shipfull?.SlotUsage < place?.Slots)
             {
                 return false;
             }

@@ -31,9 +31,9 @@ namespace SeaBotCore.BotMethods.ShipManagment
         public static void UnloadAllShips()
         {
             var unloadedships = new List<int>();
-            for (var index = 0; index < Core.GlobalData.Ships.Count; index++)
+            foreach (var shi in Core.GlobalData.Ships)
             {
-                var ship = Core.GlobalData.Ships[index];
+                var ship = Core.GlobalData.Ships.Where(n => n.InstId == shi.InstId).First();
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.IsVoyageCompleted())
                 {
 
@@ -43,9 +43,11 @@ namespace SeaBotCore.BotMethods.ShipManagment
                             {
                                 if (ship.Loaded == 1)
                                 {
+                                    
                                     unloadedships.Add(ship.DefId);
-                                    int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                    ShipManagment.UnloadShips.UnloadUpgradable(ship, uniqueid);
+                                    var ship1 = ship;
+                                    int uniqueid = unloadedships.Count(n => n == ship1.DefId);
+                                    UnloadUpgradable(ship, uniqueid);
                                 }
 
                                 break;
@@ -54,35 +56,35 @@ namespace SeaBotCore.BotMethods.ShipManagment
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                ShipManagment.UnloadShips.UnloadMarketplace(ship,uniqueid);
+                                UnloadMarketplace(ship,uniqueid);
                                 break;
                             }
                         case "wreck":
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                ShipManagment.UnloadShips.UnloadWreck(ship,uniqueid);
+                               UnloadWreck(ship,uniqueid);
                                 break;
                             }
                         case "contractor":
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                               ShipManagment.UnloadShips.UnloadContractor(ship,uniqueid);
+                                UnloadContractor(ship,uniqueid);
                                 break;
                             }
                         case "outpost":
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                ShipManagment.UnloadShips.UnloadOutpost(ship,uniqueid);
+                                UnloadOutpost(ship,uniqueid);
                                 break;
                             }
                         case "social_contract":
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                ShipManagment.UnloadShips.UnloadSocialcontract(ship,uniqueid);
+                                UnloadSocialcontract(ship,uniqueid);
                                 break;
                             }
                     }

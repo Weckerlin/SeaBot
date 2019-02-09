@@ -38,33 +38,39 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 case ShipDestType.Upgradable:
                     foreach (var ship in bestships)
                     {
+
                         Destinations.SendToUpgradable(ship, Core.Config.autoshiptype);
                     }
                     break;
                 case ShipDestType.Outpost:
                     foreach (var ship in bestships)
                     {
+                       
                         Destinations.SendToOutpost(ship);
                     }
                     break;
                 case ShipDestType.Marketplace:
                     foreach (var ship in bestships)
                     {
+                       
                         Destinations.SendToMarketplace(ship);
                     }
                     break;
                 case ShipDestType.Contractor:
                     foreach (var ship in bestships)
                     {
+                     
                         Destinations.SendToContractor(ship);
                     }
                     break;
                 case ShipDestType.Auto:
+                    
                     SendShips.SendShipsAutoDestination();
                     break;
                 case ShipDestType.Wreck:
                     foreach (var ship in bestships)
                     {
+                       
                         Destinations.SendToWreck(ship);
                     }
                     break;
@@ -84,11 +90,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         private const int wreckproc = 5;
         public static void SendShipsAutoDestination()
         {
-         
+            Logger.Info("STEPPED TO SEND AUTO. SHIP COUNT: "+ Core.GlobalData.Ships.Count);
                     var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                         .OrderByDescending(SendingHelper.GetCapacity));
-                    var z = 0;
-                    //First 30% to upgradable
+                  
+               
                     int upgcont = SendingHelper.GetPercentage(upgproc,bestships.Count);
                     int outpostcont = SendingHelper.GetPercentage(outpostproc,bestships.Count);
                     int marketcount = SendingHelper.GetPercentage(marketproc,bestships.Count);
@@ -121,7 +127,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         Destinations.SendToWreck(ship);
                        Logger.Info("wrk"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==ship.DefId).First().Name);
                     }
-                    //Use reverse lookup
+              
                     var failed = new Queue<Ship>(
                         Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                             .OrderByDescending(SendingHelper.GetCapacity));
@@ -181,6 +187,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
 
                     }
+                  
         }
 
         public static Dictionary<ShipDestType,double> PercentageDest()

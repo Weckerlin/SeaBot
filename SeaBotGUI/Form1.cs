@@ -43,8 +43,10 @@ namespace SeaBotGUI
     using Newtonsoft.Json;
 
     using SeaBotCore;
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Config;
     using SeaBotCore.Data;
+    using SeaBotCore.Data.Definitions;
     using SeaBotCore.Data.Materials;
     using SeaBotCore.Localizaion;
     using SeaBotCore.Logger;
