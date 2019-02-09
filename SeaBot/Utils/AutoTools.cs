@@ -144,7 +144,11 @@ namespace SeaBotCore.Utils
 
             return ret;
         }
-
+        public static IEnumerable<T> TakeAndRemove<T>(Queue<T> queue, int count)
+        {
+            for (int i = 0; i < count && queue.Count > 0; i++)
+                yield return queue.Dequeue();
+        }
         public static Dictionary<int, decimal> NeededItemsForUpgradePercentage()
         {
             var ret = new Dictionary<int, decimal>();

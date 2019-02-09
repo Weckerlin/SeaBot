@@ -61,7 +61,8 @@
     <Compile Include="BotMethods\FishPier.cs" />
     <Compile Include="BotMethods\Museum.cs" />
     <Compile Include="BotMethods\Outposts.cs" />
-    <Compile Include="BotMethods\Ships.cs" />
+    <Compile Include="BotMethods\ShipManagment\Ships.cs" />
+    <Compile Include="BotMethods\ShipManagment\UnloadShips.cs" />
     <Compile Include="BotMethods\Sleep.cs" />
     <Compile Include="BotMethods\Upgradable.cs" />
     <Compile Include="Cache\DefenitionCache.cs" />
