@@ -28,7 +28,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
     using SeaBotCore.Logger;
     using SeaBotCore.Utils;
 
-  public  static class Destinations
+    public static class Destinations
     {
         public static bool SendToContractor(Ship ship)
         {
@@ -58,7 +58,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 }
             }
 
-            foreach (var opst in statiopst)
+            foreach (var opst in statiopst.OrderBy(n => n.QuestId))
             {
                 var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
                 var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
@@ -105,7 +105,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 return true;
             }
 
-            foreach (var opst in genopst)
+            foreach (var opst in genopst.OrderBy(n => n.QuestId))
             {
                 var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
                 var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
