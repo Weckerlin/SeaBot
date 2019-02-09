@@ -18,6 +18,7 @@ namespace SeaBotCore.BotMethods
     #region
 
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using SeaBotCore.Data.Definitions;
 
@@ -27,6 +28,7 @@ namespace SeaBotCore.BotMethods
     {
         public static void ConfirmOutpost()
         {
+            Logger.Logger.Info("Outpost confirm is not implemented!");
             //var readyoutposts = Core.GlobalData.Outposts.Where(n => n.RequiredCrew <= n.Crew).ToList();
             //foreach (var outpost in readyoutposts)
             //{
