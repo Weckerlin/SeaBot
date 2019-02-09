@@ -72,6 +72,16 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             }
         }
+
+        private const int upgproc = 30;
+
+        private const int outpostproc = 20;
+
+        private const int marketproc = 15;
+
+        private const int contractorproc = 30;
+
+        private const int wreckproc = 5;
         public static void SendShipsAutoDestination()
         {
          
@@ -79,11 +89,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         .OrderByDescending(SendingHelper.GetCapacity));
                     var z = 0;
                     //First 30% to upgradable
-                    int upgcont = SendingHelper.GetPercentage(30,bestships.Count);
-                    int outpostcont = SendingHelper.GetPercentage(20,bestships.Count);
-                    int marketcount = SendingHelper.GetPercentage(15,bestships.Count);
-                    int contractorcount = SendingHelper.GetPercentage(30,bestships.Count);
-                    int wreckcount =  SendingHelper.GetPercentage(5,bestships.Count);
+                    int upgcont = SendingHelper.GetPercentage(upgproc,bestships.Count);
+                    int outpostcont = SendingHelper.GetPercentage(outpostproc,bestships.Count);
+                    int marketcount = SendingHelper.GetPercentage(marketproc,bestships.Count);
+                    int contractorcount = SendingHelper.GetPercentage(contractorproc,bestships.Count);
+                    int wreckcount =  SendingHelper.GetPercentage(wreckproc,bestships.Count);
                    
                     foreach (var ship in AutoTools.TakeAndRemove(bestships,upgcont))
                     {
@@ -119,28 +129,28 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     foreach (var ship in failed)
                     {
                         var perc = PercentageDest();
-                        if (contractorcount > perc[ShipDestType.Contractor])
+                        if (contractorproc > perc[ShipDestType.Contractor])
                         {
                             if (Destinations.SendToContractor(ship))
                             {
                                 continue;
                             }
                         }
-                        if (upgcont > perc[ShipDestType.Upgradable])
+                        if (upgproc > perc[ShipDestType.Upgradable])
                         {
                             if (Destinations.SendToUpgradable(ship, Core.Config.autoshiptype))
                             {
                                 continue;
                             }
                         }
-                        if (marketcount > perc[ShipDestType.Marketplace])
+                        if (marketproc > perc[ShipDestType.Marketplace])
                         {
                             if (Destinations.SendToMarketplace(ship))
                             {
                                 continue;
                             }
                         }
-                        if (outpostcont > perc[ShipDestType.Outpost])
+                        if (outpostproc > perc[ShipDestType.Outpost])
                         {
                             if (Destinations.SendToOutpost(ship))
                             {
