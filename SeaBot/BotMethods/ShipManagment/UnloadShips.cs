@@ -227,6 +227,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
             if (wrk != null)
             {
              
+                ship.LogUnload();
                 Networking.AddTask(
                     new Task.UnloadShipTask(
                         ship.InstId,

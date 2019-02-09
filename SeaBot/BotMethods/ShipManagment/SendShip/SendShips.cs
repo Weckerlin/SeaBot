@@ -99,13 +99,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     foreach (var ship in AutoTools.TakeAndRemove(bestships,marketcount))
                     {
                         Destinations.SendToMarketplace(ship);
-                        Logger.Info("mkt"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==ship.DefId).First().Name);
                     }
 
                     foreach (var ship in AutoTools.TakeAndRemove(bestships,contractorcount))
                     {
                         Destinations.SendToContractor(ship);
-                       Logger.Info("ctr"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==ship.DefId).First().Name);
                     }
 
                     foreach (var ship in AutoTools.TakeAndRemove(bestships,wreckcount))

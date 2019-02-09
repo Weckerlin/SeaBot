@@ -129,7 +129,6 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 lship.TargetId = opst.DefId;
                 lship.MaterialId = quest.ObjectiveDefId;
                 lship.TargetLevel = quest.Id;
-                Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
                 Networking.AddTask(
                     new Task.SendShipContractorTask(
                         ship.InstId,
@@ -211,7 +210,6 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             canproceed = wehaveininv < ship.Capacity() ? wehaveininv : ship.Capacity();
 
             Core.GlobalData.Inventory.Where(n => n.Id == maktplc.InputId).FirstOrDefault().Amount -= canproceed;
-           Logger.Info("TEMPLATE: SENDING A SHIP TO MARKETPLACE");
             Networking.AddTask(new Task.SendShipMarketplaceTask(ship.InstId, maktplc.Id, 1, canproceed));
             var locship = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
             locship.Type = "marketplace";
@@ -261,7 +259,6 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 var sending = 0;
                 sending = next.Crew > ship.Sailors() ? ship.Sailors() : next.Crew;
 
-             Logger.Info("TEMPLATE: SENDING A SHIP TO OUTPOST");
                 Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, next.DefId, sending));
                 Core.GlobalData.Outposts.Add(
                     new Outpost

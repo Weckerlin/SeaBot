@@ -115,6 +115,15 @@ namespace SeaBotCore.Localizaion {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Upgraded Contractor .
+        /// </summary>
+        internal static string CONTRACTOR_UPGRADED {
+            get {
+                return ResourceManager.GetString("CONTRACTOR_UPGRADED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Downloading localization cache....
         /// </summary>
         internal static string CORE_LOCAL_DOWNLOAD_STARTED {

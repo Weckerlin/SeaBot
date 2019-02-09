@@ -240,4 +240,7 @@
   <data name="MUSEUM_COLLECT" xml:space="preserve">
     <value>Collecting Museum</value>
   </data>
+  <data name="CONTRACTOR_UPGRADED" xml:space="preserve">
+    <value>Upgraded Contractor </value>
+  </data>
 </root>

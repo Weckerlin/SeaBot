@@ -30,9 +30,7 @@ namespace SeaBotCore.BotMethods
     {
         public static void UpgradeContractor()
         {
-            return;
-
-            ///BETA!!!
+           
             for (var index = 0; index < Core.GlobalData.Contracts.Count; index++)
             {
                 var upg = Core.GlobalData.Contracts[index];
@@ -48,7 +46,7 @@ namespace SeaBotCore.BotMethods
                 {
                     // upgrade ofc
                     Logger.Info(
-                        "BETA CONTRACTOR " + Localization.UPGRADABLE_UPGRADED
+                        Localization.CONTRACTOR_UPGRADED
                                            + LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
 
                     // todo: add new local

@@ -122,6 +122,9 @@
     <EmbeddedResource Include="Form1.ru.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.rwk.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Localization\PrivateLocal.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PrivateLocal.Designer.cs</LastGenOutput>
