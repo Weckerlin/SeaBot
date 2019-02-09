@@ -302,23 +302,63 @@ namespace SeaBotCore.BotMethods
             }
 
             _deship.Clear();
-            var bestships = Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
-                .OrderByDescending(AutoShipUtils.GetCapacity).ToList();
+          
 
             // now send
             if (true)
             {
-                foreach (var VARIABLE in bestships)
-                {
-                    // AutoShipUtils.SendToUpgradable(VARIABLE,Core.Config.autoshiptype);
-                    AutoShipUtils.SendToWreck(VARIABLE);
-                }
+               
+                    List<Ship> failedships = new List<Ship>();
+
+                    var bestships = Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                        .OrderByDescending(AutoShipUtils.GetCapacity).ToList();
+                    var z = 0;
+                    //First 30% to upgradable
+                    int upgcont = AutoShipUtils.GetPercentage(30,bestships.Count);
+                    int outpostcont = AutoShipUtils.GetPercentage(20,bestships.Count);
+                    int marketcount = AutoShipUtils.GetPercentage(15,bestships.Count);
+                    int contractorcount = AutoShipUtils.GetPercentage(30,bestships.Count);
+                    int wreckcount =  AutoShipUtils.GetPercentage(5,bestships.Count);
+                    for (int i=z ; z < upgcont; z++)
+                    {
+                        AutoShipUtils.SendToUpgradable(bestships[z], Core.Config.autoshiptype);
+                        
+                    }
+
+                    for (int i=z; z < i+outpostcont; z++)
+                    {
+                        AutoShipUtils.SendToOutpost(bestships[z]);
+                    }
+
+                    for (int i =z; z < i+marketcount; z++)
+                    {
+                        AutoShipUtils.SendToMarketplace(bestships[z]);
+                        Logger.Info("mkt"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==bestships[z].DefId).First().Name);
+                    }
+
+                    for (int i =z; z < i+contractorcount; z++)
+                    {
+                        AutoShipUtils.SendToContractor(bestships[z]);
+                        Logger.Info("ctr"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==bestships[z].DefId).First().Name);
+                    }
+
+                    for (int i =z; z < i+wreckcount; z++)
+                    {
+                        AutoShipUtils.SendToWreck(bestships[z]);
+                        Logger.Info("wrk"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==bestships[z].DefId).First().Name);
+                    }
             }
         }
     }
 
     public static class AutoShipUtils
     {
+        public static int GetPercentage(int procent, int total)
+        {
+            var globalkoef = total / 100D;
+            var loccoef = globalkoef * procent;
+            return (int) Math.Truncate(loccoef);
+        }
         public static int Capacity(this Ship ship)
         {
             return GetCapacity(ship);

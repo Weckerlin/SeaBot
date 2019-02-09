@@ -121,6 +121,7 @@ namespace SeaBotCore
 
                     if (Config.autoship)
                     {
+                        Outposts.ConfirmOutpost();
                         Upgradable.UpgradeUpgradable();
                         Contractor.UpgradeContractor();
                         Ships.AutoShip(Config.autoshiptype, Config.autoshipprofit);
