@@ -28,7 +28,7 @@ namespace SeaBotCore.BotMethods
     {
         public static void ConfirmOutpost()
         {
-            Logger.Logger.Info("Outpost confirm is not implemented!");
+            //   Logger.Logger.Info("Outpost confirm is not implemented!");
             //var readyoutposts = Core.GlobalData.Outposts.Where(n => n.RequiredCrew <= n.Crew).ToList();
             //foreach (var outpost in readyoutposts)
             //{

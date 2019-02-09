@@ -232,8 +232,12 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 case "wreck":
 
                     var wrk = Core.GlobalData.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
-                    traveltime = (int)Definitions.WreckDef.Items.Item.FirstOrDefault(n => n.DefId == wrk.DefId)
-                        ?.TravelTime;
+                    var tm = Definitions.WreckDef.Items.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.TravelTime;
+                    if (tm != null)
+                    {
+                        traveltime = (int)tm;
+                    }
+
                     break;
                 case "contractor":
 
@@ -289,12 +293,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     break;
             }
 
-            if (!traveltime.HasValue)
-            {
-                return int.MaxValue;
-            }
-
-            return traveltime.Value;
+            return !traveltime.HasValue ? int.MaxValue : traveltime.Value;
         }
 
         public static List<OutpostDefinitions.Item> GetUnlockableOutposts()

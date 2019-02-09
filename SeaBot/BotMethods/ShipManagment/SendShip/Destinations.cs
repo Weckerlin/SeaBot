@@ -39,7 +39,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 if (contractor.Done == 0)
                 {
                     var def = Definitions.ConDef.Items.Item.Where(c => contractor.DefId == c.DefId).FirstOrDefault();
-                    var quest = def.Quests.Quest.Where(q => contractor.QuestId == q.Id).First();
+                    var quest = def.Quests.Quest.Where(q => contractor.QuestId == q.Id).FirstOrDefault();
+                    if (quest == null)
+                    {
+                        continue;
+                    }
                     if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
                     {
                         if (def.Type == "static")
@@ -57,7 +61,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             foreach (var opst in statiopst)
             {
                 var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
-                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).First();
+                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
+                if (quest == null)
+                {
+                    continue;
+                }
                 var already = opst.Progress;
                 var exists = quest.Amount - opst.Progress;
                 if (exists <= 0)
@@ -100,8 +108,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             foreach (var opst in genopst)
             {
                 var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
-                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).First();
-                
+                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
+                if (quest == null)
+                {
+                    continue;
+                }
                 var already = opst.Progress;
                 var exists = (int)quest.InputAmount() - opst.Progress;
                 if (exists <= 0)
