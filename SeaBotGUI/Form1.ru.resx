@@ -345,6 +345,15 @@
   <data name="tabPage7.Text" xml:space="preserve">
     <value>Бот</value>
   </data>
+  <data name="groupBox25.Text" xml:space="preserve">
+    <value>Дополнительно.</value>
+  </data>
+  <data name="chk_exploit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 17</value>
+  </data>
+  <data name="chk_exploit.Text" xml:space="preserve">
+    <value>Небезопасный режим</value>
+  </data>
   <data name="btn_dumpcore.Text" xml:space="preserve">
     <value>Дамп инфы</value>
   </data>

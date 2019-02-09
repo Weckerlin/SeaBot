@@ -375,6 +375,7 @@ namespace SeaBotCore
             else
             {
                 Logger.Logger.Fatal(Localization.NETWORKING_SYNC_NO_RESPONSE);
+                Core.StopBot();
             }
 
             _lastRaised = DateTime.Now;
@@ -404,11 +405,6 @@ namespace SeaBotCore
 
                             if (Core.IsBotRunning)
                             {
-                                if (Core.Config.debug)
-                                {
-                                    File.WriteAllText("beforecrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                                }
-
                                 _syncThread.Abort();
                                 Logger.Logger.Muted = true;
                                 Thread.Sleep(Core.hibernation * 1000 * 60);
@@ -416,10 +412,6 @@ namespace SeaBotCore
                                 Logger.Logger.Info(Localization.NETWORKING_WAKING_UP);
                                 StartThread();
                                 Login();
-                                if (Core.Config.debug)
-                                {
-                                    File.WriteAllText("aftercrash.json", JsonConvert.SerializeObject(Core.GlobalData));
-                                }
                             }
                         }
                     });

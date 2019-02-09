@@ -33,6 +33,10 @@
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -97,6 +101,8 @@
             this.radio_wood = new System.Windows.Forms.RadioButton();
             this.radio_gold = new System.Windows.Forms.RadioButton();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.chk_exploit = new System.Windows.Forms.CheckBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.btn_dumpcore = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -174,11 +180,10 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.chk_exploit = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox19.SuspendLayout();
+            this.groupBox26.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -201,6 +206,7 @@
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.groupBox25.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox17.SuspendLayout();
@@ -232,26 +238,53 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.groupBox25.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage4
             // 
+            resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Controls.Add(this.groupBox26);
             this.tabPage4.Controls.Add(this.groupBox19);
             this.tabPage4.Controls.Add(this.groupBox18);
             this.tabPage4.Controls.Add(this.groupBox7);
-            resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // groupBox19
             // 
+            resources.ApplyResources(this.groupBox19, "groupBox19");
             this.groupBox19.Controls.Add(this.label18);
             this.groupBox19.Controls.Add(this.label17);
             this.groupBox19.Controls.Add(this.label12);
-            resources.ApplyResources(this.groupBox19, "groupBox19");
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.TabStop = false;
+            // 
+            // groupBox26
+            // 
+            resources.ApplyResources(this.groupBox26, "groupBox26");
+            this.groupBox26.Controls.Add(this.label19);
+            this.groupBox26.Controls.Add(this.label20);
+            this.groupBox26.Controls.Add(this.label21);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.TabStop = false;
+            // 
+            // label19
+            // 
+            resources.ApplyResources(this.label19, "label19");
+            this.label19.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label19.Name = "label19";
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label20.Name = "label20";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label21.Name = "label21";
             // 
             // label18
             // 
@@ -274,10 +307,10 @@
             // 
             // groupBox18
             // 
+            resources.ApplyResources(this.groupBox18, "groupBox18");
             this.groupBox18.Controls.Add(this.linkLabel9);
             this.groupBox18.Controls.Add(this.linkLabel8);
             this.groupBox18.Controls.Add(this.linkLabel7);
-            resources.ApplyResources(this.groupBox18, "groupBox18");
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.TabStop = false;
             // 
@@ -304,12 +337,12 @@
             // 
             // groupBox7
             // 
+            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Controls.Add(this.linkLabel5);
             this.groupBox7.Controls.Add(this.linkLabel4);
             this.groupBox7.Controls.Add(this.linkLabel3);
             this.groupBox7.Controls.Add(this.linkLabel2);
             this.groupBox7.Controls.Add(this.label2);
-            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
             // 
@@ -348,21 +381,22 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.tabControl2);
             resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabControl2
             // 
+            resources.ApplyResources(this.tabControl2, "tabControl2");
             this.tabControl2.Controls.Add(this.tabPage8);
             this.tabControl2.Controls.Add(this.tabPage7);
-            resources.ApplyResources(this.tabControl2, "tabControl2");
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
             // 
             // tabPage8
             // 
+            resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Controls.Add(this.groupBox24);
             this.tabPage8.Controls.Add(this.groupBox23);
             this.tabPage8.Controls.Add(this.groupBox22);
@@ -372,14 +406,13 @@
             this.tabPage8.Controls.Add(this.groupBox8);
             this.tabPage8.Controls.Add(this.groupBox12);
             this.tabPage8.Controls.Add(this.groupBox11);
-            resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // groupBox24
             // 
-            this.groupBox24.Controls.Add(this.button1);
             resources.ApplyResources(this.groupBox24, "groupBox24");
+            this.groupBox24.Controls.Add(this.button1);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.TabStop = false;
             // 
@@ -392,9 +425,9 @@
             // 
             // groupBox23
             // 
+            resources.ApplyResources(this.groupBox23, "groupBox23");
             this.groupBox23.Controls.Add(this.checkBox4);
             this.groupBox23.Controls.Add(this.checkBox3);
-            resources.ApplyResources(this.groupBox23, "groupBox23");
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.TabStop = false;
             // 
@@ -412,13 +445,13 @@
             // 
             // groupBox22
             // 
+            resources.ApplyResources(this.groupBox22, "groupBox22");
             this.groupBox22.Controls.Add(this.radio_wreck);
             this.groupBox22.Controls.Add(this.radio_marketplace);
             this.groupBox22.Controls.Add(this.radio_autoshipauto);
             this.groupBox22.Controls.Add(this.radio_outpost);
             this.groupBox22.Controls.Add(this.radio_contractor);
             this.groupBox22.Controls.Add(this.radio_upgradable);
-            resources.ApplyResources(this.groupBox22, "groupBox22");
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.TabStop = false;
             // 
@@ -472,6 +505,7 @@
             // 
             // groupBox20
             // 
+            resources.ApplyResources(this.groupBox20, "groupBox20");
             this.groupBox20.Controls.Add(this.label16);
             this.groupBox20.Controls.Add(this.label15);
             this.groupBox20.Controls.Add(this.label14);
@@ -483,7 +517,6 @@
             this.groupBox20.Controls.Add(this.radioButton3);
             this.groupBox20.Controls.Add(this.radioButton2);
             this.groupBox20.Controls.Add(this.radioButton1);
-            resources.ApplyResources(this.groupBox20, "groupBox20");
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.TabStop = false;
             // 
@@ -589,6 +622,7 @@
             // 
             // groupBox6
             // 
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.num_stonelimit);
             this.groupBox6.Controls.Add(this.num_ironlimit);
             this.groupBox6.Controls.Add(this.num_woodlimit);
@@ -596,7 +630,6 @@
             this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Controls.Add(this.label3);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
@@ -671,8 +704,8 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.chk_onlyfactory);
             resources.ApplyResources(this.groupBox10, "groupBox10");
+            this.groupBox10.Controls.Add(this.chk_onlyfactory);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
@@ -685,16 +718,16 @@
             // 
             // groupBox8
             // 
+            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Controls.Add(this.num_barrelinterval);
             this.groupBox8.Controls.Add(this.label8);
-            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
             // 
             // num_barrelinterval
             // 
-            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
             resources.ApplyResources(this.num_barrelinterval, "num_barrelinterval");
+            this.num_barrelinterval.ForeColor = System.Drawing.SystemColors.WindowText;
             this.num_barrelinterval.Minimum = new decimal(new int[] {
             1,
             0,
@@ -716,9 +749,9 @@
             // 
             // groupBox12
             // 
+            resources.ApplyResources(this.groupBox12, "groupBox12");
             this.groupBox12.Controls.Add(this.radio_saveloot);
             this.groupBox12.Controls.Add(this.radio_savesailors);
-            resources.ApplyResources(this.groupBox12, "groupBox12");
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.TabStop = false;
             // 
@@ -739,13 +772,13 @@
             // 
             // groupBox11
             // 
+            resources.ApplyResources(this.groupBox11, "groupBox11");
             this.groupBox11.Controls.Add(this.radio_oil);
             this.groupBox11.Controls.Add(this.radio_stone);
             this.groupBox11.Controls.Add(this.radio_fish);
             this.groupBox11.Controls.Add(this.radio_iron);
             this.groupBox11.Controls.Add(this.radio_wood);
             this.groupBox11.Controls.Add(this.radio_gold);
-            resources.ApplyResources(this.groupBox11, "groupBox11");
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.TabStop = false;
             // 
@@ -799,6 +832,7 @@
             // 
             // tabPage7
             // 
+            resources.ApplyResources(this.tabPage7, "tabPage7");
             this.tabPage7.Controls.Add(this.groupBox25);
             this.tabPage7.Controls.Add(this.groupBox21);
             this.tabPage7.Controls.Add(this.groupBox1);
@@ -806,15 +840,28 @@
             this.tabPage7.Controls.Add(this.groupBox9);
             this.tabPage7.Controls.Add(this.groupBox14);
             this.tabPage7.Controls.Add(this.groupBox13);
-            resources.ApplyResources(this.tabPage7, "tabPage7");
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // groupBox25
+            // 
+            resources.ApplyResources(this.groupBox25, "groupBox25");
+            this.groupBox25.Controls.Add(this.chk_exploit);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.TabStop = false;
+            // 
+            // chk_exploit
+            // 
+            resources.ApplyResources(this.chk_exploit, "chk_exploit");
+            this.chk_exploit.Name = "chk_exploit";
+            this.chk_exploit.UseVisualStyleBackColor = true;
+            this.chk_exploit.CheckedChanged += new System.EventHandler(this.Chk_exploit_CheckedChanged);
+            // 
             // groupBox21
             // 
+            resources.ApplyResources(this.groupBox21, "groupBox21");
             this.groupBox21.Controls.Add(this.btn_dumpcore);
             this.groupBox21.Controls.Add(this.checkBox1);
-            resources.ApplyResources(this.groupBox21, "groupBox21");
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.TabStop = false;
             // 
@@ -834,10 +881,10 @@
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.linkLabel1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox2);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -862,23 +909,23 @@
             // 
             // groupBox17
             // 
-            this.groupBox17.Controls.Add(this.cbox_lang);
             resources.ApplyResources(this.groupBox17, "groupBox17");
+            this.groupBox17.Controls.Add(this.cbox_lang);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.TabStop = false;
             // 
             // cbox_lang
             // 
-            this.cbox_lang.FormattingEnabled = true;
             resources.ApplyResources(this.cbox_lang, "cbox_lang");
+            this.cbox_lang.FormattingEnabled = true;
             this.cbox_lang.Name = "cbox_lang";
             this.cbox_lang.SelectedIndexChanged += new System.EventHandler(this.cbox_lang_SelectedIndexChanged);
             // 
             // groupBox9
             // 
+            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Controls.Add(this.num_hibernationinterval);
             this.groupBox9.Controls.Add(this.label9);
-            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
             // 
@@ -895,11 +942,11 @@
             // 
             // groupBox14
             // 
+            resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Controls.Add(this.chk_sleepenabled);
             this.groupBox14.Controls.Add(this.chk_smartsleep);
             this.groupBox14.Controls.Add(this.groupBox16);
             this.groupBox14.Controls.Add(this.groupBox15);
-            resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.TabStop = false;
             // 
@@ -919,10 +966,10 @@
             // 
             // groupBox16
             // 
+            resources.ApplyResources(this.groupBox16, "groupBox16");
             this.groupBox16.Controls.Add(this.num_sleepevery);
             this.groupBox16.Controls.Add(this.radio_sleepeverymin);
             this.groupBox16.Controls.Add(this.radio_sleepeveryhrs);
-            resources.ApplyResources(this.groupBox16, "groupBox16");
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.TabStop = false;
             // 
@@ -964,10 +1011,10 @@
             // 
             // groupBox15
             // 
+            resources.ApplyResources(this.groupBox15, "groupBox15");
             this.groupBox15.Controls.Add(this.num_sleepfor);
             this.groupBox15.Controls.Add(this.radio_sleepformins);
             this.groupBox15.Controls.Add(this.radio_sleepforhrs);
-            resources.ApplyResources(this.groupBox15, "groupBox15");
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.TabStop = false;
             // 
@@ -1008,6 +1055,7 @@
             // 
             // groupBox13
             // 
+            resources.ApplyResources(this.groupBox13, "groupBox13");
             this.groupBox13.Controls.Add(this.button5);
             this.groupBox13.Controls.Add(this.button4);
             this.groupBox13.Controls.Add(this.lbl_startupcode);
@@ -1015,7 +1063,6 @@
             this.groupBox13.Controls.Add(this.linkLabel6);
             this.groupBox13.Controls.Add(this.label10);
             this.groupBox13.Controls.Add(this.textBox3);
-            resources.ApplyResources(this.groupBox13, "groupBox13");
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.TabStop = false;
             // 
@@ -1064,10 +1111,10 @@
             // 
             // tabPage3
             // 
+            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Controls.Add(this.num_removenum);
             this.tabPage3.Controls.Add(this.btn_removeitem);
             this.tabPage3.Controls.Add(this.listView1);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -1100,10 +1147,10 @@
             // 
             // listView1
             // 
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -1118,34 +1165,34 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.dataGridView2);
             resources.ApplyResources(this.tabPage6, "tabPage6");
+            this.tabPage6.Controls.Add(this.dataGridView2);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
+            resources.ApplyResources(this.dataGridView2, "dataGridView2");
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.dataGridView2, "dataGridView2");
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.dataGridView1);
             resources.ApplyResources(this.tabPage5, "tabPage5");
+            this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
+            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
@@ -1154,6 +1201,7 @@
             // 
             // tabPage1
             // 
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Controls.Add(this.linkLabel10);
             this.tabPage1.Controls.Add(this.btn_stats);
             this.tabPage1.Controls.Add(this.label7);
@@ -1161,7 +1209,6 @@
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
-            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -1186,6 +1233,7 @@
             // 
             // groupBox5
             // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.pictureBox8);
             this.groupBox5.Controls.Add(this.pictureBox7);
             this.groupBox5.Controls.Add(this.lbl_sailors);
@@ -1202,23 +1250,22 @@
             this.groupBox5.Controls.Add(this.pictureBox3);
             this.groupBox5.Controls.Add(this.pictureBox2);
             this.groupBox5.Controls.Add(this.pictureBox1);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
             // pictureBox8
             // 
+            resources.ApplyResources(this.pictureBox8, "pictureBox8");
             this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox8.Image = global::SeaBotGUI.Properties.Resources.sailor;
-            resources.ApplyResources(this.pictureBox8, "pictureBox8");
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.TabStop = false;
             // 
             // pictureBox7
             // 
+            resources.ApplyResources(this.pictureBox7, "pictureBox7");
             this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox7.Image = global::SeaBotGUI.Properties.Resources.level;
-            resources.ApplyResources(this.pictureBox7, "pictureBox7");
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.TabStop = false;
             // 
@@ -1264,57 +1311,57 @@
             // 
             // pictureBox6
             // 
+            resources.ApplyResources(this.pictureBox6, "pictureBox6");
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox6.Image = global::SeaBotGUI.Properties.Resources.wood;
-            resources.ApplyResources(this.pictureBox6, "pictureBox6");
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.TabStop = false;
             // 
             // pictureBox5
             // 
+            resources.ApplyResources(this.pictureBox5, "pictureBox5");
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Image = global::SeaBotGUI.Properties.Resources.stone;
-            resources.ApplyResources(this.pictureBox5, "pictureBox5");
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox4
             // 
+            resources.ApplyResources(this.pictureBox4, "pictureBox4");
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Image = global::SeaBotGUI.Properties.Resources.metal;
-            resources.ApplyResources(this.pictureBox4, "pictureBox4");
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox3
             // 
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Image = global::SeaBotGUI.Properties.Resources.fish;
-            resources.ApplyResources(this.pictureBox3, "pictureBox3");
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.TabStop = false;
             // 
             // pictureBox2
             // 
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = global::SeaBotGUI.Properties.Resources.diamond;
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = global::SeaBotGUI.Properties.Resources.coin;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
             // groupBox4
             // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.button3);
             this.groupBox4.Controls.Add(this.button2);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -1334,21 +1381,22 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.richTextBox1);
             resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.richTextBox1);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
             // richTextBox1
             // 
+            resources.ApplyResources(this.richTextBox1, "richTextBox1");
             this.richTextBox1.BackColor = System.Drawing.SystemColors.GrayText;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.richTextBox1, "richTextBox1");
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             // 
             // groupBox2
             // 
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.chk_automuseum);
             this.groupBox2.Controls.Add(this.chk_autoshipupg);
             this.groupBox2.Controls.Add(this.chk_finishupgrade);
@@ -1357,7 +1405,6 @@
             this.groupBox2.Controls.Add(this.chk_collectmat);
             this.groupBox2.Controls.Add(this.chk_autofish);
             this.groupBox2.Controls.Add(this.chk_aupgrade);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -1419,29 +1466,15 @@
             // 
             // tabControl1
             // 
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            // 
-            // groupBox25
-            // 
-            this.groupBox25.Controls.Add(this.chk_exploit);
-            resources.ApplyResources(this.groupBox25, "groupBox25");
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.TabStop = false;
-            // 
-            // chk_exploit
-            // 
-            resources.ApplyResources(this.chk_exploit, "chk_exploit");
-            this.chk_exploit.Name = "chk_exploit";
-            this.chk_exploit.UseVisualStyleBackColor = true;
-            this.chk_exploit.CheckedChanged += new System.EventHandler(this.Chk_exploit_CheckedChanged);
             // 
             // Form1
             // 
@@ -1451,10 +1484,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             this.groupBox7.ResumeLayout(false);
@@ -1487,6 +1523,8 @@
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.tabPage7.ResumeLayout(false);
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1528,8 +1566,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.groupBox25.ResumeLayout(false);
-            this.groupBox25.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1681,5 +1717,9 @@
         private System.Windows.Forms.LinkLabel linkLabel10;
         private System.Windows.Forms.GroupBox groupBox25;
         private System.Windows.Forms.CheckBox chk_exploit;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
     }
 }

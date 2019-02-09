@@ -19,8 +19,11 @@ namespace SeaBotCore
 
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Net.Http;
     using System.Threading;
+
+    using Newtonsoft.Json;
 
     using SeaBotCore.BotMethods;
     using SeaBotCore.Config;
@@ -54,6 +57,7 @@ namespace SeaBotCore
 
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
 
+        private static bool aftercrash = false;
         static Core()
         {
             Configurator.Load();
@@ -177,6 +181,16 @@ namespace SeaBotCore
                 BotThread.Start();
             }
 
+            if (aftercrash)
+            {
+                if (Core.GlobalData != null)
+                {
+                    aftercrash = false;
+                    File.WriteAllText(
+                        "afcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
+                        JsonConvert.SerializeObject(Core.GlobalData));
+                }
+            }
             Events.Events.BotStartedEvent.BotStarted.Invoke();
         }
 
@@ -190,6 +204,14 @@ namespace SeaBotCore
                             || (int)e == 1011 || (int)e == 2006)
                         {
                             Logger.Logger.Info(Localization.CORE_RESTARTING);
+                            if (Core.GlobalData != null)
+                            {
+                                aftercrash = true;
+                                File.WriteAllText(
+                                    "bfcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
+                                    JsonConvert.SerializeObject(Core.GlobalData));
+                            }
+
                             StopBot();
                             StartBot();
                         }

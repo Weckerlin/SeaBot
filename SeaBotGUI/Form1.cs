@@ -189,6 +189,23 @@ namespace SeaBotGUI
             this.chk_prodfact.Checked = Core.Config.prodfactory;
             this.chk_collectmat.Checked = Core.Config.collectfactory;
             this.chk_barrelhack.Checked = Core.Config.barrelhack;
+            if (Core.Config.sleepeveryhrs)
+            {
+                this.radio_sleepeveryhrs.Checked = true;
+            }
+            else
+            {
+                this.radio_sleepeverymin.Checked = true;
+            }
+
+            if (Core.Config.sleepforhrs)
+            {
+                this.radio_sleepforhrs.Checked = true;
+            }
+            else
+            {
+                this.radio_sleepformins.Checked = true;
+            }
             this.chk_finishupgrade.Checked = Core.Config.finishupgrade;
             this.chk_aupgrade.Checked = Core.Config.autoupgrade;
             this.chk_automuseum.Checked = Core.Config.collectmuseum;
@@ -1117,6 +1134,11 @@ namespace SeaBotGUI
         private void Chk_exploit_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.exploitmode = this.chk_exploit.Checked;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

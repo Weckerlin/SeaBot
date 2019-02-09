@@ -52,6 +52,8 @@ namespace SeaBotCore.Config
         Wreck
     }
 
+ 
+
     public class Config : INotifyPropertyChanged
     {
         private bool _acceptedresponsibility;
@@ -79,6 +81,8 @@ namespace SeaBotCore.Config
         private bool _debug;
 
         private bool _finishupgrade;
+
+  
 
         private int _hibernateinterval = 5;
 
@@ -125,6 +129,8 @@ namespace SeaBotCore.Config
         private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+      
 
         public bool exploitmode
         {

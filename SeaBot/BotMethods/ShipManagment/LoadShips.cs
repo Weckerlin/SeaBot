@@ -61,6 +61,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
                     Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
                         Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
                         Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).CargoOnTheWay -=
+                    lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
                 Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                     lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
 

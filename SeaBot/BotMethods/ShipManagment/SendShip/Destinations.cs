@@ -32,15 +32,24 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
     {
         public static bool SendToContractor(Ship ship)
         {
-            var statiopst = new List<Data.Contractor>();
-            var genopst = new List<Data.Contractor>();
+            
+            if (ship == null)
+            {
+                return false;
+            }
+            var statiopst = new List<Contractor>();
+            var genopst = new List<Contractor>();
             foreach (var contractor in Core.GlobalData.Contracts)
             {
+                if (contractor == null)
+                {
+                    continue;
+                }
                 if (contractor.Done == 0)
                 {
-                    var def = Definitions.ConDef.Items.Item.Where(c => contractor.DefId == c.DefId).FirstOrDefault();
-                    var quest = def.Quests.Quest.Where(q => contractor.QuestId == q.Id).FirstOrDefault();
-                    if (quest == null)
+                    var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
+                    var quest = def.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
+                    if (quest == null || def == null)
                     {
                         continue;
                     }
@@ -67,13 +76,12 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             foreach (var opst in statiopst.OrderBy(n => n.QuestId))
             {
-                var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
-                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
-                if (quest == null)
+                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
+                var quest = def.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
+                if (quest == null || def == null)
                 {
                     continue;
                 }
-                var already = opst.Progress;
                 var exists = quest.Amount - opst.Progress;
                 if (exists <= 0)
                 {
@@ -90,9 +98,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan = exists;
                 }
 
-                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().CargoOnTheWay +=
+                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
                     wecan * quest.MaterialKoef;
-                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().Progress +=
+                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
                     wecan * quest.MaterialKoef;
                 Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
                 Networking.AddTask(
@@ -102,7 +110,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         quest.ObjectiveDefId,
                         quest.Id,
                         wecan * quest.MaterialKoef));
-                var lship = Core.GlobalData.Ships.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                var lship = Core.GlobalData.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
                 lship.Sent = TimeUtils.GetEpochTime();
                 lship.Loaded = 0;
                 lship.Type = "contractor";
@@ -114,8 +122,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             foreach (var opst in genopst.OrderBy(n => n.QuestId))
             {
-                var def = Definitions.ConDef.Items.Item.Where(c => opst.DefId == c.DefId).FirstOrDefault();
-                var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).FirstOrDefault();
+                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
+                var quest = def.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
                 if (quest == null)
                 {
                     continue;
@@ -124,7 +132,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 var exists = (int)quest.InputAmount() - opst.Progress;
                 if (exists <= 0)
                 {
-                    continue;;
+                    continue;
                 }
                 var wecan = 0;
                 if (exists * quest.MaterialKoef > ship.Capacity())
@@ -136,11 +144,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan = exists;
                 }
 
-                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().CargoOnTheWay +=
+                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
                     wecan * quest.MaterialKoef;
-                Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().Progress +=
+                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
                     wecan * quest.MaterialKoef;
-                var lship = Core.GlobalData.Ships.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                var lship = Core.GlobalData.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
                 lship.Sent = TimeUtils.GetEpochTime();
                 lship.Loaded = 0;
                 lship.Type = "contractor";
@@ -156,10 +164,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         wecan * quest.MaterialKoef));
                 return true;
             }
-
             return false;
-
-            // KAAAAAAAAAAAAZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO?
         }
 
         public static bool SendToMarketplace(Ship ship)
@@ -323,7 +328,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 }
 
                 Core.GlobalData.Sailors -= lvls.Sailors;
-
+                
                 bestplace.CargoOnTheWay += wecan;
                 var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
                 shp.Sent = TimeUtils.GetEpochTime();
