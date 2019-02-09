@@ -1,4 +1,19 @@
-﻿using System;
+﻿// SeaBotCore
+// Copyright (C) 2018 - 2019 Weespin
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//  
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +21,7 @@ using System.Threading.Tasks;
 
 namespace SeaBotCore.BotMethods.ShipManagment
 {
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Utils;
@@ -79,18 +95,18 @@ namespace SeaBotCore.BotMethods.ShipManagment
             // if (ship.Type == "dealer")
             // {
             // var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-            // if (AutoShipUtils.isVoyageCompleted(ship))
+            // if (SendingHelper.isVoyageCompleted(ship))
             // {
 
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
             // Core.GlobalData.Level, Enums.EObject.dealer,
-            // AutoShipUtils.GetCapacity(ship),
+            // SendingHelper.GetCapacity(ship),
             // 0,
-            // AutoShipUtils.GetSailors(ship), (int)predefined.Sailors,
+            // SendingHelper.GetSailors(ship), (int)predefined.Sailors,
             // ship.TargetLevel,
             // null, _deship.Count(n => n.DefId == ship.DefId)));
-            // AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
             // }
             // }
         }
@@ -99,17 +115,17 @@ namespace SeaBotCore.BotMethods.ShipManagment
             // if (ship.Type == "treasure")
             // {
             // var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-            // if (AutoShipUtils.isVoyageCompleted(ship))
+            // if (SendingHelper.isVoyageCompleted(ship))
             // {
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
             // Core.GlobalData.Level, Enums.EObject.treasure,
-            // AutoShipUtils.GetCapacity(ship),
+            // SendingHelper.GetCapacity(ship),
             // 0,
-            // AutoShipUtils.GetSailors(ship), 0,
+            // SendingHelper.GetSailors(ship), 0,
             // ship.TargetLevel,
             // null, _deship.Count(n => n.DefId == ship.DefId)));
-            // AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
             // }
             // }
         }
@@ -118,11 +134,11 @@ namespace SeaBotCore.BotMethods.ShipManagment
             // if (ship.Type == "global_contractor")
             // {
             // var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
-            // if (AutoShipUtils.isVoyageCompleted(ship))
+            // if (SendingHelper.isVoyageCompleted(ship))
             // {
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
-            // AutoShipUtils.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
             // }
             // }
         }
@@ -147,7 +163,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                     co.Sailors,
                     ship.TargetLevel,
                     uniqueid));
-            AutoShipUtils.NullShip(ship);
+            SendingHelper.NullShip(ship);
         }
 
 
@@ -166,15 +182,15 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 new Task.DockShipTaskOutPost(
                     ship,
                     false,
-                    AutoShipUtils.GetCapacity(ship),
+                    SendingHelper.GetCapacity(ship),
                     ship.Cargo,
-                    AutoShipUtils.GetSailors(ship),
+                    SendingHelper.GetSailors(ship),
                     ship.Crew,
                     ship.TargetLevel,
                     loc.CargoOnTheWay + loc.Crew,
                     loc.RequiredCrew,
                   uniqueid));
-            AutoShipUtils.NullShip(ship);
+            SendingHelper.NullShip(ship);
         }
         public static void UnloadUpgradable(Ship ship,int uniqueid)
         {
@@ -186,7 +202,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 var upg = Core.GlobalData.Upgradeables.FirstOrDefault(n => n.DefId == ship.TargetId);
                 if (upg != null)
                 {
-                    upg.Progress += lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+                    upg.Progress += lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
                 }
 
                 Networking.AddTask(
@@ -194,13 +210,13 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         ship.InstId,
                         Core.GlobalData.Level,
                         Enums.EObject.upgradeable,
-                        AutoShipUtils.GetCapacity(ship),
-                        lvl.MaterialKoef * AutoShipUtils.GetCapacity(ship),
-                        AutoShipUtils.GetSailors(ship),
+                        SendingHelper.GetCapacity(ship),
+                        lvl.MaterialKoef * SendingHelper.GetCapacity(ship),
+                        SendingHelper.GetSailors(ship),
                         lvl.Sailors,
                         ship.TargetLevel,
                         null,uniqueid));
-                AutoShipUtils.NullShip(ship);
+                SendingHelper.NullShip(ship);
             }
         }
 
@@ -216,14 +232,14 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         ship.InstId,
                         Core.GlobalData.Level,
                         Enums.EObject.wreck,
-                        AutoShipUtils.GetCapacity(ship),
+                        SendingHelper.GetCapacity(ship),
                         0,
-                        AutoShipUtils.GetSailors(ship),
+                        SendingHelper.GetSailors(ship),
                         wrk.Sailors,
                         ship.TargetLevel,
                         null,
                         uniqueid));
-                AutoShipUtils.NullShip(ship);
+                SendingHelper.NullShip(ship);
             }
         }
 
@@ -238,7 +254,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 return;
             }
 
-            var usedshit = quest.MaterialKoef * AutoShipUtils.GetCapacity(ship);
+            var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
             var lcontract = Core.GlobalData.Contracts
                 .FirstOrDefault(n => n.DefId == ship.TargetId);
             // TODO: increasing of progress or amount!
@@ -247,9 +263,9 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 new Task.DockShipTaskContractor(
                     ship,
                     false,
-                    AutoShipUtils.GetCapacity(ship),
+                    SendingHelper.GetCapacity(ship),
                     usedshit,
-                    AutoShipUtils.GetSailors(ship),
+                    SendingHelper.GetSailors(ship),
                     currentcontractor.Sailors,
                     ship.TargetLevel,
                     currentcontractor.DefId,
@@ -258,7 +274,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                     quest.ObjectiveTypeId,
                     uniqueid));
 
-            AutoShipUtils.NullShip(ship);
+            SendingHelper.NullShip(ship);
         }
 
 
@@ -275,14 +291,14 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         ship.InstId,
                         Core.GlobalData.Level,
                         Enums.EObject.marketplace,
-                        AutoShipUtils.GetCapacity(ship),
-                        mat.InputKoef * AutoShipUtils.GetCapacity(ship),
-                        AutoShipUtils.GetSailors(ship),
+                        SendingHelper.GetCapacity(ship),
+                        mat.InputKoef * SendingHelper.GetCapacity(ship),
+                        SendingHelper.GetSailors(ship),
                         market.Sailors,
                         ship.TargetLevel,
                         null,
                         uniqueid));
-                AutoShipUtils.NullShip(ship);
+                SendingHelper.NullShip(ship);
             }
         }
     }

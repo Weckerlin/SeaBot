@@ -23,6 +23,7 @@ namespace SeaBotCore
     using System.Text;
 
     using SeaBotCore.BotMethods;
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Utils;
@@ -913,7 +914,7 @@ namespace SeaBotCore
                     "dest_material_koef",
                     destination_levels.MaterialKoef != 0 ? destination_levels.MaterialKoef : 1);
                 this.CustomObjects.Add("dest_sailors", destination_levels.Sailors);
-                this.CustomObjects.Add("amount", amount == 0 ? AutoShipUtils.GetCapacity(ship) : amount);
+                this.CustomObjects.Add("amount", amount == 0 ? ship.Capacity() : amount);
                 this.CustomObjects.Add("player_level", Core.GlobalData.Level);
             }
 

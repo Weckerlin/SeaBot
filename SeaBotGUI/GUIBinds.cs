@@ -27,6 +27,7 @@ namespace SeaBotGUI.GUIBinds
 
     using SeaBotCore;
     using SeaBotCore.BotMethods;
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Cache;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Utils;

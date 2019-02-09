@@ -61,6 +61,10 @@
     <Compile Include="BotMethods\FishPier.cs" />
     <Compile Include="BotMethods\Museum.cs" />
     <Compile Include="BotMethods\Outposts.cs" />
+    <Compile Include="BotMethods\ShipManagment\LoadShips.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\Destinations.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\SendShips.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\Helper.cs" />
     <Compile Include="BotMethods\ShipManagment\Ships.cs" />
     <Compile Include="BotMethods\ShipManagment\UnloadShips.cs" />
     <Compile Include="BotMethods\Sleep.cs" />
