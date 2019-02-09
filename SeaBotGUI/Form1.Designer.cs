@@ -425,6 +425,7 @@
             this.radio_wreck.Name = "radio_wreck";
             this.radio_wreck.TabStop = true;
             this.radio_wreck.UseVisualStyleBackColor = true;
+            this.radio_wreck.CheckedChanged += new System.EventHandler(this.Radio_wreck_CheckedChanged);
             // 
             // radio_marketplace
             // 
@@ -432,6 +433,7 @@
             this.radio_marketplace.Name = "radio_marketplace";
             this.radio_marketplace.TabStop = true;
             this.radio_marketplace.UseVisualStyleBackColor = true;
+            this.radio_marketplace.CheckedChanged += new System.EventHandler(this.Radio_marketplace_CheckedChanged);
             // 
             // radio_autoshipauto
             // 
@@ -439,6 +441,7 @@
             this.radio_autoshipauto.Name = "radio_autoshipauto";
             this.radio_autoshipauto.TabStop = true;
             this.radio_autoshipauto.UseVisualStyleBackColor = true;
+            this.radio_autoshipauto.CheckedChanged += new System.EventHandler(this.Radio_autoshipauto_CheckedChanged);
             // 
             // radio_outpost
             // 
@@ -446,6 +449,7 @@
             this.radio_outpost.Name = "radio_outpost";
             this.radio_outpost.TabStop = true;
             this.radio_outpost.UseVisualStyleBackColor = true;
+            this.radio_outpost.CheckedChanged += new System.EventHandler(this.Radio_outpost_CheckedChanged);
             // 
             // radio_contractor
             // 
@@ -453,6 +457,7 @@
             this.radio_contractor.Name = "radio_contractor";
             this.radio_contractor.TabStop = true;
             this.radio_contractor.UseVisualStyleBackColor = true;
+            this.radio_contractor.CheckedChanged += new System.EventHandler(this.Radio_contractor_CheckedChanged);
             // 
             // radio_upgradable
             // 
@@ -460,6 +465,7 @@
             this.radio_upgradable.Name = "radio_upgradable";
             this.radio_upgradable.TabStop = true;
             this.radio_upgradable.UseVisualStyleBackColor = true;
+            this.radio_upgradable.CheckedChanged += new System.EventHandler(this.Radio_upgradable_CheckedChanged);
             // 
             // groupBox20
             // 

@@ -202,6 +202,7 @@ namespace SeaBotGUI
             this.num_limitmech.Value = Core.Config.thresholdmechanical;
             this.textBox3.Text = Core.Config.telegramtoken;
             this.num_barrelinterval.Value = Core.Config.barrelinterval;
+            BindDestination();
             SeaBotCore.Events.Events.BotStoppedEvent.BotStopped.OnBotStoppedEvent += this.BotStopped_OnBotStoppedEvent;
             SeaBotCore.Events.Events.BotStartedEvent.BotStarted.OnBotStartedEvent += this.BotStarted_OnBotStartedEvent;
             this.lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
@@ -297,6 +298,33 @@ namespace SeaBotGUI
             Core.Config.PropertyChanged += this.Config_PropertyChanged;
         }
 
+        private void BindDestination()
+        {
+            switch (Core.Config.shipdesttype)
+            {
+                case ShipDestType.Upgradable:
+                    this.radio_upgradable.Checked = true;
+                    break;
+                case ShipDestType.Outpost:
+                    this.radio_outpost.Checked = true;
+                    break;
+                case ShipDestType.Marketplace:
+                    this.radio_marketplace.Checked = true;
+                    break;
+                case ShipDestType.Contractor:
+                    this.radio_contractor.Checked = true;
+                    break;
+                case ShipDestType.Auto:
+                    this.radio_autoshipauto.Checked = true;
+                    break;
+                case ShipDestType.Wreck:
+                    this.radio_wreck.Checked = true;
+                    break;
+                
+            }
+        }
+
+       
         public void ShipDestReset()
         {
             if (this.radio_upgradable.Checked)
@@ -1025,5 +1053,66 @@ namespace SeaBotGUI
                 Core.Config.autoshiptype = "Tier 2 - Oil";
             }
         }
+
+
+        private void Radio_wreck_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+
+        private void UpdateDestCfg()
+        {
+            if (this.radio_autoshipauto.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Auto;
+            }
+            if (this.radio_wreck.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Wreck;
+            }
+            if (this.radio_contractor.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Contractor;
+            }
+            if (this.radio_marketplace.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Marketplace;
+            }
+            if (this.radio_outpost.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Outpost;
+            }
+            if (this.radio_upgradable.Checked)
+            {
+                Core.Config.shipdesttype = ShipDestType.Upgradable;
+            }
+
+        }
+
+        private void Radio_autoshipauto_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+
+        private void Radio_contractor_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+
+        private void Radio_upgradable_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+
+        private void Radio_outpost_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+
+        private void Radio_marketplace_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDestCfg();
+        }
+       
     }
 }

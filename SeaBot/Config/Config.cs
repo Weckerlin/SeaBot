@@ -47,7 +47,9 @@ namespace SeaBotCore.Config
 
         Contractor,
 
-        Auto
+        Auto,
+
+        Wreck
     }
 
     public class Config : INotifyPropertyChanged

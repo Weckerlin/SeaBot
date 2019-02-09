@@ -68,7 +68,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                             {
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                ShipManagment.UnloadShips.UnloadContractor(ship,uniqueid);
+                               ShipManagment.UnloadShips.UnloadContractor(ship,uniqueid);
                                 break;
                             }
                         case "outpost":
@@ -254,25 +254,49 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 return;
             }
 
-            var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
-            var lcontract = Core.GlobalData.Contracts
-                .FirstOrDefault(n => n.DefId == ship.TargetId);
-            // TODO: increasing of progress or amount!
-            ship.LogUnload();
-            Networking.AddTask(
-                new Task.DockShipTaskContractor(
-                    ship,
-                    false,
-                    SendingHelper.GetCapacity(ship),
-                    usedshit,
-                    SendingHelper.GetSailors(ship),
-                    currentcontractor.Sailors,
-                    ship.TargetLevel,
-                    currentcontractor.DefId,
-                    lcontract.Progress,
-                    (int)quest.InputAmount(),
-                    quest.ObjectiveTypeId,
-                    uniqueid));
+            if (currentcontractor.Type == "static")
+            {
+                var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
+                var lcontract = Core.GlobalData.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
+                // TODO: increasing of progress or amount!
+                ship.LogUnload();
+                Networking.AddTask(
+                    new Task.DockShipTaskContractor(
+                        ship,
+                        false,
+                        SendingHelper.GetCapacity(ship),
+                        usedshit,
+                        SendingHelper.GetSailors(ship),
+                        currentcontractor.Sailors,
+                        ship.TargetLevel,
+                        currentcontractor.DefId,
+                        lcontract.Progress,
+                        (int)quest.InputAmount(),
+                        quest.ObjectiveTypeId,
+                        uniqueid));
+            }
+            else
+            {
+                var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
+                var lcontract = Core.GlobalData.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
+                var inp = quest.InputAmount();
+                // TODO: increasing of progress or amount!
+                ship.LogUnload();
+                Networking.AddTask(
+                    new Task.DockShipTaskContractor(
+                        ship,
+                        false,
+                        SendingHelper.GetCapacity(ship),
+                        usedshit,
+                        SendingHelper.GetSailors(ship),
+                        currentcontractor.Sailors,
+                        ship.TargetLevel,
+                        currentcontractor.DefId,
+                        lcontract.Progress,
+                        (int)quest.InputAmount(),
+                        quest.ObjectiveTypeId,
+                        uniqueid));  
+            }
 
             SendingHelper.NullShip(ship);
         }

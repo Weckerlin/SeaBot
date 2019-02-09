@@ -60,7 +60,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 var quest = def.Quests.Quest.Where(q => opst.QuestId == q.Id).First();
                 var already = opst.Progress;
                 var exists = quest.Amount - opst.Progress;
-                if (exists == 0)
+                if (exists <= 0)
                 {
                     continue;
                 }
@@ -92,6 +92,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 lship.Loaded = 0;
                 lship.Type = "contractor";
                 lship.TargetId = opst.DefId;
+                lship.MaterialId = quest.ObjectiveDefId;
                 lship.TargetLevel = quest.Id;
                 return true;
             }
@@ -103,7 +104,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 
                 var already = opst.Progress;
                 var exists = (int)quest.InputAmount() - opst.Progress;
-                if (exists == 0)
+                if (exists <= 0)
                 {
                     continue;;
                 }
@@ -122,9 +123,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 Core.GlobalData.Contracts.Where(n => n.DefId == opst.DefId).First().Progress +=
                     wecan * quest.MaterialKoef;
                 var lship = Core.GlobalData.Ships.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+                lship.Sent = TimeUtils.GetEpochTime();
                 lship.Loaded = 0;
                 lship.Type = "contractor";
                 lship.TargetId = opst.DefId;
+                lship.MaterialId = quest.ObjectiveDefId;
                 lship.TargetLevel = quest.Id;
                 Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
                 Networking.AddTask(

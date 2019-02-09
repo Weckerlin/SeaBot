@@ -58,7 +58,7 @@ namespace SeaBotCore.Utils
         public static double GetQuestDifficulty(this ContractorDefinitions.Quest quest)
         {
             var median = 0;
-            if (quest.ObjectiveTypeId != "sailor")
+            if (quest.ObjectiveTypeId == "sailor")
             {
                 median = Definitions.LevelUpDef.Items.Item.Where(n => n.DefId == Core.GlobalData.Level).First()
                     .MedianCrew;

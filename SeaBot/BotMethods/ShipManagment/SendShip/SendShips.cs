@@ -38,24 +38,43 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 case ShipDestType.Upgradable:
                     foreach (var ship in bestships)
                     {
-                       
+                        Destinations.SendToUpgradable(ship, Core.Config.autoshiptype);
                     }
                     break;
                 case ShipDestType.Outpost:
+                    foreach (var ship in bestships)
+                    {
+                        Destinations.SendToOutpost(ship);
+                    }
                     break;
                 case ShipDestType.Marketplace:
+                    foreach (var ship in bestships)
+                    {
+                        Destinations.SendToMarketplace(ship);
+                    }
                     break;
                 case ShipDestType.Contractor:
+                    foreach (var ship in bestships)
+                    {
+                        Destinations.SendToContractor(ship);
+                    }
                     break;
                 case ShipDestType.Auto:
+                    SendShips.SendShipsAutoDestination();
                     break;
-               
+                case ShipDestType.Wreck:
+                    foreach (var ship in bestships)
+                    {
+                        Destinations.SendToWreck(ship);
+                    }
+                    break;
+
+
             }
         }
         public static void SendShipsAutoDestination()
         {
-            List<Ship> failedships = new List<Ship>();
-
+         
                     var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                         .OrderByDescending(SendingHelper.GetCapacity));
                     var z = 0;
@@ -65,6 +84,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     int marketcount = SendingHelper.GetPercentage(15,bestships.Count);
                     int contractorcount = SendingHelper.GetPercentage(30,bestships.Count);
                     int wreckcount =  SendingHelper.GetPercentage(5,bestships.Count);
+                   
                     foreach (var ship in AutoTools.TakeAndRemove(bestships,upgcont))
                     {
                        Destinations.SendToUpgradable(ship, Core.Config.autoshiptype);
@@ -93,6 +113,109 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         Destinations.SendToWreck(ship);
                        Logger.Info("wrk"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==ship.DefId).First().Name);
                     }
+                    //Use reverse lookup
+                    var failed = new Queue<Ship>(
+                        Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                            .OrderByDescending(SendingHelper.GetCapacity));
+
+                    foreach (var ship in failed)
+                    {
+                        var perc = PercentageDest();
+                        if (contractorcount > perc[ShipDestType.Contractor])
+                        {
+                            if (Destinations.SendToContractor(ship))
+                            {
+                                continue;
+                            }
+                        }
+                        if (upgcont > perc[ShipDestType.Upgradable])
+                        {
+                            if (Destinations.SendToUpgradable(ship, Core.Config.autoshiptype))
+                            {
+                                continue;
+                            }
+                        }
+                        if (marketcount > perc[ShipDestType.Marketplace])
+                        {
+                            if (Destinations.SendToMarketplace(ship))
+                            {
+                                continue;
+                            }
+                        }
+                        if (outpostcont > perc[ShipDestType.Outpost])
+                        {
+                            if (Destinations.SendToOutpost(ship))
+                            {
+                                continue;
+                            }
+
+                        }
+
+                        if (Destinations.SendToContractor(ship))
+                        {
+                            continue;
+                        }
+
+                        if (Destinations.SendToUpgradable(ship, Core.Config.autoshiptype))
+                        {
+                            continue;
+                        }
+
+                        if (Destinations.SendToMarketplace(ship))
+                        {
+                            continue;
+                        }
+
+                        if (Destinations.SendToOutpost(ship))
+                        {
+                            continue;
+                        }
+
+
+                    }
+        }
+
+        public static Dictionary<ShipDestType,double> PercentageDest()
+        {
+            var temp = new Dictionary<ShipDestType,double>();
+            temp.Add(ShipDestType.Upgradable,GetPercentage(ShipDestType.Upgradable));
+            temp.Add(ShipDestType.Contractor,GetPercentage(ShipDestType.Contractor));
+            temp.Add(ShipDestType.Marketplace,GetPercentage(ShipDestType.Marketplace));
+            temp.Add(ShipDestType.Outpost,GetPercentage(ShipDestType.Outpost));
+            temp.Add(ShipDestType.Wreck,GetPercentage(ShipDestType.Wreck));
+            return temp;
+        }
+        public static double GetPercentage(ShipDestType dest)
+        {
+            int count = 0;
+            switch (dest)
+            {
+                case ShipDestType.Upgradable:
+                    count = Core.GlobalData.Ships.Count(n => n.Type == "upgradeable");
+                    break;
+                case ShipDestType.Outpost:
+                    count = Core.GlobalData.Ships.Count(n => n.Type == "outpost");
+                    break;
+                case ShipDestType.Marketplace:
+                    count = Core.GlobalData.Ships.Count(n => n.Type == "marketplace");
+                    break;
+                case ShipDestType.Contractor:
+                    count = Core.GlobalData.Ships.Count(n => n.Type == "contractor");
+                    break;
+                
+                case ShipDestType.Wreck:
+                    count = Core.GlobalData.Ships.Count(n => n.Type == "wreck");
+                    break;
+
+                
+            }
+
+            if (count == 0)
+            {
+                return 0;
+            }
+            return 100D / (Core.GlobalData.Ships.Count
+                           / count);
         }
     }
 }
