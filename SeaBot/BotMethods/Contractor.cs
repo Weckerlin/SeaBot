@@ -34,15 +34,18 @@ namespace SeaBotCore.BotMethods
             for (var index = 0; index < Core.GlobalData.Contracts.Count; index++)
             {
                 var upg = Core.GlobalData.Contracts[index];
+                if (upg.Done == 1)
+                {
+                    continue;
+                }
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
-                var nexlv = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId + 1);
                 var currquest = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId);
-                if (nexlv == null || currquest == null)
+                if (currquest == null)
                 {
                     continue;
                 }
 
-                if (upg.Amount != 0 && upg.Progress >= upg.Amount && upg.QuestId < def.QuestCount)
+                if (currquest.Amount != 0 && upg.Progress >= currquest.Amount && upg.QuestId <= def.QuestCount)
                 {
                     // upgrade ofc
                     Logger.Info(
@@ -51,9 +54,11 @@ namespace SeaBotCore.BotMethods
 
                     // todo: add new local
                     Networking.AddTask(new Task.ConfirmContractTask(upg.DefId, upg.QuestId, currquest.Rewards));
-                    upg.QuestId++;
-                    upg.Progress = 0;
-                    upg.Amount = nexlv.Amount;
+                  
+                        upg.QuestId++;
+                        upg.Progress = 0;
+                       
+                  
                 }
             }
         }

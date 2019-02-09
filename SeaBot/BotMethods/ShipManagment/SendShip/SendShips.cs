@@ -189,20 +189,20 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             switch (dest)
             {
                 case ShipDestType.Upgradable:
-                    count = Core.GlobalData.Ships.Count(n => n.Type == "upgradeable");
+                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0 && n.TargetId != 0).Count(n => n.Type == "upgradeable");
                     break;
                 case ShipDestType.Outpost:
-                    count = Core.GlobalData.Ships.Count(n => n.Type == "outpost");
+                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0 && n.TargetId != 0).Count(n => n.Type == "outpost");
                     break;
                 case ShipDestType.Marketplace:
-                    count = Core.GlobalData.Ships.Count(n => n.Type == "marketplace");
+                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0 && n.TargetId != 0).Count(n => n.Type == "marketplace");
                     break;
                 case ShipDestType.Contractor:
-                    count = Core.GlobalData.Ships.Count(n => n.Type == "contractor");
+                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0 && n.TargetId != 0).Count(n => n.Type == "contractor");
                     break;
                 
                 case ShipDestType.Wreck:
-                    count = Core.GlobalData.Ships.Count(n => n.Type == "wreck");
+                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0 && n.TargetId != 0).Count(n => n.Type == "wreck");
                     break;
 
                 
@@ -212,8 +212,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             {
                 return 0;
             }
-            return 100D / (Core.GlobalData.Ships.Count
-                           / count);
+            var perc = 100D / (Core.GlobalData.Ships.Count
+                               / (double)count);
+            return perc;
         }
     }
 }
