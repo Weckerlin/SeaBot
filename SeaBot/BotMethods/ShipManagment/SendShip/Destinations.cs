@@ -46,6 +46,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     }
                     if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
                     {
+                        if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
+                        {
+                            if (!Core.Config.exploitmode)
+                            {
+                                continue;
+                            }
+                        }
                         if (def.Type == "static")
                         {
                             statiopst.Add(contractor);
@@ -238,6 +245,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             var opst = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew).FirstOrDefault();
             if (opst != null)
             {
+                
                 var can = opst.RequiredCrew - opst.Crew;
                 var sending = 0;
                 if (can > SendingHelper.GetSailors(ship))
@@ -290,7 +298,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         public static bool SendToUpgradable(Ship ship, string itemname)
         {
             var bestplace = SendingHelper.GetBestUpgPlace(itemname, ship.Sailors(), !Core.Config.autoshipprofit);
-
+          
             if (bestplace == null || Core.GlobalData.Sailors < ship.Sailors())
             {
                 return false;

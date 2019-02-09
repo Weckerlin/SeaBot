@@ -120,9 +120,21 @@ namespace SeaBotCore.Config
 
         private int _woodlimit;
 
+        private bool _exploitmode;
+
         private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool exploitmode
+        {
+            get => this._exploitmode;
+            set
+            {
+                this._exploitmode = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("exploitmode"));
+            }
+        }
 
         public bool acceptedresponsibility
         {

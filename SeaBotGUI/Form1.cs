@@ -182,7 +182,7 @@ namespace SeaBotGUI
             this.textBox2.Text = Core.Config.server_token;
             this.num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             this.checkBox1.Checked = Core.Config.debug;
-
+            this.chk_exploit.Checked = Core.Config.exploitmode;
             this.chk_autoshipupg.Checked = Core.Config.autoship;
             this.chk_onlyfactory.Checked = Core.Config.upgradeonlyfactory;
             this.chk_autofish.Checked = Core.Config.collectfish;
@@ -1113,6 +1113,10 @@ namespace SeaBotGUI
         {
             UpdateDestCfg();
         }
-       
+
+        private void Chk_exploit_CheckedChanged(object sender, EventArgs e)
+        {
+            Core.Config.exploitmode = this.chk_exploit.Checked;
+        }
     }
 }
