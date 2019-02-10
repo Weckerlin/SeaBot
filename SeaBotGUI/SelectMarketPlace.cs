@@ -26,11 +26,11 @@ namespace SeaBotGUI
 
     #endregion
 
-    public partial class SelectMarketPlace : Form
+    public partial class Marketplace : Form
     {
         private readonly List<IgnoreMarketplaceData.IgnoreItem> locallist = new List<IgnoreMarketplaceData.IgnoreItem>();
 
-        public SelectMarketPlace()
+        public Marketplace()
         {
             this.InitializeComponent();
 

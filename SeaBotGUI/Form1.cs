@@ -451,7 +451,7 @@ namespace SeaBotGUI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var s = new SelectMarketPlace();
+            var s = new Marketplace();
             s.Show();
         }
 

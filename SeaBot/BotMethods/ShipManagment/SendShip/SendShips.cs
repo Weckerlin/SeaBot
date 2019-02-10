@@ -94,43 +94,43 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static void SendShipsAutoDestination()
         {
-        
-                    //var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
-                    //    .OrderByDescending(SendingHelper.GetCapacity));
-                    //int upgcont = SendingHelper.GetPercentage(upgproc,bestships.Count);
-                    //int outpostcont = SendingHelper.GetPercentage(outpostproc,bestships.Count);
-                    //int marketcount = SendingHelper.GetPercentage(marketproc,bestships.Count);
-                    //int contractorcount = SendingHelper.GetPercentage(contractorproc,bestships.Count);
-                    //int wreckcount =  SendingHelper.GetPercentage(wreckproc,bestships.Count);
-                   
-                    //foreach (var ship in AutoTools.TakeAndRemove(bestships,upgcont))
-                    //{
-                    //   Destinations.SendToUpgradable(ship, Core.Config.autoshiptype);
-                    //}
-                   
 
-                    //foreach (var ship in AutoTools.TakeAndRemove(bestships,outpostcont))
-                    //{
-                    //    Destinations.SendToOutpost(ship);
-                    //}
+            var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                .OrderByDescending(SendingHelper.GetCapacity));
+            int upgcont = SendingHelper.GetPercentage(upgproc, bestships.Count);
+            int outpostcont = SendingHelper.GetPercentage(outpostproc, bestships.Count);
+            int marketcount = SendingHelper.GetPercentage(marketproc, bestships.Count);
+            int contractorcount = SendingHelper.GetPercentage(contractorproc, bestships.Count);
+            int wreckcount = SendingHelper.GetPercentage(wreckproc, bestships.Count);
 
-                    //foreach (var ship in AutoTools.TakeAndRemove(bestships,marketcount))
-                    //{
-                    //    Destinations.SendToMarketplace(ship);
-                    //}
+            foreach (var ship in AutoTools.TakeAndRemove(bestships, upgcont))
+            {
+                Destinations.SendToUpgradable(ship, Core.Config.autoshiptype);
+            }
 
-                    //foreach (var ship in AutoTools.TakeAndRemove(bestships,contractorcount))
-                    //{
-                    //    Destinations.SendToContractor(ship);
-                    //}
 
-                    //foreach (var ship in AutoTools.TakeAndRemove(bestships,wreckcount))
-                    //{
-                    //    Destinations.SendToWreck(ship);
-                    //   Logger.Info("wrk"+Definitions.ShipDef.Items.Item.Where(n=>n.DefId==ship.DefId).First().Name);
-                    //}
-              
-                    var failed = new Queue<Ship>(
+            foreach (var ship in AutoTools.TakeAndRemove(bestships, outpostcont))
+            {
+                Destinations.SendToOutpost(ship);
+            }
+
+            foreach (var ship in AutoTools.TakeAndRemove(bestships, marketcount))
+            {
+                Destinations.SendToMarketplace(ship);
+            }
+
+            foreach (var ship in AutoTools.TakeAndRemove(bestships, contractorcount))
+            {
+                Destinations.SendToContractor(ship);
+            }
+
+            foreach (var ship in AutoTools.TakeAndRemove(bestships, wreckcount))
+            {
+                Destinations.SendToWreck(ship);
+                Logger.Info("wrk" + Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId).First().Name);
+            }
+
+            var failed = new Queue<Ship>(
                         Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                             .OrderByDescending(SendingHelper.GetCapacity));
 
