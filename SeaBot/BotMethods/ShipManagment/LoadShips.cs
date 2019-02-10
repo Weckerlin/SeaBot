@@ -47,6 +47,16 @@ namespace SeaBotCore.BotMethods.ShipManagment
                       LoadWreck(ship);
                     }
 
+                    if (ship.Type == "social_contract")
+                    {
+                        LoadSocContractor(ship);
+                    }
+                    if (ship.Type == "contractor")
+                    {
+                        LoadContractor(ship);
+                    }
+
+
 
             }
             }
@@ -80,6 +90,30 @@ namespace SeaBotCore.BotMethods.ShipManagment
 
                 Networking.AddTask(new Task.LoadShipWreck(ship.InstId));
                 ship.Loaded = 1;
+            
+        }
+        public static void LoadSocContractor(Ship ship)
+        {
+           
+            Logger.Info(
+                Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
+                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+
+            Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
+            ship.Loaded = 1;
+            
+        }
+        public static void LoadContractor(Ship ship)
+        {
+           
+            Logger.Info(
+                Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
+                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+
+            Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
+            ship.Loaded = 1;
             
         }
 

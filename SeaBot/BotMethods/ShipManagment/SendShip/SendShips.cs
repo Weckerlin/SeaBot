@@ -95,7 +95,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         public static void SendShipsAutoDestination()
         {
 
-            var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+            var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n =>  n.Activated != 0 && n.Sent == 0)
                 .OrderByDescending(SendingHelper.GetCapacity));
             int upgcont = SendingHelper.GetPercentage(upgproc, bestships.Count);
             int outpostcont = SendingHelper.GetPercentage(outpostproc, bestships.Count);
@@ -131,7 +131,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             }
 
             var failed = new Queue<Ship>(
-                        Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
+                        Core.GlobalData.Ships.Where(n => n.Activated != 0 && n.Sent == 0)
                             .OrderByDescending(SendingHelper.GetCapacity));
 
                     foreach (var ship in failed)

@@ -68,10 +68,14 @@ namespace SeaBotCore.BotMethods.ShipManagment
                             }
                         case "contractor":
                             {
-                                Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
-                                unloadedships.Add(ship.DefId);
-                                int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                UnloadContractor(ship,uniqueid);
+
+                                if (ship.Loaded == 1)
+                                {
+                                    unloadedships.Add(ship.DefId);
+                                    int uniqueid = unloadedships.Count(n => n == ship.DefId);
+                                    UnloadContractor(ship, uniqueid);
+                                   
+                                }
                                 break;
                             }
                         case "outpost":
@@ -84,9 +88,13 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         case "social_contract":
                             {
                                 Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
-                                unloadedships.Add(ship.DefId);
-                                int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                UnloadSocialcontract(ship,uniqueid);
+                                if (ship.Loaded == 1)
+                                {
+                                    unloadedships.Add(ship.DefId);
+                                    int uniqueid = unloadedships.Count(n => n == ship.DefId);
+                                    UnloadSocialcontract(ship, uniqueid);
+                                    
+                                }
                                 break;
                             }
                     }
