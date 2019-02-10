@@ -68,7 +68,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                             }
                         case "contractor":
                             {
-                                Networking.AddTask(new Task.UnloadShipContactorTask(ship.DefId));
+                                Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
                                 unloadedships.Add(ship.DefId);
                                 int uniqueid = unloadedships.Count(n => n == ship.DefId);
                                 UnloadContractor(ship,uniqueid);
