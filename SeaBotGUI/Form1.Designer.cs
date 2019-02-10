@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.buildingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -51,10 +54,8 @@
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.groupBox24 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupBox23 = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.radio_wreck = new System.Windows.Forms.RadioButton();
             this.radio_marketplace = new System.Windows.Forms.RadioButton();
             this.radio_autoshipauto = new System.Windows.Forms.RadioButton();
             this.radio_outpost = new System.Windows.Forms.RadioButton();
@@ -96,6 +97,8 @@
             this.radio_wood = new System.Windows.Forms.RadioButton();
             this.radio_gold = new System.Windows.Forms.RadioButton();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.chk_exploit = new System.Windows.Forms.CheckBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.btn_dumpcore = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -138,8 +141,8 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.btn_stats = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -172,8 +175,11 @@
             this.chk_autofish = new System.Windows.Forms.CheckBox();
             this.chk_aupgrade = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox26.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -181,7 +187,6 @@
             this.tabControl2.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.groupBox24.SuspendLayout();
-            this.groupBox23.SuspendLayout();
             this.groupBox22.SuspendLayout();
             this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_limitconcrete)).BeginInit();
@@ -197,6 +202,7 @@
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            this.groupBox25.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox17.SuspendLayout();
@@ -233,11 +239,37 @@
             // tabPage4
             // 
             resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Controls.Add(this.groupBox26);
             this.tabPage4.Controls.Add(this.groupBox19);
             this.tabPage4.Controls.Add(this.groupBox18);
             this.tabPage4.Controls.Add(this.groupBox7);
             this.tabPage4.Name = "tabPage4";
+            this.toolTip1.SetToolTip(this.tabPage4, resources.GetString("tabPage4.ToolTip"));
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox26
+            // 
+            resources.ApplyResources(this.groupBox26, "groupBox26");
+            this.groupBox26.Controls.Add(this.label7);
+            this.groupBox26.Controls.Add(this.label20);
+            this.groupBox26.Controls.Add(this.label21);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox26, resources.GetString("groupBox26.ToolTip"));
+            // 
+            // label20
+            // 
+            resources.ApplyResources(this.label20, "label20");
+            this.label20.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label20.Name = "label20";
+            this.toolTip1.SetToolTip(this.label20, resources.GetString("label20.ToolTip"));
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.ForeColor = System.Drawing.Color.DarkOrange;
+            this.label21.Name = "label21";
+            this.toolTip1.SetToolTip(this.label21, resources.GetString("label21.ToolTip"));
             // 
             // groupBox19
             // 
@@ -247,18 +279,21 @@
             this.groupBox19.Controls.Add(this.label12);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox19, resources.GetString("groupBox19.ToolTip"));
             // 
             // label18
             // 
             resources.ApplyResources(this.label18, "label18");
             this.label18.ForeColor = System.Drawing.Color.DarkOrange;
             this.label18.Name = "label18";
+            this.toolTip1.SetToolTip(this.label18, resources.GetString("label18.ToolTip"));
             // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
             this.label17.ForeColor = System.Drawing.Color.OrangeRed;
             this.label17.Name = "label17";
+            this.toolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
             this.label17.Click += new System.EventHandler(this.Label17_Click);
             // 
             // label12
@@ -266,6 +301,7 @@
             resources.ApplyResources(this.label12, "label12");
             this.label12.ForeColor = System.Drawing.Color.DarkOrange;
             this.label12.Name = "label12";
+            this.toolTip1.SetToolTip(this.label12, resources.GetString("label12.ToolTip"));
             // 
             // groupBox18
             // 
@@ -275,12 +311,14 @@
             this.groupBox18.Controls.Add(this.linkLabel7);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox18, resources.GetString("groupBox18.ToolTip"));
             // 
             // linkLabel9
             // 
             resources.ApplyResources(this.linkLabel9, "linkLabel9");
             this.linkLabel9.Name = "linkLabel9";
             this.linkLabel9.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel9, resources.GetString("linkLabel9.ToolTip"));
             this.linkLabel9.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel9_LinkClicked);
             // 
             // linkLabel8
@@ -288,6 +326,7 @@
             resources.ApplyResources(this.linkLabel8, "linkLabel8");
             this.linkLabel8.Name = "linkLabel8";
             this.linkLabel8.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel8, resources.GetString("linkLabel8.ToolTip"));
             this.linkLabel8.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel8_LinkClicked);
             // 
             // linkLabel7
@@ -295,6 +334,7 @@
             resources.ApplyResources(this.linkLabel7, "linkLabel7");
             this.linkLabel7.Name = "linkLabel7";
             this.linkLabel7.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel7, resources.GetString("linkLabel7.ToolTip"));
             this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
             // 
             // groupBox7
@@ -307,12 +347,14 @@
             this.groupBox7.Controls.Add(this.label2);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox7, resources.GetString("groupBox7.ToolTip"));
             // 
             // linkLabel5
             // 
             resources.ApplyResources(this.linkLabel5, "linkLabel5");
             this.linkLabel5.Name = "linkLabel5";
             this.linkLabel5.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel5, resources.GetString("linkLabel5.ToolTip"));
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
             // 
             // linkLabel4
@@ -320,6 +362,7 @@
             resources.ApplyResources(this.linkLabel4, "linkLabel4");
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel4, resources.GetString("linkLabel4.ToolTip"));
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
             // linkLabel3
@@ -327,6 +370,7 @@
             resources.ApplyResources(this.linkLabel3, "linkLabel3");
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel3, resources.GetString("linkLabel3.ToolTip"));
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // linkLabel2
@@ -334,18 +378,21 @@
             resources.ApplyResources(this.linkLabel2, "linkLabel2");
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel2, resources.GetString("linkLabel2.ToolTip"));
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // tabPage2
             // 
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Controls.Add(this.tabControl2);
             this.tabPage2.Name = "tabPage2";
+            this.toolTip1.SetToolTip(this.tabPage2, resources.GetString("tabPage2.ToolTip"));
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabControl2
@@ -355,12 +402,12 @@
             this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
+            this.toolTip1.SetToolTip(this.tabControl2, resources.GetString("tabControl2.ToolTip"));
             // 
             // tabPage8
             // 
             resources.ApplyResources(this.tabPage8, "tabPage8");
             this.tabPage8.Controls.Add(this.groupBox24);
-            this.tabPage8.Controls.Add(this.groupBox23);
             this.tabPage8.Controls.Add(this.groupBox22);
             this.tabPage8.Controls.Add(this.groupBox20);
             this.tabPage8.Controls.Add(this.groupBox6);
@@ -369,6 +416,7 @@
             this.tabPage8.Controls.Add(this.groupBox12);
             this.tabPage8.Controls.Add(this.groupBox11);
             this.tabPage8.Name = "tabPage8";
+            this.toolTip1.SetToolTip(this.tabPage8, resources.GetString("tabPage8.ToolTip"));
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // groupBox24
@@ -377,36 +425,20 @@
             this.groupBox24.Controls.Add(this.button1);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
             // 
             // button1
             // 
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
+            this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox23
-            // 
-            resources.ApplyResources(this.groupBox23, "groupBox23");
-            this.groupBox23.Controls.Add(this.checkBox4);
-            this.groupBox23.Controls.Add(this.checkBox3);
-            this.groupBox23.Name = "groupBox23";
-            this.groupBox23.TabStop = false;
-            // 
-            // checkBox4
-            // 
-            resources.ApplyResources(this.checkBox4, "checkBox4");
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            resources.ApplyResources(this.checkBox3, "checkBox3");
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // groupBox22
             // 
             resources.ApplyResources(this.groupBox22, "groupBox22");
+            this.groupBox22.Controls.Add(this.radio_wreck);
             this.groupBox22.Controls.Add(this.radio_marketplace);
             this.groupBox22.Controls.Add(this.radio_autoshipauto);
             this.groupBox22.Controls.Add(this.radio_outpost);
@@ -414,41 +446,61 @@
             this.groupBox22.Controls.Add(this.radio_upgradable);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
+            // 
+            // radio_wreck
+            // 
+            resources.ApplyResources(this.radio_wreck, "radio_wreck");
+            this.radio_wreck.Name = "radio_wreck";
+            this.radio_wreck.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_wreck, resources.GetString("radio_wreck.ToolTip"));
+            this.radio_wreck.UseVisualStyleBackColor = true;
+            this.radio_wreck.CheckedChanged += new System.EventHandler(this.Radio_wreck_CheckedChanged);
             // 
             // radio_marketplace
             // 
             resources.ApplyResources(this.radio_marketplace, "radio_marketplace");
             this.radio_marketplace.Name = "radio_marketplace";
             this.radio_marketplace.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_marketplace, resources.GetString("radio_marketplace.ToolTip"));
             this.radio_marketplace.UseVisualStyleBackColor = true;
+            this.radio_marketplace.CheckedChanged += new System.EventHandler(this.Radio_marketplace_CheckedChanged);
             // 
             // radio_autoshipauto
             // 
             resources.ApplyResources(this.radio_autoshipauto, "radio_autoshipauto");
             this.radio_autoshipauto.Name = "radio_autoshipauto";
             this.radio_autoshipauto.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_autoshipauto, resources.GetString("radio_autoshipauto.ToolTip"));
             this.radio_autoshipauto.UseVisualStyleBackColor = true;
+            this.radio_autoshipauto.CheckedChanged += new System.EventHandler(this.Radio_autoshipauto_CheckedChanged);
             // 
             // radio_outpost
             // 
             resources.ApplyResources(this.radio_outpost, "radio_outpost");
             this.radio_outpost.Name = "radio_outpost";
             this.radio_outpost.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_outpost, resources.GetString("radio_outpost.ToolTip"));
             this.radio_outpost.UseVisualStyleBackColor = true;
+            this.radio_outpost.CheckedChanged += new System.EventHandler(this.Radio_outpost_CheckedChanged);
             // 
             // radio_contractor
             // 
             resources.ApplyResources(this.radio_contractor, "radio_contractor");
             this.radio_contractor.Name = "radio_contractor";
             this.radio_contractor.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_contractor, resources.GetString("radio_contractor.ToolTip"));
             this.radio_contractor.UseVisualStyleBackColor = true;
+            this.radio_contractor.CheckedChanged += new System.EventHandler(this.Radio_contractor_CheckedChanged);
             // 
             // radio_upgradable
             // 
             resources.ApplyResources(this.radio_upgradable, "radio_upgradable");
             this.radio_upgradable.Name = "radio_upgradable";
             this.radio_upgradable.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_upgradable, resources.GetString("radio_upgradable.ToolTip"));
             this.radio_upgradable.UseVisualStyleBackColor = true;
+            this.radio_upgradable.CheckedChanged += new System.EventHandler(this.Radio_upgradable_CheckedChanged);
             // 
             // groupBox20
             // 
@@ -466,27 +518,32 @@
             this.groupBox20.Controls.Add(this.radioButton1);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox20, resources.GetString("groupBox20.ToolTip"));
             // 
             // label16
             // 
             resources.ApplyResources(this.label16, "label16");
             this.label16.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.label16.Name = "label16";
+            this.toolTip1.SetToolTip(this.label16, resources.GetString("label16.ToolTip"));
             // 
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
             this.label15.Name = "label15";
+            this.toolTip1.SetToolTip(this.label15, resources.GetString("label15.ToolTip"));
             // 
             // label14
             // 
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
+            this.toolTip1.SetToolTip(this.label14, resources.GetString("label14.ToolTip"));
             // 
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
             this.label13.Name = "label13";
+            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
             // 
             // num_limitconcrete
             // 
@@ -502,6 +559,7 @@
             0,
             0});
             this.num_limitconcrete.Name = "num_limitconcrete";
+            this.toolTip1.SetToolTip(this.num_limitconcrete, resources.GetString("num_limitconcrete.ToolTip"));
             this.num_limitconcrete.Leave += new System.EventHandler(this.Num_limitconcrete_Leave);
             // 
             // num_limitfuel
@@ -518,6 +576,7 @@
             0,
             0});
             this.num_limitfuel.Name = "num_limitfuel";
+            this.toolTip1.SetToolTip(this.num_limitfuel, resources.GetString("num_limitfuel.ToolTip"));
             this.num_limitfuel.Leave += new System.EventHandler(this.Num_limitfuel_Leave);
             // 
             // num_limitmech
@@ -534,12 +593,14 @@
             0,
             0});
             this.num_limitmech.Name = "num_limitmech";
+            this.toolTip1.SetToolTip(this.num_limitmech, resources.GetString("num_limitmech.ToolTip"));
             this.num_limitmech.Leave += new System.EventHandler(this.Num_limitmech_Leave);
             // 
             // checkBox2
             // 
             resources.ApplyResources(this.checkBox2, "checkBox2");
             this.checkBox2.Name = "checkBox2";
+            this.toolTip1.SetToolTip(this.checkBox2, resources.GetString("checkBox2.ToolTip"));
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
             // 
@@ -548,6 +609,7 @@
             resources.ApplyResources(this.radioButton3, "radioButton3");
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton3, resources.GetString("radioButton3.ToolTip"));
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.RadioButton3_CheckedChanged);
             // 
@@ -556,6 +618,7 @@
             resources.ApplyResources(this.radioButton2, "radioButton2");
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton2, resources.GetString("radioButton2.ToolTip"));
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2_CheckedChanged);
             // 
@@ -564,6 +627,7 @@
             resources.ApplyResources(this.radioButton1, "radioButton1");
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.TabStop = true;
+            this.toolTip1.SetToolTip(this.radioButton1, resources.GetString("radioButton1.ToolTip"));
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.RadioButton1_CheckedChanged);
             // 
@@ -579,6 +643,7 @@
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
             // 
             // num_stonelimit
             // 
@@ -594,6 +659,7 @@
             0,
             0});
             this.num_stonelimit.Name = "num_stonelimit";
+            this.toolTip1.SetToolTip(this.num_stonelimit, resources.GetString("num_stonelimit.ToolTip"));
             this.num_stonelimit.Leave += new System.EventHandler(this.num_stonelimit_Leave);
             // 
             // num_ironlimit
@@ -610,6 +676,7 @@
             0,
             0});
             this.num_ironlimit.Name = "num_ironlimit";
+            this.toolTip1.SetToolTip(this.num_ironlimit, resources.GetString("num_ironlimit.ToolTip"));
             this.num_ironlimit.Leave += new System.EventHandler(this.num_ironlimit_Leave);
             // 
             // num_woodlimit
@@ -626,6 +693,7 @@
             0,
             0});
             this.num_woodlimit.Name = "num_woodlimit";
+            this.toolTip1.SetToolTip(this.num_woodlimit, resources.GetString("num_woodlimit.ToolTip"));
             this.num_woodlimit.Leave += new System.EventHandler(this.num_woodlimit_Leave);
             // 
             // label6
@@ -633,21 +701,25 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonShadow;
             this.label6.Name = "label6";
+            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
+            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
+            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // groupBox10
             // 
@@ -655,11 +727,13 @@
             this.groupBox10.Controls.Add(this.chk_onlyfactory);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox10, resources.GetString("groupBox10.ToolTip"));
             // 
             // chk_onlyfactory
             // 
             resources.ApplyResources(this.chk_onlyfactory, "chk_onlyfactory");
             this.chk_onlyfactory.Name = "chk_onlyfactory";
+            this.toolTip1.SetToolTip(this.chk_onlyfactory, resources.GetString("chk_onlyfactory.ToolTip"));
             this.chk_onlyfactory.UseVisualStyleBackColor = true;
             this.chk_onlyfactory.CheckedChanged += new System.EventHandler(this.chk_onlyfactory_CheckedChanged);
             // 
@@ -670,6 +744,7 @@
             this.groupBox8.Controls.Add(this.label8);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox8, resources.GetString("groupBox8.ToolTip"));
             // 
             // num_barrelinterval
             // 
@@ -681,6 +756,7 @@
             0,
             0});
             this.num_barrelinterval.Name = "num_barrelinterval";
+            this.toolTip1.SetToolTip(this.num_barrelinterval, resources.GetString("num_barrelinterval.ToolTip"));
             this.num_barrelinterval.Value = new decimal(new int[] {
             22,
             0,
@@ -693,6 +769,7 @@
             // 
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // groupBox12
             // 
@@ -701,12 +778,14 @@
             this.groupBox12.Controls.Add(this.radio_savesailors);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox12, resources.GetString("groupBox12.ToolTip"));
             // 
             // radio_saveloot
             // 
             resources.ApplyResources(this.radio_saveloot, "radio_saveloot");
             this.radio_saveloot.Name = "radio_saveloot";
             this.radio_saveloot.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_saveloot, resources.GetString("radio_saveloot.ToolTip"));
             this.radio_saveloot.UseVisualStyleBackColor = true;
             this.radio_saveloot.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
@@ -715,6 +794,7 @@
             resources.ApplyResources(this.radio_savesailors, "radio_savesailors");
             this.radio_savesailors.Name = "radio_savesailors";
             this.radio_savesailors.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_savesailors, resources.GetString("radio_savesailors.ToolTip"));
             this.radio_savesailors.UseVisualStyleBackColor = true;
             // 
             // groupBox11
@@ -728,12 +808,14 @@
             this.groupBox11.Controls.Add(this.radio_gold);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox11, resources.GetString("groupBox11.ToolTip"));
             // 
             // radio_oil
             // 
             resources.ApplyResources(this.radio_oil, "radio_oil");
             this.radio_oil.Name = "radio_oil";
             this.radio_oil.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_oil, resources.GetString("radio_oil.ToolTip"));
             this.radio_oil.UseVisualStyleBackColor = true;
             this.radio_oil.CheckedChanged += new System.EventHandler(this.Radio_oil_CheckedChanged);
             // 
@@ -742,6 +824,7 @@
             resources.ApplyResources(this.radio_stone, "radio_stone");
             this.radio_stone.Name = "radio_stone";
             this.radio_stone.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_stone, resources.GetString("radio_stone.ToolTip"));
             this.radio_stone.UseVisualStyleBackColor = true;
             this.radio_stone.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
@@ -750,6 +833,7 @@
             resources.ApplyResources(this.radio_fish, "radio_fish");
             this.radio_fish.Name = "radio_fish";
             this.radio_fish.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_fish, resources.GetString("radio_fish.ToolTip"));
             this.radio_fish.UseVisualStyleBackColor = true;
             this.radio_fish.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
@@ -758,6 +842,7 @@
             resources.ApplyResources(this.radio_iron, "radio_iron");
             this.radio_iron.Name = "radio_iron";
             this.radio_iron.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_iron, resources.GetString("radio_iron.ToolTip"));
             this.radio_iron.UseVisualStyleBackColor = true;
             this.radio_iron.CheckedChanged += new System.EventHandler(this.radio_iron_CheckedChanged);
             // 
@@ -766,6 +851,7 @@
             resources.ApplyResources(this.radio_wood, "radio_wood");
             this.radio_wood.Name = "radio_wood";
             this.radio_wood.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_wood, resources.GetString("radio_wood.ToolTip"));
             this.radio_wood.UseVisualStyleBackColor = true;
             this.radio_wood.CheckedChanged += new System.EventHandler(this.radio_wood_CheckedChanged);
             // 
@@ -774,12 +860,14 @@
             resources.ApplyResources(this.radio_gold, "radio_gold");
             this.radio_gold.Name = "radio_gold";
             this.radio_gold.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_gold, resources.GetString("radio_gold.ToolTip"));
             this.radio_gold.UseVisualStyleBackColor = true;
             this.radio_gold.CheckedChanged += new System.EventHandler(this.radio_gold_CheckedChanged);
             // 
             // tabPage7
             // 
             resources.ApplyResources(this.tabPage7, "tabPage7");
+            this.tabPage7.Controls.Add(this.groupBox25);
             this.tabPage7.Controls.Add(this.groupBox21);
             this.tabPage7.Controls.Add(this.groupBox1);
             this.tabPage7.Controls.Add(this.groupBox17);
@@ -787,7 +875,24 @@
             this.tabPage7.Controls.Add(this.groupBox14);
             this.tabPage7.Controls.Add(this.groupBox13);
             this.tabPage7.Name = "tabPage7";
+            this.toolTip1.SetToolTip(this.tabPage7, resources.GetString("tabPage7.ToolTip"));
             this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox25
+            // 
+            resources.ApplyResources(this.groupBox25, "groupBox25");
+            this.groupBox25.Controls.Add(this.chk_exploit);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox25, resources.GetString("groupBox25.ToolTip"));
+            // 
+            // chk_exploit
+            // 
+            resources.ApplyResources(this.chk_exploit, "chk_exploit");
+            this.chk_exploit.Name = "chk_exploit";
+            this.toolTip1.SetToolTip(this.chk_exploit, resources.GetString("chk_exploit.ToolTip"));
+            this.chk_exploit.UseVisualStyleBackColor = true;
+            this.chk_exploit.CheckedChanged += new System.EventHandler(this.Chk_exploit_CheckedChanged);
             // 
             // groupBox21
             // 
@@ -796,11 +901,13 @@
             this.groupBox21.Controls.Add(this.checkBox1);
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox21, resources.GetString("groupBox21.ToolTip"));
             // 
             // btn_dumpcore
             // 
             resources.ApplyResources(this.btn_dumpcore, "btn_dumpcore");
             this.btn_dumpcore.Name = "btn_dumpcore";
+            this.toolTip1.SetToolTip(this.btn_dumpcore, resources.GetString("btn_dumpcore.ToolTip"));
             this.btn_dumpcore.UseVisualStyleBackColor = true;
             this.btn_dumpcore.Click += new System.EventHandler(this.btn_dumpcore_Click);
             // 
@@ -808,6 +915,7 @@
             // 
             resources.ApplyResources(this.checkBox1, "checkBox1");
             this.checkBox1.Name = "checkBox1";
+            this.toolTip1.SetToolTip(this.checkBox1, resources.GetString("checkBox1.ToolTip"));
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
@@ -819,6 +927,7 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             // 
             // linkLabel1
             // 
@@ -826,17 +935,20 @@
             this.linkLabel1.LinkColor = System.Drawing.Color.Silver;
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel1, resources.GetString("linkLabel1.ToolTip"));
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // textBox2
             // 
             resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.Name = "textBox2";
+            this.toolTip1.SetToolTip(this.textBox2, resources.GetString("textBox2.ToolTip"));
             this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave_1);
             // 
             // groupBox17
@@ -845,12 +957,14 @@
             this.groupBox17.Controls.Add(this.cbox_lang);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox17, resources.GetString("groupBox17.ToolTip"));
             // 
             // cbox_lang
             // 
             resources.ApplyResources(this.cbox_lang, "cbox_lang");
             this.cbox_lang.FormattingEnabled = true;
             this.cbox_lang.Name = "cbox_lang";
+            this.toolTip1.SetToolTip(this.cbox_lang, resources.GetString("cbox_lang.ToolTip"));
             this.cbox_lang.SelectedIndexChanged += new System.EventHandler(this.cbox_lang_SelectedIndexChanged);
             // 
             // groupBox9
@@ -860,17 +974,20 @@
             this.groupBox9.Controls.Add(this.label9);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox9, resources.GetString("groupBox9.ToolTip"));
             // 
             // num_hibernationinterval
             // 
             resources.ApplyResources(this.num_hibernationinterval, "num_hibernationinterval");
             this.num_hibernationinterval.Name = "num_hibernationinterval";
+            this.toolTip1.SetToolTip(this.num_hibernationinterval, resources.GetString("num_hibernationinterval.ToolTip"));
             this.num_hibernationinterval.Leave += new System.EventHandler(this.numericUpDown2_Leave);
             // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
+            this.toolTip1.SetToolTip(this.label9, resources.GetString("label9.ToolTip"));
             // 
             // groupBox14
             // 
@@ -881,11 +998,13 @@
             this.groupBox14.Controls.Add(this.groupBox15);
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox14, resources.GetString("groupBox14.ToolTip"));
             // 
             // chk_sleepenabled
             // 
             resources.ApplyResources(this.chk_sleepenabled, "chk_sleepenabled");
             this.chk_sleepenabled.Name = "chk_sleepenabled";
+            this.toolTip1.SetToolTip(this.chk_sleepenabled, resources.GetString("chk_sleepenabled.ToolTip"));
             this.chk_sleepenabled.UseVisualStyleBackColor = true;
             this.chk_sleepenabled.CheckedChanged += new System.EventHandler(this.chk_sleepenabled_CheckedChanged);
             // 
@@ -893,6 +1012,7 @@
             // 
             resources.ApplyResources(this.chk_smartsleep, "chk_smartsleep");
             this.chk_smartsleep.Name = "chk_smartsleep";
+            this.toolTip1.SetToolTip(this.chk_smartsleep, resources.GetString("chk_smartsleep.ToolTip"));
             this.chk_smartsleep.UseVisualStyleBackColor = true;
             this.chk_smartsleep.CheckedChanged += new System.EventHandler(this.chk_smartsleep_CheckedChanged);
             // 
@@ -904,6 +1024,7 @@
             this.groupBox16.Controls.Add(this.radio_sleepeveryhrs);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox16, resources.GetString("groupBox16.ToolTip"));
             // 
             // num_sleepevery
             // 
@@ -919,6 +1040,7 @@
             0,
             0});
             this.num_sleepevery.Name = "num_sleepevery";
+            this.toolTip1.SetToolTip(this.num_sleepevery, resources.GetString("num_sleepevery.ToolTip"));
             this.num_sleepevery.Value = new decimal(new int[] {
             30,
             0,
@@ -932,12 +1054,14 @@
             this.radio_sleepeverymin.Checked = true;
             this.radio_sleepeverymin.Name = "radio_sleepeverymin";
             this.radio_sleepeverymin.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_sleepeverymin, resources.GetString("radio_sleepeverymin.ToolTip"));
             this.radio_sleepeverymin.UseVisualStyleBackColor = true;
             // 
             // radio_sleepeveryhrs
             // 
             resources.ApplyResources(this.radio_sleepeveryhrs, "radio_sleepeveryhrs");
             this.radio_sleepeveryhrs.Name = "radio_sleepeveryhrs";
+            this.toolTip1.SetToolTip(this.radio_sleepeveryhrs, resources.GetString("radio_sleepeveryhrs.ToolTip"));
             this.radio_sleepeveryhrs.UseVisualStyleBackColor = true;
             this.radio_sleepeveryhrs.CheckedChanged += new System.EventHandler(this.radio_sleepeveryhrs_CheckedChanged);
             // 
@@ -949,6 +1073,7 @@
             this.groupBox15.Controls.Add(this.radio_sleepforhrs);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox15, resources.GetString("groupBox15.ToolTip"));
             // 
             // num_sleepfor
             // 
@@ -964,6 +1089,7 @@
             0,
             0});
             this.num_sleepfor.Name = "num_sleepfor";
+            this.toolTip1.SetToolTip(this.num_sleepfor, resources.GetString("num_sleepfor.ToolTip"));
             this.num_sleepfor.Value = new decimal(new int[] {
             1,
             0,
@@ -974,6 +1100,7 @@
             // 
             resources.ApplyResources(this.radio_sleepformins, "radio_sleepformins");
             this.radio_sleepformins.Name = "radio_sleepformins";
+            this.toolTip1.SetToolTip(this.radio_sleepformins, resources.GetString("radio_sleepformins.ToolTip"));
             this.radio_sleepformins.UseVisualStyleBackColor = true;
             // 
             // radio_sleepforhrs
@@ -982,6 +1109,7 @@
             this.radio_sleepforhrs.Checked = true;
             this.radio_sleepforhrs.Name = "radio_sleepforhrs";
             this.radio_sleepforhrs.TabStop = true;
+            this.toolTip1.SetToolTip(this.radio_sleepforhrs, resources.GetString("radio_sleepforhrs.ToolTip"));
             this.radio_sleepforhrs.UseVisualStyleBackColor = true;
             this.radio_sleepforhrs.CheckedChanged += new System.EventHandler(this.radio_sleepforhrs_CheckedChanged);
             // 
@@ -997,11 +1125,13 @@
             this.groupBox13.Controls.Add(this.textBox3);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox13, resources.GetString("groupBox13.ToolTip"));
             // 
             // button5
             // 
             resources.ApplyResources(this.button5, "button5");
             this.button5.Name = "button5";
+            this.toolTip1.SetToolTip(this.button5, resources.GetString("button5.ToolTip"));
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -1009,6 +1139,7 @@
             // 
             resources.ApplyResources(this.button4, "button4");
             this.button4.Name = "button4";
+            this.toolTip1.SetToolTip(this.button4, resources.GetString("button4.ToolTip"));
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_2);
             // 
@@ -1016,11 +1147,13 @@
             // 
             resources.ApplyResources(this.lbl_startupcode, "lbl_startupcode");
             this.lbl_startupcode.Name = "lbl_startupcode";
+            this.toolTip1.SetToolTip(this.lbl_startupcode, resources.GetString("lbl_startupcode.ToolTip"));
             // 
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
+            this.toolTip1.SetToolTip(this.label11, resources.GetString("label11.ToolTip"));
             // 
             // linkLabel6
             // 
@@ -1028,17 +1161,20 @@
             this.linkLabel6.LinkColor = System.Drawing.Color.Silver;
             this.linkLabel6.Name = "linkLabel6";
             this.linkLabel6.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel6, resources.GetString("linkLabel6.ToolTip"));
             this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
             // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
+            this.toolTip1.SetToolTip(this.label10, resources.GetString("label10.ToolTip"));
             // 
             // textBox3
             // 
             resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.Name = "textBox3";
+            this.toolTip1.SetToolTip(this.textBox3, resources.GetString("textBox3.ToolTip"));
             this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
             // 
             // tabPage3
@@ -1048,6 +1184,7 @@
             this.tabPage3.Controls.Add(this.btn_removeitem);
             this.tabPage3.Controls.Add(this.listView1);
             this.tabPage3.Name = "tabPage3";
+            this.toolTip1.SetToolTip(this.tabPage3, resources.GetString("tabPage3.ToolTip"));
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // num_removenum
@@ -1064,6 +1201,7 @@
             0,
             0});
             this.num_removenum.Name = "num_removenum";
+            this.toolTip1.SetToolTip(this.num_removenum, resources.GetString("num_removenum.ToolTip"));
             this.num_removenum.Value = new decimal(new int[] {
             1,
             0,
@@ -1074,6 +1212,7 @@
             // 
             resources.ApplyResources(this.btn_removeitem, "btn_removeitem");
             this.btn_removeitem.Name = "btn_removeitem";
+            this.toolTip1.SetToolTip(this.btn_removeitem, resources.GetString("btn_removeitem.ToolTip"));
             this.btn_removeitem.UseVisualStyleBackColor = true;
             this.btn_removeitem.Click += new System.EventHandler(this.btn_removeitem_Click);
             // 
@@ -1084,6 +1223,7 @@
             this.columnHeader1,
             this.columnHeader2});
             this.listView1.Name = "listView1";
+            this.toolTip1.SetToolTip(this.listView1, resources.GetString("listView1.ToolTip"));
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
@@ -1100,6 +1240,7 @@
             resources.ApplyResources(this.tabPage6, "tabPage6");
             this.tabPage6.Controls.Add(this.dataGridView2);
             this.tabPage6.Name = "tabPage6";
+            this.toolTip1.SetToolTip(this.tabPage6, resources.GetString("tabPage6.ToolTip"));
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
@@ -1111,12 +1252,14 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
+            this.toolTip1.SetToolTip(this.dataGridView2, resources.GetString("dataGridView2.ToolTip"));
             // 
             // tabPage5
             // 
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Name = "tabPage5";
+            this.toolTip1.SetToolTip(this.tabPage5, resources.GetString("tabPage5.ToolTip"));
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
@@ -1129,31 +1272,37 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dataGridView1.RowHeadersVisible = false;
+            this.toolTip1.SetToolTip(this.dataGridView1, resources.GetString("dataGridView1.ToolTip"));
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
             // tabPage1
             // 
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.linkLabel10);
             this.tabPage1.Controls.Add(this.btn_stats);
-            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Name = "tabPage1";
+            this.toolTip1.SetToolTip(this.tabPage1, resources.GetString("tabPage1.ToolTip"));
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel10
+            // 
+            resources.ApplyResources(this.linkLabel10, "linkLabel10");
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.TabStop = true;
+            this.toolTip1.SetToolTip(this.linkLabel10, resources.GetString("linkLabel10.ToolTip"));
+            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel10_LinkClicked);
             // 
             // btn_stats
             // 
             resources.ApplyResources(this.btn_stats, "btn_stats");
             this.btn_stats.Name = "btn_stats";
+            this.toolTip1.SetToolTip(this.btn_stats, resources.GetString("btn_stats.ToolTip"));
             this.btn_stats.UseVisualStyleBackColor = true;
             this.btn_stats.Click += new System.EventHandler(this.Btn_stats_Click);
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
             // 
             // groupBox5
             // 
@@ -1176,6 +1325,7 @@
             this.groupBox5.Controls.Add(this.pictureBox1);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox5, resources.GetString("groupBox5.ToolTip"));
             // 
             // pictureBox8
             // 
@@ -1184,6 +1334,7 @@
             this.pictureBox8.Image = global::SeaBotGUI.Properties.Resources.sailor;
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox8, resources.GetString("pictureBox8.ToolTip"));
             // 
             // pictureBox7
             // 
@@ -1192,46 +1343,55 @@
             this.pictureBox7.Image = global::SeaBotGUI.Properties.Resources.level;
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox7, resources.GetString("pictureBox7.ToolTip"));
             // 
             // lbl_sailors
             // 
             resources.ApplyResources(this.lbl_sailors, "lbl_sailors");
             this.lbl_sailors.Name = "lbl_sailors";
+            this.toolTip1.SetToolTip(this.lbl_sailors, resources.GetString("lbl_sailors.ToolTip"));
             // 
             // lbl_lvl
             // 
             resources.ApplyResources(this.lbl_lvl, "lbl_lvl");
             this.lbl_lvl.Name = "lbl_lvl";
+            this.toolTip1.SetToolTip(this.lbl_lvl, resources.GetString("lbl_lvl.ToolTip"));
             // 
             // lbl_wood
             // 
             resources.ApplyResources(this.lbl_wood, "lbl_wood");
             this.lbl_wood.Name = "lbl_wood";
+            this.toolTip1.SetToolTip(this.lbl_wood, resources.GetString("lbl_wood.ToolTip"));
             // 
             // lbl_stone
             // 
             resources.ApplyResources(this.lbl_stone, "lbl_stone");
             this.lbl_stone.Name = "lbl_stone";
+            this.toolTip1.SetToolTip(this.lbl_stone, resources.GetString("lbl_stone.ToolTip"));
             // 
             // lbl_iron
             // 
             resources.ApplyResources(this.lbl_iron, "lbl_iron");
             this.lbl_iron.Name = "lbl_iron";
+            this.toolTip1.SetToolTip(this.lbl_iron, resources.GetString("lbl_iron.ToolTip"));
             // 
             // lbl_fish
             // 
             resources.ApplyResources(this.lbl_fish, "lbl_fish");
             this.lbl_fish.Name = "lbl_fish";
+            this.toolTip1.SetToolTip(this.lbl_fish, resources.GetString("lbl_fish.ToolTip"));
             // 
             // lbl_gems
             // 
             resources.ApplyResources(this.lbl_gems, "lbl_gems");
             this.lbl_gems.Name = "lbl_gems";
+            this.toolTip1.SetToolTip(this.lbl_gems, resources.GetString("lbl_gems.ToolTip"));
             // 
             // lbl_coins
             // 
             resources.ApplyResources(this.lbl_coins, "lbl_coins");
             this.lbl_coins.Name = "lbl_coins";
+            this.toolTip1.SetToolTip(this.lbl_coins, resources.GetString("lbl_coins.ToolTip"));
             // 
             // pictureBox6
             // 
@@ -1240,6 +1400,7 @@
             this.pictureBox6.Image = global::SeaBotGUI.Properties.Resources.wood;
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox6, resources.GetString("pictureBox6.ToolTip"));
             // 
             // pictureBox5
             // 
@@ -1248,6 +1409,7 @@
             this.pictureBox5.Image = global::SeaBotGUI.Properties.Resources.stone;
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox5, resources.GetString("pictureBox5.ToolTip"));
             // 
             // pictureBox4
             // 
@@ -1256,6 +1418,7 @@
             this.pictureBox4.Image = global::SeaBotGUI.Properties.Resources.metal;
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox4, resources.GetString("pictureBox4.ToolTip"));
             // 
             // pictureBox3
             // 
@@ -1264,6 +1427,7 @@
             this.pictureBox3.Image = global::SeaBotGUI.Properties.Resources.fish;
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox3, resources.GetString("pictureBox3.ToolTip"));
             // 
             // pictureBox2
             // 
@@ -1272,6 +1436,7 @@
             this.pictureBox2.Image = global::SeaBotGUI.Properties.Resources.diamond;
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox2, resources.GetString("pictureBox2.ToolTip"));
             // 
             // pictureBox1
             // 
@@ -1280,6 +1445,7 @@
             this.pictureBox1.Image = global::SeaBotGUI.Properties.Resources.coin;
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox1, resources.GetString("pictureBox1.ToolTip"));
             // 
             // groupBox4
             // 
@@ -1288,11 +1454,13 @@
             this.groupBox4.Controls.Add(this.button2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
             // 
             // button3
             // 
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
+            this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -1300,6 +1468,7 @@
             // 
             resources.ApplyResources(this.button2, "button2");
             this.button2.Name = "button2";
+            this.toolTip1.SetToolTip(this.button2, resources.GetString("button2.ToolTip"));
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1309,6 +1478,7 @@
             this.groupBox3.Controls.Add(this.richTextBox1);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox3, resources.GetString("groupBox3.ToolTip"));
             // 
             // richTextBox1
             // 
@@ -1317,6 +1487,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.richTextBox1, resources.GetString("richTextBox1.ToolTip"));
             // 
             // groupBox2
             // 
@@ -1331,11 +1502,13 @@
             this.groupBox2.Controls.Add(this.chk_aupgrade);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // chk_automuseum
             // 
             resources.ApplyResources(this.chk_automuseum, "chk_automuseum");
             this.chk_automuseum.Name = "chk_automuseum";
+            this.toolTip1.SetToolTip(this.chk_automuseum, resources.GetString("chk_automuseum.ToolTip"));
             this.chk_automuseum.UseVisualStyleBackColor = true;
             this.chk_automuseum.CheckedChanged += new System.EventHandler(this.chk_automuseum_CheckedChanged);
             // 
@@ -1343,6 +1516,7 @@
             // 
             resources.ApplyResources(this.chk_autoshipupg, "chk_autoshipupg");
             this.chk_autoshipupg.Name = "chk_autoshipupg";
+            this.toolTip1.SetToolTip(this.chk_autoshipupg, resources.GetString("chk_autoshipupg.ToolTip"));
             this.chk_autoshipupg.UseVisualStyleBackColor = true;
             this.chk_autoshipupg.CheckedChanged += new System.EventHandler(this.chk_autoshipupg_CheckedChanged);
             // 
@@ -1350,6 +1524,7 @@
             // 
             resources.ApplyResources(this.chk_finishupgrade, "chk_finishupgrade");
             this.chk_finishupgrade.Name = "chk_finishupgrade";
+            this.toolTip1.SetToolTip(this.chk_finishupgrade, resources.GetString("chk_finishupgrade.ToolTip"));
             this.chk_finishupgrade.UseVisualStyleBackColor = true;
             this.chk_finishupgrade.CheckedChanged += new System.EventHandler(this.chk_finishupgrade_CheckedChanged);
             // 
@@ -1357,6 +1532,7 @@
             // 
             resources.ApplyResources(this.chk_prodfact, "chk_prodfact");
             this.chk_prodfact.Name = "chk_prodfact";
+            this.toolTip1.SetToolTip(this.chk_prodfact, resources.GetString("chk_prodfact.ToolTip"));
             this.chk_prodfact.UseVisualStyleBackColor = true;
             this.chk_prodfact.CheckedChanged += new System.EventHandler(this.chk_prodfact_CheckedChanged);
             // 
@@ -1364,6 +1540,7 @@
             // 
             resources.ApplyResources(this.chk_barrelhack, "chk_barrelhack");
             this.chk_barrelhack.Name = "chk_barrelhack";
+            this.toolTip1.SetToolTip(this.chk_barrelhack, resources.GetString("chk_barrelhack.ToolTip"));
             this.chk_barrelhack.UseVisualStyleBackColor = true;
             this.chk_barrelhack.CheckedChanged += new System.EventHandler(this.chk_barrelhack_CheckedChanged);
             // 
@@ -1371,6 +1548,7 @@
             // 
             resources.ApplyResources(this.chk_collectmat, "chk_collectmat");
             this.chk_collectmat.Name = "chk_collectmat";
+            this.toolTip1.SetToolTip(this.chk_collectmat, resources.GetString("chk_collectmat.ToolTip"));
             this.chk_collectmat.UseVisualStyleBackColor = true;
             this.chk_collectmat.CheckedChanged += new System.EventHandler(this.chk_collectmat_CheckedChanged);
             // 
@@ -1378,6 +1556,7 @@
             // 
             resources.ApplyResources(this.chk_autofish, "chk_autofish");
             this.chk_autofish.Name = "chk_autofish";
+            this.toolTip1.SetToolTip(this.chk_autofish, resources.GetString("chk_autofish.ToolTip"));
             this.chk_autofish.UseVisualStyleBackColor = true;
             this.chk_autofish.CheckedChanged += new System.EventHandler(this.chk_autofish_CheckedChanged);
             // 
@@ -1385,6 +1564,7 @@
             // 
             resources.ApplyResources(this.chk_aupgrade, "chk_aupgrade");
             this.chk_aupgrade.Name = "chk_aupgrade";
+            this.toolTip1.SetToolTip(this.chk_aupgrade, resources.GetString("chk_aupgrade.ToolTip"));
             this.chk_aupgrade.UseVisualStyleBackColor = true;
             this.chk_aupgrade.CheckedChanged += new System.EventHandler(this.chk_aupgrade_CheckedChanged);
             // 
@@ -1399,6 +1579,14 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.toolTip1.SetToolTip(this.tabControl1, resources.GetString("tabControl1.ToolTip"));
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label7.Name = "label7";
+            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             // 
             // Form1
             // 
@@ -1407,9 +1595,12 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.buildingBindingSource)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.groupBox26.ResumeLayout(false);
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
             this.groupBox18.ResumeLayout(false);
@@ -1420,8 +1611,6 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.groupBox24.ResumeLayout(false);
-            this.groupBox23.ResumeLayout(false);
-            this.groupBox23.PerformLayout();
             this.groupBox22.ResumeLayout(false);
             this.groupBox22.PerformLayout();
             this.groupBox20.ResumeLayout(false);
@@ -1444,6 +1633,8 @@
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.tabPage7.ResumeLayout(false);
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1560,7 +1751,6 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox7;
@@ -1622,9 +1812,6 @@
         private System.Windows.Forms.GroupBox groupBox22;
         private System.Windows.Forms.RadioButton radio_contractor;
         private System.Windows.Forms.RadioButton radio_upgradable;
-        private System.Windows.Forms.GroupBox groupBox23;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.RadioButton radio_marketplace;
         private System.Windows.Forms.RadioButton radio_autoshipauto;
         private System.Windows.Forms.RadioButton radio_outpost;
@@ -1632,5 +1819,14 @@
         private System.Windows.Forms.GroupBox groupBox24;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton radio_oil;
+        private System.Windows.Forms.RadioButton radio_wreck;
+        private System.Windows.Forms.LinkLabel linkLabel10;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private System.Windows.Forms.CheckBox chk_exploit;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -49,8 +49,6 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
@@ -62,7 +60,13 @@
     <Compile Include="BotMethods\Factories.cs" />
     <Compile Include="BotMethods\FishPier.cs" />
     <Compile Include="BotMethods\Museum.cs" />
-    <Compile Include="BotMethods\Ships.cs" />
+    <Compile Include="BotMethods\Outposts.cs" />
+    <Compile Include="BotMethods\ShipManagment\LoadShips.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\Destinations.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\SendShips.cs" />
+    <Compile Include="BotMethods\ShipManagment\SendShip\Helper.cs" />
+    <Compile Include="BotMethods\ShipManagment\Ships.cs" />
+    <Compile Include="BotMethods\ShipManagment\UnloadShips.cs" />
     <Compile Include="BotMethods\Sleep.cs" />
     <Compile Include="BotMethods\Upgradable.cs" />
     <Compile Include="Cache\DefenitionCache.cs" />
@@ -102,7 +106,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statistics\StatisticsWriter.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="Utils\AutoTools.cs" />
     <Compile Include="Utils\ContractorHelper.cs" />
+    <Compile Include="Utils\Cookies.cs" />
     <Compile Include="Utils\FullObserv.cs" />
     <Compile Include="Utils\ThreadKill.cs" />
     <Compile Include="Utils\Time.cs" />

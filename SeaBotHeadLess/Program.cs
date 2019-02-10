@@ -10,30 +10,30 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using SeaBotCore;
-using SeaBotCore.Logger;
-
 namespace SeaBotHeadLess
 {
-    class Program
+    #region
+
+    using System;
+    using System.IO;
+    using System.Threading;
+
+    using SeaBotCore;
+    using SeaBotCore.Logger;
+
+    #endregion
+
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Logger.Event.LogMessageChat.OnLogMessage += message => Console.WriteLine(message.message);
             if (File.Exists("config.json"))
             {
-                if (Core.Config.server_token != String.Empty)
+                if (Core.Config.server_token != string.Empty)
                 {
                     Core.StartBot();
                 }

@@ -10,25 +10,25 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace SeaBotCore.Localizaion
 {
+    #region
+
+    using System;
+    using System.Globalization;
+    using System.Threading;
+
+    #endregion
+
     public static class LocalizationController
     {
         public enum ELanguages
         {
             EN,
+
             RU
         }
 
@@ -47,10 +47,10 @@ namespace SeaBotCore.Localizaion
         {
             foreach (var lang in Enum.GetNames(typeof(ELanguages)))
             {
-                CultureInfo ci = CultureInfo.InstalledUICulture;
+                var ci = CultureInfo.InstalledUICulture;
                 if (string.Compare(ci.TwoLetterISOLanguageName, lang, true) == 0)
                 {
-                    return (ELanguages) Enum.Parse(typeof(ELanguages), lang);
+                    return (ELanguages)Enum.Parse(typeof(ELanguages), lang);
                 }
             }
 
@@ -59,18 +59,20 @@ namespace SeaBotCore.Localizaion
 
         public static void SetLanguage(ELanguages elang)
         {
-            CultureInfo inf = CultureInfo.DefaultThreadCurrentUICulture;
+            var inf = CultureInfo.DefaultThreadCurrentUICulture;
             switch (elang)
             {
                 case ELanguages.EN:
-                {
-                    inf = new CultureInfo("en");
-                }
+                    {
+                        inf = new CultureInfo("en");
+                    }
+
                     break;
                 case ELanguages.RU:
-                {
-                    inf = new CultureInfo("ru-RU");
-                }
+                    {
+                        inf = new CultureInfo("ru-RU");
+                    }
+
                     break;
             }
 

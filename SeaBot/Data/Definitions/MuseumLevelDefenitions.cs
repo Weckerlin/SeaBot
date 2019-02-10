@@ -10,40 +10,55 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#region
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
-using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
+using R = Newtonsoft.Json.Required;
+
+#endregion
 
 namespace SeaBotCore.Data.Definitions
 {
+    #region
+
+    using System.Collections.Generic;
+
+    #endregion
+
     public class MuseumLevelDefenitions
     {
-        public class Root : IDefinition
+        public class Item
         {
-            [J("items")] public Items Items { get; set; }
+            [J("def_id")]
+            public int DefId { get; set; }
+
+            [J("id")]
+            public int Id { get; set; }
+
+            [J("output_amount")]
+            public int OutputAmount { get; set; }
+
+            [J("turn_count")]
+            public int TurnCount { get; set; }
+
+            [J("turn_time")]
+            public int TurnTime { get; set; }
         }
 
         public class Items
         {
-            [J("item")] public List<Item> Item { get; set; }
+            [J("item")]
+            public List<Item> Item { get; set; }
         }
 
-        public class Item
+        public class Root : IDefinition
         {
-            [J("def_id")] public int DefId { get; set; }
-            [J("id")] public int Id { get; set; }
-            [J("turn_count")] public int TurnCount { get; set; }
-            [J("turn_time")] public int TurnTime { get; set; }
-            [J("output_amount")] public int OutputAmount { get; set; }
+            [J("items")]
+            public Items Items { get; set; }
         }
     }
 }

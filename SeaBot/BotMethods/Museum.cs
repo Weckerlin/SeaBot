@@ -10,27 +10,28 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SeaBotCore.Data;
-using SeaBotCore.Data.Definitions;
-using SeaBotCore.Localizaion;
-using SeaBotCore.Utils;
-
 namespace SeaBotCore.BotMethods
 {
+    #region
+
+    using System;
+    using System.Linq;
+
+    using SeaBotCore.Data.Definitions;
+    using SeaBotCore.Localizaion;
+    using SeaBotCore.Logger;
+    using SeaBotCore.Utils;
+
+    #endregion
+
     public static class Museum
     {
         public static void CollectMuseum()
         {
-            //12 = museum
+            // 12 = museum
             var museum = Core.GlobalData.Buildings.FirstOrDefault(n => n.DefId == 12);
             if (museum == null)
             {
@@ -47,7 +48,7 @@ namespace SeaBotCore.BotMethods
             {
                 return;
             }
-            
+
             var started = TimeUtils.FromUnixTime(slot.LastUsed);
             var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == slot.Level);
 
@@ -55,8 +56,8 @@ namespace SeaBotCore.BotMethods
             if (turns >= b.TurnCount)
             {
                 museum.ProdStart = TimeUtils.GetEpochTime();
-                Logger.Logger.Info(Localization.MUSEUM_COLLECT);
-                Networking.AddTask(new Task.ConfirmMuseumTask((int)b.TurnCount));
+                Logger.Info(Localization.MUSEUM_COLLECT);
+                Networking.AddTask(new Task.ConfirmMuseumTask(b.TurnCount));
             }
         }
     }

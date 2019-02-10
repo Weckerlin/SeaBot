@@ -10,12 +10,15 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#region
 
 using System.Reflection;
 using System.Runtime.InteropServices;
+
+#endregion
 
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
@@ -38,15 +41,12 @@ using System.Runtime.InteropServices;
 [assembly: Guid("c9f20a11-7f95-4b34-ac2f-94455ac8427c")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
-//
 //      Основной номер версии
 //      Дополнительный номер версии
 //   Номер сборки
 //      Редакция
-//
 // Можно задать все значения или принять номер сборки и номер редакции по умолчанию.
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-
-[assembly: AssemblyVersion("0.8.7.6")]
-[assembly: AssemblyFileVersion("0.8.7.6")]
+[assembly: AssemblyVersion("0.8.8")]
+[assembly: AssemblyFileVersion("0.8.8")]

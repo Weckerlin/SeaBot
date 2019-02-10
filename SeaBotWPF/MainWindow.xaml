@@ -13,8 +13,10 @@
         Title="MainWindow" Height="720" Width="1280" Background="#FF001532">
     <Window.Resources>
         <Storyboard x:Key="overlay">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="0.0" To="1.0" />
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:03" BeginTime="00:00:02" From="1.0" To="0.0" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="0.0"
+                             To="1.0" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:03" BeginTime="00:00:02" From="1.0"
+                             To="0.0" />
         </Storyboard>
     </Window.Resources>
     <Grid Background="#FF001529">
@@ -101,28 +103,29 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Border Height="50" BorderThickness="1" Grid.Column="6" Grid.Row="1" 
+            <Border Height="50" BorderThickness="1" Grid.Column="6" Grid.Row="1"
                     CornerRadius="0,10,0,10" BorderBrush="Black" Background="#1E4D5F">
-        
-            <Button BorderBrush="{x:Null}" Click="ButtonBase_OnClick" Background="{x:Null}">
 
-                <Label Margin="0,-12,0,0" Foreground="AliceBlue" FontSize="41" FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Content="Start">
-                    <Label.Effect>
-                        <DropShadowEffect BlurRadius="19"></DropShadowEffect>
+                <Button BorderBrush="{x:Null}" Click="ButtonBase_OnClick" Background="{x:Null}">
+
+                    <Label Margin="0,-12,0,0" Foreground="AliceBlue" FontSize="41"
+                           FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Content="Start">
+                        <Label.Effect>
+                            <DropShadowEffect BlurRadius="19" />
                         </Label.Effect>
                     </Label>
-            </Button>
-          
+                </Button>
+
             </Border>
-            <Label Name="lbl_last_log" Grid.Row="0" Margin="-36,0,0,0" FontStyle="Oblique" FontSize="36" FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Grid.ColumnSpan="5" Foreground ="AliceBlue" Content="Last log: Collecting 10 apples">
+            <Label Name="lbl_last_log" Grid.Row="0" Margin="-36,0,0,0" FontStyle="Oblique" FontSize="36"
+                   FontFamily="pack://application:,,,/Fonts/#Open Sans Light" Grid.ColumnSpan="5"
+                   Foreground="AliceBlue" Content="Last log: Collecting 10 apples">
                 <Label.Style>
                     <Style TargetType="{x:Type Label}">
                         <Style.Triggers>
                             <Trigger Property="Visibility" Value="Visible">
                                 <Trigger.EnterActions>
-                                    <BeginStoryboard Storyboard="{StaticResource overlay}">
-                                       
-                                    </BeginStoryboard>
+                                    <BeginStoryboard Storyboard="{StaticResource overlay}" />
                                 </Trigger.EnterActions>
                             </Trigger>
                         </Style.Triggers>

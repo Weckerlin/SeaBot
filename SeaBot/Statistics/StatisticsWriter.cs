@@ -10,41 +10,68 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Threading.Tasks;
-using System.Threading;
-using Newtonsoft.Json;
-using SeaBotCore.Utils;
-
 namespace SeaBotCore.Statistics
 {
+    #region
+
+    using System;
+    using System.IO;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Newtonsoft.Json;
+
+    using SeaBotCore.Logger;
+    using SeaBotCore.Utils;
+
+    #endregion
+
     public static class StatisticsWriter
     {
-        private static Thread _thread = new Thread(ThreadLoop) { IsBackground = true};
-        const int MinuteInterval = 20;
-        private static string statfolder = "stats";
+        private const int MinuteInterval = 20;
+
+        private static readonly Thread _thread = new Thread(ThreadLoop) { IsBackground = true };
+
+        private static readonly string statfolder = "stats";
+
         internal static void Start()
         {
-            if(!_thread.IsAlive)
+            if (!_thread.IsAlive)
             {
-                 _thread.Start();
+                _thread.Start();
             }
-
         }
+
         internal static void Stop()
         {
-            new System.Threading.Tasks.Task(() =>
+            new Task(
+                () =>
+                    {
+                        ThreadKill.KillTheThread(_thread); // todo fix
+                    }).Start();
+        }
+
+        private static void LogStatistics()
+        {
+            try
             {
-                ThreadKill.KillTheThread(_thread); // todo fix
-            }).Start();
+                if (!Directory.Exists(statfolder))
+                {
+                    Directory.CreateDirectory(statfolder);
+                }
+
+                File.WriteAllText(
+                    statfolder + "/" + DateTime.Now.ToString("yyyyMMddTHHmmss"),
+                    JsonConvert.SerializeObject(Core.GlobalData));
+                Logger.Debug("Saved a new stat");
+            }
+            catch (Exception)
+            {
+                // Ignored
+            }
         }
 
         private static void ThreadLoop()
@@ -57,24 +84,6 @@ namespace SeaBotCore.Statistics
                     LogStatistics();
                     Thread.Sleep(MinuteInterval * 60 * 1000);
                 }
-            }
-        }
-
-        private static void LogStatistics()
-        {
-            try
-            {
-                    if (!Directory.Exists(statfolder))
-                    {
-                        Directory.CreateDirectory(statfolder);
-                    }
-
-                    File.WriteAllText(statfolder + "/" + DateTime.Now.ToString("yyyyMMddTHHmmss"), JsonConvert.SerializeObject(Core.GlobalData));
-                    Logger.Logger.Debug("Saved a new stat");
-            }
-            catch (Exception)
-            {
-                //Ignored
             }
         }
     }

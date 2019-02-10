@@ -10,26 +10,41 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using SeaBotCore;
-using SeaBotCore.BotMethods;
-using SeaBotCore.Data.Definitions;
-using SeaBotCore.Data.Materials;
-using SeaBotCore.Events;
-using SeaBotCore.Utils;
-
 namespace ConsoleApp1
 {
+    #region
+
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Threading;
+
+    using SeaBotCore;
+    using SeaBotCore.BotMethods;
+    using SeaBotCore.Data.Definitions;
+    using SeaBotCore.Data.Materials;
+    using SeaBotCore.Events;
+    using SeaBotCore.Utils;
+
+    #endregion
+
     internal class Program
     {
         public static bool kicked;
+
+        private static void Kicked_OnWrongSession(Enums.EErrorCode e)
+        {
+            kicked = true;
+            Console.WriteLine("Kicked us with error " + e);
+        }
+
+        private static void Kicked_OnWrongSession()
+        {
+            kicked = true;
+        }
 
         private static void Main(string[] args)
         {
@@ -51,16 +66,21 @@ namespace ConsoleApp1
                     if (!kicked)
                     {
                         var barrelid = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
-                        var bar = Barrels.BarrelController.GetNextBarrel(Definitions.BarrelDef.Items.Item
-                            .Where(n => n.DefId == 21).First());
+                        var bar = Barrels.BarrelController.GetNextBarrel(
+                            Definitions.BarrelDef.Items.Item.Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
                         {
                             Console.WriteLine(
                                 $"Barrel! Collecting {bar.Amount} {MaterialDB.GetItem(bar.Definition.Id).Name}");
                         }
 
-                        Networking.AddTask(new Task.ConfirmBarrelTask((int) barrelid, bar.get_type(), bar.Amount,
-                            bar.Definition.Id, Core.GlobalData.Level));
+                        Networking.AddTask(
+                            new Task.ConfirmBarrelTask(
+                                (int)barrelid,
+                                bar.get_type(),
+                                bar.Amount,
+                                bar.Definition.Id,
+                                Core.GlobalData.Level));
                         attempts++;
                     }
                     else
@@ -70,17 +90,6 @@ namespace ConsoleApp1
                     }
                 }
             }
-        }
-
-        private static void Kicked_OnWrongSession(Enums.EErrorCode e)
-        {
-            kicked = true;
-            Console.WriteLine("Kicked us with error " + e);
-        }
-
-        private static void Kicked_OnWrongSession()
-        {
-            kicked = true;
         }
     }
 }

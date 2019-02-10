@@ -113,9 +113,6 @@
     <Compile Include="TelegramBot\TeleUtils.cs" />
     <Compile Include="Utils\CompUtils.cs" />
     <Compile Include="Utils\GitHub.cs" />
-    <EmbeddedResource Include="Form1.en.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,9 +165,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Anchor.ico" />
+    <Content Include="Exchange.ico" />
     <Content Include="Icons\coin.png" />
     <Content Include="Icons\diamond.png" />
     <Content Include="Icons\fish.png" />
+    <Content Include="Stat.ico" />
     <None Include="Icons\level.png" />
     <Content Include="Icons\metal.png" />
     <None Include="Icons\sailor.png" />

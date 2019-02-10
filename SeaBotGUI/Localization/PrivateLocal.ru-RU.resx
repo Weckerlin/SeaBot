@@ -307,4 +307,7 @@
 	<data name="STAT_AMOUNT" xml:space="preserve">
 		<value>Кол-во</value>
 	</data>
+	<data name="SHIPS.SOCIAL_CONTRACT" xml:space="preserve">
+		<value>Соц. Контракт</value>
+	</data>
 </root>

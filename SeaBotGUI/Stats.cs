@@ -1,4 +1,4 @@
-﻿// SeaBotCore
+﻿// SeabotGUI
 // Copyright (C) 2018 - 2019 Weespin
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -10,67 +10,153 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using LiveCharts;
-using LiveCharts.Wpf;
-using SeaBotCore;
-using SeaBotCore.Data;
-using System.IO;
-using Newtonsoft.Json;
-using System.Globalization;
-using SeaBotGUI.Localization;
-
 namespace SeaBotGUI
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Integration;
+
+    using LiveCharts;
+    using LiveCharts.Wpf;
+
+    using Newtonsoft.Json;
+
+    using SeaBotCore.Data;
+
+    using SeaBotGUI.Localization;
+
+    #endregion
+
     public partial class Stats : Form
     {
+        private static ChartData chartdata = ChartData.Resources;
+
+        private static ChartType charttype = ChartType.Hour;
+
         public Stats()
         {
-            InitializeComponent();
-            DrawChart();
-            cartesianChart1.LegendLocation = LegendLocation.Right;
-            cartesianChart1.Zoom = ZoomingOptions.X;
+            this.InitializeComponent();
+            this.DrawChart();
+            this.cartesianChart1.LegendLocation = LegendLocation.Right;
+            this.cartesianChart1.Zoom = ZoomingOptions.X;
         }
-      
-        private void CartesianChart1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-        {
 
-        }
-        private void ClearZoom()
-        {
-            //to clear the current zoom/pan just set the axis limits to double.NaN
-
-            cartesianChart1.AxisX[0].MinValue = double.NaN;
-            cartesianChart1.AxisX[0].MaxValue = double.NaN;
-            cartesianChart1.AxisY[0].MinValue = double.NaN;
-            cartesianChart1.AxisY[0].MaxValue = double.NaN;
-        }
-        private void Btn_zoomreset_Click(object sender, EventArgs e)
-        {
-            ClearZoom();
-        }
-        static ChartType charttype = ChartType.Hour;
-        static ChartData chartdata = ChartData.Resources;
-        public enum ChartType
-        {
-            Hour,Day
-        }
         public enum ChartData
         {
-            Resources,PlayerInfo
+            Resources,
+
+            PlayerInfo
         }
+
+        public enum ChartType
+        {
+            Hour,
+
+            Day
+        }
+
+        public void DrawChart()
+        {
+            var data = this.GetGlobalData(charttype).OrderBy(x => x.createtime).ToList();
+            if (chartdata == ChartData.Resources)
+            {
+                this.cartesianChart1.Series = new SeriesCollection
+                                                  {
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_COINS,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 1)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_FISH,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 3)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_STONE,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 5)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_IRON,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 6)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_WOOD,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 4)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          }
+                                                  };
+            }
+
+            if (chartdata == ChartData.PlayerInfo)
+            {
+                this.cartesianChart1.Series = new SeriesCollection
+                                                  {
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_LEVEL,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(n => Convert.ToDouble(n.data.Level)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_GEMS,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(
+                                                                      n => Convert.ToDouble(
+                                                                          n.data.Inventory.Where(a => a.Id == 2)
+                                                                              .FirstOrDefault()?.Amount)))
+                                                          },
+                                                      new LineSeries
+                                                          {
+                                                              Title = PrivateLocal.STAT_SAILORS,
+                                                              Values = new ChartValues<double>(
+                                                                  data.Select(n => Convert.ToDouble(n.data.Sailors)))
+                                                          }
+                                                  };
+            }
+
+            this.cartesianChart1.AxisX.Clear();
+            this.cartesianChart1.AxisX.Add(
+                new Axis
+                    {
+                        Title = PrivateLocal.STAT_TIME, Labels = data.Select(n => n.createtime.ToString()).ToList()
+                    });
+            this.cartesianChart1.AxisY.Clear();
+            this.cartesianChart1.AxisY.Add(new Axis { Title = PrivateLocal.STAT_AMOUNT });
+        }
+
         public Dictionary<GlobalData, DateTime> LoadAllStats()
         {
             var l = new Dictionary<GlobalData, DateTime>();
@@ -81,146 +167,78 @@ namespace SeaBotGUI
                 {
                     try
                     {
-                        var datestr = file.Replace(@"stats\", "");
+                        var datestr = file.Replace(@"stats\", string.Empty);
                         var date = DateTime.ParseExact(datestr, @"yyyyMMddTHHmmss", CultureInfo.InvariantCulture);
                         l.Add(JsonConvert.DeserializeObject<GlobalData>(File.ReadAllText(file)), date);
                     }
                     catch (Exception)
                     {
-
                     }
-                    
                 }
             }
+
             return l;
         }
-        List<GraphGlobalData> GetGlobalData(ChartType t)
-        {
 
-            var array = LoadAllStats();
+        private void Btn_zoomreset_Click(object sender, EventArgs e)
+        {
+            this.ClearZoom();
+        }
+
+        private void CartesianChart1_ChildChanged(object sender, ChildChangedEventArgs e)
+        {
+        }
+
+        private void ClearZoom()
+        {
+            // to clear the current zoom/pan just set the axis limits to double.NaN
+            this.cartesianChart1.AxisX[0].MinValue = double.NaN;
+            this.cartesianChart1.AxisX[0].MaxValue = double.NaN;
+            this.cartesianChart1.AxisY[0].MinValue = double.NaN;
+            this.cartesianChart1.AxisY[0].MaxValue = double.NaN;
+        }
+
+        private List<GraphGlobalData> GetGlobalData(ChartType t)
+        {
+            var array = this.LoadAllStats();
             var l = new Dictionary<GlobalData, DateTime>();
-            
-                foreach (var gd in array)
+
+            foreach (var gd in array)
+            {
+                var d = false;
+                if (t == ChartType.Hour)
                 {
-                    var d = false;
-                    if (t == ChartType.Hour)
-                    {
-                        d = l.All(n => (gd.Value - n.Value).Duration().TotalMinutes >= 59);
-                    }
-                    if (t == ChartType.Day)
-                    {
-                        d = l.All(n => (gd.Value - n.Value).Duration().TotalDays >= 0.9);
-                    }
-                    if (d)
-                    {
-                        l.Add(gd.Key, gd.Value);
-                    }
+                    d = l.All(n => (gd.Value - n.Value).Duration().TotalMinutes >= 59);
                 }
-            
-            List<GraphGlobalData> list = new List<GraphGlobalData>();
-            foreach(var entry in l)
+
+                if (t == ChartType.Day)
+                {
+                    d = l.All(n => (gd.Value - n.Value).Duration().TotalDays >= 0.9);
+                }
+
+                if (d)
+                {
+                    l.Add(gd.Key, gd.Value);
+                }
+            }
+
+            var list = new List<GraphGlobalData>();
+            foreach (var entry in l)
             {
                 list.Add(new GraphGlobalData(entry.Value, entry.Key));
             }
+
             return list;
-        }
-       internal struct GraphGlobalData {
-            internal GlobalData data;
-            internal DateTime createtime;
-            internal GraphGlobalData(DateTime time, GlobalData gdata)
-            {
-                data = gdata;
-                createtime = time;
-            }
-        }
-        public void DrawChart()
-        {
-            List<GraphGlobalData> data = GetGlobalData(charttype).OrderBy(x => x.createtime).ToList();
-            if (chartdata == ChartData.Resources)
-            {
-                cartesianChart1.Series = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title = PrivateLocal.STAT_COINS,
-                    Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a=>a.Id==1).FirstOrDefault()?.Amount)))
-                },
-                new LineSeries
-                {
-                    Title = PrivateLocal.STAT_FISH,
-                    Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a=>a.Id==3).FirstOrDefault()?.Amount)))
-                },
-                new LineSeries
-                {
-                    Title = PrivateLocal.STAT_STONE,
-                    Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a=>a.Id==5).FirstOrDefault()?.Amount)))
-
-                },
-
-                   new LineSeries
-                {
-                    Title = PrivateLocal.STAT_IRON,
-                       Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a=>a.Id==6).FirstOrDefault()?.Amount)))
-
-                },
-                    new LineSeries
-                {
-                    Title = PrivateLocal.STAT_WOOD,
-                      Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a=>a.Id==4).FirstOrDefault()?.Amount)))
-
-                },
-
-            };
-            }
-                if (chartdata == ChartData.PlayerInfo)
-                {
-                    cartesianChart1.Series = new SeriesCollection
-                    {
-                        new LineSeries
-                        {
-                            Title = PrivateLocal.STAT_LEVEL,
-                            Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Level)))
-
-                        },
-                        new LineSeries
-                        {
-                            Title = PrivateLocal.STAT_GEMS,
-                            Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Inventory.Where(a => a.Id == 2).FirstOrDefault()?.Amount)))
-
-                        },
-                        new LineSeries
-                        {
-                            Title = PrivateLocal.STAT_SAILORS,
-                            Values = new ChartValues<double>(data.Select(n => Convert.ToDouble(n.data.Sailors)))
-
-                        }
-
-                    };
-                }
-                cartesianChart1.AxisX.Clear();
-                cartesianChart1.AxisX.Add(new Axis
-                {
-                    Title = PrivateLocal.STAT_TIME,
-                    Labels = data.Select(n => (string)n.createtime.ToString()).ToList()
-                });
-                cartesianChart1.AxisY.Clear();
-                cartesianChart1.AxisY.Add(new Axis
-                {
-                    Title = PrivateLocal.STAT_AMOUNT,
-
-                });
-            
         }
 
         private void Radio_days_CheckedChanged(object sender, EventArgs e)
         {
-       //     charttype = ChartType.Day;
-          
+            // charttype = ChartType.Day;
         }
 
         private void Radio_hours_CheckedChanged(object sender, EventArgs e)
         {
-            if (!radio_days.Checked)
+            if (!this.radio_days.Checked)
             {
                 charttype = ChartType.Hour;
             }
@@ -228,12 +246,13 @@ namespace SeaBotGUI
             {
                 charttype = ChartType.Day;
             }
-            DrawChart();
+
+            this.DrawChart();
         }
 
         private void Radio_res_CheckedChanged(object sender, EventArgs e)
         {
-            if (radio_res.Checked)
+            if (this.radio_res.Checked)
             {
                 chartdata = ChartData.Resources;
             }
@@ -241,8 +260,21 @@ namespace SeaBotGUI
             {
                 chartdata = ChartData.PlayerInfo;
             }
-            DrawChart();
+
+            this.DrawChart();
         }
 
+        internal struct GraphGlobalData
+        {
+            internal GlobalData data;
+
+            internal DateTime createtime;
+
+            internal GraphGlobalData(DateTime time, GlobalData gdata)
+            {
+                this.data = gdata;
+                this.createtime = time;
+            }
+        }
     }
 }

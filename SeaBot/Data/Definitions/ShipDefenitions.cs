@@ -10,153 +10,236 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#region
 
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
-using R = Newtonsoft.Json.Required;
 using N = Newtonsoft.Json.NullValueHandling;
+using R = Newtonsoft.Json.Required;
+
+#endregion
 
 namespace SeaBotCore.Data.Definitions
 {
+    #region
+
+    using System;
+    using System.Collections.Generic;
+
+    using Newtonsoft.Json;
+
+    #endregion
+
     public class ShipDefenitions
     {
-        public class Items
+        public class Animation
         {
-            [J("item")] public List<Item> Item { get; set; }
+            [J("data")]
+            public string Data { get; set; }
+
+            [J("id")]
+            public int Id { get; set; }
         }
 
-        public class Root : IDefinition
+        public class Animations
         {
-            [J("items")] public Items Items { get; set; }
+            [J("animation")]
+            public List<Animation> Animation { get; set; }
+        }
+
+        public class CapacityLevelsLevel
+        {
+            [J("capacity", NullValueHandling = N.Ignore)]
+            public int? Capacity { get; set; }
+
+            [J("gem_price")]
+            public int GemPrice { get; set; }
+
+            [J("id")]
+            public int Id { get; set; }
+
+            [J("materials")]
+            public Materials Materials { get; set; }
+
+            [J("sailors", NullValueHandling = N.Ignore)]
+            public int? Sailors { get; set; }
+
+            [J("xp")]
+            public int Xp { get; set; }
         }
 
         public class Item
         {
-            [J("def_id")] public int DefId { get; set; }
-            [J("version_id")] public int VersionId { get; set; }
-            [J("texture")] public string Texture { get; set; }
-            [J("name")] public string Name { get; set; }
-            [J("name_loc")] public string NameLoc { get; set; }
-            [J("desc_loc")] public string DescLoc { get; set; }
-            [J("ship_type")] public string ShipType { get; set; }
-            [J("propulsion")] public string Propulsion { get; set; }
-            [J("slot_usage")] public int SlotUsage { get; set; }
+            [J("animations", NullValueHandling = N.Ignore)]
+            public Animations Animations { get; set; }
+
+            [J("bounds_max")]
+            public string BoundsMax { get; set; }
+
+            [J("bounds_min")]
+            public string BoundsMin { get; set; }
+
+            [J("capacity_levels", NullValueHandling = N.Ignore)]
+            public Levels CapacityLevels { get; set; }
+
+            [J("def_id")]
+            public int DefId { get; set; }
+
+            [J("desc_loc")]
+            public string DescLoc { get; set; }
+
+            [J("event_id")]
+            public int EventId { get; set; }
+
+            [J("hide")]
+            public int Hide { get; set; }
+
+            [J("levels", NullValueHandling = N.Ignore)]
+            public LevelsClass Levels { get; set; }
 
             [J("mass")]
             [JsonConverter(typeof(ParseStringConverter))]
             public int Mass { get; set; }
 
-            [J("start_level")] public int StartLevel { get; set; }
-            [J("player_level")] public int PlayerLevel { get; set; }
-            [J("req_type")] public string ReqType { get; set; }
-            [J("req_id")] public int ReqId { get; set; }
-            [J("req_level")] public int ReqLevel { get; set; }
-            [J("max_count")] public int MaxCount { get; set; }
-            [J("shop_order_id")] public int ShopOrderId { get; set; }
-            [J("event_id")] public int EventId { get; set; }
-            [J("museum_xp")] public int MuseumXp { get; set; }
-            [J("hide")] public int Hide { get; set; }
-            [J("bounds_min")] public string BoundsMin { get; set; }
-            [J("bounds_max")] public string BoundsMax { get; set; }
+            [J("max_count")]
+            public int MaxCount { get; set; }
 
-            [J("animations", NullValueHandling = N.Ignore)]
-            public Animations Animations { get; set; }
+            [J("museum_xp")]
+            public int MuseumXp { get; set; }
 
-            [J("levels", NullValueHandling = N.Ignore)]
-            public LevelsClass Levels { get; set; }
+            [J("name")]
+            public string Name { get; set; }
 
-            [J("capacity_levels", NullValueHandling = N.Ignore)]
-            public Levels CapacityLevels { get; set; }
-
-            [J("sailors_levels", NullValueHandling = N.Ignore)]
-            public Levels SailorsLevels { get; set; }
+            [J("name_loc")]
+            public string NameLoc { get; set; }
 
             [J("particles", NullValueHandling = N.Ignore)]
             public Particles Particles { get; set; }
 
             [J("particles_new", NullValueHandling = N.Ignore)]
             public ParticlesNew ParticlesNew { get; set; }
+
+            [J("player_level")]
+            public int PlayerLevel { get; set; }
+
+            [J("propulsion")]
+            public string Propulsion { get; set; }
+
+            [J("req_id")]
+            public int ReqId { get; set; }
+
+            [J("req_level")]
+            public int ReqLevel { get; set; }
+
+            [J("req_type")]
+            public string ReqType { get; set; }
+
+            [J("sailors_levels", NullValueHandling = N.Ignore)]
+            public Levels SailorsLevels { get; set; }
+
+            [J("ship_type")]
+            public string ShipType { get; set; }
+
+            [J("shop_order_id")]
+            public int ShopOrderId { get; set; }
+
+            [J("slot_usage")]
+            public int SlotUsage { get; set; }
+
+            [J("start_level")]
+            public int StartLevel { get; set; }
+
+            [J("texture")]
+            public string Texture { get; set; }
+
+            [J("version_id")]
+            public int VersionId { get; set; }
         }
 
-        public class Animations
+        public class Items
         {
-            [J("animation")] public List<Animation> Animation { get; set; }
-        }
-
-        public class Animation
-        {
-            [J("id")] public int Id { get; set; }
-            [J("data")] public string Data { get; set; }
+            [J("item")]
+            public List<Item> Item { get; set; }
         }
 
         public class Levels
         {
-            [J("level")] public List<CapacityLevelsLevel> Level { get; set; }
-        }
-
-        public class CapacityLevelsLevel
-        {
-            [J("id")] public int Id { get; set; }
-            [J("xp")] public int Xp { get; set; }
-            [J("gem_price")] public int GemPrice { get; set; }
-
-            [J("capacity", NullValueHandling = N.Ignore)]
-            public int? Capacity { get; set; }
-
-            [J("materials")] public Materials Materials { get; set; }
-
-            [J("sailors", NullValueHandling = N.Ignore)]
-            public int? Sailors { get; set; }
-        }
-
-        public class Materials
-        {
-            [J("material")] public List<Material> Material { get; set; }
-        }
-
-        public class Material
-        {
-            [J("id")] public int Id { get; set; }
-            [J("amount")] public int Amount { get; set; }
+            [J("level")]
+            public List<CapacityLevelsLevel> Level { get; set; }
         }
 
         public class LevelsClass
         {
-            [J("level")] public List<LevelsLevel> Level { get; set; }
+            [J("level")]
+            public List<LevelsLevel> Level { get; set; }
         }
 
         public class LevelsLevel
         {
-            [J("id")] public int Id { get; set; }
-            [J("xp")] public int Xp { get; set; }
-            [J("gem_price")] public int GemPrice { get; set; }
-            [J("sailors")] public int Sailors { get; set; }
-            [J("capacity")] public int Capacity { get; set; }
-            [J("speed")] public int Speed { get; set; }
+            [J("capacity")]
+            public int Capacity { get; set; }
+
+            [J("gem_price")]
+            public int GemPrice { get; set; }
+
+            [J("id")]
+            public int Id { get; set; }
 
             [J("materials", NullValueHandling = N.Ignore)]
             public Materials Materials { get; set; }
+
+            [J("sailors")]
+            public int Sailors { get; set; }
+
+            [J("speed")]
+            public int Speed { get; set; }
+
+            [J("xp")]
+            public int Xp { get; set; }
         }
 
-        public class Particles
+        public class Material
         {
-            [J("particle")] public List<Animation> Particle { get; set; }
+            [J("amount")]
+            public int Amount { get; set; }
+
+            [J("id")]
+            public int Id { get; set; }
         }
 
-        public class ParticlesNew
+        public class Materials
         {
-            [J("particle")] public List<Particle> Particle { get; set; }
+            [J("material")]
+            public List<Material> Material { get; set; }
         }
 
         public class Particle
         {
-            [J("particle_id")] public int ParticleId { get; set; }
-            [J("data")] public string Data { get; set; }
+            [J("data")]
+            public string Data { get; set; }
+
+            [J("particle_id")]
+            public int ParticleId { get; set; }
+        }
+
+        public class Particles
+        {
+            [J("particle")]
+            public List<Animation> Particle { get; set; }
+        }
+
+        public class ParticlesNew
+        {
+            [J("particle")]
+            public List<Particle> Particle { get; set; }
+        }
+
+        public class Root : IDefinition
+        {
+            [J("items")]
+            public Items Items { get; set; }
         }
 
         internal class ParseStringConverter : JsonConverter
@@ -193,7 +276,7 @@ namespace SeaBotCore.Data.Definitions
                     return;
                 }
 
-                var value = (int) untypedValue;
+                var value = (int)untypedValue;
                 serializer.Serialize(writer, value.ToString());
             }
         }

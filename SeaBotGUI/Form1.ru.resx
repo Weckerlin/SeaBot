@@ -118,6 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 50</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Flexushka</value>
+  </data>
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="groupBox26.Text" xml:space="preserve">
+    <value>Спасибо за тестирование и репорты</value>
+  </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
@@ -132,6 +154,82 @@
   </data>
   <data name="tabPage4.Text" xml:space="preserve">
     <value>О проекте</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>Продавать
+Предметы
+</value>
+  </data>
+  <data name="button1.ToolTip" xml:space="preserve">
+    <value>Выбери вещи которые бот должен продавать</value>
+  </data>
+  <data name="groupBox24.Text" xml:space="preserve">
+    <value>Рынок</value>
+  </data>
+  <data name="radio_wreck.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 68</value>
+  </data>
+  <data name="radio_wreck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
+  </data>
+  <data name="radio_wreck.Text" xml:space="preserve">
+    <value>Разломы</value>
+  </data>
+  <data name="radio_wreck.ToolTip" xml:space="preserve">
+    <value>Сундуки с павших кораблей :(</value>
+  </data>
+  <data name="radio_marketplace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="radio_marketplace.Text" xml:space="preserve">
+    <value>Рынок</value>
+  </data>
+  <data name="radio_marketplace.ToolTip" xml:space="preserve">
+    <value>Бот будет автоматически продавать ресурсы.
+Обязательно выбери какие именно в "Продавать Предметы"</value>
+  </data>
+  <data name="radio_autoshipauto.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 44</value>
+  </data>
+  <data name="radio_autoshipauto.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="radio_autoshipauto.Text" xml:space="preserve">
+    <value>Авто</value>
+  </data>
+  <data name="radio_autoshipauto.ToolTip" xml:space="preserve">
+    <value>Специальный режим который совмещает всё вместе!
+</value>
+  </data>
+  <data name="radio_outpost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 21</value>
+  </data>
+  <data name="radio_outpost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 17</value>
+  </data>
+  <data name="radio_outpost.Text" xml:space="preserve">
+    <value>Туманы</value>
+  </data>
+  <data name="radio_outpost.ToolTip" xml:space="preserve">
+    <value>Разблокирует туман</value>
+  </data>
+  <data name="radio_contractor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="radio_contractor.Text" xml:space="preserve">
+    <value>Контракты</value>
+  </data>
+  <data name="radio_contractor.ToolTip" xml:space="preserve">
+    <value>Побочные и главные квесты игры!</value>
+  </data>
+  <data name="radio_upgradable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 17</value>
+  </data>
+  <data name="radio_upgradable.Text" xml:space="preserve">
+    <value>Обновляемые</value>
+  </data>
+  <data name="radio_upgradable.ToolTip" xml:space="preserve">
+    <value>Обновляемые - обычные места которые можно апгрейднуть после длительных рейсов туда-сюда</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>323, 16</value>
@@ -260,13 +358,34 @@
     <value>Опт. стратегия</value>
   </data>
   <data name="radio_oil.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 19</value>
+    <value>131, 19</value>
+  </data>
+  <data name="radio_oil.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="radio_oil.Text" xml:space="preserve">
+    <value>Нефть</value>
   </data>
   <data name="radio_stone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 19</value>
+    <value>71, 19</value>
+  </data>
+  <data name="radio_stone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="radio_stone.Text" xml:space="preserve">
+    <value>Камень</value>
   </data>
   <data name="radio_fish.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 43</value>
+    <value>71, 43</value>
+  </data>
+  <data name="radio_fish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="radio_fish.Text" xml:space="preserve">
+    <value>Рыба</value>
+  </data>
+  <data name="radio_iron.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 43</value>
   </data>
   <data name="radio_iron.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
@@ -275,13 +394,16 @@
     <value>Железо</value>
   </data>
   <data name="radio_wood.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 43</value>
+    <value>131, 43</value>
   </data>
   <data name="radio_wood.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
   </data>
   <data name="radio_wood.Text" xml:space="preserve">
     <value>Дерево</value>
+  </data>
+  <data name="radio_gold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
   </data>
   <data name="radio_gold.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 17</value>
@@ -290,10 +412,23 @@
     <value>Монеты</value>
   </data>
   <data name="groupBox11.Text" xml:space="preserve">
-    <value>Лут авто-кораблей</value>
+    <value>Лут с обновляемых</value>
   </data>
   <data name="tabPage8.Text" xml:space="preserve">
     <value>Стратегия</value>
+  </data>
+  <data name="chk_exploit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 17</value>
+  </data>
+  <data name="chk_exploit.Text" xml:space="preserve">
+    <value>Небезопасный режим</value>
+  </data>
+  <data name="chk_exploit.ToolTip" xml:space="preserve">
+    <value>Очень странная штука
+Бот будет отправлять корабли туда, куда вобще невозможно попасть!</value>
+  </data>
+  <data name="groupBox25.Text" xml:space="preserve">
+    <value>Дополнительно.</value>
   </data>
   <data name="btn_dumpcore.Text" xml:space="preserve">
     <value>Дамп инфы</value>
@@ -439,10 +574,18 @@
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Здания</value>
   </data>
+  <data name="linkLabel10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 408</value>
+  </data>
+  <data name="linkLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 13</value>
+  </data>
+  <data name="linkLabel10.Text" xml:space="preserve">
+    <value>Присоединяйтесь к нашему телеграм каналу для новостей, обновлений и бета версий! </value>
+  </data>
   <data name="btn_stats.Text" xml:space="preserve">
     <value>Статистика</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -497,6 +640,9 @@
   <data name="chk_automuseum.Text" xml:space="preserve">
     <value>Собирать музеи</value>
   </data>
+  <data name="chk_automuseum.ToolTip" xml:space="preserve">
+    <value>Сбор ресурсов с музеев (только если полные)</value>
+  </data>
   <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 65</value>
   </data>
@@ -505,6 +651,9 @@
   </data>
   <data name="chk_autoshipupg.Text" xml:space="preserve">
     <value>Авто-Корабли</value>
+  </data>
+  <data name="chk_autoshipupg.ToolTip" xml:space="preserve">
+    <value>Отправка/Разгрузка кораблей</value>
   </data>
   <data name="chk_finishupgrade.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 65</value>
@@ -515,6 +664,9 @@
   <data name="chk_finishupgrade.Text" xml:space="preserve">
     <value>Завершать апгрейды</value>
   </data>
+  <data name="chk_finishupgrade.ToolTip" xml:space="preserve">
+    <value>Завершать все апгрейды</value>
+  </data>
   <data name="chk_prodfact.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 88</value>
   </data>
@@ -523,6 +675,9 @@
   </data>
   <data name="chk_prodfact.Text" xml:space="preserve">
     <value>Производство заводов</value>
+  </data>
+  <data name="chk_prodfact.ToolTip" xml:space="preserve">
+    <value>Произоводство ресурсов с помощью заводов</value>
   </data>
   <data name="chk_barrelhack.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 42</value>
@@ -533,6 +688,9 @@
   <data name="chk_barrelhack.Text" xml:space="preserve">
     <value>Авто-Бочки</value>
   </data>
+  <data name="chk_barrelhack.ToolTip" xml:space="preserve">
+    <value>Бот эмулирует бочки используя псевдо-рандом</value>
+  </data>
   <data name="chk_collectmat.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 19</value>
   </data>
@@ -542,11 +700,17 @@
   <data name="chk_collectmat.Text" xml:space="preserve">
     <value>Собирать заводы</value>
   </data>
+  <data name="chk_collectmat.ToolTip" xml:space="preserve">
+    <value>Бот будет собирать все ресурсы с заводов</value>
+  </data>
   <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 17</value>
   </data>
   <data name="chk_autofish.Text" xml:space="preserve">
     <value>Собирать рыбу</value>
+  </data>
+  <data name="chk_autofish.ToolTip" xml:space="preserve">
+    <value>Бот будет собирать рыбу с пирсов</value>
   </data>
   <data name="chk_aupgrade.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 42</value>
@@ -556,6 +720,9 @@
   </data>
   <data name="chk_aupgrade.Text" xml:space="preserve">
     <value>Апгрейд зданий</value>
+  </data>
+  <data name="chk_aupgrade.ToolTip" xml:space="preserve">
+    <value>Апгрейд всех зданий в игре</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>Стратегия</value>

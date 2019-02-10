@@ -10,26 +10,33 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//  
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Text;
-using SeaBotCore.Localizaion;
-
 namespace SeaBotCore.Logger
 {
+    #region
+
+    using System;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+
+    using SeaBotCore.Localizaion;
+
+    #endregion
+
     public static class Logger
     {
         private const string FILE_EXT = ".log";
-        private static readonly string datetimeFormat;
-        private static readonly string logFilename;
 
         public static bool Muted = false;
+
+        private static readonly string datetimeFormat;
+
+        private static readonly string logFilename;
 
         /// <summary>
         ///     Initiate an instance of SimpleLogger class constructor.
@@ -41,8 +48,8 @@ namespace SeaBotCore.Logger
             logFilename = DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + FILE_EXT;
 
             // Log file header line
-
-            var logHeader = logFilename + " " +Localization.LOGGER_CREATED+ " v"+ FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion;
+            var logHeader = logFilename + " " + Localization.LOGGER_CREATED + " v" + FileVersionInfo
+                                .GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
             if (!Directory.Exists("logs"))
             {
                 Directory.CreateDirectory("logs");
@@ -52,6 +59,24 @@ namespace SeaBotCore.Logger
             {
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
             }
+        }
+
+        [Flags]
+        private enum LogLevel
+        {
+            NETWORK,
+
+            TRACE,
+
+            INFO,
+
+            DEBUG,
+
+            WARNING,
+
+            ERROR,
+
+            FATAL
         }
 
         /// <summary>
@@ -108,24 +133,6 @@ namespace SeaBotCore.Logger
             WriteFormattedLog(LogLevel.WARNING, text);
         }
 
-        private static void WriteLine(string text, bool append = true)
-        {
-            try
-            {
-                using (var writer = new StreamWriter("logs/" + logFilename, append, Encoding.UTF8))
-                {
-                    if (!string.IsNullOrEmpty(text))
-                    {
-                        writer.WriteLine(text);
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
-
-
         private static void WriteFormattedLog(LogLevel level, string text)
         {
             if (Muted)
@@ -176,12 +183,28 @@ namespace SeaBotCore.Logger
                     break;
             }
 
-
             WriteLine(pretext + text);
             if (!onlylog)
             {
                 Message.message = pretext + text;
                 Event.LogMessageChat.Invoke(Message);
+            }
+        }
+
+        private static void WriteLine(string text, bool append = true)
+        {
+            try
+            {
+                using (var writer = new StreamWriter("logs/" + logFilename, append, Encoding.UTF8))
+                {
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        writer.WriteLine(text);
+                    }
+                }
+            }
+            catch
+            {
             }
         }
 
@@ -208,19 +231,8 @@ namespace SeaBotCore.Logger
         public class Message
         {
             public Color color;
-            public string message;
-        }
 
-        [Flags]
-        private enum LogLevel
-        {
-            NETWORK,
-            TRACE,
-            INFO,
-            DEBUG,
-            WARNING,
-            ERROR,
-            FATAL
+            public string message;
         }
     }
 }
