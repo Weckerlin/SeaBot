@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;radio_saveloot.Parent" xml:space="preserve">
-    <value>groupBox12</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lbl_wood.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -160,9 +157,8 @@
   <data name="&gt;&gt;groupBox21.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 17</value>
+  <data name="radio_sleepeveryhrs.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="linkLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -185,6 +181,7 @@
   <data name="&gt;&gt;tabControl2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="groupBox18.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 113</value>
   </data>
@@ -228,8 +225,14 @@
   <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="chk_autofish.Text" xml:space="preserve">
+    <value>Collect Fish</value>
+  </data>
   <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>463, 424</value>
+  </data>
+  <data name="lbl_coins.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_collectmat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -249,8 +252,8 @@
   <data name="&gt;&gt;num_ironlimit.Name" xml:space="preserve">
     <value>num_ironlimit</value>
   </data>
-  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
-    <value>columnHeader1</value>
+  <data name="linkLabel6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="radio_gold.Text" xml:space="preserve">
     <value>Coins</value>
@@ -378,6 +381,9 @@
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Main</value>
   </data>
@@ -438,8 +444,8 @@
   <data name="radio_saveloot.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 17</value>
   </data>
-  <data name="pictureBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 23</value>
+  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
   </data>
   <data name="lbl_gems.Location" type="System.Drawing.Point, System.Drawing">
     <value>39, 51</value>
@@ -449,6 +455,9 @@
   </data>
   <data name="&gt;&gt;tabPage4.Name" xml:space="preserve">
     <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;groupBox25.Name" xml:space="preserve">
+    <value>groupBox25</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
@@ -474,8 +483,8 @@
   <data name="&gt;&gt;lbl_lvl.Name" xml:space="preserve">
     <value>lbl_lvl</value>
   </data>
-  <data name="radio_wreck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
+  <data name="tabPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_autoshipupg.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 43</value>
@@ -497,6 +506,9 @@
   </data>
   <data name="&gt;&gt;radio_outpost.Parent" xml:space="preserve">
     <value>groupBox22</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
   </data>
   <data name="&gt;&gt;checkBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -533,9 +545,6 @@
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="radioButton1.Text" xml:space="preserve">
-    <value>Mechanical Part</value>
   </data>
   <data name="chk_finishupgrade.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 17</value>
@@ -612,8 +621,8 @@
   <data name="tabControl2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 3</value>
   </data>
   <data name="linkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -648,9 +657,6 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Interval (seconds)</value>
   </data>
-  <data name="label10.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
@@ -677,6 +683,9 @@
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox6.Name" xml:space="preserve">
     <value>pictureBox6</value>
@@ -828,9 +837,6 @@
   <data name="chk_onlyfactory.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
   <data name="radio_wood.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -903,9 +909,6 @@
   <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 59</value>
   </data>
-  <data name="&gt;&gt;button4.Parent" xml:space="preserve">
-    <value>groupBox13</value>
-  </data>
   <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
     <value>groupBox5</value>
   </data>
@@ -941,6 +944,9 @@
   </data>
   <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="radioButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
   </data>
   <data name="lbl_iron.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
@@ -1011,6 +1017,9 @@
   <data name="linkLabel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
   <data name="radio_fish.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -1073,6 +1082,9 @@
   </data>
   <data name="&gt;&gt;num_removenum.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;num_barrelinterval.Name" xml:space="preserve">
+    <value>num_barrelinterval</value>
   </data>
   <data name="radio_marketplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1194,9 +1206,6 @@
   <data name="label21.Text" xml:space="preserve">
     <value>alezhnin </value>
   </data>
-  <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 17</value>
-  </data>
   <data name="radio_sleepforhrs.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 6</value>
   </data>
@@ -1209,8 +1218,8 @@
   <data name="&gt;&gt;radio_sleepeverymin.Name" xml:space="preserve">
     <value>radio_sleepeverymin</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tabPage6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 52</value>
@@ -1253,6 +1262,9 @@
   </data>
   <data name="&gt;&gt;chk_onlyfactory.Parent" xml:space="preserve">
     <value>groupBox10</value>
+  </data>
+  <data name="num_hibernationinterval.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 20</value>
   </data>
   <data name="groupBox25.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 43</value>
@@ -1317,6 +1329,9 @@
   <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 17</value>
   </data>
+  <data name="lbl_sailors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;pictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1370,9 +1385,6 @@
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label20.Text" xml:space="preserve">
-    <value>ismetralfz</value>
   </data>
   <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>441, 133</value>
@@ -1434,11 +1446,17 @@
   <data name="pictureBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 23</value>
   </data>
+  <data name="&gt;&gt;radio_wreck.Parent" xml:space="preserve">
+    <value>groupBox22</value>
+  </data>
   <data name="linkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="num_stonelimit.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;chk_autofish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabel9.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1481,9 +1499,6 @@
   </data>
   <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
     <value>groupBox8</value>
-  </data>
-  <data name="radio_sleepeveryhrs.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1541,9 +1556,6 @@
   </data>
   <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="label16.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3382,8 +3394,8 @@
   <data name="radio_sleepformins.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;chk_collectmat.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
@@ -3454,8 +3466,8 @@
   <data name="&gt;&gt;linkLabel10.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="radio_wreck.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Auto-Barrel</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3511,8 +3523,8 @@
   <data name="groupBox14.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="label16.ToolTip" xml:space="preserve">
-    <value />
+  <data name="groupBox22.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;num_sleepevery.Name" xml:space="preserve">
     <value>num_sleepevery</value>
@@ -3544,8 +3556,8 @@
   <data name="tabPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lbl_startupcode.Name" xml:space="preserve">
     <value>lbl_startupcode</value>
@@ -3589,11 +3601,14 @@
   <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
   </data>
-  <data name="chk_automuseum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 42</value>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
   </data>
   <data name="chk_barrelhack.Location" type="System.Drawing.Point, System.Drawing">
     <value>202, 42</value>
+  </data>
+  <data name="chk_onlyfactory.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 40</value>
@@ -3634,8 +3649,8 @@
   <data name="groupBox18.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;num_ironlimit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="groupBox17.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;buildingBindingSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3784,8 +3799,8 @@
   <data name="groupBox13.Size" type="System.Drawing.Size, System.Drawing">
     <value>311, 95</value>
   </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chk_autofish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
   </data>
   <data name="chk_onlyfactory.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3810,9 +3825,6 @@
   </data>
   <data name="chk_barrelhack.ToolTip" xml:space="preserve">
     <value>Emulating a barrel receiving</value>
-  </data>
-  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
-    <value>richTextBox1</value>
   </data>
   <data name="&gt;&gt;num_stonelimit.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3934,8 +3946,8 @@
   <data name="&gt;&gt;radio_iron.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="linkLabel6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="radioButton1.Text" xml:space="preserve">
+    <value>Mechanical Part</value>
   </data>
   <data name="radio_fish.Text" xml:space="preserve">
     <value>Fish</value>
@@ -4009,14 +4021,17 @@
   <data name="label14.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="chk_finishupgrade.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="num_limitfuel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="&gt;&gt;linkLabel5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="groupBox20.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;num_ironlimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_fish.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -4045,11 +4060,11 @@
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 3</value>
-  </data>
   <data name="radio_sleepforhrs.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="pictureBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 23</value>
   </data>
   <data name="radio_wood.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4060,14 +4075,14 @@
   <data name="&gt;&gt;groupBox24.Name" xml:space="preserve">
     <value>groupBox24</value>
   </data>
-  <data name="num_limitfuel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
   <data name="&gt;&gt;linkLabel6.Parent" xml:space="preserve">
     <value>groupBox13</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
   <data name="radio_marketplace.ToolTip" xml:space="preserve">
     <value>Will send items to marketplace! Click on Recycle items and pick items to recycle!</value>
@@ -4113,9 +4128,6 @@
   </data>
   <data name="&gt;&gt;tabPage7.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label9.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;tabControl2.Name" xml:space="preserve">
     <value>tabControl2</value>
@@ -4189,8 +4201,8 @@
   <data name="&gt;&gt;pictureBox2.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="radio_wreck.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;radio_sleepformins.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -4248,9 +4260,6 @@
   </data>
   <data name="chk_aupgrade.ToolTip" xml:space="preserve">
     <value>Upgrade all buildings</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4357,9 +4366,6 @@
   <data name="&gt;&gt;btn_stats.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="checkBox1.Text" xml:space="preserve">
-    <value>Debug Mode</value>
-  </data>
   <data name="&gt;&gt;linkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -4375,14 +4381,11 @@
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>471, 450</value>
   </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>3. Alezhnin (Coin Boost)</value>
+  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>0 = infinity</value>
-  </data>
-  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btn_dumpcore.Parent" xml:space="preserve">
-    <value>groupBox21</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -4419,6 +4422,9 @@
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="chk_finishupgrade.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="chk_exploit.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4467,6 +4473,9 @@
   </data>
   <data name="&gt;&gt;radio_iron.Parent" xml:space="preserve">
     <value>groupBox11</value>
+  </data>
+  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lbl_coins.Location" type="System.Drawing.Point, System.Drawing">
     <value>38, 24</value>
@@ -4576,9 +4585,6 @@
   <data name="radio_fish.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 17</value>
   </data>
-  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
   <data name="&gt;&gt;lbl_gems.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
@@ -4594,8 +4600,8 @@
   <data name="lbl_stone.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;lbl_startupcode.Parent" xml:space="preserve">
-    <value>groupBox13</value>
+  <data name="label9.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_automuseum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4626,12 +4632,6 @@
   </data>
   <data name="radio_marketplace.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 33</value>
-  </data>
-  <data name="&gt;&gt;num_limitconcrete.Name" xml:space="preserve">
-    <value>num_limitconcrete</value>
   </data>
   <data name="num_sleepfor.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -4684,8 +4684,8 @@
   <data name="groupBox10.Text" xml:space="preserve">
     <value>Auto Upgrade</value>
   </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>3. Alezhnin (Coin Boost)</value>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="groupBox25.ToolTip" xml:space="preserve">
     <value />
@@ -4711,9 +4711,6 @@
   <data name="&gt;&gt;linkLabel10.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>Auto-Barrel</value>
-  </data>
   <data name="groupBox20.Text" xml:space="preserve">
     <value>Workshop</value>
   </data>
@@ -4723,8 +4720,8 @@
   <data name="&gt;&gt;button4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;chk_autofish.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;groupBox16.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="label8.ToolTip" xml:space="preserve">
     <value />
@@ -4759,8 +4756,8 @@
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>52, 62</value>
   </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;button5.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -4798,9 +4795,6 @@
   <data name="richTextBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;tabPage6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="chk_collectmat.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 17</value>
   </data>
@@ -4810,8 +4804,14 @@
   <data name="&gt;&gt;tabPage8.Parent" xml:space="preserve">
     <value>tabControl2</value>
   </data>
+  <data name="label16.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
+  </data>
+  <data name="radio_iron.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4975,6 +4975,9 @@
   <data name="pictureBox6.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
+  <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>360, 16</value>
+  </data>
   <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -4999,6 +5002,9 @@
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
   </data>
+  <data name="&gt;&gt;linkLabel7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;linkLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -5017,8 +5023,8 @@
   <data name="lbl_iron.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="num_hibernationinterval.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 20</value>
+  <data name="&gt;&gt;num_limitconcrete.Name" xml:space="preserve">
+    <value>num_limitconcrete</value>
   </data>
   <data name="chk_automuseum.Text" xml:space="preserve">
     <value>Collect Museum</value>
@@ -5055,9 +5061,6 @@
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>42, 20</value>
-  </data>
-  <data name="&gt;&gt;chk_collectmat.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="&gt;&gt;chk_autoshipupg.Name" xml:space="preserve">
     <value>chk_autoshipupg</value>
@@ -5104,11 +5107,8 @@
   <data name="num_limitfuel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="groupBox22.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="lbl_sailors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="groupBox25.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;label20.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5366,8 +5366,8 @@ Items</value>
   <data name="&gt;&gt;chk_collectmat.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="radio_stone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 20</value>
+  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 15</value>
@@ -5378,14 +5378,11 @@ Items</value>
   <data name="&gt;&gt;num_hibernationinterval.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chk_autoshipupg.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="lbl_sailors.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
-  <data name="&gt;&gt;groupBox16.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;btn_dumpcore.Parent" xml:space="preserve">
+    <value>groupBox21</value>
   </data>
   <data name="chk_autofish.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5429,9 +5426,6 @@ Items</value>
   <data name="label15.Text" xml:space="preserve">
     <value>Concrete</value>
   </data>
-  <data name="groupBox22.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;linkLabel1.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
@@ -5454,11 +5448,11 @@ Items</value>
     <value>Collect Fish from Piers
 </value>
   </data>
-  <data name="&gt;&gt;groupBox25.Parent" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
   <data name="chk_smartsleep.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 66</value>
+  </data>
+  <data name="chk_autoshipupg.Text" xml:space="preserve">
+    <value>Auto-Ships</value>
   </data>
   <data name="num_barrelinterval.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 31</value>
@@ -5569,8 +5563,8 @@ If checked bot will bypass event based destinations</value>
   <data name="radio_stone.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chk_autofish.Text" xml:space="preserve">
-    <value>Collect Fish</value>
+  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
+    <value>richTextBox1</value>
   </data>
   <data name="richTextBox1.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
     <value>Vertical</value>
@@ -5710,8 +5704,8 @@ If checked bot will bypass event based destinations</value>
   <data name="radio_contractor.ToolTip" xml:space="preserve">
     <value>Will complete the main or event quests</value>
   </data>
-  <data name="chk_autoshipupg.Text" xml:space="preserve">
-    <value>Auto-Ships</value>
+  <data name="&gt;&gt;groupBox25.Parent" xml:space="preserve">
+    <value>tabPage7</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5725,17 +5719,14 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;radioButton2.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="radio_iron.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;button4.Parent" xml:space="preserve">
+    <value>groupBox13</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
   <data name="radio_wreck.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="groupBox17.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="num_sleepevery.ToolTip" xml:space="preserve">
     <value />
@@ -5749,8 +5740,8 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;button5.Parent" xml:space="preserve">
     <value>groupBox13</value>
   </data>
-  <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 16</value>
+  <data name="&gt;&gt;radio_saveloot.Parent" xml:space="preserve">
+    <value>groupBox12</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -5791,6 +5782,9 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;listView1.Name" xml:space="preserve">
     <value>listView1</value>
   </data>
+  <data name="chk_automuseum.Location" type="System.Drawing.Point, System.Drawing">
+    <value>92, 42</value>
+  </data>
   <data name="num_limitmech.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 49</value>
   </data>
@@ -5802,6 +5796,9 @@ If checked bot will bypass event based destinations</value>
   </data>
   <data name="radioButton2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;num_limitfuel.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -5836,6 +5833,9 @@ If checked bot will bypass event based destinations</value>
   <data name="lbl_startupcode.Text" xml:space="preserve">
     <value>label12</value>
   </data>
+  <data name="radio_outpost.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;linkLabel7.Parent" xml:space="preserve">
     <value>groupBox18</value>
   </data>
@@ -5851,8 +5851,8 @@ If checked bot will bypass event based destinations</value>
   <data name="tabPage7.Text" xml:space="preserve">
     <value>Bot Settings</value>
   </data>
-  <data name="&gt;&gt;linkLabel7.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="groupBox16.ToolTip" xml:space="preserve">
     <value />
@@ -5983,9 +5983,6 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox25.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -5995,11 +5992,11 @@ If checked bot will bypass event based destinations</value>
   <data name="groupBox22.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 240</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;lbl_startupcode.Parent" xml:space="preserve">
+    <value>groupBox13</value>
   </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="chk_autoshipupg.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 13</value>
@@ -6092,8 +6089,11 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_coins.ToolTip" xml:space="preserve">
-    <value />
+  <data name="radio_stone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 20</value>
+  </data>
+  <data name="&gt;&gt;textBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;radio_gold.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6143,11 +6143,11 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;radio_autoshipauto.Name" xml:space="preserve">
     <value>radio_autoshipauto</value>
   </data>
-  <data name="&gt;&gt;num_barrelinterval.Name" xml:space="preserve">
-    <value>num_barrelinterval</value>
+  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Debug Mode</value>
   </data>
   <data name="&gt;&gt;groupBox20.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -6164,14 +6164,14 @@ If checked bot will bypass event based destinations</value>
   <data name="tabControl2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;groupBox25.Name" xml:space="preserve">
-    <value>groupBox25</value>
-  </data>
-  <data name="tabPage5.ToolTip" xml:space="preserve">
+  <data name="groupBox22.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;radio_wreck.Parent" xml:space="preserve">
-    <value>groupBox22</value>
+  <data name="radio_wreck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
+  </data>
+  <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
   </data>
   <data name="groupBox25.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 269</value>
@@ -6185,8 +6185,8 @@ If checked bot will bypass event based destinations</value>
   <data name="radio_iron.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 43</value>
   </data>
-  <data name="chk_onlyfactory.ToolTip" xml:space="preserve">
-    <value />
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>231, 33</value>
   </data>
   <data name="lbl_gems.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6200,8 +6200,8 @@ If checked bot will bypass event based destinations</value>
   <data name="radio_fish.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="radio_outpost.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="label10.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
     <value>groupBox20</value>
@@ -6224,14 +6224,14 @@ If checked bot will bypass event based destinations</value>
   <data name="&gt;&gt;linkLabel10.Name" xml:space="preserve">
     <value>linkLabel10</value>
   </data>
-  <data name="radioButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
+  <data name="label20.Text" xml:space="preserve">
+    <value>ismetralfz</value>
   </data>
   <data name="label3.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <metadata name="buildingBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>192, 17</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>ru</value>
@@ -6239,7 +6239,7 @@ If checked bot will bypass event based destinations</value>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>192, 17</value>
+  <metadata name="buildingBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
 </root>

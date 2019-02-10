@@ -126,23 +126,19 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 52</value>
+    <value>5, 50</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Flexushka</value>
   </data>
-  <data name="label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 22</value>
+  </data>
+  <data name="groupBox26.Text" xml:space="preserve">
+    <value>Спасибо за тестирование и репорты</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>

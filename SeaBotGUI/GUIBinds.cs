@@ -518,9 +518,9 @@ namespace SeaBotGUI.GUIBinds
         {
             public int ID { get; set; }
 
-            public string InPortAt { get; set; }
-
             public string Name { get; set; }
+
+            public string InPortAt { get; set; }
 
             public string Route { get; set; }
         }
