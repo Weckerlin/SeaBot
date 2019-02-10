@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 
 namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 {
+    using System.Threading;
+
     using SeaBotCore.Config;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
@@ -33,6 +35,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         {
             var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                 .OrderByDescending(SendingHelper.GetCapacity));
+            Thread.Sleep(2000);
             switch (type)
             {
                 case ShipDestType.Upgradable:
@@ -88,13 +91,12 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         private const int contractorproc = 30;
 
         private const int wreckproc = 5;
+
         public static void SendShipsAutoDestination()
         {
-            Logger.Info("STEPPED TO SEND AUTO. SHIP COUNT: "+ Core.GlobalData.Ships.Count);
+        
                     var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0)
                         .OrderByDescending(SendingHelper.GetCapacity));
-                  
-               
                     int upgcont = SendingHelper.GetPercentage(upgproc,bestships.Count);
                     int outpostcont = SendingHelper.GetPercentage(outpostproc,bestships.Count);
                     int marketcount = SendingHelper.GetPercentage(marketproc,bestships.Count);

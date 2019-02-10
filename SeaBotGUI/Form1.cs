@@ -572,13 +572,13 @@ namespace SeaBotGUI
             var result = version1.CompareTo(version2);
             if (result > 0)
             {
-                this.label7.ForeColor = Color.DarkMagenta;
-                this.label7.Text = $"[DEV] Version: {version1}";
+               
+                this.Text += $" [DEV] Version: {version1}";
             }
             else if (result < 0)
             {
-                this.label7.ForeColor = Color.DarkRed;
-                this.label7.Text = string.Format(PrivateLocal.VERSION_OLD, version1);
+          
+                this.Text +=  string.Format(" "+PrivateLocal.VERSION_OLD, version1);
                 var msg = MessageBox.Show(
                     PrivateLocal.VERSION_UPDATE_MBOX,
                     "Update!",
@@ -591,8 +591,8 @@ namespace SeaBotGUI
             }
             else
             {
-                this.label7.ForeColor = Color.DarkGreen;
-                this.label7.Text = string.Format(PrivateLocal.VERSION_CURRENT, version1);
+             
+                this.Text +=  string.Format(" "+PrivateLocal.VERSION_CURRENT, version1);
             }
         }
 

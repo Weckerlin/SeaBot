@@ -185,6 +185,10 @@ namespace SeaBotCore
             {
                 if (Core.GlobalData != null)
                 {
+                    if (!Directory.Exists("crashlog"))
+                    {
+                        Directory.CreateDirectory("crashlog");
+                    }
                     aftercrash = false;
                     File.WriteAllText(
                         "afcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
@@ -206,6 +210,10 @@ namespace SeaBotCore
                             Logger.Logger.Info(Localization.CORE_RESTARTING);
                             if (Core.GlobalData != null)
                             {
+                                if (!Directory.Exists("crashlog"))
+                                {
+                                    Directory.CreateDirectory("crashlog");
+                                }
                                 aftercrash = true;
                                 File.WriteAllText(
                                     "bfcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),

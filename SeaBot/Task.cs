@@ -605,8 +605,8 @@ namespace SeaBotCore
                     }
                 }
 
-                this.CustomObjects.Add("debug_uniqueId", contractid); // TODO: MESS EM AGAIN!!!
-                this.CustomObjects.Add("debug_contractId", uniqueid);
+                this.CustomObjects.Add("debug_uniqueId", uniqueid); // TODO: MESS EM AGAIN!!!
+                this.CustomObjects.Add("debug_contractId", contractid);
                 this.CustomObjects.Add("debug_progress", progress);
                 this.CustomObjects.Add("debug_goalProgress", goalprogress);
                 this.CustomObjects.Add("debug_objectiveTypeId", objectivetypeid);

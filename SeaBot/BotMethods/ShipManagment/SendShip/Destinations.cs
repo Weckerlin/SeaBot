@@ -45,31 +45,33 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     continue;
                 }
-                if (contractor.Done == 0)
+                if (contractor.Done != 0)
                 {
-                    var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
-                    var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
-                    if (quest == null || def == null)
+                    continue;
+                }
+
+                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
+                var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
+                if (quest == null)
+                {
+                    continue;
+                }
+                if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
+                {
+                    if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
                     {
-                        continue;
+                        if (!Core.Config.exploitmode)
+                        {
+                            continue;
+                        }
                     }
-                    if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
+                    if (def.Type == "static")
                     {
-                        if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
-                        {
-                            if (!Core.Config.exploitmode)
-                            {
-                                continue;
-                            }
-                        }
-                        if (def.Type == "static")
-                        {
-                            statiopst.Add(contractor);
-                        }
-                        else
-                        {
-                            genopst.Add(contractor);
-                        }
+                        statiopst.Add(contractor);
+                    }
+                    else
+                    {
+                        genopst.Add(contractor);
                     }
                 }
             }

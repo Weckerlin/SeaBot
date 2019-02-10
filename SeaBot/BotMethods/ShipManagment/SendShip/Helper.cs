@@ -371,9 +371,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return lockedspots;
         }
 
-        public static bool IsVoyageCompleted(this Ship ship)
+        public static bool IsVoyageCompleted(this Ship ship, int offset = 0)
         {
-            return (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds > ship.GetTravelTime();
+            return (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds  > ship.GetTravelTime()+offset;
         }
 
         public static void LogUnload(this Ship ship)

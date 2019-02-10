@@ -113,9 +113,6 @@
     <Compile Include="TelegramBot\TeleUtils.cs" />
     <Compile Include="Utils\CompUtils.cs" />
     <Compile Include="Utils\GitHub.cs" />
-    <EmbeddedResource Include="Form1.en.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
