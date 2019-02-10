@@ -287,7 +287,7 @@ Your current limit on Iron: </value>
 	<data name="STAT_AMOUNT" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="SHIPS.SOCIAL_CONTRACT" xml:space="preserve">
+	<data name="SHIPS.SOCIAL_CONTRACT" xml:space="preserve">
     <value>Social Contract</value>
   </data>
 </root>

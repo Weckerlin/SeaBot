@@ -89,7 +89,15 @@ namespace SeaBotCore
             var cookieContainer = new CookieContainer();
             var loc_cookies = Cookies.ReadCookiesFromDisk();
             var pxcookie = loc_cookies.GetCookies(new Uri("https://portal.pixelfederation.com"));
-
+            if (pxcookie.Count != 0)
+            {
+              
+                    if (pxcookie["_pf_login_server_token"].Value == Core.Config.server_token)
+                    {
+                        cookieContainer = loc_cookies;
+                    }
+                
+            }
            
             using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = baseAddress })
@@ -292,6 +300,7 @@ namespace SeaBotCore
             catch (Exception e)
             {
                 Logger.Logger.Fatal(string.Format(Localization.NETWORKING_NO_RESPONSE, response, e));
+                Core.restartwithdelay(10);
             }
 
             if (doc.DocumentElement != null)
@@ -381,7 +390,7 @@ namespace SeaBotCore
             else
             {
                 Logger.Logger.Fatal(Localization.NETWORKING_SYNC_NO_RESPONSE);
-                Core.StopBot();
+                Core.restartwithdelay(10);
             }
 
             _lastRaised = DateTime.Now;

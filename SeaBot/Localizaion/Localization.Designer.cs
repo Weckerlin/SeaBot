@@ -187,6 +187,42 @@ namespace SeaBotCore.Localizaion {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Sending {0} to contractor!.
+        /// </summary>
+        internal static string DESTINATION_CONTRACTOR {
+            get {
+                return ResourceManager.GetString("DESTINATION.CONTRACTOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sending {0} to marketplace!.
+        /// </summary>
+        internal static string DESTINATION_MARKETPLACE {
+            get {
+                return ResourceManager.GetString("DESTINATION.MARKETPLACE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sending {0} to outpost!.
+        /// </summary>
+        internal static string DESTINATION_OUTPOST {
+            get {
+                return ResourceManager.GetString("DESTINATION.OUTPOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sending {0} to wreck!.
+        /// </summary>
+        internal static string DESTINATION_WRECK {
+            get {
+                return ResourceManager.GetString("DESTINATION.WRECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Started producing {0}.
         /// </summary>
         internal static string FACTORIES_STARTED_PROD {

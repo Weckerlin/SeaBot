@@ -49,8 +49,8 @@ namespace SeaBotCore.BotMethods
                 {
                     // upgrade ofc
                     Logger.Info(
-                        Localization.CONTRACTOR_UPGRADED
-                                           + LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
+                        string.Format(Localization.CONTRACTOR_UPGRADED
+                                           , LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name)));
 
                     // todo: add new local
                     Networking.AddTask(new Task.ConfirmContractTask(upg.DefId, upg.QuestId, currquest.Rewards));

@@ -104,7 +104,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan * quest.MaterialKoef;
                 Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
                     wecan * quest.MaterialKoef;
-                Logger.Info("TEMPLATE: SENDING A SHIP TO CONTRACTOR");
+                Logger.Info(string.Format(Localization.DESTINATION_CONTRACTOR, ship.GetShipName()));
                 Networking.AddTask(
                     new Task.SendShipContractorTask(
                         ship.InstId,
@@ -157,6 +157,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 lship.TargetId = opst.DefId;
                 lship.MaterialId = quest.ObjectiveDefId;
                 lship.TargetLevel = quest.Id;
+                Logger.Info(string.Format(Localization.DESTINATION_CONTRACTOR, ship.GetShipName()));
                 Networking.AddTask(
                     new Task.SendShipContractorTask(
                         ship.InstId,
@@ -235,6 +236,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             canproceed = wehaveininv < ship.Capacity() ? wehaveininv : ship.Capacity();
 
             Core.GlobalData.Inventory.Where(n => n.Id == maktplc.InputId).FirstOrDefault().Amount -= canproceed;
+            Logger.Info(string.Format(Localization.DESTINATION_MARKETPLACE, ship.GetShipName()));
             Networking.AddTask(new Task.SendShipMarketplaceTask(ship.InstId, maktplc.Id, 1, canproceed));
             var locship = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
             locship.Type = "marketplace";
@@ -284,7 +286,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
                 var sending = 0;
                 sending = next.Crew > ship.Sailors() ? ship.Sailors() : next.Crew;
-
+                Logger.Info(string.Format(Localization.DESTINATION_OUTPOST, ship.GetShipName()));
                 Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, next.DefId, sending));
                 Core.GlobalData.Outposts.Add(
                     new Outpost
@@ -364,10 +366,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     shp.TargetId = wreck.InstId;
                     shp.TargetLevel = 0;
                     wreck.Status = 1;
-                   Logger.Info(
-                        Localization.SHIPS_SENDING + LocalizationCache.GetNameFromLoc(
-                            Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                            Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                    Logger.Info(string.Format(Localization.DESTINATION_WRECK, ship.GetShipName()));
                     Networking.AddTask(new Task.SendShipwreckTask(ship.InstId, wreck.InstId));
                     return true;
                 }

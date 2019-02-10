@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,188 +59,200 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="BARREL_COLLECTING_SAILORS" xml:space="preserve">
     <value>Barrel! Collecting {0} sailors!</value>
   </data>
-  <data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
+	<data name="BARREL_COLLECTING_ITEM" xml:space="preserve">
     <value>Barrel! Collecting {0} {1}</value>
   </data>
-  <data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
+	<data name="BUILDINGS_STARTED_UPG" xml:space="preserve">
     <value>Started upgrading {0}</value>
   </data>
-  <data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
+	<data name="BUILDINGS_FINISHED_UPG" xml:space="preserve">
     <value>Finishing upgrading {0}</value>
   </data>
-  <data name="BUILDINGS_COLLECTING" xml:space="preserve">
+	<data name="BUILDINGS_COLLECTING" xml:space="preserve">
     <value>Сollecting {0} {1}</value>
   </data>
-  <data name="FACTORIES_STARTED_PROD" xml:space="preserve">
+	<data name="FACTORIES_STARTED_PROD" xml:space="preserve">
     <value>Started producing {0}</value>
   </data>
-  <data name="FISH_COLLECTING" xml:space="preserve">
+	<data name="FISH_COLLECTING" xml:space="preserve">
     <value>Collecting {0} fish</value>
   </data>
-  <data name="SHIPS_SENDING" xml:space="preserve">
+	<data name="SHIPS_SENDING" xml:space="preserve">
     <value>Sending </value>
   </data>
-  <data name="SHIPS_UNLOADING" xml:space="preserve">
+	<data name="SHIPS_UNLOADING" xml:space="preserve">
     <value>Unloading </value>
   </data>
-  <data name="SHIPS_LOADING" xml:space="preserve">
+	<data name="SHIPS_LOADING" xml:space="preserve">
     <value>Loading </value>
   </data>
-  <data name="SLEEP_STARTING" xml:space="preserve">
+	<data name="SLEEP_STARTING" xml:space="preserve">
     <value>Started sleepin'. Waking up after {0} min.</value>
   </data>
-  <data name="UPGRADABLE_UPGRADED" xml:space="preserve">
+	<data name="UPGRADABLE_UPGRADED" xml:space="preserve">
     <value>Upgraded </value>
   </data>
-  <data name="CONFIG_CANT_SAVE" xml:space="preserve">
+	<data name="CONFIG_CANT_SAVE" xml:space="preserve">
     <value>Can't save a config file. Please move the bot in another directory or run with as administrator!</value>
   </data>
-  <data name="LOGGER_CREATED" xml:space="preserve">
+	<data name="LOGGER_CREATED" xml:space="preserve">
     <value> is created.</value>
   </data>
-  <data name="CORE_STOPPED" xml:space="preserve">
+	<data name="CORE_STOPPED" xml:space="preserve">
     <value>Stopped</value>
   </data>
-  <data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
+	<data name="CORE_NO_SERV_TOKEN" xml:space="preserve">
     <value>No server_token</value>
   </data>
-  <data name="CORE_RESTARTING" xml:space="preserve">
+	<data name="CORE_RESTARTING" xml:space="preserve">
     <value>Restarting bot</value>
   </data>
-  <data name="CORE_USER_BANNED" xml:space="preserve">
+	<data name="CORE_USER_BANNED" xml:space="preserve">
     <value>User is banned.</value>
   </data>
-  <data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
+	<data name="CORE_MAINTENANCE_30MIN" xml:space="preserve">
     <value>MAINTENANCE! Retrying after 30 mins</value>
   </data>
-  <data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
+	<data name="NETWORKING_SOMEONE_IS_PLAYING" xml:space="preserve">
     <value>Someone is playing this game right now, waiting for {0} minutes</value>
   </data>
-  <data name="NETWORKING_WAKING_UP" xml:space="preserve">
+	<data name="NETWORKING_WAKING_UP" xml:space="preserve">
     <value>Mwaaah, waking up after hibernation</value>
   </data>
-  <data name="NETWORKING_SYNCING" xml:space="preserve">
+	<data name="NETWORKING_SYNCING" xml:space="preserve">
     <value>Syncing...</value>
   </data>
-  <data name="NETWORKING_HEARTBEAT" xml:space="preserve">
+	<data name="NETWORKING_HEARTBEAT" xml:space="preserve">
     <value>Sending Heartbeat...</value>
   </data>
-  <data name="NETWORKING_LOGIN_1" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_1" xml:space="preserve">
     <value>[1/3] Getting another cookies</value>
   </data>
-  <data name="NETWORKING_LOGIN_2" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_2" xml:space="preserve">
     <value>[2/3] Getting portal</value>
   </data>
-  <data name="NETWORKING_LOGIN_3" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_3" xml:space="preserve">
     <value>[3/3] Getting sessionid</value>
   </data>
-  <data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_SUCCESS" xml:space="preserve">
     <value>Successfully logged in! Session ID = </value>
   </data>
-  <data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_CANT_LOGIN" xml:space="preserve">
     <value>CANT LOGIN!</value>
   </data>
-  <data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_FAKE_LOAD" xml:space="preserve">
     <value>Faking real loading. Now, we'll load for {0:F1} seconds</value>
   </data>
-  <data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
+	<data name="NETWORKING_LOGIN_FAKE_LOAD_ELAPSED" xml:space="preserve">
     <value>{0:F1} seconds elapsed</value>
   </data>
-  <data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
+	<data name="NETWORKING_NO_RESPONSE" xml:space="preserve">
     <value>Server is responding with non xml file - Response = {0}; Exception info = {1}</value>
   </data>
-  <data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
+	<data name="NETWORKING_SYNC_ACCEPTED_GOOD" xml:space="preserve">
     <value>[GOOD] Server accepted our {0} requests</value>
   </data>
-  <data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
+	<data name="NETWORKING_SYNC_ACCEPTED_BAD" xml:space="preserve">
     <value>[BAD] Server accepted our {0} requests!</value>
   </data>
-  <data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
+	<data name="NETWORKING_SYNC_FATAL_CHECK" xml:space="preserve">
     <value>Checking Fatal error...</value>
   </data>
-  <data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
+	<data name="NETWORKING_SYNC_SERVER_DISCONNECTED" xml:space="preserve">
     <value>Server disconnected us with error {0}</value>
   </data>
-  <data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
+	<data name="NETWORKING_SYNC_NO_RESPONSE" xml:space="preserve">
     <value>Sync failed, no response</value>
   </data>
-  <data name="FORM_BARREL_WARNING" xml:space="preserve">
+	<data name="FORM_BARREL_WARNING" xml:space="preserve">
     <value>Warning, at least 1 SeaBot user got banned for using interval, which is lower than 12.</value>
   </data>
-  <data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
+	<data name="CORE_LOCAL_DOWNLOAD_STEP" xml:space="preserve">
     <value>Downloading {0} lang.</value>
   </data>
-  <data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
+	<data name="CORE_LOCAL_DOWNLOAD_STARTED" xml:space="preserve">
     <value>Downloading localization cache...</value>
   </data>
-  <data name="TIMEUTIL.TIMEMISMATCH" xml:space="preserve">
+	<data name="TIMEUTIL.TIMEMISMATCH" xml:space="preserve">
     <value>Looks like your local time and server time is mismatched! Using a {0:F2}min. offset</value>
   </data>
-  <data name="MUSEUM_COLLECT" xml:space="preserve">
+	<data name="MUSEUM_COLLECT" xml:space="preserve">
     <value>Collecting Museum</value>
   </data>
-  <data name="CONTRACTOR_UPGRADED" xml:space="preserve">
-    <value>Upgraded Contractor </value>
+	<data name="CONTRACTOR_UPGRADED" xml:space="preserve">
+    <value>Upgraded {0}</value>
+  </data>
+	<data name="DESTINATION.CONTRACTOR" xml:space="preserve">
+    <value>Sending {0} to contractor!</value>
+  </data>
+	<data name="DESTINATION.MARKETPLACE" xml:space="preserve">
+    <value>Sending {0} to marketplace!</value>
+  </data>
+	<data name="DESTINATION.OUTPOST" xml:space="preserve">
+    <value>Sending {0} to outpost!</value>
+  </data>
+	<data name="DESTINATION.WRECK" xml:space="preserve">
+    <value>Sending {0} to wreck!</value>
   </data>
 </root>

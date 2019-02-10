@@ -190,7 +190,7 @@ namespace SeaBotCore
                         Directory.CreateDirectory("crashlog");
                     }
                     aftercrash = false;
-                    File.WriteAllText(
+                    File.WriteAllText("crashlog/"+
                         "afcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
                         JsonConvert.SerializeObject(Core.GlobalData));
                 }
@@ -215,13 +215,12 @@ namespace SeaBotCore
                                     Directory.CreateDirectory("crashlog");
                                 }
                                 aftercrash = true;
-                                File.WriteAllText(
+                                File.WriteAllText("crashlog/"+
                                     "bfcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
                                     JsonConvert.SerializeObject(Core.GlobalData));
                             }
 
-                            StopBot();
-                            StartBot();
+                            restartwithdelay(0);
                         }
 
                         if (e == Enums.EErrorCode.PLAYER_BANNED)
@@ -233,11 +232,19 @@ namespace SeaBotCore
                         if (e == Enums.EErrorCode.MAINTENANCE || e == Enums.EErrorCode.PLAYER_MAINTENANCE)
                         {
                             Logger.Logger.Info(Localization.CORE_MAINTENANCE_30MIN);
-                            Thread.Sleep(30 * 60 * 1000);
-                            StopBot();
-                            StartBot();
+                            restartwithdelay(20);
                         }
                     }).Start();
+        }
+
+        public static void restartwithdelay(int min)
+        {
+            new System.Threading.Tasks.Task(() =>
+                {
+                    StopBot();
+                    Thread.Sleep(min * 60 * 1000);
+                    StartBot();
+                }).Start();
         }
     }
 }

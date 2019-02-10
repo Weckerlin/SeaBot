@@ -376,6 +376,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(ship.Sent)).TotalSeconds  > ship.GetTravelTime()+offset;
         }
 
+        public static string GetShipName(this Ship ship)
+        {
+
+            return LocalizationCache.GetNameFromLoc(
+                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+        }
         public static void LogUnload(this Ship ship)
         {
             Logger.Info(
