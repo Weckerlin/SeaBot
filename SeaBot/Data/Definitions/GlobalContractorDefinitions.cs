@@ -152,7 +152,7 @@ namespace SeaBotCore.Data.Definitions
             public long Amount { get; set; }
 
             [JsonProperty("chest")]
-            public Chest Chest { get; set; }
+            public string Chest { get; set; }
 
             [JsonProperty("koef_min")]
             public double KoefMin { get; set; }
@@ -318,7 +318,6 @@ namespace SeaBotCore.Data.Definitions
                                                                              Converters =
                                                                                  {
                                                                                      AtlasConverter.Singleton,
-                                                                                     ChestConverter.Singleton,
                                                                                      RewardObjectTypeConverter
                                                                                          .Singleton,
                                                                                      ObjectiveObjectTypeConverter
@@ -370,64 +369,7 @@ namespace SeaBotCore.Data.Definitions
             public static readonly AtlasConverter Singleton = new AtlasConverter();
         }
 
-        internal class ChestConverter : JsonConverter
-        {
-            public override bool CanConvert(Type t) => t == typeof(Chest) || t == typeof(Chest?);
-
-            public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-            {
-                if (reader.TokenType == JsonToken.Null) return null;
-                var value = serializer.Deserialize<string>(reader);
-                switch (value)
-                {
-                    case "chest_01":
-                        return Chest.Chest01;
-                    case "chest_02":
-                        return Chest.Chest02;
-                    case "chest_03":
-                        return Chest.Chest03;
-                    case "chest_04":
-                        return Chest.Chest04;
-                    case "chest_05":
-                        return Chest.Chest05;
-                }
-
-                throw new Exception("Cannot unmarshal type Chest");
-            }
-
-            public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-            {
-                if (untypedValue == null)
-                {
-                    serializer.Serialize(writer, null);
-                    return;
-                }
-
-                var value = (Chest)untypedValue;
-                switch (value)
-                {
-                    case Chest.Chest01:
-                        serializer.Serialize(writer, "chest_01");
-                        return;
-                    case Chest.Chest02:
-                        serializer.Serialize(writer, "chest_02");
-                        return;
-                    case Chest.Chest03:
-                        serializer.Serialize(writer, "chest_03");
-                        return;
-                    case Chest.Chest04:
-                        serializer.Serialize(writer, "chest_04");
-                        return;
-                    case Chest.Chest05:
-                        serializer.Serialize(writer, "chest_05");
-                        return;
-                }
-
-                throw new Exception("Cannot marshal type Chest");
-            }
-
-            public static readonly ChestConverter Singleton = new ChestConverter();
-        }
+     
 
         internal class RewardObjectTypeConverter : JsonConverter
         {

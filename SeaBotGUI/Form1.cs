@@ -437,6 +437,7 @@ namespace SeaBotGUI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
             if (string.IsNullOrEmpty(Core.Config.server_token))
             {
                 MessageBox.Show(PrivateLocal.TOKEN_EMPTY, "Error");
