@@ -88,16 +88,16 @@ namespace SeaBotCore
             var baseAddress = new Uri("https://portal.pixelfederation.com/");
             var cookieContainer = new CookieContainer();
             var loc_cookies = Cookies.ReadCookiesFromDisk();
-            var pxcookie = loc_cookies.GetCookies(new Uri("https://portal.pixelfederation.com"));
-            if (pxcookie.Count != 0)
-            {
+            //var pxcookie = loc_cookies.GetCookies(new Uri("https://portal.pixelfederation.com"));
+            //if (pxcookie.Count != 0)
+            //{
               
-                    if (pxcookie["_pf_login_server_token"].Value == Core.Config.server_token)
-                    {
-                        cookieContainer = loc_cookies;
-                    }
+            //        if (pxcookie["_pf_login_server_token"].Value == Core.Config.server_token)
+            //        {
+            //            cookieContainer = loc_cookies;
+            //        }
                 
-            }
+            //}
            
             using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
             using (var client = new HttpClient(handler) { BaseAddress = baseAddress })

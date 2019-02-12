@@ -15,14 +15,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace SeaBotGUI.TelegramBot
 {
+    using System;
     #region
 
     using System.Linq;
     using System.Text;
 
     using SeaBotCore;
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
+    using SeaBotCore.Cache;
+    using SeaBotCore.Data.Definitions;
     using SeaBotCore.Data.Materials;
-
+    using SeaBotCore.Utils;
     using SeaBotGUI.Localization;
 
     using Telegram.Bot.Types;
@@ -161,18 +165,39 @@ namespace SeaBotGUI.TelegramBot
                                 new[]
                                     {
                                         new TelegramBot.Button(
-                                            !Core.Config.autoshipprofit
+                                           (Core.Config.upgradablestrategy == SeaBotCore.Config.UpgradablyStrategy.Sailors)
                                                 ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS
                                                 : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_SAVE_SAILORS,
-                                            () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
+                                            () =>
+                                            {
+                                                if(Core.Config.upgradablestrategy == SeaBotCore.Config.UpgradablyStrategy.Sailors)
+                                                {
+                                                    Core.Config.upgradablestrategy = SeaBotCore.Config.UpgradablyStrategy.Loot;
+                                                }
+                                                else
+                                                {
+                                                    Core.Config.upgradablestrategy = SeaBotCore.Config.UpgradablyStrategy.Sailors;
+                                                }
+                                            })
                                             {
                                                 redirect = (int)EMenu.AutoShipOptimal
                                             },
                                         new TelegramBot.Button(
-                                            Core.Config.autoshipprofit
+                                           (Core.Config.upgradablestrategy != SeaBotCore.Config.UpgradablyStrategy.Sailors)
+
                                                 ? "✅" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT
                                                 : "❎" + PrivateLocal.TELEGRAM_SHIP_STRATEGY_OPTIMAL_MORE_LOOT,
-                                            () => { Core.Config.autoshipprofit = !Core.Config.autoshipprofit; })
+                                            () => 
+                                            {
+                                                 if(Core.Config.upgradablestrategy != SeaBotCore.Config.UpgradablyStrategy.Sailors)
+                                                {
+                                                    Core.Config.upgradablestrategy = SeaBotCore.Config.UpgradablyStrategy.Loot;
+                                                }
+                                                else
+                                                {
+                                                    Core.Config.upgradablestrategy = SeaBotCore.Config.UpgradablyStrategy.Sailors;
+                                                }
+                                            })
                                             {
                                                 redirect = (int)EMenu.AutoShipOptimal
                                             }
@@ -601,6 +626,19 @@ namespace SeaBotGUI.TelegramBot
                                                       redirect = -1 
                                                    }
                                     },
+                                 new[]
+                                    {
+                                        new TelegramBot.Button(
+                                            PrivateLocal.TELEGRAM_BTN_INVENTORY, //TODO: add localization
+                                            () =>
+                                                {
+                                                    TelegramBotController.SendMessage(
+                                                        this.Message,
+                                                        this.GetShips());
+                                                }) {
+                                                      redirect = -1
+                                                   }
+                                    },
                                 new[]
                                     {
                                         new TelegramBot.Button(PrivateLocal.TELEGRAM_BTN_SETTINGS, () => { })
@@ -632,7 +670,7 @@ namespace SeaBotGUI.TelegramBot
                     public void Unknown(Message msg)
                     {
                     }
-
+                    
                     private string GetInventory()
                     {
                         var builder = new StringBuilder();
@@ -648,6 +686,73 @@ namespace SeaBotGUI.TelegramBot
                             else
                             {
                                 builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
+                            }
+                        }
+                        else
+                        {
+                            builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
+                        }
+
+                        return builder.ToString();
+                    }
+                    private string GetShips()
+                    {
+                        var builder = new StringBuilder();
+                        if (Core.GlobalData != null)
+                        {
+                            if (Core.GlobalData.Ships != null)
+                            {
+                                foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
+                                {
+                                    
+                                    var name = LocalizationCache.GetNameFromLoc(
+                                        Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
+                                        Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                                   
+                                  builder.Append(name+"|");
+
+                                   
+                                    if (ship.Sent != 0)
+                                    {
+                                        try
+                                        {
+                                            if (ship.Type == "social_contract")
+                                            {
+                                                builder.Append(PrivateLocal.SHIPS_SOCIAL_CONTRACT);
+                                            }
+                                            else {
+                                                builder.Append(LocalizationCache.GetNameFromLoc(ship.GetTravelName(), string.Empty));
+                                            }
+
+
+
+                                            var willatportattime = ship.Sent + ship.GetTravelTime();
+
+                                            // lol xD 
+                                            if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
+                                            {
+                                                builder.Append("|--:--:--");
+                                            }
+                                            else
+                                            {
+                                                builder.Append("|" +
+                                                    (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).ToString(
+                                                            @"hh\:mm\:ss"));
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                        }
+                                    }
+
+
+                                    builder.AppendLine();
+                                }
+                            
+                            }
+                            else
+                            {
+                                builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY); //TODO: add localization
                             }
                         }
                         else

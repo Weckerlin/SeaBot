@@ -306,7 +306,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static bool SendToUpgradable(Ship ship, string itemname)
         {
-            var bestplace = SendingHelper.GetBestUpgPlace(itemname, ship.Sailors(), !Core.Config.autoshipprofit);
+            var bestplace = SendingHelper.GetBestUpgPlace(itemname, ship.Sailors(), Core.Config.upgradablestrategy);
           
             if (bestplace == null || Core.GlobalData.Sailors < ship.Sailors())
             {

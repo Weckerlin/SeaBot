@@ -44,7 +44,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return GetCapacity(ship);
         }
 
-        public static Upgradeable GetBestUpgPlace(string itemname, int sailors, bool profitbased)
+        public static Upgradeable GetBestUpgPlace(string itemname, int sailors, Config.UpgradablyStrategy upgradablestrategy)
         {
             var mat = MaterialDB.GetItem(itemname).DefId;
             var needed = new List<UpgradeableDefenition.Item>();
@@ -72,7 +72,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     continue;
                 }
 
-                if (profitbased)
+                if (upgradablestrategy == Config.UpgradablyStrategy.Loot)
                 {
                     var itemFirst = up.Key.Levels.Level.First(n => n.Id == up.Value.Level);
                     var time = (decimal)itemFirst.TravelTime;

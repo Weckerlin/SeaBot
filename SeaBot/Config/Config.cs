@@ -36,7 +36,11 @@ namespace SeaBotCore.Config
 
         Concrete
     }
-
+    public enum UpgradablyStrategy
+    {
+        Sailors,
+        Loot
+    }
     public enum ShipDestType
     {
         Upgradable,
@@ -60,7 +64,7 @@ namespace SeaBotCore.Config
 
         private bool _autoship;
 
-        private bool _autoshipprofit;
+        private UpgradablyStrategy _upgradablestrategy;
 
         private string _autoshiptype = "coins";
 
@@ -162,13 +166,13 @@ namespace SeaBotCore.Config
             }
         }
 
-        public bool autoshipprofit
+        public UpgradablyStrategy upgradablestrategy
         {
-            get => this._autoshipprofit;
+            get => this._upgradablestrategy;
             set
             {
-                this._autoshipprofit = value;
-                this.OnPropertyChanged(new PropertyChangedEventArgs("autoshipprofit"));
+                this._upgradablestrategy = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("upgradablestrategy"));
             }
         }
 

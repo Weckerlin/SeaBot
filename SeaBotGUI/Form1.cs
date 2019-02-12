@@ -108,6 +108,7 @@ namespace SeaBotGUI
 
             // Check for cache
         }
+        public DataGridView NeededAlgoGrid { get; }
 
         public DataGridView BuildingGrid { get; }
 
@@ -225,15 +226,7 @@ namespace SeaBotGUI
             SeaBotCore.Events.Events.BotStoppedEvent.BotStopped.OnBotStoppedEvent += this.BotStopped_OnBotStoppedEvent;
             SeaBotCore.Events.Events.BotStartedEvent.BotStarted.OnBotStartedEvent += this.BotStarted_OnBotStartedEvent;
             this.lbl_startupcode.Text = TeleUtils.MacAdressCode.Substring(0, TeleUtils.MacAdressCode.Length / 2);
-            if (Core.Config.autoshipprofit)
-            {
-                this.radio_saveloot.Checked = true;
-            }
-            else
-            {
-                this.radio_savesailors.Checked = true;
-            }
-
+           
             this.chk_smartsleep.Checked = Core.Config.smartsleepenabled;
             this.chk_sleepenabled.Checked = Core.Config.sleepenabled;
             this.num_sleepevery.Value = Core.Config.sleepevery;
@@ -553,46 +546,55 @@ namespace SeaBotGUI
 
         private void CheckForUpdates()
         {
-            var httpClient = new HttpClient();
-
-            // specify to use TLS 1.2 as default connection
-            ServicePointManager.SecurityProtocol =
-                SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
-
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            var l = httpClient.GetAsync("http://api.github.com/repos/weespin/SeaBot/releases/latest").Result.Content
-                .ReadAsStringAsync().Result;
-            var data = JsonConvert.DeserializeObject<GitHub_Data.Root>(l);
-            var version1 = new Version(
-                FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
-            var version2 = new Version(data.TagName);
-
-            var result = version1.CompareTo(version2);
-            if (result > 0)
+            try
             {
-               
-                this.Text += $" [DEV] Version: {version1}";
-            }
-            else if (result < 0)
-            {
-          
-                this.Text +=  string.Format(" "+PrivateLocal.VERSION_OLD, version1);
-                var msg = MessageBox.Show(
-                    PrivateLocal.VERSION_UPDATE_MBOX,
-                    "Update!",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (msg == DialogResult.Yes)
+                var httpClient = new HttpClient();
+
+                // specify to use TLS 1.2 as default connection
+                ServicePointManager.SecurityProtocol =
+                    SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36");
+
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                var l = httpClient.GetAsync("http://api.github.com/repos/weespin/SeaBot/releases/latest").Result.Content
+                    .ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<GitHub_Data.Root>(l);
+                var version1 = new Version(
+                    FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+                var version2 = new Version(data.TagName);
+
+                var result = version1.CompareTo(version2);
+                if (result > 0)
                 {
-                    CompUtils.OpenLink(data.HtmlUrl.ToString());
+
+                    this.Text += $" [DEV] Version: {version1}";
+                }
+                else if (result < 0)
+                {
+
+                    this.Text += string.Format(" " + PrivateLocal.VERSION_OLD, version1);
+                    var msg = MessageBox.Show(
+                        PrivateLocal.VERSION_UPDATE_MBOX,
+                        "Update!",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                    if (msg == DialogResult.Yes)
+                    {
+                        CompUtils.OpenLink(data.HtmlUrl.ToString());
+                    }
+                }
+                else
+                {
+
+                    this.Text += string.Format(" " + PrivateLocal.VERSION_CURRENT, version1);
                 }
             }
-            else
+            catch (Exception)
             {
-             
-                this.Text +=  string.Format(" "+PrivateLocal.VERSION_CURRENT, version1);
+
+                this.Text += $"no internet";
+                //ignored
             }
         }
 
@@ -736,15 +738,8 @@ namespace SeaBotGUI
 
                             if (e.PropertyName == "autoshipprofit")
                             {
-                                if (Core.Config.autoshipprofit)
-                                {
-                                    this.radio_saveloot.Checked = true;
-                                }
-                                else
-                                {
-                                    this.radio_savesailors.Checked = true;
-                                }
-                            }
+                                //todo: add
+                             }
                         }));
         }
 
@@ -916,6 +911,7 @@ namespace SeaBotGUI
             this.FormatResources(Core.GlobalData);
             GUIBinds.BuildingGrid.Start();
             GUIBinds.ShipGrid.Start();
+            SeaBotGUI.Debug.DebugGUI.Start();
             Core.GlobalData.Inventory.CollectionChanged += this.Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += this.Inventory_ItemPropertyChanged;
         }
@@ -982,7 +978,15 @@ namespace SeaBotGUI
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
             // saveloot
-            Core.Config.autoshipprofit = this.radio_saveloot.Checked;
+            if(this.radio_saveloot.Checked)
+            {
+                Core.Config.upgradablestrategy = UpgradablyStrategy.Sailors;
+            }
+            else
+            {
+                Core.Config.upgradablestrategy = UpgradablyStrategy.Loot;
+            }
+           
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
