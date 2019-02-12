@@ -228,7 +228,7 @@ namespace SeaBotGUI
                 list.Add(new GraphGlobalData(entry.Value, entry.Key));
             }
 
-            return list;
+            return list.OrderByDescending(n=>n.createtime).Take(50).ToList();
         }
 
         private void Radio_days_CheckedChanged(object sender, EventArgs e)

@@ -85,6 +85,7 @@ namespace SeaBotGUI
             this.LevelLabel = this.lbl_lvl;
             this.SailorsLabel = this.lbl_sailors;
             this.NeededAlgoGrid = this.dataGridView3;
+            this.InventoryGrid = this.dataGridView4;
             instance = this;
             TeleConfigSer.Load();
             this.MaximizeBox = false;
@@ -114,6 +115,8 @@ namespace SeaBotGUI
 
         public DataGridView BuildingGrid { get; }
 
+        public DataGridView InventoryGrid { get; }
+
         public Label CoinsLabel { get; }
 
         public Label FishLabel { get; }
@@ -142,41 +145,7 @@ namespace SeaBotGUI
             }
 
             ResourcesBox.Update();
-            var a = new List<ListViewItem>();
-
-            // todo fix
-            for (var i = 0; i < data.Inventory.Count; i++)
-            {
-                if (data.Inventory[i].Amount != 0)
-                {
-                    string[] row =
-                        {
-                            MaterialDB.GetLocalizedName(data.Inventory[i].Id), data.Inventory[i].Amount.ToString()
-                        };
-                    a.Add(new ListViewItem(row));
-                }
-            }
-
-            if (this.listView1.InvokeRequired)
-            {
-                MethodInvoker inv = delegate
-                    {
-                        this.listView1.Items.Clear();
-                        foreach (var list in a)
-                        {
-                            this.listView1.Items.Add(list);
-                        }
-                    };
-                this.listView1.BeginInvoke(inv);
-            }
-            else
-            {
-                this.listView1.Items.Clear();
-                foreach (var list in a)
-                {
-                    this.listView1.Items.Add(list);
-                }
-            }
+            
         }
 
         public void LoadControls()
@@ -218,6 +187,7 @@ namespace SeaBotGUI
             this.BuildingGrid.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
             this.ShipGrid.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
             this.NeededAlgoGrid.DataSource = new BindingSource(DebugGUI.Algos,null);
+            this.InventoryGrid.DataSource = new BindingSource(GUIBinds.InventoryGrid.InventoryBinding.Items,null);
             this.num_ironlimit.Value = Core.Config.ironlimit;
             this.num_woodlimit.Value = Core.Config.woodlimit;
             this.num_stonelimit.Value = Core.Config.stonelimit;
@@ -435,16 +405,20 @@ namespace SeaBotGUI
                 return;
             }
 
-            if (this.listView1.SelectedItems.Count > 0)
+            if (this.dataGridView4.CurrentRow!=null)
             {
-                var picked = this.listView1.SelectedItems[0].SubItems[0].Text;
-                var wehave = Core.GlobalData.GetAmountItem(picked);
-                if (wehave != 0 && wehave >= much)
+
+                if (dataGridView4.CurrentRow != null)
                 {
-                    var item = MaterialDB.GetItem(picked);
-                    Logger.Info(string.Format(PrivateLocal.INVENTORY_REMOVED, much, item.Name));
-                    Networking.AddTask(new Task.RemoveMaterialTask(item.DefId, much));
-                    Core.GlobalData.Inventory.First(n => n.Id == item.DefId).Amount -= much;
+                    var picked = (GUIBinds.InventoryGrid.InventoryBinding.Item)dataGridView4.CurrentRow.DataBoundItem;
+                    var wehave = picked.Amount;
+                    if (wehave != 0 && wehave >= much)
+                    {
+                        var item = MaterialDB.GetItem(picked.ID);
+                        Logger.Info(string.Format(PrivateLocal.INVENTORY_REMOVED, much, item.Name));
+                        Networking.AddTask(new Task.RemoveMaterialTask(item.DefId, much));
+                        Core.GlobalData.Inventory.First(n => n.Id == item.DefId).Amount -= much;
+                    }
                 }
             }
         }
@@ -922,6 +896,7 @@ namespace SeaBotGUI
             GUIBinds.BuildingGrid.Start();
             GUIBinds.ShipGrid.Start();
             SeaBotGUI.Debug.DebugGUI.Start();
+            GUIBinds.InventoryGrid.Start();
             Core.GlobalData.Inventory.CollectionChanged += this.Inventory_CollectionChanged;
             Core.GlobalData.Inventory.ItemPropertyChanged += this.Inventory_ItemPropertyChanged;
         }

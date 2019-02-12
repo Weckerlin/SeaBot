@@ -30,6 +30,7 @@ namespace SeaBotGUI.GUIBinds
     using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Cache;
     using SeaBotCore.Data.Definitions;
+    using SeaBotCore.Data.Materials;
     using SeaBotCore.Utils;
 
     using SeaBotGUI.Localization;
@@ -153,6 +154,131 @@ namespace SeaBotGUI.GUIBinds
             else
             {
                 Form1.instance.StoneLabel.Text = stone.ToKMB();
+            }
+        }
+    }
+    public static class InventoryGrid
+    {
+        private static Thread InventoryGridThread;
+
+        public static void Start()
+        {
+            if (InventoryGridThread == null)
+            {
+                InventoryGridThread = new Thread(UpdateGrid);
+                InventoryGridThread.IsBackground = true;
+                InventoryGridThread.Start();
+                Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+            }
+        }
+
+        private static void Inventory_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+              UpdateGrid();
+        }
+
+        public static void Stop()
+        {
+            if (InventoryGridThread.IsAlive)
+            {
+                InventoryGridThread.Abort();
+                InventoryGridThread = null;
+            }
+        }
+
+        public static void UpdateGrid()
+        {
+            var _lastupdatedTime = DateTime.Now;
+            while (true)
+            {
+                Thread.Sleep(50);
+                if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
+                {     
+                    if (Form1.instance.WindowState == FormWindowState.Minimized)
+                    {
+                        continue;
+                    }
+
+                    _lastupdatedTime = DateTime.Now;
+                    if (Form1.instance.BuildingGrid.InvokeRequired)
+                    {
+                        var newbuild = InventoryBinding.GetItems();
+                        MethodInvoker meth = () =>
+                            {
+                                foreach (DataGridViewTextBoxColumn clmn in Form1.instance.InventoryGrid.Columns)
+                                {
+                                    clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                                    clmn.Resizable = DataGridViewTriState.False;
+                                }
+
+                                foreach (var bld in newbuild)
+                                {
+                                    if (InventoryBinding.Items.Where(n => n.ID == bld.ID).FirstOrDefault() == null)
+                                    {
+                                        InventoryBinding.Items.Add(bld);
+                                    }
+                                    else
+                                    {
+                                        var old = InventoryBinding.Items.First(n => n.ID == bld.ID);
+                                        if (old.Amount != bld.Amount)
+                                        {
+                                            old.Amount = bld.Amount;
+                                        }
+                                    }
+                                }
+
+                                Form1.instance.BuildingGrid.Refresh();
+                                Form1.instance.BuildingGrid.Update();
+                            };
+
+                        Form1.instance.BuildingGrid.BeginInvoke(meth);
+                    }
+                }
+            }
+        }
+
+        public static class InventoryBinding
+        {
+            public static BindingList<Item> Items = new BindingList<Item>();
+
+            public static BindingList<Item> GetItems()
+            {
+                var ret = new BindingList<Item>();
+                if (Core.GlobalData == null)
+                {
+                    return ret;
+                }
+
+                if (Core.GlobalData.Inventory == null)
+                {
+                    return ret;
+                }
+
+                foreach (var item in Core.GlobalData.Inventory)
+                {
+                    if (item.Amount == 0)
+                    {
+                        continue;
+                    }
+                    var pitem = new Item();
+                    pitem.ID = item.Id;
+                    pitem.Name = MaterialDB.GetLocalizedName(item.Id);
+                    pitem.Amount = item.Amount;
+                    ret.Add(pitem);
+                }
+
+                return ret;
+            }
+
+            public class Item
+            {
+               
+
+                public int ID { get; set; }
+
+                public string Name { get; set; }
+
+                public int Amount { get; set; }
             }
         }
     }
