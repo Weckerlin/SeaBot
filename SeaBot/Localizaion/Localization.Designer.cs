@@ -115,7 +115,7 @@ namespace SeaBotCore.Localizaion {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Upgraded Contractor .
+        ///   Ищет локализованную строку, похожую на Upgraded {0}.
         /// </summary>
         internal static string CONTRACTOR_UPGRADED {
             get {
@@ -453,6 +453,15 @@ namespace SeaBotCore.Localizaion {
         internal static string SLEEP_STARTING {
             get {
                 return ResourceManager.GetString("SLEEP_STARTING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ships.
+        /// </summary>
+        internal static string TELEGRAM_BTN_SHIPS {
+            get {
+                return ResourceManager.GetString("TELEGRAM_BTN_SHIPS", resourceCulture);
             }
         }
         

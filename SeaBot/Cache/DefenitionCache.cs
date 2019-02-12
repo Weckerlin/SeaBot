@@ -35,9 +35,9 @@ namespace SeaBotCore.Cache
 
     internal static class DefenitionCache
     {
-        private const string _baseaddr = "https://static.seaportgame.com/build/definitions/";
-
         private const string _basedwnladdr = "https://static.seaportgame.com/build/";
+
+        private const string _baseaddr = "https://r4a4v3g4.ssl.hwcdn.net/definitions/filelists/";
 
         private const string _cachefolder = "cache";
 
@@ -46,7 +46,7 @@ namespace SeaBotCore.Cache
 
         private static readonly object locker = new object();
 
-        private static string _lastestdef = "1.763.0";
+        private static string _lastestdef = "2.635.0";
 
         public static bool DownloadCache()
         {

@@ -43,9 +43,9 @@ namespace SeaBotCore.Utils
             return list;
         }
 
-        public static Dictionary<int, int> GetLocalProducionPerHour()
+        public static Dictionary<int, decimal> GetLocalProducionPerHour()
         {
-            var ret = new Dictionary<int, int>();
+            var ret = new Dictionary<int, decimal>();
             decimal fishprod = 0;
             foreach (var boat in Core.GlobalData.Boats)
             {
@@ -79,11 +79,11 @@ namespace SeaBotCore.Utils
                         var outperhour = perhour * outputsOutput.Amount;
                         if (ret.ContainsKey(outputsOutput.MaterialId))
                         {
-                            ret[outputsOutput.MaterialId] += (int)outperhour;
+                            ret[outputsOutput.MaterialId] += outperhour;
                         }
                         else
                         {
-                            ret.Add(outputsOutput.MaterialId, (int)outperhour);
+                            ret.Add(outputsOutput.MaterialId, outperhour);
                         }
                     }
                 }

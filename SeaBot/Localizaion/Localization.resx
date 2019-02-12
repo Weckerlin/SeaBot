@@ -255,4 +255,7 @@
 	<data name="DESTINATION.WRECK" xml:space="preserve">
     <value>Sending {0} to wreck!</value>
   </data>
+  <data name="TELEGRAM_BTN_SHIPS" xml:space="preserve">
+    <value>Ships</value>
+  </data>
 </root>

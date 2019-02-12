@@ -629,7 +629,7 @@ namespace SeaBotGUI.TelegramBot
                                  new[]
                                     {
                                         new TelegramBot.Button(
-                                            PrivateLocal.TELEGRAM_BTN_INVENTORY, //TODO: add localization
+                                            PrivateLocal.TELEGRAM_BTN_SHIPS, 
                                             () =>
                                                 {
                                                     TelegramBotController.SendMessage(
@@ -680,7 +680,7 @@ namespace SeaBotGUI.TelegramBot
                             {
                                 foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0))
                                 {
-                                    builder.AppendLine($"{MaterialDB.GetItem(item.Id).Name} - {item.Amount}");
+                                    builder.AppendLine($"{MaterialDB.GetLocalizedName(item.Id)} - {item.Amount}");
                                 }
                             }
                             else
@@ -752,12 +752,12 @@ namespace SeaBotGUI.TelegramBot
                             }
                             else
                             {
-                                builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY); //TODO: add localization
+                                builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL);
                             }
                         }
                         else
                         {
-                            builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL_INVENTORY);
+                            builder.Append(PrivateLocal.TELEGRAM_EXCEPTION_NULL);
                         }
 
                         return builder.ToString();

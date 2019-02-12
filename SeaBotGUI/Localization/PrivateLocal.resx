@@ -290,4 +290,10 @@ Your current limit on Iron: </value>
 	<data name="SHIPS.SOCIAL_CONTRACT" xml:space="preserve">
     <value>Social Contract</value>
   </data>
+  <data name="TELEGRAM_BTN_SHIPS" xml:space="preserve">
+    <value>Ships</value>
+  </data>
+  <data name="TELEGRAM_EXCEPTION_NULL" xml:space="preserve">
+    <value>Please start the bot before using this feature</value>
+  </data>
 </root>

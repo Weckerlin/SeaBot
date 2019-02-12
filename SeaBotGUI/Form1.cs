@@ -52,6 +52,7 @@ namespace SeaBotGUI
     using SeaBotCore.Logger;
     using SeaBotCore.Utils;
 
+    using SeaBotGUI.Debug;
     using SeaBotGUI.GUIBinds;
     using SeaBotGUI.Localization;
     using SeaBotGUI.TelegramBot;
@@ -83,6 +84,7 @@ namespace SeaBotGUI
             this.WoodLabel = this.lbl_wood;
             this.LevelLabel = this.lbl_lvl;
             this.SailorsLabel = this.lbl_sailors;
+            this.NeededAlgoGrid = this.dataGridView3;
             instance = this;
             TeleConfigSer.Load();
             this.MaximizeBox = false;
@@ -182,6 +184,7 @@ namespace SeaBotGUI
             ExceptionlessClient.Default.Register(true);
             ExceptionlessClient.Default.SubmitLog("Logined");
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
+
             this.textBox2.Text = Core.Config.server_token;
             this.num_hibernationinterval.Value = Core.hibernation = Core.Config.hibernateinterval;
             this.checkBox1.Checked = Core.Config.debug;
@@ -214,6 +217,7 @@ namespace SeaBotGUI
             this.chk_automuseum.Checked = Core.Config.collectmuseum;
             this.BuildingGrid.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
             this.ShipGrid.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
+            this.NeededAlgoGrid.DataSource = new BindingSource(DebugGUI.Algos,null);
             this.num_ironlimit.Value = Core.Config.ironlimit;
             this.num_woodlimit.Value = Core.Config.woodlimit;
             this.num_stonelimit.Value = Core.Config.stonelimit;
@@ -292,6 +296,15 @@ namespace SeaBotGUI
             if (Core.Config.shipdesttype == ShipDestType.Upgradable)
             {
                 this.radio_upgradable.Checked = true;
+            }
+
+            if (Core.Config.upgradablestrategy == UpgradablyStrategy.Loot)
+            {
+                this.radio_saveloot.Checked = true;
+            }
+            else
+            {
+                this.radio_savesailors.Checked = true;
             }
 
             this.linkLabel1.Links.Add(
@@ -736,10 +749,7 @@ namespace SeaBotGUI
                                 this.UpdateButtons(Core.Config.autoshiptype);
                             }
 
-                            if (e.PropertyName == "autoshipprofit")
-                            {
-                                //todo: add
-                             }
+                            
                         }));
         }
 
@@ -977,14 +987,14 @@ namespace SeaBotGUI
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            // saveloot
+            
             if(this.radio_saveloot.Checked)
             {
-                Core.Config.upgradablestrategy = UpgradablyStrategy.Sailors;
+                Core.Config.upgradablestrategy = UpgradablyStrategy.Loot;
             }
             else
             {
-                Core.Config.upgradablestrategy = UpgradablyStrategy.Loot;
+                Core.Config.upgradablestrategy = UpgradablyStrategy.Sailors;
             }
            
         }
@@ -1146,5 +1156,7 @@ namespace SeaBotGUI
         {
 
         }
+
+        
     }
 }

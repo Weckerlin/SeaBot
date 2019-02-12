@@ -287,6 +287,15 @@ namespace SeaBotGUI.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ships.
+        /// </summary>
+        internal static string TELEGRAM_BTN_SHIPS {
+            get {
+                return ResourceManager.GetString("TELEGRAM_BTN_SHIPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Start.
         /// </summary>
         internal static string TELEGRAM_BTN_START {
@@ -364,6 +373,15 @@ namespace SeaBotGUI.Localization {
         internal static string TELEGRAM_ERR_CANT_PARSE {
             get {
                 return ResourceManager.GetString("TELEGRAM_ERR_CANT_PARSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Please start the bot before using this feature.
+        /// </summary>
+        internal static string TELEGRAM_EXCEPTION_NULL {
+            get {
+                return ResourceManager.GetString("TELEGRAM_EXCEPTION_NULL", resourceCulture);
             }
         }
         

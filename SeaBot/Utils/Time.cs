@@ -39,8 +39,7 @@ namespace SeaBotCore.Utils
 
         public static void CheckForTimeMismatch(long time)
         {
-            if (Core.Debug)
-            {
+           
                 var timedelay = (DateTime.UtcNow + _timeOffset - FromUnixTime(time)).TotalMinutes;
 
                 // Logger.Logger.Info(FromUnixTime(time).ToString());
@@ -52,7 +51,7 @@ namespace SeaBotCore.Utils
 
                     // Time is really delayed!
                 }
-            }
+            
         }
 
         public static DateTime FromUnixTime(long unixTime)

@@ -127,7 +127,7 @@ namespace SeaBotCore
                         regex = new Regex(@"pid': '(.*)', 'platform");
                         tempuid = regex.Match(data).Groups[1].Value;
                         Logger.Logger.Info(Localization.NETWORKING_LOGIN_SUCCESS + Core.Ssid);
-                        regex = new Regex(@"'filelist_url1': 'https:\/\/r4a4v3g4\.ssl\.hwcdn\.net\/build\/(.+)\.xml', 'filelist_url2");
+                        regex = new Regex(@"'definition_filelist_url1': 'https:\/\/r4a4v3g4\.ssl\.hwcdn\.net\/definitions\/filelists\/(.+)\.xml', 'definition_filelist_url2'");
                         var mtch = regex.Match(data);
                         if (mtch.Success)
                         {
