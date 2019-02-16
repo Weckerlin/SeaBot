@@ -1133,6 +1133,9 @@ namespace SeaBotGUI
 
         }
 
-        
+        private void Num_sleepfor_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.sleepfor = (int)this.num_sleepfor.Value;
+        }
     }
 }
