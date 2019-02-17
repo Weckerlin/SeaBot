@@ -20,6 +20,9 @@ namespace SeaBotGUI
     using System;
     using System.Windows.Forms;
 
+    using SeaBotCore;
+    using SeaBotCore.Logger;
+
     #endregion
 
     internal static class Program

@@ -74,7 +74,6 @@ namespace SeaBotCore.BotMethods.ShipManagment
                                     unloadedships.Add(ship.DefId);
                                     int uniqueid = unloadedships.Count(n => n == ship.DefId);
                                     UnloadContractor(ship, uniqueid);
-                                   
                                 }
                                 break;
                             }

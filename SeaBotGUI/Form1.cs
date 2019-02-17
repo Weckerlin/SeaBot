@@ -92,6 +92,11 @@ namespace SeaBotGUI
             this.CheckForUpdates();
             this.UpdateButtons(Core.Config.autoshiptype);
             this.LoadControls();
+            notifyIcon1.Text = "SeaBot";
+            notifyIcon1.Visible = false;
+
+            // Handle the DoubleClick event to activate the form.
+            notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             Logger.Event.LogMessageChat.OnLogMessage += this.LogMessageChat_OnLogMessage;
             if (!Core.Config.acceptedresponsibility)
             {
@@ -108,9 +113,43 @@ namespace SeaBotGUI
                     Environment.Exit(0);
                 }
             }
+            Form1.instance.Resize += Instance_Resize;
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                if (args[1].ToLower() == "-start")
+                {
+                    if (Core.Config.server_token != "")
+                    {
+                        Core.StartBot();
+                    }
+                    else
+                    {
+                        Logger.Error("Skipped command line startup because server token is null");
+                    }
+                }
+            }
 
             // Check for cache
         }
+
+        private void Instance_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)  
+            {  
+                Hide();  
+                this.notifyIcon1.Visible = true;                  
+            }  
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            Show();  
+            this.WindowState = FormWindowState.Normal;  
+            this.notifyIcon1.Visible = false;  
+
+        }
+
         public DataGridView NeededAlgoGrid { get; }
 
         public DataGridView BuildingGrid { get; }
