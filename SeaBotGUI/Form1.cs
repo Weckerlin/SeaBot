@@ -99,7 +99,7 @@ namespace SeaBotGUI
             {
                 var msg = MessageBox.Show(
                     PrivateLocal.SEABOTGUI_WELCOME,
-                    "Root to the SeaBot!",
+                    "Welcome to the SeaBot!",
                     MessageBoxButtons.OKCancel);
                 if (msg == DialogResult.OK)
                 {

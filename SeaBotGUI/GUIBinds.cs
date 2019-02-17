@@ -532,16 +532,24 @@ namespace SeaBotGUI.GUIBinds
                     _lastupdatedTime = DateTime.Now;
                     if (Form1.instance.ShipGrid.InvokeRequired)
                     {
-                        var newbuild = ShipBinding.GetShips();
+                        var newships = ShipBinding.GetShips();
                         MethodInvoker meth = () =>
                             {
-                                foreach (DataGridViewTextBoxColumn clmn in Form1.instance.ShipGrid.Columns)
+                                foreach (var clmn in Form1.instance.ShipGrid.Columns)
                                 {
-                                    clmn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                                    clmn.Resizable = DataGridViewTriState.False;
-                                }
+                                    if ((clmn as DataGridViewTextBoxColumn) != null)
+                                    {
+                                        var b = (DataGridViewTextBoxColumn)clmn;
 
-                                foreach (var bld in newbuild)
+                                        b.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                                        b.Resizable = DataGridViewTriState.False;
+                                        b.ReadOnly = true;
+                                    }
+                                }
+                               
+                               
+
+                                foreach (var bld in newships)
                                 {
                                     if (ShipBinding.Ships.Where(n => n.ID == bld.ID).FirstOrDefault() == null)
                                     {
@@ -642,6 +650,8 @@ namespace SeaBotGUI.GUIBinds
 
         public class Ship
         {
+            private bool _ignored;
+
             public int ID { get; set; }
 
             public string Name { get; set; }
@@ -649,6 +659,37 @@ namespace SeaBotGUI.GUIBinds
             public string InPortAt { get; set; }
 
             public string Route { get; set; }
+
+            public bool Ignored
+            {
+                get
+                {
+                    return Core.Config.ignoredships.Contains(ID);
+                }
+                set
+                {
+                    if (value)
+                    {
+                        if (!Core.Config.ignoredships.Contains(ID))
+                        {
+                            var snapshot = Core.Config.ignoredships;
+                            snapshot.Add(ID);
+                            Core.Config.ignoredships = snapshot;
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (Core.Config.ignoredships.Contains(ID))
+                        {
+                            var snapshot = Core.Config.ignoredships;
+                            snapshot.Remove(ID);
+                            Core.Config.ignoredships = snapshot;
+                        } 
+                    }
+                    this._ignored = value;
+                }
+            }
         }
     }
     public class RadioGroupBox : GroupBox

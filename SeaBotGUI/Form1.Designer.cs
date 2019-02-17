@@ -1167,7 +1167,6 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dataGridView2, "dataGridView2");
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             // 
             // tabPage5

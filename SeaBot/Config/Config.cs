@@ -147,6 +147,8 @@ namespace SeaBotCore.Config
 
         private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
 
+        List<int> _ignoredships = new List<int>();
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ChartType charttype
@@ -156,6 +158,16 @@ namespace SeaBotCore.Config
             {
                 this._charttype = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("charttype"));
+            }
+        }
+
+        public List<int> ignoredships
+        {
+            get => this._ignoredships;
+            set
+            {
+                this._ignoredships = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("ignoredships"));
             }
         }
 
