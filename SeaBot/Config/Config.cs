@@ -55,6 +55,19 @@ namespace SeaBotCore.Config
 
         Wreck
     }
+    public enum ChartData
+    {
+        Resources,
+
+        PlayerInfo
+    }
+
+    public enum ChartType
+    {
+        Hour,
+
+        Day
+    }
 
  
 
@@ -64,7 +77,11 @@ namespace SeaBotCore.Config
 
         private bool _autoship;
 
-        private UpgradablyStrategy _upgradablestrategy;
+        private ChartType _charttype = ChartType.Day;
+
+        private ChartData _chartdata = ChartData.Resources;
+
+        private UpgradablyStrategy _upgradablestrategy = UpgradablyStrategy.Sailors;
 
         private string _autoshiptype = "coins";
 
@@ -85,8 +102,6 @@ namespace SeaBotCore.Config
         private bool _debug;
 
         private bool _finishupgrade;
-
-  
 
         private int _hibernateinterval = 5;
 
@@ -134,8 +149,25 @@ namespace SeaBotCore.Config
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-      
+        public ChartType charttype
+        {
+            get => this._charttype;
+            set
+            {
+                this._charttype = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("charttype"));
+            }
+        }
 
+        public ChartData chartdata
+        {
+            get => this._chartdata;
+            set
+            {
+                this._chartdata = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("chartdata"));
+            }
+        }
         public bool exploitmode
         {
             get => this._exploitmode;

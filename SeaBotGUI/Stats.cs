@@ -30,44 +30,52 @@ namespace SeaBotGUI
 
     using Newtonsoft.Json;
 
+    using SeaBotCore;
+    using SeaBotCore.Config;
     using SeaBotCore.Data;
 
     using SeaBotGUI.Localization;
+
+    using Telegram.Bot.Types.InlineQueryResults.Abstractions;
 
     #endregion
 
     public partial class Stats : Form
     {
-        private static ChartData chartdata = ChartData.Resources;
-
-        private static ChartType charttype = ChartType.Hour;
+       
 
         public Stats()
         {
+           
+
             this.InitializeComponent();
+            if (Core.Config.chartdata == ChartData.Resources)
+            {
+                this.radio_res.Checked = true;
+            }
+            else
+            {
+                this.radioButton1.Checked = true;
+            }
+            if (Core.Config.charttype == ChartType.Day)
+            {
+                this.radio_days.Checked = true;
+            }
+            else
+            {
+                this.radio_hours.Checked = true;
+            }
             this.DrawChart();
             this.cartesianChart1.LegendLocation = LegendLocation.Right;
             this.cartesianChart1.Zoom = ZoomingOptions.X;
         }
 
-        public enum ChartData
-        {
-            Resources,
-
-            PlayerInfo
-        }
-
-        public enum ChartType
-        {
-            Hour,
-
-            Day
-        }
+    
 
         public void DrawChart()
         {
-            var data = this.GetGlobalData(charttype).OrderBy(x => x.createtime).ToList();
-            if (chartdata == ChartData.Resources)
+            var data = this.GetGlobalData(Core.Config.charttype).OrderBy(x => x.createtime).ToList();
+            if (Core.Config.chartdata == ChartData.Resources)
             {
                 this.cartesianChart1.Series = new SeriesCollection
                                                   {
@@ -119,7 +127,7 @@ namespace SeaBotGUI
                                                   };
             }
 
-            if (chartdata == ChartData.PlayerInfo)
+            if (Core.Config.chartdata == ChartData.PlayerInfo)
             {
                 this.cartesianChart1.Series = new SeriesCollection
                                                   {
@@ -240,11 +248,12 @@ namespace SeaBotGUI
         {
             if (!this.radio_days.Checked)
             {
-                charttype = ChartType.Hour;
+               
+                Core.Config.charttype = ChartType.Hour;
             }
             else
             {
-                charttype = ChartType.Day;
+                Core.Config.charttype = ChartType.Day;
             }
 
             this.DrawChart();
@@ -254,11 +263,11 @@ namespace SeaBotGUI
         {
             if (this.radio_res.Checked)
             {
-                chartdata = ChartData.Resources;
+                Core.Config.chartdata = ChartData.Resources;
             }
             else
             {
-                chartdata = ChartData.PlayerInfo;
+                Core.Config.chartdata = ChartData.PlayerInfo;
             }
 
             this.DrawChart();

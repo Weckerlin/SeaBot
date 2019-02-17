@@ -92,9 +92,6 @@ namespace SeaBotGUI
             this.CheckForUpdates();
             this.UpdateButtons(Core.Config.autoshiptype);
             this.LoadControls();
-            notifyIcon1.Text = "SeaBot";
-            notifyIcon1.Visible = false;
-
             // Handle the DoubleClick event to activate the form.
             notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             Logger.Event.LogMessageChat.OnLogMessage += this.LogMessageChat_OnLogMessage;
