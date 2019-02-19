@@ -21,7 +21,7 @@ namespace SeaBotGUI.Forms
         private class IgnoredDest
         {
 
-            private ShipDestType desttype;
+            public ShipDestType desttype;
 
             public int DefId { get; set; }
 
@@ -69,6 +69,7 @@ namespace SeaBotGUI.Forms
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
+                    item.desttype = this.DestinationType;
                     item.DefId = def.DefId;
                     item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
                     locallist.Add(item);
@@ -88,6 +89,7 @@ namespace SeaBotGUI.Forms
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
+                    item.desttype = this.DestinationType;
                     item.DefId = def.DefId;
                     item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
                     locallist.Add(item);
@@ -111,6 +113,7 @@ namespace SeaBotGUI.Forms
                     }
                     dest.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(item.NameLoc, item.Name);
                     dest.DefId = opened.DefId;
+                    dest.desttype = this.DestinationType;
                     locallist.Add(dest);
                 }
                 foreach (var lockedoutpost in lockedoutposts )
@@ -119,6 +122,7 @@ namespace SeaBotGUI.Forms
                     item.DefId = lockedoutpost.DefId;
                     item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(lockedoutpost.NameLoc, lockedoutpost.Name);
                        locallist.Add(item);
+                       item.desttype = this.DestinationType;
                 }
             }
 
@@ -151,9 +155,6 @@ namespace SeaBotGUI.Forms
 
             // throw new NotImplementedException();
         }
-        private void IgnoredDestination_Load(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }

@@ -296,4 +296,7 @@ Your current limit on Iron: </value>
   <data name="TELEGRAM_EXCEPTION_NULL" xml:space="preserve">
     <value>Please start the bot before using this feature</value>
   </data>
+  <data name="TELEGRAM_STORAGE" xml:space="preserve">
+    <value>Storage {0}/{1}</value>
+  </data>
 </root>

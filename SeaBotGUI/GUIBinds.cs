@@ -279,6 +279,53 @@ namespace SeaBotGUI.GUIBinds
                 public string Name { get; set; }
 
                 public int Amount { get; set; }
+
+                public int Startup
+                {
+                    get
+                    {
+                        var am = Form1.instance.StartupInv.Where(n => n.Id == this.ID).FirstOrDefault();
+                        if (am == null)
+                        {
+                            return 0;
+                        }
+                        return am.Amount;
+                    }
+                }
+
+              
+                public char Changed
+                {
+                    get
+                    {
+                        if (Form1.instance.StartupInv.Any(n => n.Id == ID))
+                        {
+                            var startupamount = Form1.instance.StartupInv.Where(n => n.Id == ID).FirstOrDefault()
+                                ?.Amount;
+                            if (startupamount > Amount)
+                            {
+                                return '↘';
+                            }
+
+                            if (startupamount == Amount)
+                            {
+                                return '=';
+                            }
+                            
+                            if (startupamount < Amount)
+                            {
+                                return '↗';
+                            }
+                        }
+                        else
+                        {
+                            return '↗';
+                        }
+
+                        return '?';
+                    }
+                  
+                }
             }
         }
     }

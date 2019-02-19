@@ -67,7 +67,12 @@ namespace SeaBotGUI.TelegramBot
 
                 AutoShipMaterial
             }
-
+            public static bool Between(int num, int lower, int upper, bool inclusive = false)
+            {
+                return inclusive
+                           ? lower <= num && num <= upper
+                           : lower < num && num < upper;
+            }
             public static class MenuItems
             {
                 public class AutoShipMaterial : TelegramBot.IMenu
@@ -678,7 +683,18 @@ namespace SeaBotGUI.TelegramBot
                         {
                             if (Core.GlobalData.Inventory != null)
                             {
-                                foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0))
+                                foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0 && Between(n.Id,1,6,true)))
+                                {
+                                    builder.AppendLine($"{MaterialDB.GetLocalizedName(item.Id)} - {item.Amount}");
+                                }
+
+                                builder.AppendLine(
+                                    Environment.NewLine + string.Format(
+                                        PrivateLocal.TELEGRAM_STORAGE,
+                                        AutoTools.GetStogradeLoaded(),
+                                        Core.GlobalData.StorageCapacity));
+                                foreach (var item in Core.GlobalData.Inventory.Where(
+                                    n => n.Amount != 0 && !Between(n.Id, 1, 6, true)))
                                 {
                                     builder.AppendLine($"{MaterialDB.GetLocalizedName(item.Id)} - {item.Amount}");
                                 }

@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="groupBox26.Text" xml:space="preserve">
-    <value>Спасибо за тестирование и репорты</value>
-  </data>
-  <data name="groupBox19.Text" xml:space="preserve">
-    <value>Большое спасибо:</value>
-  </data>
-  <data name="groupBox18.Text" xml:space="preserve">
-    <value>Пожертвования</value>
-  </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>О проекте</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8pt</value>
@@ -146,23 +134,83 @@
   <data name="label7.Text" xml:space="preserve">
     <value>Flexushka</value>
   </data>
+  <data name="label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label20.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 22</value>
+  </data>
+  <data name="label21.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox26.Text" xml:space="preserve">
+    <value>Спасибо за тестирование и репорты</value>
+  </data>
+  <data name="groupBox26.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label18.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label17.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
+  <data name="label12.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox19.Text" xml:space="preserve">
+    <value>Большое спасибо:</value>
+  </data>
+  <data name="groupBox19.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="linkLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Настройки</value>
+  <data name="linkLabel7.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="tabPage8.Text" xml:space="preserve">
-    <value>Стратегия</value>
+  <data name="groupBox18.Text" xml:space="preserve">
+    <value>Пожертвования</value>
   </data>
-  <data name="groupBox27.Text" xml:space="preserve">
-    <value>Игнор. путей</value>
+  <data name="groupBox18.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="linkLabel2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage4.Text" xml:space="preserve">
+    <value>О проекте</value>
+  </data>
+  <data name="tabPage4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 44</value>
@@ -170,11 +218,17 @@
   <data name="button8.Text" xml:space="preserve">
     <value>Туманы</value>
   </data>
+  <data name="button8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="button10.Location" type="System.Drawing.Point, System.Drawing">
     <value>83, 16</value>
   </data>
   <data name="button10.Text" xml:space="preserve">
     <value>Контракты</value>
+  </data>
+  <data name="button10.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button11.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 23</value>
@@ -182,8 +236,14 @@
   <data name="button11.Text" xml:space="preserve">
     <value>Обновл.</value>
   </data>
-  <data name="groupBox24.Text" xml:space="preserve">
-    <value>Рынок</value>
+  <data name="button11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox27.Text" xml:space="preserve">
+    <value>Игнор. путей</value>
+  </data>
+  <data name="groupBox27.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button1.Text" xml:space="preserve">
     <value>Продавать
@@ -192,6 +252,12 @@
   </data>
   <data name="button1.ToolTip" xml:space="preserve">
     <value>Выбери вещи которые бот должен продавать</value>
+  </data>
+  <data name="groupBox24.Text" xml:space="preserve">
+    <value>Рынок</value>
+  </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_wreck.Location" type="System.Drawing.Point, System.Drawing">
     <value>99, 68</value>
@@ -258,6 +324,9 @@
   <data name="radio_upgradable.ToolTip" xml:space="preserve">
     <value>Обновляемые - обычные места которые можно апгрейднуть после длительных рейсов туда-сюда</value>
   </data>
+  <data name="groupBox22.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>323, 16</value>
   </data>
@@ -267,11 +336,17 @@
   <data name="label16.Text" xml:space="preserve">
     <value>0 = бесконечность</value>
   </data>
+  <data name="label16.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
   <data name="label15.Text" xml:space="preserve">
     <value>Бетон</value>
+  </data>
+  <data name="label15.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>217, 34</value>
@@ -282,6 +357,9 @@
   <data name="label14.Text" xml:space="preserve">
     <value>Топливо</value>
   </data>
+  <data name="label14.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 33</value>
   </data>
@@ -291,11 +369,26 @@
   <data name="label13.Text" xml:space="preserve">
     <value>Запчасть</value>
   </data>
+  <data name="label13.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_limitconcrete.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_limitfuel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_limitmech.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
   </data>
   <data name="checkBox2.Text" xml:space="preserve">
     <value>Все до лимитов</value>
+  </data>
+  <data name="checkBox2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radioButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 17</value>
@@ -303,11 +396,17 @@
   <data name="radioButton3.Text" xml:space="preserve">
     <value>Бетон</value>
   </data>
+  <data name="radioButton3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radioButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 17</value>
   </data>
   <data name="radioButton2.Text" xml:space="preserve">
     <value>Топливо</value>
+  </data>
+  <data name="radioButton2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
@@ -315,8 +414,20 @@
   <data name="radioButton1.Text" xml:space="preserve">
     <value>Запчасть</value>
   </data>
-  <data name="groupBox6.Text" xml:space="preserve">
-    <value>Лимит на производство</value>
+  <data name="radioButton1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox20.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_stonelimit.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_ironlimit.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_woodlimit.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>226, 7</value>
@@ -327,17 +438,26 @@
   <data name="label6.Text" xml:space="preserve">
     <value>0 = бесконечность</value>
   </data>
+  <data name="label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Камень</value>
   </data>
+  <data name="label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Железо</value>
+  </data>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 20</value>
@@ -348,8 +468,14 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Дерево</value>
   </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>Авто Апгрейд</value>
+  <data name="label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox6.Text" xml:space="preserve">
+    <value>Лимит на производство</value>
+  </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_onlyfactory.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 26</value>
@@ -360,8 +486,17 @@
   <data name="chk_onlyfactory.Text" xml:space="preserve">
     <value>Только заводы</value>
   </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>Авто-Бочки</value>
+  <data name="chk_onlyfactory.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Авто Апгрейд</value>
+  </data>
+  <data name="groupBox10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_barrelinterval.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
@@ -369,8 +504,14 @@
   <data name="label8.Text" xml:space="preserve">
     <value>Интервал (сек.)</value>
   </data>
-  <data name="groupBox12.Text" xml:space="preserve">
-    <value>Опт. стратегия</value>
+  <data name="label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Авто-Бочки</value>
+  </data>
+  <data name="groupBox8.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_saveloot.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
@@ -378,14 +519,23 @@
   <data name="radio_saveloot.Text" xml:space="preserve">
     <value>Только лут</value>
   </data>
+  <data name="radio_saveloot.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_savesailors.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
   </data>
   <data name="radio_savesailors.Text" xml:space="preserve">
     <value>Моряки</value>
   </data>
-  <data name="groupBox11.Text" xml:space="preserve">
-    <value>Лут с обновляемых</value>
+  <data name="radio_savesailors.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox12.Text" xml:space="preserve">
+    <value>Опт. стратегия</value>
+  </data>
+  <data name="groupBox12.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_oil.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 19</value>
@@ -396,6 +546,9 @@
   <data name="radio_oil.Text" xml:space="preserve">
     <value>Нефть</value>
   </data>
+  <data name="radio_oil.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_stone.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 19</value>
   </data>
@@ -404,6 +557,9 @@
   </data>
   <data name="radio_stone.Text" xml:space="preserve">
     <value>Камень</value>
+  </data>
+  <data name="radio_stone.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_fish.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 43</value>
@@ -414,6 +570,9 @@
   <data name="radio_fish.Text" xml:space="preserve">
     <value>Рыба</value>
   </data>
+  <data name="radio_fish.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_iron.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 43</value>
   </data>
@@ -422,6 +581,9 @@
   </data>
   <data name="radio_iron.Text" xml:space="preserve">
     <value>Железо</value>
+  </data>
+  <data name="radio_iron.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_wood.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 43</value>
@@ -432,6 +594,9 @@
   <data name="radio_wood.Text" xml:space="preserve">
     <value>Дерево</value>
   </data>
+  <data name="radio_wood.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_gold.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 19</value>
   </data>
@@ -441,11 +606,20 @@
   <data name="radio_gold.Text" xml:space="preserve">
     <value>Монеты</value>
   </data>
-  <data name="tabPage7.Text" xml:space="preserve">
-    <value>Бот</value>
+  <data name="radio_gold.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="groupBox25.Text" xml:space="preserve">
-    <value>Дополнительно.</value>
+  <data name="groupBox11.Text" xml:space="preserve">
+    <value>Лут с обновляемых</value>
+  </data>
+  <data name="groupBox11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage8.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="tabPage8.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_exploit.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 17</value>
@@ -457,8 +631,17 @@
     <value>Очень странная штука
 Бот будет отправлять корабли туда, куда вобще невозможно попасть!</value>
   </data>
+  <data name="groupBox25.Text" xml:space="preserve">
+    <value>Дополнительно.</value>
+  </data>
+  <data name="groupBox25.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_dumpcore.Text" xml:space="preserve">
     <value>Дамп инфы</value>
+  </data>
+  <data name="btn_dumpcore.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 17</value>
@@ -466,8 +649,11 @@
   <data name="checkBox1.Text" xml:space="preserve">
     <value>Откладка</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Логин</value>
+  <data name="checkBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox21.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="linkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>344, 16</value>
@@ -478,17 +664,38 @@
   <data name="linkLabel1.Text" xml:space="preserve">
     <value>Как его получить?</value>
   </data>
+  <data name="linkLabel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Токен игры</value>
   </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbox_lang.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="groupBox17.Text" xml:space="preserve">
     <value>Язык</value>
   </data>
-  <data name="groupBox9.Text" xml:space="preserve">
-    <value>Другая сессия</value>
+  <data name="groupBox17.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_hibernationinterval.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -496,8 +703,14 @@
   <data name="label9.Text" xml:space="preserve">
     <value>Спать (мин.)</value>
   </data>
-  <data name="groupBox14.Text" xml:space="preserve">
-    <value>Сон</value>
+  <data name="label9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Другая сессия</value>
+  </data>
+  <data name="groupBox9.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_sleepenabled.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
@@ -505,11 +718,17 @@
   <data name="chk_sleepenabled.Text" xml:space="preserve">
     <value>Включено</value>
   </data>
+  <data name="chk_sleepenabled.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="chk_smartsleep.Text" xml:space="preserve">
     <value>Умный сон</value>
   </data>
-  <data name="groupBox16.Text" xml:space="preserve">
-    <value>Каждые</value>
+  <data name="chk_smartsleep.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_sleepevery.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_sleepeverymin.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
@@ -517,14 +736,26 @@
   <data name="radio_sleepeverymin.Text" xml:space="preserve">
     <value>Мин.</value>
   </data>
+  <data name="radio_sleepeverymin.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_sleepeveryhrs.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
   </data>
   <data name="radio_sleepeveryhrs.Text" xml:space="preserve">
     <value>Час.</value>
   </data>
-  <data name="groupBox15.Text" xml:space="preserve">
-    <value>Бот будет спать</value>
+  <data name="radio_sleepeveryhrs.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox16.Text" xml:space="preserve">
+    <value>Каждые</value>
+  </data>
+  <data name="groupBox16.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_sleepfor.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="radio_sleepformins.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 17</value>
@@ -532,14 +763,41 @@
   <data name="radio_sleepformins.Text" xml:space="preserve">
     <value>Мин.</value>
   </data>
+  <data name="radio_sleepformins.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="radio_sleepforhrs.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 17</value>
   </data>
   <data name="radio_sleepforhrs.Text" xml:space="preserve">
     <value>Час.</value>
   </data>
-  <data name="groupBox13.Text" xml:space="preserve">
-    <value>Телеграм Бот</value>
+  <data name="radio_sleepforhrs.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox15.Text" xml:space="preserve">
+    <value>Бот будет спать</value>
+  </data>
+  <data name="groupBox15.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox14.Text" xml:space="preserve">
+    <value>Сон</value>
+  </data>
+  <data name="groupBox14.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chk_telegramautostartup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 78</value>
+  </data>
+  <data name="chk_telegramautostartup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 17</value>
+  </data>
+  <data name="chk_telegramautostartup.Text" xml:space="preserve">
+    <value>Автозапуск</value>
+  </data>
+  <data name="chk_telegramautostartup.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 62</value>
@@ -550,17 +808,29 @@
   <data name="button5.Text" xml:space="preserve">
     <value>Стоп</value>
   </data>
+  <data name="button5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 23</value>
   </data>
   <data name="button4.Text" xml:space="preserve">
     <value>Старт</value>
   </data>
+  <data name="button4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbl_startupcode.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Код старта:</value>
+  </data>
+  <data name="label11.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="linkLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 16</value>
@@ -571,26 +841,77 @@
   <data name="linkLabel6.Text" xml:space="preserve">
     <value>Как его получить?</value>
   </data>
+  <data name="linkLabel6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>Токен</value>
   </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Инвертарь</value>
+  <data name="label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="textBox3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox13.Text" xml:space="preserve">
+    <value>Телеграм Бот</value>
+  </data>
+  <data name="groupBox13.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Бот</value>
+  </data>
+  <data name="tabPage7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabControl2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="tabPage2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridView4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="num_removenum.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btn_removeitem.Text" xml:space="preserve">
     <value>Удалить</value>
   </data>
+  <data name="btn_removeitem.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Инвертарь</value>
+  </data>
+  <data name="tabPage3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridView2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="tabPage6.Text" xml:space="preserve">
     <value>Корабли</value>
+  </data>
+  <data name="tabPage6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridView1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tabPage5.Text" xml:space="preserve">
     <value>Здания</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Главная</value>
+  <data name="tabPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="linkLabel10.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 408</value>
@@ -601,53 +922,122 @@
   <data name="linkLabel10.Text" xml:space="preserve">
     <value>Присоединяйтесь к нашему телеграм каналу для новостей, обновлений и бета версий! </value>
   </data>
+  <data name="linkLabel10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btn_stats.Text" xml:space="preserve">
     <value>Статистика</value>
   </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Ресурсы</value>
+  <data name="btn_stats.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="pictureBox8.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="pictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="pictureBox7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbl_sailors.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbl_lvl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lbl_wood.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 53</value>
+  </data>
+  <data name="lbl_wood.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lbl_stone.Location" type="System.Drawing.Point, System.Drawing">
     <value>206, 24</value>
   </data>
+  <data name="lbl_stone.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lbl_iron.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 54</value>
+  </data>
+  <data name="lbl_iron.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lbl_fish.Location" type="System.Drawing.Point, System.Drawing">
     <value>121, 25</value>
   </data>
+  <data name="lbl_fish.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbl_gems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbl_coins.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 48</value>
+  </data>
+  <data name="pictureBox6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="pictureBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 19</value>
   </data>
+  <data name="pictureBox5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 48</value>
+  </data>
+  <data name="pictureBox4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="pictureBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 19</value>
   </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Управление</value>
+  <data name="pictureBox3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="pictureBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="pictureBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox5.Text" xml:space="preserve">
+    <value>Ресурсы</value>
+  </data>
+  <data name="groupBox5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="button3.Text" xml:space="preserve">
     <value>Стоп</value>
   </data>
+  <data name="button3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="button2.Text" xml:space="preserve">
     <value>Старт</value>
+  </data>
+  <data name="button2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="richTextBox1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="groupBox3.Text" xml:space="preserve">
     <value>Логи</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Стратегия</value>
+  <data name="groupBox3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="chk_automuseum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -744,6 +1134,33 @@
   </data>
   <data name="chk_aupgrade.ToolTip" xml:space="preserve">
     <value>Апгрейд всех зданий в игре</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="tabPage1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dataGridView3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabControl3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabPage9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabControl1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="notifyIcon1.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4304,5 +4721,8 @@
         AAAAAAAAAAAAAAAAAP60q1/+r7Hq/am56v2kv18AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDwAA4AcA
         AOJHAADGYwAAznMAAM5zAAAOcAAADnAAAM5zAAD+fwAA/n8AAPw/AAD4HwAA+B8AAPgfAAD8PwAA
 </value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

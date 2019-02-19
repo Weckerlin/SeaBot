@@ -544,6 +544,15 @@ namespace SeaBotGUI.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Storage {0}/{1}.
+        /// </summary>
+        internal static string TELEGRAM_STORAGE {
+            get {
+                return ResourceManager.GetString("TELEGRAM_STORAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на  Auto-Barrel.
         /// </summary>
         internal static string TELEGRAM_STRATEGY_AUTO_BARREL {

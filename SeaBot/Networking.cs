@@ -208,7 +208,7 @@ namespace SeaBotCore
 
                 var response = Client.PostAsync("https://portal.pixelfederation.com/sy/?a=" + action, content);
 
-                // <xml><time>1548446333</time></xml>
+              
                 try
                 {
                     var doc = new XmlDocument();

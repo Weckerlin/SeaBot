@@ -150,6 +150,8 @@ namespace SeaBotCore.Config
 
         private int _woodlimit;
 
+        private bool _telegramstartup;
+
         private bool _exploitmode;
 
         private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
@@ -206,6 +208,16 @@ namespace SeaBotCore.Config
             {
                 this._exploitmode = value;
                 this.OnPropertyChanged(new PropertyChangedEventArgs("exploitmode"));
+            }
+        }
+
+        public bool telegramstartup
+        {
+            get => this._telegramstartup;
+            set
+            {
+                this._telegramstartup = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("telegramstartup"));
             }
         }
 

@@ -48,7 +48,6 @@
             this.Controls.Add(this.checkedListBox1);
             this.Name = "IgnoredDestination";
             this.Text = "IgnoredDestination";
-            this.Load += new System.EventHandler(this.IgnoredDestination_Load);
             this.ResumeLayout(false);
 
         }

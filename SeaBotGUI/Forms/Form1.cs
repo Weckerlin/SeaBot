@@ -175,6 +175,8 @@ namespace SeaBotGUI
 
         public Label WoodLabel { get; }
 
+        public List<Item> StartupInv { get; set; } = new List<Item>();
+
         public void FormatResources(GlobalData data)
         {
             if (data.Inventory == null)
@@ -221,6 +223,7 @@ namespace SeaBotGUI
             }
             this.chk_finishupgrade.Checked = Core.Config.finishupgrade;
             this.chk_aupgrade.Checked = Core.Config.autoupgrade;
+            this.chk_telegramautostartup.Checked = Core.Config.telegramstartup;
             this.chk_automuseum.Checked = Core.Config.collectmuseum;
             this.BuildingGrid.DataSource = new BindingSource(GUIBinds.BuildingGrid.BuildingBinding.Buildings, null);
             this.ShipGrid.DataSource = new BindingSource(GUIBinds.ShipGrid.ShipBinding.Ships, null);
@@ -485,6 +488,7 @@ namespace SeaBotGUI
             this.button3.Enabled = true;
             this.button2.Enabled = false;
             Core.StartBot();
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -495,6 +499,11 @@ namespace SeaBotGUI
         }
 
         private void button4_Click_2(object sender, EventArgs e)
+        {
+           this.StartTelegram();
+        }
+
+        private void StartTelegram()
         {
             if (Core.Config.telegramtoken == string.Empty)
             {
@@ -512,7 +521,6 @@ namespace SeaBotGUI
                 }
             }
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             TelegramBotController.StopBot();
@@ -931,6 +939,15 @@ namespace SeaBotGUI
 
         private void OnLogined()
         {
+            StartupInv.Clear();
+            foreach (var invitItem in Core.GlobalData.Inventory)
+            {
+                StartupInv.Add(new Item{Amount = invitItem.Amount,Id=invitItem.Id});
+            }
+            if (Core.Config.telegramstartup)
+            {
+                this.StartTelegram();
+            }
             this.FormatResources(Core.GlobalData);
             GUIBinds.BuildingGrid.Start();
             GUIBinds.ShipGrid.Start();
@@ -1192,6 +1209,11 @@ namespace SeaBotGUI
         {
             var form = new IgnoredDestination(ShipDestType.Contractor);
             form.Show();
+        }
+
+        private void Chk_telegramautostartup_CheckedChanged(object sender, EventArgs e)
+        {
+            Core.Config.telegramstartup = this.chk_telegramautostartup.Checked;
         }
     }
 }

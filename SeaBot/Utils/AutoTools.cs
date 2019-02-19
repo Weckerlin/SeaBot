@@ -20,6 +20,7 @@ namespace SeaBotCore.Utils
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
 
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
@@ -28,6 +29,21 @@ namespace SeaBotCore.Utils
 
     public static class AutoTools
     {
+        public static int GetStogradeLoaded()
+        {
+            int ret = 0;
+            foreach (var item in Core.GlobalData.Inventory)
+            {
+                if (item.Id == 1 || item.Id == 3 || item.Id == 4 || item.Id == 5 || item.Id == 6 || item.Id == 2)
+                {
+                    continue;
+                }
+
+                ret += item.Amount;
+            }
+
+            return ret;
+        }
         public static List<Item> GetEnabledMarketPlacePoints()
         {
             var list = new List<Item>();

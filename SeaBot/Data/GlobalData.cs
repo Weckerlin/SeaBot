@@ -66,7 +66,7 @@ namespace SeaBotCore.Data
             data.BoatLevel = Convert.ToInt32(doc.DocumentElement.SelectSingleNode("boat_level")?.InnerText);
             data.BoatLevel = Convert.ToInt32(doc.DocumentElement.SelectSingleNode("boat_level")?.InnerText);
             data.SyncInterval = Convert.ToByte(doc.DocumentElement.SelectSingleNode("sync_interval")?.InnerText);
-
+            data.StorageCapacity =  Convert.ToInt32(doc.DocumentElement.SelectSingleNode("mat_slot_max")?.InnerText);
             data.Achievements = new List<Achievement>();
             var achievementsnode = doc.DocumentElement.SelectSingleNode("achievement");
             if (achievementsnode != null)
@@ -406,6 +406,8 @@ namespace SeaBotCore.Data
 
     public class GlobalData
     {
+        public int StorageCapacity { get; set; }
+
         public List<Achievement> Achievements { get; set; }
 
         public int BoatLevel { get; set; }

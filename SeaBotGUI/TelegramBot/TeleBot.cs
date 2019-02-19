@@ -56,7 +56,10 @@ namespace SeaBotGUI.TelegramBot
             }
             else
             {
-                bot = new TelegramBot(apikey);
+                if (bot == null)
+                {
+                    bot = new TelegramBot(apikey);
+                }
             }
         }
 
