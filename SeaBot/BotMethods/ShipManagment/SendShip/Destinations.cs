@@ -105,7 +105,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     wecan = exists;
                 }
-
+              
                 Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
                     wecan * quest.MaterialKoef;
                 Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
@@ -188,10 +188,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             var maktplc = new MarketplaceDefenitions.Material();
 
-            if (ship.Sailors() < Definitions.MarketDef.Items.Item[1].Sailors)
+            if (ship.Sailors() < Definitions.MarketDef.Items.Item[1].Sailors||Core.GlobalData.Sailors<ship.Sailors())
             {
                 return false;
             }
+            
 
             var placeswithneeded = new List<MarketplaceDefenitions.Material>();
             foreach (var need in neededitems)
@@ -260,6 +261,10 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             var opst = Core.GlobalData.Outposts
                 .FirstOrDefault(
                     n => !n.Done && n.Crew < n.RequiredCrew && !Core.Config.ignoreddestination.Any(b => b.Destination == ShipDestType.Outpost && b.DefId == n.DefId));
+            if (Core.GlobalData.Sailors < ship.Sailors())
+            {
+                return false;
+            }
             if (opst != null)
             {
                 
@@ -273,7 +278,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     sending = can;
                 }
-
+                
                 opst.Crew += sending;
                 Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, opst.DefId, sending));
                 return true;

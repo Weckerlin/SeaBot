@@ -351,7 +351,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                                     var num = 0;
                                     if (int.TryParse(req, out num))
                                     {
-                                        if (!Core.GlobalData.Outposts.Where(n => n.Done).Any(n => n.DefId == num))
+                                        if (Core.GlobalData.Outposts.Where(n => n.Done).All(n => n.DefId != num))
                                         {
                                             enogh = false;
                                             break;
