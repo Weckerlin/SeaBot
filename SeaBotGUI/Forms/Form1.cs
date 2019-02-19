@@ -118,6 +118,7 @@ namespace SeaBotGUI
             {
                 if (args[1].ToLower() == "-start")
                 {
+
                     if (Core.Config.server_token != string.Empty)
                     {
                         Core.StartBot();
