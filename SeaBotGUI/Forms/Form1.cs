@@ -58,6 +58,8 @@ namespace SeaBotGUI
     using SeaBotGUI.TelegramBot;
     using SeaBotGUI.Utils;
 
+    using IgnoredDestination = SeaBotGUI.Forms.IgnoredDestination;
+
     #endregion
 
     public partial class Form1 : Form
@@ -116,7 +118,7 @@ namespace SeaBotGUI
             {
                 if (args[1].ToLower() == "-start")
                 {
-                    if (Core.Config.server_token != "")
+                    if (Core.Config.server_token != string.Empty)
                     {
                         Core.StartBot();
                     }
@@ -1172,6 +1174,25 @@ namespace SeaBotGUI
         private void Num_sleepfor_ValueChanged(object sender, EventArgs e)
         {
             Core.Config.sleepfor = (int)this.num_sleepfor.Value;
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            var form = new IgnoredDestination(ShipDestType.Upgradable);
+            form.Show();
+        }
+
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            var form = new IgnoredDestination(ShipDestType.Outpost);
+            form.Show();
+
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            var form = new IgnoredDestination(ShipDestType.Contractor);
+            form.Show();
         }
     }
 }
