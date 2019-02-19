@@ -24,6 +24,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
     using Newtonsoft.Json;
 
     using SeaBotCore.Cache;
+    using SeaBotCore.Config;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Data.Materials;
@@ -44,7 +45,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return GetCapacity(ship);
         }
 
-        public static Upgradeable GetBestUpgPlace(string itemname, int sailors, Config.UpgradablyStrategy upgradablestrategy)
+        public static Upgradeable GetBestUpgPlace(string itemname, int sailors, UpgradablyStrategy upgradablestrategy)
         {
             var mat = MaterialDB.GetItem(itemname).DefId;
             var needed = new List<UpgradeableDefenition.Item>();
@@ -67,12 +68,17 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             var best = new Dictionary<Upgradeable, decimal>();
             foreach (var up in p)
             {
+                if (Core.Config.ignoreddestination.Any(
+                        b => b.Destination == ShipDestType.Upgradable && b.DefId == up.Key.DefId))
+                {
+                    continue;
+                }
                 if (up.Key.Levels.Level.First(n => n.Id == up.Value.Level).Sailors > sailors)
                 {
                     continue;
                 }
 
-                if (upgradablestrategy == Config.UpgradablyStrategy.Loot)
+                if (upgradablestrategy == UpgradablyStrategy.Loot)
                 {
                     var itemFirst = up.Key.Levels.Level.First(n => n.Id == up.Value.Level);
                     var time = (decimal)itemFirst.TravelTime;

@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 {
     using SeaBotCore.Cache;
+    using SeaBotCore.Config;
     using SeaBotCore.Data;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Localizaion;
@@ -50,6 +51,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     continue;
                 }
 
+                if (Core.Config.ignoreddestination.Count(n => n.Destination == ShipDestType.Contractor && n.DefId == contractor.DefId)
+                    != 0)
+                {
+                    continue;
+                }
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
                 var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
                 if (quest == null)
@@ -251,7 +257,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static bool SendToOutpost(Ship ship)
         {
-            var opst = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew).FirstOrDefault();
+            var opst = Core.GlobalData.Outposts
+                .FirstOrDefault(
+                    n => !n.Done && n.Crew < n.RequiredCrew && !Core.Config.ignoreddestination.Any(b => b.Destination == ShipDestType.Outpost && b.DefId == n.DefId));
             if (opst != null)
             {
                 

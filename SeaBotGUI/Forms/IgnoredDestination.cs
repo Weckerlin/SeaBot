@@ -12,15 +12,26 @@ using System.Windows.Forms;
 
 namespace SeaBotGUI.Forms
 {
+    using SeaBotCore.Config;
+
     public partial class IgnoredDestination : Form
     {
         private readonly List<IgnoredDest> locallist = new List<IgnoredDest>();
 
         private class IgnoredDest
         {
-           public int DefId;
-          public  string name;
+
+            private ShipDestType desttype;
+
+            public int DefId { get; set; }
+
+            public string Name { get; set; }
+
+            public bool Selected =>
+                Core.Config.ignoreddestination
+                    .Count(n => n.Destination == this.desttype && n.DefId == this.DefId) != 0;
         }
+
         SeaBotCore.Config.ShipDestType DestinationType;
         public IgnoredDestination(SeaBotCore.Config.ShipDestType type)
         {
@@ -44,7 +55,7 @@ namespace SeaBotGUI.Forms
             ((ListBox)this.checkedListBox1).ValueMember = "Selected";
             for (var i = 0; i < this.checkedListBox1.Items.Count; i++)
             {
-                var obj = (IgnoreMarketplaceData.IgnoreItem)this.checkedListBox1.Items[i];
+                var obj = (IgnoredDest)this.checkedListBox1.Items[i];
                 this.checkedListBox1.SetItemChecked(i, obj.Selected);
             }
             checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
@@ -59,7 +70,7 @@ namespace SeaBotGUI.Forms
                 {
                     IgnoredDest item = new IgnoredDest();
                     item.DefId = def.DefId;
-                    item.name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
+                    item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
                     locallist.Add(item);
                 }
             }
@@ -78,7 +89,7 @@ namespace SeaBotGUI.Forms
                 {
                     IgnoredDest item = new IgnoredDest();
                     item.DefId = def.DefId;
-                    item.name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
+                    item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name);
                     locallist.Add(item);
                 }
             }
@@ -98,7 +109,7 @@ namespace SeaBotGUI.Forms
                     {
                         continue;
                     }
-                    dest.name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(item.NameLoc, item.Name);
+                    dest.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(item.NameLoc, item.Name);
                     dest.DefId = opened.DefId;
                     locallist.Add(dest);
                 }
@@ -106,7 +117,7 @@ namespace SeaBotGUI.Forms
                 {
                     IgnoredDest item = new IgnoredDest();
                     item.DefId = lockedoutpost.DefId;
-                    item.name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(lockedoutpost.NameLoc, lockedoutpost.Name);
+                    item.Name = SeaBotCore.Cache.LocalizationCache.GetNameFromLoc(lockedoutpost.NameLoc, lockedoutpost.Name);
                        locallist.Add(item);
                 }
             }
