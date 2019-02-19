@@ -1176,20 +1176,19 @@ namespace SeaBotGUI
             Core.Config.sleepfor = (int)this.num_sleepfor.Value;
         }
 
-        private void Button6_Click(object sender, EventArgs e)
+        private void Button11_Click(object sender, EventArgs e)
         {
             var form = new IgnoredDestination(ShipDestType.Upgradable);
             form.Show();
         }
 
-        private void Button9_Click(object sender, EventArgs e)
+        private void Button8_Click(object sender, EventArgs e)
         {
             var form = new IgnoredDestination(ShipDestType.Outpost);
             form.Show();
-
         }
 
-        private void Button7_Click(object sender, EventArgs e)
+        private void Button10_Click(object sender, EventArgs e)
         {
             var form = new IgnoredDestination(ShipDestType.Contractor);
             form.Show();
