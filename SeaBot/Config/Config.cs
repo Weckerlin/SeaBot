@@ -68,7 +68,14 @@ namespace SeaBotCore.Config
 
         Day
     }
+    
+    
 
+    public class IgnoredDestination
+    {
+        public int DefId;
+        public ShipDestType Destination;
+    }
  
 
     public class Config : INotifyPropertyChanged
@@ -149,8 +156,20 @@ namespace SeaBotCore.Config
 
         List<int> _ignoredships = new List<int>();
 
+        List<IgnoredDestination> _ignoreddestination = new List<IgnoredDestination>();
+      
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public List<IgnoredDestination> ignoreddestination
+        {
+            get => this._ignoreddestination;
+            set
+            {
+                this._ignoreddestination = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("ignoreddestination"));
+
+            }
+        }
         public ChartType charttype
         {
             get => this._charttype;
