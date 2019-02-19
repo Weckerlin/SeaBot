@@ -51,10 +51,10 @@ namespace SeaBotCore.BotMethods
 
             var started = TimeUtils.FromUnixTime(slot.LastUsed);
             var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == slot.Level);
-
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
             {
+                slot.LastUsed = TimeUtils.GetEpochTime();
                 museum.ProdStart = TimeUtils.GetEpochTime();
                 Logger.Info(Localization.MUSEUM_COLLECT);
                 Networking.AddTask(new Task.ConfirmMuseumTask(b.TurnCount));

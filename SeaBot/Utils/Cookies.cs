@@ -15,7 +15,7 @@
                 try {
                     BinaryFormatter formatter = new BinaryFormatter();
                     formatter.Serialize(stream, cookieJar);
-                } catch(Exception e) { 
+                } catch(Exception) { 
                 }
             }
         }   

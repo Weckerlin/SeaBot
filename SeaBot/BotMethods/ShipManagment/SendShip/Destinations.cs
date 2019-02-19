@@ -56,7 +56,12 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     continue;
                 }
+               
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
+                if (def.Sailors > ship.Sailors() || def.Sailors>Core.GlobalData.Sailors)
+                {
+                    continue;
+                }
                 var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
                 if (quest == null)
                 {

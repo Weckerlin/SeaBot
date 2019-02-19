@@ -73,7 +73,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                                 {
                                     unloadedships.Add(ship.DefId);
                                     int uniqueid = unloadedships.Count(n => n == ship.DefId);
-                                    UnloadContractor(ship, uniqueid);
+                                    UnloadContractor(ship);
                                 }
                                 break;
                             }
@@ -255,7 +255,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
             }
         }
 
-        public static void UnloadContractor(Ship ship, int uniqueid)
+        public static void UnloadContractor(Ship ship)
         {
             var currentcontractor = Definitions.ConDef.Items.Item
                 .FirstOrDefault(n => n.DefId == ship.TargetId);
@@ -265,7 +265,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
             {
                 return;
             }
-
+            var uniqueid = ship.TargetId;
             if (currentcontractor.Type == "static")
             {
                 var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
@@ -281,7 +281,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         SendingHelper.GetSailors(ship),
                         currentcontractor.Sailors,
                         ship.TargetLevel,
-                        currentcontractor.DefId,
+                        ship.TargetLevel,
                         lcontract.Progress,
                         (int)quest.InputAmount(),
                         quest.ObjectiveTypeId,
@@ -303,7 +303,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         SendingHelper.GetSailors(ship),
                         currentcontractor.Sailors,
                         ship.TargetLevel,
-                        currentcontractor.DefId,
+                        ship.TargetLevel,
                         lcontract.Progress,
                         (int)quest.InputAmount(),
                         quest.ObjectiveTypeId,
