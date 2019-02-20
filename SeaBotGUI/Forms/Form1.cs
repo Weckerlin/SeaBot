@@ -178,7 +178,7 @@ namespace SeaBotGUI
 
         public List<Item> StartupInv { get; set; } = new List<Item>();
 
-        public void FormatResources(GlobalData data)
+        public void FormatResources(PlayerData data)
         {
             if (data.Inventory == null)
             {

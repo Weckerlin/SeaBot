@@ -89,7 +89,7 @@
     <Compile Include="Data\Definitions\TreasureDefenitions.cs" />
     <Compile Include="Data\Definitions\UpgradeableDefenition.cs" />
     <Compile Include="Data\Definitions\WreckDefenitions.cs" />
-    <Compile Include="Data\GlobalData.cs" />
+    <Compile Include="Data\PlayerData.cs" />
     <Compile Include="Data\Materials\Material.cs" />
     <Compile Include="Data\Materials\MaterialData.cs" />
     <Compile Include="Enums.cs" />

@@ -39,7 +39,7 @@ namespace SeaBotCore
     {
         public static Config.Config Config = new Config.Config();
 
-        public static GlobalData GlobalData = new GlobalData();
+        public static PlayerData GlobalData = new PlayerData();
 
         public static int hibernation = 0;
 

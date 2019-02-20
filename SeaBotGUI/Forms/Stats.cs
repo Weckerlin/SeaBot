@@ -165,9 +165,9 @@ namespace SeaBotGUI
             this.cartesianChart1.AxisY.Add(new Axis { Title = PrivateLocal.STAT_AMOUNT });
         }
 
-        public Dictionary<GlobalData, DateTime> LoadAllStats()
+        public Dictionary<PlayerData, DateTime> LoadAllStats()
         {
-            var l = new Dictionary<GlobalData, DateTime>();
+            var l = new Dictionary<PlayerData, DateTime>();
             if (Directory.Exists("stats"))
             {
                 var files = Directory.GetFiles("stats");
@@ -177,7 +177,7 @@ namespace SeaBotGUI
                     {
                         var datestr = file.Replace(@"stats\", string.Empty);
                         var date = DateTime.ParseExact(datestr, @"yyyyMMddTHHmmss", CultureInfo.InvariantCulture);
-                        l.Add(JsonConvert.DeserializeObject<GlobalData>(File.ReadAllText(file)), date);
+                        l.Add(JsonConvert.DeserializeObject<PlayerData>(File.ReadAllText(file)), date);
                     }
                     catch (Exception)
                     {
@@ -209,7 +209,7 @@ namespace SeaBotGUI
         private List<GraphGlobalData> GetGlobalData(ChartType t)
         {
             var array = this.LoadAllStats();
-            var l = new Dictionary<GlobalData, DateTime>();
+            var l = new Dictionary<PlayerData, DateTime>();
 
             foreach (var gd in array)
             {
@@ -275,11 +275,11 @@ namespace SeaBotGUI
 
         internal struct GraphGlobalData
         {
-            internal GlobalData data;
+            internal PlayerData data;
 
             internal DateTime createtime;
 
-            internal GraphGlobalData(DateTime time, GlobalData gdata)
+            internal GraphGlobalData(DateTime time, PlayerData gdata)
             {
                 this.data = gdata;
                 this.createtime = time;
