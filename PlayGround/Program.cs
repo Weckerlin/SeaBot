@@ -67,7 +67,7 @@ namespace ConsoleApp1
                     {
                         var barrelid = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
                         var bar = Barrels.BarrelController.GetNextBarrel(
-                            Definitions.BarrelDef.Items.Item.Where(n => n.DefId == 21).First());
+                            Definitions.BarrelDef.Barrels.Item.Where(n => n.DefId == 21).First());
                         if (bar.Definition.Id != 0)
                         {
                             Console.WriteLine(
@@ -80,7 +80,7 @@ namespace ConsoleApp1
                                 bar.get_type(),
                                 bar.Amount,
                                 bar.Definition.Id,
-                                Core.GlobalData.Level));
+                                Core.LocalPlayer.Level));
                         attempts++;
                     }
                     else

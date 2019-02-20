@@ -55,7 +55,7 @@ namespace SeaBotCore.Data.Definitions
             public List<FinalReward> FinalReward { get; set; }
         }
 
-        public class Item
+        public class Contractor
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -129,9 +129,6 @@ namespace SeaBotCore.Data.Definitions
             [J("speedupable")]
             public int Speedupable { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("thumb_offset")]
             public string ThumbOffset { get; set; }
 
@@ -157,7 +154,7 @@ namespace SeaBotCore.Data.Definitions
         public class Items
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Contractor> Item { get; set; }
         }
 
         public class Quest

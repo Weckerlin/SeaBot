@@ -175,7 +175,7 @@ namespace SeaBotCore
             SendRequest(values, "client.update");
             if (s.StartsWith("<xml>"))
             {
-                Core.GlobalData = Parser.ParseXmlToGlobalData(s);
+                Core.LocalPlayer = Parser.ParseXmlToGlobalData(s);
                 var rand = new Random();
 
                 var loadtime = rand.Next(5000, 13000);
@@ -283,7 +283,7 @@ namespace SeaBotCore
                 false); // _loc2_.substr(0,224) + _sessionData.sessionId + "KNn2R4sK"
             var values = new Dictionary<string, string>
                              {
-                                 { "pid", Core.GlobalData.UserId.ToString() },
+                                 { "pid", Core.LocalPlayer.UserId.ToString() },
                                  { "session_id", Core.Ssid },
                                  { "data", taskstr.ToString() },
                                  { "sig", sig }
@@ -354,16 +354,16 @@ namespace SeaBotCore
                         switch (node.Name)
                         {
                             case "level_up":
-                                Core.GlobalData.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.LocalPlayer.Level = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "sailors":
-                                Core.GlobalData.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.LocalPlayer.Sailors = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "sync_interval":
-                                Core.GlobalData.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
+                                Core.LocalPlayer.SyncInterval = Convert.ToByte(node.ChildNodes[0].InnerText);
                                 break;
                             case "xp":
-                                Core.GlobalData.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
+                                Core.LocalPlayer.Xp = Convert.ToInt32(node.ChildNodes[0].InnerText);
                                 break;
                             case "material":
                                 {
@@ -371,13 +371,13 @@ namespace SeaBotCore
                                     {
                                         var defid = Convert.ToInt32(materials.SelectSingleNode("def_id")?.InnerText);
                                         var amount = Convert.ToInt32(materials.SelectSingleNode("value")?.InnerText);
-                                        if (Core.GlobalData.Inventory.Count(n => n.Id == defid) != 0)
+                                        if (Core.LocalPlayer.Inventory.Count(n => n.Id == defid) != 0)
                                         {
-                                            Core.GlobalData.Inventory.Where(n => n.Id == defid).First().Amount = amount;
+                                            Core.LocalPlayer.Inventory.Where(n => n.Id == defid).First().Amount = amount;
                                         }
                                         else
                                         {
-                                            Core.GlobalData.Inventory.Add(new Item { Id = defid, Amount = amount });
+                                            Core.LocalPlayer.Inventory.Add(new Item { Id = defid, Amount = amount });
                                         }
                                     }
 
@@ -438,14 +438,14 @@ namespace SeaBotCore
             while (true)
             {
                 Thread.Sleep(6 * 1000);
-                if (_gametasks.Count != 0 && Core.GlobalData.Level != 0)
+                if (_gametasks.Count != 0 && Core.LocalPlayer.Level != 0)
                 {
                     Logger.Logger.Debug(Localization.NETWORKING_SYNCING);
                     Sync();
                 }
 
                 if ((DateTime.Now - _lastRaised).TotalSeconds
-                    > (Core.GlobalData.HeartbeatInterval == 0 ? 300 : Core.GlobalData.HeartbeatInterval))
+                    > (Core.LocalPlayer.HeartbeatInterval == 0 ? 300 : Core.LocalPlayer.HeartbeatInterval))
                 {
                     Logger.Logger.Debug(Localization.NETWORKING_HEARTBEAT);
                     _gametasks.Add(new Task.HeartBeat());

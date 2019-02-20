@@ -30,7 +30,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class BoatDefenitions
     {
-        public class Item
+        public class Boat
         {
             [J("bounds_max")]
             public string BoundsMax { get; set; }
@@ -45,7 +45,7 @@ namespace SeaBotCore.Data.Definitions
             public int Hide { get; set; }
 
             [J("levels")]
-            public Levels Levels { get; set; }
+            public BoatLevels BoatLevels { get; set; }
 
             [J("name")]
             public string Name { get; set; }
@@ -78,13 +78,13 @@ namespace SeaBotCore.Data.Definitions
             public int TwistSpeed { get; set; }
         }
 
-        public class Items
+        public class Boats
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Boat> Boat { get; set; }
         }
 
-        public class Level
+        public class BoatLevel
         {
             [J("id")]
             public int Id { get; set; }
@@ -108,10 +108,10 @@ namespace SeaBotCore.Data.Definitions
             public int TurnTime { get; set; }
         }
 
-        public class Levels
+        public class BoatLevels
         {
             [J("level")]
-            public List<Level> Level { get; set; }
+            public List<BoatLevel> Level { get; set; }
         }
 
         public class Material
@@ -147,7 +147,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Boats Boats { get; set; }
         }
     }
 }

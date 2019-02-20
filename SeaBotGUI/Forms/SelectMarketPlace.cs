@@ -34,7 +34,7 @@ namespace SeaBotGUI
         {
             this.InitializeComponent();
 
-            if (Core.GlobalData != null && Core.GlobalData.Inventory != null)
+            if (Core.LocalPlayer != null && Core.LocalPlayer.Inventory != null)
             {
                 foreach (var item in AutoTools.GetUsableMarketplacePoints())
                 {

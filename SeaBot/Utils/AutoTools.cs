@@ -32,7 +32,7 @@ namespace SeaBotCore.Utils
         public static int GetStogradeLoaded()
         {
             int ret = 0;
-            foreach (var item in Core.GlobalData.Inventory)
+            foreach (var item in Core.LocalPlayer.Inventory)
             {
                 if (item.Id == 1 || item.Id == 3 || item.Id == 4 || item.Id == 5 || item.Id == 6 || item.Id == 2)
                 {
@@ -63,10 +63,10 @@ namespace SeaBotCore.Utils
         {
             var ret = new Dictionary<int, decimal>();
             decimal fishprod = 0;
-            foreach (var boat in Core.GlobalData.Boats)
+            foreach (var boat in Core.LocalPlayer.Boats)
             {
-                var b = Definitions.BoatDef.Items.Item.FirstOrDefault(n => n.DefId == 1)?.Levels.Level
-                    .FirstOrDefault(n => n.Id == Core.GlobalData.BoatLevel);
+                var b = Definitions.BoatDef.Boats.Item.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
+                    .FirstOrDefault(n => n.Id == Core.LocalPlayer.BoatLevel);
                 if (b == null)
                 {
                     return ret;
@@ -78,12 +78,12 @@ namespace SeaBotCore.Utils
 
             // Fish = 3;
             ret.Add(3, (int)fishprod);
-            foreach (var building in Core.GlobalData.Buildings)
+            foreach (var building in Core.LocalPlayer.Buildings)
             {
-                var bdef = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault();
+                var bdef = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault();
                 if (bdef?.Type == "factory")
                 {
-                    var level = bdef.Levels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
+                    var level = bdef.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     foreach (var outputsOutput in level.ProdOutputs.ProdOutput)
                     {
                         if (outputsOutput.Time == 0)
@@ -110,8 +110,8 @@ namespace SeaBotCore.Utils
 
         public static List<Item> GetUsableMarketplacePoints()
         {
-            return Core.GlobalData.Inventory.Where(
-                    n => n.Amount > 0 && Definitions.MarketDef.Items.Item[1].Materials.Material
+            return Core.LocalPlayer.Inventory.Where(
+                    n => n.Amount > 0 && Definitions.MarketDef.Marketplaces.Item[1].Materials.Material
                              .Any(b => b.InputId == n.Id))
                 .ToList();
         }
@@ -121,16 +121,16 @@ namespace SeaBotCore.Utils
             var ret = new Dictionary<int, int>();
 
             // 1. Needed for upgrades!
-            var locinv = new List<Item>(Core.GlobalData.Inventory.Count);
-            locinv.AddRange(Core.GlobalData.Inventory.Select(item => new Item { Amount = item.Amount, Id = item.Id }));
+            var locinv = new List<Item>(Core.LocalPlayer.Inventory.Count);
+            locinv.AddRange(Core.LocalPlayer.Inventory.Select(item => new Item { Amount = item.Amount, Id = item.Id }));
 
-            foreach (var building in Core.GlobalData.Buildings)
+            foreach (var building in Core.LocalPlayer.Buildings)
             {
                 try
                 {
                     // Next level
-                    var nextlvlbuilding = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId)
-                        .FirstOrDefault()?.Levels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
+                    var nextlvlbuilding = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId)
+                        .FirstOrDefault()?.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     if (nextlvlbuilding?.Materials.Material != null)
                     {
                         foreach (var mats in nextlvlbuilding?.Materials.Material)
@@ -173,12 +173,12 @@ namespace SeaBotCore.Utils
             var locinv = new List<Item>();
             var makingph = GetLocalProducionPerHour();
 
-            foreach (var building in Core.GlobalData.Buildings)
+            foreach (var building in Core.LocalPlayer.Buildings)
             {
              
                     // Next level
-                    var nextlvlbuilding = Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId)
-                        .FirstOrDefault()?.Levels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
+                    var nextlvlbuilding = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId)
+                        .FirstOrDefault()?.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     if (nextlvlbuilding?.Materials.Material != null)
                     {
                         foreach (var mats in nextlvlbuilding?.Materials.Material.Where(n => n.Amount != 0))

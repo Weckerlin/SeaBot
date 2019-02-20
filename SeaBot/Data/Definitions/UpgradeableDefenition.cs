@@ -29,7 +29,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class UpgradeableDefenition
     {
-        public class Item
+        public class Upgradable
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -97,9 +97,6 @@ namespace SeaBotCore.Data.Definitions
             [J("speedupable")]
             public int Speedupable { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("unlock_time")]
             public int UnlockTime { get; set; }
 
@@ -107,10 +104,10 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Upgradables
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Upgradable> Upgradable { get; set; }
         }
 
         public class Level
@@ -155,7 +152,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Upgradables Upgradables { get; set; }
         }
     }
 }

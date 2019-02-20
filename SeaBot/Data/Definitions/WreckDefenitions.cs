@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public static class WreckDefinitions
     {
-        public class Item
+        public class Wreck
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -78,9 +78,6 @@ namespace SeaBotCore.Data.Definitions
             [J("spots", NullValueHandling = N.Ignore)]
             public Spots Spots { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("travel_time")]
             public int TravelTime { get; set; }
 
@@ -91,10 +88,10 @@ namespace SeaBotCore.Data.Definitions
             public int XpPctMin { get; set; }
         }
 
-        public class Items
+        public class Wrecks
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Wreck> Wreck { get; set; }
         }
 
         public class Reward
@@ -133,7 +130,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Wrecks Wrecks { get; set; }
         }
 
         public class Set

@@ -48,32 +48,32 @@ namespace SeaBotCore.BotMethods
                         // 10 min
                         var thresholdinmin = 20;
                         var DelayMinList = new List<int>();
-                        foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
+                        foreach (var ship in Core.LocalPlayer.Ships.Where(n => n.Activated != 0))
                         {
                             if (ship.Sent != 0)
                             {
                                 try
                                 {
                                     var shipdef =
-                                        Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+                                        Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
                                     if (shipdef == null)
                                     {
                                         continue;
                                     }
 
-                                    if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                                    if (Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels == null)
                                     {
                                         continue;
                                     }
 
-                                    if (Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                                    if (Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels.Level.Count == 0)
                                     {
                                         continue;
                                     }
 
-                                    var lvl = Definitions.UpgrDef.Items.Item
+                                    var lvl = Definitions.UpgrDef.Upgradables.Item
                                         .FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
                                         .FirstOrDefault(n => n.Id == ship.TargetLevel);
                                     if (lvl == null)
@@ -96,17 +96,17 @@ namespace SeaBotCore.BotMethods
                                 catch (Exception)
                                 {
                                     Logger.Debug(
-                                        $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} Level = {ship.TargetLevel}");
+                                        $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} BoatLevel = {ship.TargetLevel}");
                                 }
                             }
                         }
 
-                        foreach (var building in Core.GlobalData.Buildings)
+                        foreach (var building in Core.LocalPlayer.Buildings)
                         {
                             if (building.ProdStart != 0)
                             {
-                                var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
-                                                           .First(n => n.DefId == building.DefId).Levels.Level
+                                var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Buildings.Item
+                                                           .First(n => n.DefId == building.DefId).BuildingLevels.Level
                                                            .First(n => n.Id == building.Level).ProdOutputs.ProdOutput[0]
                                                            .Time;
 
@@ -119,8 +119,8 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
-                                                           .Where(n => n.DefId == building.DefId).First().Levels.Level
+                                var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Buildings.Item
+                                                           .Where(n => n.DefId == building.DefId).First().BuildingLevels.Level
                                                            .Where(n => n.Id == building.Level + 1).First().UpgradeTime;
 
                                 DelayMinList.Add(

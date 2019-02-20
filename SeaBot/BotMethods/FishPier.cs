@@ -32,11 +32,11 @@ namespace SeaBotCore.BotMethods
         public static void CollectFish()
         {
             var totalfish = 0;
-            foreach (var boat in Core.GlobalData.Boats)
+            foreach (var boat in Core.LocalPlayer.Boats)
             {
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Definitions.BoatDef.Items.Item.FirstOrDefault(n => n.DefId == 1)?.Levels.Level
-                    .FirstOrDefault(n => n.Id == Core.GlobalData.BoatLevel);
+                var b = Definitions.BoatDef.Boats.Item.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
+                    .FirstOrDefault(n => n.Id == Core.LocalPlayer.BoatLevel);
                 if (b == null)
                 {
                     continue;

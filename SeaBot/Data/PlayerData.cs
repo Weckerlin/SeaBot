@@ -473,10 +473,7 @@ namespace SeaBotCore.Data
 
     public class Building
     {
-        public Data.Definitions.BuildingDefentions.Item GetDefiniton => Definitions.Definitions.BuildingDef.Items.Item.Where(n => n.DefId == DefId).FirstOrDefault();
-
-        public Data.Definitions.BuildingDefentions.Level GetCurrentLevel() => GetDefiniton.Levels.Level.FirstOrDefault(n => n.Id == Level);
-
+       
         public int DefId;
 
         public int GridX;
@@ -515,10 +512,7 @@ namespace SeaBotCore.Data
 
     public class Upgradeable
     {
-        public Data.Definitions.UpgradeableDefenition.Item GetDefiniton() => Definitions.Definitions.UpgrDef.Items.Item.Where(n => n.DefId == DefId).FirstOrDefault();
-
-        public Data.Definitions.UpgradeableDefenition.Level GetCurrentLevel() => GetDefiniton().Levels.Level.FirstOrDefault(n => n.Id == Level);
-
+       
         public int Amount { get; set; }
 
         public int CargoOnTheWay { get; set; }
@@ -732,7 +726,6 @@ namespace SeaBotCore.Data
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Name { get => MaterialDB.GetLocalizedName(_id);}
         public int Amount
         {
             get => this._amount;

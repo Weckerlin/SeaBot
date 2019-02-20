@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class MuseumLevelDefenitions
     {
-        public class Item
+        public class MuseumLevel
         {
             [J("def_id")]
             public int DefId { get; set; }
@@ -49,16 +49,16 @@ namespace SeaBotCore.Data.Definitions
             public int TurnTime { get; set; }
         }
 
-        public class Items
+        public class MuseumLevels
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<MuseumLevel> MuseumLevel { get; set; }
         }
 
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public MuseumLevels MuseumLevels { get; set; }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class LevelUPDefenition
     {
-        public class Item
+        public class LevelUP
         {
             [JsonProperty("def_id")]
             public int DefId { get; set; }
@@ -44,10 +44,10 @@ namespace SeaBotCore.Data.Definitions
             public int Xp { get; set; }
         }
 
-        public class Items
+        public class LevelUPs
         {
             [JsonProperty("item")]
-            public Item[] Item { get; set; }
+            public LevelUP[] LevelUp { get; set; }
         }
 
         public class Reward
@@ -71,7 +71,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [JsonProperty("items")]
-            public Items Items { get; set; }
+            public LevelUPs LevelUPs { get; set; }
         }
     }
 }

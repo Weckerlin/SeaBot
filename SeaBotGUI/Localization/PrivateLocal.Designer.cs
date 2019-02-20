@@ -143,7 +143,7 @@ namespace SeaBotGUI.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Level.
+        ///   Ищет локализованную строку, похожую на BoatLevel.
         /// </summary>
         internal static string STAT_LEVEL {
             get {

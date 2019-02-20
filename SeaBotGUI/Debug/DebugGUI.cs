@@ -43,7 +43,7 @@ namespace SeaBotGUI.Debug
                 Thread.Sleep(50);
                 if ((DateTime.Now - _lastupdatedTime).TotalSeconds >= 1)
                 {
-                if (SeaBotCore.Core.GlobalData == null || !Core.Config.debug)
+                if (SeaBotCore.Core.LocalPlayer == null || !Core.Config.debug)
                 {
                     continue;
                 }

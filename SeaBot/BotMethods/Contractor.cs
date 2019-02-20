@@ -31,13 +31,14 @@ namespace SeaBotCore.BotMethods
         public static void UpgradeContractor()
         {
            
-            for (var index = 0; index < Core.GlobalData.Contracts.Count; index++)
+            for (var index = 0; index < Core.LocalPlayer.Contracts.Count; index++)
             {
-                var upg = Core.GlobalData.Contracts[index];
+                var upg = Core.LocalPlayer.Contracts[index];
                 if (upg.Done == 1)
                 {
                     continue;
                 }
+                
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
                 var currquest = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId);
                 if (currquest == null)

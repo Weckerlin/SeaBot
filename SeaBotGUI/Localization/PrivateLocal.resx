@@ -273,7 +273,7 @@ Your current limit on Iron: </value>
     <value>Wood</value>
   </data>
 	<data name="STAT_LEVEL" xml:space="preserve">
-    <value>Level</value>
+    <value>BoatLevel</value>
   </data>
 	<data name="STAT_GEMS" xml:space="preserve">
     <value>Gems</value>

@@ -92,6 +92,7 @@
     <Compile Include="Data\PlayerData.cs" />
     <Compile Include="Data\Materials\Material.cs" />
     <Compile Include="Data\Materials\MaterialData.cs" />
+    <Compile Include="Data\PlayerDataExtensions.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="Localizaion\Localization.Designer.cs">

@@ -32,13 +32,13 @@ namespace SeaBotCore.BotMethods
         public static void CollectMuseum()
         {
             // 12 = museum
-            var museum = Core.GlobalData.Buildings.FirstOrDefault(n => n.DefId == 12);
+            var museum = Core.LocalPlayer.Buildings.FirstOrDefault(n => n.DefId == 12);
             if (museum == null)
             {
                 return;
             }
 
-            var slot = Core.GlobalData.Slots.FirstOrDefault(n => n.Type == "museum_ship");
+            var slot = Core.LocalPlayer.Slots.FirstOrDefault(n => n.Type == "museum_ship");
             if (slot == null)
             {
                 return;
@@ -50,7 +50,7 @@ namespace SeaBotCore.BotMethods
             }
 
             var started = TimeUtils.FromUnixTime(slot.LastUsed);
-            var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == slot.Level);
+            var b = Definitions.MuseumLvlDef.MuseumLevels.Item.First(n => n.DefId == slot.Level);
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
             {

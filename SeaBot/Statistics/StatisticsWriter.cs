@@ -65,7 +65,7 @@ namespace SeaBotCore.Statistics
 
                 File.WriteAllText(
                     statfolder + "/" + DateTime.Now.ToString("yyyyMMddTHHmmss"),
-                    JsonConvert.SerializeObject(Core.GlobalData));
+                    JsonConvert.SerializeObject(Core.LocalPlayer));
                 Logger.Debug("Saved a new stat");
             }
             catch (Exception)
@@ -79,7 +79,7 @@ namespace SeaBotCore.Statistics
             while (true)
             {
                 Thread.Sleep(2000);
-                if (Core.GlobalData != null)
+                if (Core.LocalPlayer != null)
                 {
                     LogStatistics();
                     Thread.Sleep(MinuteInterval * 60 * 1000);

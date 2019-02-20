@@ -436,7 +436,7 @@ namespace SeaBotGUI
         {
             File.WriteAllText(
                 DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + "DUMP.json",
-                JsonConvert.SerializeObject(Core.GlobalData, Formatting.Indented));
+                JsonConvert.SerializeObject(Core.LocalPlayer, Formatting.Indented));
         }
 
         private void btn_removeitem_Click(object sender, EventArgs e)
@@ -459,7 +459,7 @@ namespace SeaBotGUI
                         var item = MaterialDB.GetItem(picked.ID);
                         Logger.Info(string.Format(PrivateLocal.INVENTORY_REMOVED, much, item.Name));
                         Networking.AddTask(new Task.RemoveMaterialTask(item.DefId, much));
-                        Core.GlobalData.Inventory.First(n => n.Id == item.DefId).Amount -= much;
+                        Core.LocalPlayer.Inventory.First(n => n.Id == item.DefId).Amount -= much;
                     }
                 }
             }
@@ -793,12 +793,12 @@ namespace SeaBotGUI
 
         private void Inventory_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.FormatResources(Core.GlobalData);
+            this.FormatResources(Core.LocalPlayer);
         }
 
         private void Inventory_ItemPropertyChanged(object sender, ItemPropertyChangedEventArgs e)
         {
-            this.FormatResources(Core.GlobalData);
+            this.FormatResources(Core.LocalPlayer);
         }
 
         private void Label17_Click(object sender, EventArgs e)
@@ -941,7 +941,7 @@ namespace SeaBotGUI
         private void OnLogined()
         {
             StartupInv.Clear();
-            foreach (var invitItem in Core.GlobalData.Inventory)
+            foreach (var invitItem in Core.LocalPlayer.Inventory)
             {
                 StartupInv.Add(new Item{Amount = invitItem.Amount,Id=invitItem.Id});
             }
@@ -949,13 +949,13 @@ namespace SeaBotGUI
             {
                 this.StartTelegram();
             }
-            this.FormatResources(Core.GlobalData);
+            this.FormatResources(Core.LocalPlayer);
             GUIBinds.BuildingGrid.Start();
             GUIBinds.ShipGrid.Start();
             SeaBotGUI.Debug.DebugGUI.Start();
             GUIBinds.InventoryGrid.Start();
-            Core.GlobalData.Inventory.CollectionChanged += this.Inventory_CollectionChanged;
-            Core.GlobalData.Inventory.ItemPropertyChanged += this.Inventory_ItemPropertyChanged;
+            Core.LocalPlayer.Inventory.CollectionChanged += this.Inventory_CollectionChanged;
+            Core.LocalPlayer.Inventory.ItemPropertyChanged += this.Inventory_ItemPropertyChanged;
         }
 
         private void radio_gold_CheckedChanged(object sender, EventArgs e)

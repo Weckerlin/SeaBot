@@ -63,9 +63,9 @@ namespace SeaBotGUI.Forms
 
         private void BindContractor()
         {
-            if (Core.GlobalData != null && Core.GlobalData.Inventory != null)
+            if (Core.LocalPlayer != null && Core.LocalPlayer.Inventory != null)
             {
-                var definitions = SeaBotCore.Data.Definitions.Definitions.ConDef.Items.Item.Where(n => (Core.GlobalData.Contracts.Count(b => b.DefId == n.DefId) != 0));
+                var definitions = SeaBotCore.Data.Definitions.Definitions.ConDef.Items.Item.Where(n => (Core.LocalPlayer.Contracts.Count(b => b.DefId == n.DefId) != 0));
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
@@ -79,13 +79,13 @@ namespace SeaBotGUI.Forms
 
         private void BindUpgradable()
         {
-            if (Core.GlobalData != null && Core.GlobalData.Inventory != null)
+            if (Core.LocalPlayer != null && Core.LocalPlayer.Inventory != null)
             {
                 var sito = 
-              Core.GlobalData.Upgradeables.Where(
+              Core.LocalPlayer.Upgradeables.Where(
                               n => n.Amount != 0 && n.Progress < n.Amount
                                  );
-                var definitions = SeaBotCore.Data.Definitions.Definitions.UpgrDef.Items.Item.Where(n => (sito.Count(b=>b.DefId==n.DefId)!=0));
+                var definitions = SeaBotCore.Data.Definitions.Definitions.UpgrDef.Upgradables.Item.Where(n => (sito.Count(b=>b.DefId==n.DefId)!=0));
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
@@ -99,14 +99,14 @@ namespace SeaBotGUI.Forms
 
         public void BindOutpost()
         {
-            if (Core.GlobalData != null && Core.GlobalData.Inventory != null)
+            if (Core.LocalPlayer != null && Core.LocalPlayer.Inventory != null)
             {
-                var openedoutpost = Core.GlobalData.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew);
+                var openedoutpost = Core.LocalPlayer.Outposts.Where(n => !n.Done && n.Crew < n.RequiredCrew);
                 var lockedoutposts = SendingHelper.GetUnlockableOutposts(); 
                 foreach(var opened in openedoutpost)
                 {
                    IgnoredDest dest = new IgnoredDest();
-                    var item = SeaBotCore.Data.Definitions.Definitions.OutpostDef.Items.Item.Where(n => n.DefId == opened.DefId).FirstOrDefault();
+                    var item = SeaBotCore.Data.Definitions.Definitions.OutpostDef.Outposts.Item.Where(n => n.DefId == opened.DefId).FirstOrDefault();
                     if(item == null)
                     {
                         continue;

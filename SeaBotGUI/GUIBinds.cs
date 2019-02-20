@@ -74,7 +74,7 @@ namespace SeaBotGUI.GUIBinds
 
         public static void Update()
         {
-            var sailors = Core.GlobalData.Sailors;
+            var sailors = Core.LocalPlayer.Sailors;
             if (Form1.instance.SailorsLabel.InvokeRequired)
             {
                 Form1.instance.SailorsLabel.Invoke(
@@ -85,7 +85,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.CoinsLabel.Text = sailors.ToKMB();
             }
 
-            var level = Core.GlobalData.Level;
+            var level = Core.LocalPlayer.Level;
             if (Form1.instance.LevelLabel.InvokeRequired)
             {
                 Form1.instance.LevelLabel.Invoke(
@@ -96,7 +96,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.LevelLabel.Text = level.ToString();
             }
 
-            var coins = Core.GlobalData.GetAmountItem("coins");
+            var coins = Core.LocalPlayer.GetAmountItem("coins");
             if (Form1.instance.CoinsLabel.InvokeRequired)
             {
                 Form1.instance.CoinsLabel.Invoke(new Action(() => { Form1.instance.CoinsLabel.Text = coins.ToKMB(); }));
@@ -106,7 +106,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.CoinsLabel.Text = coins.ToKMB();
             }
 
-            var fish = Core.GlobalData.GetAmountItem("fish");
+            var fish = Core.LocalPlayer.GetAmountItem("fish");
             if (Form1.instance.FishLabel.InvokeRequired)
             {
                 Form1.instance.FishLabel.Invoke(new Action(() => { Form1.instance.FishLabel.Text = fish.ToKMB(); }));
@@ -116,7 +116,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.FishLabel.Text = fish.ToKMB();
             }
 
-            var iron = Core.GlobalData.GetAmountItem("iron");
+            var iron = Core.LocalPlayer.GetAmountItem("iron");
             if (Form1.instance.IronLabel.InvokeRequired)
             {
                 Form1.instance.IronLabel.Invoke(new Action(() => { Form1.instance.IronLabel.Text = iron.ToKMB(); }));
@@ -126,7 +126,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.IronLabel.Text = iron.ToKMB();
             }
 
-            var gem = Core.GlobalData.GetAmountItem("gem");
+            var gem = Core.LocalPlayer.GetAmountItem("gem");
             if (Form1.instance.GemLabel.InvokeRequired)
             {
                 Form1.instance.GemLabel.Invoke(new Action(() => { Form1.instance.GemLabel.Text = gem.ToKMB(); }));
@@ -136,7 +136,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.GemLabel.Text = gem.ToKMB();
             }
 
-            var wood = Core.GlobalData.GetAmountItem("wood");
+            var wood = Core.LocalPlayer.GetAmountItem("wood");
             if (Form1.instance.WoodLabel.InvokeRequired)
             {
                 Form1.instance.WoodLabel.Invoke(new Action(() => { Form1.instance.WoodLabel.Text = wood.ToKMB(); }));
@@ -146,7 +146,7 @@ namespace SeaBotGUI.GUIBinds
                 Form1.instance.WoodLabel.Text = wood.ToKMB();
             }
 
-            var stone = Core.GlobalData.GetAmountItem("stone");
+            var stone = Core.LocalPlayer.GetAmountItem("stone");
             if (Form1.instance.StoneLabel.InvokeRequired)
             {
                 Form1.instance.StoneLabel.Invoke(new Action(() => { Form1.instance.StoneLabel.Text = stone.ToKMB(); }));
@@ -168,7 +168,7 @@ namespace SeaBotGUI.GUIBinds
                 InventoryGridThread = new Thread(UpdateGrid);
                 InventoryGridThread.IsBackground = true;
                 InventoryGridThread.Start();
-                Core.GlobalData.Inventory.CollectionChanged += Inventory_CollectionChanged;
+                Core.LocalPlayer.Inventory.CollectionChanged += Inventory_CollectionChanged;
             }
         }
 
@@ -244,17 +244,17 @@ namespace SeaBotGUI.GUIBinds
             public static BindingList<Item> GetItems()
             {
                 var ret = new BindingList<Item>();
-                if (Core.GlobalData == null)
+                if (Core.LocalPlayer == null)
                 {
                     return ret;
                 }
 
-                if (Core.GlobalData.Inventory == null)
+                if (Core.LocalPlayer.Inventory == null)
                 {
                     return ret;
                 }
 
-                foreach (var item in Core.GlobalData.Inventory)
+                foreach (var item in Core.LocalPlayer.Inventory)
                 {
                     if (item.Amount == 0)
                     {
@@ -429,31 +429,31 @@ namespace SeaBotGUI.GUIBinds
             public static BindingList<Building> GetBuildings()
             {
                 var ret = new BindingList<Building>();
-                if (Core.GlobalData == null)
+                if (Core.LocalPlayer == null)
                 {
                     return ret;
                 }
 
-                if (Core.GlobalData.Buildings == null)
+                if (Core.LocalPlayer.Buildings == null)
                 {
                     return ret;
                 }
 
-                foreach (var building in Core.GlobalData.Buildings)
+                foreach (var building in Core.LocalPlayer.Buildings)
                 {
                     var Building = new Building();
                     Building.ID = building.InstId;
                     Building.Name = LocalizationCache.GetNameFromLoc(
-                        Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
                             ?.NameLoc,
-                        Definitions.BuildingDef.Items.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
                             ?.Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Items.Item
-                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
+                        var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Buildings.Item
+                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
                                                    .Where(n => n.Id == building.Level).FirstOrDefault()?.ProdOutputs
                                                    .ProdOutput[0].Time;
                         if (willbeproducedat.HasValue)
@@ -468,8 +468,8 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Items.Item
-                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.Levels.Level
+                        var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Buildings.Item
+                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
                                                    .Where(n => n.Id == building.Level + 1).FirstOrDefault()
                                                    ?.UpgradeTime;
                         if (willbeproducedat.HasValue)
@@ -483,7 +483,7 @@ namespace SeaBotGUI.GUIBinds
                     {
                         if (building.UpgStart == 0)
                         {
-                            var slot = Core.GlobalData.Slots.FirstOrDefault(n => n.Type == "museum_ship");
+                            var slot = Core.LocalPlayer.Slots.FirstOrDefault(n => n.Type == "museum_ship");
                             if (slot == null)
                             {
                                 continue;
@@ -496,7 +496,7 @@ namespace SeaBotGUI.GUIBinds
 
                             var started = TimeUtils.FromUnixTime(slot.LastUsed);
 
-                            var b = Definitions.MuseumLvlDef.Items.Item.First(n => n.DefId == building.Level);
+                            var b = Definitions.MuseumLvlDef.MuseumLevels.Item.First(n => n.DefId == building.Level);
 
                             producing = (TimeUtils.FixedUTCTime - started.AddSeconds(b.TurnCount * b.TurnTime))
                                 .ToString(@"hh\:mm\:ss");
@@ -638,21 +638,21 @@ namespace SeaBotGUI.GUIBinds
             public static BindingList<Ship> GetShips()
             {
                 var ret = new BindingList<Ship>();
-                if (Core.GlobalData == null)
+                if (Core.LocalPlayer == null)
                 {
                     return ret;
                 }
 
-                if (Core.GlobalData.Buildings == null)
+                if (Core.LocalPlayer.Buildings == null)
                 {
                     return ret;
                 }
 
-                foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
+                foreach (var ship in Core.LocalPlayer.Ships.Where(n => n.Activated != 0))
                 {
                     var name = LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
-                        Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                        Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
+                        Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
                     Ship.Name = name;

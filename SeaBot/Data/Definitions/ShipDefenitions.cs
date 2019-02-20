@@ -34,20 +34,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class ShipDefenitions
     {
-        public class Animation
-        {
-            [J("data")]
-            public string Data { get; set; }
-
-            [J("id")]
-            public int Id { get; set; }
-        }
-
-        public class Animations
-        {
-            [J("animation")]
-            public List<Animation> Animation { get; set; }
-        }
+        
 
         public class CapacityLevelsLevel
         {
@@ -70,10 +57,8 @@ namespace SeaBotCore.Data.Definitions
             public int Xp { get; set; }
         }
 
-        public class Item
+        public class Ship
         {
-            [J("animations", NullValueHandling = N.Ignore)]
-            public Animations Animations { get; set; }
 
             [J("bounds_max")]
             public string BoundsMax { get; set; }
@@ -115,12 +100,6 @@ namespace SeaBotCore.Data.Definitions
             [J("name_loc")]
             public string NameLoc { get; set; }
 
-            [J("particles", NullValueHandling = N.Ignore)]
-            public Particles Particles { get; set; }
-
-            [J("particles_new", NullValueHandling = N.Ignore)]
-            public ParticlesNew ParticlesNew { get; set; }
-
             [J("player_level")]
             public int PlayerLevel { get; set; }
 
@@ -151,17 +130,14 @@ namespace SeaBotCore.Data.Definitions
             [J("start_level")]
             public int StartLevel { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("version_id")]
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Ships
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Ship> Ship { get; set; }
         }
 
         public class Levels
@@ -186,9 +162,6 @@ namespace SeaBotCore.Data.Definitions
 
             [J("id")]
             public int Id { get; set; }
-
-            [J("materials", NullValueHandling = N.Ignore)]
-            public Materials Materials { get; set; }
 
             [J("sailors")]
             public int Sailors { get; set; }
@@ -215,31 +188,10 @@ namespace SeaBotCore.Data.Definitions
             public List<Material> Material { get; set; }
         }
 
-        public class Particle
-        {
-            [J("data")]
-            public string Data { get; set; }
-
-            [J("particle_id")]
-            public int ParticleId { get; set; }
-        }
-
-        public class Particles
-        {
-            [J("particle")]
-            public List<Animation> Particle { get; set; }
-        }
-
-        public class ParticlesNew
-        {
-            [J("particle")]
-            public List<Particle> Particle { get; set; }
-        }
-
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Ships Ships { get; set; }
         }
 
         internal class ParseStringConverter : JsonConverter

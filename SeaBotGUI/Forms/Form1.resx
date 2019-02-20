@@ -764,7 +764,7 @@
   </data>
   <data name="button1.Text" xml:space="preserve">
     <value>Recycle
-Items</value>
+Barrels</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>192, 17</value>

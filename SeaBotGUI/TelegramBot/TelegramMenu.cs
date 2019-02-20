@@ -679,11 +679,11 @@ namespace SeaBotGUI.TelegramBot
                     private string GetInventory()
                     {
                         var builder = new StringBuilder();
-                        if (Core.GlobalData != null)
+                        if (Core.LocalPlayer != null)
                         {
-                            if (Core.GlobalData.Inventory != null)
+                            if (Core.LocalPlayer.Inventory != null)
                             {
-                                foreach (var item in Core.GlobalData.Inventory.Where(n => n.Amount != 0 && Between(n.Id,1,6,true)))
+                                foreach (var item in Core.LocalPlayer.Inventory.Where(n => n.Amount != 0 && Between(n.Id,1,6,true)))
                                 {
                                     builder.AppendLine($"{MaterialDB.GetLocalizedName(item.Id)} - {item.Amount}");
                                 }
@@ -692,8 +692,8 @@ namespace SeaBotGUI.TelegramBot
                                     Environment.NewLine + string.Format(
                                         PrivateLocal.TELEGRAM_STORAGE,
                                         AutoTools.GetStogradeLoaded(),
-                                        Core.GlobalData.StorageCapacity));
-                                foreach (var item in Core.GlobalData.Inventory.Where(
+                                        Core.LocalPlayer.StorageCapacity));
+                                foreach (var item in Core.LocalPlayer.Inventory.Where(
                                     n => n.Amount != 0 && !Between(n.Id, 1, 6, true)))
                                 {
                                     builder.AppendLine($"{MaterialDB.GetLocalizedName(item.Id)} - {item.Amount}");
@@ -714,16 +714,16 @@ namespace SeaBotGUI.TelegramBot
                     private string GetShips()
                     {
                         var builder = new StringBuilder();
-                        if (Core.GlobalData != null)
+                        if (Core.LocalPlayer != null)
                         {
-                            if (Core.GlobalData.Ships != null)
+                            if (Core.LocalPlayer.Ships != null)
                             {
-                                foreach (var ship in Core.GlobalData.Ships.Where(n => n.Activated != 0))
+                                foreach (var ship in Core.LocalPlayer.Ships.Where(n => n.Activated != 0))
                                 {
                                     
                                     var name = LocalizationCache.GetNameFromLoc(
-                                        Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
-                                        Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                                        Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
+                                        Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
                                    
                                   builder.Append(name+"|");
 

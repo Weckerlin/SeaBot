@@ -31,9 +31,9 @@ namespace SeaBotCore.BotMethods.ShipManagment
         public static void UnloadAllShips()
         {
             var unloadedships = new List<int>();
-            foreach (var shi in Core.GlobalData.Ships)
+            foreach (var shi in Core.LocalPlayer.Ships)
             {
-                var ship = Core.GlobalData.Ships.Where(n => n.InstId == shi.InstId).First();
+                var ship = Core.LocalPlayer.Ships.Where(n => n.InstId == shi.InstId).First();
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.IsVoyageCompleted())
                 {
 
@@ -105,19 +105,19 @@ namespace SeaBotCore.BotMethods.ShipManagment
         {
             // if (ship.Type == "dealer")
             // {
-            // var predefined = Definitions.DealerDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+            // var predefined = Definitions.DealerDef.Barrels.Barrel.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
             // if (SendingHelper.isVoyageCompleted(ship))
             // {
 
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
-            // Core.GlobalData.Level, Enums.EObject.dealer,
+            // Core.LocalPlayer.BoatLevel, Enums.EObject.dealer,
             // SendingHelper.GetCapacity(ship),
             // 0,
             // SendingHelper.GetSailors(ship), (int)predefined.Sailors,
             // ship.TargetLevel,
             // null, _deship.Count(n => n.DefId == ship.DefId)));
-            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.LocalPlayer.Ships[index]);
             // }
             // }
         }
@@ -125,18 +125,18 @@ namespace SeaBotCore.BotMethods.ShipManagment
         {
             // if (ship.Type == "treasure")
             // {
-            // var predefined = Definitions.TreasureDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+            // var predefined = Definitions.TreasureDef.Barrels.Barrel.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
             // if (SendingHelper.isVoyageCompleted(ship))
             // {
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipTask(ship.InstId,
-            // Core.GlobalData.Level, Enums.EObject.treasure,
+            // Core.LocalPlayer.BoatLevel, Enums.EObject.treasure,
             // SendingHelper.GetCapacity(ship),
             // 0,
             // SendingHelper.GetSailors(ship), 0,
             // ship.TargetLevel,
             // null, _deship.Count(n => n.DefId == ship.DefId)));
-            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.LocalPlayer.Ships[index]);
             // }
             // }
         }
@@ -144,19 +144,19 @@ namespace SeaBotCore.BotMethods.ShipManagment
         {
             // if (ship.Type == "global_contractor")
             // {
-            // var predefined = Definitions.GConDef.Items.Item.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+            // var predefined = Definitions.GConDef.Barrels.Barrel.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
             // if (SendingHelper.isVoyageCompleted(ship))
             // {
             // _deship.Add(ship);
             // Networking.AddTask(new Task.UnloadShipGlobalContractorTask(ship.InstId));
-            // SendingHelper.NullShip(Core.GlobalData.Ships[index]);
+            // SendingHelper.NullShip(Core.LocalPlayer.Ships[index]);
             // }
             // }
         }
 
         public static void UnloadSocialcontract(Ship ship, int uniqueid)
         {
-            var co = Core.GlobalData.SocialContracts.Where(n => n.InstId == ship.TargetId)
+            var co = Core.LocalPlayer.SocialContracts.Where(n => n.InstId == ship.TargetId)
                 .FirstOrDefault();
             if (co == null)
             {
@@ -181,9 +181,9 @@ namespace SeaBotCore.BotMethods.ShipManagment
         public static void UnloadOutpost(Ship ship, int uniqueid)
         {
           
-            var loc = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).First();
+            var loc = Core.LocalPlayer.Outposts.Where(n => n.DefId == ship.TargetId).First();
             ship.LogUnload();
-            var outp = Core.GlobalData.Outposts.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
+            var outp = Core.LocalPlayer.Outposts.Where(n => n.DefId == ship.TargetId).FirstOrDefault();
             if (outp.CargoOnTheWay <= ship.Sailors())
             {
                 outp.CargoOnTheWay -= ship.Sailors();
@@ -205,12 +205,12 @@ namespace SeaBotCore.BotMethods.ShipManagment
         }
         public static void UnloadUpgradable(Ship ship,int uniqueid)
         {
-            var defenition = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+            var defenition = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
             var lvl = defenition?.Levels.Level.FirstOrDefault(n => n.Id == ship.TargetLevel);
             if (lvl != null)
             {
                 ship.LogUnload();
-                var upg = Core.GlobalData.Upgradeables.FirstOrDefault(n => n.DefId == ship.TargetId);
+                var upg = Core.LocalPlayer.Upgradeables.FirstOrDefault(n => n.DefId == ship.TargetId);
                 if (upg != null)
                 {
                     upg.Progress += lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
@@ -219,7 +219,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 Networking.AddTask(
                     new Task.UnloadShipTask(
                         ship.InstId,
-                        Core.GlobalData.Level,
+                        Core.LocalPlayer.Level,
                         Enums.EObject.upgradeable,
                         SendingHelper.GetCapacity(ship),
                         lvl.MaterialKoef * SendingHelper.GetCapacity(ship),
@@ -233,7 +233,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
 
         public static void UnloadWreck(Ship ship, int uniqueid)
         {
-            var wrk = Core.GlobalData.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
+            var wrk = Core.LocalPlayer.Wrecks.Where(n => n.InstId == ship.TargetId).FirstOrDefault();
                     
             if (wrk != null)
             {
@@ -242,7 +242,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 Networking.AddTask(
                     new Task.UnloadShipTask(
                         ship.InstId,
-                        Core.GlobalData.Level,
+                        Core.LocalPlayer.Level,
                         Enums.EObject.wreck,
                         SendingHelper.GetCapacity(ship),
                         0,
@@ -269,7 +269,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
             if (currentcontractor.Type == "static")
             {
                 var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
-                var lcontract = Core.GlobalData.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
+                var lcontract = Core.LocalPlayer.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
                 // TODO: increasing of progress or amount!
                 ship.LogUnload();
                 Networking.AddTask(
@@ -290,7 +290,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
             else
             {
                 var usedshit = quest.MaterialKoef * SendingHelper.GetCapacity(ship);
-                var lcontract = Core.GlobalData.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
+                var lcontract = Core.LocalPlayer.Contracts.FirstOrDefault(n => n.DefId == ship.TargetId);
                 var inp = quest.InputAmount();
                 // TODO: increasing of progress or amount!
                 ship.LogUnload();
@@ -316,8 +316,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
 
         public static void UnloadMarketplace(Ship ship, int uniqueid)
         {
-            var market = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-            var lvl = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+            var market = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+            var lvl = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
             var mat = lvl?.Materials.Material.FirstOrDefault(n => n.Id == ship.MaterialId);
             if (mat != null)
             {
@@ -325,7 +325,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                 Networking.AddTask(
                     new Task.UnloadShipTask(
                         ship.InstId,
-                        Core.GlobalData.Level,
+                        Core.LocalPlayer.Level,
                         Enums.EObject.marketplace,
                         SendingHelper.GetCapacity(ship),
                         mat.InputKoef * SendingHelper.GetCapacity(ship),

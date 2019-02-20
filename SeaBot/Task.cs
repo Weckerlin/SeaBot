@@ -541,7 +541,7 @@ namespace SeaBotCore
             {
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
                 this.CustomObjects.Add("debug_capacity", ship_capacity);
                 this.CustomObjects.Add("debug_capacity_used", ship_capacity_used);
                 this.CustomObjects.Add("debug_sailors", sailors);
@@ -554,7 +554,7 @@ namespace SeaBotCore
                         this.CustomObjects.Add("debug_captain_id", ship.CaptainId);
                         this.CustomObjects.Add(
                             "debug_captain_def_id",
-                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                            Core.LocalPlayer.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
                                 ?.InstId);
                     }
                 }
@@ -587,7 +587,7 @@ namespace SeaBotCore
             {
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
                 this.CustomObjects.Add("debug_capacity", ship_capacity);
                 this.CustomObjects.Add("debug_capacity_used", ship_capacity_used);
                 this.CustomObjects.Add("debug_sailors", sailors);
@@ -600,7 +600,7 @@ namespace SeaBotCore
                         this.CustomObjects.Add("debug_captain_id", ship.CaptainId);
                         this.CustomObjects.Add(
                             "debug_captain_def_id",
-                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                            Core.LocalPlayer.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
                                 ?.InstId);
                     }
                 }
@@ -633,7 +633,7 @@ namespace SeaBotCore
             {
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
                 this.CustomObjects.Add("debug_capacity", ship_capacity);
                 this.CustomObjects.Add("debug_capacity_used", ship_capacity_used);
                 this.CustomObjects.Add("debug_sailors", sailors);
@@ -646,7 +646,7 @@ namespace SeaBotCore
                         this.CustomObjects.Add("debug_captain_id", ship.CaptainId);
                         this.CustomObjects.Add(
                             "debug_captain_def_id",
-                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                            Core.LocalPlayer.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
                                 ?.InstId);
                     }
                 }
@@ -677,7 +677,7 @@ namespace SeaBotCore
             {
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
                 this.CustomObjects.Add("debug_capacity", ship_capacity);
                 this.CustomObjects.Add("debug_capacity_used", ship_capacity_used);
                 this.CustomObjects.Add("debug_sailors", sailors);
@@ -690,7 +690,7 @@ namespace SeaBotCore
                         this.CustomObjects.Add("debug_captain_id", ship.CaptainId);
                         this.CustomObjects.Add(
                             "debug_captain_def_id",
-                            Core.GlobalData.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
+                            Core.LocalPlayer.CaptainsNew.Where(n => n.InstId == ship.CaptainId).FirstOrDefault()
                                 ?.InstId);
                     }
                 }
@@ -836,7 +836,7 @@ namespace SeaBotCore
                 this.CustomObjects.Add("inst_id", inst_id);
                 this.CustomObjects.Add("outpost_id", outpost_id);
                 this.CustomObjects.Add("crew", crew);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
             }
 
             public string Action => "send_ship_outpost";
@@ -872,7 +872,7 @@ namespace SeaBotCore
                 this.CustomObjects.Add("material_id", material_id);
                 this.CustomObjects.Add("amount", amount);
                 this.CustomObjects.Add("quest_id", quest_id);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
             }
 
             public string Action => "send_ship_contractor";
@@ -904,7 +904,7 @@ namespace SeaBotCore
         {
             public SendShipUpgradeableTask(Ship ship, Upgradeable destination, int amount)
             {
-                var destination_levels = Definitions.UpgrDef.Items.Item.First(n => n.DefId == destination.DefId).Levels
+                var destination_levels = Definitions.UpgrDef.Upgradables.Item.First(n => n.DefId == destination.DefId).Levels
                     .Level.FirstOrDefault(n => n.Id == destination.Level);
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
@@ -915,7 +915,7 @@ namespace SeaBotCore
                     destination_levels.MaterialKoef != 0 ? destination_levels.MaterialKoef : 1);
                 this.CustomObjects.Add("dest_sailors", destination_levels.Sailors);
                 this.CustomObjects.Add("amount", amount == 0 ? ship.Capacity() : amount);
-                this.CustomObjects.Add("player_level", Core.GlobalData.Level);
+                this.CustomObjects.Add("player_level", Core.LocalPlayer.Level);
             }
 
             public string Action => "send_ship_upgradeable";
@@ -1007,8 +1007,8 @@ namespace SeaBotCore
 
                 // calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Definitions.BoatDef.Items.Item.First(n => n.DefId == 1).Levels.Level
-                    .First(n => n.Id == Core.GlobalData.BoatLevel);
+                var b = Definitions.BoatDef.Boats.Item.First(n => n.DefId == 1).BoatLevels.Level
+                    .First(n => n.Id == Core.LocalPlayer.BoatLevel);
                 var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
                 this.CustomObjects.Add("inst_id", boat.InstId);
                 if (turns > b.TurnCount)
@@ -1020,7 +1020,7 @@ namespace SeaBotCore
                     this.CustomObjects.Add("turns", turns);
                 }
 
-                Core.GlobalData.Boats.First(n => n.InstId == boat.InstId).ProdStart = TimeUtils.GetEpochTime();
+                Core.LocalPlayer.Boats.First(n => n.InstId == boat.InstId).ProdStart = TimeUtils.GetEpochTime();
             }
 
             public string Action => "finish_boat_prod";

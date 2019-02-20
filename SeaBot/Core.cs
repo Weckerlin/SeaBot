@@ -39,7 +39,7 @@ namespace SeaBotCore
     {
         public static Config.Config Config = new Config.Config();
 
-        public static PlayerData GlobalData = new PlayerData();
+        public static PlayerData LocalPlayer = new PlayerData();
 
         public static int hibernation = 0;
 
@@ -58,6 +58,7 @@ namespace SeaBotCore
         private static DateTime _lastdefinv = DateTime.Now.AddSeconds(-100); // ( ͡° ͜ʖ ͡°) travelin in time
 
         private static bool aftercrash = false;
+
         static Core()
         {
             Configurator.Load();
@@ -183,7 +184,7 @@ namespace SeaBotCore
 
             if (aftercrash)
             {
-                if (Core.GlobalData != null)
+                if (Core.LocalPlayer != null)
                 {
                     if (!Directory.Exists("crashlog"))
                     {
@@ -192,7 +193,7 @@ namespace SeaBotCore
                     aftercrash = false;
                     File.WriteAllText("crashlog/"+
                         "afcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
-                        JsonConvert.SerializeObject(Core.GlobalData));
+                        JsonConvert.SerializeObject(Core.LocalPlayer));
                 }
             }
             Events.Events.BotStartedEvent.BotStarted.Invoke();
@@ -208,7 +209,7 @@ namespace SeaBotCore
                             || (int)e == 1011 || (int)e == 2006)
                         {
                             Logger.Logger.Info(Localization.CORE_RESTARTING);
-                            if (Core.GlobalData != null)
+                            if (Core.LocalPlayer != null)
                             {
                                 if (!Directory.Exists("crashlog"))
                                 {
@@ -217,7 +218,7 @@ namespace SeaBotCore
                                 aftercrash = true;
                                 File.WriteAllText("crashlog/"+
                                     "bfcrashdmp" + DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss"),
-                                    JsonConvert.SerializeObject(Core.GlobalData));
+                                    JsonConvert.SerializeObject(Core.LocalPlayer));
                             }
 
                             restartwithdelay(0);

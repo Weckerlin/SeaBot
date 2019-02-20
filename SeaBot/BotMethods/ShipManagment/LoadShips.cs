@@ -32,9 +32,9 @@ namespace SeaBotCore.BotMethods.ShipManagment
     {
         public static void LoadAllShips()
         {
-            for (var index = 0; index < Core.GlobalData.Ships.Count; index++)
+            for (var index = 0; index < Core.LocalPlayer.Ships.Count; index++)
             {
-                var ship = Core.GlobalData.Ships[index];
+                var ship = Core.LocalPlayer.Ships[index];
                 if (ship.TargetId != 0 && ship.Activated != 0 && ship.Loaded == 0 && ship.IsVoyageCompleted())
                 {
                     if (ship.Type == "upgradeable")
@@ -63,17 +63,17 @@ namespace SeaBotCore.BotMethods.ShipManagment
         }
         public static void LoadUpgradeable(Ship ship)
         {
-            var lvl = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
+            var lvl = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
                 .Level.First(n => n.Id == ship.TargetLevel);
             if (lvl != null)
             {
                 Logger.Info(
                     Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
-                Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).CargoOnTheWay -=
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                Core.LocalPlayer.Upgradeables.First(n => n.DefId == ship.TargetId).CargoOnTheWay -=
                     lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
-                Core.GlobalData.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
+                Core.LocalPlayer.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
                     lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
 
                 Networking.AddTask(new Task.LoadShipUpgradeableTask(ship.InstId));
@@ -85,8 +85,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
                 Logger.Info(
                     Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
 
                 Networking.AddTask(new Task.LoadShipWreck(ship.InstId));
                 ship.Loaded = 1;
@@ -97,8 +97,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
             Logger.Info(
                 Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
 
             Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
             ship.Loaded = 1;
@@ -109,8 +109,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
             Logger.Info(
                 Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                    Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
 
             Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
             ship.Loaded = 1;

@@ -30,10 +30,10 @@ namespace SeaBotCore.BotMethods
     {
         public static void UpgradeUpgradable()
         {
-            for (var index = 0; index < Core.GlobalData.Upgradeables.Count; index++)
+            for (var index = 0; index < Core.LocalPlayer.Upgradeables.Count; index++)
             {
-                var upg = Core.GlobalData.Upgradeables[index];
-                var def = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
+                var upg = Core.LocalPlayer.Upgradeables[index];
+                var def = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == upg.DefId);
                 var currentlvl = def?.Levels.Level.FirstOrDefault(n => n.Id == upg.Level);
                 if (def == null || currentlvl == null)
                 {
@@ -54,13 +54,13 @@ namespace SeaBotCore.BotMethods
                 if (upg.Progress >= currentlvl.Amount)
                 {
                     // upgrade ofc
-                    Core.GlobalData.Upgradeables[index].Level++;
-                    Core.GlobalData.Upgradeables[index].Progress = 0;
-                    Core.GlobalData.Upgradeables[index].Amount = nextlvl.Amount;
-                    Core.GlobalData.Upgradeables[index].MaterialKoef = nextlvl.MaterialKoef;
+                    Core.LocalPlayer.Upgradeables[index].Level++;
+                    Core.LocalPlayer.Upgradeables[index].Progress = 0;
+                    Core.LocalPlayer.Upgradeables[index].Amount = nextlvl.Amount;
+                    Core.LocalPlayer.Upgradeables[index].MaterialKoef = nextlvl.MaterialKoef;
                     Logger.Info(
                         Localization.UPGRADABLE_UPGRADED + LocalizationCache.GetNameFromLoc(def.NameLoc, def.Name));
-                    Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.GlobalData.Level));
+                    Networking.AddTask(new Task.ConfirmUpgradeableTask(upg.DefId, Core.LocalPlayer.Level));
                 }
             }
         }

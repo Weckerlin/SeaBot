@@ -29,7 +29,7 @@ namespace SeaBotCore.Data.Definitions
 
     public static class DealerDefenitions
     {
-        public class Item
+        public class Dealer
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -39,9 +39,6 @@ namespace SeaBotCore.Data.Definitions
 
             [J("controls")]
             public string Controls { get; set; }
-
-            [J("dealer_texture")]
-            public string DealerTexture { get; set; }
 
             [J("def_id")]
             public int DefId { get; set; }
@@ -98,7 +95,7 @@ namespace SeaBotCore.Data.Definitions
         public class Items
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Dealer> Item { get; set; }
         }
 
         public class Root : IDefinition

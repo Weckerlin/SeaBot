@@ -73,7 +73,7 @@ namespace SeaBotCore.Data.Definitions
                                                                          };
         }
 
-        public class Item
+        public class Event
         {
             [J("barrel")]
             public Barrel Barrel { get; set; }
@@ -133,16 +133,16 @@ namespace SeaBotCore.Data.Definitions
             public string Upgradeables { get; set; }
         }
 
-        public class Items
+        public class Events
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Event> Event { get; set; }
         }
 
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Events Events { get; set; }
         }
 
         internal class BarrelConverter : JsonConverter
@@ -152,6 +152,11 @@ namespace SeaBotCore.Data.Definitions
             public override bool CanConvert(Type t)
             {
                 return t == typeof(Barrel) || t == typeof(Barrel?);
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+              
             }
 
             public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
@@ -168,24 +173,6 @@ namespace SeaBotCore.Data.Definitions
                 }
 
                 throw new Exception("Cannot unmarshal type Barrel");
-            }
-
-            public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-            {
-                var value = (Barrel)untypedValue;
-                if (value.Integer != null)
-                {
-                    serializer.Serialize(writer, value.Integer.Value);
-                    return;
-                }
-
-                if (value.String != null)
-                {
-                    serializer.Serialize(writer, value.String);
-                    return;
-                }
-
-                throw new Exception("Cannot marshal type Barrel");
             }
         }
     }

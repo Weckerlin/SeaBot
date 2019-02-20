@@ -39,15 +39,15 @@ namespace SeaBotCore.Data.Definitions
         public partial class Root : IDefinition
         {
             [JsonProperty("items")]
-            public Items Items { get; set; }
+            public GlobalContractors GlobalContractors { get; set; }
         }
-        public partial class Items
+        public partial class GlobalContractors
         {
             [JsonProperty("item")]
-            public Item[] Item { get; set; }
+            public GlobalContractor[] GlobalContractor { get; set; }
         }
 
-        public partial class Item
+        public partial class GlobalContractor
         {
             [JsonProperty("def_id")]
             public long DefId { get; set; }
@@ -72,9 +72,6 @@ namespace SeaBotCore.Data.Definitions
 
             [JsonProperty("wallpost_desc")]
             public string WallpostDesc { get; set; }
-
-            [JsonProperty("wallpost_img")]
-            public string WallpostImg { get; set; }
 
             [JsonProperty("objective_amount")]
             public long ObjectiveAmount { get; set; }
@@ -105,9 +102,6 @@ namespace SeaBotCore.Data.Definitions
 
             [JsonProperty("atlas")]
             public Atlas Atlas { get; set; }
-
-            [JsonProperty("texture")]
-            public string Texture { get; set; }
 
             [JsonProperty("iso_width")]
             public long IsoWidth { get; set; }
@@ -275,18 +269,6 @@ namespace SeaBotCore.Data.Definitions
             MapGround1
         };
 
-        public enum Chest
-        {
-            Chest01,
-
-            Chest02,
-
-            Chest03,
-
-            Chest04,
-
-            Chest05
-        };
 
         public enum RewardObjectType
         {

@@ -48,8 +48,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         public static Upgradeable GetBestUpgPlace(string itemname, int sailors, UpgradablyStrategy upgradablestrategy)
         {
             var mat = MaterialDB.GetItem(itemname).DefId;
-            var needed = new List<UpgradeableDefenition.Item>();
-            foreach (var item in Definitions.UpgrDef.Items.Item)
+            var needed = new List<UpgradeableDefenition.Upgradable>();
+            foreach (var item in Definitions.UpgrDef.Upgradables.Item)
             {
                 if (item.MaterialId == mat)
                 {
@@ -58,13 +58,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             }
 
             var sito = needed.Where(
-                shtItem => Core.GlobalData.Upgradeables.FirstOrDefault(
+                shtItem => Core.LocalPlayer.Upgradeables.FirstOrDefault(
                                n => n.DefId == shtItem.DefId && n.Amount != 0 && n.Progress < n.Amount
                                     || n.DefId == shtItem.DefId && shtItem.MaxLevel == 1 && shtItem.EventId == 0)
                            != null);
             var p = sito.ToDictionary(
                 shtItem => shtItem,
-                shtItem => Core.GlobalData.Upgradeables.First(n => n.DefId == shtItem.DefId));
+                shtItem => Core.LocalPlayer.Upgradeables.First(n => n.DefId == shtItem.DefId));
             var best = new Dictionary<Upgradeable, decimal>();
             foreach (var up in p)
             {
@@ -101,9 +101,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         public static int GetCapacity(Ship ship)
         {
            
-                if (Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Levels == null)
+                if (Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Levels == null)
                 {
-                    var capacity = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).CapacityLevels.Level
+                    var capacity = Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).CapacityLevels.Level
                         .FirstOrDefault(n => n.Id == ship.CapacityLevel)?.Capacity;
                     if (capacity != null)
                     {
@@ -111,8 +111,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     }
                 }
 
-                ShipDefenitions.Item first = null;
-                foreach (var n in Definitions.ShipDef.Items.Item)
+                ShipDefenitions.Ship first = null;
+                foreach (var n in Definitions.ShipDef.Ships.Item)
                 {
                     if (n.DefId == ship.DefId)
                     {
@@ -142,10 +142,10 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static int GetSailors(Ship ship)
         {
-            if (Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)
+            if (Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).SailorsLevels == null)
             {
-                ShipDefenitions.Item first = null;
-                foreach (var n in Definitions.ShipDef.Items.Item)
+                ShipDefenitions.Ship first = null;
+                foreach (var n in Definitions.ShipDef.Ships.Item)
                 {
                     if (n.DefId == ship.DefId)
                     {
@@ -160,7 +160,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 }
             }
 
-            var sailors = Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).SailorsLevels.Level
+            var sailors = Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).SailorsLevels.Level
                 .First(n => n.Id == ship.SailorsLevel).Sailors;
             if (sailors != null)
             {
@@ -170,9 +170,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return int.MaxValue;
         }
 
-        public static ShipDefenitions.Item GetShipDefId(Ship ship)
+        public static ShipDefenitions.Ship GetShipDefId(Ship ship)
         {
-            return Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId);
+            return Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId);
         }
 
         public static string GetTravelName(this Ship ship)
@@ -181,15 +181,15 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             switch (ship.Type)
             {
                 case "upgradeable":
-                    pointname = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
+                    pointname = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
                     break;
                 case "marketplace":
-                    pointname = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
+                    pointname = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
                     break;
                 case "wreck":
 
-                    var wrk = Core.GlobalData.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
-                    pointname = Definitions.WreckDef.Items.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.NameLoc;
+                    var wrk = Core.LocalPlayer.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
+                    pointname = Definitions.WreckDef.Wrecks.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.NameLoc;
                     break;
                 case "contractor":
 
@@ -198,13 +198,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     break;
                 case "global_contractor":
 
-                    pointname = Definitions.GConDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
+                    pointname = Definitions.GConDef.GlobalContractors.GlobalContractor.FirstOrDefault(n => n.DefId == ship.TargetId)?.NameLoc;
 
                     break;
                 case "outpost":
 
-                    OutpostDefinitions.Item first = null;
-                    foreach (var n in Definitions.OutpostDef.Items.Item)
+                    OutpostDefinitions.Outpost first = null;
+                    foreach (var n in Definitions.OutpostDef.Outposts.Item)
                     {
                         if (n.DefId == ship.TargetId)
                         {
@@ -217,7 +217,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     break;
                 case "social_contract":
 
-                    pointname = Definitions.SContractDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                    pointname = Definitions.SContractDef.SocialContracts.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.NameLoc;
 
                     break;
@@ -237,17 +237,17 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             switch (ship.Type)
             {
                 case "upgradeable":
-                    traveltime = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
+                    traveltime = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
                         .Level.FirstOrDefault(n => n.Id == ship.TargetLevel)?.TravelTime;
                     break;
                 case "marketplace":
-                    traveltime = Definitions.MarketDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                    traveltime = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
                         ?.TravelTime;
                     break;
                 case "wreck":
 
-                    var wrk = Core.GlobalData.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
-                    var tm = Definitions.WreckDef.Items.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.TravelTime;
+                    var wrk = Core.LocalPlayer.Wrecks.FirstOrDefault(n => n.InstId == ship.TargetId);
+                    var tm = Definitions.WreckDef.Wrecks.Item.FirstOrDefault(n => n.DefId == wrk.DefId)?.TravelTime;
                     if (tm != null)
                     {
                         traveltime = (int)tm;
@@ -265,7 +265,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     break;
                 case "global_contractor":
 
-                    var time = Definitions.GConDef.Items.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
+                    var time = Definitions.GConDef.GlobalContractors.GlobalContractor.FirstOrDefault(n => n.DefId == ship.TargetId)?.TravelTime;
                     if (time != null)
                     {
                         traveltime = (int)time;
@@ -274,8 +274,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     break;
                 case "outpost":
 
-                    OutpostDefinitions.Item first = null;
-                    foreach (var n in Definitions.OutpostDef.Items.Item)
+                    OutpostDefinitions.Outpost first = null;
+                    foreach (var n in Definitions.OutpostDef.Outposts.Item)
                     {
                         if (n.DefId == ship.TargetId)
                         {
@@ -287,9 +287,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     traveltime = first.TravelTime;
                     break;
                 case "social_contract":
-                    var soccontract = Core.GlobalData.SocialContracts.Where(n => n.InstId == ship.TargetId)
+                    var soccontract = Core.LocalPlayer.SocialContracts.Where(n => n.InstId == ship.TargetId)
                         .FirstOrDefault();
-                    var travelTime = Definitions.SContractDef.Items.Item
+                    var travelTime = Definitions.SContractDef.SocialContracts.Item
                         .FirstOrDefault(n => n.DefId == soccontract?.DefId)?.TravelTime;
                     if (travelTime != null)
                     {
@@ -311,18 +311,18 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             return !traveltime.HasValue ? int.MaxValue : traveltime.Value;
         }
 
-        public static List<OutpostDefinitions.Item> GetUnlockableOutposts()
+        public static List<OutpostDefinitions.Outpost> GetUnlockableOutposts()
         {
-            var lockedspots = new List<OutpostDefinitions.Item>();
-            foreach (var lpost in Definitions.OutpostDef.Items.Item)
+            var lockedspots = new List<OutpostDefinitions.Outpost>();
+            foreach (var lpost in Definitions.OutpostDef.Outposts.Item)
             {
-                if (Core.GlobalData.Outposts.Any(n => n.DefId == lpost.DefId))
+                if (Core.LocalPlayer.Outposts.Any(n => n.DefId == lpost.DefId))
                 {
                     continue;
                 }
 
                 // check for level
-                if (lpost.ReqLevel < Core.GlobalData.Level)
+                if (lpost.ReqLevel < Core.LocalPlayer.Level)
                 {
                     if (lpost.UnlockTime <= TimeUtils.GetEpochTime())
                     {
@@ -351,7 +351,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                                     var num = 0;
                                     if (int.TryParse(req, out num))
                                     {
-                                        if (Core.GlobalData.Outposts.Where(n => n.Done).All(n => n.DefId != num))
+                                        if (Core.LocalPlayer.Outposts.Where(n => n.Done).All(n => n.DefId != num))
                                         {
                                             enogh = false;
                                             break;
@@ -386,15 +386,15 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         {
 
             return LocalizationCache.GetNameFromLoc(
-                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
         }
         public static void LogUnload(this Ship ship)
         {
             Logger.Info(
                 Localization.SHIPS_UNLOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
-                    Definitions.ShipDef.Items.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
+                    Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.NameLoc,
+                    Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name));
         }
 
         public static void NullShip(Ship ship)

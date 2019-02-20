@@ -33,7 +33,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
     {
         public static void SendShipsDestination(ShipDestType type)
         {
-            var bestships = new Queue<Ship>(Core.GlobalData.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0 && !Core.Config.ignoredships.Contains(n.InstId))
+            var bestships = new Queue<Ship>(Core.LocalPlayer.Ships.Where(n => n.TargetId == 0 && n.Activated != 0 && n.Sent == 0 && !Core.Config.ignoredships.Contains(n.InstId))
                 .OrderByDescending(SendingHelper.GetCapacity));
             Thread.Sleep(2000);
             switch (type)
@@ -96,7 +96,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         {
 
                     var failed = 
-                        Core.GlobalData.Ships.Where(n => n.Activated != 0 && n.Sent == 0)
+                        Core.LocalPlayer.Ships.Where(n => n.Activated != 0 && n.Sent == 0)
                             .OrderByDescending(SendingHelper.GetCapacity);
 
                     foreach (var ship in failed)
@@ -173,20 +173,20 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             switch (dest)
             {
                 case ShipDestType.Upgradable:
-                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "upgradeable");
+                    count = Core.LocalPlayer.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "upgradeable");
                     break;
                 case ShipDestType.Outpost:
-                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "outpost");
+                    count = Core.LocalPlayer.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "outpost");
                     break;
                 case ShipDestType.Marketplace:
-                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "marketplace");
+                    count = Core.LocalPlayer.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "marketplace");
                     break;
                 case ShipDestType.Contractor:
-                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "contractor");
+                    count = Core.LocalPlayer.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "contractor");
                     break;
                 
                 case ShipDestType.Wreck:
-                    count = Core.GlobalData.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "wreck");
+                    count = Core.LocalPlayer.Ships.Where(n => n.Sent != 0 && n.Activated!=0).Count(n => n.Type == "wreck");
                     break;
             }
 
@@ -194,7 +194,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             {
                 return 0;
             }
-            var perc = 100D / (Core.GlobalData.Ships.Count(n => n.Sent != 0 && n.Activated != 0)
+            var perc = 100D / (Core.LocalPlayer.Ships.Count(n => n.Sent != 0 && n.Activated != 0)
                                / (double)count);
             return perc;
         }

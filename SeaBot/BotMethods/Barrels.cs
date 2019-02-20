@@ -34,7 +34,7 @@ namespace SeaBotCore.BotMethods
         public static void CollectBarrel()
         {
             var nearestev = TimeUtils.GetCurrentEvent().Barrel.Integer.Value;
-            var barrelcontroller = Definitions.BarrelDef.Items.Item.Where(n => n.DefId == nearestev).First();
+            var barrelcontroller = Definitions.BarrelDef.Barrels.Item.Where(n => n.DefId == nearestev).First();
             var nextbarrel = BarrelController.GetNextBarrel(barrelcontroller);
             if (nextbarrel.Definition.Id != 0)
             {
@@ -43,13 +43,13 @@ namespace SeaBotCore.BotMethods
                         Localization.BARREL_COLLECTING_ITEM,
                         nextbarrel.Amount,
                         MaterialDB.GetLocalizedName(nextbarrel.Definition.Id)));
-                if (Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == nextbarrel.Definition.Id) != null)
+                if (Core.LocalPlayer.Inventory.FirstOrDefault(n => n.Id == nextbarrel.Definition.Id) != null)
                 {
-                    Core.GlobalData.Inventory.First(n => n.Id == nextbarrel.Definition.Id).Amount += nextbarrel.Amount;
+                    Core.LocalPlayer.Inventory.First(n => n.Id == nextbarrel.Definition.Id).Amount += nextbarrel.Amount;
                 }
                 else
                 {
-                    Core.GlobalData.Inventory.Add(
+                    Core.LocalPlayer.Inventory.Add(
                         new Item { Amount = nextbarrel.Amount, Id = nextbarrel.Definition.Id });
                 }
             }
@@ -64,7 +64,7 @@ namespace SeaBotCore.BotMethods
                     nextbarrel.get_type(),
                     nextbarrel.Amount,
                     nextbarrel.Definition.Id,
-                    Core.GlobalData.Level));
+                    Core.LocalPlayer.Level));
         }
 
         public static class BarrelController
@@ -75,20 +75,20 @@ namespace SeaBotCore.BotMethods
 
             private static double _seed = 1;
 
-            public static BarrelMaterial GetNextBarrel(BarrelDefenitions.Item _definition)
+            public static BarrelMaterial GetNextBarrel(BarrelDefenitions.Barrel _definition)
             {
                 SetSeed(_lastBarrelSeed);
 
                 var material = _definition.Materials.Material[NextIntInRange(
                     0,
                     _definition.Materials.Material.Count - 1)];
-                var min = Ceil(Math.Pow(Core.GlobalData.Level, material.ExponentMin) + material.OffsetMin);
-                var max = Ceil(Math.Pow(Core.GlobalData.Level, material.ExponentMax) + material.OffsetMax);
+                var min = Ceil(Math.Pow(Core.LocalPlayer.Level, material.ExponentMin) + material.OffsetMin);
+                var max = Ceil(Math.Pow(Core.LocalPlayer.Level, material.ExponentMax) + material.OffsetMax);
                 var cur = NextIntInRange(min, max);
                 var curcelling = Ceil(cur * material.Koef);
                 _lastBarrelSeed = NextInt();
                 material.DefId = _definition.DefId.ToString();
-                var ret = new BarrelMaterial(material, (int)curcelling, Core.GlobalData.Level);
+                var ret = new BarrelMaterial(material, (int)curcelling, Core.LocalPlayer.Level);
                 return ret;
             }
 

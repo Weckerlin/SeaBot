@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class SocialContractDefenitions
     {
-        public class Item
+        public class SocialContract
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -81,9 +81,6 @@ namespace SeaBotCore.Data.Definitions
             [J("speedupable")]
             public int Speedupable { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("travel_time")]
             public int TravelTime { get; set; }
 
@@ -91,10 +88,10 @@ namespace SeaBotCore.Data.Definitions
             public string Type { get; set; }
         }
 
-        public class Items
+        public class SocialContracts
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<SocialContract> SocialContract { get; set; }
         }
 
         public class Material
@@ -145,7 +142,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public SocialContracts SocialContracts { get; set; }
         }
     }
 }

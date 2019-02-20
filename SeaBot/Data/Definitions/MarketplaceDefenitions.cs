@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class MarketplaceDefenitions
     {
-        public class Item
+        public class Marketplace
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -91,10 +91,10 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Marketplaces
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Marketplace> Marketplace { get; set; }
         }
 
         public class Material
@@ -136,7 +136,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Marketplaces Marketplaces { get; set; }
         }
     }
 }

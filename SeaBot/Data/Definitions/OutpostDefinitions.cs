@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class OutpostDefinitions
     {
-        public class Item
+        public class Outpost
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -96,9 +96,6 @@ namespace SeaBotCore.Data.Definitions
             [J("speedupable")]
             public int Speedupable { get; set; }
 
-            [J("texture")]
-            public string Texture { get; set; }
-
             [J("title_loc")]
             public string TitleLoc { get; set; }
 
@@ -127,10 +124,10 @@ namespace SeaBotCore.Data.Definitions
             public int XpPct { get; set; }
         }
 
-        public class Items
+        public class Outposts
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Outpost> Outpost { get; set; }
         }
 
         public class Location
@@ -151,7 +148,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Outposts Outposts { get; set; }
         }
     }
 }

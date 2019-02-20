@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class BarrelDefenitions
     {
-        public class Item
+        public class Barrel
         {
             [J("bounds_max")]
             public string BoundsMax { get; set; }
@@ -73,10 +73,10 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Barrels
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Barrel> Barrel { get; set; }
         }
 
         public class Material
@@ -114,7 +114,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Barrels Barrels { get; set; }
         }
     }
 }

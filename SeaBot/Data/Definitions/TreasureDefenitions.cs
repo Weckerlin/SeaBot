@@ -31,7 +31,7 @@ namespace SeaBotCore.Data.Definitions
 
     public class TreasureDefenitions
     {
-        public class Item
+        public class Treasure
         {
             [J("atlas")]
             public string Atlas { get; set; }
@@ -100,10 +100,10 @@ namespace SeaBotCore.Data.Definitions
             public int Xp { get; set; }
         }
 
-        public class Items
+        public class Treasures
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Treasure> Treasure { get; set; }
         }
 
         public class Reward
@@ -136,7 +136,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Treasures Treasures { get; set; }
         }
     }
 }

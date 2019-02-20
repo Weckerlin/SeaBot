@@ -40,7 +40,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             }
             var statiopst = new List<Contractor>();
             var genopst = new List<Contractor>();
-            foreach (var contractor in Core.GlobalData.Contracts)
+            foreach (var contractor in Core.LocalPlayer.Contracts)
             {
                 if (contractor == null)
                 {
@@ -58,7 +58,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 }
                
                 var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
-                if (def.Sailors > ship.Sailors() || def.Sailors>Core.GlobalData.Sailors)
+                if (def.Sailors > ship.Sailors() || def.Sailors>Core.LocalPlayer.Sailors)
                 {
                     continue;
                 }
@@ -67,7 +67,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     continue;
                 }
-                if (Core.GlobalData.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
+                if (Core.LocalPlayer.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
                 {
                     if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
                     {
@@ -111,9 +111,9 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan = exists;
                 }
               
-                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
+                Core.LocalPlayer.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
                     wecan * quest.MaterialKoef;
-                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
+                Core.LocalPlayer.Contracts.First(n => n.DefId == opst.DefId).Progress +=
                     wecan * quest.MaterialKoef;
                 Logger.Info(string.Format(Localization.DESTINATION_CONTRACTOR, ship.GetShipName()));
                 Networking.AddTask(
@@ -123,7 +123,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                         quest.ObjectiveDefId,
                         quest.Id,
                         wecan * quest.MaterialKoef));
-                var lship = Core.GlobalData.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
+                var lship = Core.LocalPlayer.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
                 lship.Sent = TimeUtils.GetEpochTime();
                 lship.Loaded = 0;
                 lship.Type = "contractor";
@@ -157,11 +157,11 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan = exists;
                 }
 
-                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
+                Core.LocalPlayer.Contracts.First(n => n.DefId == opst.DefId).CargoOnTheWay +=
                     wecan * quest.MaterialKoef;
-                Core.GlobalData.Contracts.First(n => n.DefId == opst.DefId).Progress +=
+                Core.LocalPlayer.Contracts.First(n => n.DefId == opst.DefId).Progress +=
                     wecan * quest.MaterialKoef;
-                var lship = Core.GlobalData.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
+                var lship = Core.LocalPlayer.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
                 lship.Sent = TimeUtils.GetEpochTime();
                 lship.Loaded = 0;
                 lship.Type = "contractor";
@@ -193,7 +193,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             var maktplc = new MarketplaceDefenitions.Material();
 
-            if (ship.Sailors() < Definitions.MarketDef.Items.Item[1].Sailors||Core.GlobalData.Sailors<ship.Sailors())
+            if (ship.Sailors() < Definitions.MarketDef.Marketplaces.Item[1].Sailors||Core.LocalPlayer.Sailors<ship.Sailors())
             {
                 return false;
             }
@@ -201,7 +201,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             var placeswithneeded = new List<MarketplaceDefenitions.Material>();
             foreach (var need in neededitems)
-            foreach (var plc in Definitions.MarketDef.Items.Item[1].Materials.Material)
+            foreach (var plc in Definitions.MarketDef.Marketplaces.Item[1].Materials.Material)
             {
                 if (plc.OutputId == need)
                 {
@@ -230,7 +230,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             if (maktplc.OutputType == null)
             {
-                var can = Definitions.MarketDef.Items.Item[1].Materials.Material.Where(
+                var can = Definitions.MarketDef.Marketplaces.Item[1].Materials.Material.Where(
                     n => n.InputId == marketplacepoints.OrderByDescending(b => b.Amount).FirstOrDefault()?.Id).ToList();
                 if (can.Count > 0)
                 {
@@ -243,14 +243,14 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 return false;
             }
 
-            var wehaveininv = Core.GlobalData.GetAmountItem(maktplc.InputId);
+            var wehaveininv = Core.LocalPlayer.GetAmountItem(maktplc.InputId);
             var canproceed = 0;
             canproceed = wehaveininv < ship.Capacity() ? wehaveininv : ship.Capacity();
 
-            Core.GlobalData.Inventory.Where(n => n.Id == maktplc.InputId).FirstOrDefault().Amount -= canproceed;
+            Core.LocalPlayer.Inventory.Where(n => n.Id == maktplc.InputId).FirstOrDefault().Amount -= canproceed;
             Logger.Info(string.Format(Localization.DESTINATION_MARKETPLACE, ship.GetShipName()));
             Networking.AddTask(new Task.SendShipMarketplaceTask(ship.InstId, maktplc.Id, 1, canproceed));
-            var locship = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
+            var locship = Core.LocalPlayer.Ships.Where(n => n.InstId == ship.InstId).First();
             locship.Type = "marketplace";
             locship.TargetId = 1;
             locship.TargetLevel = 0;
@@ -263,10 +263,10 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
         public static bool SendToOutpost(Ship ship)
         {
-            var opst = Core.GlobalData.Outposts
+            var opst = Core.LocalPlayer.Outposts
                 .FirstOrDefault(
                     n => !n.Done && n.Crew < n.RequiredCrew && !Core.Config.ignoreddestination.Any(b => b.Destination == ShipDestType.Outpost && b.DefId == n.DefId));
-            if (Core.GlobalData.Sailors < ship.Sailors())
+            if (Core.LocalPlayer.Sailors < ship.Sailors())
             {
                 return false;
             }
@@ -306,14 +306,14 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 sending = next.Crew > ship.Sailors() ? ship.Sailors() : next.Crew;
                 Logger.Info(string.Format(Localization.DESTINATION_OUTPOST, ship.GetShipName()));
                 Networking.AddTask(new Task.OutpostSendShipTask(ship.InstId, next.DefId, sending));
-                Core.GlobalData.Outposts.Add(
+                Core.LocalPlayer.Outposts.Add(
                     new Outpost
                         {
                             CargoOnTheWay = sending,
                             Crew = sending,
                             DefId = sending,
                             Done = false,
-                            PlayerLevel = Core.GlobalData.Level,
+                            PlayerLevel = Core.LocalPlayer.Level,
                             RequiredCrew = next.Crew
                         });
                 return true;
@@ -326,13 +326,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         {
             var bestplace = SendingHelper.GetBestUpgPlace(itemname, ship.Sailors(), Core.Config.upgradablestrategy);
           
-            if (bestplace == null || Core.GlobalData.Sailors < ship.Sailors())
+            if (bestplace == null || Core.LocalPlayer.Sailors < ship.Sailors())
             {
                 return false;
             }
 
-            var place = Definitions.UpgrDef.Items.Item.FirstOrDefault(n => n.DefId == bestplace.DefId);
-            var shipfull = Definitions.ShipDef.Items.Item.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+            var place = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == bestplace.DefId);
+            var shipfull = Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId).FirstOrDefault();
             var lvls = place?.Levels.Level.FirstOrDefault(n => n.Id == bestplace.Level);
 
             if (shipfull?.SlotUsage < place?.Slots)
@@ -349,10 +349,10 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     wecan = remain;
                 }
 
-                Core.GlobalData.Sailors -= lvls.Sailors;
+                Core.LocalPlayer.Sailors -= lvls.Sailors;
                 
                 bestplace.CargoOnTheWay += wecan;
-                var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
+                var shp = Core.LocalPlayer.Ships.Where(n => n.InstId == ship.InstId).First();
                 shp.Sent = TimeUtils.GetEpochTime();
                 shp.Loaded = 0;
                 shp.Type = "upgradeable";
@@ -360,8 +360,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 shp.TargetLevel = bestplace.Level;
                 Logger.Info(
                     Localization.SHIPS_SENDING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Items.Item.First(n => n.DefId == ship.DefId).Name));
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
+                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
                 Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
                 return true;
             }
@@ -371,13 +371,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
         
         public static bool SendToWreck(Ship ship)
         {
-            var wreck = Core.GlobalData.Wrecks.Where(n => n.Status == 0).FirstOrDefault();
+            var wreck = Core.LocalPlayer.Wrecks.Where(n => n.Status == 0).FirstOrDefault();
 
             if (wreck != null)
             {
                 if (wreck.Sailors < ship.Sailors())
                 {
-                    var shp = Core.GlobalData.Ships.Where(n => n.InstId == ship.InstId).First();
+                    var shp = Core.LocalPlayer.Ships.Where(n => n.InstId == ship.InstId).First();
                     shp.Sent = TimeUtils.GetEpochTime();
                     shp.Loaded = 0;
                     shp.Type = "wreck";

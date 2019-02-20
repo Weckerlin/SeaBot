@@ -33,17 +33,17 @@ namespace SeaBotCore.BotMethods
     {
         public static void ProduceFactories()
         {
-            foreach (var data in Core.GlobalData.Buildings)
+            foreach (var data in Core.LocalPlayer.Buildings)
             {
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {
-                    var def = Definitions.BuildingDef.Items.Item.First(n => n.DefId == data.DefId);
+                    var def = Definitions.BuildingDef.Buildings.Item.First(n => n.DefId == data.DefId);
                     if (def.Type != "factory")
                     {
                         continue;
                     }
 
-                    var needed = def.Levels.Level.FirstOrDefault(n => n.Id == data.Level);
+                    var needed = def.BuildingLevels.Level.FirstOrDefault(n => n.Id == data.Level);
                     if (needed == null)
                     {
                         continue;
@@ -55,7 +55,7 @@ namespace SeaBotCore.BotMethods
                         if (Core.Config.autothresholdworkshop)
                         {
                             // Mechanical part
-                            if (Core.GlobalData.GetAmountItem(33) < Core.Config.thresholdmechanical)
+                            if (Core.LocalPlayer.GetAmountItem(33) < Core.Config.thresholdmechanical)
                             {
                                 var prodid = 1;
                                 var enough = true;
@@ -67,7 +67,7 @@ namespace SeaBotCore.BotMethods
 
                                 foreach (var prod in mat.Inputs.Input)
                                 {
-                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    if (Core.LocalPlayer.GetAmountItem(prod.Id) < prod.Amount)
                                     {
                                         enough = false;
                                     }
@@ -77,7 +77,7 @@ namespace SeaBotCore.BotMethods
                                 {
                                     foreach (var inp in mat.Inputs.Input)
                                     {
-                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
+                                        Core.LocalPlayer.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
                                     }
 
                                     Logger.Info(
@@ -94,7 +94,7 @@ namespace SeaBotCore.BotMethods
                             }
 
                             // Fuel
-                            if (Core.GlobalData.GetAmountItem(180) < Core.Config.thresholdfuel)
+                            if (Core.LocalPlayer.GetAmountItem(180) < Core.Config.thresholdfuel)
                             {
                                 var prodid = 2;
                                 var enough = true;
@@ -106,7 +106,7 @@ namespace SeaBotCore.BotMethods
 
                                 foreach (var prod in mat.Inputs.Input)
                                 {
-                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    if (Core.LocalPlayer.GetAmountItem(prod.Id) < prod.Amount)
                                     {
                                         enough = false;
                                     }
@@ -116,7 +116,7 @@ namespace SeaBotCore.BotMethods
                                 {
                                     foreach (var inp in mat.Inputs.Input)
                                     {
-                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
+                                        Core.LocalPlayer.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
                                     }
 
                                     Logger.Info(
@@ -133,7 +133,7 @@ namespace SeaBotCore.BotMethods
                             // Concrete
                             if (data.Level >= 5)
                             {
-                                if (Core.GlobalData.GetAmountItem(182) < Core.Config.thresholdconcrete)
+                                if (Core.LocalPlayer.GetAmountItem(182) < Core.Config.thresholdconcrete)
                                 {
                                     var prodid = 3;
 
@@ -146,7 +146,7 @@ namespace SeaBotCore.BotMethods
 
                                     foreach (var prod in mat.Inputs.Input)
                                     {
-                                        if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                        if (Core.LocalPlayer.GetAmountItem(prod.Id) < prod.Amount)
                                         {
                                             enough = false;
                                         }
@@ -156,7 +156,7 @@ namespace SeaBotCore.BotMethods
                                     {
                                         foreach (var inp in mat.Inputs.Input)
                                         {
-                                            Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
+                                            Core.LocalPlayer.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
                                         }
 
                                         Logger.Info(
@@ -206,7 +206,7 @@ namespace SeaBotCore.BotMethods
                                 continue;
                             }
 
-                            if (Core.GlobalData.GetAmountItem(matid) < thresholdconc || thresholdconc == 0)
+                            if (Core.LocalPlayer.GetAmountItem(matid) < thresholdconc || thresholdconc == 0)
                             {
                                 var enough = true;
                                 var mat = needed.ProdOutputs.ProdOutput.Where(n => n.Id == prodid).FirstOrDefault();
@@ -217,7 +217,7 @@ namespace SeaBotCore.BotMethods
 
                                 foreach (var prod in mat.Inputs.Input)
                                 {
-                                    if (Core.GlobalData.GetAmountItem(prod.Id) < prod.Amount)
+                                    if (Core.LocalPlayer.GetAmountItem(prod.Id) < prod.Amount)
                                     {
                                         enough = false;
                                     }
@@ -227,7 +227,7 @@ namespace SeaBotCore.BotMethods
                                 {
                                     foreach (var inp in mat.Inputs.Input)
                                     {
-                                        Core.GlobalData.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
+                                        Core.LocalPlayer.Inventory.First(n => n.Id == inp.Id).Amount -= inp.Amount;
                                     }
 
                                     Logger.Info(
@@ -253,7 +253,7 @@ namespace SeaBotCore.BotMethods
                     {
                         foreach (var inp in input.Inputs.Input)
                         {
-                            var ourmat = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == inp.Id);
+                            var ourmat = Core.LocalPlayer.Inventory.FirstOrDefault(n => n.Id == inp.Id);
                             if (ourmat == null)
                             {
                                 ok = false;
@@ -280,7 +280,7 @@ namespace SeaBotCore.BotMethods
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "wood")
                         {
-                            var amount = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+                            var amount = Core.LocalPlayer.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && Core.Config.woodlimit != 0)
                             {
                                 if (amount.Amount > Core.Config.woodlimit)
@@ -292,7 +292,7 @@ namespace SeaBotCore.BotMethods
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "iron")
                         {
-                            var amount = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+                            var amount = Core.LocalPlayer.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && Core.Config.ironlimit != 0)
                             {
                                 if (amount.Amount > Core.Config.ironlimit)
@@ -304,7 +304,7 @@ namespace SeaBotCore.BotMethods
 
                         if (MaterialDB.GetItem(input.MaterialId).Name == "stone")
                         {
-                            var amount = Core.GlobalData.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
+                            var amount = Core.LocalPlayer.Inventory.FirstOrDefault(n => n.Id == input.MaterialId);
                             if (amount != null && Core.Config.stonelimit != 0)
                             {
                                 if (amount.Amount > Core.Config.stonelimit)
@@ -319,7 +319,7 @@ namespace SeaBotCore.BotMethods
                     {
                         foreach (var inp in Dict)
                         {
-                            Core.GlobalData.Inventory.First(n => n.Id == inp.Key).Amount -= (int)inp.Value;
+                            Core.LocalPlayer.Inventory.First(n => n.Id == inp.Key).Amount -= (int)inp.Value;
                         }
 
                         Logger.Info(

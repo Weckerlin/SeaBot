@@ -59,10 +59,10 @@ namespace SeaBotCore.Utils
             return Epoch.AddSeconds(unixTime);
         }
 
-        public static EventsDefenitions.Item GetCurrentEvent()
+        public static EventsDefenitions.Event GetCurrentEvent()
         {
-            var stl = new Dictionary<EventsDefenitions.Item, long>();
-            foreach (var item in Definitions.EvntDef.Items.Item)
+            var stl = new Dictionary<EventsDefenitions.Event, long>();
+            foreach (var item in Definitions.EvntDef.Events.Item)
             {
                 var x = GetEpochTime();
                 if (x >= item.StartTime && x <= item.EndTime)
@@ -71,7 +71,7 @@ namespace SeaBotCore.Utils
                 }
             }
 
-            return Definitions.EvntDef.Items.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
+            return Definitions.EvntDef.Events.Item.OrderBy(x => Math.Abs(x.EndTime - GetEpochTime())).First();
         }
 
         public static int GetEpochTime()

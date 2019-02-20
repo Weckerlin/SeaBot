@@ -36,7 +36,7 @@ namespace SeaBotCore.Data.Definitions
             public List<Material> Input { get; set; }
         }
 
-        public class Item
+        public class Building
         {
             [J("def_id")]
             public int DefId { get; set; }
@@ -48,7 +48,7 @@ namespace SeaBotCore.Data.Definitions
             public int Hide { get; set; }
 
             [J("levels")]
-            public Levels Levels { get; set; }
+            public BuildingLevels BuildingLevels { get; set; }
 
             [J("max_level")]
             public int MaxLevel { get; set; }
@@ -78,13 +78,13 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Buildings
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Building> Item { get; set; }
         }
 
-        public class Level
+        public class BuildingLevel
         {
             [J("animations")]
             public string Animations { get; set; }
@@ -140,15 +140,6 @@ namespace SeaBotCore.Data.Definitions
             [J("museum_level")]
             public int MuseumLevel { get; set; }
 
-            [J("particle_new", NullValueHandling = N.Ignore)]
-            public ParticleNew ParticleNew { get; set; }
-
-            [J("particles")]
-            public string Particles { get; set; }
-
-            [J("particles_new")]
-            public string ParticlesNew { get; set; }
-
             [J("pivot_x")]
             public int PivotX { get; set; }
 
@@ -201,10 +192,10 @@ namespace SeaBotCore.Data.Definitions
             public int Xp { get; set; }
         }
 
-        public class Levels
+        public class BuildingLevels
         {
             [J("level")]
-            public List<Level> Level { get; set; }
+            public List<BuildingLevel> Level { get; set; }
         }
 
         public class Material
@@ -220,21 +211,6 @@ namespace SeaBotCore.Data.Definitions
         {
             [J("material")]
             public List<Material> Material { get; set; }
-        }
-
-        public class Particle
-        {
-            [J("data")]
-            public string Data { get; set; }
-
-            [J("particle_id")]
-            public int ParticleId { get; set; }
-        }
-
-        public class ParticleNew
-        {
-            [J("particle")]
-            public List<Particle> Particle { get; set; }
         }
 
         public class ProdOutput
@@ -264,7 +240,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Buildings Buildings { get; set; }
         }
 
         public class Slot
