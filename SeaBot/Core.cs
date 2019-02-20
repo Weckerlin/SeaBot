@@ -20,12 +20,14 @@ namespace SeaBotCore
     using System;
     using System.ComponentModel;
     using System.IO;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading;
 
     using Newtonsoft.Json;
 
     using SeaBotCore.BotMethods;
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Config;
     using SeaBotCore.Data;
     using SeaBotCore.Localizaion;
@@ -111,6 +113,7 @@ namespace SeaBotCore
             LocalizationController.SetLanguage(Config.language);
             while (true)
             {
+           
                 Thread.Sleep(100);
                 if (Config.sleepenabled)
                 {

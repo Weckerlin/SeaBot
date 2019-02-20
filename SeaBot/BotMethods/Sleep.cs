@@ -23,6 +23,7 @@ namespace SeaBotCore.BotMethods
     using System.Threading;
     using System.Threading.Tasks;
 
+    using SeaBotCore.BotMethods.ShipManagment.SendShip;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Localizaion;
     using SeaBotCore.Logger;
@@ -52,52 +53,7 @@ namespace SeaBotCore.BotMethods
                         {
                             if (ship.Sent != 0)
                             {
-                                try
-                                {
-                                    var shipdef =
-                                        LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId);
-                                    if (shipdef == null)
-                                    {
-                                        continue;
-                                    }
-
-                                    if (LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId)
-                                            ?.Levels == null)
-                                    {
-                                        continue;
-                                    }
-
-                                    if (LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId)
-                                            ?.Levels.Level.Count == 0)
-                                    {
-                                        continue;
-                                    }
-
-                                    var lvl = LocalDefinitions.Upgradables
-                                        .FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
-                                        .FirstOrDefault(n => n.Id == ship.TargetLevel);
-                                    if (lvl == null)
-                                    {
-                                        continue;
-                                    }
-
-                                    var willatportattime = ship.Sent + lvl.TravelTime;
-
-                                    // lol xD 
-                                    if (!((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime))
-                                          .TotalSeconds > 0))
-                                    {
-                                        DelayMinList.Add(
-                                            (int)Math.Ceiling(
-                                                (TimeUtils.FromUnixTime(willatportattime) - TimeUtils.FixedUTCTime)
-                                                .TotalMinutes));
-                                    }
-                                }
-                                catch (Exception)
-                                {
-                                    Logger.Debug(
-                                        $"Again fucking exception -> Ship def id = {ship.DefId} Destination = {ship.TargetId} BoatLevel = {ship.TargetLevel}");
-                                }
+                                DelayMinList.Add(ship.GetTravelTime() / 60);
                             }
                         }
 

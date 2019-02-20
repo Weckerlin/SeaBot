@@ -56,7 +56,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     continue;
                 }
-               
+
                 var def = LocalDefinitions.Contractors.FirstOrDefault(c => contractor.DefId == c.DefId);
                 if (def.Sailors > ship.Sailors() || def.Sailors>Core.LocalPlayer.Sailors)
                 {
@@ -89,8 +89,13 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             foreach (var opst in statiopst.OrderBy(n => n.QuestId))
             {
+
                 var def = LocalDefinitions.Contractors.FirstOrDefault(c => opst.DefId == c.DefId);
                 var quest = def?.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
+                if (def.Sailors > ship.Sailors() || def.Sailors>Core.LocalPlayer.Sailors)
+                {
+                    continue;
+                }
                 if (quest == null || def == null)
                 {
                     continue;
