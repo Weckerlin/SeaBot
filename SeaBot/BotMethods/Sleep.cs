@@ -119,9 +119,7 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + LocalDefinitions.Buildings
-                                                           .Where(n => n.DefId == building.DefId).First().BuildingLevels.Level
-                                                           .Where(n => n.Id == building.Level + 1).First().UpgradeTime;
+                                var willbeproducedat = building.UpgStart + LocalDefinitions.Buildings.First(n => n.DefId == building.DefId).BuildingLevels.Level.First(n => n.Id == building.Level + 1).UpgradeTime;
 
                                 DelayMinList.Add(
                                     (int)Math.Ceiling(
