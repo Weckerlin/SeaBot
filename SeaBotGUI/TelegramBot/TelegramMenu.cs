@@ -721,11 +721,9 @@ namespace SeaBotGUI.TelegramBot
                                 foreach (var ship in Core.LocalPlayer.Ships.Where(n => n.Activated != 0))
                                 {
                                     
-                                    var name = LocalizationCache.GetNameFromLoc(
-                                        Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
-                                        Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                                    var name = ship.GetShipName();
                                    
-                                  builder.Append(name+"|");
+                                  builder.Append(name+" | ");
 
                                    
                                     if (ship.Sent != 0)
@@ -747,11 +745,11 @@ namespace SeaBotGUI.TelegramBot
                                             // lol xD 
                                             if ((TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).TotalSeconds > 0)
                                             {
-                                                builder.Append("|--:--:--");
+                                                builder.Append("| --:--:--");
                                             }
                                             else
                                             {
-                                                builder.Append("|" +
+                                                builder.Append(" | " +
                                                     (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willatportattime)).ToString(
                                                             @"hh\:mm\:ss"));
                                             }

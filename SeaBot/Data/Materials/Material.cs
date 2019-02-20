@@ -27,31 +27,31 @@ namespace SeaBotCore.Data.Materials
 
     public static class MaterialDB
     {
-        public static List<MaterialsData.Item> GetAllItems()
+        public static List<MaterialsData.Material> GetAllItems()
         {
-            return Definitions.MatDef.Items.Item.ToList();
+            return LocalDefinitions.Materials.ToList();
         }
 
-        public static MaterialsData.Item GetItem(int id)
+        public static MaterialsData.Material GetItem(int id)
         {
-            return Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
+            return  LocalDefinitions.Materials.FirstOrDefault(n => n.DefId == id);
         }
 
-        public static MaterialsData.Item GetItem(long id)
+        public static MaterialsData.Material GetItem(long id)
         {
-            return Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id);
+            return  LocalDefinitions.Materials.FirstOrDefault(n => n.DefId == id);
         }
 
-        public static MaterialsData.Item GetItem(string name)
+        public static MaterialsData.Material GetItem(string name)
         {
-            return Definitions.MatDef.Items.Item.FirstOrDefault(n => n.Name == name);
+            return  LocalDefinitions.Materials.FirstOrDefault(n => n.Name == name);
         }
 
         public static string GetLocalizedName(int id)
         {
             return LocalizationCache.GetNameFromLoc(
-                Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id)?.NameLoc.ToLower(),
-                Definitions.MatDef.Items.Item.FirstOrDefault(n => n.DefId == id)?.Name);
+                LocalDefinitions.Materials.FirstOrDefault(n => n.DefId == id)?.NameLoc.ToLower(),
+                LocalDefinitions.Materials.FirstOrDefault(n => n.DefId == id)?.Name);
         }
     }
 }

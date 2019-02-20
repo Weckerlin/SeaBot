@@ -63,14 +63,14 @@ namespace SeaBotCore.BotMethods.ShipManagment
         }
         public static void LoadUpgradeable(Ship ship)
         {
-            var lvl = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
+            var lvl = LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels
                 .Level.First(n => n.Id == ship.TargetLevel);
             if (lvl != null)
             {
                 Logger.Info(
                     Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).NameLoc,
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).Name));
                 Core.LocalPlayer.Upgradeables.First(n => n.DefId == ship.TargetId).CargoOnTheWay -=
                     lvl.MaterialKoef * SendingHelper.GetCapacity(ship);
                 Core.LocalPlayer.Upgradeables.First(n => n.DefId == ship.TargetId).Progress +=
@@ -85,8 +85,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
                 Logger.Info(
                     Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).NameLoc,
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).Name));
 
                 Networking.AddTask(new Task.LoadShipWreck(ship.InstId));
                 ship.Loaded = 1;
@@ -97,8 +97,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
             Logger.Info(
                 Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                    LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).NameLoc,
+                    LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).Name));
 
             Networking.AddTask(new Task.UnloadShipSocialContractTask(ship.InstId));
             ship.Loaded = 1;
@@ -109,8 +109,8 @@ namespace SeaBotCore.BotMethods.ShipManagment
            
             Logger.Info(
                 Localization.SHIPS_LOADING + LocalizationCache.GetNameFromLoc(
-                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                    Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                    LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).NameLoc,
+                    LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).Name));
 
             Networking.AddTask(new Task.UnloadShipContactorTask(ship.InstId));
             ship.Loaded = 1;

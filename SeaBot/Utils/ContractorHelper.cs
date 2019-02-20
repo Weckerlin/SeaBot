@@ -32,7 +32,7 @@ namespace SeaBotCore.Utils
             if (reward.Type != "material")
             {
                 ret = Math.Floor(
-                    Definitions.LevelUpDef.LevelUPs.LevelUp.Where(n => n.DefId == Core.LocalPlayer.Level).First().Xp / 1000D
+                    LocalDefinitions.LevelUPs.First(n => n.DefId == Core.LocalPlayer.Level).Xp / 1000D
                     * reward.XpPct);
             }
             else
@@ -60,12 +60,12 @@ namespace SeaBotCore.Utils
             var median = 0;
             if (quest.ObjectiveTypeId == "sailor")
             {
-                median = Definitions.LevelUpDef.LevelUPs.LevelUp.Where(n => n.DefId == Core.LocalPlayer.Level).First()
+                median = LocalDefinitions.LevelUPs.First(n => n.DefId == Core.LocalPlayer.Level)
                     .MedianCrew;
             }
             else
             {
-                median = Definitions.LevelUpDef.LevelUPs.LevelUp.Where(n => n.DefId == Core.LocalPlayer.Level).First()
+                median = LocalDefinitions.LevelUPs.First(n => n.DefId == Core.LocalPlayer.Level)
                     .MedianCapacity;
             }
 

@@ -904,7 +904,7 @@ namespace SeaBotCore
         {
             public SendShipUpgradeableTask(Ship ship, Upgradeable destination, int amount)
             {
-                var destination_levels = Definitions.UpgrDef.Upgradables.Item.First(n => n.DefId == destination.DefId).Levels
+                var destination_levels = LocalDefinitions.Upgradables.First(n => n.DefId == destination.DefId).Levels
                     .Level.FirstOrDefault(n => n.Id == destination.Level);
                 this.Time = (uint)TimeUtils.GetEpochTime();
                 this.CustomObjects.Add("inst_id", ship.InstId);
@@ -1007,7 +1007,7 @@ namespace SeaBotCore
 
                 // calculate turns :thinking:
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Definitions.BoatDef.Boats.Item.First(n => n.DefId == 1).BoatLevels.Level
+                var b = LocalDefinitions.Boats.First(n => n.DefId == 1).BoatLevels.Level
                     .First(n => n.Id == Core.LocalPlayer.BoatLevel);
                 var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
                 this.CustomObjects.Add("inst_id", boat.InstId);

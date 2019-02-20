@@ -17,6 +17,8 @@ namespace SeaBotCore.Data.Definitions
 {
     #region
 
+    using System.Collections.Generic;
+
     using SeaBotCore.Cache;
     using SeaBotCore.Data.Materials;
 
@@ -63,57 +65,57 @@ namespace SeaBotCore.Data.Definitions
         LevelUp
     }
 
-    public static class Definitions
+    public static class LocalDefinitions
     {
-        public static BarrelDefenitions.Root BarrelDef =>
-            (BarrelDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Barrels);
+        public static List<BarrelDefenitions.Barrel> Barrels =>(
+            (BarrelDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Barrels)).Barrels.Barrel;
 
-        public static BoatDefenitions.Root BoatDef =>
-            (BoatDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Boat);
+        public static List<BoatDefenitions.Boat> Boats =>(
+            (BoatDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Boat)).Boats.Boat;
 
-        public static BuildingDefentions.Root BuildingDef =>
-            (BuildingDefentions.Root)DefenitionCache.GetDefinition(EDefinitionType.Buildings);
+        public static List<BuildingDefentions.Building> Buildings =>(
+            (BuildingDefentions.Root)DefenitionCache.GetDefinition(EDefinitionType.Buildings)).Buildings.Item;
 
-        public static ContractorDefinitions.Root ConDef =>
-            (ContractorDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Contractor);
+        public static List<ContractorDefinitions.Contractor> Contractors =>(
+            (ContractorDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Contractor)).Contractors.Contractor;
 
-        public static DealerDefenitions.Root DealerDef =>
-            (DealerDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Dealer);
+        public static List<DealerDefenitions.Dealer> Dealers =>(
+            (DealerDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Dealer)).Dealers.Dealer;
 
-        public static EventsDefenitions.Root EvntDef =>
-            (EventsDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Events);
+        public static List<EventsDefenitions.Event> Events =>(
+            (EventsDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Events)).Events.Event;
 
-        public static GlobalContractorDefinitions.Root GConDef =>
-            (GlobalContractorDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.GlobalContractor);
+        public static GlobalContractorDefinitions.GlobalContractor[] GlobalContractors =>(
+            (GlobalContractorDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.GlobalContractor)).GlobalContractors.GlobalContractor;
 
-        public static LevelUPDefenition.Root LevelUpDef =>
-            (LevelUPDefenition.Root)DefenitionCache.GetDefinition(EDefinitionType.LevelUp);
+        public static LevelUPDefenition.LevelUP[] LevelUPs =>
+            ((LevelUPDefenition.Root)DefenitionCache.GetDefinition(EDefinitionType.LevelUp)).LevelUPs.LevelUp;
 
-        public static MarketplaceDefenitions.Root MarketDef =>
-            (MarketplaceDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Marketplace);
+        public static List<MarketplaceDefenitions.Marketplace> Marketplaces =>
+            ((MarketplaceDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Marketplace)).Marketplaces.Marketplace;
 
-        public static MaterialsData.Root MatDef =>
-            (MaterialsData.Root)DefenitionCache.GetDefinition(EDefinitionType.Material);
+        public static List<MaterialsData.Material> Materials =>(
+            (MaterialsData.Root)DefenitionCache.GetDefinition(EDefinitionType.Material)).Materials.Material;
 
-        public static MuseumLevelDefenitions.Root MuseumLvlDef =>
-            (MuseumLevelDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.MuseumLevels);
+        public static List<MuseumLevelDefenitions.MuseumLevel> MuseumLevels =>(
+            (MuseumLevelDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.MuseumLevels)).MuseumLevels.MuseumLevel;
 
-        public static OutpostDefinitions.Root OutpostDef =>
-            (OutpostDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Outpost);
+        public static List<OutpostDefinitions.Outpost> Outposts =>(
+            (OutpostDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Outpost)).Outposts.Outpost;
 
-        public static SocialContractDefenitions.Root SContractDef =>
-            (SocialContractDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.SocialContract);
+        public static List<SocialContractDefenitions.SocialContract> SocialContracts =>(
+            (SocialContractDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.SocialContract)).SocialContracts.SocialContract;
 
-        public static ShipDefenitions.Root ShipDef =>
-            (ShipDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Ship);
+        public static List<ShipDefenitions.Ship> Ships =>(
+            (ShipDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Ship)).Ships.Ship;
 
-        public static TreasureDefenitions.Root TreasureDef =>
-            (TreasureDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Treasure);
+        public static List<TreasureDefenitions.Treasure> Treasures =>(
+            (TreasureDefenitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Treasure)).Treasures.Treasure;
 
-        public static UpgradeableDefenition.Root UpgrDef =>
-            (UpgradeableDefenition.Root)DefenitionCache.GetDefinition(EDefinitionType.Upgradable);
+        public static List<UpgradeableDefenition.Upgradable> Upgradables =>(
+            (UpgradeableDefenition.Root)DefenitionCache.GetDefinition(EDefinitionType.Upgradable)).Upgradables.Upgradable;
 
-        public static WreckDefinitions.Root WreckDef =>
-            (WreckDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Wreck);
+        public static List<WreckDefinitions.Wreck> Wrecks =>(
+            (WreckDefinitions.Root)DefenitionCache.GetDefinition(EDefinitionType.Wreck)).Wrecks.Wreck;
     }
 }

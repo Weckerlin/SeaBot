@@ -35,7 +35,7 @@ namespace SeaBotCore.BotMethods
             foreach (var boat in Core.LocalPlayer.Boats)
             {
                 var started = TimeUtils.FromUnixTime(boat.ProdStart);
-                var b = Definitions.BoatDef.Boats.Item.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
+                var b = LocalDefinitions.Boats.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
                     .FirstOrDefault(n => n.Id == Core.LocalPlayer.BoatLevel);
                 if (b == null)
                 {

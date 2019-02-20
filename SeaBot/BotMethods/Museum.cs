@@ -50,7 +50,7 @@ namespace SeaBotCore.BotMethods
             }
 
             var started = TimeUtils.FromUnixTime(slot.LastUsed);
-            var b = Definitions.MuseumLvlDef.MuseumLevels.Item.First(n => n.DefId == slot.Level);
+            var b = LocalDefinitions.MuseumLevels.First(n => n.DefId == slot.Level);
             var turns = Math.Round((TimeUtils.FixedUTCTime - started).TotalSeconds / b.TurnTime);
             if (turns >= b.TurnCount)
             {

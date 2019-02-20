@@ -55,25 +55,25 @@ namespace SeaBotCore.BotMethods
                                 try
                                 {
                                     var shipdef =
-                                        Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+                                        LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId);
                                     if (shipdef == null)
                                     {
                                         continue;
                                     }
 
-                                    if (Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                                    if (LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels == null)
                                     {
                                         continue;
                                     }
 
-                                    if (Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId)
+                                    if (LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId)
                                             ?.Levels.Level.Count == 0)
                                     {
                                         continue;
                                     }
 
-                                    var lvl = Definitions.UpgrDef.Upgradables.Item
+                                    var lvl = LocalDefinitions.Upgradables
                                         .FirstOrDefault(n => n.DefId == ship.TargetId)?.Levels.Level
                                         .FirstOrDefault(n => n.Id == ship.TargetLevel);
                                     if (lvl == null)
@@ -105,7 +105,7 @@ namespace SeaBotCore.BotMethods
                         {
                             if (building.ProdStart != 0)
                             {
-                                var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Buildings.Item
+                                var willbeproducedat = building.ProdStart + LocalDefinitions.Buildings
                                                            .First(n => n.DefId == building.DefId).BuildingLevels.Level
                                                            .First(n => n.Id == building.Level).ProdOutputs.ProdOutput[0]
                                                            .Time;
@@ -119,7 +119,7 @@ namespace SeaBotCore.BotMethods
 
                             if (building.UpgStart != 0)
                             {
-                                var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Buildings.Item
+                                var willbeproducedat = building.UpgStart + LocalDefinitions.Buildings
                                                            .Where(n => n.DefId == building.DefId).First().BuildingLevels.Level
                                                            .Where(n => n.Id == building.Level + 1).First().UpgradeTime;
 

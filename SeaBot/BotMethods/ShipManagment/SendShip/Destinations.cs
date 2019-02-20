@@ -57,7 +57,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                     continue;
                 }
                
-                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => contractor.DefId == c.DefId);
+                var def = LocalDefinitions.Contractors.FirstOrDefault(c => contractor.DefId == c.DefId);
                 if (def.Sailors > ship.Sailors() || def.Sailors>Core.LocalPlayer.Sailors)
                 {
                     continue;
@@ -89,7 +89,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             foreach (var opst in statiopst.OrderBy(n => n.QuestId))
             {
-                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
+                var def = LocalDefinitions.Contractors.FirstOrDefault(c => opst.DefId == c.DefId);
                 var quest = def?.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
                 if (quest == null || def == null)
                 {
@@ -135,7 +135,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             foreach (var opst in genopst.OrderBy(n => n.QuestId))
             {
-                var def = Definitions.ConDef.Items.Item.FirstOrDefault(c => opst.DefId == c.DefId);
+                var def = LocalDefinitions.Contractors.FirstOrDefault(c => opst.DefId == c.DefId);
                 var quest = def?.Quests.Quest.FirstOrDefault(q => opst.QuestId == q.Id);
                 if (quest == null)
                 {
@@ -193,7 +193,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             var maktplc = new MarketplaceDefenitions.Material();
 
-            if (ship.Sailors() < Definitions.MarketDef.Marketplaces.Item[1].Sailors||Core.LocalPlayer.Sailors<ship.Sailors())
+            if (ship.Sailors() < LocalDefinitions.Marketplaces[1].Sailors||Core.LocalPlayer.Sailors<ship.Sailors())
             {
                 return false;
             }
@@ -201,7 +201,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             var placeswithneeded = new List<MarketplaceDefenitions.Material>();
             foreach (var need in neededitems)
-            foreach (var plc in Definitions.MarketDef.Marketplaces.Item[1].Materials.Material)
+            foreach (var plc in  LocalDefinitions.Marketplaces[1].Materials.Material)
             {
                 if (plc.OutputId == need)
                 {
@@ -230,7 +230,7 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
 
             if (maktplc.OutputType == null)
             {
-                var can = Definitions.MarketDef.Marketplaces.Item[1].Materials.Material.Where(
+                var can = LocalDefinitions.Marketplaces[1].Materials.Material.Where(
                     n => n.InputId == marketplacepoints.OrderByDescending(b => b.Amount).FirstOrDefault()?.Id).ToList();
                 if (can.Count > 0)
                 {
@@ -330,9 +330,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             {
                 return false;
             }
-
-            var place = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == bestplace.DefId);
-            var shipfull = Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId).FirstOrDefault();
+            var place = LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == bestplace.DefId);
+            var shipfull = LocalDefinitions.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
             var lvls = place?.Levels.Level.FirstOrDefault(n => n.Id == bestplace.Level);
 
             if (shipfull?.SlotUsage < place?.Slots)
@@ -360,8 +359,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 shp.TargetLevel = bestplace.Level;
                 Logger.Info(
                     Localization.SHIPS_SENDING + LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).NameLoc,
-                        Definitions.ShipDef.Ships.Item.First(n => n.DefId == ship.DefId).Name));
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).NameLoc,
+                        LocalDefinitions.Ships.First(n => n.DefId == ship.DefId).Name));
                 Networking.AddTask(new Task.SendShipUpgradeableTask(ship, bestplace, wecan));
                 return true;
             }

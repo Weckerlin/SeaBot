@@ -32,7 +32,7 @@ namespace SeaBotCore.Data.Materials
 
     public class MaterialsData
     {
-        public class Item
+        public class Material
         {
             [J("def_id")]
             public int DefId { get; set; }
@@ -53,16 +53,16 @@ namespace SeaBotCore.Data.Materials
             public string Texture { get; set; }
         }
 
-        public class Items
+        public class Materials
         {
             [J("item")]
-            public List<Item> Item { get; set; }
+            public List<Material> Material { get; set; }
         }
 
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Materials Materials { get; set; }
         }
     }
 }

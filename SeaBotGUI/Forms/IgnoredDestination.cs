@@ -65,7 +65,7 @@ namespace SeaBotGUI.Forms
         {
             if (Core.LocalPlayer != null && Core.LocalPlayer.Inventory != null)
             {
-                var definitions = SeaBotCore.Data.Definitions.Definitions.ConDef.Items.Item.Where(n => (Core.LocalPlayer.Contracts.Count(b => b.DefId == n.DefId) != 0));
+                var definitions = SeaBotCore.Data.Definitions.LocalDefinitions.Contractors.Where(n => (Core.LocalPlayer.Contracts.Count(b => b.DefId == n.DefId) != 0));
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
@@ -85,7 +85,7 @@ namespace SeaBotGUI.Forms
               Core.LocalPlayer.Upgradeables.Where(
                               n => n.Amount != 0 && n.Progress < n.Amount
                                  );
-                var definitions = SeaBotCore.Data.Definitions.Definitions.UpgrDef.Upgradables.Item.Where(n => (sito.Count(b=>b.DefId==n.DefId)!=0));
+                var definitions = SeaBotCore.Data.Definitions.LocalDefinitions.Upgradables.Where(n => (sito.Count(b=>b.DefId==n.DefId)!=0));
                 foreach (var def in definitions)
                 {
                     IgnoredDest item = new IgnoredDest();
@@ -106,7 +106,7 @@ namespace SeaBotGUI.Forms
                 foreach(var opened in openedoutpost)
                 {
                    IgnoredDest dest = new IgnoredDest();
-                    var item = SeaBotCore.Data.Definitions.Definitions.OutpostDef.Outposts.Item.Where(n => n.DefId == opened.DefId).FirstOrDefault();
+                    var item = SeaBotCore.Data.Definitions.LocalDefinitions.Outposts.Where(n => n.DefId == opened.DefId).FirstOrDefault();
                     if(item == null)
                     {
                         continue;

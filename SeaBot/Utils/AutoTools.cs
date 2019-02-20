@@ -65,7 +65,7 @@ namespace SeaBotCore.Utils
             decimal fishprod = 0;
             foreach (var boat in Core.LocalPlayer.Boats)
             {
-                var b = Definitions.BoatDef.Boats.Item.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
+                var b =  LocalDefinitions.Boats.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
                     .FirstOrDefault(n => n.Id == Core.LocalPlayer.BoatLevel);
                 if (b == null)
                 {
@@ -80,7 +80,7 @@ namespace SeaBotCore.Utils
             ret.Add(3, (int)fishprod);
             foreach (var building in Core.LocalPlayer.Buildings)
             {
-                var bdef = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault();
+                var bdef = LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId).FirstOrDefault();
                 if (bdef?.Type == "factory")
                 {
                     var level = bdef.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
@@ -111,7 +111,7 @@ namespace SeaBotCore.Utils
         public static List<Item> GetUsableMarketplacePoints()
         {
             return Core.LocalPlayer.Inventory.Where(
-                    n => n.Amount > 0 && Definitions.MarketDef.Marketplaces.Item[1].Materials.Material
+                    n => n.Amount > 0 && LocalDefinitions.Marketplaces[1].Materials.Material
                              .Any(b => b.InputId == n.Id))
                 .ToList();
         }
@@ -129,7 +129,7 @@ namespace SeaBotCore.Utils
                 try
                 {
                     // Next level
-                    var nextlvlbuilding = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId)
+                    var nextlvlbuilding = LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId)
                         .FirstOrDefault()?.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     if (nextlvlbuilding?.Materials.Material != null)
                     {
@@ -160,11 +160,7 @@ namespace SeaBotCore.Utils
 
             return ret;
         }
-        public static IEnumerable<T> TakeAndRemove<T>(Queue<T> queue, int count)
-        {
-            for (int i = 0; i < count && queue.Count > 0; i++)
-                yield return queue.Dequeue();
-        }
+     
         public static Dictionary<int, decimal> NeededItemsForUpgradePercentage()
         {
             var ret = new Dictionary<int, decimal>();
@@ -177,7 +173,7 @@ namespace SeaBotCore.Utils
             {
              
                     // Next level
-                    var nextlvlbuilding = Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId)
+                    var nextlvlbuilding = LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId)
                         .FirstOrDefault()?.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
                     if (nextlvlbuilding?.Materials.Material != null)
                     {

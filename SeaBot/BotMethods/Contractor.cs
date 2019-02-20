@@ -39,7 +39,7 @@ namespace SeaBotCore.BotMethods
                     continue;
                 }
                 
-                var def = Definitions.ConDef.Items.Item.FirstOrDefault(n => n.DefId == upg.DefId);
+                var def = LocalDefinitions.Contractors.FirstOrDefault(n => n.DefId == upg.DefId);
                 var currquest = def?.Quests.Quest.FirstOrDefault(n => n.Id == upg.QuestId);
                 if (currquest == null)
                 {

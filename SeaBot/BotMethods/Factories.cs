@@ -37,7 +37,7 @@ namespace SeaBotCore.BotMethods
             {
                 if (data.UpgStart == 0 && data.ProdStart == 0)
                 {
-                    var def = Definitions.BuildingDef.Buildings.Item.First(n => n.DefId == data.DefId);
+                    var def = LocalDefinitions.Buildings.First(n => n.DefId == data.DefId);
                     if (def.Type != "factory")
                     {
                         continue;

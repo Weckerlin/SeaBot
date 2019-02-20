@@ -92,16 +92,16 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Dealers
         {
             [J("item")]
-            public List<Dealer> Item { get; set; }
+            public List<Dealer> Dealer { get; set; }
         }
 
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Dealers Dealers { get; set; }
         }
 
         public class Trade

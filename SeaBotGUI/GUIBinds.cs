@@ -444,15 +444,15 @@ namespace SeaBotGUI.GUIBinds
                     var Building = new Building();
                     Building.ID = building.InstId;
                     Building.Name = LocalizationCache.GetNameFromLoc(
-                        Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        SeaBotCore.Data.Definitions.LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId).FirstOrDefault()
                             ?.NameLoc,
-                        Definitions.BuildingDef.Buildings.Item.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId).FirstOrDefault()
                             ?.Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + Definitions.BuildingDef.Buildings.Item
+                        var willbeproducedat = building.ProdStart + LocalDefinitions.Buildings
                                                    .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
                                                    .Where(n => n.Id == building.Level).FirstOrDefault()?.ProdOutputs
                                                    .ProdOutput[0].Time;
@@ -468,7 +468,7 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + Definitions.BuildingDef.Buildings.Item
+                        var willbeproducedat = building.UpgStart + LocalDefinitions.Buildings
                                                    .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
                                                    .Where(n => n.Id == building.Level + 1).FirstOrDefault()
                                                    ?.UpgradeTime;
@@ -496,7 +496,7 @@ namespace SeaBotGUI.GUIBinds
 
                             var started = TimeUtils.FromUnixTime(slot.LastUsed);
 
-                            var b = Definitions.MuseumLvlDef.MuseumLevels.Item.First(n => n.DefId == building.Level);
+                            var b = LocalDefinitions.MuseumLevels.First(n => n.DefId == building.Level);
 
                             producing = (TimeUtils.FixedUTCTime - started.AddSeconds(b.TurnCount * b.TurnTime))
                                 .ToString(@"hh\:mm\:ss");
@@ -650,9 +650,8 @@ namespace SeaBotGUI.GUIBinds
 
                 foreach (var ship in Core.LocalPlayer.Ships.Where(n => n.Activated != 0))
                 {
-                    var name = LocalizationCache.GetNameFromLoc(
-                        Definitions.ShipDef.Ships.Item.Where(n => n.DefId == ship.DefId)?.FirstOrDefault()?.NameLoc,
-                        Definitions.ShipDef.Ships.Item.FirstOrDefault(n => n.DefId == ship.DefId)?.Name);
+                    
+                    var name = ship.GetShipName();
                     var Ship = new Ship();
                     Ship.ID = ship.InstId;
                     Ship.Name = name;

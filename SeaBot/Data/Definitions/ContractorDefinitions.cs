@@ -151,10 +151,10 @@ namespace SeaBotCore.Data.Definitions
             public int VersionId { get; set; }
         }
 
-        public class Items
+        public class Contractors
         {
             [J("item")]
-            public List<Contractor> Item { get; set; }
+            public List<Contractor> Contractor { get; set; }
         }
 
         public class Quest
@@ -244,7 +244,7 @@ namespace SeaBotCore.Data.Definitions
         public class Root : IDefinition
         {
             [J("items")]
-            public Items Items { get; set; }
+            public Contractors Contractors { get; set; }
         }
 
         public class UnlockedLocations

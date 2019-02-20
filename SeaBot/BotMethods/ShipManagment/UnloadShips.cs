@@ -205,7 +205,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
         }
         public static void UnloadUpgradable(Ship ship,int uniqueid)
         {
-            var defenition = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+            var defenition = LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == ship.TargetId);
             var lvl = defenition?.Levels.Level.FirstOrDefault(n => n.Id == ship.TargetLevel);
             if (lvl != null)
             {
@@ -257,7 +257,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
 
         public static void UnloadContractor(Ship ship)
         {
-            var currentcontractor = Definitions.ConDef.Items.Item
+            var currentcontractor = LocalDefinitions.Contractors
                 .FirstOrDefault(n => n.DefId == ship.TargetId);
 
             var quest = currentcontractor?.Quests.Quest.FirstOrDefault(n => n.Id == ship.TargetLevel);
@@ -316,8 +316,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
 
         public static void UnloadMarketplace(Ship ship, int uniqueid)
         {
-            var market = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
-            var lvl = Definitions.MarketDef.Marketplaces.Item.FirstOrDefault(n => n.DefId == ship.TargetId);
+            var lvl = LocalDefinitions.Marketplaces.FirstOrDefault(n => n.DefId == ship.TargetId);
             var mat = lvl?.Materials.Material.FirstOrDefault(n => n.Id == ship.MaterialId);
             if (mat != null)
             {
@@ -330,7 +329,7 @@ namespace SeaBotCore.BotMethods.ShipManagment
                         SendingHelper.GetCapacity(ship),
                         mat.InputKoef * SendingHelper.GetCapacity(ship),
                         SendingHelper.GetSailors(ship),
-                        market.Sailors,
+                        lvl.Sailors,
                         ship.TargetLevel,
                         null,
                         uniqueid));

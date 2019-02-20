@@ -33,7 +33,7 @@ namespace SeaBotCore.BotMethods
             for (var index = 0; index < Core.LocalPlayer.Upgradeables.Count; index++)
             {
                 var upg = Core.LocalPlayer.Upgradeables[index];
-                var def = Definitions.UpgrDef.Upgradables.Item.FirstOrDefault(n => n.DefId == upg.DefId);
+                var def = LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == upg.DefId);
                 var currentlvl = def?.Levels.Level.FirstOrDefault(n => n.Id == upg.Level);
                 if (def == null || currentlvl == null)
                 {
