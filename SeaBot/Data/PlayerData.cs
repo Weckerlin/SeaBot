@@ -25,6 +25,8 @@ namespace SeaBotCore.Data
     using System.Security.Cryptography.X509Certificates;
     using System.Xml;
 
+    using Newtonsoft.Json;
+
     using SeaBotCore.BotMethods;
     using SeaBotCore.Data.Definitions;
     using SeaBotCore.Data.Materials;
@@ -495,7 +497,7 @@ namespace SeaBotCore.Data
         public int UpgStart;
 
         public int UpgType;
-
+        [JsonIgnore]
         public BuildingDefentions.Building Definition
         {
             get
@@ -505,7 +507,7 @@ namespace SeaBotCore.Data
                 return def;
             }
         }
-        
+        [JsonIgnore]
         public BuildingDefentions.BuildingLevel DefinitionLevel
         {
             get
@@ -514,7 +516,7 @@ namespace SeaBotCore.Data
                
             }
         }
-       
+        [JsonIgnore]
         public int ProductionTime
         {
             get
@@ -531,7 +533,7 @@ namespace SeaBotCore.Data
                 return 0;
             }
         }
-
+        [JsonIgnore]
         public int UpgradeTime
         {
             get
@@ -561,7 +563,7 @@ namespace SeaBotCore.Data
         public int PlayerLevel { get; set; }
 
         public int RequiredCrew { get; set; }
-
+        [JsonIgnore]
         public OutpostDefinitions.Outpost Definition
         {
             get
@@ -595,7 +597,7 @@ namespace SeaBotCore.Data
         public int Progress { get; set; }
 
         public int Sailors { get; set; }
-
+        [JsonIgnore]
         public UpgradeableDefenition.Upgradable Definition
         {
             get
@@ -646,7 +648,7 @@ namespace SeaBotCore.Data
         public int TargetLevel { get; set; }
 
         public string Type { get; set; }
-
+        [JsonIgnore]
         public ShipDefenitions.Ship Definition
         {
             get
@@ -667,7 +669,7 @@ namespace SeaBotCore.Data
         public int Seed { get; set; }
 
         public int UnlockStarted { get; set; }
-
+        [JsonIgnore]
         public TreasureDefenitions.Treasure Definition
         {
             get
@@ -692,7 +694,7 @@ namespace SeaBotCore.Data
         public int Spot { get; set; }
 
         public int Status { get; set; }
-        
+        [JsonIgnore]
         public WreckDefinitions.Wreck Definition
         {
             get
@@ -734,7 +736,7 @@ namespace SeaBotCore.Data
         public int Progress { get; set; }
 
         public int QuestId { get; set; }
-        
+        [JsonIgnore]
         public ContractorDefinitions.Contractor Definition
         {
             get
@@ -744,7 +746,7 @@ namespace SeaBotCore.Data
                 return def;
             }
         }
-
+        [JsonIgnore]
         public List<Reward> Rewards { get; set; }
     }
 
@@ -782,7 +784,7 @@ namespace SeaBotCore.Data
         public string RewardType { get; set; }
 
         public int Sailors { get; set; }
- 
+        [JsonIgnore]
         public SocialContractDefenitions.SocialContract Definition
         {
             get
@@ -825,7 +827,7 @@ namespace SeaBotCore.Data
         public int ProdStart { get; set; }
 
         public int Turn { get; set; }
-
+        [JsonIgnore]
         public BoatDefenitions.Boat Definition
         {
             get

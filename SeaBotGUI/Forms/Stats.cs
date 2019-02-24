@@ -170,7 +170,9 @@ namespace SeaBotGUI
             var l = new Dictionary<PlayerData, DateTime>();
             if (Directory.Exists("stats"))
             {
+                //cleanup 
                 var files = Directory.GetFiles("stats");
+                
                 foreach (var file in files)
                 {
                     try
@@ -235,8 +237,7 @@ namespace SeaBotGUI
             {
                 list.Add(new GraphGlobalData(entry.Value, entry.Key));
             }
-
-            return list.OrderByDescending(n=>n.createtime).Take(50).ToList();
+            return list.OrderByDescending(n=>n.createtime).ToList();
         }
 
         private void Radio_days_CheckedChanged(object sender, EventArgs e)

@@ -63,9 +63,10 @@ namespace SeaBotCore.Utils
         {
             var ret = new Dictionary<int, decimal>();
             decimal fishprod = 0;
-            foreach (var boat in Core.LocalPlayer.Boats)
+            for (var index = 0; index < Core.LocalPlayer.Boats.Count; index++)
             {
-                var b =  LocalDefinitions.Boats.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
+                var boat = Core.LocalPlayer.Boats[index];
+                var b = LocalDefinitions.Boats.FirstOrDefault(n => n.DefId == 1)?.BoatLevels.Level
                     .FirstOrDefault(n => n.Id == Core.LocalPlayer.BoatLevel);
                 if (b == null)
                 {
@@ -169,27 +170,26 @@ namespace SeaBotCore.Utils
             var locinv = new List<Item>();
             var makingph = GetLocalProducionPerHour();
 
-            foreach (var building in Core.LocalPlayer.Buildings)
+            for (var index = 0; index < Core.LocalPlayer.Buildings.Count; index++)
             {
-             
-                    // Next level
-                    var nextlvlbuilding = LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId)
-                        .FirstOrDefault()?.BuildingLevels.Level.Where(n => n.Id == building.Level).FirstOrDefault();
-                    if (nextlvlbuilding?.Materials.Material != null)
+                var building = Core.LocalPlayer.Buildings[index];
+                // Next level
+                var nextlvlbuilding = building.DefinitionLevel;
+                if (nextlvlbuilding?.Materials.Material != null)
+                {
+                    foreach (var mats in nextlvlbuilding?.Materials.Material.Where(n => n.Amount != 0))
                     {
-                        foreach (var mats in nextlvlbuilding?.Materials.Material.Where(n => n.Amount != 0))
+                        if (locinv.Any(n => n.Id == mats.Id))
                         {
-                            if (locinv.Any(n => n.Id == mats.Id))
-                            { 
-                                locinv.Where(n => n.Id == mats.Id).First().Amount += mats.Amount;
-                            }
-                            else
-                            {
-                                var mat = new Item { Id = mats.Id, Amount = mats.Amount };
-                                locinv.Add(mat);
-                            }
+                            locinv.Where(n => n.Id == mats.Id).First().Amount += mats.Amount;
+                        }
+                        else
+                        {
+                            var mat = new Item { Id = mats.Id, Amount = mats.Amount };
+                            locinv.Add(mat);
                         }
                     }
+                }
             }
 
             foreach (var item in locinv)
