@@ -455,7 +455,8 @@ namespace SeaBotGUI.GUIBinds
                         var willbeproducedat = building.ProdStart + LocalDefinitions.Buildings
                                                    .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
                                                    .Where(n => n.Id == building.Level).FirstOrDefault()?.ProdOutputs
-                                                   .ProdOutput[0].Time;
+                                                   .ProdOutput[building.ProdId].Time;
+
                         if (willbeproducedat.HasValue)
                         {
                             producing = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat.Value))
@@ -468,9 +469,7 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + LocalDefinitions.Buildings
-                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
-                                                   .Where(n => n.Id == building.Level + 1).FirstOrDefault()
+                        var willbeproducedat = building.UpgStart + (LocalDefinitions.Buildings.FirstOrDefault(n => n.DefId == building.DefId)?.BuildingLevels.Level).FirstOrDefault(n => n.Id == building.Level + 1)
                                                    ?.UpgradeTime;
                         if (willbeproducedat.HasValue)
                         {

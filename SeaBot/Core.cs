@@ -184,6 +184,17 @@ namespace SeaBotCore
                 BotThread = new Thread(BotVoid) { IsBackground = true };
                 BotThread.Start();
             }
+            else
+            {
+                new System.Threading.Tasks.Task(
+                    () =>
+                        {
+                       
+                            ThreadKill.KillTheThread(BotThread);
+                            BotThread = new Thread(BotVoid) { IsBackground = true };
+                            BotThread.Start();
+                        }).Start();
+            }
 
             if (aftercrash)
             {
