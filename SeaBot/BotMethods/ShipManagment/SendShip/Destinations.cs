@@ -46,44 +46,61 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
                 {
                     continue;
                 }
+
                 if (contractor.Done != 0)
                 {
                     continue;
                 }
 
-                if (Core.Config.ignoreddestination.Count(n => n.Destination == ShipDestType.Contractor && n.DefId == contractor.DefId)
-                    != 0)
+                if (Core.Config.ignoreddestination.Count(
+                        n => n.Destination == ShipDestType.Contractor && n.DefId == contractor.DefId) != 0)
                 {
                     continue;
                 }
 
                 var def = LocalDefinitions.Contractors.FirstOrDefault(c => contractor.DefId == c.DefId);
-                if (def.Sailors > ship.Sailors() || def.Sailors>Core.LocalPlayer.Sailors)
+                if (def.Sailors > ship.Sailors() || def.Sailors > Core.LocalPlayer.Sailors)
                 {
                     continue;
                 }
+
                 var quest = def?.Quests.Quest.FirstOrDefault(q => contractor.QuestId == q.Id);
                 if (quest == null)
                 {
                     continue;
                 }
-                if (Core.LocalPlayer.GetAmountItem(quest.ObjectiveDefId) >= quest.InputAmount())
+
+
+                if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
                 {
-                    if (def.EventId != 0 && def.EventId != TimeUtils.GetCurrentEvent().DefId)
+                    if (!Core.Config.exploitmode)
                     {
-                        if (!Core.Config.exploitmode)
-                        {
-                            continue;
-                        }
+                        continue;
                     }
-                    if (def.Type == "static")
+                }
+
+                if (quest.ObjectiveTypeId == "sailor")
+                {
+                    if (Core.LocalPlayer.Sailors < ship.Sailors())
                     {
-                        statiopst.Add(contractor);
+                        continue;
                     }
-                    else
+                }
+                else
+                {
+                    if (Core.LocalPlayer.GetAmountItem(quest.ObjectiveDefId) < quest.InputAmount())
                     {
-                        genopst.Add(contractor);
+                        continue;
                     }
+                }
+
+                if (def.Type == "static")
+                {
+                    statiopst.Add(contractor);
+                }
+                else
+                {
+                    genopst.Add(contractor);
                 }
             }
 
@@ -335,8 +352,8 @@ namespace SeaBotCore.BotMethods.ShipManagment.SendShip
             {
                 return false;
             }
-            var place = LocalDefinitions.Upgradables.FirstOrDefault(n => n.DefId == bestplace.DefId);
-            var shipfull = LocalDefinitions.Ships.FirstOrDefault(n => n.DefId == ship.DefId);
+            var place = bestplace.Definition;
+            var shipfull = ship.Definition;
             var lvls = place?.Levels.Level.FirstOrDefault(n => n.Id == bestplace.Level);
 
             if (shipfull?.SlotUsage < place?.Slots)

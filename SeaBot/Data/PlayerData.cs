@@ -22,9 +22,11 @@ namespace SeaBotCore.Data
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
     using System.Xml;
 
     using SeaBotCore.BotMethods;
+    using SeaBotCore.Data.Definitions;
     using SeaBotCore.Data.Materials;
     using SeaBotCore.Utils;
 
@@ -493,6 +495,57 @@ namespace SeaBotCore.Data
         public int UpgStart;
 
         public int UpgType;
+
+        public BuildingDefentions.Building Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Buildings
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
+        
+        public BuildingDefentions.BuildingLevel DefinitionLevel
+        {
+            get
+            {
+                return this.Definition.BuildingLevels.Level.FirstOrDefault(n => n.Id == this.Level);
+               
+            }
+        }
+       
+        public int ProductionTime
+        {
+            get
+            {
+                
+                var prod = this.DefinitionLevel.ProdOutputs.ProdOutput
+                    .FirstOrDefault(n => n.Id == this.ProdId);
+                if (prod != null)
+                {
+                    return prod.Time;
+                }
+                
+                
+                return 0;
+            }
+        }
+
+        public int UpgradeTime
+        {
+            get
+            {
+                var nextlvl = Definition.BuildingLevels.Level.FirstOrDefault(n => n.Id == this.Level + 1);
+                if (nextlvl != null)
+                {
+                     return nextlvl.UpgradeTime;
+                 }
+
+                 return 0;
+                
+            }
+        }
     }
 
     public class Outpost
@@ -508,6 +561,16 @@ namespace SeaBotCore.Data
         public int PlayerLevel { get; set; }
 
         public int RequiredCrew { get; set; }
+
+        public OutpostDefinitions.Outpost Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Outposts
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Upgradeable
@@ -533,7 +596,15 @@ namespace SeaBotCore.Data
 
         public int Sailors { get; set; }
 
-        public int UpgradeTimeStarted { get; set; }
+        public UpgradeableDefenition.Upgradable Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Upgradables
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Ship
@@ -575,6 +646,16 @@ namespace SeaBotCore.Data
         public int TargetLevel { get; set; }
 
         public string Type { get; set; }
+
+        public ShipDefenitions.Ship Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Ships
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class LostTreasure
@@ -586,6 +667,16 @@ namespace SeaBotCore.Data
         public int Seed { get; set; }
 
         public int UnlockStarted { get; set; }
+
+        public TreasureDefenitions.Treasure Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Treasures
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Wreck
@@ -601,6 +692,16 @@ namespace SeaBotCore.Data
         public int Spot { get; set; }
 
         public int Status { get; set; }
+        
+        public WreckDefinitions.Wreck Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Wrecks
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Slot
@@ -633,6 +734,16 @@ namespace SeaBotCore.Data
         public int Progress { get; set; }
 
         public int QuestId { get; set; }
+        
+        public ContractorDefinitions.Contractor Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Contractors
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
 
         public List<Reward> Rewards { get; set; }
     }
@@ -671,6 +782,16 @@ namespace SeaBotCore.Data
         public string RewardType { get; set; }
 
         public int Sailors { get; set; }
+ 
+        public SocialContractDefenitions.SocialContract Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.SocialContracts
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Captain
@@ -690,6 +811,7 @@ namespace SeaBotCore.Data
         public string SourceType { get; set; }
 
         public string Type { get; set; }
+
     }
 
     public class Boat
@@ -703,6 +825,16 @@ namespace SeaBotCore.Data
         public int ProdStart { get; set; }
 
         public int Turn { get; set; }
+
+        public BoatDefenitions.Boat Definition
+        {
+            get
+            {
+                var def = LocalDefinitions.Boats
+                    .FirstOrDefault(n => n.DefId == this.DefId);
+                return def;
+            }
+        }
     }
 
     public class Achievement

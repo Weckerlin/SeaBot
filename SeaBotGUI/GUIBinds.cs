@@ -444,24 +444,18 @@ namespace SeaBotGUI.GUIBinds
                     var Building = new Building();
                     Building.ID = building.InstId;
                     Building.Name = LocalizationCache.GetNameFromLoc(
-                        SeaBotCore.Data.Definitions.LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        building.Definition
                             ?.NameLoc,
-                        LocalDefinitions.Buildings.Where(n => n.DefId == building.DefId).FirstOrDefault()
+                        building.Definition
                             ?.Name);
                     Building.Level = building.Level;
                     var producing = string.Empty;
                     if (building.ProdStart != 0)
                     {
-                        var willbeproducedat = building.ProdStart + LocalDefinitions.Buildings
-                                                   .Where(n => n.DefId == building.DefId).FirstOrDefault()?.BuildingLevels.Level
-                                                   .Where(n => n.Id == building.Level).FirstOrDefault()?.ProdOutputs
-                                                   .ProdOutput[building.ProdId].Time;
-
-                        if (willbeproducedat.HasValue)
-                        {
-                            producing = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat.Value))
+                        var willbeproducedat = building.ProdStart + building.ProductionTime;
+                            producing = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime(willbeproducedat))
                                 .ToString(@"hh\:mm\:ss");
-                        }
+                        
 
                         // lol xD
                     }
@@ -469,13 +463,11 @@ namespace SeaBotGUI.GUIBinds
                     var upgrade = string.Empty;
                     if (building.UpgStart != 0)
                     {
-                        var willbeproducedat = building.UpgStart + (LocalDefinitions.Buildings.FirstOrDefault(n => n.DefId == building.DefId)?.BuildingLevels.Level).FirstOrDefault(n => n.Id == building.Level + 1)
-                                                   ?.UpgradeTime;
-                        if (willbeproducedat.HasValue)
-                        {
+                        var willbeproducedat = building.UpgStart + building.UpgradeTime;
+                       
                             upgrade = (TimeUtils.FixedUTCTime - TimeUtils.FromUnixTime((long)willbeproducedat))
                                 .ToString(@"hh\:mm\:ss");
-                        }
+                        
                     }
 
                     if (building.DefId == 12)
