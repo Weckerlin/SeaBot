@@ -154,6 +154,8 @@ namespace SeaBotCore.Config
 
         private bool _exploitmode;
 
+        private int _maxkeepedlogs = 10;
+
         private WorkshopType _workshoptype = WorkshopType.MechanicalPart;
 
         List<int> _ignoredships = new List<int>();
@@ -240,6 +242,17 @@ namespace SeaBotCore.Config
                 this.OnPropertyChanged(new PropertyChangedEventArgs("autoship"));
             }
         }
+
+        public int maxkeepedlogs
+        {
+            get => this._maxkeepedlogs;
+            set
+            {
+                this._maxkeepedlogs = value;
+                this.OnPropertyChanged(new PropertyChangedEventArgs("maxkeepedlogs"));
+            }
+        }
+
 
         public UpgradablyStrategy upgradablestrategy
         {

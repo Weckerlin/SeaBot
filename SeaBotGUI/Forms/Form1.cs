@@ -222,6 +222,8 @@ namespace SeaBotGUI
             {
                 this.radio_sleepformins.Checked = true;
             }
+
+            this.num_keepedlogs.Value = Core.Config.maxkeepedlogs;
             this.chk_finishupgrade.Checked = Core.Config.finishupgrade;
             this.chk_aupgrade.Checked = Core.Config.autoupgrade;
             this.chk_telegramautostartup.Checked = Core.Config.telegramstartup;
@@ -1215,6 +1217,11 @@ namespace SeaBotGUI
         private void Chk_telegramautostartup_CheckedChanged(object sender, EventArgs e)
         {
             Core.Config.telegramstartup = this.chk_telegramautostartup.Checked;
+        }
+
+        private void Num_keepedlogs_ValueChanged(object sender, EventArgs e)
+        {
+            Core.Config.maxkeepedlogs = (int)this.num_keepedlogs.Value;
         }
     }
 }

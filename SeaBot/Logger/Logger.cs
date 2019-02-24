@@ -21,6 +21,7 @@ namespace SeaBotCore.Logger
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Text;
 
@@ -44,6 +45,7 @@ namespace SeaBotCore.Logger
         /// </summary>
         static Logger()
         {
+          
             datetimeFormat = "yyyy-MM-dd HH:mm:ss.fff";
             logFilename = DateTime.Now.ToString(@"yyyy-MM-dd HH-mm-ss") + FILE_EXT;
 
@@ -54,11 +56,35 @@ namespace SeaBotCore.Logger
             {
                 Directory.CreateDirectory("logs");
             }
+            else
+            {
+                CleanUp();
+            }
 
             if (!File.Exists("logs/" + logFilename))
             {
+
                 WriteLine(DateTime.Now.ToString(datetimeFormat) + " " + logHeader, false);
             }
+        }
+
+        private static void CleanUp()
+        {
+          
+            var files = new DirectoryInfo("logs/").GetFileSystemInfos()
+                .OrderByDescending(fi => fi.CreationTime).Skip(Core.Config.maxkeepedlogs);
+            foreach (var entry in files)
+            {
+                try
+                {
+                    File.Delete(entry.FullName);
+                }
+                catch
+                {
+                    
+                }
+            }
+            
         }
 
         [Flags]
